@@ -108,7 +108,8 @@ const smtrackChildren: RouteObject[] = [
     ? [
         {
           path: 'test',
-          element: <DynamicVideoColor />,
+          element: <div>test</div>,
+          // element: <DynamicVideoColor />,
           errorElement: <ErrorScreen />
         }
       ]
