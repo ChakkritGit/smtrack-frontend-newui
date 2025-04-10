@@ -30,7 +30,7 @@ export default function DynamicVideoColor () {
 
     canvas.toBlob(async blob => {
       if (blob) {
-        // console.log('Blob: ', blob)
+        console.log('Blob: ', blob)
         const imageURL = URL.createObjectURL(blob)
         const palette = await Vibrant.from(imageURL).getPalette()
         setColor(palette?.Vibrant?.hex ?? '#000000')
@@ -38,9 +38,9 @@ export default function DynamicVideoColor () {
     }, 'image/jpeg')
   }
 
-  // useEffect(() => {
-  //   console.log('Color: ', color)
-  // }, [color])
+  useEffect(() => {
+    console.log('Color: ', color)
+  }, [color])
 
   return (
     <div className='h-screen p-5 flex flex-col items-center gap-2'>
