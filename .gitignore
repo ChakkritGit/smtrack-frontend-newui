@@ -26,5 +26,3 @@ dist-ssr
 # Ignore .env files
 .env
 .env.**
-
-*.mp4

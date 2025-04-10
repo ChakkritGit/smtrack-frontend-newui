@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Vibrant } from 'node-vibrant/browser'
-import Video from '../assets/images/test.mp4'
+import Video from '../assets/images/dynamic.mp4'
 
 export default function DynamicVideoColor () {
   const videoRef = useRef<HTMLVideoElement>(null)
@@ -43,7 +43,7 @@ export default function DynamicVideoColor () {
   }, [color])
 
   return (
-    <div className='h-screen bg-black p-5 flex flex-col items-center gap-2'>
+    <div className='h-screen p-5 flex flex-col items-center gap-2'>
       <div className='relative flex justify-center items-center'>
         <video
           ref={videoRef}
@@ -53,17 +53,27 @@ export default function DynamicVideoColor () {
           loop
           src={Video}
           crossOrigin='anonymous'
-          className='w-[720px] h-[405px] rounded-2xl z-20'
+          className='w-[320px] h-[180px] md:w-[720px] md:h-[405px] rounded-2xl z-20'
         />
         <div
-          className={`absolute w-[800px] h-[500px] blur-[256px] duration-1000 ease-linear z-10`}
+          className={`absolute w-[320px] h-[180px] md:w-[800px] md:h-[500px] blur-[128px] md:blur-[256px] rounded-2xl duration-1000 ease-linear z-10`}
           style={{ backgroundColor: color }}
         ></div>
       </div>
       <div className='relative flex justify-center mt-3 w-full'>
-        <canvas ref={canvasRef} className='w-[720px] rounded-2xl z-10' />
-        <p className='text-white bg-black/70 p-2 rounded-lg text-[32px] font-medium absolute bottom-3 z-20'>
-          <span className='text-shadow-lg'>Dominant color:</span> <span className='text-white rounded-lg px-2' style={{ backgroundColor: color }}> <span className='text-shadow-lg'>{color}</span></span>
+        <canvas
+          ref={canvasRef}
+          className='w-[320px] md:w-[720px] rounded-2xl z-10'
+        />
+        <p className='text-white bg-black/70 p-2 rounded-lg text-[22px] md:text-[32px] font-medium absolute bottom-3 z-20'>
+          <span className='text-shadow-lg'>Dominant color:</span>{' '}
+          <span
+            className='text-white rounded-lg px-2'
+            style={{ backgroundColor: color }}
+          >
+            {' '}
+            <span className='text-shadow-lg'>{color}</span>
+          </span>
         </p>
       </div>
     </div>
