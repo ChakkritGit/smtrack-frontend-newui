@@ -1,0 +1,25 @@
+User-agent: *
+Allow: /
+Allow: /privacy-policy
+Allow: /terms-conditions
+Allow: /support
+Allow: /app
+Allow: /login
+
+Allow: /dashboard
+Allow: /dashboard/chart
+Allow: /dashboard/chart/preview
+Allow: /dashboard/table
+Allow: /dashboard/chart/compare
+Allow: /users
+Allow: /management
+Allow: /management/:id
+Allow: /warranty
+Allow: /warranty/preview
+Allow: /repair
+Allow: /repair/preview
+Allow: /settings
+Allow: /notification
+Allow: /changelog
+Allow: /management/flasher
+Sitemap: https://siamatic.dev/sitemap.xml

@@ -1,0 +1,106 @@
+{
+  "manifest_version": 2,
+  "version": "2.0.0",
+  "name": "SMTrack+",
+  "short_name": "SMTrack+",
+  "icons": [
+    {
+      "src": "pwa-64x64.png",
+      "sizes": "64x64",
+      "type": "image/png"
+    },
+    {
+      "src": "pwa-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "pwa-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "maskable-icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "desktop01.png",
+      "sizes": "3840x2160",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Login"
+    },
+    {
+      "src": "desktop02.png",
+      "sizes": "3840x2160",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Home"
+    },
+    {
+      "src": "desktop03.png",
+      "sizes": "3840x2160",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Dashboard"
+    },
+    {
+      "src": "desktop04.png",
+      "sizes": "3840x2160",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Chart"
+    },
+    {
+      "src": "desktop05.png",
+      "sizes": "3840x2160",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Table"
+    },
+    {
+      "src": "mobile01.png",
+      "sizes": "1125x2436",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Login"
+    },
+    {
+      "src": "mobile02.png",
+      "sizes": "1125x2436",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Home"
+    },
+    {
+      "src": "mobile03.png",
+      "sizes": "1125x2436",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Dashboard"
+    }
+  ],
+  "prefer_related_applications": true,
+  "related_applications": [
+    {
+      "platform": "play",
+      "url": "https://play.google.com/store/apps/details?id=com.thanes.temp_noti",
+      "id": "com.thanes.temp_noti"
+    },
+    {
+      "platform": "itunes",
+      "url": "https://apps.apple.com/th/app/smtrack/id6670781090",
+      "id": "id6670781090"
+    }
+  ],
+  "description": "The system show all smtrack box detect temperature realtime and notify when temperature higher than limit.",
+  "theme_color": "#fdfdfd",
+  "background_color": "#fdfdfd",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait"
+}
