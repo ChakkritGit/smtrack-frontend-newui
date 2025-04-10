@@ -10,7 +10,7 @@ export default function DynamicVideoColor () {
   useEffect(() => {
     const interval = setInterval(() => {
       extractColorFromVideo()
-    }, 1300)
+    }, 1000)
 
     return () => clearInterval(interval)
   }, [])
