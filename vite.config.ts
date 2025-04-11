@@ -22,9 +22,9 @@ export default defineConfig({
         manualChunks (id) {
           const normalizedId = id.split(path.sep).join('/')
 
-          if (normalizedId.includes('node_modules')) {
-            return 'vendor'
-          }
+          // if (normalizedId.includes('node_modules')) {
+          //   return 'vendor'
+          // }
 
           if (normalizedId.includes('/src/components/')) {
             const parts = normalizedId.split('/src/components/')[1].split('/')
