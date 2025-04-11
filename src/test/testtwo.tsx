@@ -128,13 +128,14 @@ const VideoPlayer = () => {
     <div className='relative w-full max-w-5xl mx-auto group mt-5'>
       <video
         ref={videoRef}
-        className='w-full rounded-2xl'
         src={Video}
+        width={1080}
+        autoPlay={false}
         controls={false}
         onTimeUpdate={updateProgress}
-        width={1080}
         onClick={togglePlay}
         onDoubleClick={toggleFullscreen}
+        className='w-full rounded-2xl'
       />
 
       {showCenterIcon && (
