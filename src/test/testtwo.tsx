@@ -150,7 +150,7 @@ const VideoPlayer = () => {
       <div className='absolute bottom-0 left-0 right-0 h-[50px] flex gap-3 items-center justify-between px-4 py-2 rounded-bl-2xl rounded-br-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 overflow-hidden'>
         <div
           className='before:absolute before:inset-x-0 before:bottom-0 before:h-12
-          before:bg-gradient-to-t before:from-base-content/50 before:to-transparent'
+          before:bg-gradient-to-t before:from-black/50 before:to-transparent'
         ></div>
 
         <div className='flex items-center space-x-3 z-20'>
