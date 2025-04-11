@@ -104,7 +104,7 @@ const smtrackChildren: RouteObject[] = [
     element: <Changelog />,
     errorElement: <ErrorScreen />
   },
-  ...(import.meta.env.VITE_APP_NODE_ENV === 'production'
+  ...(import.meta.env.VITE_APP_NODE_ENV === 'development'
     ? [
         {
           path: 'test',

@@ -16,6 +16,39 @@ export default defineConfig({
     // }
     commonjsOptions: {
       transformMixedEsModules: true
+    },
+    rollupOptions: {
+      output: {
+        manualChunks (id) {
+          const normalizedId = id.split(path.sep).join('/')
+
+          if (normalizedId.includes('node_modules')) {
+            return 'vendor'
+          }
+
+          if (normalizedId.includes('/src/components/')) {
+            const parts = normalizedId.split('/src/components/')[1].split('/')
+            const folder = parts[0]
+            return `components/${folder}`
+          }
+
+          if (normalizedId.includes('/src/pages/')) {
+            const parts = normalizedId.split('/src/pages/')[1].split('/')
+            const folder = parts[0]
+            return `pages/${folder}`
+          }
+        },
+        assetFileNames: assetInfo => {
+          const name = assetInfo.name ?? 'asset'
+          if (name.endsWith('.css')) {
+            if (name.includes('component-')) return 'component/[name][extname]'
+            if (name.includes('page-')) return 'page/[name][extname]'
+            return 'style/[name][extname]'
+          }
+
+          return 'assets/[name][extname]'
+        }
+      }
     }
   },
   server: {
