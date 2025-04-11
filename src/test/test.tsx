@@ -28,12 +28,79 @@ export default function DynamicVideoColor () {
 
     ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
 
-    canvas.toBlob(async blob => {
+    const borderThickness = Math.min(canvas.width, canvas.height) * 0.10
+
+    const borderCanvas = document.createElement('canvas')
+    const borderCtx = borderCanvas.getContext('2d')
+
+    if (!borderCtx) return
+
+    const totalBorderArea = 2 * (canvas.width + canvas.height) * borderThickness
+    borderCanvas.width = Math.ceil(Math.sqrt(totalBorderArea))
+    borderCanvas.height = Math.ceil(totalBorderArea / borderCanvas.width)
+
+    let currentX = 0
+    let currentY = 0
+
+    borderCtx.drawImage(
+      canvas,
+      0,
+      0,
+      canvas.width,
+      borderThickness,
+      currentX,
+      currentY,
+      canvas.width,
+      borderThickness
+    )
+    currentY += borderThickness
+
+    borderCtx.drawImage(
+      canvas,
+      0,
+      canvas.height - borderThickness,
+      canvas.width,
+      borderThickness,
+      currentX,
+      currentY,
+      canvas.width,
+      borderThickness
+    )
+    currentY += borderThickness
+
+    borderCtx.drawImage(
+      canvas,
+      0,
+      borderThickness,
+      borderThickness,
+      canvas.height - 2 * borderThickness,
+      currentX,
+      currentY,
+      borderThickness,
+      canvas.height - 2 * borderThickness
+    )
+    currentX += borderThickness
+
+    borderCtx.drawImage(
+      canvas,
+      canvas.width - borderThickness,
+      borderThickness,
+      borderThickness,
+      canvas.height - 2 * borderThickness,
+      currentX,
+      currentY,
+      borderThickness,
+      canvas.height - 2 * borderThickness
+    )
+
+    borderCanvas.toBlob(async blob => {
       if (blob) {
-        console.log('Blob: ', blob)
+        console.log('Border Blob: ', blob)
         const imageURL = URL.createObjectURL(blob)
         const palette = await Vibrant.from(imageURL).getPalette()
         setColor(palette?.Vibrant?.hex ?? '#000000')
+
+        URL.revokeObjectURL(imageURL)
       }
     }, 'image/jpeg')
   }
@@ -59,6 +126,10 @@ export default function DynamicVideoColor () {
           className={`absolute w-[320px] h-[180px] md:w-[800px] md:h-[500px] blur-[128px] md:blur-[256px] rounded-2xl duration-1000 ease-linear z-10`}
           style={{ backgroundColor: color }}
         ></div>
+        {/* <canvas
+          ref={canvasRef}
+          className='absolute w-[320px] h-[180px] md:w-[800px] md:h-[500px] blur-[128px] md:blur-[128px] opacity-90 rounded-2xl duration-1000 ease-linear z-10'
+        /> */}
       </div>
       <div className='relative flex justify-center mt-3 w-full'>
         <canvas
