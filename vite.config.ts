@@ -37,6 +37,24 @@ export default defineConfig({
             const folder = parts[0]
             return `pages/${folder}`
           }
+
+          if (normalizedId.includes('/src/constants/')) {
+            const parts = normalizedId.split('/src/constants/')[1].split('/')
+            const folder = parts[0]
+            return `constants/${folder}`
+          }
+
+          if (normalizedId.includes('/src/middleware/')) {
+            const parts = normalizedId.split('/src/middleware/')[1].split('/')
+            const folder = parts[0]
+            return `middleware/${folder}`
+          }
+
+          if (normalizedId.includes('/src/routes/')) {
+            const parts = normalizedId.split('/src/routes/')[1].split('/')
+            const folder = parts[0]
+            return `routes/${folder}`
+          }
         },
         assetFileNames: assetInfo => {
           const name = assetInfo.name ?? 'asset'
