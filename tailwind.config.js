@@ -4,7 +4,14 @@ export default {
   theme: {
     extend: {
       animation: {
-        'transition-pop': 'button-pop var(--animation-btn, 0.25s) ease-out'
+        'transition-pop': 'button-pop var(--animation-btn, 0.25s) ease-out',
+        fade: 'fadeOut 1s ease-in-out'
+      },
+      keyframes: {
+        fadeOut: {
+          '0%': { opacity: 1, transform: 'scale(1.2)' },
+          '100%': { opacity: 0, transform: 'scale(1)' }
+        }
       }
     }
   },

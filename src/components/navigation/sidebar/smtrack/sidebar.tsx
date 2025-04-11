@@ -282,7 +282,7 @@ const Sidebar = () => {
                       cookies.set('tmsMode', !tmsMode, cookieOptions)
                       cookies.update()
 
-                      await new Promise(resolve => setTimeout(resolve, 300))
+                      await new Promise(resolve => setTimeout(resolve, 500))
 
                       navigate('/')
                       dispatch(setTmsMode())

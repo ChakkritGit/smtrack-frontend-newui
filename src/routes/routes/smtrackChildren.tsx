@@ -15,7 +15,9 @@ import Notification from '../../pages/notification/notification'
 import RepairPdf from '../../components/pdf/repairPdf'
 import WarrantyPdf from '../../components/pdf/WarrantyPdf'
 import Changelog from '../../components/changelog/changelog'
+import VideoPlayer from '../../test/testtwo'
 import DynamicVideoColor from '../../test/test'
+import TestWrapper from '../../test/testWrapper'
 
 const smtrackChildren: RouteObject[] = [
   {
@@ -104,12 +106,24 @@ const smtrackChildren: RouteObject[] = [
     element: <Changelog />,
     errorElement: <ErrorScreen />
   },
-  ...(import.meta.env.VITE_APP_NODE_ENV === 'development'
+  ...(import.meta.env.VITE_APP_NODE_ENV === 'production'
     ? [
         {
           path: 'test',
-          element: <DynamicVideoColor />,
-          errorElement: <ErrorScreen />
+          element: <TestWrapper />,
+          errorElement: <ErrorScreen />,
+          children: [
+            {
+              path: 'test',
+              element: <DynamicVideoColor />,
+              errorElement: <ErrorScreen />
+            },
+            {
+              path: 'test2',
+              element: <VideoPlayer />,
+              errorElement: <ErrorScreen />
+            }
+          ]
         }
       ]
     : []),
