@@ -6,7 +6,6 @@ import { StylesPdf } from './style/styles'
 export default function Fullchartpdf (pdftype: pdftype) {
   const { chartIMG, dateTime, devName, devSn, title, hosImg, deviceLogs } =
     pdftype
-    
 
   return (
     <Document
@@ -19,7 +18,7 @@ export default function Fullchartpdf (pdftype: pdftype) {
       language='th-TH'
     >
       <Page
-        dpi={72}
+        dpi={300}
         orientation='landscape'
         size={'A4'}
         style={StylesPdf.body}
@@ -74,6 +73,17 @@ export default function Fullchartpdf (pdftype: pdftype) {
           <Image src={chartIMG} style={StylesPdf.img_width} />
         </View>
       </Page>
+      {/* <Page
+        dpi={300}
+        orientation='landscape'
+        size={'A4'}
+        style={StylesPdf.body}
+        wrap
+      >
+        <View>
+          <Text>Test</Text>
+        </View>
+      </Page> */}
     </Document>
   )
 }

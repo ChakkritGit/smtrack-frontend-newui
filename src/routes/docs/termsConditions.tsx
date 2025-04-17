@@ -2,17 +2,16 @@ const TermsConditions = () => {
   return (
     <div className='max-w-[720px] mx-auto py-14 px-5'>
       <div className='flex items-center justify-center'>
-        <span className='text-[24px] font-normal'>Terms & Conditions</span>
+        <p className='text-[24px] font-normal tracking-wide'>Terms & Conditions</p>
       </div>
       <div className='mt-7'>
-        <span>
+        <p className='leading-7 tracking-wide'>
           These terms and conditions applies to the SMTrack app (hereby referred
           to as "Application") for mobile devices that was created by SIAMATIC
           COMPANY LIMITED (hereby referred to as "Service Provider") as a Free
           service.
-        </span>
-        <div className='h-5'></div>
-        <span>
+        </p>
+        <p className='block mt-5 leading-7 tracking-wide'>
           Upon downloading or utilizing the Application, you are automatically
           agreeing to the following terms. It is strongly advised that you
           thoroughly read and understand these terms prior to using the
@@ -23,18 +22,16 @@ const TermsConditions = () => {
           are not permitted. All trademarks, copyrights, database rights, and
           other intellectual property rights related to the Application remain
           the property of the Service Provider.
-        </span>
-        <div className='h-5'></div>
-        <span>
+        </p>
+        <p className='block mt-5 leading-7 tracking-wide'>
           The Service Provider is dedicated to ensuring that the Application is
           as beneficial and efficient as possible. As such, they reserve the
           right to modify the Application or charge for their services at any
           time and for any reason. The Service Provider assures you that any
           charges for the Application or its services will be clearly
           communicated to you.
-        </span>
-        <div className='h-5'></div>
-        <span>
+        </p>
+        <p className='block mt-5 leading-7 tracking-wide'>
           The Application stores and processes personal data that you have
           provided to the Service Provider in order to provide the Service. It
           is your responsibility to maintain the security of your phone and
@@ -48,21 +45,19 @@ const TermsConditions = () => {
           third-party services that have their own Terms and Conditions. Below
           are the links to the Terms and Conditions of the third-party service
           providers used by the Application:
-        </span>
-        <div className='h-5'></div>
-        <ul className='list-disc pl-5'>
+        </p>
+        <ul className='list-disc pl-5 block mt-5'>
           <li>
             <a
               href='https://policies.google.com/terms'
               target='_blank'
-              className='link link-primary'
+              className='link link-primary leading-7 tracking-wide'
             >
               Google Play Services
             </a>
           </li>
         </ul>
-        <div className='h-5'></div>
-        <span>
+        <p className='block mt-5 leading-7 tracking-wide'>
           Please be aware that the Service Provider does not assume
           responsibility for certain aspects. Some functions of the Application
           require an active internet connection, which can be Wi-Fi or provided
@@ -70,9 +65,8 @@ const TermsConditions = () => {
           responsible if the Application does not function at full capacity due
           to lack of access to Wi-Fi or if you have exhausted your data
           allowance.
-        </span>
-        <div className='h-5'></div>
-        <span>
+        </p>
+        <p className='block mt-5 leading-7 tracking-wide'>
           If you are using the application outside of a Wi-Fi area, please be
           aware that your mobile network provider's agreement terms still apply.
           Consequently, you may incur charges from your mobile provider for data
@@ -83,17 +77,15 @@ const TermsConditions = () => {
           without disabling data roaming. If you are not the bill payer for the
           device on which you are using the application, they assume that you
           have obtained permission from the bill payer.
-        </span>
-        <div className='h-5'></div>
-        <span>
+        </p>
+        <p className='block mt-5 leading-7 tracking-wide'>
           Similarly, the Service Provider cannot always assume responsibility
           for your usage of the application. For instance, it is your
           responsibility to ensure that your device remains charged. If your
           device runs out of battery and you are unable to access the Service,
           the Service Provider cannot be held responsible.
-        </span>
-        <div className='h-5'></div>
-        <span>
+        </p>
+        <p className='block mt-5 leading-7 tracking-wide'>
           In terms of the Service Provider's responsibility for your use of the
           application, it is important to note that while they strive to ensure
           that it is updated and accurate at all times, they do rely on third
@@ -101,9 +93,8 @@ const TermsConditions = () => {
           available to you. The Service Provider accepts no liability for any
           loss, direct or indirect, that you experience as a result of relying
           entirely on this functionality of the application.
-        </span>
-        <div className='h-5'></div>
-        <span>
+        </p>
+        <p className='block mt-5 leading-7 tracking-wide'>
           The Service Provider may wish to update the application at some point.
           The application is currently available as per the requirements for the
           operating system (and for any additional systems they decide to extend
@@ -119,24 +110,21 @@ const TermsConditions = () => {
           termination, (a) the rights and licenses granted to you in these terms
           will end; (b) you must cease using the application, and (if necessary)
           delete it from your device.
-        </span>
-        <div className='h-5'></div>
-        <span className='text-base font-bold'>
+        </p>
+        <p className='text-base font-bold block mt-5 leading-7 tracking-wide'>
           Changes to These Terms and Conditions
-        </span>
-        <br />
-        <span>
+        </p>
+        <p className='block mt-3 leading-7 tracking-wide'>
           The Service Provider may periodically update their Terms and
           Conditions. Therefore, you are advised to review this page regularly
           for any changes. The Service Provider will notify you of any changes
           by posting the new Terms and Conditions on this page.
-        </span>
-        <div className='h-5'></div>
-        <span>These terms and conditions are effective as of 2024-11-05</span>
-        <div className='h-5'></div>
-        <span className='text-base font-bold'>Contact Us</span>
-        <br />
-        <span>
+        </p>
+        <p className='block mt-5 leading-7 tracking-wide'>
+          These terms and conditions are effective as of 2024-11-05
+        </p>
+        <p className='text-base font-bold block mt-5 leading-7 tracking-wide'>Contact Us</p>
+        <p className='block mt-3 leading-7 tracking-wide'>
           If you have any questions or suggestions about the Terms and
           Conditions, please do not hesitate to contact the Service Provider at{' '}
           <a
@@ -146,7 +134,7 @@ const TermsConditions = () => {
           >
             siamatic.thanesgroup@gmail.com
           </a>
-        </span>
+        </p>
       </div>
     </div>
   )

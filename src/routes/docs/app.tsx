@@ -24,10 +24,10 @@ const App = () => {
         </div>
         <div className='divider divider-vertical md:divider-horizontal'></div>
         <div>
-          <span className='text-[24px] font-medium'>
+          <p className='text-[24px] font-medium leading-7 tracking-wide'>
             {t('appDownload')} SMTrack+
-          </span>
-          <div className='flex flex-col md:flex-row items-center gap-3 mt-3'>
+          </p>
+          <div className='flex flex-col md:flex-row items-center gap-3 mt-4'>
             <a
               className='avatar'
               href='https://apps.apple.com/th/app/smtrack/id6670781090'
@@ -61,9 +61,9 @@ const App = () => {
           </div>
         </div>
       </div>
-      <span className='link link-primary' onClick={() => window.open(pdf)}>
+      <p className='link link-primary leading-7 tracking-wide' onClick={() => window.open(pdf)}>
         {t('installApp')}
-      </span>
+      </p>
     </div>
   )
 }

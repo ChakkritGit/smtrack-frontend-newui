@@ -454,7 +454,7 @@ const Navbar = () => {
               value={globalSearch}
               type='text'
               className='grow !w-28 md:w-auto caret-primary placeholder:text-base-content/50'
-              placeholder='Search'
+              placeholder={t('searchItemsNav')}
               autoComplete='off'
               ref={searchRef}
             />
@@ -496,7 +496,8 @@ const Navbar = () => {
       clearText,
       searchRef,
       globalSearch,
-      searchOpen
+      searchOpen,
+      t
     ]
   )
 

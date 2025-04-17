@@ -97,9 +97,13 @@ const Support = () => {
 
   return (
     <div className='min-h-screen flex items-center justify-center p-5'>
-      <div className='card bg-base-100 w-full max-w-3xl shadow-xl p-8'>
-        <h2 className='text-2xl font-bold text-center'>{t('getInTouch')}</h2>
-        <p className='text-center text-gray-500 mb-5'>{t('contactDes')}</p>
+      <div className='card bg-base-100 w-full max-w-3xl shadow-xl p-4 md:p-8'>
+        <h2 className='text-2xl font-bold text-center leading-7 tracking-wide'>
+          {t('getInTouch')}
+        </h2>
+        <p className='text-center text-gray-500 mb-5 leading-7 tracking-wide'>
+          {t('contactDes')}
+        </p>
         <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
           <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
             <input
@@ -179,18 +183,18 @@ const Support = () => {
             value={formData.message}
             onChange={handleChange}
           ></textarea>
-          <button className='btn btn-primary w-full'>
+          <button className='btn btn-primary w-full text-lg mt-3'>
             {t('contactSubmit')}
           </button>
         </form>
-        <p className='text-center text-sm text-gray-500 mt-4'>
+        <p className='flex items-center justify-center flex-wrap text-sm text-gray-500 mt-4 leading-7 tracking-wide'>
           {t('contactAgree')}{' '}
-          <span
+          <p
             onClick={() => navigate('/privacy-policy')}
-            className='link link-primary font-semibold'
+            className='link link-primary font-semibold ml-2'
           >
             {t('contactAgreeLink')}
-          </span>
+          </p>
         </p>
       </div>
     </div>

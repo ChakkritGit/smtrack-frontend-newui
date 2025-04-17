@@ -405,12 +405,15 @@ const Users = () => {
           if (error.response?.status === 401) {
             dispatch(setTokenExpire(true))
           }
+          editModalRef.current?.close()
           Swal.fire({
             title: t('alertHeaderError'),
             text: error.response?.data.message,
             icon: 'error',
             showConfirmButton: false,
             timer: 2500
+          }).finally(() => {
+            editModalRef.current?.showModal()
           })
         } else {
           console.error(error)
