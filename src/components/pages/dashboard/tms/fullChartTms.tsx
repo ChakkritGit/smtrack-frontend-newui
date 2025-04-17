@@ -300,7 +300,7 @@ const FullChartTmsComponent = (props: FullChartPropType) => {
 
   const chart = useMemo(
     () => <Chart options={options} series={series} height={680} />,
-    [dataLog, options, series]
+    [dataLog]
   )
 
   return (

@@ -1,5 +1,5 @@
 import { AxiosError } from 'axios'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Location, useLocation, useNavigate } from 'react-router-dom'
 import axiosInstance from '../../../constants/axios/axiosInstance'
 import {
@@ -269,6 +269,18 @@ const FullChartTms = () => {
     })
   }
 
+  const ChartWrapper = useMemo(
+    () => (
+      <FullChartTmsComponent
+        dataLog={dataLog}
+        tempMin={deviceLogs?.minTemp}
+        tempMax={deviceLogs?.maxTemp}
+        isLoading={isLoading}
+      />
+    ),
+    [dataLog, isLoading]
+  )
+
   useEffect(() => {
     logDay()
   }, [])
@@ -451,12 +463,7 @@ const FullChartTms = () => {
             {deviceLogs?.name ? deviceLogs?.name : '--'} | {deviceLogs?.sn}
           </span>
         </div>
-        <FullChartTmsComponent
-          dataLog={dataLog}
-          tempMin={deviceLogs?.minTemp}
-          tempMax={deviceLogs?.maxTemp}
-          isLoading={isLoading}
-        />
+        {ChartWrapper}
       </div>
       {submitLoading && <Loading />}
     </div>
