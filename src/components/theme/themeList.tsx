@@ -20,7 +20,14 @@ const ThemeList = () => {
 
   return (
     <div className='dropdown dropdown-end hidden [@supports(color:oklch(0%_0_0))]:block'>
-      <button tabIndex={0} name='Themes' aria-label={t('themeMode')} role='button' className='btn btn-ghost hidden lg:flex'>
+      <button
+        data-tip={t('themeMode')}
+        tabIndex={0}
+        name='Themes'
+        aria-label={t('themeMode')}
+        role='button'
+        className='btn btn-ghost hidden lg:flex tooltip tooltip-bottom'
+      >
         <svg
           width='20'
           height='20'

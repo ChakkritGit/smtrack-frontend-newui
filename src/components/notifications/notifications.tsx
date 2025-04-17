@@ -307,7 +307,7 @@ const Notifications = () => {
     () => (
       <ul
         tabIndex={1}
-        className='dropdown-content bg-base-100 text-base-content rounded-box top-px mt-16 right-0 w-[360px] md:w-[480px] border border-white/5 shadow-2xl outline outline-1 outline-black/5'
+        className='dropdown-content bg-base-100 text-base-content rounded-box top-px z-10 mt-16 right-0 w-[360px] md:w-[480px] border border-white/5 shadow-2xl outline outline-1 outline-black/5'
       >
         <div className='flex items-center justify-between rounded-t-box p-2 h-[54px] bg-base-100/70 backdrop-blur-md border-b border-base-content/10 shadow-sm sticky top-0 z-10'>
           <span className='text-base ml-2'>{t('titleNotification')}</span>
@@ -471,8 +471,9 @@ const Notifications = () => {
     <div className='dropdown dropdown-end'>
       <div
         tabIndex={0}
+        data-tip={t('titleNotification')}
         role='button'
-        className='indicator btn btn-ghost justify-end'
+        className='indicator flex btn btn-ghost justify-end tooltip tooltip-bottom'
         onClick={handleClick}
       >
         {notificationList.length > 0 && (
