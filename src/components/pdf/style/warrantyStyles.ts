@@ -31,7 +31,7 @@ const style = StyleSheet.create({
     justifyContent: 'space-between'
   },
   headImage: {
-    aspectRatio: 1/1,
+    aspectRatio: 1 / 1,
     objectFit: 'contain',
     width: '64px',
     height: '64px'

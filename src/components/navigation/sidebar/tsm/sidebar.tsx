@@ -217,6 +217,7 @@ const Sidebar = () => {
                     type='checkbox'
                     className='toggle toggle-md'
                     checked={tmsMode}
+                    disabled={switchingMode}
                     onChange={async () => {
                       dispatch(setSwitchingMode())
                       dispatch(setDeviceKey(''))

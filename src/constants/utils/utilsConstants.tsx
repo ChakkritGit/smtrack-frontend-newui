@@ -584,6 +584,9 @@ const useSwiperSync = () => {
   return useContext(GlobalContext)
 }
 
+const breakText = (text: string, length = 25) =>
+  text?.match(new RegExp(`.{1,${length}}`, 'g'))?.join('\n')
+
 export {
   accessToken,
   cookieDecodeObject,
@@ -601,5 +604,6 @@ export {
   minutesOptions,
   swalMoveDevice,
   extractValues,
-  useSwiperSync
+  useSwiperSync,
+  breakText
 }

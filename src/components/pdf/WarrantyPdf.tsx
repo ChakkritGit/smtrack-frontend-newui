@@ -21,6 +21,7 @@ import Loading from '../skeleton/table/loading'
 import { UAParser } from 'ua-parser-js'
 import { Worker, Viewer } from '@react-pdf-viewer/core'
 import { defaultLayoutPlugin } from '@react-pdf-viewer/default-layout'
+import { breakText } from '../../constants/utils/utilsConstants'
 
 const WarrantyPdf = () => {
   const { t } = useTranslation()
@@ -91,7 +92,7 @@ const WarrantyPdf = () => {
                     <Text>Warranty No</Text>
                   </View>
                   <View style={style.secondHeaderTextTwo}>
-                    <Text>{state?.id ?? '—'}</Text>
+                    <Text>{state?.id ? breakText(state.id, 25) : '—'}</Text>
                   </View>
                 </View>
                 <View style={style.secondHeaderTextColumn}>

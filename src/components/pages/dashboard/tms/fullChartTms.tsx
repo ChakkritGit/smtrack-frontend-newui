@@ -15,10 +15,6 @@ const FullChartTmsComponent = (props: FullChartPropType) => {
   const { t } = useTranslation()
   const { dataLog, isLoading } = props
 
-  // const tempAvgValues = dataLog ? dataLog.map(item => item._value) : [0]
-  // const minTempAvg = Math.min(...tempAvgValues) - 2
-  // const maxTempAvg = Math.max(...tempAvgValues) + 2
-
   const mappedData = dataLog
     ? dataLog.map(item => ({
         time: new Date(item._time).getTime(),
@@ -38,67 +34,52 @@ const FullChartTmsComponent = (props: FullChartPropType) => {
 
   const series: ApexAxisChartSeries = Object.keys(groupedByProbe).map(
     probe => ({
-      type: 'area',
+      type: 'line',
       name: probe,
       data: groupedByProbe[probe],
       zIndex: 50
     })
   )
 
-  // series.push(
-  //   {
-  //     type: 'area',
-  //     name: t('tempMin'),
-  //     zIndex: 60,
-  //     data: mappedData.map(data => ({ x: data.time, y: tempMin }))
-  //   },
-  //   {
-  //     type: 'area',
-  //     name: t('tempMax'),
-  //     zIndex: 60,
-  //     data: mappedData.map(data => ({ x: data.time, y: tempMax }))
-  //   }
-  // )
+  const dynamicColors = [
+    'oklch(65% 0.25 30)',
+    'oklch(65% 0.25 60)',
+    'oklch(65% 0.25 90)',
+    'oklch(65% 0.25 120)',
+    'oklch(65% 0.25 150)',
+    'oklch(65% 0.25 180)',
+    'oklch(65% 0.25 210)',
+    'oklch(65% 0.25 240)',
+    'oklch(65% 0.25 270)',
+    'oklch(65% 0.25 300)',
+    'oklch(65% 0.25 330)',
+    'oklch(65% 0.25 0)',
+    'oklch(72% 0.27 15)',
+    'oklch(72% 0.27 45)',
+    'oklch(72% 0.27 75)',
+    'oklch(72% 0.27 105)',
+    'oklch(72% 0.27 135)',
+    'oklch(72% 0.27 165)',
+    'oklch(72% 0.27 195)',
+    'oklch(72% 0.27 225)',
+    'oklch(72% 0.27 255)',
+    'oklch(72% 0.27 285)',
+    'oklch(72% 0.27 315)',
+    'oklch(72% 0.27 345)',
+    'oklch(60% 0.20 20)',
+    'oklch(60% 0.20 70)',
+    'oklch(60% 0.20 140)',
+    'oklch(60% 0.20 200)',
+    'oklch(60% 0.20 260)',
+    'oklch(60% 0.20 320)'
+  ]
 
-  const generateColors = (count: number) => {
-    const colors = ['oklch(73.24% 0.1973 44.47 / 1)']
-    for (let i = 1; i < count; i++) {
-      const chroma = (Math.random() * 0.2 + 0.1).toFixed(4)
-      const hue = (Math.random() * 360).toFixed(0)
-      colors.push(`oklch(72% ${chroma} ${hue} / 1)`)
-    }
-    return colors
-  }
-
-  const dynamicColors = generateColors(series.length)
-
-  const dynamicStrokeWidths = Array.from({ length: series.length }, (_, i) =>
-    i === 0 ? 2.0 : 1.0
+  const dynamicStrokeWidths = Array.from(
+    { length: series.length },
+    (_, _i) => 2.0
   )
 
   const dynamicStrokeCurves = Array(series.length).fill('smooth')
-
-  const dynamicYaxis = Array.from({ length: series.length }, (_, i) => ({
-    show: i === 0,
-    axisTicks: {
-      show: i === 0
-    },
-    axisBorder: {
-      show: true,
-      color: 'oklch(73.24% 0.1973 44.47 / 1)',
-      width: 3
-    },
-    labels: {
-      style: {
-        fontFamily: 'Anuphan',
-        colors: 'oklch(70% 0.1973 44.47 / 1)',
-        fontSize: '14px',
-        fontWeight: 600
-      }
-    },
-    // min: minTempAvg,
-    // max: maxTempAvg
-  }))
 
   const options: ApexCharts.ApexOptions = {
     chart: {
@@ -223,7 +204,25 @@ const FullChartTmsComponent = (props: FullChartPropType) => {
     xaxis: {
       type: 'datetime'
     },
-    yaxis: dynamicYaxis,
+    yaxis: {
+      show: true,
+      axisTicks: {
+        show: true
+      },
+      axisBorder: {
+        show: true,
+        color: 'oklch(65% 0.25 30 / 1)',
+        width: 3
+      },
+      labels: {
+        style: {
+          fontFamily: 'Anuphan',
+          colors: 'oklch(65% 0.25 30 / 1)',
+          fontSize: '12px',
+          fontWeight: 600
+        }
+      },
+    },
     noData: {
       text: t('nodata'),
       align: 'center',
@@ -237,21 +236,6 @@ const FullChartTmsComponent = (props: FullChartPropType) => {
       }
     },
     colors: dynamicColors,
-    fill: {
-      type: 'gradient',
-      gradient: {
-        shade: 'light',
-        type: 'vertical',
-        shadeIntensity: 0.5,
-        gradientToColors: dynamicColors.map(color =>
-          color.replace('72%', '79.71%')
-        ),
-        inverseColors: true,
-        opacityFrom: 0.45,
-        opacityTo: 0,
-        stops: [0, 25]
-      }
-    },
     legend: {
       position: 'bottom',
       horizontalAlign: 'right'
