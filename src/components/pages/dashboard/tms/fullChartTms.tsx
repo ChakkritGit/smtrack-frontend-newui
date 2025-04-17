@@ -15,13 +15,11 @@ const FullChartTmsComponent = (props: FullChartPropType) => {
   const { t } = useTranslation()
   const { dataLog, isLoading } = props
 
-  const mappedData = dataLog
-    ? dataLog.map(item => ({
-        time: new Date(item._time).getTime(),
-        tempAvg: item._value,
-        probe: item.probe
-      }))
-    : [{ time: 0, tempAvg: 0, probe: '' }]
+  const mappedData = dataLog?.map(item => ({
+    time: new Date(item._time).getTime(),
+    tempAvg: Number(item._value),
+    probe: item.probe ?? 'unknown'
+  })) ?? []
 
   const groupedByProbe: Record<string, { x: number; y: number }[]> = {}
 
@@ -94,7 +92,7 @@ const FullChartTmsComponent = (props: FullChartPropType) => {
           speed: 500
         }
       },
-      stacked: true,
+      stacked: false,
       zoom: {
         type: 'x',
         enabled: true,
@@ -302,7 +300,7 @@ const FullChartTmsComponent = (props: FullChartPropType) => {
 
   const chart = useMemo(
     () => <Chart options={options} series={series} height={680} />,
-    [dataLog]
+    [dataLog, options, series]
   )
 
   return (

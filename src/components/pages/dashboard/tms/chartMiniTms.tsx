@@ -15,10 +15,10 @@ const ChartMiniTms = (props: ChartMiniProps) => {
   const mappedData = deviceLogs?.log
     ? deviceLogs.log.map(item => ({
         time: new Date(item.createdAt).getTime(),
-        tempAvg: item.tempValue,
-        probe: item.mcuId
+        tempAvg: Number(item.tempValue),
+        probe: item.mcuId ?? 'unknown'
       }))
-    : [{ time: 0, tempAvg: 0, probe: '' }]
+    : []
 
   const groupedByProbe: Record<string, { x: number; y: number }[]> = {}
 
