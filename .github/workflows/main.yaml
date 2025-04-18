@@ -12,17 +12,22 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+
+    - name: Set dynamic image tag
+      run: echo "TAG=siamatic/smtrack-frontend:$(date +%Y%m%d)-${GITHUB_SHA::7}" >> $GITHUB_ENV
+
     - name: Login to docker hub
       uses: docker/login-action@v3
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
+
     - name: Build and push
       uses: docker/build-push-action@v6
       with:
         context: .
         push: true
-        tags: siamatic/smtrack-frontend:2.0.3b10
+        tags: ${{ env.TAG }}
         build-args: |
           VITE_APP_API=${{secrets.VITE_APP_API}}
           VITE_APP_IMG=${{secrets.VITE_APP_IMG}}
@@ -37,41 +42,31 @@ jobs:
           VITE_APP_SECRETKEY=${{secrets.VITE_APP_SECRETKEY}}
           VITE_APP_MAXAGE=${{secrets.VITE_APP_MAXAGE}}
           VITE_APP_NODE_ENV=${{secrets.VITE_APP_NODE_ENV}}
+
     - name: Update Kubernetes manifests
       run: |
         git config --global user.email "nongtonnee@gmail.com"
         git config --global user.name "ChakkritGit"
 
-        if grep -q "image: siamatic/smtrack-frontend:" deploy.yaml; then
-          echo "No changes needed in deploy.yaml"
-          exit 0
-        fi
-
-        sed -i -E "s|image: [^ ]+|image: siamatic/smtrack-frontend:2.0.3b10|g" deploy.yaml
-
-        git diff deploy.yaml || echo "No changes detected"
-
-        if git diff --quiet deploy.yaml; then
-          echo "No changes detected in deploy.yaml"
-          exit 0
-        fi
+        sed -i -E "s|image: siamatic/smtrack-frontend:[^ ]+|image: ${{ env.TAG }}|g" deploy.yaml
 
         git add deploy.yaml
-        git commit -m "Update deployment image to siamatic/smtrack-frontend:2.0.3b10"
+        git commit -m "Update deployment image to ${{ env.TAG }}"
         git push
+
     - name: Send success message to slack
       id: slack
       uses: slackapi/slack-github-action@v1.27.0
       with:
         payload: |
           {
-            "text": "✅ GitHub Action build siamatic/smtrack-frontend:2.0.3b10 result: ${{ job.status }} 🫩🫩",
+            "text": "✅ GitHub Action build ${{ env.TAG }} result: ${{ job.status }}",
             "blocks": [
               {
                 "type": "section",
                 "text": {
                   "type": "mrkdwn",
-                  "text": "✅ GitHub Action build siamatic/smtrack-frontend:2.0.3b10 result: ${{ job.status }} 🫩🫩"
+                  "text": "✅ GitHub Action build *${{ env.TAG }}* result: *${{ job.status }}*"
                 }
               }
             ]
