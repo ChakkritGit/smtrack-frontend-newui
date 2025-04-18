@@ -103,10 +103,10 @@ const DashboardTms = () => {
           ) : (
             <>
               <div className='flex items-start gap-4 mt-4 flex-wrap lg:flex-wrap xl:flex-nowrap'>
-                <div className='w-full xl:w-[35%] lg:h-[295px] bg-base-100 rounded-btn overflow-hidden'>
+                <div className='w-full xl:w-[50%] lg:h-[295px] bg-base-100 rounded-btn overflow-hidden'>
                   {CardInfoComponent}
                 </div>
-                <div className='grid grid-cols-2 md:grid-cols-4 xl:grid-cols-12 gap-4 w-full xl:w-[65%]'>
+                <div className='grid grid-cols-2 md:grid-cols-4 xl:grid-cols-12 gap-4 w-full xl:w-[50%]'>
                   {CardStatusComponent}
                 </div>
               </div>
