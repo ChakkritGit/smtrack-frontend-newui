@@ -60,13 +60,13 @@ jobs:
       with:
         payload: |
           {
-            "text": "✅ GitHub Action build ${{ env.TAG }} result: ${{ job.status }}",
+            "text": "✅ GitHub Action build ${{ env.TAG }} result: ${{ job.status }} 🫩🫩",
             "blocks": [
               {
                 "type": "section",
                 "text": {
                   "type": "mrkdwn",
-                  "text": "✅ GitHub Action build *${{ env.TAG }}* result: *${{ job.status }}*"
+                  "text": "✅ GitHub Action build *${{ env.TAG }}* result: *${{ job.status }}* 🫩🫩"
                 }
               }
             ]

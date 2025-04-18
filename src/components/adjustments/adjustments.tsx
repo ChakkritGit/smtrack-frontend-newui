@@ -164,6 +164,10 @@ const Adjustments = (props: AdjustmentsProps) => {
       }).finally(async () => {
         await fetchDevices(1, 10)
         openAdjustModalRef.current?.showModal()
+        client.publish(
+          `siamatic/${deviceModel}/${version}/${serial}/adj`,
+          'on'
+        )
       })
     } catch (error) {
       openAdjustModalRef.current?.close()
@@ -225,6 +229,10 @@ const Adjustments = (props: AdjustmentsProps) => {
       }).finally(async () => {
         await fetchDevices(1, 10)
         openAdjustModalRef.current?.showModal()
+        client.publish(
+          `siamatic/${deviceModel}/${version}/${serial}/adj`,
+          'on'
+        )
       })
     } catch (error) {
       openAdjustModalRef.current?.close()
@@ -511,24 +519,15 @@ const Adjustments = (props: AdjustmentsProps) => {
         })
         setProbeBefore(probeFiltered)
 
-        if (version === 'v2' || version === 'v3') {
-          client.subscribe(
-            `${serial}/${probeFiltered?.channel}/temp/real`,
-            err => {
-              if (err) console.error('MQTT Subscribe Error', err)
-            }
-          )
-        } else {
-          client.subscribe(`${serial}/temp/real`, err => {
+        client.subscribe(
+          `${serial}/${probeFiltered?.channel}/temp/real`,
+          err => {
             if (err) console.error('MQTT Subscribe Error', err)
-          })
-        }
-
-        // รอลบ
+          }
+        )
         client.subscribe(`${serial}/temp/real`, err => {
           if (err) console.error('MQTT Subscribe Error', err)
         })
-        //
 
         setIsLoadingMqtt(true)
 
