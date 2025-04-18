@@ -41,14 +41,14 @@ const Sidebar = () => {
   const { ward } = userProfile || {}
   const { role } = tokenDecode || {}
 
-  const currentDate: Date = new Date()
-  const formattedDate = currentDate
-    .toLocaleDateString('en-GB', {
-      day: '2-digit',
-      month: '2-digit',
-      year: '2-digit'
-    })
-    .replace(/\//g, '-')
+  // const currentDate: Date = new Date()
+  // const formattedDate = currentDate
+  //   .toLocaleDateString('en-GB', {
+  //     day: '2-digit',
+  //     month: '2-digit',
+  //     year: '2-digit'
+  //   })
+  //   .replace(/\//g, '-')
 
   return (
     <aside
@@ -264,7 +264,7 @@ const Sidebar = () => {
               } hover:underline cursor-pointer`}
             >
               {/* {import.meta.env.VITE_APP_VERSION} */}
-              Version {formattedDate}-beta_latest
+              Version 2.0.2b12-beta_latest
             </Link>
           </div>
         </div>
