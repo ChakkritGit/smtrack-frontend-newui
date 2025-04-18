@@ -48,7 +48,7 @@ jobs:
         git config --global user.email "nongtonnee@gmail.com"
         git config --global user.name "ChakkritGit"
 
-        sed -i -E "s|image: siamatic/smtrack-frontend:[^ ]+|image: ${{ env.TAG }}|g" deploy.yaml
+        sed -i -E "s|image: siamatic/smtrack-frontend:[^ ]+|image: ${{ env.TAG }}|g" k8s/deploy.yaml
 
         git add deploy.yaml
         git commit -m "Update deployment image to ${{ env.TAG }}"
