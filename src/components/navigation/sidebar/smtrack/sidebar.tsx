@@ -317,7 +317,7 @@ const Sidebar = () => {
               } hover:underline cursor-pointer`}
             >
               {/* {import.meta.env.VITE_APP_VERSION} */}
-              Version 2.0.2b12-beta_latest
+              Version 2.0.2b13-beta_latest
             </Link>
           </div>
         </div>

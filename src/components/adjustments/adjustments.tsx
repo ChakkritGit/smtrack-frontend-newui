@@ -288,13 +288,13 @@ const Adjustments = (props: AdjustmentsProps) => {
     setMuteEtemp({ ...muteEtemp, door: !muteEtemp.door })
     if (!muteEtemp.door) {
       client.publish(
-        `siamatic/${deviceModel}/${version}/${serial}/${filter.channel}/mute/door/sound`,
+        `siamatic/${deviceModel}/${version}/${serial}/${filter.channel}/door/sound`,
         'on'
       )
       client.publish(`${serial}/mute/long`, 'on')
     } else {
       client.publish(
-        `siamatic/${deviceModel}/${version}/${serial}/${filter.channel}/mute/door/sound`,
+        `siamatic/${deviceModel}/${version}/${serial}/${filter.channel}/door/sound`,
         'off'
       )
       client.publish(`${serial}/mute/long`, 'off')

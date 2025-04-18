@@ -81,7 +81,7 @@ export default {
     mutsmtrackorary: 'Mute alarm (Temporary)',
     muteAlways: 'Mute alarm (Duration)',
     muteAlert: 'Mute door alarm (Refill Inventory)',
-    muteDoor: 'Mute Sound',
+    muteDoor: 'Sound',
     muteDoorDuration: 'Door alarm (Duration)',
     adjustHumGreater: 'The humidity range cannot be set beyond 0-100%',
     clearShedule: 'Clear',
