@@ -9,7 +9,6 @@ const Changelog = () => {
       <div>
         <DateVersion />
         <V2 />
-        <V2 />
       </div>
     </div>
   )
