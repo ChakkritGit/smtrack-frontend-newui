@@ -24,7 +24,10 @@ import {
   RESET_UTILS,
   TOKEN_EXPIRE,
   SHOULD_FETCH,
-  SWITCHING_MODE
+  SWITCHING_MODE,
+  GRAYSCALE_MODE,
+  BLUR_DISABLED,
+  TRANSITION_DISABLED
 } from '../types/utilsTypes'
 
 const setCookieEncode = (dataEncode?: string) => ({
@@ -110,6 +113,18 @@ const setSwitchingMode = () => ({
   type: SWITCHING_MODE
 })
 
+const setGrayscaleMode = () => ({
+  type: GRAYSCALE_MODE
+})
+
+const setBlurDisabled = () => ({
+  type: BLUR_DISABLED
+})
+
+const setTransitionDisabled = () => ({
+  type: TRANSITION_DISABLED
+})
+
 const resetUtils = () => ({
   type: RESET_UTILS
 })
@@ -133,5 +148,8 @@ export {
   setTokenExpire,
   setSholdFetch,
   setSwitchingMode,
+  setGrayscaleMode,
+  setBlurDisabled,
+  setTransitionDisabled,
   resetUtils
 }

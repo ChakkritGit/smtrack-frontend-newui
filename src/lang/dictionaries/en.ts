@@ -466,6 +466,11 @@ export default {
     switchingMode: 'Switching...',
     currentMode: '*Switch SMTrack and Line mode',
     typeLabel: 'Type',
+    filterColor: 'Filter',
+    animation: 'Animation',
+    transition: 'Transition',
+    grayscale: 'Grayscale',
+    blur: 'Blur Effect',
 
     // connect
     ipAddress: 'IP',

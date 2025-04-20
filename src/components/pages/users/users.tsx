@@ -17,7 +17,7 @@ const RoleButtons = (props: RoleButtonProps) => {
       <button
         key={level}
         disabled={disabled}
-        className={`flex items-center justify-center btn w-max h-[36px] min-h-0 p-2 font-normal ${
+        className={`flex items-center justify-center btn w-max h-[36px] min-h-0 p-2 font-normal ${disabled ? 'opacity-50' : ''} ${
           userConnect === level
             ? 'btn-neutral text-white'
             : 'btn-ghost border border-base-content/50 text-base-content'

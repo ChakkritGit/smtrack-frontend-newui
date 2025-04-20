@@ -20,13 +20,14 @@ type PropsType = {
   fetchDevices: () => Promise<void>
   swiperInfoRef: RefObject<SwiperType | null>
   isPause: boolean
+  blurDisabled: boolean
 }
 
 SwiperCore.use([Pagination])
 
 const CardInFoComponent = (props: PropsType) => {
   const { t } = useTranslation()
-  const { deviceData, fetchDevices, swiperInfoRef, isPause } = props
+  const { deviceData, fetchDevices, swiperInfoRef, isPause, blurDisabled } = props
   const [serial, setSerial] = useState<string>('')
   const [probeData, setProbeData] = useState<ProbeType[]>([])
   const [colors, setColors] = useState<string[]>([])
@@ -55,10 +56,12 @@ const CardInFoComponent = (props: PropsType) => {
   }, [activeIndex, isPause, swiperInfoRef])
 
   useEffect(() => {
+    if (!blurDisabled) return
+
     if (deviceData) {
       getColor(deviceData?.positionPic ?? DefaultPic, 0, setColors)
     }
-  }, [deviceData])
+  }, [deviceData, blurDisabled])
 
   return (
     <div className='p-5 h-full'>
@@ -95,7 +98,7 @@ const CardInFoComponent = (props: PropsType) => {
         </div>
         <button
           aria-label={t('adjustMents')}
-          className='btn btn-ghost flex p-0 min-w-[30px] min-h-[30px] max-w-[30px] max-h-[30px] duration-300 ease-linear tooltip tooltip-left'
+          className='btn btn-ghost flex p-0 min-w-[30px] min-h-[30px] max-w-[30px] max-h-[30px] duration-300 ease-linear tooltip tooltip-left z-30'
           data-tip={t('adjustMents')}
           onClick={() =>
             openAdjustModal(
@@ -120,10 +123,10 @@ const CardInFoComponent = (props: PropsType) => {
               />
             </div>
           </div>
-          <div
+          {blurDisabled && <div
             className='blur-[128px] w-28 h-[85%] absolute opacity-75 z-10 duration-700 ease-linear'
             style={{ backgroundColor: colors[0] }}
-          ></div>
+          ></div>}
         </div>
         <div className='w-full lg:w-[60%] lg:h-48 p-1'>
           <Swiper

@@ -24,6 +24,9 @@ const SOUND_MODE = 'SOUND_MODE'
 const TOKEN_EXPIRE = 'TOKEN_EXPIRE'
 const SHOULD_FETCH = 'SHOULD_FETCH'
 const SWITCHING_MODE = 'SWITCHING_MODE'
+const GRAYSCALE_MODE = 'GRAYSCALE_MODE'
+const BLUR_DISABLED = 'BLUR_DISABLED'
+const TRANSITION_DISABLED = 'TRANSITION_DISABLED'
 const RESET_UTILS = 'RESET_UTILS'
 
 interface UtilsState {
@@ -44,6 +47,9 @@ interface UtilsState {
   soundMode: boolean
   shouldFetch: boolean
   switchingMode: boolean
+  grayscaleMode: boolean
+  blurDisabled: boolean
+  transitionDisabled: boolean
   tokenExpire: boolean
 }
 
@@ -66,6 +72,9 @@ type UtilsAction =
   | { type: typeof SOUND_MODE }
   | { type: typeof SHOULD_FETCH }
   | { type: typeof SWITCHING_MODE }
+  | { type: typeof GRAYSCALE_MODE }
+  | { type: typeof BLUR_DISABLED }
+  | { type: typeof TRANSITION_DISABLED }
   | { type: typeof RESET_UTILS }
 
 export {
@@ -87,6 +96,9 @@ export {
   TOKEN_EXPIRE,
   SHOULD_FETCH,
   SWITCHING_MODE,
+  GRAYSCALE_MODE,
+  BLUR_DISABLED,
+  TRANSITION_DISABLED,
   RESET_UTILS
 }
 export type { UtilsState, UtilsAction }

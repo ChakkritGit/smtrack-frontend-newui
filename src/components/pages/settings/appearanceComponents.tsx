@@ -1,12 +1,19 @@
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../../redux/reducers/rootReducer'
-import { setTheme } from '../../../redux/actions/utilsActions'
+import {
+  setBlurDisabled,
+  setGrayscaleMode,
+  setTheme,
+  setTransitionDisabled
+} from '../../../redux/actions/utilsActions'
 
 const AppearanceComponents = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
-  const { themeMode } = useSelector((state: RootState) => state.utils)
+  const { themeMode, grayscaleMode, blurDisabled, transitionDisabled } = useSelector(
+    (state: RootState) => state.utils
+  )
 
   const changeTheme = (themeName: string) => {
     dispatch(setTheme(themeName))
@@ -21,7 +28,7 @@ const AppearanceComponents = () => {
   return (
     <div>
       <span className='text-[24px]'>{t('themeMode')}</span>
-      <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 p-3'>
+      <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 p-3 my-3 max-h-[400px] md:max-h-[450px] overflow-y-scroll'>
         <button
           onClick={changeToSystem}
           className='outline-base-content text-start outline-offset-4'
@@ -1258,6 +1265,63 @@ const AppearanceComponents = () => {
             </span>
           </span>
         </button>
+      </div>
+      <div className='divider divider-vertical my-2 before:h-[1px] after:h-[1px]'></div>
+      <div className='mt-3'>
+        <span className='text-[24px]'>{t('filterColor')}</span>
+        <div>
+          <div className=' flex items-center justify-between mt-3'>
+            <span>{t('blur')}</span>
+            <input
+              type='checkbox'
+              className='toggle'
+              name='filterColor'
+              id='filterColor'
+              checked={blurDisabled}
+              onChange={() => {
+                dispatch(setBlurDisabled())
+                localStorage.setItem('blurDisabled', String(!blurDisabled))
+              }}
+            />
+          </div>
+          <div
+            className={`ml-3 flex items-center justify-between mt-3 max-h-[24px] opacity-100 ${
+              !blurDisabled ? '!max-h-0 !opacity-0' : ''
+            } overflow-hidden duration-300 ease-linear`}
+          >
+            <span>{t('grayscale')}</span>
+            <input
+              type='checkbox'
+              className='toggle'
+              name='filterColor'
+              id='filterColor'
+              disabled={!blurDisabled}
+              checked={grayscaleMode}
+              onChange={() => {
+                dispatch(setGrayscaleMode())
+                localStorage.setItem('grayscaleMode', String(!grayscaleMode))
+              }}
+            />
+          </div>
+        </div>
+      </div>
+      <div className='divider divider-vertical my-2 before:h-[1px] after:h-[1px]'></div>
+      <div className='mt-3'>
+        <span className='text-[24px]'>{t('animation')}</span>
+        <div className=' flex items-center justify-between mt-3'>
+          <span>{t('transition')}</span>
+          <input
+            type='checkbox'
+            className='toggle'
+            name='filterColor'
+            id='filterColor'
+            checked={transitionDisabled}
+            onChange={() => {
+              dispatch(setTransitionDisabled())
+              localStorage.setItem('transitionDisabled', String(!transitionDisabled))
+            }}
+          />
+        </div>
       </div>
     </div>
   )

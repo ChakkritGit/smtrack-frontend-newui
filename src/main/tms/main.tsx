@@ -212,7 +212,7 @@ const MainTms = () => {
 
   return (
     <main>
-      <div className='drawer lg:drawer-open w-auto duration-300 ease-linear'>
+      <div className='drawer lg:drawer-open bg-base-200 w-auto duration-300 ease-linear'>
         <input id='my-drawer-2' type='checkbox' className='drawer-toggle' />
         <div className='drawer-content'>
           <Navbar />

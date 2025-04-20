@@ -48,7 +48,7 @@ import AddHopitalSelect from '../../components/selects/addHopitalSelect'
 
 const Users = () => {
   const dispatch = useDispatch()
-  const { globalSearch, wardId, tokenDecode, tmsMode } = useSelector(
+  const { globalSearch, wardId, tokenDecode, tmsMode, blurDisabled } = useSelector(
     (state: RootState) => state.utils
   )
   const { t } = useTranslation()
@@ -483,12 +483,14 @@ const Users = () => {
   }, [users, globalSearch, wardId, tmsMode, userConnect, userInactive])
 
   useEffect(() => {
+    if (!blurDisabled) return
+
     if (usersFilter.length > 0) {
       usersFilter.forEach((item, index) => {
         getColor(item.pic ?? defaultPic, index, setColors)
       })
     }
-  }, [usersFilter])
+  }, [usersFilter, blurDisabled])
 
   const UserCard = useMemo(() => {
     if (isLoading)
@@ -596,16 +598,16 @@ const Users = () => {
                           />
                         </div>
                       </div>
-                      <div
+                      {blurDisabled && <div
                         className='blur-[128px] w-24 h-24 absolute opacity-75 z-10 duration-700 ease-linear'
                         style={{ backgroundColor: bgColor }}
-                      ></div>
+                      ></div>}
                     </div>
                   </div>
                   <div className='flex flex-col items-center justify-center'>
                     <label
                       htmlFor='span'
-                      className='tooltip tooltip-top'
+                      className='tooltip tooltip-top z-30'
                       data-tip={item.display ?? '—'}
                     >
                       <span className='truncate block max-w-[180px] text-[20px]'>
@@ -614,7 +616,7 @@ const Users = () => {
                     </label>
                     <label
                       htmlFor='span'
-                      className='tooltip tooltip-bottom'
+                      className='tooltip tooltip-top z-30'
                       data-tip={item.username ?? '—'}
                     >
                       <span className='truncate block max-w-[180px] text-base-content/50 text-[16px]'>
@@ -676,7 +678,7 @@ const Users = () => {
             <button
               disabled={userConnect !== ''}
               key={'Inactive'}
-              className={`flex items-center justify-center btn w-max h-[36px] min-h-0 p-2 font-normal ${
+              className={`flex items-center justify-center btn w-max h-[36px] min-h-0 p-2 font-normal ${userConnect !== '' ? 'opacity-50' : ''} ${
                 userInactive
                   ? 'btn-neutral text-white'
                   : 'btn-ghost border border-base-content/50 text-base-content'

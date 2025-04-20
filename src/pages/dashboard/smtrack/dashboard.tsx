@@ -25,7 +25,7 @@ const Dashboard = () => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
   const navigate = useNavigate()
-  const { deviceKey, socketData, switchingMode } = useSelector(
+  const { deviceKey, socketData, switchingMode, blurDisabled } = useSelector(
     (state: RootState) => state.utils
   )
   const [deviceLogs, setDeviceLogs] = useState<DeviceLogsType>()
@@ -110,6 +110,7 @@ const Dashboard = () => {
         fetchDevices={fetchDeviceLogs}
         swiperInfoRef={swiperInfoRef}
         isPause={isPause}
+        blurDisabled={blurDisabled}
       />
     )
   }, [deviceKey, deviceLogs, activeIndex, swiperInfoRef, isPause])

@@ -67,6 +67,12 @@ const getOKLCHColor = (themeMode: string, system: string): string => {
       return 'oklch(95.1276% 0.007445 260.731539 / 0.8)'
     case 'sunset':
       return 'oklch(22% 0.019 237.69 / 0.8)'
+    case 'caramellatte':
+      return 'oklch(98% 0.016 73.684)'
+    case 'abyss':
+      return 'oklch(20% 0.08 209)'
+    case 'silk':
+      return 'oklch(97% 0.0035 67.78)'
     default:
       return system === 'dark'
         ? 'oklch(25.3267% 0.015896 252.417568 / 0.8)'

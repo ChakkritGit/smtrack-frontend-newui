@@ -426,7 +426,7 @@ div:where(.swal2-container).swal2-noanimation {
 }
 
 body {
-  @apply bg-base-200 h-full;
+  @apply h-full;
 }
 
 .go2072408551 {

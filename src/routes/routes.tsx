@@ -1,4 +1,11 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState
+} from 'react'
 import { RouterProvider } from 'react-router-dom'
 import { router } from './createRoutes'
 import { useDispatch, useSelector } from 'react-redux'
@@ -21,8 +28,16 @@ import { getOKLCHColor } from '../constants/utils/color'
 
 const Routes = () => {
   const dispatch = useDispatch()
-  const { tokenDecode, cookieDecode, tmsMode, themeMode, userProfile } =
-    useSelector((state: RootState) => state.utils)
+  const {
+    tokenDecode,
+    cookieDecode,
+    tmsMode,
+    themeMode,
+    userProfile,
+    blurDisabled,
+    transitionDisabled,
+    grayscaleMode
+  } = useSelector((state: RootState) => state.utils)
   const [hospital, setHospital] = useState<HospitalType[]>([])
   const [activeIndex, setActiveIndex] = useState(0)
   const [ward, setWard] = useState<WardType[]>([])
@@ -193,6 +208,98 @@ const Routes = () => {
     () => <RouterProvider key={hashText()} router={routerInstance} />,
     [routerInstance]
   )
+
+  useLayoutEffect(() => {
+    if (!grayscaleMode) return
+
+    const style = document.createElement('style')
+    style.setAttribute('data-grayscale', 'true')
+
+    const selectors = [
+      'html',
+      'body',
+      '.modal',
+      '.dialog',
+      '[role="dialog"]'
+    ].join(', ')
+
+    style.textContent = `
+      ${selectors} {
+        filter: ${grayscaleMode ? 'grayscale(1)' : 'grayscale(0)'} !important;
+        transition: filter 0.3s ease !important;
+      }
+    `
+
+    document.head.appendChild(style)
+
+    return () => {
+      document.head
+        .querySelectorAll('style[data-grayscale="true"]')
+        .forEach(el => el.remove())
+    }
+  }, [grayscaleMode])
+
+  useLayoutEffect(() => {
+    if (blurDisabled) return
+
+    const style = document.createElement('style')
+    style.setAttribute('data-filter-remover', 'true')
+
+    const selectors = [
+      'html',
+      'body',
+      '.modal',
+      '.dialog',
+      '[role="dialog"]',
+      '*'
+    ].join(', ')
+
+    style.textContent = `
+      ${selectors} {
+        filter: none !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+      }
+    `
+
+    document.head.appendChild(style)
+
+    return () => {
+      document.head
+        .querySelectorAll('style[data-filter-remover="true"]')
+        .forEach(el => el.remove())
+    }
+  }, [blurDisabled])
+
+  useLayoutEffect(() => {
+    if (!transitionDisabled) return
+
+    const style = document.createElement('style')
+    style.setAttribute('data-transition-remover', 'true')
+
+    const selectors = [
+      'html',
+      'body',
+      '.modal',
+      '.dialog',
+      '[role="dialog"]',
+      '*'
+    ].join(', ')
+
+    style.textContent = `
+      ${selectors} {
+        transition: none !important;
+      }
+    `
+
+    document.head.appendChild(style)
+
+    return () => {
+      document.head
+        .querySelectorAll('style[data-transition-remover="true"]')
+        .forEach(el => el.remove())
+    }
+  }, [transitionDisabled])
 
   return (
     <GlobalContext.Provider value={contextValue}>

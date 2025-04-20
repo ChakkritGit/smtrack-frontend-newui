@@ -21,7 +21,10 @@ import {
   RESET_UTILS,
   TOKEN_EXPIRE,
   SHOULD_FETCH,
-  SWITCHING_MODE
+  SWITCHING_MODE,
+  GRAYSCALE_MODE,
+  BLUR_DISABLED,
+  TRANSITION_DISABLED
 } from '../types/utilsTypes'
 
 const initialState: UtilsState = {
@@ -42,6 +45,9 @@ const initialState: UtilsState = {
   tokenExpire: false,
   shouldFetch: false,
   switchingMode: false,
+  grayscaleMode: localStorage.getItem('grayscaleMode') === 'true' ? true : false,
+  blurDisabled: localStorage.getItem('blurDisabled') === 'false' ? false : true,
+  transitionDisabled: localStorage.getItem('transitionDisabled') === 'true' ? true : false,
   soundMode: cookies.get('soundMode') ?? false
 }
 
@@ -86,6 +92,12 @@ const utilsReducer = (
       return { ...state, shouldFetch: !state.shouldFetch }
     case SWITCHING_MODE:
       return { ...state, switchingMode: !state.switchingMode }
+    case GRAYSCALE_MODE:
+      return { ...state, grayscaleMode: !state.grayscaleMode }
+    case BLUR_DISABLED:
+      return { ...state, blurDisabled: !state.blurDisabled }
+    case TRANSITION_DISABLED:
+      return { ...state, transitionDisabled: !state.transitionDisabled }
     case RESET_UTILS:
       return initialState
     default:

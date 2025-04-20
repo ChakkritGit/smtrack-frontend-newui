@@ -64,7 +64,7 @@ const Settings = () => {
 
   const settingContent = useMemo(
     () => (
-      <div className='w-full p-3 bg-base-100 rounded-field max-h-[calc(100dvh-230px)] overflow-y-scroll'>
+      <div className='w-full p-3 bg-base-100 rounded-field max-h-[calc(100dvh-230px)] md:max-h-[calc(100dvh-150px)] overflow-y-scroll'>
         {tab === 1 ? (
           settingProfile
         ) : tab === 2 ? (
@@ -125,7 +125,7 @@ const Settings = () => {
               ) : (
                 <RiColorFilterAiLine size={24} />
               )}
-              <span className='hidden md:block'>{t('themeMode')}</span>
+              <span className='hidden md:block'>{t('tabDisplay')}</span>
             </a>
           </li>
           <li

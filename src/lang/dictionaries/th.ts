@@ -465,6 +465,11 @@ export default {
     switchingMode: 'กำลังสลับ...',
     currentMode: '*สลับ SMTrack และ Line โหมด',
     typeLabel: 'ประเภท',
+    filterColor: 'ฟิลเตอร์',
+    animation: 'แอนิเมชั่น',
+    transition: 'ทรานซิชั่น',
+    grayscale: 'เกสเกล',
+    blur: 'เอฟเฟคเบลอ',
 
     // connect
     ipAddress: 'IP',

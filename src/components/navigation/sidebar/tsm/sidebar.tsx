@@ -35,7 +35,7 @@ const Sidebar = () => {
   const navigate = useNavigate()
   const { t } = useTranslation()
   const location = useLocation()
-  const { isExpand, userProfile, tmsMode, tokenDecode, switchingMode } =
+  const { isExpand, userProfile, tmsMode, tokenDecode, switchingMode, transitionDisabled } =
     useSelector((state: RootState) => state.utils)
   const { ward: wardData } = useContext(GlobalContext) as GlobalContextType
   const { ward } = userProfile || {}
@@ -62,7 +62,7 @@ const Sidebar = () => {
         className='drawer-overlay'
       ></label>
       <div
-        className={`menu bg-base-100 text-base-content min-h-full flex flex-col !items-center justify-between !transition-all !ease-linear !duration-300 ${
+        className={`menu bg-base-100 text-base-content min-h-full flex flex-col !items-center justify-between ${!transitionDisabled ? '!transition-all !ease-linear !duration-300' : ''} ${
           isExpand ? 'w-[100px]' : 'w-[235px]'
         }`}
       >
@@ -263,7 +263,7 @@ const Sidebar = () => {
                 isExpand ? 'text-center' : 'text-right'
               } hover:underline cursor-pointer`}
             >
-              Version 2.0.0b14
+              Version 2.0.0b14b
             </Link>
           </div>
         </div>
