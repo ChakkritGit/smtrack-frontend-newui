@@ -21,10 +21,10 @@ const CardStatusTms = (props: PropsType) => {
 
   return (
     <>
-      <div className='bg-base-100 p-3 rounded-btn w-full h-[140px] overflow-hidden xl:col-span-6'>
+      <div className='bg-base-100 p-3 rounded-field w-full h-[140px] overflow-hidden xl:col-span-6'>
         <div className='flex items-center gap-2 h-[30%]'>
           <div
-            className={`flex items-center justify-center rounded-btn bg-base-300 w-[32px] h-[32px]`}
+            className={`flex items-center justify-center rounded-field bg-base-300 w-[32px] h-[32px]`}
           >
             <RiTempColdLine size={20} />
           </div>
@@ -42,10 +42,10 @@ const CardStatusTms = (props: PropsType) => {
           </div>
         </div>
       </div>
-      {/* <div className='flex flex-col gap-2 p-3 bg-base-100 rounded-btn w-full h-[140px] xl:col-span-4'>
+      {/* <div className='flex flex-col gap-2 p-3 bg-base-100 rounded-field w-full h-[140px] xl:col-span-4'>
         <div className='flex items-center gap-2'>
           <div
-            className={`flex items-center justify-center rounded-btn bg-base-300 w-[32px] h-[32px] ${
+            className={`flex items-center justify-center rounded-field bg-base-300 w-[32px] h-[32px] ${
               deviceData?.log && deviceData?.log[0]?.internet
                 ? 'text-base-content bg-opacity-80 bg-red-500'
                 : ''
@@ -73,10 +73,10 @@ const CardStatusTms = (props: PropsType) => {
             : '—'}
         </div>
       </div> */}
-      <div className='flex flex-col gap-2 p-3 bg-base-100 rounded-btn w-full h-[140px] xl:col-span-6'>
+      <div className='flex flex-col gap-2 p-3 bg-base-100 rounded-field w-full h-[140px] xl:col-span-6'>
         <div className='flex items-center gap-2'>
           <div
-            className={`flex items-center justify-center rounded-btn bg-base-300 w-[32px] h-[32px] ${
+            className={`flex items-center justify-center rounded-field bg-base-300 w-[32px] h-[32px] ${
               deviceData?.log && deviceData?.log[0]?.door
                 ? 'text-base-content bg-opacity-80 bg-red-500'
                 : ''
@@ -102,10 +102,10 @@ const CardStatusTms = (props: PropsType) => {
             : '—'}
         </div>
       </div>
-      <div className='flex flex-col gap-2 p-3 bg-base-100 rounded-btn w-full h-[140px] xl:col-span-6'>
+      <div className='flex flex-col gap-2 p-3 bg-base-100 rounded-field w-full h-[140px] xl:col-span-6'>
         <div className='flex items-center gap-2'>
           <div
-            className={`flex items-center justify-center rounded-btn bg-base-300 w-[32px] h-[32px] ${
+            className={`flex items-center justify-center rounded-field bg-base-300 w-[32px] h-[32px] ${
               deviceData?.log && !deviceData?.log[0]?.plugin
                 ? 'text-base-content bg-opacity-80 bg-red-500'
                 : ''
@@ -131,10 +131,10 @@ const CardStatusTms = (props: PropsType) => {
             : '—'}
         </div>
       </div>
-      <div className='bg-base-100 p-3 rounded-btn w-full h-[140px] overflow-hidden xl:col-span-6'>
+      <div className='bg-base-100 p-3 rounded-field w-full h-[140px] overflow-hidden xl:col-span-6'>
         <div className='flex items-center gap-2 h-[30%]'>
           <div
-            className={`flex items-center justify-center rounded-btn bg-base-300 w-[32px] h-[32px]`}
+            className={`flex items-center justify-center rounded-field bg-base-300 w-[32px] h-[32px]`}
           >
             <HiOutlineArrowsUpDown size={20} />
           </div>

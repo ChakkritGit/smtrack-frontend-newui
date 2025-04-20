@@ -1053,7 +1053,7 @@ const ManageDevice = () => {
             <>
               <button
                 data-tip={t('moveDevice')}
-                className='btn btn-primary tooltip tooltip-left flex text-white min-w-[32px] max-w-[32px] min-h-[32px] max-h-[32px] p-0'
+                className='btn btn-primary tooltip tooltip-left flex text-primary-content min-w-[32px] max-w-[32px] min-h-[32px] max-h-[32px] p-0'
                 onClick={() => {
                   if (item.status) {
                     swalMoveDevice.fire({
@@ -1109,7 +1109,7 @@ const ManageDevice = () => {
             ) : (
               <button
                 data-tip={t('deviceActive')}
-                className='btn btn-primary tooltip tooltip-left flex text-white min-w-[32px] max-w-[32px] min-h-[32px] max-h-[32px] p-0'
+                className='btn btn-primary tooltip tooltip-left flex text-primary-content min-w-[32px] max-w-[32px] min-h-[32px] max-h-[32px] p-0'
                 onClick={() =>
                   Swal.fire({
                     title: t('deactivateDevice'),
@@ -1135,7 +1135,7 @@ const ManageDevice = () => {
               </button>
             ))}
           <button
-            className='btn btn-ghost flex text-white min-w-[32px] max-w-[32px] min-h-[32px] max-h-[32px] p-0 bg-primary'
+            className='btn btn-ghost flex text-primary-content min-w-[32px] max-w-[32px] min-h-[32px] max-h-[32px] p-0 bg-primary'
             onClick={() => openEditModal(item)}
           >
             <RiEditLine size={20} />
@@ -1232,14 +1232,14 @@ const ManageDevice = () => {
         <div className='flex flex-col lg:flex-row mt-3 lg:mt-0 lg:items-center items-end lg:gap-3'>
           <HospitalAndWard />
           <button
-            className='btn btn-primary max-w-[130px]'
+            className='btn btn-neutral max-w-[130px]'
             onClick={() => addModalRef.current?.showModal()}
           >
             {t('addDeviceButton')}
           </button>
           <div className='divider divider-horizontal mx-0 py-1'></div>
           <button
-            className='btn flex btn-primary p-0 w-[48px] h-[48px] min-w-[48px] min-h-[48px] tooltip tooltip-left'
+            className='btn flex btn-neutral p-0 w-[48px] h-[48px] min-w-[48px] min-h-[48px] tooltip tooltip-left'
             data-tip={'Sync Device Time'}
             onClick={() => {
               socket.emit('send_schedule', 'time', (val: string) => {
@@ -1275,7 +1275,7 @@ const ManageDevice = () => {
         </div>
       </div>
 
-      <div className='dataTableWrapper bg-base-100 rounded-btn p-3 mt-5 duration-300 ease-linear'>
+      <div className='dataTableWrapper bg-base-100 rounded-field p-3 mt-5 duration-300 ease-linear'>
         <DataTable
           responsive
           fixedHeader
@@ -1306,8 +1306,8 @@ const ManageDevice = () => {
             <div className='col-span-2 grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4'>
               {/* sn */}
               <div className='form-control w-full'>
-                <label className='label flex-col items-start'>
-                  <span className='label-text mb-2'>
+                <label className='label flex-col items-start w-full mb-3'>
+                  <span className='label-text text-wrap mb-2'>
                     <span className='font-medium text-red-500 mr-1'>*</span>
                     {t('deviceSerialTb')}
                   </span>
@@ -1324,8 +1324,8 @@ const ManageDevice = () => {
 
               {/* name */}
               <div className='form-control w-full'>
-                <label className='label flex-col items-start'>
-                  <span className='label-text mb-2'>
+                <label className='label flex-col items-start w-full mb-3'>
+                  <span className='label-text text-wrap mb-2'>
                     <span className='font-medium text-red-500 mr-1'>*</span>
                     {t('deviceNameTb')}
                   </span>
@@ -1354,7 +1354,7 @@ const ManageDevice = () => {
             >
               {t('cancelButton')}
             </button>
-            <button type='submit' className='btn btn-primary'>
+            <button type='submit' className='btn btn-neutral'>
               {t('submitButton')}
             </button>
           </div>
@@ -1382,7 +1382,7 @@ const ManageDevice = () => {
               <div className='col-span-1 flex justify-center'>
                 <div className='form-control'>
                   <label className='label cursor-pointer image-hover flex flex-col justify-center'>
-                    <span className='label-text'>{t('userPicture')}</span>
+                    <span className='label-text text-wrap'>{t('userPicture')}</span>
                     <input
                       key={formData.imagePreview}
                       ref={fileInputRef}
@@ -1404,7 +1404,7 @@ const ManageDevice = () => {
                               : defaultPic
                           }
                           alt='Preview'
-                          className={`w-32 h-32 md:w-48 md:h-48 rounded-btn object-cover border-2 border-dashed border-base-300 ${
+                          className={`w-32 h-32 md:w-48 md:h-48 rounded-field object-cover border-2 border-dashed border-base-300 ${
                             formData.imagePreview || defaultPic
                               ? 'border-none'
                               : ''
@@ -1423,8 +1423,8 @@ const ManageDevice = () => {
               <div className='col-span-2 grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4'>
                 {/* Hospital */}
                 <div className='form-control w-full'>
-                  <label className='label flex-col items-start'>
-                    <span className='label-text mb-2'>
+                  <label className='label flex-col items-start w-full mb-3'>
+                    <span className='label-text text-wrap mb-2'>
                       <span className='font-medium text-red-500 mr-1'>*</span>
                       {t('hospitalsName')}
                     </span>
@@ -1437,8 +1437,8 @@ const ManageDevice = () => {
 
                 {/* Ward */}
                 <div className='form-control w-full'>
-                  <label className='label flex-col items-start'>
-                    <span className='label-text mb-2'>
+                  <label className='label flex-col items-start w-full mb-3'>
+                    <span className='label-text text-wrap mb-2'>
                       <span className='font-medium text-red-500 mr-1'>*</span>
                       {t('ward')}
                     </span>
@@ -1451,8 +1451,8 @@ const ManageDevice = () => {
 
                 {/* name */}
                 <div className='form-control w-full'>
-                  <label className='label flex-col items-start'>
-                    <span className='label-text mb-2'>
+                  <label className='label flex-col items-start w-full mb-3'>
+                    <span className='label-text text-wrap mb-2'>
                       <span className='font-medium text-red-500 mr-1'>*</span>
                       {t('deviceNameTb')}
                     </span>
@@ -1469,8 +1469,8 @@ const ManageDevice = () => {
 
                 {/* location */}
                 <div className='form-control w-full'>
-                  <label className='label flex-col items-start'>
-                    <span className='label-text mb-2'>
+                  <label className='label flex-col items-start w-full mb-3'>
+                    <span className='label-text text-wrap mb-2'>
                       <span className='font-medium text-red-500 mr-1'>*</span>
                       {t('deviceLocationTb')}
                     </span>
@@ -1487,8 +1487,8 @@ const ManageDevice = () => {
 
                 {/* position */}
                 <div className='form-control w-full'>
-                  <label className='label flex-col items-start'>
-                    <span className='label-text mb-2'>
+                  <label className='label flex-col items-start w-full mb-3'>
+                    <span className='label-text text-wrap mb-2'>
                       <span className='font-medium text-red-500 mr-1'>*</span>
                       {t('deviceLocationDeviceTb')}
                     </span>
@@ -1505,8 +1505,8 @@ const ManageDevice = () => {
 
                 {/* remark */}
                 <div className='form-control w-full'>
-                  <label className='label flex-col items-start'>
-                    <span className='label-text mb-2'>{t('remmark')}</span>
+                  <label className='label flex-col items-start w-full mb-3'>
+                    <span className='label-text text-wrap mb-2'>{t('remmark')}</span>
                     <input
                       type='text'
                       name='remark'
@@ -1520,8 +1520,8 @@ const ManageDevice = () => {
 
                 {/* tag */}
                 <div className='form-control w-full'>
-                  <label className='label flex-col items-start'>
-                    <span className='label-text mb-2'>{t('tag')}</span>
+                  <label className='label flex-col items-start w-full mb-3'>
+                    <span className='label-text text-wrap mb-2'>{t('tag')}</span>
                     <input
                       type='text'
                       name='tag'
@@ -1535,13 +1535,13 @@ const ManageDevice = () => {
 
                 {/* network */}
                 <div className='form-control w-full'>
-                  <label className='label flex-col items-start'>
-                    <span className='label-text mb-2'>
+                  <label className='label flex-col items-start w-full mb-3'>
+                    <span className='label-text text-wrap mb-2'>
                       {t('deviceNetwork')}
                     </span>
                     <button
                       type='button'
-                      className='btn btn-primary w-full'
+                      className='btn btn-neutral w-full'
                       onClick={() => openEdit(formData.config)}
                     >
                       <RiSettings4Line size={20} />
@@ -1554,8 +1554,8 @@ const ManageDevice = () => {
                 {role === 'SUPER' && (
                   <>
                     <div className='form-control w-full md:col-span-2'>
-                      <div className='label flex-col items-start'>
-                        <span className='label-text mb-2'>
+                      <div className='label flex-col items-start w-full mb-3'>
+                        <span className='label-text text-wrap mb-2'>
                           {t('hardReset')}
                         </span>
                         <div className='grid grid-cols-1 md:grid-cols-3 gap-2 w-full'>
@@ -1607,7 +1607,7 @@ const ManageDevice = () => {
                             classNamePrefix='react-select'
                           />
                           <button
-                            className='btn btn-primary'
+                            className='btn btn-neutral'
                             type='button'
                             onClick={() => hardResetFun()}
                           >
@@ -1623,8 +1623,8 @@ const ManageDevice = () => {
                           : ''
                       }`}
                     >
-                      <div className='label flex-col items-start'>
-                        <span className='label-text mb-2'>
+                      <div className='label flex-col items-start w-full mb-3'>
+                        <span className='label-text text-wrap mb-2'>
                           {t('firmWareVer')}
                         </span>
                         <div className='grid grid-cols-1 md:grid-cols-2 gap-2 w-full'>
@@ -1654,7 +1654,7 @@ const ManageDevice = () => {
                             classNamePrefix='react-select'
                           />
                           <button
-                            className='btn btn-primary'
+                            className='btn btn-neutral'
                             type='button'
                             disabled={selectedFirmware === ''}
                             onClick={() => handleUpdateFirmware()}
@@ -1670,7 +1670,7 @@ const ManageDevice = () => {
             </div>
           ) : (
             <div>
-              <div role='tablist' className='tabs tabs-bordered mt-4'>
+              <div role='tablist' className='tabs tabs-border justify-evenly mt-4'>
                 <a
                   role='tab'
                   className={`tab ${
@@ -1770,8 +1770,8 @@ const ManageDevice = () => {
                     <div className='mt-3'>
                       <div className='form-control w-full'>
                         <div className='grid grid-cols-1 md:grid-cols-2 md:gap-3'>
-                          <label className='label flex-col items-start'>
-                            <span className='label-text mb-2'>
+                          <label className='label flex-col items-start w-full mb-3'>
+                            <span className='label-text text-wrap mb-2'>
                               <span className='font-medium text-red-500 mr-1'>
                                 *
                               </span>
@@ -1795,8 +1795,8 @@ const ManageDevice = () => {
                               maxLength={50}
                             />
                           </label>
-                          <label className='label flex-col items-start'>
-                            <span className='label-text mb-2'>
+                          <label className='label flex-col items-start w-full mb-3'>
+                            <span className='label-text text-wrap mb-2'>
                               <span className='font-medium text-red-500 mr-1'>
                                 *
                               </span>
@@ -1831,8 +1831,8 @@ const ManageDevice = () => {
                     >
                       <div className='form-control w-full'>
                         <div className='grid grid-cols-1 md:grid-cols-2 md:gap-3'>
-                          <label className='label flex-col items-start'>
-                            <span className='label-text mb-2'>
+                          <label className='label flex-col items-start w-full mb-3'>
+                            <span className='label-text text-wrap mb-2'>
                               {!networkObject.selectWifi && (
                                 <span className='font-medium text-red-500 mr-1'>
                                   *
@@ -1859,8 +1859,8 @@ const ManageDevice = () => {
                               maxLength={50}
                             />
                           </label>
-                          <label className='label flex-col items-start'>
-                            <span className='label-text mb-2'>
+                          <label className='label flex-col items-start w-full mb-3'>
+                            <span className='label-text text-wrap mb-2'>
                               {!networkObject.selectWifi && (
                                 <span className='font-medium text-red-500 mr-1'>
                                   *
@@ -1887,8 +1887,8 @@ const ManageDevice = () => {
                               maxLength={50}
                             />
                           </label>
-                          <label className='label flex-col items-start'>
-                            <span className='label-text mb-2'>
+                          <label className='label flex-col items-start w-full mb-3'>
+                            <span className='label-text text-wrap mb-2'>
                               {!networkObject.selectWifi && (
                                 <span className='font-medium text-red-500 mr-1'>
                                   *
@@ -1916,8 +1916,8 @@ const ManageDevice = () => {
                             />
                           </label>
 
-                          <label className='label flex-col items-start'>
-                            <span className='label-text mb-2'>
+                          <label className='label flex-col items-start w-full mb-3'>
+                            <span className='label-text text-wrap mb-2'>
                               {!networkObject.selectWifi && (
                                 <span className='font-medium text-red-500 mr-1'>
                                   *
@@ -1944,8 +1944,8 @@ const ManageDevice = () => {
                               maxLength={50}
                             />
                           </label>
-                          <label className='label flex-col items-start'>
-                            <span className='label-text mb-2'>
+                          <label className='label flex-col items-start w-full mb-3'>
+                            <span className='label-text text-wrap mb-2'>
                               {!networkObject.selectWifi && (
                                 <span className='font-medium text-red-500 mr-1'>
                                   *
@@ -2032,8 +2032,8 @@ const ManageDevice = () => {
                       <div className='mt-3'>
                         <div className='form-control w-full'>
                           <div className='grid grid-cols-1 md:grid-cols-2 md:gap-3'>
-                            <label className='label flex-col items-start'>
-                              <span className='label-text mb-2'>
+                            <label className='label flex-col items-start w-full mb-3'>
+                              <span className='label-text text-wrap mb-2'>
                                 <span className='font-medium text-red-500 mr-1'>
                                   *
                                 </span>
@@ -2057,8 +2057,8 @@ const ManageDevice = () => {
                                 maxLength={50}
                               />
                             </label>
-                            <label className='label flex-col items-start'>
-                              <span className='label-text mb-2'>
+                            <label className='label flex-col items-start w-full mb-3'>
+                              <span className='label-text text-wrap mb-2'>
                                 <span className='font-medium text-red-500 mr-1'>
                                   *
                                 </span>
@@ -2084,8 +2084,8 @@ const ManageDevice = () => {
                             </label>
                           </div>
                           <div className='grid grid-cols-1 md:grid-cols-2 md:gap-3'>
-                            <label className='label flex-col items-start'>
-                              <span className='label-text mb-2'>Gateway</span>
+                            <label className='label flex-col items-start w-full mb-3'>
+                              <span className='label-text text-wrap mb-2'>Gateway</span>
                               <input
                                 type='text'
                                 name='gatway'
@@ -2103,8 +2103,8 @@ const ManageDevice = () => {
                                 maxLength={50}
                               />
                             </label>
-                            <label className='label flex-col items-start'>
-                              <span className='label-text mb-2'>Dns</span>
+                            <label className='label flex-col items-start w-full mb-3'>
+                              <span className='label-text text-wrap mb-2'>Dns</span>
                               <input
                                 type='text'
                                 name='gatway'
@@ -2227,7 +2227,7 @@ const ManageDevice = () => {
                 {t('buttonErrorBack')}
               </button>
             )}
-            <button type='submit' className='btn btn-primary'>
+            <button type='submit' className='btn btn-neutral'>
               {t('submitButton')}
             </button>
           </div>
@@ -2246,7 +2246,7 @@ const ManageDevice = () => {
               deviceId={deviceId}
               setDeviceId={setDeviceId}
             />
-            <div className='bg-base-200 rounded-btn p-3 mt-3'>
+            <div className='bg-base-200 rounded-field p-3 mt-3'>
               {/* <RiCpuLine size={24} /> */}
               <div className='flex flex-col gap-1'>
                 <span>S/N: {moveDevice.id}</span>
@@ -2256,7 +2256,7 @@ const ManageDevice = () => {
             <div className='my-10 w-full flex items-center justify-center'>
               <IoSwapVertical size={36} className='text-base-content/70' />
             </div>
-            <div className='bg-base-200 rounded-btn p-3 mt-3'>
+            <div className='bg-base-200 rounded-field p-3 mt-3'>
               {/* <RiCpuLine size={24} /> */}
               <div className='flex flex-col gap-1'>
                 <span>S/N: {deviceId !== '' ? deviceId : '—'}</span>
@@ -2282,7 +2282,7 @@ const ManageDevice = () => {
             </button>
             <button
               type='submit'
-              className='btn btn-primary'
+              className='btn btn-neutral'
               disabled={deviceId === ''}
             >
               {t('submitButton')}

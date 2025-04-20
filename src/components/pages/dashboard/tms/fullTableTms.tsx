@@ -97,7 +97,7 @@ const FullTableTmsComponent = (props: FullTablePropType) => {
   )
 
   return (
-    <div className='dataTableWrapper bg-base-100 rounded-btn p-3 duration-300 ease-linear mt-5'>
+    <div className='dataTableWrapper bg-base-100 rounded-field p-3 duration-300 ease-linear mt-5'>
       {table}
     </div>
   )

@@ -35,7 +35,7 @@ const ImageModal = (props: ImageModalProps) => {
           <img
             src={deviceData?.positionPic ?? DefaultPic}
             alt='Device-image'
-            className='rounded-btn object-contain'
+            className='rounded-field object-contain'
           />
         </div>
       </form>

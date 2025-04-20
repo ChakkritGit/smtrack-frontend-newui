@@ -31,12 +31,12 @@ const ManagementTms = () => {
 
   const manageMenu = useMemo(
     () => (
-      <div className='flex items-center gap-2 border-b-2 border-primary w-full mt-3'>
+      <div className='flex items-center gap-2 border-b-2 border-neutral w-full mt-3'>
         <a
           className={`flex items-center text-sm md:text-lg border-2 border-b-0 p-2 rounded-tl-md rounded-tr-md cursor-pointer ${
             tab === 1
-              ? 'font-medium bg-primary border-primary text-white'
-              : 'border-base-content/70'
+              ? 'font-bold bg-neutral border-neutral text-neutral-content'
+              : 'font-medium border-neutral/70 text-neutral'
           }`}
           onClick={() => {
             cookies.set('manageHospitalTab', 1, cookieOptions)
@@ -55,8 +55,8 @@ const ManagementTms = () => {
             <a
               className={`flex items-center text-sm md:text-lg border-2 border-b-0 p-2 rounded-tl-md rounded-tr-md cursor-pointer ${
                 tab === 2
-                  ? 'font-medium bg-primary border-primary text-white'
-                  : 'border-base-content/70'
+                  ? 'font-bold bg-neutral border-neutral text-neutral-content'
+                  : 'font-medium border-neutral/70 text-neutral'
               }`}
               onClick={() => {
                 cookies.set('manageHospitalTab', 2, cookieOptions)
@@ -75,8 +75,8 @@ const ManagementTms = () => {
             <a
               className={`flex items-center text-sm md:text-lg border-2 border-b-0 p-2 rounded-tl-md rounded-tr-md cursor-pointer ${
                 tab === 3
-                  ? 'font-medium bg-primary border-primary text-white'
-                  : 'border-base-content/70'
+                  ? 'font-bold bg-neutral border-neutral text-neutral-content'
+                  : 'font-medium border-neutral/70 text-neutral'
               }`}
               onClick={() => {
                 cookies.set('manageHospitalTab', 3, cookieOptions)

@@ -480,7 +480,7 @@ const Repair = () => {
 
   const DataTableComponent = useMemo(() => {
     return (
-      <div className='dataTableWrapper bg-base-100 rounded-btn p-3 mt-5 duration-300 ease-linear'>
+      <div className='dataTableWrapper bg-base-100 rounded-field p-3 mt-5 duration-300 ease-linear'>
         <DataTable
           responsive
           fixedHeader
@@ -504,7 +504,7 @@ const Repair = () => {
         <span className='text-[20px] font-medium'></span>
         <div className='flex flex-col lg:flex-row mt-3 lg:mt-0 lg:items-center items-end lg:gap-3'>
           <button
-            className='btn btn-primary max-w-[150px]'
+            className='btn btn-neutral max-w-[150px]'
             onClick={() => {
               addModalRef.current?.showModal()
               setRepairForm({
@@ -528,8 +528,8 @@ const Repair = () => {
           <div className='grid grid-cols-1 md:grid-cols-2 md:gap-4 mt-4 w-full'>
             <div>
               <div className='form-control w-full'>
-                <label className='label flex-col items-start'>
-                  <span className='label-text mb-2'>
+                <label className='label flex-col items-start w-full mb-3'>
+                  <span className='label-text text-wrap mb-2'>
                     <span className='font-medium text-red-500 mr-1'>*</span>
                     {t('hisUsername')}
                   </span>
@@ -543,8 +543,8 @@ const Repair = () => {
                 </label>
               </div>
               <div className='form-control w-full'>
-                <label className='label flex-col items-start'>
-                  <span className='label-text mb-2'>
+                <label className='label flex-col items-start w-full mb-3'>
+                  <span className='label-text text-wrap mb-2'>
                     <span className='font-medium text-red-500 mr-1'>*</span>
                     {t('hosAddress')}
                   </span>
@@ -558,8 +558,8 @@ const Repair = () => {
                 </label>
               </div>
               <div className='form-control w-full'>
-                <label className='label flex-col items-start'>
-                  <span className='label-text mb-2'>
+                <label className='label flex-col items-start w-full mb-3'>
+                  <span className='label-text text-wrap mb-2'>
                     <span className='font-medium text-red-500 mr-1'>*</span>
                     {t('hosTel')}
                   </span>
@@ -574,8 +574,8 @@ const Repair = () => {
                 </label>
               </div>
               <div className='form-control w-full'>
-                <label className='label flex-col items-start'>
-                  <span className='label-text mb-2'>
+                <label className='label flex-col items-start w-full mb-3'>
+                  <span className='label-text text-wrap mb-2'>
                     <span className='font-medium text-red-500 mr-1'>*</span>
                     {t('ward')}
                   </span>
@@ -601,8 +601,8 @@ const Repair = () => {
             </div>
             <div>
               <div className='form-control w-full'>
-                <label className='label flex-col items-start'>
-                  <span className='label-text mb-2'>
+                <label className='label flex-col items-start w-full mb-3'>
+                  <span className='label-text text-wrap mb-2'>
                     <span className='font-medium text-red-500 mr-1'>*</span>
                     {t('deviceSerialTb')}
                   </span>
@@ -629,7 +629,7 @@ const Repair = () => {
                 </label>
               </div>
               <div className='form-control w-full'>
-                <label className='label flex-col items-start'>
+                <label className='label flex-col items-start w-full mb-3'>
                   <div className='flex flex-col gap-2'>
                     <label className='flex items-center gap-2'>
                       <input
@@ -684,8 +684,8 @@ const Repair = () => {
               </div>
               {repairForm.warrantyStatus === '4' && (
                 <div className='form-control w-full'>
-                  <label className='label flex-col items-start'>
-                    <span className='label-text mb-2'>{t('hisDetail')}</span>
+                  <label className='label flex-col items-start w-full mb-3'>
+                    <span className='label-text text-wrap mb-2'>{t('hisDetail')}</span>
                     <textarea
                       name='remark'
                       value={repairForm.remark}
@@ -702,8 +702,8 @@ const Repair = () => {
 
           <div className='grid grid-cols-1 gap-4 w-full'>
             <div className='form-control w-full'>
-              <label className='label flex-col items-start'>
-                <span className='label-text mb-2'>{t('hisDetail')}</span>
+              <label className='label flex-col items-start w-full mb-3'>
+                <span className='label-text text-wrap mb-2'>{t('hisDetail')}</span>
                 <textarea
                   name='detail'
                   value={repairForm.detail}
@@ -719,8 +719,8 @@ const Repair = () => {
           <div className='grid grid-cols-1 md:grid-cols-2 md:gap-4 w-full'>
             <div className='grid grid-cols-1 gap-4 mt-2 w-full'>
               <div className='form-control w-full'>
-                <label className='label flex-col items-start'>
-                  <span className='label-text mb-2'>
+                <label className='label flex-col items-start w-full mb-3'>
+                  <span className='label-text text-wrap mb-2'>
                     {t('deviceCondition')}
                   </span>
                   <textarea
@@ -736,8 +736,8 @@ const Repair = () => {
             </div>
             <div className='grid grid-cols-1 gap-4 mt-2 w-full'>
               <div className='form-control w-full'>
-                <label className='label flex-col items-start'>
-                  <span className='label-text mb-2'>
+                <label className='label flex-col items-start w-full mb-3'>
+                  <span className='label-text text-wrap mb-2'>
                     {t('deviceRepairInfo')}
                   </span>
                   <textarea
@@ -765,7 +765,7 @@ const Repair = () => {
             >
               {t('cancelButton')}
             </button>
-            <button type='submit' className='btn btn-primary'>
+            <button type='submit' className='btn btn-neutral'>
               {t('submitButton')}
             </button>
           </div>
@@ -781,8 +781,8 @@ const Repair = () => {
           <div className='grid grid-cols-1 md:grid-cols-2 md:gap-4 mt-4 w-full'>
             <div>
               <div className='form-control w-full'>
-                <label className='label flex-col items-start'>
-                  <span className='label-text mb-2'>
+                <label className='label flex-col items-start w-full mb-3'>
+                  <span className='label-text text-wrap mb-2'>
                     <span className='font-medium text-red-500 mr-1'>*</span>
                     {t('hisUsername')}
                   </span>
@@ -796,8 +796,8 @@ const Repair = () => {
                 </label>
               </div>
               <div className='form-control w-full'>
-                <label className='label flex-col items-start'>
-                  <span className='label-text mb-2'>
+                <label className='label flex-col items-start w-full mb-3'>
+                  <span className='label-text text-wrap mb-2'>
                     <span className='font-medium text-red-500 mr-1'>*</span>
                     {t('hosAddress')}
                   </span>
@@ -811,8 +811,8 @@ const Repair = () => {
                 </label>
               </div>
               <div className='form-control w-full'>
-                <label className='label flex-col items-start'>
-                  <span className='label-text mb-2'>
+                <label className='label flex-col items-start w-full mb-3'>
+                  <span className='label-text text-wrap mb-2'>
                     <span className='font-medium text-red-500 mr-1'>*</span>
                     {t('hosTel')}
                   </span>
@@ -827,8 +827,8 @@ const Repair = () => {
                 </label>
               </div>
               <div className='form-control w-full'>
-                <label className='label flex-col items-start'>
-                  <span className='label-text mb-2'>
+                <label className='label flex-col items-start w-full mb-3'>
+                  <span className='label-text text-wrap mb-2'>
                     <span className='font-medium text-red-500 mr-1'>*</span>
                     {t('ward')}
                   </span>
@@ -854,8 +854,8 @@ const Repair = () => {
             </div>
             <div>
               <div className='form-control w-full'>
-                <label className='label flex-col items-start'>
-                  <span className='label-text mb-2'>
+                <label className='label flex-col items-start w-full mb-3'>
+                  <span className='label-text text-wrap mb-2'>
                     <span className='font-medium text-red-500 mr-1'>*</span>
                     {t('deviceSerialTb')}
                   </span>
@@ -882,7 +882,7 @@ const Repair = () => {
                 </label>
               </div>
               <div className='form-control w-full'>
-                <label className='label flex-col items-start'>
+                <label className='label flex-col items-start w-full mb-3'>
                   <div className='flex flex-col gap-2'>
                     <label className='flex items-center gap-2'>
                       <input
@@ -937,8 +937,8 @@ const Repair = () => {
               </div>
               {repairForm.warrantyStatus === '4' && (
                 <div className='form-control w-full'>
-                  <label className='label flex-col items-start'>
-                    <span className='label-text mb-2'>{t('hisDetail')}</span>
+                  <label className='label flex-col items-start w-full mb-3'>
+                    <span className='label-text text-wrap mb-2'>{t('hisDetail')}</span>
                     <textarea
                       name='remark'
                       value={repairForm.remark}
@@ -955,8 +955,8 @@ const Repair = () => {
 
           <div className='grid grid-cols-1 gap-4 w-full'>
             <div className='form-control w-full'>
-              <label className='label flex-col items-start'>
-                <span className='label-text mb-2'>{t('hisDetail')}</span>
+              <label className='label flex-col items-start w-full mb-3'>
+                <span className='label-text text-wrap mb-2'>{t('hisDetail')}</span>
                 <textarea
                   name='detail'
                   value={repairForm.detail}
@@ -972,8 +972,8 @@ const Repair = () => {
           <div className='grid grid-cols-1 md:grid-cols-2 md:gap-4 w-full'>
             <div className='grid grid-cols-1 gap-4 mt-2 w-full'>
               <div className='form-control w-full'>
-                <label className='label flex-col items-start'>
-                  <span className='label-text mb-2'>
+                <label className='label flex-col items-start w-full mb-3'>
+                  <span className='label-text text-wrap mb-2'>
                     {t('deviceCondition')}
                   </span>
                   <textarea
@@ -989,8 +989,8 @@ const Repair = () => {
             </div>
             <div className='grid grid-cols-1 gap-4 mt-2 w-full'>
               <div className='form-control w-full'>
-                <label className='label flex-col items-start'>
-                  <span className='label-text mb-2'>
+                <label className='label flex-col items-start w-full mb-3'>
+                  <span className='label-text text-wrap mb-2'>
                     {t('deviceRepairInfo')}
                   </span>
                   <textarea
@@ -1018,7 +1018,7 @@ const Repair = () => {
             >
               {t('cancelButton')}
             </button>
-            <button type='submit' className='btn btn-primary'>
+            <button type='submit' className='btn btn-neutral'>
               {t('submitButton')}
             </button>
           </div>

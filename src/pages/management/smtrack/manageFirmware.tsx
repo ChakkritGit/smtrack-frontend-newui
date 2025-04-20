@@ -513,7 +513,7 @@ const ManageFirmware = () => {
         renderItem={(item, index) => (
           <div
             key={index}
-            className='p-3 bg-base-100 w-full h-[120px] rounded-btn flex items-center justify-between gap-4'
+            className='p-3 bg-base-100 w-full h-[120px] rounded-field flex items-center justify-between gap-4'
           >
             <div className='flex items-center gap-4 ml-3'>
               <div className='avatar'>
@@ -584,7 +584,7 @@ const ManageFirmware = () => {
   const uploadJSXStyle = useMemo(() => {
     return (
       <div
-        className={`flex items-center justify-center h-[25rem] border-2 border-dashed rounded-btn ${
+        className={`flex items-center justify-center h-[25rem] border-2 border-dashed rounded-field ${
           error
             ? 'border-error bg-error/15'
             : file
@@ -718,7 +718,7 @@ const ManageFirmware = () => {
           </div>
           <div className='modal-action'>
             <form onSubmit={handleSubmit}>
-              <button className='btn btn-primary' disabled={file === undefined}>
+              <button className='btn btn-neutral' disabled={file === undefined}>
                 {t('uploadButton')}
               </button>
             </form>
@@ -837,7 +837,7 @@ const ManageFirmware = () => {
             {selectedDevicesOption !== t('selectOTA') && (
               <button
                 disabled={selectedDevices.length === 0}
-                className='btn btn-primary'
+                className='btn btn-neutral'
                 onClick={() => handleUpdate()}
               >
                 {t('uploadButton')}
@@ -887,13 +887,13 @@ const ManageFirmware = () => {
     <div>
       <div className='flex items-center justify-end gap-3'>
         <button
-          className='btn btn-primary'
+          className='btn btn-neutral'
           onClick={() => selectUploadModalRef.current?.showModal()}
         >
           {t('selectToUpdateButton')}
         </button>
         <button
-          className='btn btn-primary'
+          className='btn btn-neutral'
           onClick={() => uploadModalRef.current?.showModal()}
         >
           {t('uploadButton')}

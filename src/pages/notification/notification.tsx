@@ -184,7 +184,7 @@ const Notification = () => {
           className='input input-bordered w-full md:max-w-xs'
         />
       </div>
-      <div className='bg-base-100 rounded-btn py-4 px-5'>
+      <div className='bg-base-100 rounded-field py-4 px-5'>
         {!isLoading ? (
           role === 'LEGACY_ADMIN' || role === 'LEGACY_USER' || tmsMode ? (
             <div>
@@ -198,7 +198,7 @@ const Notification = () => {
                       className={`flex items-center gap-3 py-2 px-3 border-b border-base-content/5`}
                       key={index}
                     >
-                      <div className='bg-primary/10 text-primary/70 rounded-btn p-1'>
+                      <div className='bg-primary/10 text-primary/70 rounded-field p-1'>
                         <RiAlarmWarningFill size={24} />
                       </div>
                       <div className='flex flex-col gap-1 w-full'>
@@ -238,7 +238,7 @@ const Notification = () => {
                       className={`flex items-center gap-3 py-2 px-3 border-b border-base-content/5`}
                       key={index}
                     >
-                      <div className='bg-primary/10 text-primary/70 rounded-btn p-1'>
+                      <div className='bg-primary/10 text-primary/70 rounded-field p-1'>
                         {subTextNotiDetailsIcon(item?.message)}
                       </div>
                       <div className='flex flex-col gap-1 w-full'>

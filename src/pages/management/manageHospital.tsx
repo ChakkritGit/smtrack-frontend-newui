@@ -685,7 +685,7 @@ const ManageHospital = () => {
   ]
 
   const ExpandedComponent = memo(({ data }: { data: HospitalsType }) => (
-    <div className='dataTableSubWrapper bg-base-100 rounded-btn duration-300 ease-linear'>
+    <div className='dataTableSubWrapper bg-base-100 rounded-field duration-300 ease-linear'>
       <DataTable
         columns={subWardColumns}
         data={data.ward}
@@ -731,21 +731,21 @@ const ManageHospital = () => {
         <div className='flex flex-col lg:flex-row mt-3 lg:mt-0 lg:items-center items-end gap-3'>
           {(role === 'SUPER' || role === 'SERVICE') && (
             <button
-              className='btn btn-primary'
+              className='btn btn-neutral'
               onClick={() => addHosModalRef.current?.showModal()}
             >
               {t('addHos')}
             </button>
           )}
           <button
-            className='btn btn-primary'
+            className='btn btn-neutral'
             onClick={() => addWardModalRef.current?.showModal()}
           >
             {t('addWard')}
           </button>
         </div>
       </div>
-      <div className='dataTableWrapper bg-base-100 rounded-btn p-3 mt-5 duration-300 ease-linear'>
+      <div className='dataTableWrapper bg-base-100 rounded-field p-3 mt-5 duration-300 ease-linear'>
         <DataTable
           columns={columns}
           data={filterHospital}
@@ -778,7 +778,7 @@ const ManageHospital = () => {
             <div className='col-span-1 flex justify-center'>
               <div className='form-control'>
                 <label className='label cursor-pointer image-hover flex flex-col justify-center'>
-                  <span className='label-text'>{t('hosPicture')}</span>
+                  <span className='label-text text-wrap'>{t('hosPicture')}</span>
                   <input
                     key={hospitalForm.imagePreview}
                     ref={fileInputRef}
@@ -800,7 +800,7 @@ const ManageHospital = () => {
                             : defaultPic
                         }
                         alt='Preview'
-                        className={`w-32 h-32 md:w-48 md:h-48 rounded-btn object-cover border-2 border-dashed border-base-300 ${
+                        className={`w-32 h-32 md:w-48 md:h-48 rounded-field object-cover border-2 border-dashed border-base-300 ${
                           hospitalForm.imagePreview || defaultPic
                             ? 'border-none'
                             : ''
@@ -819,8 +819,8 @@ const ManageHospital = () => {
             <div className='col-span-2 grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4'>
               {/* Hospital name */}
               <div className='form-control w-full'>
-                <label className='label flex-col items-start'>
-                  <span className='label-text mb-2'>
+                <label className='label flex-col items-start w-full mb-3'>
+                  <span className='label-text text-wrap mb-2'>
                     <span className='font-medium text-red-500 mr-1'>*</span>
                     {t('hosName')}
                   </span>
@@ -837,8 +837,8 @@ const ManageHospital = () => {
 
               {/* Address */}
               <div className='form-control w-full'>
-                <label className='label flex-col items-start'>
-                  <span className='label-text mb-2'>
+                <label className='label flex-col items-start w-full mb-3'>
+                  <span className='label-text text-wrap mb-2'>
                     <span className='font-medium text-red-500 mr-1'>*</span>
                     {t('hosAddress')}
                   </span>
@@ -855,8 +855,8 @@ const ManageHospital = () => {
 
               {/* tel */}
               <div className='form-control w-full'>
-                <label className='label flex-col items-start'>
-                  <span className='label-text mb-2'>
+                <label className='label flex-col items-start w-full mb-3'>
+                  <span className='label-text text-wrap mb-2'>
                     <span className='font-medium text-red-500 mr-1'>*</span>
                     {t('hosTel')}
                   </span>
@@ -873,8 +873,8 @@ const ManageHospital = () => {
 
               {/* userTel */}
               <div className='form-control w-full'>
-                <label className='label flex-col items-start'>
-                  <span className='label-text mb-2'>
+                <label className='label flex-col items-start w-full mb-3'>
+                  <span className='label-text text-wrap mb-2'>
                     <span className='font-medium text-red-500 mr-1'>*</span>
                     {t('userTel')}
                   </span>
@@ -891,8 +891,8 @@ const ManageHospital = () => {
 
               {/* hosLatitude */}
               <div className='form-control w-full'>
-                <label className='label flex-col items-start'>
-                  <span className='label-text mb-2'>{t('hosLat')}</span>
+                <label className='label flex-col items-start w-full mb-3'>
+                  <span className='label-text text-wrap mb-2'>{t('hosLat')}</span>
                   <input
                     name='hosLatitude'
                     type='text'
@@ -906,8 +906,8 @@ const ManageHospital = () => {
 
               {/* hosLongitude */}
               <div className='form-control w-full'>
-                <label className='label flex-col items-start'>
-                  <span className='label-text mb-2'>{t('hosLong')}</span>
+                <label className='label flex-col items-start w-full mb-3'>
+                  <span className='label-text text-wrap mb-2'>{t('hosLong')}</span>
                   <input
                     name='hosLongitude'
                     type='text'
@@ -921,8 +921,8 @@ const ManageHospital = () => {
 
               {/* userContact */}
               <div className='form-control w-full'>
-                <label className='label flex-col items-start'>
-                  <span className='label-text mb-2'>{t('userContact')}</span>
+                <label className='label flex-col items-start w-full mb-3'>
+                  <span className='label-text text-wrap mb-2'>{t('userContact')}</span>
                   <input
                     name='userContact'
                     type='text'
@@ -948,7 +948,7 @@ const ManageHospital = () => {
             >
               {t('cancelButton')}
             </button>
-            <button type='submit' className='btn btn-primary'>
+            <button type='submit' className='btn btn-neutral'>
               {t('submitButton')}
             </button>
           </div>
@@ -965,7 +965,7 @@ const ManageHospital = () => {
             <div className='col-span-1 flex justify-center'>
               <div className='form-control'>
                 <label className='label cursor-pointer image-hover flex flex-col justify-center'>
-                  <span className='label-text'>{t('hosPicture')}</span>
+                  <span className='label-text text-wrap'>{t('hosPicture')}</span>
                   <input
                     key={hospitalForm.imagePreview}
                     ref={fileInputRef}
@@ -987,7 +987,7 @@ const ManageHospital = () => {
                             : defaultPic
                         }
                         alt='Preview'
-                        className={`w-32 h-32 md:w-48 md:h-48 rounded-btn object-cover border-2 border-dashed border-base-300 ${
+                        className={`w-32 h-32 md:w-48 md:h-48 rounded-field object-cover border-2 border-dashed border-base-300 ${
                           hospitalForm.imagePreview || defaultPic
                             ? 'border-none'
                             : ''
@@ -1006,8 +1006,8 @@ const ManageHospital = () => {
             <div className='col-span-2 grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4'>
               {/* Hospital name */}
               <div className='form-control w-full'>
-                <label className='label flex-col items-start'>
-                  <span className='label-text mb-2'>
+                <label className='label flex-col items-start w-full mb-3'>
+                  <span className='label-text text-wrap mb-2'>
                     <span className='font-medium text-red-500 mr-1'>*</span>
                     {t('hosName')}
                   </span>
@@ -1024,8 +1024,8 @@ const ManageHospital = () => {
 
               {/* Address */}
               <div className='form-control w-full'>
-                <label className='label flex-col items-start'>
-                  <span className='label-text mb-2'>
+                <label className='label flex-col items-start w-full mb-3'>
+                  <span className='label-text text-wrap mb-2'>
                     <span className='font-medium text-red-500 mr-1'>*</span>
                     {t('hosAddress')}
                   </span>
@@ -1042,8 +1042,8 @@ const ManageHospital = () => {
 
               {/* tel */}
               <div className='form-control w-full'>
-                <label className='label flex-col items-start'>
-                  <span className='label-text mb-2'>
+                <label className='label flex-col items-start w-full mb-3'>
+                  <span className='label-text text-wrap mb-2'>
                     <span className='font-medium text-red-500 mr-1'>*</span>
                     {t('hosTel')}
                   </span>
@@ -1060,8 +1060,8 @@ const ManageHospital = () => {
 
               {/* userTel */}
               <div className='form-control w-full'>
-                <label className='label flex-col items-start'>
-                  <span className='label-text mb-2'>
+                <label className='label flex-col items-start w-full mb-3'>
+                  <span className='label-text text-wrap mb-2'>
                     <span className='font-medium text-red-500 mr-1'>*</span>
                     {t('userTel')}
                   </span>
@@ -1078,8 +1078,8 @@ const ManageHospital = () => {
 
               {/* hosLatitude */}
               <div className='form-control w-full'>
-                <label className='label flex-col items-start'>
-                  <span className='label-text mb-2'>{t('hosLat')}</span>
+                <label className='label flex-col items-start w-full mb-3'>
+                  <span className='label-text text-wrap mb-2'>{t('hosLat')}</span>
                   <input
                     name='hosLatitude'
                     type='text'
@@ -1093,8 +1093,8 @@ const ManageHospital = () => {
 
               {/* hosLongitude */}
               <div className='form-control w-full'>
-                <label className='label flex-col items-start'>
-                  <span className='label-text mb-2'>{t('hosLong')}</span>
+                <label className='label flex-col items-start w-full mb-3'>
+                  <span className='label-text text-wrap mb-2'>{t('hosLong')}</span>
                   <input
                     name='hosLongitude'
                     type='text'
@@ -1108,8 +1108,8 @@ const ManageHospital = () => {
 
               {/* userContact */}
               <div className='form-control w-full'>
-                <label className='label flex-col items-start'>
-                  <span className='label-text mb-2'>{t('userContact')}</span>
+                <label className='label flex-col items-start w-full mb-3'>
+                  <span className='label-text text-wrap mb-2'>{t('userContact')}</span>
                   <input
                     name='userContact'
                     type='text'
@@ -1135,7 +1135,7 @@ const ManageHospital = () => {
             >
               {t('cancelButton')}
             </button>
-            <button type='submit' className='btn btn-primary'>
+            <button type='submit' className='btn btn-neutral'>
               {t('submitButton')}
             </button>
           </div>
@@ -1154,8 +1154,8 @@ const ManageHospital = () => {
               <div className='col-span-2 grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4'>
                 {/* Hospital */}
                 <div className='form-control w-full'>
-                  <label className='label flex-col items-start'>
-                    <span className='label-text mb-2'>
+                  <label className='label flex-col items-start w-full mb-3'>
+                    <span className='label-text text-wrap mb-2'>
                       <span className='font-medium text-red-500 mr-1'>*</span>
                       {t('userHospitals')}
                     </span>
@@ -1165,8 +1165,8 @@ const ManageHospital = () => {
 
                 {/* Ward */}
                 <div className='form-control w-full'>
-                  <label className='label flex-col items-start'>
-                    <span className='label-text mb-2'>
+                  <label className='label flex-col items-start w-full mb-3'>
+                    <span className='label-text text-wrap mb-2'>
                       <span className='font-medium text-red-500 mr-1'>*</span>
                       {t('userWard')}
                     </span>
@@ -1181,8 +1181,8 @@ const ManageHospital = () => {
                   </label>
                 </div>
                 <div className='form-control w-full'>
-                  <label className='label flex-col items-start'>
-                    <span className='label-text mb-2'>
+                  <label className='label flex-col items-start w-full mb-3'>
+                    <span className='label-text text-wrap mb-2'>
                       <span className='font-medium text-red-500 mr-1'>*</span>
                       {t('typeLabel')}
                     </span>
@@ -1222,7 +1222,7 @@ const ManageHospital = () => {
             >
               {t('cancelButton')}
             </button>
-            <button type='submit' className='btn btn-primary'>
+            <button type='submit' className='btn btn-neutral'>
               {t('submitButton')}
             </button>
           </div>
@@ -1241,8 +1241,8 @@ const ManageHospital = () => {
               <div className='col-span-2 grid grid-cols-1 gap-2 md:gap-4'>
                 {/* Ward */}
                 <div className='form-control w-full'>
-                  <label className='label flex-col items-start'>
-                    <span className='label-text mb-2'>
+                  <label className='label flex-col items-start w-full mb-3'>
+                    <span className='label-text text-wrap mb-2'>
                       <span className='font-medium text-red-500 mr-1'>*</span>
                       {t('userWard')}
                     </span>
@@ -1257,8 +1257,8 @@ const ManageHospital = () => {
                   </label>
                 </div>
                 <div className='form-control w-full'>
-                  <label className='label flex-col items-start'>
-                    <span className='label-text mb-2'>
+                  <label className='label flex-col items-start w-full mb-3'>
+                    <span className='label-text text-wrap mb-2'>
                       <span className='font-medium text-red-500 mr-1'>*</span>
                       {t('typeLabel')}
                     </span>
@@ -1297,7 +1297,7 @@ const ManageHospital = () => {
             >
               {t('cancelButton')}
             </button>
-            <button type='submit' className='btn btn-primary'>
+            <button type='submit' className='btn btn-neutral'>
               {t('submitButton')}
             </button>
           </div>

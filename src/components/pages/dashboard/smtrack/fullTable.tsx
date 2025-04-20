@@ -100,7 +100,7 @@ const FullTableComponent = (props: FullTablePropType) => {
             {doors.slice(0, doorCount).map(doorKey => (
               <div
                 key={doorKey}
-                className={`w-[24px] h-[24px] flex items-center justify-center rounded-btn ${
+                className={`w-[24px] h-[24px] flex items-center justify-center rounded-field ${
                   item.door1 || item.door2 || item.door3
                     ? 'bg-red-500 text-white'
                     : 'border border-primary text-primary'
@@ -163,7 +163,7 @@ const FullTableComponent = (props: FullTablePropType) => {
   )
 
   return (
-    <div className='dataTableWrapper bg-base-100 rounded-btn p-3 duration-300 ease-linear mt-5'>
+    <div className='dataTableWrapper bg-base-100 rounded-field p-3 duration-300 ease-linear mt-5'>
       {table}
     </div>
   )

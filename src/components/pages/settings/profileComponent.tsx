@@ -274,7 +274,7 @@ const ProfileComponent = (props: ProfileProps) => {
             </span>
           </div>
           <button
-            className='w-full md:w-[80px] h-[45px] md:h-[40px] font-bold rounded-btn border-[2px] border-base-content text-[14px] md:text-base-content hover:opacity-50 duration-300 ease-linear'
+            className='w-full md:w-[80px] h-[45px] md:h-[40px] font-bold rounded-field border-[2px] border-base-content text-[14px] md:text-base-content hover:opacity-50 cursor-pointer duration-300 ease-linear'
             onClick={() => {
               setEdit(true)
               setDisplayName(userProfile?.display ?? '—')
@@ -286,7 +286,7 @@ const ProfileComponent = (props: ProfileProps) => {
       ) : (
         <form onSubmit={handleSubmit}>
           <div className='form-control'>
-            <label className='input input-bordered flex items-center gap-2'>
+            <label className='input input-bordered flex items-center gap-2 w-full'>
               <span className='opacity-50'>{t('userDisplayName')}</span>
               <input
                 type='text'
@@ -305,7 +305,7 @@ const ProfileComponent = (props: ProfileProps) => {
             <button type='button' className='btn' onClick={() => resetForm()}>
               {t('cancelButton')}
             </button>
-            <button type='submit' className='btn btn-primary'>
+            <button type='submit' className='btn btn-neutral'>
               {t('submitButton')}
             </button>
           </div>

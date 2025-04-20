@@ -168,8 +168,8 @@ const AppMute = (props: AppMuteProps) => {
         <div className='col-span-2 grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4'>
           {/* 1 */}
           <div className='form-control w-full'>
-            <label className='label flex-col items-start'>
-              <span className='label-text mb-2'>{t('choiceOne')}</span>
+            <label className='label flex-col items-start w-full mb-3'>
+              <span className='label-text mb-2 text-wrap'>{t('choiceOne')}</span>
               <div className='flex flex-col gap-3'>
                 <label className='flex items-center gap-2'>
                   <input
@@ -203,7 +203,7 @@ const AppMute = (props: AppMuteProps) => {
                     <button
                       name='after'
                       type='button'
-                      className='btn join-item rounded-l-btn'
+                      className='btn join-item rounded-l-box'
                       onClick={() => {
                         if (sendTime.after > 5) {
                           setSendTime({
@@ -227,7 +227,7 @@ const AppMute = (props: AppMuteProps) => {
                     <button
                       name='after'
                       type='button'
-                      className='btn join-item rounded-r-btn'
+                      className='btn join-item rounded-r-box'
                       onClick={() => {
                         if (sendTime.after < 30) {
                           setSendTime({
@@ -247,8 +247,8 @@ const AppMute = (props: AppMuteProps) => {
 
           {/* 2 */}
           <div className='form-control w-full'>
-            <label className='label flex-col items-start'>
-              <span className='label-text mb-2'>{t('choiceTwo')}</span>
+            <label className='label flex-col items-start w-full mb-3'>
+              <span className='label-text mb-2 text-wrap'>{t('choiceTwo')}</span>
               <div className='flex flex-col gap-3'>
                 <label className='flex items-center gap-2'>
                   <input
@@ -285,8 +285,8 @@ const AppMute = (props: AppMuteProps) => {
         <div className='col-span-2 grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4'>
           {/* 3 */}
           <div className='form-control w-full'>
-            <label className='label flex-col items-start'>
-              <span className='label-text mb-2'>{t('choiceThree')}</span>
+            <label className='label flex-col items-start w-full mb-3'>
+              <span className='label-text mb-2 text-wrap'>{t('choiceThree')}</span>
               <div className='flex flex-col gap-3'>
                 <label className='flex items-center gap-2'>
                   <input
@@ -320,7 +320,7 @@ const AppMute = (props: AppMuteProps) => {
                     <button
                       name='every'
                       type='button'
-                      className='btn join-item rounded-l-btn'
+                      className='btn join-item rounded-l-box'
                       onClick={() => {
                         if (sendTime.every > 5) {
                           setSendTime({
@@ -344,7 +344,7 @@ const AppMute = (props: AppMuteProps) => {
                     <button
                       name='every'
                       type='button'
-                      className='btn join-item rounded-r-btn'
+                      className='btn join-item rounded-r-box'
                       onClick={() => {
                         if (sendTime.every < 30) {
                           setSendTime({
@@ -364,8 +364,8 @@ const AppMute = (props: AppMuteProps) => {
 
           {/* 4 */}
           <div className='form-control w-full'>
-            <label className='label flex-col items-start'>
-              <span className='label-text mb-2'>{t('choiceFour')}</span>
+            <label className='label flex-col items-start w-full mb-3'>
+              <span className='label-text mb-2 text-wrap'>{t('choiceFour')}</span>
               <div className='flex flex-col gap-3'>
                 <label className='flex items-center gap-2'>
                   <input
@@ -406,7 +406,7 @@ const AppMute = (props: AppMuteProps) => {
             className='label flex-col items-center justify-center w-full'
             htmlFor='scheduleDayArray'
           >
-            <span className='label-text mb-2'>{t('firstDay')}</span>
+            <span className='label-text mb-2 text-wrap'>{t('firstDay')}</span>
             <Select
               id='scheduleDayArray'
               isDisabled={scheduleDay.firstDay === 'ALL'}
@@ -438,7 +438,7 @@ const AppMute = (props: AppMuteProps) => {
             className='label flex-col items-center justify-center w-full'
             htmlFor='scheduleDayArray'
           >
-            <span className='label-text mb-2'>{t('seccondDay')}</span>
+            <span className='label-text mb-2 text-wrap'>{t('seccondDay')}</span>
             <Select
               id='scheduleDayArray'
               isDisabled={scheduleDay.seccondDay === 'ALL'}
@@ -470,7 +470,7 @@ const AppMute = (props: AppMuteProps) => {
             className='label flex-col items-center justify-center w-full'
             htmlFor='scheduleDayArray'
           >
-            <span className='label-text mb-2'>{t('thirdDay')}</span>
+            <span className='label-text mb-2 text-wrap'>{t('thirdDay')}</span>
             <Select
               id='scheduleDayArray'
               isDisabled={scheduleDay.thirdDay === 'ALL'}
@@ -499,10 +499,10 @@ const AppMute = (props: AppMuteProps) => {
         </div>
         <div className='form-control w-full items-center justify-center'>
           <label
-            className='label flex-col items-center justify-center'
+            className='label flex-col items-center justify-center w-full h-full'
             htmlFor='toggle'
           >
-            <span className='label-text mb-2'>{t('everyDays')}</span>
+            <span className='label-text mb-2 text-wrap'>{t('everyDays')}</span>
             <input
               id='toggle'
               type='checkbox'
@@ -537,7 +537,7 @@ const AppMute = (props: AppMuteProps) => {
       </div>
 
       <div className='grid grid-cols-1 lg:grid-cols-3 gap-4 mt-5 w-full'>
-        <span className='label-text mb-2'>{t('firstTime')}</span>
+        <span className='label-text mb-2 text-wrap'>{t('firstTime')}</span>
         <Select
           name='scheduleTimeArray'
           // key={String(scheduleTime.firstTime)}
@@ -584,7 +584,7 @@ const AppMute = (props: AppMuteProps) => {
       </div>
 
       <div className='grid grid-cols-1 lg:grid-cols-3 gap-4 mt-4 w-full'>
-        <span className='label-text mb-2'>{t('seccondTime')}</span>
+        <span className='label-text mb-2 text-wrap'>{t('seccondTime')}</span>
         <Select
           name='scheduleTimeArray'
           options={filterOptions(
@@ -630,7 +630,7 @@ const AppMute = (props: AppMuteProps) => {
       </div>
 
       <div className='grid grid-cols-1 lg:grid-cols-3 gap-4 mt-4 w-full'>
-        <span className='label-text mb-2'>{t('thirdTime')}</span>
+        <span className='label-text mb-2 text-wrap'>{t('thirdTime')}</span>
         <Select
           name='scheduleTimeArray'
           // key={String(scheduleTime.firstTime)}

@@ -78,7 +78,7 @@ const ChartSwiperWrapper = (props: ChartSwiperWrapperProps) => {
             )
             return (
               <SwiperSlide key={item.id}>
-                <span className='badge badge-primary bg-opacity-15 text-primary font-bold border-2 ml-3'>
+                <span className='badge badge-soft badge-primary bg-opacity-15 text-primary font-bold border-2 ml-3'>
                   P{item.channel}
                 </span>
                 <ChartMini
@@ -91,7 +91,7 @@ const ChartSwiperWrapper = (props: ChartSwiperWrapperProps) => {
           })
         ) : (
           <SwiperSlide>
-            <span className='badge badge-primary bg-opacity-15 text-primary font-bold border-2 ml-3'>
+            <span className='badge badge-soft badge-primary bg-opacity-15 text-primary font-bold border-2 ml-3'>
               P—
             </span>
             <div className='flex items-center justify-center h-full'>—</div>
@@ -102,7 +102,7 @@ const ChartSwiperWrapper = (props: ChartSwiperWrapperProps) => {
   }, [deviceLogs, swiperRef, activeIndex, swiperRef, isPause])
 
   return (
-    <div className='flex flex-col gap-3 bg-base-100 w-full h-full rounded-btn p-3'>
+    <div className='flex flex-col gap-3 bg-base-100 w-full h-full rounded-field p-3'>
       <div className='flex items-center justify-between px-3'>
         <div className='flex items-center gap-3'>
           <span className='text-[20px] font-bold'>{t('pageChart')}</span>

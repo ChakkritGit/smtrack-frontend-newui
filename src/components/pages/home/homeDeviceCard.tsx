@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { DeviceType } from '../../../types/smtrack/devices/deviceType'
+import { DeviceLogsType, DeviceType } from '../../../types/smtrack/devices/deviceType'
 import DevicePagination from '../../pagination/devicePagination'
 import {
   RiAlertLine,
@@ -17,7 +17,6 @@ import {
 } from 'react-icons/ri'
 import Default from '../../../assets/images/default-pic.png'
 import { ProbeType } from '../../../types/smtrack/probe/probeType'
-import { DeviceLogType } from '../../../types/smtrack/logs/deviceLog'
 import { TbPlug, TbPlugX } from 'react-icons/tb'
 import { MdOutlineSdCard, MdOutlineSdCardAlert, MdOutlineWaterDrop } from 'react-icons/md'
 import { cookieOptions, cookies } from '../../../constants/utils/utilsConstants'
@@ -54,15 +53,15 @@ const HomeDeviceCard = (props: DeviceCardProps) => {
   } = props
   const [colors, setColors] = useState<string[]>([])
 
-  const doorComponent = (probe: ProbeType[], log: DeviceLogType[]) => {
+  const doorComponent = (probe: ProbeType[], log: DeviceLogsType[]) => {
     return (
       <>
         {Array.from({ length: probe[0]?.doorQty || 1 }, (_, index) => {
-          const doorKey = `door${index + 1}` as keyof DeviceLogType
+          const doorKey = `door${index + 1}` as keyof DeviceLogsType
           const doorLog = log[0]?.[doorKey]
           return (
             <div
-              className={`border border-base-content/50 w-[32px] h-[32px] rounded-btn flex items-center justify-center tooltip tooltip-top ${
+              className={`border border-base-content/50 w-[32px] h-[32px] rounded-field flex items-center justify-center tooltip tooltip-top ${
                 doorLog ? 'bg-red-500 text-white border-none' : ''
               }`}
               data-tip={`${t('deviceDoor')} ${index + 1}`}
@@ -118,12 +117,12 @@ const HomeDeviceCard = (props: DeviceCardProps) => {
             return (
               <div
                 key={index}
-                className='w-[350px] sm:w-[310px] lg:w-full h-[356px] bg-base-100 rounded-btn shadow-sm p-4 overflow-hidden'
+                className='w-[350px] sm:w-[310px] lg:w-full h-[356px] bg-base-100 rounded-field shadow-sm p-4 overflow-hidden'
               >
                 <div className='flex items-start justify-between'>
                   <div className='relative w-28 h-28'>
                     <div className='avatar absolute z-20'>
-                      <div className='w-28 rounded-btn'>
+                      <div className='w-28 rounded-field'>
                         <img
                           src={item.positionPic ?? Default}
                           alt={`device-image-${item.id ?? 'dev_img'}`}
@@ -138,7 +137,7 @@ const HomeDeviceCard = (props: DeviceCardProps) => {
                   <div className='flex flex-col gap-1'>
                     <div className='flex items-center gap-1'>
                       <button
-                        className='btn btn-ghost flex p-0 min-w-[30px] min-h-[30px] max-w-[30px] max-h-[30px] duration-300 ease-linear tooltip tooltip-left'
+                        className='btn btn-ghost flex p-0 min-w-[30px] min-h-[30px] max-w-[30px] max-h-[30px] duration-300 ease-linear tooltip tooltip-left z-20'
                         data-tip={t('sideDashboard')}
                         onClick={() => handleRowClicked(item)}
                         name='to-dashboard'
@@ -147,7 +146,7 @@ const HomeDeviceCard = (props: DeviceCardProps) => {
                         <RiDashboardLine size={24} />
                       </button>
                       <button
-                        className='btn btn-ghost flex p-0 min-w-[30px] min-h-[30px] max-w-[30px] max-h-[30px] duration-300 ease-linear tooltip tooltip-left'
+                        className='btn btn-ghost flex p-0 min-w-[30px] min-h-[30px] max-w-[30px] max-h-[30px] duration-300 ease-linear tooltip tooltip-left z-20'
                         data-tip={t('adjustMents')}
                         onClick={() => openAdjustModal(item.probe, item.id)}
                         name='device-adjustments'
@@ -179,7 +178,7 @@ const HomeDeviceCard = (props: DeviceCardProps) => {
                 </div>
                 <div className='flex items-center gap-2 mt-2'>
                   <div
-                    className='flex items-center justify-center gap-1 text-[14px] h-[32px] w-max px-2 min-w-[30px] border border-base-content/50 rounded-btn tooltip tooltip-top'
+                    className='flex items-center justify-center gap-1 text-[14px] h-[32px] w-max px-2 min-w-[30px] border border-base-content/50 rounded-field tooltip tooltip-top'
                     data-tip={t('devicTemperatureTb')}
                   >
                     {item.log[0]?.tempDisplay ? (
@@ -194,7 +193,7 @@ const HomeDeviceCard = (props: DeviceCardProps) => {
                     )}
                   </div>
                   <div
-                    className='flex items-center justify-center gap-1 text-[14px] h-[32px] w-max px-2 min-w-[30px] border border-base-content/50 rounded-btn tooltip tooltip-top'
+                    className='flex items-center justify-center gap-1 text-[14px] h-[32px] w-max px-2 min-w-[30px] border border-base-content/50 rounded-field tooltip tooltip-top'
                     data-tip={t('deviceHumiTb')}
                   >
                     {item.log[0]?.humidityDisplay ? (
@@ -209,7 +208,7 @@ const HomeDeviceCard = (props: DeviceCardProps) => {
                     )}
                   </div>
                   <div
-                    className='flex items-center justify-center text-[14px] h-[32px] w-max px-2 min-w-[30px] border border-base-content/50 rounded-btn tooltip tooltip-top'
+                    className='flex items-center justify-center text-[14px] h-[32px] w-max px-2 min-w-[30px] border border-base-content/50 rounded-field tooltip tooltip-top'
                     data-tip={t('deviceTime')}
                   >
                     {item.log[0]?.sendTime.substring(11, 16) ?? '—'}
@@ -222,7 +221,7 @@ const HomeDeviceCard = (props: DeviceCardProps) => {
                       item.log[0]?.tempDisplay <= item.probe[0]?.tempMin
                         ? 'bg-red-500 border-red-500'
                         : ''
-                    } flex items-center justify-center text-[14px] h-[32px] min-w-[30px] w-max px-2 border border-base-content/50 rounded-btn tooltip tooltip-top`}
+                    } flex items-center justify-center text-[14px] h-[32px] min-w-[30px] w-max px-2 border border-base-content/50 rounded-field tooltip tooltip-top`}
                     data-tip={t('deviceProbe')}
                   >
                     {item.log[0] ? (
@@ -241,7 +240,7 @@ const HomeDeviceCard = (props: DeviceCardProps) => {
                       item.log[0] && !item.log[0]?.plug
                         ? 'bg-red-500 border-red-500'
                         : ''
-                    } flex items-center justify-center text-[14px] h-[32px] min-w-[30px] w-max px-2 border border-base-content/50 rounded-btn tooltip tooltip-top`}
+                    } flex items-center justify-center text-[14px] h-[32px] min-w-[30px] w-max px-2 border border-base-content/50 rounded-field tooltip tooltip-top`}
                     data-tip={t('devicePlug')}
                   >
                     {item.log[0] ? (
@@ -259,7 +258,7 @@ const HomeDeviceCard = (props: DeviceCardProps) => {
                       item.log[0] && !item.log[0]?.extMemory
                         ? 'bg-red-500 border-red-500'
                         : ''
-                    } flex items-center justify-center text-[14px] h-[32px] min-w-[30px] w-max px-2 border border-base-content/50 rounded-btn tooltip tooltip-top`}
+                    } flex items-center justify-center text-[14px] h-[32px] min-w-[30px] w-max px-2 border border-base-content/50 rounded-field tooltip tooltip-top`}
                     data-tip={t('dashSdCard')}
                   >
                     {item.log[0] ? (
@@ -279,7 +278,7 @@ const HomeDeviceCard = (props: DeviceCardProps) => {
                         : item.log[0]?.battery === 0
                         ? 'bg-red-500 border-red-500 text-white'
                         : ''
-                    } flex items-center justify-center gap-1 text-[14px] h-[32px] min-w-[30px] w-max px-2 border border-base-content/50 rounded-btn tooltip tooltip-top`}
+                    } flex items-center justify-center gap-1 text-[14px] h-[32px] min-w-[30px] w-max px-2 border border-base-content/50 rounded-field tooltip tooltip-top`}
                     data-tip={t('deviceBatteryTb')}
                   >
                     <div>

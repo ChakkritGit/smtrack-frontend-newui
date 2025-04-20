@@ -510,7 +510,7 @@ const Users = () => {
               <div
                 className={`min-h-[240px] max-h-[270px] w-full shadow-sm ${
                   !item.status ? 'bg-base-100/40' : 'bg-base-100'
-                } rounded-btn overflow-hidden`}
+                } rounded-field overflow-hidden`}
                 key={index}
               >
                 <div
@@ -587,7 +587,7 @@ const Users = () => {
                   >
                     <div className='relative w-24 h-24'>
                       <div className='avatar absolute z-20'>
-                        <div className='w-24 rounded-btn'>
+                        <div className='w-24 rounded-field'>
                           <img
                             src={
                               isSafeImageUrl(item.pic) ? item.pic : defaultPic
@@ -651,7 +651,7 @@ const Users = () => {
         <div className='flex flex-col lg:flex-row mt-3 lg:mt-0 lg:items-center items-end gap-4'>
           <HospitalAndWard />
           <button
-            className='btn btn-primary max-w-[130px]'
+            className='btn btn-neutral max-w-[130px]'
             onClick={() => addModalRef.current?.showModal()}
           >
             {t('addUserButton')}
@@ -678,7 +678,7 @@ const Users = () => {
               key={'Inactive'}
               className={`flex items-center justify-center btn w-max h-[36px] min-h-0 p-2 font-normal ${
                 userInactive
-                  ? 'btn-primary text-white'
+                  ? 'btn-neutral text-white'
                   : 'btn-ghost border border-base-content/50 text-base-content'
               }`}
               onClick={() => setUserInactive(!userInactive)}
@@ -703,7 +703,7 @@ const Users = () => {
             <div className='col-span-1 flex justify-center'>
               <div className='form-control'>
                 <label className='label cursor-pointer image-hover flex flex-col justify-center'>
-                  <span className='label-text'>{t('userPicture')}</span>
+                  <span className='label-text text-wrap'>{t('userPicture')}</span>
                   <input
                     key={formData.imagePreview}
                     ref={fileInputRef}
@@ -725,7 +725,7 @@ const Users = () => {
                             : defaultPic
                         }
                         alt='Preview'
-                        className={`w-32 h-32 md:w-48 md:h-48 rounded-btn object-cover border-2 border-dashed border-base-300 ${
+                        className={`w-32 h-32 md:w-48 md:h-48 rounded-field object-cover border-2 border-dashed border-base-300 ${
                           formData.imagePreview || defaultPic
                             ? 'border-none'
                             : ''
@@ -744,8 +744,8 @@ const Users = () => {
             <div className='col-span-2 grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4'>
               {/* Hospital */}
               <div className='form-control w-full'>
-                <label className='label flex-col items-start'>
-                  <span className='label-text mb-2'>
+                <label className='label flex-col items-start w-full mb-3'>
+                  <span className='label-text text-wrap mb-2'>
                     <span className='font-medium text-red-500 mr-1'>*</span>
                     {t('userHospitals')}
                   </span>
@@ -755,8 +755,8 @@ const Users = () => {
 
               {/* Ward */}
               <div className='form-control w-full'>
-                <label className='label flex-col items-start'>
-                  <span className='label-text mb-2'>
+                <label className='label flex-col items-start w-full mb-3'>
+                  <span className='label-text text-wrap mb-2'>
                     <span className='font-medium text-red-500 mr-1'>*</span>
                     {t('userWard')}
                   </span>
@@ -766,8 +766,8 @@ const Users = () => {
 
               {/* Username */}
               <div className='form-control w-full'>
-                <label className='label flex-col items-start'>
-                  <span className='label-text mb-2'>
+                <label className='label flex-col items-start w-full mb-3'>
+                  <span className='label-text text-wrap mb-2'>
                     <span className='font-medium text-red-500 mr-1'>*</span>
                     {t('userNameForm')}
                   </span>
@@ -783,8 +783,8 @@ const Users = () => {
               </div>
 
               {/* Password */}
-              <label className='label flex-col items-start'>
-                <span className='label-text mb-2'>
+              <label className='label flex-col items-start w-full mb-3'>
+                <span className='label-text text-wrap mb-2'>
                   <span className='font-medium text-red-500 mr-1'>*</span>
                   {t('userPassword')}
                 </span>
@@ -799,7 +799,7 @@ const Users = () => {
                   />
                   <button
                     type='button'
-                    className='absolute right-2 top-1/2 -translate-y-1/2 border border-base-content/50 w-8 h-8 p-1 flex items-center justify-center rounded-btn text-base-content/70 hover:opacity-50 duration-300 ease-linear'
+                    className='absolute right-2 top-1/2 -translate-y-1/2 border-2 border-base-content/30 w-7 h-7 p-1 flex items-center justify-center cursor-pointer rounded-field text-base-content/30 hover:opacity-50 duration-300 ease-linear z-10'
                     onClick={() => setShowPassword(prev => !prev)}
                   >
                     {showPassword ? (
@@ -813,8 +813,8 @@ const Users = () => {
 
               {/* DisplayName */}
               <div className='form-control w-full'>
-                <label className='label flex-col items-start'>
-                  <span className='label-text mb-2'>
+                <label className='label flex-col items-start w-full mb-3'>
+                  <span className='label-text text-wrap mb-2'>
                     <span className='font-medium text-red-500 mr-1'>*</span>
                     {t('userDisplayName')}
                   </span>
@@ -831,8 +831,8 @@ const Users = () => {
 
               {/* Role */}
               <div className='form-control w-full'>
-                <label className='label flex-col items-start'>
-                  <span className='label-text mb-2'>{t('userRole')}</span>
+                <label className='label flex-col items-start w-full mb-3'>
+                  <span className='label-text text-wrap mb-2'>{t('userRole')}</span>
                   <RoleSelect
                     formData={formData}
                     roleToken={role}
@@ -856,7 +856,7 @@ const Users = () => {
             >
               {t('cancelButton')}
             </button>
-            <button type='submit' className='btn btn-primary'>
+            <button type='submit' className='btn btn-neutral'>
               {t('submitButton')}
             </button>
           </div>
@@ -878,7 +878,7 @@ const Users = () => {
               <div className='col-span-1 flex justify-center'>
                 <div className='form-control'>
                   <label className='label cursor-pointer image-hover flex flex-col justify-center'>
-                    <span className='label-text'>{t('userPicture')}</span>
+                    <span className='label-text text-wrap'>{t('userPicture')}</span>
                     <input
                       key={formData.imagePreview}
                       ref={fileInputRef}
@@ -900,7 +900,7 @@ const Users = () => {
                               : defaultPic
                           }
                           alt='Preview'
-                          className={`w-32 h-32 md:w-48 md:h-48 rounded-btn object-cover border-2 border-dashed border-base-300 ${
+                          className={`w-32 h-32 md:w-48 md:h-48 rounded-field object-cover border-2 border-dashed border-base-300 ${
                             formData.imagePreview || defaultPic
                               ? 'border-none'
                               : ''
@@ -919,16 +919,16 @@ const Users = () => {
               <div className='col-span-2 grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4'>
                 {/* Ward */}
                 <div className='form-control w-full'>
-                  <label className='label flex-col items-start'>
-                    <span className='label-text mb-2'>{t('ward')}</span>
+                  <label className='label flex-col items-start w-full mb-3'>
+                    <span className='label-text text-wrap mb-2'>{t('ward')}</span>
                     <WardSelect formData={formData} setFormData={setFormData} />
                   </label>
                 </div>
 
                 {/* Status */}
                 <div className='form-control w-full'>
-                  <label className='label flex-col items-start'>
-                    <span className='label-text mb-2'>{t('userStatus')}</span>
+                  <label className='label flex-col items-start w-full mb-3'>
+                    <span className='label-text text-wrap mb-2'>{t('userStatus')}</span>
                     <StatusSelect
                       formData={formData}
                       setFormData={setFormData}
@@ -938,8 +938,8 @@ const Users = () => {
 
                 {/* Username */}
                 <div className='form-control w-full'>
-                  <label className='label flex-col items-start'>
-                    <span className='label-text mb-2'>
+                  <label className='label flex-col items-start w-full mb-3'>
+                    <span className='label-text text-wrap mb-2'>
                       <span className='font-medium text-red-500 mr-1'>*</span>
                       {t('userNameForm')}
                     </span>
@@ -956,8 +956,8 @@ const Users = () => {
 
                 {/* Display Name */}
                 <div className='form-control w-full'>
-                  <label className='label flex-col items-start'>
-                    <span className='label-text mb-2'>
+                  <label className='label flex-col items-start w-full mb-3'>
+                    <span className='label-text text-wrap mb-2'>
                       <span className='font-medium text-red-500 mr-1'>*</span>
                       {t('userDisplayName')}
                     </span>
@@ -974,8 +974,8 @@ const Users = () => {
 
                 {/* Role */}
                 <div className='form-control w-full'>
-                  <label className='label flex-col items-start'>
-                    <span className='label-text mb-2'>{t('userRole')}</span>
+                  <label className='label flex-col items-start w-full mb-3'>
+                    <span className='label-text text-wrap mb-2'>{t('userRole')}</span>
                     <RoleSelect
                       formData={formData}
                       roleToken={role}
@@ -987,13 +987,13 @@ const Users = () => {
                 {/* Password reset */}
                 {role === 'SUPER' && (
                   <div className='form-control w-full'>
-                    <label className='label flex-col items-start'>
-                      <span className='label-text mb-2'>
+                    <label className='label flex-col items-start w-full mb-3'>
+                      <span className='label-text text-wrap mb-2'>
                         {t('titleSecurity')}
                       </span>
                       <button
                         type='button'
-                        className='btn btn-primary w-full'
+                        className='btn btn-neutral w-full'
                         onClick={() => setOnEdit(true)}
                       >
                         <RiKey2Line size={20} />
@@ -1008,7 +1008,7 @@ const Users = () => {
             <div className='mt-4'>
               <div className='mt-3'>
                 <div className='form-control w-full relative'>
-                  <label className='input input-bordered flex items-center gap-2 pr-14'>
+                  <label className='input input-bordered flex items-center gap-2 pr-14 w-full'>
                     <span className='hidden md:block opacity-50'>
                       {t('newPassword')}
                     </span>
@@ -1027,7 +1027,7 @@ const Users = () => {
                   </label>
                   <button
                     type='button'
-                    className='absolute right-2 top-1/2 -translate-y-1/2 border border-base-content/50 w-8 h-8 p-1 flex items-center justify-center rounded-btn text-base-content/70 hover:opacity-50 duration-300 ease-linear'
+                    className='absolute right-2 top-1/2 -translate-y-1/2 border-2 border-base-content/30 w-7 h-7 p-1 flex items-center justify-center cursor-pointer rounded-field text-base-content/30 hover:opacity-50 duration-300 ease-linear z-10'
                     onClick={() => setShowPassword(prev => !prev)}
                   >
                     {showPassword ? (
@@ -1068,7 +1068,7 @@ const Users = () => {
                 {t('buttonErrorBack')}
               </button>
             )}
-            <button type='submit' className='btn btn-primary'>
+            <button type='submit' className='btn btn-neutral'>
               {t('submitButton')}
             </button>
           </div>

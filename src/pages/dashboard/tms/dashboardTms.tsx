@@ -21,7 +21,7 @@ const DashboardTms = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const { deviceKey } = useSelector((state: RootState) => state.utils)
+  const { deviceKey, switchingMode } = useSelector((state: RootState) => state.utils)
   const [deviceLogs, setDeviceLogs] = useState<DeviceLogTms>()
   const [loading, setLoading] = useState(false)
   const modalRef = useRef<HTMLDialogElement>(null)
@@ -60,7 +60,7 @@ const DashboardTms = () => {
   }, [deviceKey, deviceLogs])
 
   useEffect(() => {
-    if (!deviceKey) {
+    if (!deviceKey && !switchingMode) {
       modalRef.current?.showModal()
     } else {
       modalRef.current?.close()
@@ -103,7 +103,7 @@ const DashboardTms = () => {
           ) : (
             <>
               <div className='flex items-start gap-4 mt-4 flex-wrap lg:flex-wrap xl:flex-nowrap'>
-                <div className='w-full xl:w-[50%] lg:h-[295px] bg-base-100 rounded-btn overflow-hidden'>
+                <div className='w-full xl:w-[50%] lg:h-[295px] bg-base-100 rounded-field overflow-hidden'>
                   {CardInfoComponent}
                 </div>
                 <div className='grid grid-cols-2 md:grid-cols-4 xl:grid-cols-12 gap-4 w-full xl:w-[50%]'>

@@ -197,7 +197,7 @@ const MainSmtrack = () => {
           style: {
             backgroundColor:
               'var(--fallback-b1,oklch(var(--b1)/var(--tw-bg-opacity, 1)))',
-            borderRadius: 'var(--rounded-btn, 0.5rem)',
+            borderRadius: 'var(--rounded-field, 0.5rem)',
             padding: '.5rem .7rem',
             backdropFilter:
               'var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)',

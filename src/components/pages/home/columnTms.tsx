@@ -96,7 +96,7 @@ const columnTms = (
             {doors.slice(0, doorCount).map(doorKey => (
               <div
                 key={doorKey}
-                className={`w-[24px] h-[24px] flex items-center justify-center rounded-btn ${
+                className={`w-[24px] h-[24px] flex items-center justify-center rounded-field ${
                   item.log[0]?.door
                     ? 'bg-red-500 text-white'
                     : 'border border-primary text-primary'
@@ -159,7 +159,7 @@ const subColumnData = (
             {doors.slice(0, doorCount).map(doorKey => (
               <div
                 key={doorKey}
-                className={`w-[24px] h-[24px] flex items-center justify-center rounded-btn ${
+                className={`w-[24px] h-[24px] flex items-center justify-center rounded-field ${
                   item?.door
                     ? 'bg-red-500 text-white'
                     : 'border border-primary text-primary'

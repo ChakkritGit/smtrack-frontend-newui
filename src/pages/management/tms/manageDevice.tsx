@@ -439,14 +439,14 @@ const ManageDevice = () => {
         <div className='flex flex-col lg:flex-row mt-3 lg:mt-0 lg:items-center items-end gap-4'>
           <HospitalAndWard />
           <button
-            className='btn btn-primary max-w-[130px]'
+            className='btn btn-neutral max-w-[130px]'
             onClick={() => addModalRef.current?.showModal()}
           >
             {t('addDeviceButton')}
           </button>
         </div>
       </div>
-      <div className='dataTableWrapper bg-base-100 rounded-btn p-3 mt-5 duration-300 ease-linear'>
+      <div className='dataTableWrapper bg-base-100 rounded-field p-3 mt-5 duration-300 ease-linear'>
         <DataTable
           responsive
           fixedHeader
@@ -477,8 +477,8 @@ const ManageDevice = () => {
             <div className='col-span-2 grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4'>
               {/* Hospital */}
               <div className='form-control w-full'>
-                <label className='label flex-col items-start'>
-                  <span className='label-text mb-2'>
+                <label className='label flex-col items-start w-full mb-3'>
+                  <span className='label-text text-wrap mb-2'>
                     <span className='font-medium text-red-500 mr-1'>*</span>
                     {t('userHospitals')}
                   </span>
@@ -491,8 +491,8 @@ const ManageDevice = () => {
 
               {/* Ward */}
               <div className='form-control w-full'>
-                <label className='label flex-col items-start'>
-                  <span className='label-text mb-2'>
+                <label className='label flex-col items-start w-full mb-3'>
+                  <span className='label-text text-wrap mb-2'>
                     <span className='font-medium text-red-500 mr-1'>*</span>
                     {t('userWard')}
                   </span>
@@ -505,8 +505,8 @@ const ManageDevice = () => {
 
               {/* sn */}
               <div className='form-control w-full'>
-                <label className='label flex-col items-start'>
-                  <span className='label-text mb-2'>
+                <label className='label flex-col items-start w-full mb-3'>
+                  <span className='label-text text-wrap mb-2'>
                     <span className='font-medium text-red-500 mr-1'>*</span>
                     {t('deviceSerialTb')}
                   </span>
@@ -523,8 +523,8 @@ const ManageDevice = () => {
 
               {/* name */}
               <div className='form-control w-full'>
-                <label className='label flex-col items-start'>
-                  <span className='label-text mb-2'>
+                <label className='label flex-col items-start w-full mb-3'>
+                  <span className='label-text text-wrap mb-2'>
                     <span className='font-medium text-red-500 mr-1'>*</span>
                     {t('deviceNameTb')}
                   </span>
@@ -553,7 +553,7 @@ const ManageDevice = () => {
             >
               {t('cancelButton')}
             </button>
-            <button type='submit' className='btn btn-primary'>
+            <button type='submit' className='btn btn-neutral'>
               {t('submitButton')}
             </button>
           </div>
@@ -571,8 +571,8 @@ const ManageDevice = () => {
             <div className='col-span-2 grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4'>
               {/* Hospital */}
               <div className='form-control w-full'>
-                <label className='label flex-col items-start'>
-                  <span className='label-text mb-2'>
+                <label className='label flex-col items-start w-full mb-3'>
+                  <span className='label-text text-wrap mb-2'>
                     <span className='font-medium text-red-500 mr-1'>*</span>
                     {t('userHospitals')}
                   </span>
@@ -585,8 +585,8 @@ const ManageDevice = () => {
 
               {/* Ward */}
               <div className='form-control w-full'>
-                <label className='label flex-col items-start'>
-                  <span className='label-text mb-2'>
+                <label className='label flex-col items-start w-full mb-3'>
+                  <span className='label-text text-wrap mb-2'>
                     <span className='font-medium text-red-500 mr-1'>*</span>
                     {t('userWard')}
                   </span>
@@ -599,8 +599,8 @@ const ManageDevice = () => {
 
               {/* sn */}
               <div className='form-control w-full'>
-                <label className='label flex-col items-start'>
-                  <span className='label-text mb-2'>
+                <label className='label flex-col items-start w-full mb-3'>
+                  <span className='label-text text-wrap mb-2'>
                     <span className='font-medium text-red-500 mr-1'>*</span>
                     {t('deviceSerialTb')}
                   </span>
@@ -617,8 +617,8 @@ const ManageDevice = () => {
 
               {/* name */}
               <div className='form-control w-full'>
-                <label className='label flex-col items-start'>
-                  <span className='label-text mb-2'>
+                <label className='label flex-col items-start w-full mb-3'>
+                  <span className='label-text text-wrap mb-2'>
                     <span className='font-medium text-red-500 mr-1'>*</span>
                     {t('deviceNameTb')}
                   </span>
@@ -647,7 +647,7 @@ const ManageDevice = () => {
             >
               {t('cancelButton')}
             </button>
-            <button type='submit' className='btn btn-primary'>
+            <button type='submit' className='btn btn-neutral'>
               {t('submitButton')}
             </button>
           </div>

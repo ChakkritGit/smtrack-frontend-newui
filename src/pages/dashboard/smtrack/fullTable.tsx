@@ -354,7 +354,7 @@ const FullTable = () => {
         </ul>
       </div>
       <div className='flex items-center justify-between flex-col md:flex-row gap-3 mt-2'>
-        <div role='tablist' className='tabs tabs-bordered justify-start w-full'>
+        <div role='tablist' className='tabs tabs-border justify-start w-full'>
           <a
             role='tab'
             className={`tab ${pageNumber === 1 ? 'tab-active' : ''}`}
@@ -392,7 +392,7 @@ const FullTable = () => {
               data-tip={isPause ? t('startSlide') : t('stopSlide')}
             >
               <button
-                className='btn btn-primary bg-opacity-15 text-primary border-primary border-2 p-0 hover:opacity-50 hover:border-primary hover:bg-transparent duration-300 ease-linear max-h-[28px] min-h-[28px] max-w-[28px] min-w-[28px]'
+                className='btn btn-neutral bg-opacity-15 text-primary border-primary border-2 p-0 hover:opacity-50 hover:border-primary hover:bg-transparent duration-300 ease-linear max-h-[28px] min-h-[28px] max-w-[28px] min-w-[28px]'
                 onClick={togglePause}
               >
                 {isPause ? <RiPlayLine size={20} /> : <RiStopLine size={20} />}
@@ -452,7 +452,7 @@ const FullTable = () => {
               setFilterDate({ ...filterDate, endDate: e.target.value })
             }
           />
-          <button className='btn btn-primary' onClick={() => Logcustom()}>
+          <button className='btn btn-neutral' onClick={() => Logcustom()}>
             Search
           </button>
         </div>

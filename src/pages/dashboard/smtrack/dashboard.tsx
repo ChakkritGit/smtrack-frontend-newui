@@ -25,7 +25,7 @@ const Dashboard = () => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
   const navigate = useNavigate()
-  const { deviceKey, socketData } = useSelector(
+  const { deviceKey, socketData, switchingMode } = useSelector(
     (state: RootState) => state.utils
   )
   const [deviceLogs, setDeviceLogs] = useState<DeviceLogsType>()
@@ -133,7 +133,7 @@ const Dashboard = () => {
   ])
 
   useEffect(() => {
-    if (!deviceKey) {
+    if (!deviceKey && !switchingMode) {
       modalRef.current?.showModal()
     } else {
       modalRef.current?.close()
@@ -177,7 +177,7 @@ const Dashboard = () => {
                   <button
                     name={isPause ? t('startSlide') : t('stopSlide')}
                     aria-label={isPause ? t('startSlide') : t('stopSlide')}
-                    className='btn btn-primary bg-opacity-15 text-primary border-primary border-2 p-0 hover:opacity-50 hover:border-primary hover:bg-transparent duration-300 ease-linear max-h-[28px] min-h-[28px] max-w-[28px] min-w-[28px]'
+                    className='btn btn-neutral bg-opacity-15 text-primary border-primary border-2 p-0 hover:opacity-50 hover:border-primary hover:bg-transparent duration-300 ease-linear max-h-[28px] min-h-[28px] max-w-[28px] min-w-[28px]'
                     onClick={togglePause}
                   >
                     {isPause ? (
@@ -198,7 +198,7 @@ const Dashboard = () => {
           ) : (
             <>
               <div className='flex items-center gap-4 mt-4 flex-wrap lg:flex-wrap xl:flex-nowrap'>
-                <div className='w-full xl:w-[35%] lg:h-[330px] bg-base-100 rounded-btn overflow-hidden'>
+                <div className='w-full xl:w-[35%] lg:h-[330px] bg-base-100 rounded-field overflow-hidden'>
                   {CardInfoComponent}
                 </div>
                 <div className='grid grid-cols-2 md:grid-cols-4 xl:grid-cols-5 gap-4 w-full xl:w-[65%] justify-items-center'>

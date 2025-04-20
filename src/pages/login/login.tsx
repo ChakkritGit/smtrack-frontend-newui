@@ -165,7 +165,7 @@ const Login = () => {
         </div>
         <div className='card-body px-5 sm:px-7 lg:px-10'>
           <form onSubmit={handleLogin} className='flex flex-col gap-4'>
-            <label className='input input-bordered flex items-center gap-2'>
+            <label className='input input-bordered flex items-center gap-2 w-full'>
               <RiAtLine
                 fill='currentColor'
                 width={16}
@@ -182,7 +182,7 @@ const Login = () => {
               />
             </label>
             <div className='relative'>
-              <label className='input input-bordered flex items-center gap-2 pr-16'>
+              <label className='input input-bordered flex items-center gap-2 pr-16 w-full'>
                 <RiKey2Line
                   fill='currentColor'
                   width={16}
@@ -199,7 +199,7 @@ const Login = () => {
               </label>
               <button
                 type='button'
-                className='absolute right-2 top-1/2 -translate-y-1/2 border border-base-content/50 w-8 h-8 p-1 flex items-center justify-center rounded-btn text-base-content/70 hover:opacity-50 duration-300 ease-linear'
+                className='absolute right-2 top-1/2 -translate-y-1/2 border-2 border-base-content/30 w-7 h-7 p-1 flex items-center justify-center cursor-pointer rounded-field text-base-content/30 hover:opacity-50 duration-300 ease-linear z-10'
                 onClick={() => setShowPassword(prev => !prev)}
               >
                 {showPassword ? (
@@ -212,7 +212,7 @@ const Login = () => {
             <div className='card-actions'>
               <button
                 type='submit'
-                className='btn btn-primary w-full text-[16px]'
+                className='btn btn-neutral w-full text-[16px]'
               >
                 {loading ? (
                   <span className='loading loading-spinner loading-md'></span>

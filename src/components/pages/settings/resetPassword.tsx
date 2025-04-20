@@ -98,7 +98,7 @@ const ResetPassword = () => {
             <div className='grid grid-cols-1 md:grid-cols-2 gap-3'>
               {/* Old Password */}
               <div className='form-control w-full relative'>
-                <label className='input input-bordered flex items-center gap-2 pr-14'>
+                <label className='input input-bordered flex items-center gap-2 pr-14 w-full'>
                   <span className='hidden md:block opacity-50'>
                     {t('oldPassword')}
                   </span>
@@ -122,7 +122,7 @@ const ResetPassword = () => {
                 </label>
                 <button
                   type='button'
-                  className='absolute right-2 top-1/2 -translate-y-1/2 border border-base-content/50 w-8 h-8 p-1 flex items-center justify-center rounded-btn text-base-content/70 hover:opacity-50 duration-300 ease-linear'
+                  className='absolute right-2 top-1/2 -translate-y-1/2 border-2 border-base-content/30 w-7 h-7 p-1 flex items-center justify-center cursor-pointer rounded-field text-base-content/30 hover:opacity-50 duration-300 ease-linear z-10'
                   onClick={() => setShowPassword(prev => !prev)}
                 >
                   {showPassword ? (
@@ -135,7 +135,7 @@ const ResetPassword = () => {
 
               {/* New Password */}
               <div className='form-control w-full relative'>
-                <label className='input input-bordered flex items-center gap-2 pr-14'>
+                <label className='input input-bordered flex items-center gap-2 pr-14 w-full'>
                   <span className='hidden md:block opacity-50'>
                     {t('newPassword')}
                   </span>
@@ -158,7 +158,7 @@ const ResetPassword = () => {
                 </label>
                 <button
                   type='button'
-                  className='absolute right-2 top-1/2 -translate-y-1/2 border border-base-content/50 w-8 h-8 p-1 flex items-center justify-center rounded-btn text-base-content/70 hover:opacity-50 duration-300 ease-linear'
+                  className='absolute right-2 top-1/2 -translate-y-1/2 border-2 border-base-content/30 w-7 h-7 p-1 flex items-center justify-center cursor-pointer rounded-field text-base-content/30 hover:opacity-50 duration-300 ease-linear z-10'
                   onClick={() => setShowPassword(prev => !prev)}
                 >
                   {showPassword ? (
@@ -175,7 +175,7 @@ const ResetPassword = () => {
               <button type='button' className='btn' onClick={() => resetForm()}>
                 {t('cancelButton')}
               </button>
-              <button type='submit' className='btn btn-primary'>
+              <button type='submit' className='btn btn-neutral'>
                 {t('submitButton')}
               </button>
             </div>
@@ -186,7 +186,7 @@ const ResetPassword = () => {
           <span className='ml-5'>{t('titlePassword')}</span>
           <button
             onClick={() => setOnEdit(true)}
-            className='md:w-[140px] h-[45px] md:h-[40px] px-2 font-bold rounded-btn border-[2px] border-base-content text-[14px] md:text-base-content hover:opacity-50 duration-300 ease-linear'
+            className='md:w-[140px] h-[45px] md:h-[40px] px-2 font-bold rounded-field border-[2px] border-base-content text-[14px] md:text-base-content hover:opacity-50 cursor-pointer duration-300 ease-linear'
           >
             {t('changPassword')}
           </button>

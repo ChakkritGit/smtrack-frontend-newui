@@ -92,7 +92,7 @@ const columnData = (
 
         return (
           <div
-            className={`w-[24px] h-[24px] flex items-center justify-center rounded-btn ${
+            className={`w-[24px] h-[24px] flex items-center justify-center rounded-field ${
               isTempOutOfRange
                 ? 'bg-red-500 text-white'
                 : 'border border-primary text-primary'
@@ -124,7 +124,7 @@ const columnData = (
             {doors.slice(0, doorCount).map(doorKey => (
               <div
                 key={doorKey}
-                className={`w-[24px] h-[24px] flex items-center justify-center rounded-btn ${
+                className={`w-[24px] h-[24px] flex items-center justify-center rounded-field ${
                   item.log[0]?.[doorKey]
                     ? 'bg-red-500 text-white'
                     : 'border border-primary text-primary'
@@ -147,7 +147,7 @@ const columnData = (
       name: t('deviceConnectTb'),
       cell: item => (
         <div
-          className={`w-max h-[24px] px-2 text-black flex items-center justify-center rounded-btn ${
+          className={`w-max h-[24px] px-2 text-black flex items-center justify-center rounded-field ${
             item.online ? 'bg-green-400' : 'bg-red-400'
           } duration-300 ease-linear`}
           onClick={() => handleRowClicked(item)}
@@ -177,7 +177,7 @@ const columnData = (
       cell: item => {
         return (
           <span
-            className={`w-max max-w-[150px] h-[24px] px-2 flex items-center justify-center rounded-btn ${
+            className={`w-max max-w-[150px] h-[24px] px-2 flex items-center justify-center rounded-field ${
               calculateDate(item).daysRemaining <= 0
                 ? 'bg-red-500 text-white'
                 : ''
@@ -300,7 +300,7 @@ const subColumnData = (
         return (
           <div
             key={index}
-            className={`w-[24px] h-[24px] flex items-center justify-center rounded-btn ${
+            className={`w-[24px] h-[24px] flex items-center justify-center rounded-field ${
               isTempOutOfRange
                 ? 'bg-red-500 text-white'
                 : 'border border-primary text-primary'
@@ -333,7 +333,7 @@ const subColumnData = (
             {doors.slice(0, doorCount).map(doorKey => (
               <div
                 key={doorKey}
-                className={`w-[24px] h-[24px] flex items-center justify-center rounded-btn ${
+                className={`w-[24px] h-[24px] flex items-center justify-center rounded-field ${
                   deviceLog?.door1 || deviceLog?.door2 || deviceLog?.door3
                     ? 'bg-red-500 text-white'
                     : 'border border-primary text-primary'

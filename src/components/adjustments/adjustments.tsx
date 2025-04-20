@@ -642,7 +642,7 @@ const Adjustments = (props: AdjustmentsProps) => {
         <div className='divider divider-vertical my-2'></div>
 
         <div className='form-control w-full'>
-          <label className='label flex-col items-start'>
+          <label className='label flex-col items-start w-full mb-3'>
             <span className='label-text mb-2'>{t('selectProbe')}</span>
             <Select
               options={mapOptions<ProbeType, keyof ProbeType>(
@@ -666,7 +666,7 @@ const Adjustments = (props: AdjustmentsProps) => {
           </label>
         </div>
 
-        <div role='tablist' className='tabs tabs-bordered mt-3'>
+        <div role='tablist' className='tabs tabs-border justify-evenly mt-3'>
           <a
             role='tab'
             className={`tab ${
@@ -992,15 +992,15 @@ const Adjustments = (props: AdjustmentsProps) => {
               <div className='md:grid grid-cols-1 hidden md:grid-cols-2 gap-4 mt-4 w-full'>
                 {/* Temperature */}
                 <div className='form-control w-full'>
-                  <div className='label flex-col items-start'>
+                  <div className='label flex-col items-start w-full mb-3'>
                     <span className='label-text mb-2'>
                       {t('probeTempSubTb')}
                     </span>
                     <ReactSlider
                       aria-label={t('Temperature-min-max')}
-                      className='relative flex items-center w-full h-2 bg-gray-300 rounded-btn my-3'
+                      className='relative flex items-center w-full h-2 bg-gray-300 rounded-field my-3'
                       thumbClassName='flex items-center justify-center'
-                      trackClassName='bg-orange-500/20 h-2 rounded-btn'
+                      trackClassName='bg-orange-500/20 h-2 rounded-field'
                       value={[adjustmentsForm.tempMin, adjustmentsForm.tempMax]}
                       onChange={values =>
                         setAdjustmentsForm({
@@ -1021,7 +1021,7 @@ const Adjustments = (props: AdjustmentsProps) => {
                             {...validProps}
                             ref={ref as Ref<HTMLDivElement> | undefined}
                             key={key}
-                            className='flex items-center justify-center w-[42px] h-[32px] bg-orange-500 text-white font-bold text-[12px] shadow-md rounded-btn p-1 cursor-pointer outline-orange-500/50'
+                            className='flex items-center justify-center w-[42px] h-[32px] bg-orange-500 text-white font-bold text-[12px] shadow-md rounded-field p-1 cursor-pointer outline-orange-500/50'
                             aria-label={t('Temperature-min-max')}
                           >
                             {state.valueNow}
@@ -1034,15 +1034,15 @@ const Adjustments = (props: AdjustmentsProps) => {
 
                 {/* Humidity */}
                 <div className='form-control w-full'>
-                  <div className='label flex-col items-start'>
+                  <div className='label flex-col items-start w-full mb-3'>
                     <span className='label-text mb-2'>
                       {t('probeHumiSubTb')}
                     </span>
                     <ReactSlider
                       aria-label={t('Humidity-min-max')}
-                      className='relative flex items-center w-full h-2 bg-gray-300 rounded-btn my-3'
+                      className='relative flex items-center w-full h-2 bg-gray-300 rounded-field my-3'
                       thumbClassName='flex items-center justify-center'
-                      trackClassName='bg-blue-500/20 h-2 rounded-btn'
+                      trackClassName='bg-blue-500/20 h-2 rounded-field'
                       value={[adjustmentsForm.humiMin, adjustmentsForm.humiMax]}
                       onChange={values =>
                         setAdjustmentsForm({
@@ -1063,7 +1063,7 @@ const Adjustments = (props: AdjustmentsProps) => {
                             {...validProps}
                             ref={ref as Ref<HTMLDivElement> | undefined}
                             key={key}
-                            className='flex items-center justify-center w-[42px] h-[32px] bg-blue-500 text-white font-bold text-[12px] shadow-md rounded-btn p-1 cursor-pointer outline-blue-500/50'
+                            className='flex items-center justify-center w-[42px] h-[32px] bg-blue-500 text-white font-bold text-[12px] shadow-md rounded-field p-1 cursor-pointer outline-blue-500/50'
                             aria-label={t('Humidity-min-max')}
                           >
                             {state.valueNow}
@@ -1202,15 +1202,15 @@ const Adjustments = (props: AdjustmentsProps) => {
               <div className='md:grid grid-cols-1 hidden md:grid-cols-2 gap-4 mt-4 w-full'>
                 {/* AdjustTemperature */}
                 <div className='form-control w-full'>
-                  <div className='label flex-col items-start'>
+                  <div className='label flex-col items-start w-full mb-3'>
                     <span className='label-text mb-2'>{t('adjustTemp')}</span>
                     <ReactSlider
                       aria-label={t('Temperature-adjustment')}
-                      className={`relative flex items-center w-full h-2 bg-gray-300 rounded-btn my-3 ${
+                      className={`relative flex items-center w-full h-2 bg-gray-300 rounded-field my-3 ${
                         isLoadingMqtt ? 'opacity-50 cursor-not-allowed' : ''
                       }`}
                       thumbClassName='flex items-center justify-center'
-                      trackClassName='bg-orange-500/20 h-2 rounded-btn'
+                      trackClassName='bg-orange-500/20 h-2 rounded-field'
                       value={adjustmentsForm.adjustTemp}
                       onChange={values =>
                         setAdjustmentsForm({
@@ -1238,7 +1238,7 @@ const Adjustments = (props: AdjustmentsProps) => {
                             {...validProps}
                             ref={ref as Ref<HTMLDivElement> | undefined}
                             key={key}
-                            className={`flex items-center justify-center w-[42px] h-[32px] bg-orange-500 text-white font-bold text-[12px] shadow-md rounded-btn p-1 cursor-pointer outline-orange-500/50 ${
+                            className={`flex items-center justify-center w-[42px] h-[32px] bg-orange-500 text-white font-bold text-[12px] shadow-md rounded-field p-1 cursor-pointer outline-orange-500/50 ${
                               isLoadingMqtt ? 'cursor-not-allowed' : ''
                             }`}
                             aria-label={t('Temperature-adjustment')}
@@ -1253,15 +1253,15 @@ const Adjustments = (props: AdjustmentsProps) => {
 
                 {/* AdjustHumidity */}
                 <div className='form-control w-full'>
-                  <div className='label flex-col items-start'>
+                  <div className='label flex-col items-start w-full mb-3'>
                     <span className='label-text mb-2'>{t('adjustHumi')}</span>
                     <ReactSlider
                       aria-label={t('Humidity-adjustment')}
-                      className={`relative flex items-center w-full h-2 bg-gray-300 rounded-btn my-3 ${
+                      className={`relative flex items-center w-full h-2 bg-gray-300 rounded-field my-3 ${
                         isLoadingMqtt ? 'opacity-50 cursor-not-allowed' : ''
                       }`}
                       thumbClassName='flex items-center justify-center'
-                      trackClassName='bg-blue-500/20 h-2 rounded-btn'
+                      trackClassName='bg-blue-500/20 h-2 rounded-field'
                       value={adjustmentsForm.adjustHumi}
                       onChange={values =>
                         setAdjustmentsForm({
@@ -1289,7 +1289,7 @@ const Adjustments = (props: AdjustmentsProps) => {
                             {...validProps}
                             ref={ref as Ref<HTMLDivElement> | undefined}
                             key={key}
-                            className={`flex items-center justify-center w-[42px] h-[32px] bg-blue-500 text-white font-bold text-[12px] shadow-md rounded-btn p-1 cursor-pointer outline-blue-500/50 ${
+                            className={`flex items-center justify-center w-[42px] h-[32px] bg-blue-500 text-white font-bold text-[12px] shadow-md rounded-field p-1 cursor-pointer outline-blue-500/50 ${
                               isLoadingMqtt ? 'cursor-not-allowed' : ''
                             }`}
                             aria-label={t('Humidity-adjustment')}
@@ -1583,7 +1583,7 @@ const Adjustments = (props: AdjustmentsProps) => {
                 <div className='flex flex-col md:flex-row items-center justify-around gap-5 md:gap-2 mt-5'>
                   <div className='flex flex-col items-center gap-2'>
                     <span className='md:text-[14px]'>{t('currentTemp')}</span>
-                    <div className='flex items-center justify-center h-[55px] px-2 min-w-[55px] w-max rounded-btn border-[2px] border-primary text-primary text-[18px] font-bold'>
+                    <div className='flex items-center justify-center h-[55px] px-2 min-w-[55px] w-max rounded-field border-[2px] border-primary text-primary text-[18px] font-bold'>
                       {mqData.temp ? `${mqData.temp.toFixed(2)}°C` : '—'}
                     </div>
                   </div>
@@ -1593,7 +1593,7 @@ const Adjustments = (props: AdjustmentsProps) => {
                     <span className='md:text-[14px]'>
                       {t('adjustAfterTemp')}
                     </span>
-                    <div className='flex items-center justify-center h-[55px] px-2 min-w-[55px] w-max rounded-btn border-[2px] border-primary text-primary text-[18px] font-bold'>
+                    <div className='flex items-center justify-center h-[55px] px-2 min-w-[55px] w-max rounded-field border-[2px] border-primary text-primary text-[18px] font-bold'>
                       {mqData.temp
                         ? `${(
                             mqData.temp +
@@ -1608,7 +1608,7 @@ const Adjustments = (props: AdjustmentsProps) => {
                 <div className='flex flex-col md:flex-row items-center justify-around gap-5 md:gap-2 mt-5'>
                   <div className='flex flex-col items-center gap-2'>
                     <span className='md:text-[14px]'>{t('currentHum')}</span>
-                    <div className='flex items-center justify-center h-[55px] px-2 min-w-[55px] w-max rounded-btn border-[2px] border-primary text-primary text-[18px] font-bold'>
+                    <div className='flex items-center justify-center h-[55px] px-2 min-w-[55px] w-max rounded-field border-[2px] border-primary text-primary text-[18px] font-bold'>
                       {mqData.humi ? `${mqData.humi.toFixed(2)}%` : '—'}
                     </div>
                   </div>
@@ -1618,7 +1618,7 @@ const Adjustments = (props: AdjustmentsProps) => {
                     <span className='md:text-[14px]'>
                       {t('adjustAfterHum')}
                     </span>
-                    <div className='flex items-center justify-center h-[55px] px-2 min-w-[55px] w-max rounded-btn border-[2px] border-primary text-primary text-[18px] font-bold'>
+                    <div className='flex items-center justify-center h-[55px] px-2 min-w-[55px] w-max rounded-field border-[2px] border-primary text-primary text-[18px] font-bold'>
                       {mqData.humi
                         ? `${(
                             mqData.humi +
@@ -1706,7 +1706,7 @@ const Adjustments = (props: AdjustmentsProps) => {
                   </div>
                   <button
                     type='button'
-                    className='btn btn-primary'
+                    className='btn btn-neutral'
                     onClick={() => muteAlways(true)}
                   >
                     {t('messageSend')}
@@ -1774,7 +1774,7 @@ const Adjustments = (props: AdjustmentsProps) => {
                   </div>
                   <button
                     type='button'
-                    className='btn btn-primary'
+                    className='btn btn-neutral'
                     onClick={() => muteDoorDuration(true)}
                   >
                     {t('messageSend')}
@@ -1820,7 +1820,7 @@ const Adjustments = (props: AdjustmentsProps) => {
                   </div>
                   <button
                     type='button'
-                    className='btn btn-primary'
+                    className='btn btn-neutral'
                     onClick={() => muteAlert(true)}
                   >
                     {t('messageSend')}
@@ -1846,7 +1846,7 @@ const Adjustments = (props: AdjustmentsProps) => {
 
         {(tab === 1 || tab === 2) && (
           <div className={`modal-action ${isLoadingMqtt ? 'mt-0' : 'mt-6'}`}>
-            <button type='submit' className='btn btn-primary'>
+            <button type='submit' className='btn btn-neutral'>
               {t('submitButton')}
             </button>
           </div>

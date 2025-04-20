@@ -307,7 +307,7 @@ const Notifications = () => {
     () => (
       <ul
         tabIndex={1}
-        className='dropdown-content bg-base-100 text-base-content rounded-box top-px z-10 mt-16 right-0 w-[360px] md:w-[480px] border border-white/5 shadow-2xl outline outline-1 outline-black/5'
+        className='dropdown-content bg-base-100 text-base-content rounded-box top-px z-10 mt-16 right-0 w-[360px] md:w-[480px] border border-white/5 shadow-2xl outline-1 outline-black/5'
       >
         <div className='flex items-center justify-between rounded-t-box p-2 h-[54px] bg-base-100/70 backdrop-blur-md border-b border-base-content/10 shadow-sm sticky top-0 z-10'>
           <span className='text-base ml-2'>{t('titleNotification')}</span>
@@ -355,7 +355,7 @@ const Notifications = () => {
                       className='flex items-center gap-3 py-2 px-3'
                       key={index}
                     >
-                      <div className='bg-primary/10 text-primary/70 rounded-btn p-1'>
+                      <div className='bg-primary/10 text-primary/70 rounded-field p-1'>
                         <RiAlarmWarningFill size={24} />
                       </div>
                       <div className='flex flex-col gap-1 w-full'>
@@ -418,7 +418,7 @@ const Notifications = () => {
                       className='flex items-center gap-3 py-2 px-3'
                       key={index}
                     >
-                      <div className='bg-primary/10 text-primary/70 rounded-btn p-1'>
+                      <div className='bg-primary/10 text-primary/70 rounded-field p-1'>
                         {subTextNotiDetailsIcon(item.message)}
                       </div>
                       <div className='flex flex-col gap-1 w-full'>
@@ -473,7 +473,7 @@ const Notifications = () => {
         tabIndex={0}
         data-tip={t('titleNotification')}
         role='button'
-        className='indicator flex btn btn-ghost justify-end tooltip tooltip-bottom'
+        className='indicator flex btn btn-ghost justify-end tooltip tooltip-left md:tooltip-bottom'
         onClick={handleClick}
       >
         {notificationList.length > 0 && (

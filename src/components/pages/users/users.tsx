@@ -19,7 +19,7 @@ const RoleButtons = (props: RoleButtonProps) => {
         disabled={disabled}
         className={`flex items-center justify-center btn w-max h-[36px] min-h-0 p-2 font-normal ${
           userConnect === level
-            ? 'btn-primary text-white'
+            ? 'btn-neutral text-white'
             : 'btn-ghost border border-base-content/50 text-base-content'
         }`}
         onClick={() => handleFilterConnect(level)}

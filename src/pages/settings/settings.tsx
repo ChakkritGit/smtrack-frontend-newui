@@ -64,7 +64,7 @@ const Settings = () => {
 
   const settingContent = useMemo(
     () => (
-      <div className='w-full p-3 bg-base-100 rounded-btn max-h-[calc(100dvh-230px)] overflow-y-scroll'>
+      <div className='w-full p-3 bg-base-100 rounded-field max-h-[calc(100dvh-230px)] overflow-y-scroll'>
         {tab === 1 ? (
           settingProfile
         ) : tab === 2 ? (
@@ -86,7 +86,7 @@ const Settings = () => {
           <li
             onClick={() => setTab(1)}
             className={`${
-              tab === 1 ? '!btn-primary' : 'btn-ghost'
+              tab === 1 ? '!btn-neutral' : 'btn-ghost'
             } btn font-normal flex-nowrap text-[16px] justify-start w-full flex`}
           >
             <a className='text-[16px] h-9 flex items-center gap-2'>
@@ -101,7 +101,7 @@ const Settings = () => {
           <li
             onClick={() => setTab(2)}
             className={`${
-              tab === 2 ? '!btn-primary' : 'btn-ghost'
+              tab === 2 ? '!btn-neutral' : 'btn-ghost'
             } btn font-normal flex-nowrap text-[16px] justify-start w-full flex`}
           >
             <a className='text-[16px] h-9 flex items-center gap-2'>
@@ -116,7 +116,7 @@ const Settings = () => {
           <li
             onClick={() => setTab(3)}
             className={`${
-              tab === 3 ? '!btn-primary' : 'btn-ghost'
+              tab === 3 ? '!btn-neutral' : 'btn-ghost'
             } btn font-normal flex-nowrap text-[16px] justify-start w-full flex`}
           >
             <a className='text-[16px] h-9 flex items-center gap-2'>
@@ -131,7 +131,7 @@ const Settings = () => {
           <li
             onClick={() => setTab(4)}
             className={`${
-              tab === 4 ? '!btn-primary' : 'btn-ghost'
+              tab === 4 ? '!btn-neutral' : 'btn-ghost'
             } btn font-normal flex-nowrap text-[16px] justify-start w-full flex`}
           >
             <a className='text-[16px] h-9 flex items-center gap-2'>
@@ -176,7 +176,7 @@ const Settings = () => {
           </li>
         </ul>
         <div className='divider divider-horizontal mx-1 md:mx-4'></div>
-        <div className='w-full p-3 bg-base-100 rounded-btn'>
+        <div className='w-full p-3 bg-base-100 rounded-field'>
           {settingContent}
         </div>
       </div>

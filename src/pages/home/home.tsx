@@ -244,12 +244,12 @@ const Home = () => {
     fetchDeviceCount(1)
   }, [wardId])
 
-  useEffect(() => {
-    setInterval(() => {
-      fetchDevices(currentPage, perPage, globalSearch)
-      fetchDeviceCount(currentPage, perPage)
-    }, 300000)
-  }, [currentPage, perPage, globalSearch])
+  // useEffect(() => {
+  //   setInterval(() => {
+  //     fetchDevices(currentPage, perPage, globalSearch)
+  //     fetchDeviceCount(currentPage, perPage)
+  //   }, 300000)
+  // }, [currentPage, perPage, globalSearch])
 
   useEffect(() => {
     return () => {
@@ -306,7 +306,7 @@ const Home = () => {
   const ExpandedComponent = ({ data }: { data: DeviceType }) => {
     const { probe } = data
     return (
-      <div className='dataTableSubWrapper bg-base-100 rounded-btn duration-300 ease-linear'>
+      <div className='dataTableSubWrapper bg-base-100 rounded-field duration-300 ease-linear'>
         <DataTable
           columns={subColumns}
           data={probe}
@@ -325,7 +325,7 @@ const Home = () => {
         </span>
         <div className='flex items-center justify-end w-full'>
           {role === 'SUPER' && (
-            <div className='flex items-center gap-2 bg-base-300 p-2 px-3 rounded-btn w-max'>
+            <div className='flex items-center gap-2 bg-base-300 p-2 px-3 rounded-field w-max'>
               <span className='truncate max-w-[150px] md:max-w-[300px]'>
                 {hospital?.filter(f => f.id?.includes(hosId))[0]?.hosName ??
                   userProfile?.ward?.hospital?.hosName}
@@ -351,14 +351,14 @@ const Home = () => {
             <button
               className={`flex items-center justify-center !border-base-content/70 btn w-max h-[36px] min-h-0 p-2 font-normal ${
                 deviceConnect === 'online'
-                  ? 'btn-primary bg-opacity-50 text-white !border-primary'
-                  : 'btn-ghost border border-gray-500 text-gray-500'
+                  ? 'btn-primary bg-opacity-50 text-primary-content !border-primary'
+                  : 'btn-ghost border border-base-content text-base-content'
               }`}
               onClick={() => handleFilterConnect('online')}
             >
-              <div className={`w-[10px] h-[10px] ${deviceConnect === 'online' ? 'bg-base-content' : 'bg-green-500'} rounded-btn`}></div>
+              <div className={`w-[10px] h-[10px] ${deviceConnect === 'online' ? 'bg-primary-content' : 'bg-green-500'} rounded-field`}></div>
               <span
-                className={`text-base-content font-medium`}
+                className={`font-medium`}
               >
                 {t('deviceOnline')}
               </span>
@@ -366,14 +366,14 @@ const Home = () => {
             <button
               className={`flex items-center justify-center !border-base-content/70 btn w-max h-[36px] min-h-0 p-2 font-normal ${
                 deviceConnect === 'offline'
-                  ? 'btn-primary bg-opacity-50 text-white !border-primary'
-                  : 'btn-ghost border border-gray-500 text-gray-500'
+                  ? 'btn-primary bg-opacity-50 text-primary-content !border-primary'
+                  : 'btn-ghost border border-base-content text-base-content'
               }`}
               onClick={() => handleFilterConnect('offline')}
             >
-              <div className={`w-[10px] h-[10px] ${deviceConnect === 'offline' ? 'bg-base-content' : 'bg-red-500'} rounded-btn`}></div>
+              <div className={`w-[10px] h-[10px] ${deviceConnect === 'offline' ? 'bg-primary-content' : 'bg-red-500'} rounded-field`}></div>
               <span
-                className={`text-base-content font-medium`}
+                className={`font-medium`}
               >
                 {t('deviceOffline')}
               </span>
@@ -385,7 +385,7 @@ const Home = () => {
             <button
               className={`flex items-center justify-center btn ${
                 listAndGrid === 1
-                  ? 'btn-primary text-base-content'
+                  ? 'btn-primary text-primary-content'
                   : 'btn-ghost border-base-content text-base-content'
               } w-[36px] h-[36px] min-h-0 p-2 tooltip tooltip-top`}
               onClick={() => changListAndGrid(1)}
@@ -398,7 +398,7 @@ const Home = () => {
             <button
               className={`flex items-center justify-center btn ${
                 listAndGrid === 2
-                  ? 'btn-primary text-base-content'
+                  ? 'btn-primary text-primary-content'
                   : 'btn-ghost border border-base-content text-base-content'
               } w-[36px] h-[36px] min-h-0 p-2 tooltip tooltip-top`}
               onClick={() => changListAndGrid(2)}
@@ -412,7 +412,7 @@ const Home = () => {
         </div>
       </div>
       {listAndGrid === 1 ? (
-        <div className='dataTableWrapper bg-base-100 rounded-btn p-3 duration-300 ease-linear'>
+        <div className='dataTableWrapper bg-base-100 rounded-field p-3 duration-300 ease-linear'>
           <DataTable
             responsive
             fixedHeader

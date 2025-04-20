@@ -1,10 +1,11 @@
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
 import path from 'path'
+import tailwindcss from '@tailwindcss/vite'
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), tailwindcss()],
   build: {
     chunkSizeWarningLimit: 100000, // Unit is in KB => 100MB
     // rollupOptions: {
@@ -16,7 +17,7 @@ export default defineConfig({
     // }
     commonjsOptions: {
       transformMixedEsModules: true
-    },
+    }
   },
   server: {
     port: 12345,

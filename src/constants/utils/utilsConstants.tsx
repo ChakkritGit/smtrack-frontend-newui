@@ -565,7 +565,7 @@ const extractValues = (text: string) => {
 
 const swalMoveDevice = Swal.mixin({
   customClass: {
-    confirmButton: 'btn btn-primary'
+    confirmButton: 'btn btn-neutral'
   },
   buttonsStyling: false
 })

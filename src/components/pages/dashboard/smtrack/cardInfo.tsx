@@ -113,7 +113,7 @@ const CardInFoComponent = (props: PropsType) => {
           onClick={() => modalRef.current?.showModal()}
         >
           <div className='avatar cursor-pointer hover:scale-95 duration-300 ease-linear absolute z-20'>
-            <div className='w-56 h-56 md:w-52 md:h-52 lg:w-48 lg:h-48 rounded-btn'>
+            <div className='w-56 h-56 md:w-52 md:h-52 lg:w-48 lg:h-48 rounded-field'>
               <img
                 src={deviceData?.positionPic ?? DefaultPic}
                 alt='Device-image'
@@ -157,7 +157,7 @@ const CardInFoComponent = (props: PropsType) => {
               deviceData?.probe?.map(item => {
                 return (
                   <SwiperSlide key={item.id}>
-                    <span className='badge badge-primary bg-opacity-15 text-primary font-bold border-2 mb-2'>
+                    <span className='badge badge-soft badge-primary bg-opacity-15 text-primary font-bold border-2 mb-2'>
                       P{item.channel}
                     </span>
                     <div className='flex items-center gap-3'>
@@ -177,7 +177,7 @@ const CardInFoComponent = (props: PropsType) => {
               })
             ) : (
               <SwiperSlide>
-                <span className='badge badge-primary bg-opacity-15 text-primary font-bold border-2 mb-2'>
+                <span className='badge badge-soft badge-primary bg-opacity-15 text-primary font-bold border-2 mb-2'>
                   P—
                 </span>
                 <div className='flex items-center gap-3'>

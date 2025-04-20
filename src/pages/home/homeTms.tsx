@@ -117,7 +117,7 @@ const HomeTms = () => {
     )
 
     return (
-      <div className='dataTableSubWrapper bg-base-100 rounded-btn duration-300 ease-linear'>
+      <div className='dataTableSubWrapper bg-base-100 rounded-field duration-300 ease-linear'>
         <DataTable
           responsive
           columns={subColumns}
@@ -204,7 +204,7 @@ const HomeTms = () => {
           <HospitalAndWard />
         </div>
       </div>
-      <div className='dataTableWrapper bg-base-100 rounded-btn p-3 duration-300 ease-linear'>
+      <div className='dataTableWrapper bg-base-100 rounded-field p-3 duration-300 ease-linear'>
         {dataTable}
       </div>
     </div>

@@ -92,7 +92,7 @@ const Sidebar = () => {
             <Link
               to={'/'}
               className={`btn font-normal flex-nowrap justify-start w-full ${
-                location.pathname === '/' ? 'btn-primary' : 'btn-ghost'
+                location.pathname === '/' ? 'btn-neutral' : 'btn-ghost'
               } flex ${isExpand ? 'tooltip tooltip-right z-50' : ''}`}
               data-tip={t('sideShowAllBox')}
             >
@@ -114,7 +114,7 @@ const Sidebar = () => {
                 location.pathname.split('/')[2] === 'chart' ||
                 location.pathname.split('/')[2] === 'table' ||
                 location.pathname === '/dashboard/chart/compare'
-                  ? 'btn-primary'
+                  ? 'btn-neutral'
                   : 'btn-ghost'
               } flex ${isExpand ? 'tooltip tooltip-right z-50' : ''}`}
               data-tip={t('sideDashboard')}
@@ -140,7 +140,7 @@ const Sidebar = () => {
                 <Link
                   to={'/users'}
                   className={`btn font-normal flex-nowrap justify-start w-full ${
-                    location.pathname === '/users' ? 'btn-primary' : 'btn-ghost'
+                    location.pathname === '/users' ? 'btn-neutral' : 'btn-ghost'
                   } flex ${isExpand ? 'tooltip tooltip-right z-50' : ''}`}
                   data-tip={t('sidePermission')}
                 >
@@ -162,7 +162,7 @@ const Sidebar = () => {
                       location.pathname === '/management' ||
                       location.pathname === '/management/logadjust' ||
                       location.pathname === '/management/flasher'
-                        ? 'btn-primary'
+                        ? 'btn-neutral'
                         : 'btn-ghost'
                     } flex ${isExpand ? 'tooltip tooltip-right z-50' : ''}`}
                     data-tip={t('sideManage')}
@@ -242,7 +242,7 @@ const Sidebar = () => {
             <Link
               to={'/settings'}
               className={`btn font-normal flex-nowrap justify-start w-full ${
-                location.pathname === '/settings' ? 'btn-primary' : 'btn-ghost'
+                location.pathname === '/settings' ? 'btn-neutral' : 'btn-ghost'
               } flex ${isExpand ? 'tooltip tooltip-right z-50' : ''}`}
               data-tip={t('sideSetting')}
             >
@@ -263,8 +263,7 @@ const Sidebar = () => {
                 isExpand ? 'text-center' : 'text-right'
               } hover:underline cursor-pointer`}
             >
-              {/* {import.meta.env.VITE_APP_VERSION} */}
-              Version 2.0.2b13-beta_latest
+              Version 2.0.0b14
             </Link>
           </div>
         </div>

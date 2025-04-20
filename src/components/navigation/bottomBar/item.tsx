@@ -29,7 +29,7 @@ const BottomNavItem = (props: BottomItemProps) => {
 
   return (
     <div
-      className={`btm-nav overflow-hidden bottom-0 px-3 pb-2 sm:hidden bg-base-100/80 backdrop-blur ease-linear duration-300 z-[89]
+      className={`dock overflow-hidden bottom-0 px-3 pb-2 sm:hidden bg-base-100/80 backdrop-blur z-[89]
         ${
           isScrollingDown
             ? '!h-[0px] opacity-0'
@@ -37,7 +37,7 @@ const BottomNavItem = (props: BottomItemProps) => {
         }
         ${
           ['cupcake', 'valentine', 'forest', 'pastel', 'acid'].includes(themeMode)
-            ? `bottom-5 mx-auto w-[95%] rounded-btn !pb-0`
+            ? `bottom-5 mx-auto w-[95%] rounded-field !pb-0`
             : ''
         }`}
     >
@@ -80,7 +80,7 @@ const BottomNavItem = (props: BottomItemProps) => {
               key={to}
               to={to}
               className={`relative flex flex-col items-center justify-center w-full py-0 ${
-                isActive ? 'text-base-content' : ''
+                isActive ? 'dock-active' : ''
               }`}
             >
               {isActive
@@ -89,10 +89,6 @@ const BottomNavItem = (props: BottomItemProps) => {
               <span className='text-[10px] leading-normal truncate max-w-[64px]'>
                 {text}
               </span>
-              <span
-                className='absolute top-0 left-1/2 -translate-x-1/2 w-[60%] h-[2px] bg-base-content transition-all duration-300 ease-linear'
-                style={{ opacity: isActive ? 1 : 0 }}
-              />
             </Link>
           )
         })}
@@ -100,12 +96,12 @@ const BottomNavItem = (props: BottomItemProps) => {
       <Link
         to={'/settings'}
         className={`relative flex flex-col items-center justify-center w-full py-0 ${
-          location.pathname === '/settings' ? 'text-base-content' : ''
+          location.pathname === '/settings' ? 'dock-active' : ''
         }`}
       >
         <div className='avatar'>
           <div
-            className={`w-[24px] duration-300 rounded-btn ease-linear ${
+            className={`w-[24px] rounded-field ${
               isScrollingDown ? 'scale-0' : 'scale-100'
             }`}
           >
@@ -115,10 +111,6 @@ const BottomNavItem = (props: BottomItemProps) => {
         <span className='text-[10px] leading-normal truncate max-w-[64px]'>
           {t('tabAccount')}
         </span>
-        <span
-          className='absolute top-0 left-1/2 -translate-x-1/2 w-[60%] h-[2px] bg-base-content transition-all duration-300 ease-linear'
-          style={{ opacity: location.pathname === '/settings' ? 1 : 0 }}
-        />
       </Link>
     </div>
   )

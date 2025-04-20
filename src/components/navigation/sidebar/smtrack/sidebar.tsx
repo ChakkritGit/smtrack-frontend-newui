@@ -76,8 +76,8 @@ const Sidebar = () => {
               onClick={() => navigate('/')}
               src={ward?.hospital.hosPic ? ward.hospital.hosPic : DefaultPic}
               alt='Hospital-img'
-              className={`btn btn-ghost rounded-box transition-all ease-linear duration-300 ${
-                isExpand ? 'w-24 h-max' : 'w-32 h-28'
+              className={`btn btn-ghost rounded-box bg-white transition-all ease-linear duration-300 ${
+                isExpand ? 'w-24 h-max' : 'max-w-32 h-28'
               } object-contain p-0 hover:bg-transparent`}
             />
             <h3
@@ -96,7 +96,7 @@ const Sidebar = () => {
             <Link
               to={'/'}
               className={`btn font-normal flex-nowrap justify-start w-full ${
-                location.pathname === '/' ? 'btn-primary' : 'btn-ghost'
+                location.pathname === '/' ? 'btn-neutral' : 'btn-ghost'
               } flex ${isExpand ? 'tooltip tooltip-right z-50' : ''}`}
               data-tip={t('sideShowAllBox')}
             >
@@ -118,7 +118,7 @@ const Sidebar = () => {
                 location.pathname.split('/')[2] === 'chart' ||
                 location.pathname.split('/')[2] === 'table' ||
                 location.pathname === '/dashboard/chart/compare'
-                  ? 'btn-primary'
+                  ? 'btn-neutral'
                   : 'btn-ghost'
               } flex ${isExpand ? 'tooltip tooltip-right z-50' : ''}`}
               data-tip={t('sideDashboard')}
@@ -142,7 +142,7 @@ const Sidebar = () => {
                 <Link
                   to={'/users'}
                   className={`btn font-normal flex-nowrap justify-start w-full ${
-                    location.pathname === '/users' ? 'btn-primary' : 'btn-ghost'
+                    location.pathname === '/users' ? 'btn-neutral' : 'btn-ghost'
                   } flex ${isExpand ? 'tooltip tooltip-right z-50' : ''}`}
                   data-tip={t('sidePermission')}
                 >
@@ -163,7 +163,7 @@ const Sidebar = () => {
                     location.pathname === '/management' ||
                     location.pathname === '/management/logadjust' ||
                     location.pathname === '/management/flasher'
-                      ? 'btn-primary'
+                      ? 'btn-neutral'
                       : 'btn-ghost'
                   } flex ${isExpand ? 'tooltip tooltip-right z-50' : ''}`}
                   data-tip={t('sideManage')}
@@ -196,7 +196,7 @@ const Sidebar = () => {
                   className={`btn font-normal flex-nowrap justify-start w-full ${
                     location.pathname === '/repair' ||
                     location.pathname === '/repair/preview'
-                      ? 'btn-primary'
+                      ? 'btn-neutral'
                       : 'btn-ghost'
                   } flex ${isExpand ? 'tooltip tooltip-right z-50' : ''}`}
                   data-tip={t('sideRepair')}
@@ -218,7 +218,7 @@ const Sidebar = () => {
                   className={`btn font-normal flex-nowrap justify-start w-full ${
                     location.pathname === '/warranty' ||
                     location.pathname === '/warranty/preview'
-                      ? 'btn-primary'
+                      ? 'btn-neutral'
                       : 'btn-ghost'
                   } flex ${isExpand ? 'tooltip tooltip-right z-50' : ''}`}
                   data-tip={t('sideWarranty')}
@@ -295,7 +295,7 @@ const Sidebar = () => {
             <Link
               to={'/settings'}
               className={`btn hidden sm:flex font-normal flex-nowrap justify-start w-full ${
-                location.pathname === '/settings' ? 'btn-primary' : 'btn-ghost'
+                location.pathname === '/settings' ? 'btn-neutral' : 'btn-ghost'
               } flex ${isExpand ? 'tooltip tooltip-right z-50' : ''}`}
               data-tip={t('sideSetting')}
             >
@@ -316,8 +316,7 @@ const Sidebar = () => {
                 isExpand ? 'text-center' : 'text-right'
               } hover:underline cursor-pointer`}
             >
-              {/* {import.meta.env.VITE_APP_VERSION} */}
-              Version 2.0.2b13-beta_latest
+              Version 2.0.0b14
             </Link>
           </div>
         </div>

@@ -43,7 +43,7 @@ const FirmwarePagination = <T,>({
             pages.push(
                 <button
                     key={i}
-                    className={`join-item btn ${currentPage === i ? 'btn-primary' : 'bg-base-300 border-base-300'}`}
+                    className={`join-item btn ${currentPage === i ? 'btn-neutral' : 'bg-base-300 border-base-300'}`}
                     onClick={() => i !== currentPage && goToPage(i)}
                 >
                     {i}
@@ -54,7 +54,7 @@ const FirmwarePagination = <T,>({
         pages.push(
             <button
                 key={1}
-                className={`join-item btn ${currentPage === 1 ? 'btn-primary' : ''}`}
+                className={`join-item btn ${currentPage === 1 ? 'btn-neutral' : ''}`}
                 onClick={() => currentPage !== 1 && goToPage(1)}
             >
                 1
@@ -72,7 +72,7 @@ const FirmwarePagination = <T,>({
             pages.push(
                 <button
                     key={i}
-                    className={`join-item btn ${currentPage === i ? 'btn-primary' : 'bg-base-300 border-base-300'}`}
+                    className={`join-item btn ${currentPage === i ? 'btn-neutral' : ''}`}
                     onClick={() => currentPage !== i && goToPage(i)}
                 >
                     {i}
@@ -87,7 +87,7 @@ const FirmwarePagination = <T,>({
         pages.push(
             <button
                 key={totalPages}
-                className={`join-item btn ${currentPage === totalPages ? 'btn-primary' : ''}`}
+                className={`join-item btn ${currentPage === totalPages ? 'btn-neutral' : ''}`}
                 onClick={() => currentPage !== totalPages && goToPage(totalPages)}
             >
                 {totalPages}
@@ -114,8 +114,8 @@ const FirmwarePagination = <T,>({
         </label>
 
         <div className="join">
-          <button
-            className="join-item btn bg-base-300 border-base-300"
+        <button
+            className={`join-item btn bg-base-300 ${currentPage !== 1 ? 'border-base-300' : ''}`}
             onClick={() => goToPage(currentPage - 1)}
             disabled={currentPage === 1}
           >
@@ -123,7 +123,7 @@ const FirmwarePagination = <T,>({
           </button>
           {generatePagination()}
           <button
-            className="join-item btn bg-base-300 border-base-300"
+            className={`join-item btn bg-base-300 ${currentPage !== totalPages ? 'border-base-300' : ''}`}
             onClick={() => goToPage(currentPage + 1)}
             disabled={currentPage === totalPages}
           >

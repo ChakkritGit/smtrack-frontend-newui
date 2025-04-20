@@ -243,7 +243,7 @@ const Navbar = () => {
                 key={index}
                 className={`${
                   index !== 0 ? 'mt-1' : ''
-                } flex items-center justify-between p-2 rounded-btn cursor-pointer hover:bg-primary/30 duration-300 ease-linear`}
+                } flex items-center justify-between p-2 rounded-field cursor-pointer hover:bg-primary/30 duration-300 ease-linear`}
                 onClick={() => {
                   updateSearchHistory(item)
                   setSearchOpen(false)
@@ -274,7 +274,7 @@ const Navbar = () => {
                   </span>
                 </div>
                 <button
-                  className='p-1 rounded-full hover:bg-red-500 hover:text-white duration-300 ease-linear'
+                  className='p-1 rounded-full hover:bg-red-500 hover:text-white cursor-pointer duration-300 ease-linear'
                   onClick={e => {
                     e.stopPropagation()
                     removeHistoryItem(item.path)
@@ -308,7 +308,7 @@ const Navbar = () => {
                 devive.map((item, index) => (
                   <div
                     key={index}
-                    className='flex items-center gap-2 p-2 rounded-btn cursor-pointer hover:bg-primary/30 duration-300 ease-linear'
+                    className='flex items-center gap-2 p-2 rounded-field cursor-pointer hover:bg-primary/30 duration-300 ease-linear'
                     onClick={() => {
                       const newItem = {
                         text: item.name,
@@ -388,7 +388,7 @@ const Navbar = () => {
                 filter.map((item, index) => (
                   <div
                     key={index}
-                    className='flex items-center gap-2 p-2 rounded-btn cursor-pointer hover:bg-primary/30 duration-300 ease-linear'
+                    className='flex items-center gap-2 p-2 rounded-field cursor-pointer hover:bg-primary/30 duration-300 ease-linear'
                     onClick={() => {
                       const newItem = {
                         text: item.text,
@@ -504,7 +504,7 @@ const Navbar = () => {
   return (
     <nav className='bg-base-100/80 text-base-content sticky top-0 z-[80] flex h-16 w-full justify-center backdrop-blur transition-shadow duration-300 ease-linear [transform:translate3d(0,0,0)] shadow-sm'>
       <div className='navbar'>
-        <div className='flex-1 lg:gap-3'>
+        <div className='flex flex-1 lg:gap-3'>
           <label
             htmlFor='my-drawer-2'
             className='btn btn-ghost drawer-button lg:hidden'
@@ -559,12 +559,12 @@ const Navbar = () => {
               className='btn btn-ghost gap-3 px-1'
             >
               <div className='avatar'>
-                <div className='w-10 rounded-btn'>
+                <div className='w-8 rounded-field'>
                   <img src={pic ? pic : DefaultPic} alt='User-img' />
                 </div>
               </div>
-              <div className='flex flex-col items-start gap-1'>
-                <span className='font-normal text-[17px]'>
+              <div className='flex flex-col items-start'>
+                <span className='font-normal text-[14px] truncate max-w-[130px]'>
                   {display ? display : '—'}
                 </span>
                 <span className='text-[12px]'>
@@ -580,7 +580,7 @@ const Navbar = () => {
               <li className='h-9'>
                 <button
                   onClick={() => profileModalRef?.current?.showModal()}
-                  className='text-[16px] h-9 flex items-center gap-2 w-full text-left'
+                  className='text-[16px] h-9 flex items-center gap-2 w-full text-left cursor-pointer'
                 >
                   <RiIdCardLine />
                   {t('profile')}
@@ -590,7 +590,7 @@ const Navbar = () => {
               <li className='h-9'>
                 <button
                   onClick={() => settingModalRef?.current?.showModal()}
-                  className='text-[16px] h-9 flex items-center gap-2 w-full text-left'
+                  className='text-[16px] h-9 flex items-center gap-2 w-full text-left cursor-pointer'
                 >
                   <RiNotification4Line />
                   {t('titleNotification')}

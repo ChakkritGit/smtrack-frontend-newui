@@ -345,7 +345,7 @@ const Warranty = () => {
 
   const manageMenu = useMemo(
     () => (
-      <div role='tablist' className='tabs tabs-bordered w-72 md:w-max mt-3'>
+      <div role='tablist' className='tabs tabs-border justify-evenly w-72 md:w-max mt-3'>
         <a
           role='tab'
           className={`tab text-sm md:text-base ${
@@ -563,7 +563,7 @@ const Warranty = () => {
 
   const DataTableComponent = useMemo(() => {
     return (
-      <div className='dataTableWrapper bg-base-100 rounded-btn p-3 mt-5 duration-300 ease-linear'>
+      <div className='dataTableWrapper bg-base-100 rounded-field p-3 mt-5 duration-300 ease-linear'>
         <DataTable
           responsive
           fixedHeader
@@ -604,7 +604,7 @@ const Warranty = () => {
         <span className='text-[20px] font-medium'></span>
         <div className='flex flex-col lg:flex-row mt-3 lg:mt-0 lg:items-center items-end lg:gap-3'>
           <button
-            className='btn btn-primary max-w-[150px]'
+            className='btn btn-neutral max-w-[150px]'
             onClick={() => addModalRef.current?.showModal()}
           >
             {t('addWarrantyButton')}
@@ -621,8 +621,8 @@ const Warranty = () => {
           <h3 className='font-bold text-lg'>{t('addWarrantyButton')}</h3>
           {/* Invoic */}
           <div className='form-control w-full'>
-            <label className='label flex-col items-start'>
-              <span className='label-text mb-2'>
+            <label className='label flex-col items-start w-full mb-3'>
+              <span className='label-text text-wrap mb-2'>
                 <span className='font-medium text-red-500 mr-1'>*</span>
                 {t('invoice')}
               </span>
@@ -639,8 +639,8 @@ const Warranty = () => {
 
           {/* productName */}
           <div className='form-control w-full'>
-            <label className='label flex-col items-start'>
-              <span className='label-text mb-2'>
+            <label className='label flex-col items-start w-full mb-3'>
+              <span className='label-text text-wrap mb-2'>
                 <span className='font-medium text-red-500 mr-1'>*</span>
                 {t('productName')}
               </span>
@@ -657,8 +657,8 @@ const Warranty = () => {
 
           {/* selectDeviceDrop */}
           <div className='form-control w-full'>
-            <label className='label flex-col items-start'>
-              <span className='label-text mb-2'>
+            <label className='label flex-col items-start w-full mb-3'>
+              <span className='label-text text-wrap mb-2'>
                 <span className='font-medium text-red-500 mr-1'>*</span>
                 {t('selectDeviceDrop')}
               </span>
@@ -692,8 +692,8 @@ const Warranty = () => {
 
           {/* modelName */}
           <div className='form-control w-full'>
-            <label className='label flex-col items-start'>
-              <span className='label-text mb-2'>
+            <label className='label flex-col items-start w-full mb-3'>
+              <span className='label-text text-wrap mb-2'>
                 <span className='font-medium text-red-500 mr-1'>*</span>
                 {t('modelName')}
               </span>
@@ -713,8 +713,8 @@ const Warranty = () => {
             <div className='col-span-2 grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4'>
               {/* startDate */}
               <div className='form-control w-full'>
-                <label className='label flex-col items-start'>
-                  <span className='label-text mb-2'>
+                <label className='label flex-col items-start w-full mb-3'>
+                  <span className='label-text text-wrap mb-2'>
                     <span className='font-medium text-red-500 mr-1'>*</span>
                     {t('startDate')}
                   </span>
@@ -733,8 +733,8 @@ const Warranty = () => {
 
               {/* endDate */}
               <div className='form-control w-full'>
-                <label className='label flex-col items-start'>
-                  <span className='label-text mb-2'>
+                <label className='label flex-col items-start w-full mb-3'>
+                  <span className='label-text text-wrap mb-2'>
                     <span className='font-medium text-red-500 mr-1'>*</span>
                     {t('endDate')}
                   </span>
@@ -756,8 +756,8 @@ const Warranty = () => {
 
           {/* customerName */}
           <div className='form-control w-full'>
-            <label className='label flex-col items-start'>
-              <span className='label-text mb-2'>
+            <label className='label flex-col items-start w-full mb-3'>
+              <span className='label-text text-wrap mb-2'>
                 <span className='font-medium text-red-500 mr-1'>*</span>
                 {t('customerName')}
               </span>
@@ -798,8 +798,8 @@ const Warranty = () => {
 
           {/* customerAddress */}
           <div className='form-control w-full'>
-            <label className='label flex-col items-start'>
-              <span className='label-text mb-2'>
+            <label className='label flex-col items-start w-full mb-3'>
+              <span className='label-text text-wrap mb-2'>
                 <span className='font-medium text-red-500 mr-1'>*</span>
                 {t('customerAddress')}
               </span>
@@ -816,8 +816,8 @@ const Warranty = () => {
 
           {/* distributionCompany */}
           <div className='form-control w-full'>
-            <label className='label flex-col items-start'>
-              <span className='label-text mb-2'>
+            <label className='label flex-col items-start w-full mb-3'>
+              <span className='label-text text-wrap mb-2'>
                 <span className='font-medium text-red-500 mr-1'>*</span>
                 {t('distributionCompany')}
               </span>
@@ -859,7 +859,7 @@ const Warranty = () => {
             >
               {t('cancelButton')}
             </button>
-            <button type='submit' className='btn btn-primary'>
+            <button type='submit' className='btn btn-neutral'>
               {t('submitButton')}
             </button>
           </div>
@@ -874,8 +874,8 @@ const Warranty = () => {
           <h3 className='font-bold text-lg'>{t('editWarranty')}</h3>
           {/* Invoic */}
           <div className='form-control w-full'>
-            <label className='label flex-col items-start'>
-              <span className='label-text mb-2'>
+            <label className='label flex-col items-start w-full mb-3'>
+              <span className='label-text text-wrap mb-2'>
                 <span className='font-medium text-red-500 mr-1'>*</span>
                 {t('invoice')}
               </span>
@@ -892,8 +892,8 @@ const Warranty = () => {
 
           {/* productName */}
           <div className='form-control w-full'>
-            <label className='label flex-col items-start'>
-              <span className='label-text mb-2'>
+            <label className='label flex-col items-start w-full mb-3'>
+              <span className='label-text text-wrap mb-2'>
                 <span className='font-medium text-red-500 mr-1'>*</span>
                 {t('productName')}
               </span>
@@ -910,8 +910,8 @@ const Warranty = () => {
 
           {/* selectDeviceDrop */}
           <div className='form-control w-full'>
-            <label className='label flex-col items-start'>
-              <span className='label-text mb-2'>
+            <label className='label flex-col items-start w-full mb-3'>
+              <span className='label-text text-wrap mb-2'>
                 <span className='font-medium text-red-500 mr-1'>*</span>
                 {t('selectDeviceDrop')}
               </span>
@@ -945,8 +945,8 @@ const Warranty = () => {
 
           {/* modelName */}
           <div className='form-control w-full'>
-            <label className='label flex-col items-start'>
-              <span className='label-text mb-2'>
+            <label className='label flex-col items-start w-full mb-3'>
+              <span className='label-text text-wrap mb-2'>
                 <span className='font-medium text-red-500 mr-1'>*</span>
                 {t('modelName')}
               </span>
@@ -966,8 +966,8 @@ const Warranty = () => {
             <div className='col-span-2 grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4'>
               {/* startDate */}
               <div className='form-control w-full'>
-                <label className='label flex-col items-start'>
-                  <span className='label-text mb-2'>
+                <label className='label flex-col items-start w-full mb-3'>
+                  <span className='label-text text-wrap mb-2'>
                     <span className='font-medium text-red-500 mr-1'>*</span>
                     {t('startDate')}
                   </span>
@@ -987,8 +987,8 @@ const Warranty = () => {
 
               {/* endDate */}
               <div className='form-control w-full'>
-                <label className='label flex-col items-start'>
-                  <span className='label-text mb-2'>
+                <label className='label flex-col items-start w-full mb-3'>
+                  <span className='label-text text-wrap mb-2'>
                     <span className='font-medium text-red-500 mr-1'>*</span>
                     {t('endDate')}
                   </span>
@@ -1010,8 +1010,8 @@ const Warranty = () => {
 
           {/* customerName */}
           <div className='form-control w-full'>
-            <label className='label flex-col items-start'>
-              <span className='label-text mb-2'>
+            <label className='label flex-col items-start w-full mb-3'>
+              <span className='label-text text-wrap mb-2'>
                 <span className='font-medium text-red-500 mr-1'>*</span>
                 {t('customerName')}
               </span>
@@ -1052,8 +1052,8 @@ const Warranty = () => {
 
           {/* customerAddress */}
           <div className='form-control w-full'>
-            <label className='label flex-col items-start'>
-              <span className='label-text mb-2'>
+            <label className='label flex-col items-start w-full mb-3'>
+              <span className='label-text text-wrap mb-2'>
                 <span className='font-medium text-red-500 mr-1'>*</span>
                 {t('customerAddress')}
               </span>
@@ -1070,8 +1070,8 @@ const Warranty = () => {
 
           {/* distributionCompany */}
           <div className='form-control w-full'>
-            <label className='label flex-col items-start'>
-              <span className='label-text mb-2'>
+            <label className='label flex-col items-start w-full mb-3'>
+              <span className='label-text text-wrap mb-2'>
                 <span className='font-medium text-red-500 mr-1'>*</span>
                 {t('distributionCompany')}
               </span>
@@ -1113,7 +1113,7 @@ const Warranty = () => {
             >
               {t('cancelButton')}
             </button>
-            <button type='submit' className='btn btn-primary'>
+            <button type='submit' className='btn btn-neutral'>
               {t('submitButton')}
             </button>
           </div>

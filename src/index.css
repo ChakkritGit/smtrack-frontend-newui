@@ -1,6 +1,7 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: 'all';
+}
 
 @font-face {
   font-family: 'Anuphan';
@@ -52,8 +53,6 @@
 }
 
 * {
-  margin: 0;
-  padding: 0;
   font-family: 'Anuphan', sans-serif;
   /* user-select: none;
   -webkit-user-select: none; */
@@ -61,7 +60,11 @@
 }
 
 .react-select__control {
-  @apply !border-base-content/20 !bg-base-100 !rounded-btn h-[48px];
+  @apply !border-base-content/20 !bg-base-100 !rounded-field h-[40px];
+}
+
+.react-select__indicator, .react-select__dropdown-indicator {
+  @apply fill-base-content;
 }
 
 .react-select__control--is-focused {
@@ -86,7 +89,7 @@
 }
 
 .react-select__menu {
-  @apply !bg-base-100 !rounded-box !overflow-hidden !p-2 !w-max;
+  @apply !bg-base-100 !rounded-field !overflow-hidden !p-2 !w-max;
 }
 
 .react-select__menu-list {
@@ -94,7 +97,7 @@
 }
 
 .react-select__option {
-  @apply !rounded-btn !cursor-pointer !px-4;
+  @apply !rounded-field !cursor-pointer !px-4;
 }
 
 .react-select__option--is-focused {
@@ -102,7 +105,7 @@
 }
 
 .react-select__option--is-selected {
-  @apply !bg-primary !text-primary-content;
+  @apply !bg-neutral !text-primary-content;
 }
 
 .custom-role-select {
@@ -163,7 +166,7 @@
 }
 
 .swiper-pagination-bullet {
-  @apply !bg-primary/70 border border-primary/50 !rounded-btn !w-[10px] !h-[10px];
+  @apply !bg-primary/70 border border-primary/50 !rounded-field !w-[10px] !h-[10px];
 }
 
 .custom-swiper-pagination .swiper-pagination-bullet {
@@ -193,7 +196,7 @@
 }
 
 .apexcharts-tooltip.apexcharts-active {
-  @apply !bg-base-200/95 backdrop-blur !shadow-sm p-2 !z-20 !rounded-btn;
+  @apply !bg-base-200/95 backdrop-blur !shadow-sm p-2 !z-20 !rounded-field;
 }
 
 .dataTableWrapperWithNoData {
@@ -215,10 +218,6 @@
   &>div:nth-child(1) {
     @apply rounded-none;
   }
-
-  /* &>div>div>div>div:nth-child(1) {
-    @apply bg-base-100/90 backdrop-blur;
-  } */
 
   &>div>div>div>div>div>div>button {
     @apply text-inherit;
@@ -326,12 +325,12 @@
 }
 
 div:where(.swal2-container) div:where(.swal2-popup) {
-  @apply !bg-base-100 !text-base-content !rounded-btn;
+  @apply !bg-base-100 !text-base-content !rounded-field;
 }
 
 div:where(.swal2-container) button:where(.swal2-styled):where(.swal2-confirm),
 div:where(.swal2-container) button:where(.swal2-styled):where(.swal2-cancel) {
-  @apply !rounded-btn;
+  @apply !rounded-field;
 }
 
 div:where(.swal2-container) button:where(.swal2-styled):where(.swal2-confirm) {
@@ -379,7 +378,22 @@ div:where(.swal2-icon).swal2-error [class^=swal2-x-mark-line] {
 }
 
 .swal2-show {
-  @apply !animate-transition-pop;
+  --animation-btn: .25s;
+  animation: button-pop var(--animation-btn, 0.25s) ease-out !important;
+}
+
+@keyframes button-pop {
+  0% {
+    transform: scale(.96);
+  }
+
+  30% {
+    transform: scale(.98);
+  }
+
+  100% {
+    transform: scale(1);
+  }
 }
 
 .swal2-shown {
@@ -400,11 +414,15 @@ div:where(.swal2-container) div:where(.swal2-html-container) {
   }
 }
 
-.modal:not(dialog:not(.modal-open)),
-.modal::backdrop,
 div:where(.swal2-container).swal2-backdrop-show,
 div:where(.swal2-container).swal2-noanimation {
   @apply !bg-black/30 backdrop-blur;
+}
+
+.modal {
+  &.modal-open, &[open], &:target {
+    @apply !bg-black/30 backdrop-blur;
+  }
 }
 
 body {

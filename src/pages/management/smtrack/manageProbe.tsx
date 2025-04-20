@@ -732,7 +732,7 @@ const ManageProbe = () => {
         <span className='text-[20px] font-medium'></span>
         <div className='flex flex-col lg:flex-row mt-3 lg:mt-0 lg:items-center items-end lg:gap-3'>
           <button
-            className='btn btn-primary max-w-[130px]'
+            className='btn btn-neutral max-w-[130px]'
             onClick={() => addModalRef.current?.showModal()}
           >
             {t('addProbe')}
@@ -740,7 +740,7 @@ const ManageProbe = () => {
         </div>
       </div>
 
-      <div className='dataTableWrapper bg-base-100 rounded-btn p-3 mt-5 duration-300 ease-linear'>
+      <div className='dataTableWrapper bg-base-100 rounded-field p-3 mt-5 duration-300 ease-linear'>
         <DataTable
           responsive
           fixedHeader
@@ -769,8 +769,8 @@ const ManageProbe = () => {
                 <div className='col-span-2 grid grid-cols-1'>
                   {/* Deivce */}
                   <div className='form-control w-full'>
-                    <label className='label flex-col items-start'>
-                      <span className='label-text mb-2'>
+                    <label className='label flex-col items-start w-full mb-3'>
+                      <span className='label-text text-wrap mb-2'>
                         <span className='font-medium text-red-500 mr-1'>*</span>
                         {t('deviceSerialTb')}
                       </span>
@@ -797,8 +797,8 @@ const ManageProbe = () => {
                 <div className='col-span-2 grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4'>
                   {/* name */}
                   <div className='form-control w-full'>
-                    <label className='label flex-col items-start'>
-                      <span className='label-text mb-2'>
+                    <label className='label flex-col items-start w-full mb-3'>
+                      <span className='label-text text-wrap mb-2'>
                         <span className='font-medium text-red-500 mr-1'>*</span>
                         {t('probeName')}
                       </span>
@@ -825,8 +825,8 @@ const ManageProbe = () => {
 
                   {/* probe type */}
                   <div className='form-control w-full'>
-                    <label className='label flex-col items-start'>
-                      <span className='label-text mb-2'>
+                    <label className='label flex-col items-start w-full mb-3'>
+                      <span className='label-text text-wrap mb-2'>
                         <span className='font-medium text-red-500 mr-1'>*</span>
                         {t('probeType')}
                       </span>
@@ -855,8 +855,8 @@ const ManageProbe = () => {
                 <div className='col-span-2 grid grid-cols-1'>
                   {/* probe location */}
                   <div className='form-control w-full'>
-                    <label className='label flex-col items-start'>
-                      <span className='label-text mb-2'>
+                    <label className='label flex-col items-start w-full mb-3'>
+                      <span className='label-text text-wrap mb-2'>
                         <span className='font-medium text-red-500 mr-1'>*</span>
                         {t('probeLocation')}
                       </span>
@@ -876,8 +876,8 @@ const ManageProbe = () => {
               <div className='grid grid-cols-1 md:grid-cols-3 gap-4 mt-4 w-full'>
                 {/* Deivce */}
                 <div className='form-control w-full'>
-                  <label className='label flex-col items-start'>
-                    <span className='label-text mb-2'>
+                  <label className='label flex-col items-start w-full mb-3'>
+                    <span className='label-text text-wrap mb-2'>
                       <span className='font-medium text-red-500 mr-1'>*</span>
                       {t('delay')}
                     </span>
@@ -903,8 +903,8 @@ const ManageProbe = () => {
                 </div>
                 {/* Deivce */}
                 <div className='form-control w-full'>
-                  <label className='label flex-col items-start'>
-                    <span className='label-text mb-2'>
+                  <label className='label flex-col items-start w-full mb-3'>
+                    <span className='label-text text-wrap mb-2'>
                       <span className='font-medium text-red-500 mr-1'>*</span>
                       {t('door')}
                     </span>
@@ -930,8 +930,8 @@ const ManageProbe = () => {
                 </div>
                 {/* Deivce */}
                 <div className='form-control w-full'>
-                  <label className='label flex-col items-start'>
-                    <span className='label-text mb-2'>
+                  <label className='label flex-col items-start w-full mb-3'>
+                    <span className='label-text text-wrap mb-2'>
                       <span className='font-medium text-red-500 mr-1'>*</span>
                       {t('probeChanel')}
                     </span>
@@ -1206,14 +1206,14 @@ const ManageProbe = () => {
               <div className='md:grid grid-cols-1 hidden md:grid-cols-2 gap-4 mt-4 w-full'>
                 {/* Temperature */}
                 <div className='form-control w-full'>
-                  <label className='label flex-col items-start'>
-                    <span className='label-text mb-2'>
+                  <label className='label flex-col items-start w-full mb-3'>
+                    <span className='label-text text-wrap mb-2'>
                       {t('probeTempSubTb')}
                     </span>
                     <ReactSlider
-                      className='relative flex items-center w-full h-2 bg-gray-300 rounded-btn my-3'
+                      className='relative flex items-center w-full h-2 bg-gray-300 rounded-field my-3'
                       thumbClassName='flex items-center justify-center'
-                      trackClassName='bg-orange-500/20 h-2 rounded-btn'
+                      trackClassName='bg-orange-500/20 h-2 rounded-field'
                       value={[formData.tempMin, formData.tempMax]}
                       onChange={values =>
                         setFormData({
@@ -1234,7 +1234,7 @@ const ManageProbe = () => {
                             {...validProps}
                             ref={ref as Ref<HTMLDivElement> | undefined}
                             key={key}
-                            className='flex items-center justify-center w-[42px] h-[32px] bg-orange-500 text-white font-bold text-[12px] shadow-md rounded-btn p-1 cursor-pointer outline-orange-500/50'
+                            className='flex items-center justify-center w-[42px] h-[32px] bg-orange-500 text-white font-bold text-[12px] shadow-md rounded-field p-1 cursor-pointer outline-orange-500/50'
                           >
                             {state.valueNow}
                           </div>
@@ -1246,14 +1246,14 @@ const ManageProbe = () => {
 
                 {/* Humidity */}
                 <div className='form-control w-full'>
-                  <label className='label flex-col items-start'>
-                    <span className='label-text mb-2'>
+                  <label className='label flex-col items-start w-full mb-3'>
+                    <span className='label-text text-wrap mb-2'>
                       {t('probeHumiSubTb')}
                     </span>
                     <ReactSlider
-                      className='relative flex items-center w-full h-2 bg-gray-300 rounded-btn my-3'
+                      className='relative flex items-center w-full h-2 bg-gray-300 rounded-field my-3'
                       thumbClassName='flex items-center justify-center'
-                      trackClassName='bg-blue-500/20 h-2 rounded-btn'
+                      trackClassName='bg-blue-500/20 h-2 rounded-field'
                       value={[formData.humiMin, formData.humiMax]}
                       onChange={values =>
                         setFormData({
@@ -1274,7 +1274,7 @@ const ManageProbe = () => {
                             {...validProps}
                             ref={ref as Ref<HTMLDivElement> | undefined}
                             key={key}
-                            className='flex items-center justify-center w-[42px] h-[32px] bg-blue-500 text-white font-bold text-[12px] shadow-md rounded-btn p-1 cursor-pointer outline-blue-500/50'
+                            className='flex items-center justify-center w-[42px] h-[32px] bg-blue-500 text-white font-bold text-[12px] shadow-md rounded-field p-1 cursor-pointer outline-blue-500/50'
                           >
                             {state.valueNow}
                           </div>
@@ -1403,7 +1403,7 @@ const ManageProbe = () => {
             >
               {t('cancelButton')}
             </button>
-            <button type='submit' className='btn btn-primary'>
+            <button type='submit' className='btn btn-neutral'>
               {t('submitButton')}
             </button>
           </div>
@@ -1423,8 +1423,8 @@ const ManageProbe = () => {
                 <div className='col-span-2 grid grid-cols-1'>
                   {/* Deivce */}
                   <div className='form-control w-full'>
-                    <label className='label flex-col items-start'>
-                      <span className='label-text mb-2'>
+                    <label className='label flex-col items-start w-full mb-3'>
+                      <span className='label-text text-wrap mb-2'>
                         <span className='font-medium text-red-500 mr-1'>*</span>
                         {t('deviceSerialTb')}
                       </span>
@@ -1451,8 +1451,8 @@ const ManageProbe = () => {
                 <div className='col-span-2 grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4'>
                   {/* name */}
                   <div className='form-control w-full'>
-                    <label className='label flex-col items-start'>
-                      <span className='label-text mb-2'>
+                    <label className='label flex-col items-start w-full mb-3'>
+                      <span className='label-text text-wrap mb-2'>
                         <span className='font-medium text-red-500 mr-1'>*</span>
                         {t('probeName')}
                       </span>
@@ -1479,8 +1479,8 @@ const ManageProbe = () => {
 
                   {/* probe type */}
                   <div className='form-control w-full'>
-                    <label className='label flex-col items-start'>
-                      <span className='label-text mb-2'>
+                    <label className='label flex-col items-start w-full mb-3'>
+                      <span className='label-text text-wrap mb-2'>
                         <span className='font-medium text-red-500 mr-1'>*</span>
                         {t('probeType')}
                       </span>
@@ -1509,8 +1509,8 @@ const ManageProbe = () => {
                 <div className='col-span-2 grid grid-cols-1'>
                   {/* probe location */}
                   <div className='form-control w-full'>
-                    <label className='label flex-col items-start'>
-                      <span className='label-text mb-2'>
+                    <label className='label flex-col items-start w-full mb-3'>
+                      <span className='label-text text-wrap mb-2'>
                         <span className='font-medium text-red-500 mr-1'>*</span>
                         {t('probeLocation')}
                       </span>
@@ -1530,8 +1530,8 @@ const ManageProbe = () => {
               <div className='grid grid-cols-1 md:grid-cols-3 gap-4 mt-4 w-full'>
                 {/* Deivce */}
                 <div className='form-control w-full'>
-                  <label className='label flex-col items-start'>
-                    <span className='label-text mb-2'>
+                  <label className='label flex-col items-start w-full mb-3'>
+                    <span className='label-text text-wrap mb-2'>
                       <span className='font-medium text-red-500 mr-1'>*</span>
                       {t('delay')}
                     </span>
@@ -1557,8 +1557,8 @@ const ManageProbe = () => {
                 </div>
                 {/* Deivce */}
                 <div className='form-control w-full'>
-                  <label className='label flex-col items-start'>
-                    <span className='label-text mb-2'>
+                  <label className='label flex-col items-start w-full mb-3'>
+                    <span className='label-text text-wrap mb-2'>
                       <span className='font-medium text-red-500 mr-1'>*</span>
                       {t('door')}
                     </span>
@@ -1584,8 +1584,8 @@ const ManageProbe = () => {
                 </div>
                 {/* Deivce */}
                 <div className='form-control w-full'>
-                  <label className='label flex-col items-start'>
-                    <span className='label-text mb-2'>
+                  <label className='label flex-col items-start w-full mb-3'>
+                    <span className='label-text text-wrap mb-2'>
                       <span className='font-medium text-red-500 mr-1'>*</span>
                       {t('probeChanel')}
                     </span>
@@ -1860,14 +1860,14 @@ const ManageProbe = () => {
               <div className='md:grid grid-cols-1 hidden md:grid-cols-2 gap-4 mt-4 w-full'>
                 {/* Temperature */}
                 <div className='form-control w-full'>
-                  <label className='label flex-col items-start'>
-                    <span className='label-text mb-2'>
+                  <label className='label flex-col items-start w-full mb-3'>
+                    <span className='label-text text-wrap mb-2'>
                       {t('probeTempSubTb')}
                     </span>
                     <ReactSlider
-                      className='relative flex items-center w-full h-2 bg-gray-300 rounded-btn my-3'
+                      className='relative flex items-center w-full h-2 bg-gray-300 rounded-field my-3'
                       thumbClassName='flex items-center justify-center'
-                      trackClassName='bg-orange-500/20 h-2 rounded-btn'
+                      trackClassName='bg-orange-500/20 h-2 rounded-field'
                       value={[formData.tempMin, formData.tempMax]}
                       onChange={values =>
                         setFormData({
@@ -1888,7 +1888,7 @@ const ManageProbe = () => {
                             {...validProps}
                             ref={ref as Ref<HTMLDivElement> | undefined}
                             key={key}
-                            className='flex items-center justify-center w-[42px] h-[32px] bg-orange-500 text-white font-bold text-[12px] shadow-md rounded-btn p-1 cursor-pointer outline-orange-500/50'
+                            className='flex items-center justify-center w-[42px] h-[32px] bg-orange-500 text-white font-bold text-[12px] shadow-md rounded-field p-1 cursor-pointer outline-orange-500/50'
                           >
                             {state.valueNow}
                           </div>
@@ -1900,14 +1900,14 @@ const ManageProbe = () => {
 
                 {/* Humidity */}
                 <div className='form-control w-full'>
-                  <label className='label flex-col items-start'>
-                    <span className='label-text mb-2'>
+                  <label className='label flex-col items-start w-full mb-3'>
+                    <span className='label-text text-wrap mb-2'>
                       {t('probeHumiSubTb')}
                     </span>
                     <ReactSlider
-                      className='relative flex items-center w-full h-2 bg-gray-300 rounded-btn my-3'
+                      className='relative flex items-center w-full h-2 bg-gray-300 rounded-field my-3'
                       thumbClassName='flex items-center justify-center'
-                      trackClassName='bg-blue-500/20 h-2 rounded-btn'
+                      trackClassName='bg-blue-500/20 h-2 rounded-field'
                       value={[formData.humiMin, formData.humiMax]}
                       onChange={values =>
                         setFormData({
@@ -1928,7 +1928,7 @@ const ManageProbe = () => {
                             {...validProps}
                             ref={ref as Ref<HTMLDivElement> | undefined}
                             key={key}
-                            className='flex items-center justify-center w-[42px] h-[32px] bg-blue-500 text-white font-bold text-[12px] shadow-md rounded-btn p-1 cursor-pointer outline-blue-500/50'
+                            className='flex items-center justify-center w-[42px] h-[32px] bg-blue-500 text-white font-bold text-[12px] shadow-md rounded-field p-1 cursor-pointer outline-blue-500/50'
                           >
                             {state.valueNow}
                           </div>
@@ -2053,8 +2053,8 @@ const ManageProbe = () => {
                 <div className='col-span-2 grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4'>
                   {/* 1 */}
                   <div className='form-control w-full'>
-                    <label className='label flex-col items-start'>
-                      <span className='label-text mb-2'>{t('choiceOne')}</span>
+                    <label className='label flex-col items-start w-full mb-3'>
+                      <span className='label-text text-wrap mb-2'>{t('choiceOne')}</span>
                       <div className='flex flex-col gap-3'>
                         <label className='flex items-center gap-2'>
                           <input
@@ -2087,7 +2087,7 @@ const ManageProbe = () => {
                           <div className='join'>
                             <button
                               type='button'
-                              className='btn join-item rounded-l-btn'
+                              className='btn join-item rounded-l-box'
                               onClick={() => {
                                 if (sendTime.after > 5) {
                                   setSendTime({
@@ -2109,7 +2109,7 @@ const ManageProbe = () => {
                             />
                             <button
                               type='button'
-                              className='btn join-item rounded-r-btn'
+                              className='btn join-item rounded-r-box'
                               onClick={() => {
                                 if (sendTime.after < 30) {
                                   setSendTime({
@@ -2129,8 +2129,8 @@ const ManageProbe = () => {
 
                   {/* 2 */}
                   <div className='form-control w-full'>
-                    <label className='label flex-col items-start'>
-                      <span className='label-text mb-2'>{t('choiceTwo')}</span>
+                    <label className='label flex-col items-start w-full mb-3'>
+                      <span className='label-text text-wrap mb-2'>{t('choiceTwo')}</span>
                       <div className='flex flex-col gap-3'>
                         <label className='flex items-center gap-2'>
                           <input
@@ -2167,8 +2167,8 @@ const ManageProbe = () => {
                 <div className='col-span-2 grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4'>
                   {/* 3 */}
                   <div className='form-control w-full'>
-                    <label className='label flex-col items-start'>
-                      <span className='label-text mb-2'>
+                    <label className='label flex-col items-start w-full mb-3'>
+                      <span className='label-text text-wrap mb-2'>
                         {t('choiceThree')}
                       </span>
                       <div className='flex flex-col gap-3'>
@@ -2203,7 +2203,7 @@ const ManageProbe = () => {
                           <div className='join'>
                             <button
                               type='button'
-                              className='btn join-item rounded-l-btn'
+                              className='btn join-item rounded-l-box'
                               onClick={() => {
                                 if (sendTime.every > 5) {
                                   setSendTime({
@@ -2225,7 +2225,7 @@ const ManageProbe = () => {
                             />
                             <button
                               type='button'
-                              className='btn join-item rounded-r-btn'
+                              className='btn join-item rounded-r-box'
                               onClick={() => {
                                 if (sendTime.every < 30) {
                                   setSendTime({
@@ -2245,8 +2245,8 @@ const ManageProbe = () => {
 
                   {/* 4 */}
                   <div className='form-control w-full'>
-                    <label className='label flex-col items-start'>
-                      <span className='label-text mb-2'>{t('choiceFour')}</span>
+                    <label className='label flex-col items-start w-full mb-3'>
+                      <span className='label-text text-wrap mb-2'>{t('choiceFour')}</span>
                       <div className='flex flex-col gap-3'>
                         <label className='flex items-center gap-2'>
                           <input
@@ -2284,7 +2284,7 @@ const ManageProbe = () => {
               <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-4 w-full'>
                 <div className='form-control w-full items-center justify-center'>
                   <label className='label flex-col items-center justify-center w-full'>
-                    <span className='label-text mb-2'>{t('firstDay')}</span>
+                    <span className='label-text text-wrap mb-2'>{t('firstDay')}</span>
                     <Select
                       isDisabled={scheduleDay.firstDay === 'ALL'}
                       key={String(scheduleDay.firstDay)}
@@ -2315,7 +2315,7 @@ const ManageProbe = () => {
                 </div>
                 <div className='form-control w-full items-center justify-center'>
                   <label className='label flex-col items-center justify-center w-full'>
-                    <span className='label-text mb-2'>{t('seccondDay')}</span>
+                    <span className='label-text text-wrap mb-2'>{t('seccondDay')}</span>
                     <Select
                       isDisabled={scheduleDay.seccondDay === 'ALL'}
                       key={String(scheduleDay.seccondDay)}
@@ -2346,7 +2346,7 @@ const ManageProbe = () => {
                 </div>
                 <div className='form-control w-full items-center justify-center'>
                   <label className='label flex-col items-center justify-center w-full'>
-                    <span className='label-text mb-2'>{t('thirdDay')}</span>
+                    <span className='label-text text-wrap mb-2'>{t('thirdDay')}</span>
                     <Select
                       isDisabled={scheduleDay.thirdDay === 'ALL'}
                       key={String(scheduleDay.thirdDay)}
@@ -2377,7 +2377,7 @@ const ManageProbe = () => {
                 </div>
                 <div className='form-control w-full items-center justify-center'>
                   <label className='label flex-col items-center justify-center'>
-                    <span className='label-text mb-2'>{t('everyDays')}</span>
+                    <span className='label-text text-wrap mb-2'>{t('everyDays')}</span>
                     <input
                       type='checkbox'
                       className='toggle toggle-md'
@@ -2411,7 +2411,7 @@ const ManageProbe = () => {
               </div>
 
               <div className='grid grid-cols-1 lg:grid-cols-3 gap-4 mt-5 w-full'>
-                <span className='label-text mb-2'>{t('firstTime')}</span>
+                <span className='label-text text-wrap mb-2'>{t('firstTime')}</span>
                 <Select
                   // key={String(scheduleTime.firstTime)}
                   options={filterOptions(
@@ -2459,7 +2459,7 @@ const ManageProbe = () => {
               </div>
 
               <div className='grid grid-cols-1 lg:grid-cols-3 gap-4 mt-4 w-full'>
-                <span className='label-text mb-2'>{t('seccondTime')}</span>
+                <span className='label-text text-wrap mb-2'>{t('seccondTime')}</span>
                 <Select
                   options={filterOptions(
                     mapOptions<ScheduleHour, keyof ScheduleHour>(
@@ -2506,7 +2506,7 @@ const ManageProbe = () => {
               </div>
 
               <div className='grid grid-cols-1 lg:grid-cols-3 gap-4 mt-4 w-full'>
-                <span className='label-text mb-2'>{t('thirdTime')}</span>
+                <span className='label-text text-wrap mb-2'>{t('thirdTime')}</span>
                 <Select
                   // key={String(scheduleTime.firstTime)}
                   options={filterOptions(
@@ -2571,7 +2571,7 @@ const ManageProbe = () => {
             >
               {t('cancelButton')}
             </button>
-            <button type='submit' className='btn btn-primary'>
+            <button type='submit' className='btn btn-neutral'>
               {t('submitButton')}
             </button>
           </div>

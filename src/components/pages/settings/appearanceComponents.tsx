@@ -28,7 +28,7 @@ const AppearanceComponents = () => {
           data-set-theme='system'
         >
           <span
-            className='relative grid grid-cols-2 rounded-btn shadow-md text-base-content w-full h-[70px] items-center cursor-pointer'
+            className='relative grid grid-cols-2 rounded-field shadow-md text-base-content w-full h-[70px] items-center cursor-pointer'
             data-theme='system'
           >
             <svg
@@ -38,32 +38,32 @@ const AppearanceComponents = () => {
               viewBox='0 0 24 24'
               className={`${
                 themeMode === '' ? 'visible' : 'invisible'
-              } fill-white shrink-0 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-btn shadow-md bg-primary w-[20px] h-[20px] p-1`}
+              } fill-white shrink-0 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-field shadow-md bg-primary w-[20px] h-[20px] p-1`}
             >
               <path d='M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z'></path>
             </svg>
             <span
-              className='bg-white text-black rounded-l-btn flex flex-col items-center h-[70px] justify-center gap-1 p-4'
+              className='bg-white text-black rounded-l-box flex flex-col items-center h-[70px] justify-center gap-1 p-4'
               data-theme='light'
             >
               <span className='text-sm font-medium'>Light</span>
               <div className='flex gap-1'>
-                <span className='bg-primary rounded-badge w-2 h-2'></span>
-                <span className='bg-secondary rounded-badge w-2 h-2'></span>
-                <span className='bg-accent rounded-badge w-2 h-2'></span>
-                <span className='bg-neutral rounded-badge w-2 h-2'></span>
+                <span className='bg-primary rounded-box w-2 h-2'></span>
+                <span className='bg-secondary rounded-box w-2 h-2'></span>
+                <span className='bg-accent rounded-box w-2 h-2'></span>
+                <span className='bg-neutral rounded-box w-2 h-2'></span>
               </div>
             </span>
             <span
-              className='bg-[oklch(0.25 0.02 252.42 / 0.8)] text-white rounded-r-btn flex flex-col items-center h-[70px] justify-center gap-1 p-4'
+              className='bg-[oklch(0.25 0.02 252.42 / 0.8)] text-white rounded-r-box flex flex-col items-center h-[70px] justify-center gap-1 p-4'
               data-theme='dark'
             >
               <span className='text-sm font-medium'>Dark</span>
               <div className='flex gap-1'>
-                <span className='bg-primary rounded-badge w-2 h-2'></span>
-                <span className='bg-secondary rounded-badge w-2 h-2'></span>
-                <span className='bg-accent rounded-badge w-2 h-2'></span>
-                <span className='bg-neutral rounded-badge w-2 h-2'></span>
+                <span className='bg-primary rounded-box w-2 h-2'></span>
+                <span className='bg-secondary rounded-box w-2 h-2'></span>
+                <span className='bg-accent rounded-box w-2 h-2'></span>
+                <span className='bg-neutral rounded-box w-2 h-2'></span>
               </div>
             </span>
           </span>
@@ -74,7 +74,7 @@ const AppearanceComponents = () => {
           data-set-theme='light'
         >
           <span
-            className='bg-base-100 rounded-btn shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
+            className='bg-base-100 rounded-field shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
             data-theme='light'
           >
             <span className='grid grid-cols-5 grid-rows-3'>
@@ -93,10 +93,10 @@ const AppearanceComponents = () => {
                 </svg>
                 <span className='flex-grow text-sm'>light</span>
                 <span className='flex h-full shrink-0 flex-wrap gap-1'>
-                  <span className='bg-primary rounded-badge w-2'></span>
-                  <span className='bg-secondary rounded-badge w-2'></span>
-                  <span className='bg-accent rounded-badge w-2'></span>
-                  <span className='bg-neutral rounded-badge w-2'></span>
+                  <span className='bg-primary rounded-box w-2'></span>
+                  <span className='bg-secondary rounded-box w-2'></span>
+                  <span className='bg-accent rounded-box w-2'></span>
+                  <span className='bg-neutral rounded-box w-2'></span>
                 </span>
               </span>
             </span>
@@ -108,7 +108,7 @@ const AppearanceComponents = () => {
           data-set-theme='dark'
         >
           <span
-            className='bg-base-100 rounded-btn shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
+            className='bg-base-100 rounded-field shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
             data-theme='dark'
           >
             <span className='grid grid-cols-5 grid-rows-3'>
@@ -127,10 +127,10 @@ const AppearanceComponents = () => {
                 </svg>
                 <span className='flex-grow text-sm'>dark</span>
                 <span className='flex h-full shrink-0 flex-wrap gap-1'>
-                  <span className='bg-primary rounded-badge w-2'></span>
-                  <span className='bg-secondary rounded-badge w-2'></span>
-                  <span className='bg-accent rounded-badge w-2'></span>
-                  <span className='bg-neutral rounded-badge w-2'></span>
+                  <span className='bg-primary rounded-box w-2'></span>
+                  <span className='bg-secondary rounded-box w-2'></span>
+                  <span className='bg-accent rounded-box w-2'></span>
+                  <span className='bg-neutral rounded-box w-2'></span>
                 </span>
               </span>
             </span>
@@ -142,7 +142,7 @@ const AppearanceComponents = () => {
           data-set-theme='cupcake'
         >
           <span
-            className='bg-base-100 rounded-btn shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
+            className='bg-base-100 rounded-field shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
             data-theme='cupcake'
           >
             <span className='grid grid-cols-5 grid-rows-3'>
@@ -161,10 +161,10 @@ const AppearanceComponents = () => {
                 </svg>
                 <span className='flex-grow text-sm'>cupcake</span>
                 <span className='flex h-full shrink-0 flex-wrap gap-1'>
-                  <span className='bg-primary rounded-badge w-2'></span>
-                  <span className='bg-secondary rounded-badge w-2'></span>
-                  <span className='bg-accent rounded-badge w-2'></span>
-                  <span className='bg-neutral rounded-badge w-2'></span>
+                  <span className='bg-primary rounded-box w-2'></span>
+                  <span className='bg-secondary rounded-box w-2'></span>
+                  <span className='bg-accent rounded-box w-2'></span>
+                  <span className='bg-neutral rounded-box w-2'></span>
                 </span>
               </span>
             </span>
@@ -176,7 +176,7 @@ const AppearanceComponents = () => {
           data-set-theme='bumblebee'
         >
           <span
-            className='bg-base-100 rounded-btn shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
+            className='bg-base-100 rounded-field shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
             data-theme='bumblebee'
           >
             <span className='grid grid-cols-5 grid-rows-3'>
@@ -195,10 +195,10 @@ const AppearanceComponents = () => {
                 </svg>
                 <span className='flex-grow text-sm'>bumblebee</span>
                 <span className='flex h-full shrink-0 flex-wrap gap-1'>
-                  <span className='bg-primary rounded-badge w-2'></span>
-                  <span className='bg-secondary rounded-badge w-2'></span>
-                  <span className='bg-accent rounded-badge w-2'></span>
-                  <span className='bg-neutral rounded-badge w-2'></span>
+                  <span className='bg-primary rounded-box w-2'></span>
+                  <span className='bg-secondary rounded-box w-2'></span>
+                  <span className='bg-accent rounded-box w-2'></span>
+                  <span className='bg-neutral rounded-box w-2'></span>
                 </span>
               </span>
             </span>
@@ -210,7 +210,7 @@ const AppearanceComponents = () => {
           data-set-theme='emerald'
         >
           <span
-            className='bg-base-100 rounded-btn shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
+            className='bg-base-100 rounded-field shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
             data-theme='emerald'
           >
             <span className='grid grid-cols-5 grid-rows-3'>
@@ -229,10 +229,10 @@ const AppearanceComponents = () => {
                 </svg>
                 <span className='flex-grow text-sm'>emerald</span>
                 <span className='flex h-full shrink-0 flex-wrap gap-1'>
-                  <span className='bg-primary rounded-badge w-2'></span>
-                  <span className='bg-secondary rounded-badge w-2'></span>
-                  <span className='bg-accent rounded-badge w-2'></span>
-                  <span className='bg-neutral rounded-badge w-2'></span>
+                  <span className='bg-primary rounded-box w-2'></span>
+                  <span className='bg-secondary rounded-box w-2'></span>
+                  <span className='bg-accent rounded-box w-2'></span>
+                  <span className='bg-neutral rounded-box w-2'></span>
                 </span>
               </span>
             </span>
@@ -244,7 +244,7 @@ const AppearanceComponents = () => {
           data-set-theme='corporate'
         >
           <span
-            className='bg-base-100 rounded-btn shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
+            className='bg-base-100 rounded-field shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
             data-theme='corporate'
           >
             <span className='grid grid-cols-5 grid-rows-3'>
@@ -263,10 +263,10 @@ const AppearanceComponents = () => {
                 </svg>
                 <span className='flex-grow text-sm'>corporate</span>
                 <span className='flex h-full shrink-0 flex-wrap gap-1'>
-                  <span className='bg-primary rounded-badge w-2'></span>
-                  <span className='bg-secondary rounded-badge w-2'></span>
-                  <span className='bg-accent rounded-badge w-2'></span>
-                  <span className='bg-neutral rounded-badge w-2'></span>
+                  <span className='bg-primary rounded-box w-2'></span>
+                  <span className='bg-secondary rounded-box w-2'></span>
+                  <span className='bg-accent rounded-box w-2'></span>
+                  <span className='bg-neutral rounded-box w-2'></span>
                 </span>
               </span>
             </span>
@@ -278,7 +278,7 @@ const AppearanceComponents = () => {
           data-set-theme='synthwave'
         >
           <span
-            className='bg-base-100 rounded-btn shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
+            className='bg-base-100 rounded-field shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
             data-theme='synthwave'
           >
             <span className='grid grid-cols-5 grid-rows-3'>
@@ -297,10 +297,10 @@ const AppearanceComponents = () => {
                 </svg>
                 <span className='flex-grow text-sm'>synthwave</span>
                 <span className='flex h-full shrink-0 flex-wrap gap-1'>
-                  <span className='bg-primary rounded-badge w-2'></span>
-                  <span className='bg-secondary rounded-badge w-2'></span>
-                  <span className='bg-accent rounded-badge w-2'></span>
-                  <span className='bg-neutral rounded-badge w-2'></span>
+                  <span className='bg-primary rounded-box w-2'></span>
+                  <span className='bg-secondary rounded-box w-2'></span>
+                  <span className='bg-accent rounded-box w-2'></span>
+                  <span className='bg-neutral rounded-box w-2'></span>
                 </span>
               </span>
             </span>
@@ -312,7 +312,7 @@ const AppearanceComponents = () => {
           data-set-theme='retro'
         >
           <span
-            className='bg-base-100 rounded-btn shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
+            className='bg-base-100 rounded-field shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
             data-theme='retro'
           >
             <span className='grid grid-cols-5 grid-rows-3'>
@@ -331,10 +331,10 @@ const AppearanceComponents = () => {
                 </svg>
                 <span className='flex-grow text-sm'>retro</span>
                 <span className='flex h-full shrink-0 flex-wrap gap-1'>
-                  <span className='bg-primary rounded-badge w-2'></span>
-                  <span className='bg-secondary rounded-badge w-2'></span>
-                  <span className='bg-accent rounded-badge w-2'></span>
-                  <span className='bg-neutral rounded-badge w-2'></span>
+                  <span className='bg-primary rounded-box w-2'></span>
+                  <span className='bg-secondary rounded-box w-2'></span>
+                  <span className='bg-accent rounded-box w-2'></span>
+                  <span className='bg-neutral rounded-box w-2'></span>
                 </span>
               </span>
             </span>
@@ -346,7 +346,7 @@ const AppearanceComponents = () => {
           data-set-theme='cyberpunk'
         >
           <span
-            className='bg-base-100 rounded-btn shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
+            className='bg-base-100 rounded-field shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
             data-theme='cyberpunk'
           >
             <span className='grid grid-cols-5 grid-rows-3'>
@@ -365,10 +365,10 @@ const AppearanceComponents = () => {
                 </svg>
                 <span className='flex-grow text-sm'>cyberpunk</span>
                 <span className='flex h-full shrink-0 flex-wrap gap-1'>
-                  <span className='bg-primary rounded-badge w-2'></span>
-                  <span className='bg-secondary rounded-badge w-2'></span>
-                  <span className='bg-accent rounded-badge w-2'></span>
-                  <span className='bg-neutral rounded-badge w-2'></span>
+                  <span className='bg-primary rounded-box w-2'></span>
+                  <span className='bg-secondary rounded-box w-2'></span>
+                  <span className='bg-accent rounded-box w-2'></span>
+                  <span className='bg-neutral rounded-box w-2'></span>
                 </span>
               </span>
             </span>
@@ -380,7 +380,7 @@ const AppearanceComponents = () => {
           data-set-theme='valentine'
         >
           <span
-            className='bg-base-100 rounded-btn shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
+            className='bg-base-100 rounded-field shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
             data-theme='valentine'
           >
             <span className='grid grid-cols-5 grid-rows-3'>
@@ -399,10 +399,10 @@ const AppearanceComponents = () => {
                 </svg>
                 <span className='flex-grow text-sm'>valentine</span>
                 <span className='flex h-full shrink-0 flex-wrap gap-1'>
-                  <span className='bg-primary rounded-badge w-2'></span>
-                  <span className='bg-secondary rounded-badge w-2'></span>
-                  <span className='bg-accent rounded-badge w-2'></span>
-                  <span className='bg-neutral rounded-badge w-2'></span>
+                  <span className='bg-primary rounded-box w-2'></span>
+                  <span className='bg-secondary rounded-box w-2'></span>
+                  <span className='bg-accent rounded-box w-2'></span>
+                  <span className='bg-neutral rounded-box w-2'></span>
                 </span>
               </span>
             </span>
@@ -414,7 +414,7 @@ const AppearanceComponents = () => {
           data-set-theme='halloween'
         >
           <span
-            className='bg-base-100 rounded-btn shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
+            className='bg-base-100 rounded-field shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
             data-theme='halloween'
           >
             <span className='grid grid-cols-5 grid-rows-3'>
@@ -433,10 +433,10 @@ const AppearanceComponents = () => {
                 </svg>
                 <span className='flex-grow text-sm'>halloween</span>
                 <span className='flex h-full shrink-0 flex-wrap gap-1'>
-                  <span className='bg-primary rounded-badge w-2'></span>
-                  <span className='bg-secondary rounded-badge w-2'></span>
-                  <span className='bg-accent rounded-badge w-2'></span>
-                  <span className='bg-neutral rounded-badge w-2'></span>
+                  <span className='bg-primary rounded-box w-2'></span>
+                  <span className='bg-secondary rounded-box w-2'></span>
+                  <span className='bg-accent rounded-box w-2'></span>
+                  <span className='bg-neutral rounded-box w-2'></span>
                 </span>
               </span>
             </span>
@@ -448,7 +448,7 @@ const AppearanceComponents = () => {
           data-set-theme='garden'
         >
           <span
-            className='bg-base-100 rounded-btn shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
+            className='bg-base-100 rounded-field shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
             data-theme='garden'
           >
             <span className='grid grid-cols-5 grid-rows-3'>
@@ -467,10 +467,10 @@ const AppearanceComponents = () => {
                 </svg>
                 <span className='flex-grow text-sm'>garden</span>
                 <span className='flex h-full shrink-0 flex-wrap gap-1'>
-                  <span className='bg-primary rounded-badge w-2'></span>
-                  <span className='bg-secondary rounded-badge w-2'></span>
-                  <span className='bg-accent rounded-badge w-2'></span>
-                  <span className='bg-neutral rounded-badge w-2'></span>
+                  <span className='bg-primary rounded-box w-2'></span>
+                  <span className='bg-secondary rounded-box w-2'></span>
+                  <span className='bg-accent rounded-box w-2'></span>
+                  <span className='bg-neutral rounded-box w-2'></span>
                 </span>
               </span>
             </span>
@@ -482,7 +482,7 @@ const AppearanceComponents = () => {
           data-set-theme='forest'
         >
           <span
-            className='bg-base-100 rounded-btn shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
+            className='bg-base-100 rounded-field shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
             data-theme='forest'
           >
             <span className='grid grid-cols-5 grid-rows-3'>
@@ -501,10 +501,10 @@ const AppearanceComponents = () => {
                 </svg>
                 <span className='flex-grow text-sm'>forest</span>
                 <span className='flex h-full shrink-0 flex-wrap gap-1'>
-                  <span className='bg-primary rounded-badge w-2'></span>
-                  <span className='bg-secondary rounded-badge w-2'></span>
-                  <span className='bg-accent rounded-badge w-2'></span>
-                  <span className='bg-neutral rounded-badge w-2'></span>
+                  <span className='bg-primary rounded-box w-2'></span>
+                  <span className='bg-secondary rounded-box w-2'></span>
+                  <span className='bg-accent rounded-box w-2'></span>
+                  <span className='bg-neutral rounded-box w-2'></span>
                 </span>
               </span>
             </span>
@@ -516,7 +516,7 @@ const AppearanceComponents = () => {
           data-set-theme='aqua'
         >
           <span
-            className='bg-base-100 rounded-btn shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
+            className='bg-base-100 rounded-field shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
             data-theme='aqua'
           >
             <span className='grid grid-cols-5 grid-rows-3'>
@@ -535,10 +535,10 @@ const AppearanceComponents = () => {
                 </svg>
                 <span className='flex-grow text-sm'>aqua</span>
                 <span className='flex h-full shrink-0 flex-wrap gap-1'>
-                  <span className='bg-primary rounded-badge w-2'></span>
-                  <span className='bg-secondary rounded-badge w-2'></span>
-                  <span className='bg-accent rounded-badge w-2'></span>
-                  <span className='bg-neutral rounded-badge w-2'></span>
+                  <span className='bg-primary rounded-box w-2'></span>
+                  <span className='bg-secondary rounded-box w-2'></span>
+                  <span className='bg-accent rounded-box w-2'></span>
+                  <span className='bg-neutral rounded-box w-2'></span>
                 </span>
               </span>
             </span>
@@ -550,7 +550,7 @@ const AppearanceComponents = () => {
           data-set-theme='lofi'
         >
           <span
-            className='bg-base-100 rounded-btn shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
+            className='bg-base-100 rounded-field shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
             data-theme='lofi'
           >
             <span className='grid grid-cols-5 grid-rows-3'>
@@ -569,10 +569,10 @@ const AppearanceComponents = () => {
                 </svg>
                 <span className='flex-grow text-sm'>lofi</span>
                 <span className='flex h-full shrink-0 flex-wrap gap-1'>
-                  <span className='bg-primary rounded-badge w-2'></span>
-                  <span className='bg-secondary rounded-badge w-2'></span>
-                  <span className='bg-accent rounded-badge w-2'></span>
-                  <span className='bg-neutral rounded-badge w-2'></span>
+                  <span className='bg-primary rounded-box w-2'></span>
+                  <span className='bg-secondary rounded-box w-2'></span>
+                  <span className='bg-accent rounded-box w-2'></span>
+                  <span className='bg-neutral rounded-box w-2'></span>
                 </span>
               </span>
             </span>
@@ -584,7 +584,7 @@ const AppearanceComponents = () => {
           data-set-theme='pastel'
         >
           <span
-            className='bg-base-100 rounded-btn shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
+            className='bg-base-100 rounded-field shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
             data-theme='pastel'
           >
             <span className='grid grid-cols-5 grid-rows-3'>
@@ -603,10 +603,10 @@ const AppearanceComponents = () => {
                 </svg>
                 <span className='flex-grow text-sm'>pastel</span>
                 <span className='flex h-full shrink-0 flex-wrap gap-1'>
-                  <span className='bg-primary rounded-badge w-2'></span>
-                  <span className='bg-secondary rounded-badge w-2'></span>
-                  <span className='bg-accent rounded-badge w-2'></span>
-                  <span className='bg-neutral rounded-badge w-2'></span>
+                  <span className='bg-primary rounded-box w-2'></span>
+                  <span className='bg-secondary rounded-box w-2'></span>
+                  <span className='bg-accent rounded-box w-2'></span>
+                  <span className='bg-neutral rounded-box w-2'></span>
                 </span>
               </span>
             </span>
@@ -618,7 +618,7 @@ const AppearanceComponents = () => {
           data-set-theme='fantasy'
         >
           <span
-            className='bg-base-100 rounded-btn shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
+            className='bg-base-100 rounded-field shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
             data-theme='fantasy'
           >
             <span className='grid grid-cols-5 grid-rows-3'>
@@ -637,10 +637,10 @@ const AppearanceComponents = () => {
                 </svg>
                 <span className='flex-grow text-sm'>fantasy</span>
                 <span className='flex h-full shrink-0 flex-wrap gap-1'>
-                  <span className='bg-primary rounded-badge w-2'></span>
-                  <span className='bg-secondary rounded-badge w-2'></span>
-                  <span className='bg-accent rounded-badge w-2'></span>
-                  <span className='bg-neutral rounded-badge w-2'></span>
+                  <span className='bg-primary rounded-box w-2'></span>
+                  <span className='bg-secondary rounded-box w-2'></span>
+                  <span className='bg-accent rounded-box w-2'></span>
+                  <span className='bg-neutral rounded-box w-2'></span>
                 </span>
               </span>
             </span>
@@ -652,7 +652,7 @@ const AppearanceComponents = () => {
           data-set-theme='wireframe'
         >
           <span
-            className='bg-base-100 rounded-btn shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
+            className='bg-base-100 rounded-field shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
             data-theme='wireframe'
           >
             <span className='grid grid-cols-5 grid-rows-3'>
@@ -671,10 +671,10 @@ const AppearanceComponents = () => {
                 </svg>
                 <span className='flex-grow text-sm'>wireframe</span>
                 <span className='flex h-full shrink-0 flex-wrap gap-1'>
-                  <span className='bg-primary rounded-badge w-2'></span>
-                  <span className='bg-secondary rounded-badge w-2'></span>
-                  <span className='bg-accent rounded-badge w-2'></span>
-                  <span className='bg-neutral rounded-badge w-2'></span>
+                  <span className='bg-primary rounded-box w-2'></span>
+                  <span className='bg-secondary rounded-box w-2'></span>
+                  <span className='bg-accent rounded-box w-2'></span>
+                  <span className='bg-neutral rounded-box w-2'></span>
                 </span>
               </span>
             </span>
@@ -686,7 +686,7 @@ const AppearanceComponents = () => {
           data-set-theme='black'
         >
           <span
-            className='bg-base-100 rounded-btn shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
+            className='bg-base-100 rounded-field shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
             data-theme='black'
           >
             <span className='grid grid-cols-5 grid-rows-3'>
@@ -705,10 +705,10 @@ const AppearanceComponents = () => {
                 </svg>
                 <span className='flex-grow text-sm'>black</span>
                 <span className='flex h-full shrink-0 flex-wrap gap-1'>
-                  <span className='bg-primary rounded-badge w-2'></span>
-                  <span className='bg-secondary rounded-badge w-2'></span>
-                  <span className='bg-accent rounded-badge w-2'></span>
-                  <span className='bg-neutral rounded-badge w-2'></span>
+                  <span className='bg-primary rounded-box w-2'></span>
+                  <span className='bg-secondary rounded-box w-2'></span>
+                  <span className='bg-accent rounded-box w-2'></span>
+                  <span className='bg-neutral rounded-box w-2'></span>
                 </span>
               </span>
             </span>
@@ -720,7 +720,7 @@ const AppearanceComponents = () => {
           data-set-theme='luxury'
         >
           <span
-            className='bg-base-100 rounded-btn shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
+            className='bg-base-100 rounded-field shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
             data-theme='luxury'
           >
             <span className='grid grid-cols-5 grid-rows-3'>
@@ -739,10 +739,10 @@ const AppearanceComponents = () => {
                 </svg>
                 <span className='flex-grow text-sm'>luxury</span>
                 <span className='flex h-full shrink-0 flex-wrap gap-1'>
-                  <span className='bg-primary rounded-badge w-2'></span>
-                  <span className='bg-secondary rounded-badge w-2'></span>
-                  <span className='bg-accent rounded-badge w-2'></span>
-                  <span className='bg-neutral rounded-badge w-2'></span>
+                  <span className='bg-primary rounded-box w-2'></span>
+                  <span className='bg-secondary rounded-box w-2'></span>
+                  <span className='bg-accent rounded-box w-2'></span>
+                  <span className='bg-neutral rounded-box w-2'></span>
                 </span>
               </span>
             </span>
@@ -754,7 +754,7 @@ const AppearanceComponents = () => {
           data-set-theme='dracula'
         >
           <span
-            className='bg-base-100 rounded-btn shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
+            className='bg-base-100 rounded-field shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
             data-theme='dracula'
           >
             <span className='grid grid-cols-5 grid-rows-3'>
@@ -773,10 +773,10 @@ const AppearanceComponents = () => {
                 </svg>
                 <span className='flex-grow text-sm'>dracula</span>
                 <span className='flex h-full shrink-0 flex-wrap gap-1'>
-                  <span className='bg-primary rounded-badge w-2'></span>
-                  <span className='bg-secondary rounded-badge w-2'></span>
-                  <span className='bg-accent rounded-badge w-2'></span>
-                  <span className='bg-neutral rounded-badge w-2'></span>
+                  <span className='bg-primary rounded-box w-2'></span>
+                  <span className='bg-secondary rounded-box w-2'></span>
+                  <span className='bg-accent rounded-box w-2'></span>
+                  <span className='bg-neutral rounded-box w-2'></span>
                 </span>
               </span>
             </span>
@@ -788,7 +788,7 @@ const AppearanceComponents = () => {
           data-set-theme='cmyk'
         >
           <span
-            className='bg-base-100 rounded-btn shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
+            className='bg-base-100 rounded-field shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
             data-theme='cmyk'
           >
             <span className='grid grid-cols-5 grid-rows-3'>
@@ -807,10 +807,10 @@ const AppearanceComponents = () => {
                 </svg>
                 <span className='flex-grow text-sm'>cmyk</span>
                 <span className='flex h-full shrink-0 flex-wrap gap-1'>
-                  <span className='bg-primary rounded-badge w-2'></span>
-                  <span className='bg-secondary rounded-badge w-2'></span>
-                  <span className='bg-accent rounded-badge w-2'></span>
-                  <span className='bg-neutral rounded-badge w-2'></span>
+                  <span className='bg-primary rounded-box w-2'></span>
+                  <span className='bg-secondary rounded-box w-2'></span>
+                  <span className='bg-accent rounded-box w-2'></span>
+                  <span className='bg-neutral rounded-box w-2'></span>
                 </span>
               </span>
             </span>
@@ -822,7 +822,7 @@ const AppearanceComponents = () => {
           data-set-theme='autumn'
         >
           <span
-            className='bg-base-100 rounded-btn shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
+            className='bg-base-100 rounded-field shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
             data-theme='autumn'
           >
             <span className='grid grid-cols-5 grid-rows-3'>
@@ -841,10 +841,10 @@ const AppearanceComponents = () => {
                 </svg>
                 <span className='flex-grow text-sm'>autumn</span>
                 <span className='flex h-full shrink-0 flex-wrap gap-1'>
-                  <span className='bg-primary rounded-badge w-2'></span>
-                  <span className='bg-secondary rounded-badge w-2'></span>
-                  <span className='bg-accent rounded-badge w-2'></span>
-                  <span className='bg-neutral rounded-badge w-2'></span>
+                  <span className='bg-primary rounded-box w-2'></span>
+                  <span className='bg-secondary rounded-box w-2'></span>
+                  <span className='bg-accent rounded-box w-2'></span>
+                  <span className='bg-neutral rounded-box w-2'></span>
                 </span>
               </span>
             </span>
@@ -856,7 +856,7 @@ const AppearanceComponents = () => {
           data-set-theme='business'
         >
           <span
-            className='bg-base-100 rounded-btn shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
+            className='bg-base-100 rounded-field shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
             data-theme='business'
           >
             <span className='grid grid-cols-5 grid-rows-3'>
@@ -875,10 +875,10 @@ const AppearanceComponents = () => {
                 </svg>
                 <span className='flex-grow text-sm'>business</span>
                 <span className='flex h-full shrink-0 flex-wrap gap-1'>
-                  <span className='bg-primary rounded-badge w-2'></span>
-                  <span className='bg-secondary rounded-badge w-2'></span>
-                  <span className='bg-accent rounded-badge w-2'></span>
-                  <span className='bg-neutral rounded-badge w-2'></span>
+                  <span className='bg-primary rounded-box w-2'></span>
+                  <span className='bg-secondary rounded-box w-2'></span>
+                  <span className='bg-accent rounded-box w-2'></span>
+                  <span className='bg-neutral rounded-box w-2'></span>
                 </span>
               </span>
             </span>
@@ -890,7 +890,7 @@ const AppearanceComponents = () => {
           data-set-theme='acid'
         >
           <span
-            className='bg-base-100 rounded-btn shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
+            className='bg-base-100 rounded-field shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
             data-theme='acid'
           >
             <span className='grid grid-cols-5 grid-rows-3'>
@@ -909,10 +909,10 @@ const AppearanceComponents = () => {
                 </svg>
                 <span className='flex-grow text-sm'>acid</span>
                 <span className='flex h-full shrink-0 flex-wrap gap-1'>
-                  <span className='bg-primary rounded-badge w-2'></span>
-                  <span className='bg-secondary rounded-badge w-2'></span>
-                  <span className='bg-accent rounded-badge w-2'></span>
-                  <span className='bg-neutral rounded-badge w-2'></span>
+                  <span className='bg-primary rounded-box w-2'></span>
+                  <span className='bg-secondary rounded-box w-2'></span>
+                  <span className='bg-accent rounded-box w-2'></span>
+                  <span className='bg-neutral rounded-box w-2'></span>
                 </span>
               </span>
             </span>
@@ -924,7 +924,7 @@ const AppearanceComponents = () => {
           data-set-theme='lemonade'
         >
           <span
-            className='bg-base-100 rounded-btn shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
+            className='bg-base-100 rounded-field shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
             data-theme='lemonade'
           >
             <span className='grid grid-cols-5 grid-rows-3'>
@@ -943,10 +943,10 @@ const AppearanceComponents = () => {
                 </svg>
                 <span className='flex-grow text-sm'>lemonade</span>
                 <span className='flex h-full shrink-0 flex-wrap gap-1'>
-                  <span className='bg-primary rounded-badge w-2'></span>
-                  <span className='bg-secondary rounded-badge w-2'></span>
-                  <span className='bg-accent rounded-badge w-2'></span>
-                  <span className='bg-neutral rounded-badge w-2'></span>
+                  <span className='bg-primary rounded-box w-2'></span>
+                  <span className='bg-secondary rounded-box w-2'></span>
+                  <span className='bg-accent rounded-box w-2'></span>
+                  <span className='bg-neutral rounded-box w-2'></span>
                 </span>
               </span>
             </span>
@@ -958,7 +958,7 @@ const AppearanceComponents = () => {
           data-set-theme='night'
         >
           <span
-            className='bg-base-100 rounded-btn shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
+            className='bg-base-100 rounded-field shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
             data-theme='night'
           >
             <span className='grid grid-cols-5 grid-rows-3'>
@@ -977,10 +977,10 @@ const AppearanceComponents = () => {
                 </svg>
                 <span className='flex-grow text-sm'>night</span>
                 <span className='flex h-full shrink-0 flex-wrap gap-1'>
-                  <span className='bg-primary rounded-badge w-2'></span>
-                  <span className='bg-secondary rounded-badge w-2'></span>
-                  <span className='bg-accent rounded-badge w-2'></span>
-                  <span className='bg-neutral rounded-badge w-2'></span>
+                  <span className='bg-primary rounded-box w-2'></span>
+                  <span className='bg-secondary rounded-box w-2'></span>
+                  <span className='bg-accent rounded-box w-2'></span>
+                  <span className='bg-neutral rounded-box w-2'></span>
                 </span>
               </span>
             </span>
@@ -992,7 +992,7 @@ const AppearanceComponents = () => {
           data-set-theme='coffee'
         >
           <span
-            className='bg-base-100 rounded-btn shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
+            className='bg-base-100 rounded-field shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
             data-theme='coffee'
           >
             <span className='grid grid-cols-5 grid-rows-3'>
@@ -1011,10 +1011,10 @@ const AppearanceComponents = () => {
                 </svg>
                 <span className='flex-grow text-sm'>coffee</span>
                 <span className='flex h-full shrink-0 flex-wrap gap-1'>
-                  <span className='bg-primary rounded-badge w-2'></span>
-                  <span className='bg-secondary rounded-badge w-2'></span>
-                  <span className='bg-accent rounded-badge w-2'></span>
-                  <span className='bg-neutral rounded-badge w-2'></span>
+                  <span className='bg-primary rounded-box w-2'></span>
+                  <span className='bg-secondary rounded-box w-2'></span>
+                  <span className='bg-accent rounded-box w-2'></span>
+                  <span className='bg-neutral rounded-box w-2'></span>
                 </span>
               </span>
             </span>
@@ -1026,7 +1026,7 @@ const AppearanceComponents = () => {
           data-set-theme='winter'
         >
           <span
-            className='bg-base-100 rounded-btn shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
+            className='bg-base-100 rounded-field shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
             data-theme='winter'
           >
             <span className='grid grid-cols-5 grid-rows-3'>
@@ -1045,10 +1045,10 @@ const AppearanceComponents = () => {
                 </svg>
                 <span className='flex-grow text-sm'>winter</span>
                 <span className='flex h-full shrink-0 flex-wrap gap-1'>
-                  <span className='bg-primary rounded-badge w-2'></span>
-                  <span className='bg-secondary rounded-badge w-2'></span>
-                  <span className='bg-accent rounded-badge w-2'></span>
-                  <span className='bg-neutral rounded-badge w-2'></span>
+                  <span className='bg-primary rounded-box w-2'></span>
+                  <span className='bg-secondary rounded-box w-2'></span>
+                  <span className='bg-accent rounded-box w-2'></span>
+                  <span className='bg-neutral rounded-box w-2'></span>
                 </span>
               </span>
             </span>
@@ -1060,7 +1060,7 @@ const AppearanceComponents = () => {
           data-set-theme='dim'
         >
           <span
-            className='bg-base-100 rounded-btn shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
+            className='bg-base-100 rounded-field shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
             data-theme='dim'
           >
             <span className='grid grid-cols-5 grid-rows-3'>
@@ -1079,10 +1079,10 @@ const AppearanceComponents = () => {
                 </svg>
                 <span className='flex-grow text-sm'>dim</span>
                 <span className='flex h-full shrink-0 flex-wrap gap-1'>
-                  <span className='bg-primary rounded-badge w-2'></span>
-                  <span className='bg-secondary rounded-badge w-2'></span>
-                  <span className='bg-accent rounded-badge w-2'></span>
-                  <span className='bg-neutral rounded-badge w-2'></span>
+                  <span className='bg-primary rounded-box w-2'></span>
+                  <span className='bg-secondary rounded-box w-2'></span>
+                  <span className='bg-accent rounded-box w-2'></span>
+                  <span className='bg-neutral rounded-box w-2'></span>
                 </span>
               </span>
             </span>
@@ -1094,7 +1094,7 @@ const AppearanceComponents = () => {
           data-set-theme='nord'
         >
           <span
-            className='bg-base-100 rounded-btn shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
+            className='bg-base-100 rounded-field shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
             data-theme='nord'
           >
             <span className='grid grid-cols-5 grid-rows-3'>
@@ -1113,10 +1113,10 @@ const AppearanceComponents = () => {
                 </svg>
                 <span className='flex-grow text-sm'>nord</span>
                 <span className='flex h-full shrink-0 flex-wrap gap-1'>
-                  <span className='bg-primary rounded-badge w-2'></span>
-                  <span className='bg-secondary rounded-badge w-2'></span>
-                  <span className='bg-accent rounded-badge w-2'></span>
-                  <span className='bg-neutral rounded-badge w-2'></span>
+                  <span className='bg-primary rounded-box w-2'></span>
+                  <span className='bg-secondary rounded-box w-2'></span>
+                  <span className='bg-accent rounded-box w-2'></span>
+                  <span className='bg-neutral rounded-box w-2'></span>
                 </span>
               </span>
             </span>
@@ -1128,7 +1128,7 @@ const AppearanceComponents = () => {
           data-set-theme='sunset'
         >
           <span
-            className='bg-base-100 rounded-btn shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
+            className='bg-base-100 rounded-field shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
             data-theme='sunset'
           >
             <span className='grid grid-cols-5 grid-rows-3'>
@@ -1147,10 +1147,112 @@ const AppearanceComponents = () => {
                 </svg>
                 <span className='flex-grow text-sm'>sunset</span>
                 <span className='flex h-full shrink-0 flex-wrap gap-1'>
-                  <span className='bg-primary rounded-badge w-2'></span>
-                  <span className='bg-secondary rounded-badge w-2'></span>
-                  <span className='bg-accent rounded-badge w-2'></span>
-                  <span className='bg-neutral rounded-badge w-2'></span>
+                  <span className='bg-primary rounded-box w-2'></span>
+                  <span className='bg-secondary rounded-box w-2'></span>
+                  <span className='bg-accent rounded-box w-2'></span>
+                  <span className='bg-neutral rounded-box w-2'></span>
+                </span>
+              </span>
+            </span>
+          </span>
+        </button>
+        <button
+          onClick={() => changeTheme('caramellatte')}
+          className='outline-base-content text-start outline-offset-4'
+          data-set-theme='caramellatte'
+        >
+          <span
+            className='bg-base-100 rounded-field shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
+            data-theme='caramellatte'
+          >
+            <span className='grid grid-cols-5 grid-rows-3'>
+              <span className='col-span-5 row-span-3 row-start-1 flex items-center gap-2 px-4 py-3'>
+                <svg
+                  xmlns='http://www.w3.org/2000/svg'
+                  width='16'
+                  height='16'
+                  viewBox='0 0 24 24'
+                  fill='currentColor'
+                  className={`${
+                    themeMode === 'caramellatte' ? 'visible' : 'invisible'
+                  } h-3 w-3 shrink-0`}
+                >
+                  <path d='M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z'></path>
+                </svg>
+                <span className='flex-grow text-sm'>caramellatte</span>
+                <span className='flex h-full shrink-0 flex-wrap gap-1'>
+                  <span className='bg-primary rounded-box w-2'></span>
+                  <span className='bg-secondary rounded-box w-2'></span>
+                  <span className='bg-accent rounded-box w-2'></span>
+                  <span className='bg-neutral rounded-box w-2'></span>
+                </span>
+              </span>
+            </span>
+          </span>
+        </button>
+        <button
+          onClick={() => changeTheme('abyss')}
+          className='outline-base-content text-start outline-offset-4'
+          data-set-theme='abyss'
+        >
+          <span
+            className='bg-base-100 rounded-field shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
+            data-theme='abyss'
+          >
+            <span className='grid grid-cols-5 grid-rows-3'>
+              <span className='col-span-5 row-span-3 row-start-1 flex items-center gap-2 px-4 py-3'>
+                <svg
+                  xmlns='http://www.w3.org/2000/svg'
+                  width='16'
+                  height='16'
+                  viewBox='0 0 24 24'
+                  fill='currentColor'
+                  className={`${
+                    themeMode === 'abyss' ? 'visible' : 'invisible'
+                  } h-3 w-3 shrink-0`}
+                >
+                  <path d='M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z'></path>
+                </svg>
+                <span className='flex-grow text-sm'>abyss</span>
+                <span className='flex h-full shrink-0 flex-wrap gap-1'>
+                  <span className='bg-primary rounded-box w-2'></span>
+                  <span className='bg-secondary rounded-box w-2'></span>
+                  <span className='bg-accent rounded-box w-2'></span>
+                  <span className='bg-neutral rounded-box w-2'></span>
+                </span>
+              </span>
+            </span>
+          </span>
+        </button>
+        <button
+          onClick={() => changeTheme('silk')}
+          className='outline-base-content text-start outline-offset-4'
+          data-set-theme='silk'
+        >
+          <span
+            className='bg-base-100 rounded-field shadow-md text-base-content  w-full h-[70px] flex items-center cursor-pointer font-sans'
+            data-theme='silk'
+          >
+            <span className='grid grid-cols-5 grid-rows-3'>
+              <span className='col-span-5 row-span-3 row-start-1 flex items-center gap-2 px-4 py-3'>
+                <svg
+                  xmlns='http://www.w3.org/2000/svg'
+                  width='16'
+                  height='16'
+                  viewBox='0 0 24 24'
+                  fill='currentColor'
+                  className={`${
+                    themeMode === 'silk' ? 'visible' : 'invisible'
+                  } h-3 w-3 shrink-0`}
+                >
+                  <path d='M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z'></path>
+                </svg>
+                <span className='flex-grow text-sm'>silk</span>
+                <span className='flex h-full shrink-0 flex-wrap gap-1'>
+                  <span className='bg-primary rounded-box w-2'></span>
+                  <span className='bg-secondary rounded-box w-2'></span>
+                  <span className='bg-accent rounded-box w-2'></span>
+                  <span className='bg-neutral rounded-box w-2'></span>
                 </span>
               </span>
             </span>

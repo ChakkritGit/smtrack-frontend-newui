@@ -67,7 +67,7 @@ const CardStatus = (props: PropsType) => {
 
   return (
     <>
-      <div className='bg-base-100 rounded-btn w-full h-[155px] overflow-hidden'>
+      <div className='bg-base-100 rounded-field w-full h-[155px] overflow-hidden'>
         <Swiper
           key={'tempAndHumi'}
           slidesPerView={'auto'}
@@ -108,7 +108,7 @@ const CardStatus = (props: PropsType) => {
                 <SwiperSlide className='p-3 h-full bg-base-100' key={item.id}>
                   <div className='flex items-center gap-2 h-[30%]'>
                     <div
-                      className={`flex items-center justify-center rounded-btn bg-base-300 w-[32px] h-[32px] ${
+                      className={`flex items-center justify-center rounded-field bg-base-300 w-[32px] h-[32px] ${
                         probeLimitIcon(
                           item.tempMin,
                           item.tempMax,
@@ -135,7 +135,7 @@ const CardStatus = (props: PropsType) => {
                       )}
                     </div>
                     <span>{t('dashProbe')}</span>
-                    <span className='badge badge-primary bg-opacity-15 text-primary font-bold border-2'>
+                    <span className='badge badge-soft badge-primary bg-opacity-15 text-primary font-bold border-2'>
                       P{item.channel}
                     </span>
                   </div>
@@ -177,11 +177,11 @@ const CardStatus = (props: PropsType) => {
           ) : (
             <SwiperSlide className='p-3 h-full bg-base-100'>
               <div className='flex items-center gap-2 h-[30%]'>
-                <div className='flex items-center justify-center rounded-btn bg-base-300 w-[32px] h-[32px]'>
+                <div className='flex items-center justify-center rounded-field bg-base-300 w-[32px] h-[32px]'>
                   <RiTempColdLine size={20} />
                 </div>
                 <span>{t('dashProbe')}</span>
-                <span className='badge badge-primary bg-opacity-15 text-primary font-bold border-2'>
+                <span className='badge badge-soft badge-primary bg-opacity-15 text-primary font-bold border-2'>
                   P—
                 </span>
               </div>
@@ -192,10 +192,10 @@ const CardStatus = (props: PropsType) => {
           )}
         </Swiper>
       </div>
-      <div className='flex flex-col gap-2 p-3 bg-base-100 rounded-btn w-full h-[155px]'>
+      <div className='flex flex-col gap-2 p-3 bg-base-100 rounded-field w-full h-[155px]'>
         <div className='flex items-center gap-2'>
           <div
-            className={`flex items-center justify-center rounded-btn bg-base-300 w-[32px] h-[32px] ${
+            className={`flex items-center justify-center rounded-field bg-base-300 w-[32px] h-[32px] ${
               !deviceData?.online
                 ? 'text-base-content bg-opacity-80 bg-red-500'
                 : ''
@@ -217,10 +217,10 @@ const CardStatus = (props: PropsType) => {
           {!deviceData?.online ? t('stateDisconnect') : t('stateConnect')}
         </div>
       </div>
-      <div className='flex flex-col gap-2 p-3 bg-base-100 rounded-btn w-full h-[155px]'>
+      <div className='flex flex-col gap-2 p-3 bg-base-100 rounded-field w-full h-[155px]'>
         <div className='flex items-center gap-2'>
           <div
-            className={`flex items-center justify-center rounded-btn bg-base-300 w-[32px] h-[32px] ${
+            className={`flex items-center justify-center rounded-field bg-base-300 w-[32px] h-[32px] ${
               doorOpen(deviceData)
                 ? 'text-base-content bg-opacity-80 bg-red-500'
                 : ''
@@ -246,10 +246,10 @@ const CardStatus = (props: PropsType) => {
             : '—'}
         </div>
       </div>
-      <div className='flex flex-col gap-2 p-3 bg-base-100 rounded-btn w-full h-[155px]'>
+      <div className='flex flex-col gap-2 p-3 bg-base-100 rounded-field w-full h-[155px]'>
         <div className='flex items-center gap-2'>
           <div
-            className={`flex items-center justify-center rounded-btn bg-base-300 w-[32px] h-[32px] ${
+            className={`flex items-center justify-center rounded-field bg-base-300 w-[32px] h-[32px] ${
               !unPlug(deviceData)
                 ? 'text-base-content bg-opacity-80 bg-red-500'
                 : ''
@@ -271,10 +271,10 @@ const CardStatus = (props: PropsType) => {
           {!unPlug(deviceData) ? t('stateProblem') : t('stateNormal') ?? '—'}
         </div>
       </div>
-      <div className='flex flex-col gap-2 p-3 bg-base-100 rounded-btn w-full h-[155px]'>
+      <div className='flex flex-col gap-2 p-3 bg-base-100 rounded-field w-full h-[155px]'>
         <div className='flex items-center gap-2'>
           <div
-            className={`flex items-center justify-center rounded-btn bg-base-300 w-[32px] h-[32px] ${
+            className={`flex items-center justify-center rounded-field bg-base-300 w-[32px] h-[32px] ${
               deviceData?.log
                 ? deviceData?.log[0]?.battery <= 20
                   ? 'text-yellow-500 bg-opacity-80 bg-yellow-300'
@@ -304,7 +304,7 @@ const CardStatus = (props: PropsType) => {
             : '—'}
         </div>
       </div>
-      <div className='bg-base-100 rounded-btn w-full h-[155px] overflow-hidden'>
+      <div className='bg-base-100 rounded-field w-full h-[155px] overflow-hidden'>
         <Swiper
           key={'tempOfDaya'}
           slidesPerView={'auto'}
@@ -345,7 +345,7 @@ const CardStatus = (props: PropsType) => {
                 <SwiperSlide className='p-3 h-full bg-base-100' key={item.id}>
                   <div className='flex items-center gap-2 h-[30%]'>
                     <div
-                      className={`flex items-center justify-center rounded-btn bg-base-300 w-[32px] h-[32px] ${
+                      className={`flex items-center justify-center rounded-field bg-base-300 w-[32px] h-[32px] ${
                         probeLimitIcon(
                           item.tempMin,
                           item.tempMax,
@@ -369,7 +369,7 @@ const CardStatus = (props: PropsType) => {
                         {t('dashTempofDay')}
                       </span>
                     </label>
-                    <span className='badge badge-primary bg-opacity-15 text-primary font-bold border-2'>
+                    <span className='badge badge-soft badge-primary bg-opacity-15 text-primary font-bold border-2'>
                       P{item.channel}
                     </span>
                   </div>
@@ -399,7 +399,7 @@ const CardStatus = (props: PropsType) => {
           ) : (
             <SwiperSlide className='p-3 h-full bg-base-100'>
               <div className='flex items-center gap-2 h-[30%]'>
-                <div className='flex items-center justify-center rounded-btn bg-base-300 w-[32px] h-[32px]'>
+                <div className='flex items-center justify-center rounded-field bg-base-300 w-[32px] h-[32px]'>
                   <HiOutlineArrowsUpDown size={20} />
                 </div>
                 <label
@@ -411,7 +411,7 @@ const CardStatus = (props: PropsType) => {
                     {t('dashTempofDay')}
                   </span>
                 </label>
-                <span className='badge badge-primary bg-opacity-15 text-primary font-bold border-2'>
+                <span className='badge badge-soft badge-primary bg-opacity-15 text-primary font-bold border-2'>
                   P—
                 </span>
               </div>
@@ -422,10 +422,10 @@ const CardStatus = (props: PropsType) => {
           )}
         </Swiper>
       </div>
-      <div className='flex flex-col gap-2 p-3 bg-base-100 rounded-btn w-full h-[155px]'>
+      <div className='flex flex-col gap-2 p-3 bg-base-100 rounded-field w-full h-[155px]'>
         <div className='flex items-center gap-2'>
           <div
-            className={`flex items-center justify-center rounded-btn bg-base-300 w-[32px] h-[32px] ${
+            className={`flex items-center justify-center rounded-field bg-base-300 w-[32px] h-[32px] ${
               !sdCard(deviceData)
                 ? 'text-base-content bg-opacity-80 bg-red-500'
                 : ''
@@ -447,9 +447,9 @@ const CardStatus = (props: PropsType) => {
           {!sdCard(deviceData) ? t('stateProblem') : t('stateNormal') ?? '—'}
         </div>
       </div>
-      <div className='flex flex-col gap-2 p-3 bg-base-100 rounded-btn w-full h-[155px]'>
+      <div className='flex flex-col gap-2 p-3 bg-base-100 rounded-field w-full h-[155px]'>
         <div className='flex items-center gap-2'>
-          <div className='flex items-center justify-center rounded-btn bg-base-300 w-[32px] h-[32px]'>
+          <div className='flex items-center justify-center rounded-field bg-base-300 w-[32px] h-[32px]'>
             <RiCollageLine size={20} />
           </div>
           <span>{t('dashProbeandDoor')}</span>
@@ -461,15 +461,15 @@ const CardStatus = (props: PropsType) => {
                   .length ?? '—'
               : '—'}
           </span>
-          <div className='w-[3px] h-7 py-2 bg-primary rounded-btn'></div>
+          <div className='w-[3px] h-7 py-2 bg-primary rounded-field'></div>
           <span>
             {deviceData?.probe?.find(item => item.doorQty)?.doorQty ?? '—'}
           </span>
         </div>
       </div>
-      <div className='flex flex-col gap-2 p-3 bg-base-100 rounded-btn w-full h-[155px]'>
+      <div className='flex flex-col gap-2 p-3 bg-base-100 rounded-field w-full h-[155px]'>
         <div className='flex items-center gap-2'>
-          <div className='flex items-center justify-center rounded-btn bg-base-300 w-[32px] h-[32px]'>
+          <div className='flex items-center justify-center rounded-field bg-base-300 w-[32px] h-[32px]'>
             <RiShieldCheckLine size={20} />
           </div>
           <span>{t('dashWarranty')}</span>
@@ -504,9 +504,9 @@ const CardStatus = (props: PropsType) => {
           )}
         </div>
       </div>
-      <div className='flex flex-col gap-2 p-3 bg-base-100 rounded-btn w-full h-[155px]'>
+      <div className='flex flex-col gap-2 p-3 bg-base-100 rounded-field w-full h-[155px]'>
         <div className='flex items-center gap-2'>
-          <div className='flex items-center justify-center rounded-btn bg-base-300 w-[32px] h-[32px]'>
+          <div className='flex items-center justify-center rounded-field bg-base-300 w-[32px] h-[32px]'>
             <RiFolderSettingsLine size={20} />
           </div>
           <span>{t('dashRepair')}</span>
