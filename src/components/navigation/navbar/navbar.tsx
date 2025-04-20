@@ -217,7 +217,7 @@ const Navbar = () => {
 
     return (
       <div
-        className={`${!transitionDisabled ? 'search-anim' : ''} absolute min-w-[280px] w-[280px] max-w-[300px] md:min-w-[450px] min-h-[50px] md:max-w-[500px]
+        className={`${transitionDisabled ? 'search-anim' : ''} absolute min-w-[280px] w-[280px] max-w-[300px] md:min-w-[450px] min-h-[50px] md:max-w-[500px]
       max-h-[400px] bg-base-100 backdrop-blur transition-shadow shadow-2xl duration-300 ease-linear
       border-base-content/15 border-[1px] py-3 pl-4 pr-1 top-[60px] overflow-y-scroll
       rounded-box`}

@@ -272,7 +272,7 @@ const Routes = () => {
   }, [blurDisabled])
 
   useLayoutEffect(() => {
-    if (!transitionDisabled) return
+    if (transitionDisabled) return
 
     const style = document.createElement('style')
     style.setAttribute('data-transition-remover', 'true')

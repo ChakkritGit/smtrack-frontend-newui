@@ -62,7 +62,7 @@ const Sidebar = () => {
         className='drawer-overlay'
       ></label>
       <div
-        className={`menu bg-base-100 text-base-content min-h-full flex flex-col !items-center justify-between ${!transitionDisabled ? '!transition-all !ease-linear !duration-300' : ''} ${
+        className={`menu bg-base-100 text-base-content min-h-full flex flex-col !items-center justify-between ${transitionDisabled ? '!transition-all !ease-linear !duration-300' : ''} ${
           isExpand ? 'w-[100px]' : 'w-[235px]'
         }`}
       >
@@ -263,7 +263,7 @@ const Sidebar = () => {
                 isExpand ? 'text-center' : 'text-right'
               } hover:underline cursor-pointer`}
             >
-              Version 2.0.0b14b
+              Version 2.0.0b14c
             </Link>
           </div>
         </div>

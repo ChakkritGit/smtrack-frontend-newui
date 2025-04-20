@@ -47,7 +47,7 @@ const initialState: UtilsState = {
   switchingMode: false,
   grayscaleMode: localStorage.getItem('grayscaleMode') === 'true' ? true : false,
   blurDisabled: localStorage.getItem('blurDisabled') === 'false' ? false : true,
-  transitionDisabled: localStorage.getItem('transitionDisabled') === 'true' ? true : false,
+  transitionDisabled: localStorage.getItem('transitionDisabled') === 'false' ? false : true,
   soundMode: cookies.get('soundMode') ?? false
 }
 
