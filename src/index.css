@@ -60,7 +60,7 @@
 }
 
 .react-select__control {
-  @apply !border-base-content/20 !bg-base-100 !rounded-field h-[40px];
+  @apply !border-base-content/20 !bg-base-100 !rounded-field h-[40px] !border-2;
 }
 
 .react-select__indicator, .react-select__dropdown-indicator {
@@ -105,7 +105,7 @@
 }
 
 .react-select__option--is-selected {
-  @apply !bg-neutral !text-primary-content;
+  @apply !bg-neutral !text-neutral-content;
 }
 
 .custom-role-select {

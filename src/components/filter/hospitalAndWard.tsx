@@ -155,7 +155,7 @@ const HospitalAndWard = () => {
             )}
             onChange={e => getWard(e?.value)}
             autoFocus={false}
-            className='react-select-container custom-ward-menu-select z-30 min-w-[150px]'
+            className='react-select-container custom-ward-menu-select z-40 min-w-[150px]'
             classNamePrefix='react-select'
           />
           <RiCloseLine
