@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../../redux/reducers/rootReducer'
 import {
+  setAmbientDisabled,
   setBlurDisabled,
   setGrayscaleMode,
   setTheme,
@@ -11,7 +12,7 @@ import {
 const AppearanceComponents = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
-  const { themeMode, grayscaleMode, blurDisabled, transitionDisabled } = useSelector(
+  const { themeMode, grayscaleMode, blurDisabled, transitionDisabled, ambientDisabled } = useSelector(
     (state: RootState) => state.utils
   )
 
@@ -1300,6 +1301,20 @@ const AppearanceComponents = () => {
               onChange={() => {
                 dispatch(setGrayscaleMode())
                 localStorage.setItem('grayscaleMode', String(!grayscaleMode))
+              }}
+            />
+          </div>
+          <div className=' flex items-center justify-between mt-3'>
+            <span>{t('ambientMode')}</span>
+            <input
+              type='checkbox'
+              className='toggle'
+              name='filterColor'
+              id='filterColor'
+              checked={ambientDisabled}
+              onChange={() => {
+                dispatch(setAmbientDisabled())
+                localStorage.setItem('ambientDisabled', String(!ambientDisabled))
               }}
             />
           </div>

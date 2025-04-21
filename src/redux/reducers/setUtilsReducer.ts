@@ -24,7 +24,8 @@ import {
   SWITCHING_MODE,
   GRAYSCALE_MODE,
   BLUR_DISABLED,
-  TRANSITION_DISABLED
+  TRANSITION_DISABLED,
+  AMBIENT_DISABLED
 } from '../types/utilsTypes'
 
 const initialState: UtilsState = {
@@ -48,6 +49,7 @@ const initialState: UtilsState = {
   grayscaleMode: localStorage.getItem('grayscaleMode') === 'true' ? true : false,
   blurDisabled: localStorage.getItem('blurDisabled') === 'false' ? false : true,
   transitionDisabled: localStorage.getItem('transitionDisabled') === 'false' ? false : true,
+  ambientDisabled: localStorage.getItem('ambientDisabled') === 'true' ? true : false,
   soundMode: cookies.get('soundMode') ?? false
 }
 
@@ -98,6 +100,8 @@ const utilsReducer = (
       return { ...state, blurDisabled: !state.blurDisabled }
     case TRANSITION_DISABLED:
       return { ...state, transitionDisabled: !state.transitionDisabled }
+    case AMBIENT_DISABLED:
+      return { ...state, ambientDisabled: !state.ambientDisabled }
     case RESET_UTILS:
       return initialState
     default:

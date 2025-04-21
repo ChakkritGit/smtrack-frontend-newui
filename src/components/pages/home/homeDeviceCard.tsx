@@ -35,7 +35,7 @@ interface DeviceCardProps {
   perPage: number
   totalRows: number
   currentPage: number
-  blurDisabled: boolean
+  ambientDisabled: boolean
 }
 
 const HomeDeviceCard = (props: DeviceCardProps) => {
@@ -51,7 +51,7 @@ const HomeDeviceCard = (props: DeviceCardProps) => {
     perPage,
     totalRows,
     currentPage,
-    blurDisabled
+    ambientDisabled
   } = props
   const [colors, setColors] = useState<string[]>([])
 
@@ -89,14 +89,14 @@ const HomeDeviceCard = (props: DeviceCardProps) => {
   }
 
   useEffect(() => {
-    if (!blurDisabled) return
+    if (!ambientDisabled) return
 
     if (devicesFiltered.length > 0) {
       devicesFiltered.forEach((item, index) => {
         getColor(item.positionPic ?? Default, index, setColors)
       })
     }
-  }, [devicesFiltered, blurDisabled])
+  }, [devicesFiltered, ambientDisabled])
 
   const UserCard = useMemo(() => {
     if (loading)
@@ -133,7 +133,7 @@ const HomeDeviceCard = (props: DeviceCardProps) => {
                         />
                       </div>
                     </div>
-                    {blurDisabled && <div
+                    {ambientDisabled && <div
                       className='blur-[128px] w-28 h-28 absolute opacity-75 z-10 duration-700 ease-linear'
                       style={{ backgroundColor: bgColor }}
                     ></div>}

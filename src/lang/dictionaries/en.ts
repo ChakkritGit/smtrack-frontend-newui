@@ -471,6 +471,7 @@ export default {
     transition: 'Transition',
     grayscale: 'Grayscale',
     blur: 'Blur Effect',
+    ambientMode: 'Ambient Light',
 
     // connect
     ipAddress: 'IP',

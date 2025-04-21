@@ -47,7 +47,7 @@ const Home = () => {
     wardId,
     tokenDecode,
     socketData,
-    blurDisabled,
+    ambientDisabled,
     shouldFetch
   } = useSelector((state: RootState) => state.utils)
   const {
@@ -444,7 +444,7 @@ const Home = () => {
           currentPage={currentPage}
           perPage={perPage}
           loading={loading}
-          blurDisabled={blurDisabled}
+          ambientDisabled={ambientDisabled}
           handlePerRowsChange={handlePerRowsChange}
           handlePageChange={handlePageChange}
           openAdjustModal={openAdjustModal}

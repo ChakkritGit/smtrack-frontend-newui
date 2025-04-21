@@ -48,7 +48,7 @@ import AddHopitalSelect from '../../components/selects/addHopitalSelect'
 
 const Users = () => {
   const dispatch = useDispatch()
-  const { globalSearch, wardId, tokenDecode, tmsMode, blurDisabled } = useSelector(
+  const { globalSearch, wardId, tokenDecode, tmsMode, ambientDisabled } = useSelector(
     (state: RootState) => state.utils
   )
   const { t } = useTranslation()
@@ -483,14 +483,14 @@ const Users = () => {
   }, [users, globalSearch, wardId, tmsMode, userConnect, userInactive])
 
   useEffect(() => {
-    if (!blurDisabled) return
+    if (!ambientDisabled) return
 
     if (usersFilter.length > 0) {
       usersFilter.forEach((item, index) => {
         getColor(item.pic ?? defaultPic, index, setColors)
       })
     }
-  }, [usersFilter, blurDisabled])
+  }, [usersFilter, ambientDisabled])
 
   const UserCard = useMemo(() => {
     if (isLoading)
@@ -598,7 +598,7 @@ const Users = () => {
                           />
                         </div>
                       </div>
-                      {blurDisabled && <div
+                      {ambientDisabled && <div
                         className='blur-[128px] w-24 h-24 absolute opacity-75 z-10 duration-700 ease-linear'
                         style={{ backgroundColor: bgColor }}
                       ></div>}

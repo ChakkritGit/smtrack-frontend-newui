@@ -470,6 +470,7 @@ export default {
     transition: 'ทรานซิชั่น',
     grayscale: 'เกสเกล',
     blur: 'เอฟเฟคเบลอ',
+    ambientMode: 'แสงแบบล้อมรอบ',
 
     // connect
     ipAddress: 'IP',

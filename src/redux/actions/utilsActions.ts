@@ -27,7 +27,8 @@ import {
   SWITCHING_MODE,
   GRAYSCALE_MODE,
   BLUR_DISABLED,
-  TRANSITION_DISABLED
+  TRANSITION_DISABLED,
+  AMBIENT_DISABLED
 } from '../types/utilsTypes'
 
 const setCookieEncode = (dataEncode?: string) => ({
@@ -125,6 +126,10 @@ const setTransitionDisabled = () => ({
   type: TRANSITION_DISABLED
 })
 
+const setAmbientDisabled = () => ({
+  type: AMBIENT_DISABLED
+})
+
 const resetUtils = () => ({
   type: RESET_UTILS
 })
@@ -151,5 +156,6 @@ export {
   setGrayscaleMode,
   setBlurDisabled,
   setTransitionDisabled,
+  setAmbientDisabled,
   resetUtils
 }

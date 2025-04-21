@@ -20,14 +20,14 @@ type PropsType = {
   fetchDevices: () => Promise<void>
   swiperInfoRef: RefObject<SwiperType | null>
   isPause: boolean
-  blurDisabled: boolean
+  ambientDisabled: boolean
 }
 
 SwiperCore.use([Pagination])
 
 const CardInFoComponent = (props: PropsType) => {
   const { t } = useTranslation()
-  const { deviceData, fetchDevices, swiperInfoRef, isPause, blurDisabled } = props
+  const { deviceData, fetchDevices, swiperInfoRef, isPause, ambientDisabled } = props
   const [serial, setSerial] = useState<string>('')
   const [probeData, setProbeData] = useState<ProbeType[]>([])
   const [colors, setColors] = useState<string[]>([])
@@ -56,12 +56,12 @@ const CardInFoComponent = (props: PropsType) => {
   }, [activeIndex, isPause, swiperInfoRef])
 
   useEffect(() => {
-    if (!blurDisabled) return
+    if (!ambientDisabled) return
 
     if (deviceData) {
       getColor(deviceData?.positionPic ?? DefaultPic, 0, setColors)
     }
-  }, [deviceData, blurDisabled])
+  }, [deviceData, ambientDisabled])
 
   return (
     <div className='p-5 h-full'>
@@ -123,7 +123,7 @@ const CardInFoComponent = (props: PropsType) => {
               />
             </div>
           </div>
-          {blurDisabled && <div
+          {ambientDisabled && <div
             className='blur-[128px] w-28 h-[85%] absolute opacity-75 z-10 duration-700 ease-linear'
             style={{ backgroundColor: colors[0] }}
           ></div>}
