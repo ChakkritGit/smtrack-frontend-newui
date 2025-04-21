@@ -34,7 +34,7 @@ const BottomNavItem = (props: BottomItemProps) => {
         ${
           isScrollingDown
             ? '!h-[0px] opacity-0'
-            : 'h-[80px] shadow-md opacity-100'
+            : 'h-[80px] shadow-sm opacity-100'
         }
         ${
           ['cupcake', 'valentine', 'forest', 'pastel', 'acid'].includes(themeMode)

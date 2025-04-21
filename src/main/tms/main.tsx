@@ -217,7 +217,7 @@ const MainTms = () => {
         <div className='drawer-content'>
           <Navbar />
           <section
-            className={`min-h-[calc(100dvh-64px)] pb-[84px] sm:pb-0 rounded-box bg-base-200 m-3 ${
+            className={`min-h-[calc(100dvh-70px)] pb-[84px] sm:pb-0 md:rounded-box bg-base-200 md:m-3 ${
               ['cupcake', 'valentine', 'forest', 'pastel', 'acid'].includes(
                 themeMode
               )

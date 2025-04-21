@@ -67,9 +67,14 @@ const Navbar = () => {
   const dispatch = useDispatch()
   const location = useLocation()
   const { t } = useTranslation()
-  const { isExpand, userProfile, globalSearch, tmsMode, transitionDisabled, blurDisabled } = useSelector(
-    (state: RootState) => state.utils
-  )
+  const {
+    isExpand,
+    userProfile,
+    globalSearch,
+    tmsMode,
+    transitionDisabled,
+    blurDisabled
+  } = useSelector((state: RootState) => state.utils)
   const { searchRef, isFocused, setIsFocused, setIsCleared } = useContext(
     GlobalContext
   ) as GlobalContextType
@@ -84,6 +89,7 @@ const Navbar = () => {
   const [deviceList, setDeviceList] = useState<
     DeviceListType[] | DeviceListTmsType[]
   >([])
+  const [scrolled, setScrolled] = useState(false)
   const [image, setImage] = useState<FormState>({
     imagePreview: userProfile?.pic ?? null
   })
@@ -217,7 +223,9 @@ const Navbar = () => {
 
     return (
       <div
-        className={`${transitionDisabled ? 'search-anim' : ''} absolute min-w-[280px] w-[280px] max-w-[300px] md:min-w-[450px] min-h-[50px] md:max-w-[500px]
+        className={`${
+          transitionDisabled ? 'search-anim' : ''
+        } absolute min-w-[280px] w-[280px] max-w-[300px] md:min-w-[450px] min-h-[50px] md:max-w-[500px]
       max-h-[400px] bg-base-100 backdrop-blur transition-shadow shadow-2xl duration-300 ease-linear
       border-base-content/15 border-[1px] py-3 pl-4 pr-1 top-[60px] overflow-y-scroll
       rounded-box`}
@@ -268,7 +276,7 @@ const Navbar = () => {
                   </div>
                   <span
                     className='max-w-[170px] md:max-w-[300px] block truncate text-left'
-                    style={{ direction: 'rtl'}}
+                    style={{ direction: 'rtl' }}
                   >
                     {t(item.text)}
                   </span>
@@ -462,7 +470,9 @@ const Navbar = () => {
               <>
                 {!searchOpen && (
                   <>
-                    <kbd className='kbd kbd-sm'>{isWindows ? 'Ctrl' : <RiCommandFill />}</kbd>
+                    <kbd className='kbd kbd-sm'>
+                      {isWindows ? 'Ctrl' : <RiCommandFill />}
+                    </kbd>
                     <kbd className='kbd kbd-sm'>K</kbd>
                   </>
                 )}
@@ -501,8 +511,23 @@ const Navbar = () => {
     ]
   )
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 100)
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
   return (
-    <nav className={`text-base-content sticky top-0 z-[80] flex h-16 w-full justify-center ${blurDisabled ? 'bg-base-100/80 backdrop-blur' : 'bg-base-100'} transition-shadow duration-300 ease-linear [transform:translate3d(0,0,0)]`}>
+    <nav
+      className={`text-base-content sticky top-0 z-[80] flex h-16 w-full justify-center ${
+        scrolled ? 'shadow-sm' : ''
+      } ${
+        blurDisabled ? 'bg-base-100/80 backdrop-blur' : 'bg-base-100'
+      } transition-shadow duration-300 ease-linear [transform:translate3d(0,0,0)]`}
+    >
       <div className='navbar'>
         <div className='flex flex-1 lg:gap-3'>
           <label
