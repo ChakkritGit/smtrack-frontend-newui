@@ -7,7 +7,7 @@ import BottomNavItem from './item'
 
 const BottomBar = () => {
   const { t } = useTranslation()
-  const { tokenDecode, themeMode, userProfile } = useSelector(
+  const { tokenDecode, themeMode, userProfile, blurDisabled } = useSelector(
     (state: RootState) => state.utils
   )
   const { role } = tokenDecode ?? {}
@@ -41,6 +41,7 @@ const BottomBar = () => {
       themeMode={themeMode}
       userProfile={userProfile}
       role={role}
+      blurDisabled={blurDisabled}
     />
   )
 }

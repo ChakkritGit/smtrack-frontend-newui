@@ -471,6 +471,7 @@ export default {
     grayscale: 'เกสเกล',
     blur: 'เอฟเฟคเบลอ',
     ambientMode: 'แสงแบบล้อมรอบ',
+    showFPS: 'แสดงเฟรมเรท',
 
     // connect
     ipAddress: 'IP',

@@ -28,6 +28,7 @@ const GRAYSCALE_MODE = 'GRAYSCALE_MODE'
 const BLUR_DISABLED = 'BLUR_DISABLED'
 const TRANSITION_DISABLED = 'TRANSITION_DISABLED'
 const AMBIENT_DISABLED = 'AMBIENT_DISABLED'
+const FPS_DISABLED = 'FPS_DISABLED'
 const RESET_UTILS = 'RESET_UTILS'
 
 interface UtilsState {
@@ -52,6 +53,7 @@ interface UtilsState {
   blurDisabled: boolean
   transitionDisabled: boolean
   ambientDisabled: boolean
+  fpsDisabled: boolean
   tokenExpire: boolean
 }
 
@@ -78,6 +80,7 @@ type UtilsAction =
   | { type: typeof BLUR_DISABLED }
   | { type: typeof TRANSITION_DISABLED }
   | { type: typeof AMBIENT_DISABLED }
+  | { type: typeof FPS_DISABLED }
   | { type: typeof RESET_UTILS }
 
 export {
@@ -103,6 +106,7 @@ export {
   BLUR_DISABLED,
   TRANSITION_DISABLED,
   AMBIENT_DISABLED,
+  FPS_DISABLED,
   RESET_UTILS
 }
 export type { UtilsState, UtilsAction }

@@ -21,15 +21,16 @@ type BottomItemProps = {
   userProfile: UserProfileType | undefined
   DefaultPic: string
   role: UserRole | undefined
+  blurDisabled: boolean
 }
 
 const BottomNavItem = (props: BottomItemProps) => {
-  const { DefaultPic, isScrollingDown, t, themeMode, userProfile, role } = props
+  const { DefaultPic, isScrollingDown, t, themeMode, userProfile, role, blurDisabled } = props
   const location = useLocation()
 
   return (
     <div
-      className={`dock overflow-hidden bottom-0 px-3 pb-2 sm:hidden bg-base-100/80 backdrop-blur z-[89]
+      className={`dock overflow-hidden bottom-0 px-3 pb-2 sm:hidden ${blurDisabled ? 'bg-base-100/80 backdrop-blur' : 'bg-base-100'} z-[89]
         ${
           isScrollingDown
             ? '!h-[0px] opacity-0'

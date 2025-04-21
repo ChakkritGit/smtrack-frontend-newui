@@ -472,6 +472,7 @@ export default {
     grayscale: 'Grayscale',
     blur: 'Blur Effect',
     ambientMode: 'Ambient Light',
+    showFPS: 'Show Frame Rate',
 
     // connect
     ipAddress: 'IP',

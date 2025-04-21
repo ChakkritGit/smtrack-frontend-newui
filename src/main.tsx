@@ -18,6 +18,7 @@ import Routes from './routes/routes.tsx'
 import i18n from './lang/i18n.ts'
 import isPropValid from '@emotion/is-prop-valid'
 import store from './redux/store/index.ts'
+import FrameRate from './constants/utils/frameRate.tsx'
 
 class AppRenderer {
   private static instance: AppRenderer
@@ -57,6 +58,7 @@ class AppRenderer {
             <Provider store={store}>
               <I18nextProvider i18n={i18n}>
                 <Routes />
+                <FrameRate />
                 <Toaster position='bottom-right' reverseOrder={false} />
               </I18nextProvider>
             </Provider>

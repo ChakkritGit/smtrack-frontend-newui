@@ -4,6 +4,7 @@ import { RootState } from '../../../redux/reducers/rootReducer'
 import {
   setAmbientDisabled,
   setBlurDisabled,
+  setFpsDisabled,
   setGrayscaleMode,
   setTheme,
   setTransitionDisabled
@@ -12,9 +13,16 @@ import {
 const AppearanceComponents = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
-  const { themeMode, grayscaleMode, blurDisabled, transitionDisabled, ambientDisabled } = useSelector(
-    (state: RootState) => state.utils
-  )
+  const {
+    themeMode,
+    grayscaleMode,
+    blurDisabled,
+    transitionDisabled,
+    ambientDisabled,
+    fpsDisabled,
+    tokenDecode
+  } = useSelector((state: RootState) => state.utils)
+  const { role } = tokenDecode || {}
 
   const changeTheme = (themeName: string) => {
     dispatch(setTheme(themeName))
@@ -1314,7 +1322,10 @@ const AppearanceComponents = () => {
               checked={ambientDisabled}
               onChange={() => {
                 dispatch(setAmbientDisabled())
-                localStorage.setItem('ambientDisabled', String(!ambientDisabled))
+                localStorage.setItem(
+                  'ambientDisabled',
+                  String(!ambientDisabled)
+                )
               }}
             />
           </div>
@@ -1333,10 +1344,27 @@ const AppearanceComponents = () => {
             checked={transitionDisabled}
             onChange={() => {
               dispatch(setTransitionDisabled())
-              localStorage.setItem('transitionDisabled', String(!transitionDisabled))
+              localStorage.setItem(
+                'transitionDisabled',
+                String(!transitionDisabled)
+              )
             }}
           />
         </div>
+        {role === 'SUPER' && <div className=' flex items-center justify-between mt-3'>
+          <span>{t('showFPS')}</span>
+          <input
+            type='checkbox'
+            className='toggle'
+            name='filterColor'
+            id='filterColor'
+            checked={fpsDisabled}
+            onChange={() => {
+              dispatch(setFpsDisabled())
+              localStorage.setItem('fpsDisabled', String(!fpsDisabled))
+            }}
+          />
+        </div>}
       </div>
     </div>
   )
