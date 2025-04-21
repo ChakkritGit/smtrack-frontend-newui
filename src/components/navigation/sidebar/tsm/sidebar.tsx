@@ -52,7 +52,7 @@ const Sidebar = () => {
 
   return (
     <aside
-      className={`drawer-side shadow-sm z-[90] ${
+      className={`drawer-side z-[90] ${
         isExpand ? '!overflow-visible' : ''
       }`}
     >
@@ -263,7 +263,7 @@ const Sidebar = () => {
                 isExpand ? 'text-center' : 'text-right'
               } hover:underline cursor-pointer`}
             >
-              Version 2.0.0b15a
+              Version 2.0.0b15b
             </Link>
           </div>
         </div>

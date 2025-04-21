@@ -212,12 +212,12 @@ const MainTms = () => {
 
   return (
     <main>
-      <div className='drawer lg:drawer-open bg-base-200 w-auto duration-300 ease-linear'>
+      <div className='drawer lg:drawer-open bg-base-100 w-auto duration-300 ease-linear'>
         <input id='my-drawer-2' type='checkbox' className='drawer-toggle' />
         <div className='drawer-content'>
           <Navbar />
           <section
-            className={`min-h-[calc(100dvh-64px)] pb-[84px] sm:pb-0 ${
+            className={`min-h-[calc(100dvh-64px)] pb-[84px] sm:pb-0 rounded-box bg-base-200 m-3 ${
               ['cupcake', 'valentine', 'forest', 'pastel', 'acid'].includes(
                 themeMode
               )

@@ -502,7 +502,7 @@ const Navbar = () => {
   )
 
   return (
-    <nav className={`text-base-content sticky top-0 z-[80] flex h-16 w-full justify-center ${blurDisabled ? 'bg-base-100/80 backdrop-blur' : 'bg-base-100'} transition-shadow duration-300 ease-linear [transform:translate3d(0,0,0)] shadow-sm`}>
+    <nav className={`text-base-content sticky top-0 z-[80] flex h-16 w-full justify-center ${blurDisabled ? 'bg-base-100/80 backdrop-blur' : 'bg-base-100'} transition-shadow duration-300 ease-linear [transform:translate3d(0,0,0)]`}>
       <div className='navbar'>
         <div className='flex flex-1 lg:gap-3'>
           <label
