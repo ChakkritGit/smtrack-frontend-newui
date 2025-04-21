@@ -2,7 +2,7 @@ import Logo from '../../assets/images/app-logo.png'
 
 const Footer = () => {
   return (
-    <footer className='footer items-center justify-center md:justify-end py-3 mt-4 border-t border-base-content/15 pr-3'>
+    <footer className='footer items-center justify-center md:justify-end p-3 border-t border-base-content/10'>
       <aside className='grid-flow-col items-center'>
         <img
           src={Logo}
