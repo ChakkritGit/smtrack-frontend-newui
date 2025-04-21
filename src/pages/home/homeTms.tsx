@@ -190,7 +190,7 @@ const HomeTms = () => {
         onChangePage={handlePageChange}
         onRowClicked={handleRowClicked}
         paginationRowsPerPageOptions={[10, 20, 40]}
-        fixedHeaderScrollHeight='calc(100dvh - 250px)'
+        fixedHeaderScrollHeight='calc(100dvh - 270px)'
       />
     ),
     [devices, loading, totalRows, currentPage, perPage, columns, wardId]

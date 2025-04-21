@@ -434,7 +434,7 @@ const Home = () => {
             onChangePage={handlePageChange}
             onRowClicked={handleRowClicked}
             paginationRowsPerPageOptions={[10, 25, 50]}
-            className='md:!max-h-[calc(100dvh-490px)]'
+            className='md:!max-h-[calc(100dvh-495px)]'
           />
         </div>
       ) : (

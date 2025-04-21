@@ -26,6 +26,7 @@ import { SocketResponseType } from '../../types/global/socketType'
 import notificationSound from '../../assets/sounds/notification.mp3'
 import BottomBar from '../../components/navigation/bottomBar/bottomBar'
 import TokenExpire from '../../components/modal/tokenExpire'
+import Footer from '../../components/footer/footer'
 
 const MainSmtrack = () => {
   const { t } = useTranslation()
@@ -219,7 +220,7 @@ const MainSmtrack = () => {
         <div className='drawer-content'>
           <Navbar />
           <section
-            className={`min-h-[calc(100dvh-70px)] pb-[84px] sm:pb-0 md:rounded-box bg-base-200 md:m-3 ${
+            className={`min-h-[calc(100dvh-90px)] pb-[84px] sm:pb-0 md:rounded-box bg-base-200 md:m-3 ${
               ['cupcake', 'valentine', 'forest', 'pastel', 'acid'].includes(
                 themeMode
               )
@@ -229,6 +230,7 @@ const MainSmtrack = () => {
           >
             <Outlet />
           </section>
+          <Footer />
           <BottomBar />
         </div>
         <Sidebar />

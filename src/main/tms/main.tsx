@@ -26,6 +26,7 @@ import notificationSound from '../../assets/sounds/notification.mp3'
 import { cookieOptions, cookies } from '../../constants/utils/utilsConstants'
 import BottomBar from '../../components/navigation/bottomBar/bottomBar'
 import TokenExpire from '../../components/modal/tokenExpire'
+import Footer from '../../components/footer/footer'
 
 const MainTms = () => {
   const { t } = useTranslation()
@@ -217,7 +218,7 @@ const MainTms = () => {
         <div className='drawer-content'>
           <Navbar />
           <section
-            className={`min-h-[calc(100dvh-70px)] pb-[84px] sm:pb-0 md:rounded-box bg-base-200 md:m-3 ${
+            className={`min-h-[calc(100dvh-90px)] pb-[84px] sm:pb-0 md:rounded-box bg-base-200 md:m-3 ${
               ['cupcake', 'valentine', 'forest', 'pastel', 'acid'].includes(
                 themeMode
               )
@@ -227,6 +228,7 @@ const MainTms = () => {
           >
             <Outlet />
           </section>
+          <Footer />
           <BottomBar />
         </div>
         <Sidebar />

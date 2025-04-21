@@ -27,7 +27,7 @@
     "filesize": "^10.1.6",
     "heic2any": "^0.0.4",
     "html2canvas-pro": "^1.5.8",
-    "i18next": "^25.0.0",
+    "i18next": "^25.0.1",
     "jwt-decode": "^4.0.0",
     "mqtt": "^5.11.0",
     "node-vibrant": "^4.0.3",
