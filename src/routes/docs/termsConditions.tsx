@@ -1,3 +1,5 @@
+import Footer from "../../components/footer/footer"
+
 const TermsConditions = () => {
   return (
     <div className='max-w-[720px] mx-auto py-14 px-5'>
@@ -136,6 +138,7 @@ const TermsConditions = () => {
           </a>
         </p>
       </div>
+      <Footer />
     </div>
   )
 }

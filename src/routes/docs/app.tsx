@@ -5,6 +5,7 @@ import LogoBanner from '../../assets/images/app-logo.png'
 import ApkBanner from '../../assets/images/apk-banner.svg'
 import pdf from '../../assets/pdf/install_apk.pdf'
 import { Helmet } from 'react-helmet-async'
+import Footer from '../../components/footer/footer'
 
 const App = () => {
   const { t } = useTranslation()
@@ -64,6 +65,9 @@ const App = () => {
       <p className='link link-primary leading-7 tracking-wide' onClick={() => window.open(pdf)}>
         {t('installApp')}
       </p>
+      <div className='absolute bottom-0 left-0 right-0'>
+        <Footer />
+      </div>
     </div>
   )
 }

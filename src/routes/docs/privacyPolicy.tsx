@@ -1,3 +1,5 @@
+import Footer from '../../components/footer/footer'
+
 const PrivacyPolicy = () => {
   return (
     <div className='max-w-[720px] mx-auto py-14 px-5'>
@@ -155,6 +157,7 @@ const PrivacyPolicy = () => {
           Service Provider via email at siamatic.thanesgroup@gmail.com.
         </p>
       </div>
+      <Footer />
     </div>
   )
 }

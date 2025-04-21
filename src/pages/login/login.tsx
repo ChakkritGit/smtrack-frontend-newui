@@ -13,6 +13,7 @@ import { useTranslation } from 'react-i18next'
 import LanguageList from '../../components/language/languageList'
 import { RiAtLine, RiEyeLine, RiEyeOffLine, RiKey2Line } from 'react-icons/ri'
 import { Helmet } from 'react-helmet-async'
+import Footer from '../../components/footer/footer'
 
 const Login = () => {
   const { t } = useTranslation()
@@ -236,6 +237,9 @@ const Login = () => {
       </div>
       <div className='flex items-center justify-end w-[370px] sm:w-[500px] md:w-[500px] lg:w-[600px] px-10'>
         <span>{`${formattedDate} ${formattedTime}`}</span>
+      </div>
+      <div className='absolute bottom-0 left-0 right-0'>
+        <Footer />
       </div>
     </div>
   )

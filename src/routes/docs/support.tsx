@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { countryCodes } from '../../constants/utils/utilsConstants'
 import axios from 'axios'
 import Swal from 'sweetalert2'
+import Footer from '../../components/footer/footer'
 
 const Support = () => {
   const { t } = useTranslation()
@@ -196,6 +197,9 @@ const Support = () => {
             {t('contactAgreeLink')}
           </p>
         </p>
+      </div>
+      <div className='absolute bottom-0 left-0 right-0'>
+        <Footer />
       </div>
     </div>
   )
