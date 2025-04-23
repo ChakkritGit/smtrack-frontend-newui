@@ -1,10 +1,10 @@
-import piexif from 'piexifjs'
 import heic2any from 'heic2any'
+import * as UPNG from 'upng-js'
 
 const resizeImage = (file: File, targetDPI: number = 300): Promise<File> => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader()
-    const finalMimeString = 'image/jpeg'
+    const finalMimeString = 'image/png'
     reader.onload = async (e: ProgressEvent<FileReader>) => {
       try {
         let imageSrc = e.target?.result as string
@@ -35,7 +35,7 @@ const resizeImage = (file: File, targetDPI: number = 300): Promise<File> => {
         }
 
         if (file.type === 'image/heic' || file.type === 'image/heif') {
-          const heicBlob = await heic2any({ blob: file, toType: 'image/jpeg' })
+          const heicBlob = await heic2any({ blob: file, toType: 'image/png' })
           const singleBlob = Array.isArray(heicBlob) ? heicBlob[0] : heicBlob
           imageSrc = URL.createObjectURL(singleBlob)
         }
@@ -46,7 +46,7 @@ const resizeImage = (file: File, targetDPI: number = 300): Promise<File> => {
           const canvas = document.createElement('canvas')
           const context: CanvasRenderingContext2D | null =
             canvas.getContext('2d')
-          const maxDimensions = { width: 128, height: 128 }
+          const maxDimensions = { width: 720, height: 720 }
           const scaleFactor = Math.min(
             maxDimensions.width / image.width,
             maxDimensions.height / image.height
@@ -65,37 +65,35 @@ const resizeImage = (file: File, targetDPI: number = 300): Promise<File> => {
             context.font = '6px Anuphan'
             context.fillStyle = 'rgba(255, 255, 255, 0.18)'
             context.textAlign = 'right'
-
             context.shadowColor = 'rgba(0, 0, 0, 0.5)'
             context.shadowOffsetX = 2
             context.shadowOffsetY = 2
             context.shadowBlur = 1
-
             context.fillText('SMTrack+', originalWidth - 5, originalHeight - 5)
-
             context.shadowColor = 'transparent'
             context.shadowOffsetX = 0
             context.shadowOffsetY = 0
             context.shadowBlur = 0
           }
 
-          const dataUrl = canvas.toDataURL(finalMimeString)
+          const imageData = context?.getImageData(
+            0,
+            0,
+            canvas.width,
+            canvas.height
+          )
+          const rgbaData = imageData?.data || new Uint8ClampedArray()
 
-          const exifObj = piexif.load(dataUrl)
-          exifObj['0th'] = exifObj['0th'] || {}
-          exifObj['0th'][piexif.ImageIFD.Copyright] =
-            'SMTrack+ Copyright - Thanes Development Co., Ltd.'
-          const exifStr = piexif.dump(exifObj)
-          const newImageData = piexif.insert(exifStr, dataUrl)
+          const compressed = UPNG.encode(
+            [rgbaData.buffer],
+            canvas.width,
+            canvas.height,
+            256
+          )
 
-          const byteString = atob(newImageData.split(',')[1])
-          const ab = new ArrayBuffer(byteString.length)
-          const ia = new Uint8Array(ab)
-          for (let i = 0; i < byteString.length; i++) {
-            ia[i] = byteString.charCodeAt(i)
-          }
-          const blob = new Blob([ab], { type: finalMimeString })
-          const resizedFile = new File([blob], file.name, {
+          const blob = new Blob([compressed], { type: finalMimeString })
+          const newFileName = file.name.replace(/\.\w+$/, '.png')
+          const resizedFile = new File([blob], newFileName, {
             type: finalMimeString
           })
           resolve(resizedFile)
