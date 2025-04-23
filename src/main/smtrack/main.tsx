@@ -220,7 +220,7 @@ const MainSmtrack = () => {
         <div className='drawer-content'>
           <Navbar />
           <section
-            className={`min-h-[calc(100dvh-90px)] pb-[84px] sm:pb-0 md:rounded-box bg-base-200 md:m-3 ${
+            className={`min-h-[calc(100dvh-90px)] pb-[84px] sm:pb-0 md:rounded-box bg-base-200 md:mx-3 md:mb-3 ${
               ['cupcake', 'valentine', 'forest', 'pastel', 'acid'].includes(
                 themeMode
               )
