@@ -704,6 +704,7 @@ const ManageProbe = () => {
   ]
 
   const doorArray = [
+    { value: 'OFF', name: "0" },
     { value: '1', name: t('probeDoor1') },
     { value: '2', name: t('probeDoor2') },
     { value: '3', name: t('probeDoor3') }
