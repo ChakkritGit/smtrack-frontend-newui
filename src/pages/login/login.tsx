@@ -14,6 +14,8 @@ import LanguageList from '../../components/language/languageList'
 import { RiAtLine, RiEyeLine, RiEyeOffLine, RiKey2Line } from 'react-icons/ri'
 import { Helmet } from 'react-helmet-async'
 import Footer from '../../components/footer/footer'
+import { responseType } from '../../types/smtrack/utilsRedux/utilsReduxType'
+import { LoginType } from '../../types/global/login'
 
 const Login = () => {
   const { t } = useTranslation()
@@ -25,6 +27,7 @@ const Login = () => {
   const [alertMessage, setAlertMessage] = useState('')
   const [loading, setLoading] = useState(false)
   const [currentDate, setCurrentDate] = useState(new Date())
+  const modalAlert = useRef<HTMLDialogElement>(null)
 
   const handleLogin = async (e: FormEvent) => {
     e.preventDefault()
@@ -51,11 +54,23 @@ const Login = () => {
     }
 
     try {
-      const response = await axiosInstance.post('/auth/login', {
-        username: username.toLowerCase(),
-        password
-      })
-      const { hosId, token, refreshToken, id, wardId } = response.data.data
+      const response = await axiosInstance.post<responseType<LoginType>>(
+        '/auth/login',
+        {
+          username: username.toLowerCase(),
+          password
+        }
+      )
+      const { hosId, token, refreshToken, id, wardId, role } =
+        response.data.data
+
+      if (role === 'GUEST') {
+        if (modalAlert.current) {
+          modalAlert.current.showModal()
+        }
+        return
+      }
+
       const tokenObject = {
         hosId,
         refreshToken,
@@ -63,6 +78,7 @@ const Login = () => {
         id,
         wardId
       }
+
       cookies.set(
         'tokenObject',
         String(accessToken(tokenObject)),
@@ -241,6 +257,21 @@ const Login = () => {
       <div className='absolute bottom-0 left-0 right-0'>
         <Footer />
       </div>
+
+      <dialog ref={modalAlert} className='modal'>
+        <div className='modal-box'>
+          <h3 className='font-bold text-lg'>Alert!</h3>
+          <p className='py-4'>
+            Press ESC key or click the button below to close
+          </p>
+          <span>You don't have permission to access</span>
+          <div className='modal-action'>
+            <form method='dialog'>
+              <button className='btn'>Close</button>
+            </form>
+          </div>
+        </div>
+      </dialog>
     </div>
   )
 }
