@@ -473,6 +473,7 @@ export default {
     blur: 'Blur Effect',
     ambientMode: 'Ambient Light',
     showFPS: 'Frame Rate',
+    exit: 'Press ESC key or click the button below to close',
 
     // connect
     ipAddress: 'IP',
