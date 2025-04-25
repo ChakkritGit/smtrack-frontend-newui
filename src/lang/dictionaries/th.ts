@@ -472,7 +472,7 @@ export default {
     blur: 'เอฟเฟคเบลอ',
     ambientMode: 'แสงแบบล้อมรอบ',
     showFPS: 'เฟรมเรท',
-    exit: 'กด ESC หรือ กดปุ่มปิด เพื่อปิด',
+    exit: 'กด ESC หรือ ปุ่มปิด เพื่อปิด',
 
     // connect
     ipAddress: 'IP',

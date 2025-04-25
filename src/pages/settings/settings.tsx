@@ -30,7 +30,7 @@ const Settings = () => {
   const profileModalRef = useRef<HTMLDialogElement>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
 
-  const [tab, setTab] = useState(1)
+  const [tab, setTab] = useState(localStorage.getItem('settingTab') ?? '1')
   const [image, setImage] = useState<FormState>({
     imagePreview: userProfile?.pic ?? null
   })
@@ -65,11 +65,11 @@ const Settings = () => {
   const settingContent = useMemo(
     () => (
       <div className='w-full p-3 bg-base-100 rounded-field max-h-[calc(100dvh-230px)] md:max-h-[calc(100dvh-150px)] overflow-y-scroll'>
-        {tab === 1 ? (
+        {tab === '1' ? (
           settingProfile
-        ) : tab === 2 ? (
+        ) : tab === '2' ? (
           <SoundAndNotificationComponents />
-        ) : tab === 3 ? (
+        ) : tab === '3' ? (
           <AppearanceComponents />
         ) : (
           <LanguageComponents />
@@ -84,13 +84,16 @@ const Settings = () => {
       <div className='flex gap-1 md:gap-3 p-3'>
         <ul className='flex flex-col md:min-w-[200px] gap-1'>
           <li
-            onClick={() => setTab(1)}
+            onClick={() => {
+              setTab('1')
+              localStorage.setItem('settingTab', '1')
+            }}
             className={`${
-              tab === 1 ? '!btn-neutral' : 'btn-ghost'
+              tab === '1' ? '!btn-neutral' : 'btn-ghost'
             } btn font-normal flex-nowrap text-[16px] justify-start w-full flex`}
           >
             <a className='text-[16px] h-9 flex items-center gap-2'>
-              {tab === 1 ? (
+              {tab === '1' ? (
                 <RiIdCardFill size={24} />
               ) : (
                 <RiIdCardLine size={24} />
@@ -99,13 +102,16 @@ const Settings = () => {
             </a>
           </li>
           <li
-            onClick={() => setTab(2)}
+            onClick={() => {
+              setTab('2')
+              localStorage.setItem('settingTab', '2')
+            }}
             className={`${
-              tab === 2 ? '!btn-neutral' : 'btn-ghost'
+              tab === '2' ? '!btn-neutral' : 'btn-ghost'
             } btn font-normal flex-nowrap text-[16px] justify-start w-full flex`}
           >
             <a className='text-[16px] h-9 flex items-center gap-2'>
-              {tab === 2 ? (
+              {tab === '2' ? (
                 <RiNotification4Fill size={24} />
               ) : (
                 <RiNotification4Line size={24} />
@@ -114,13 +120,16 @@ const Settings = () => {
             </a>
           </li>
           <li
-            onClick={() => setTab(3)}
+            onClick={() => {
+              setTab('3')
+              localStorage.setItem('settingTab', '3')
+            }}
             className={`${
-              tab === 3 ? '!btn-neutral' : 'btn-ghost'
+              tab === '3' ? '!btn-neutral' : 'btn-ghost'
             } btn font-normal flex-nowrap text-[16px] justify-start w-full flex`}
           >
             <a className='text-[16px] h-9 flex items-center gap-2'>
-              {tab === 3 ? (
+              {tab === '3' ? (
                 <RiColorFilterAiFill size={24} />
               ) : (
                 <RiColorFilterAiLine size={24} />
@@ -129,9 +138,12 @@ const Settings = () => {
             </a>
           </li>
           <li
-            onClick={() => setTab(4)}
+            onClick={() => {
+              setTab('4')
+              localStorage.setItem('settingTab', '4')
+            }}
             className={`${
-              tab === 4 ? '!btn-neutral' : 'btn-ghost'
+              tab === '4' ? '!btn-neutral' : 'btn-ghost'
             } btn font-normal flex-nowrap text-[16px] justify-start w-full flex`}
           >
             <a className='text-[16px] h-9 flex items-center gap-2'>

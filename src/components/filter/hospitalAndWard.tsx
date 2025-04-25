@@ -122,7 +122,6 @@ const HospitalAndWard = () => {
         <>
           {(role === 'SUPER' || role === 'SERVICE') && (
             <Select
-              key={hosId}
               options={mapOptions<Hospital, keyof Hospital>(
                 updatedHosData,
                 'id',
@@ -141,7 +140,6 @@ const HospitalAndWard = () => {
             />
           )}
           <Select
-            key={wardId}
             options={mapOptions<Ward, keyof Ward>(
               updatedWardData,
               'id',

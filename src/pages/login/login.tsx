@@ -133,8 +133,8 @@ const Login = () => {
           <div className='text-end'>
             <LanguageList />
           </div>
-          <h1 className='text-[38px] font-bold text-primary'>SMTrack+</h1>
-          <span>
+          <h1 className='text-4xl md:text-5xl font-bold text-neutral'>SMTrack+</h1>
+          <span className='font-medium'>
             Real-time temperature monitoring with alerts for exceeding limits
           </span>
           <div
@@ -260,12 +260,12 @@ const Login = () => {
 
       <dialog ref={modalAlert} className='modal'>
         <div className='modal-box'>
-          <h3 className='font-bold text-lg'>{t('alertHeaderWarning')}</h3>
-          <p className='py-4'>
+          <h3 className='font-bold text-lg'>{t('alertHeaderError')}</h3>
+          <p className='py-2 text-sm opacity-70'>
             {t('exit')}
           </p>
-          <span>{t('titleNotAccess')}</span>
-          <div className='modal-action'>
+          <p className='py-2'>{t('titleNotAccess')}</p>
+          <div className='modal-action mt-3'>
             <form method='dialog'>
               <button className='btn'>{t('doorClose')}</button>
             </form>
