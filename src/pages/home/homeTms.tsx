@@ -25,7 +25,7 @@ const HomeTms = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const { wardId, globalSearch, shouldFetch, tokenDecode } = useSelector(
+  const { wardId, globalSearch, shouldFetch, tokenDecode, hosId } = useSelector(
     (state: RootState) => state.utils
   )
   const { searchRef, isFocused, setIsFocused, isCleared, setIsCleared } =
@@ -43,7 +43,7 @@ const HomeTms = () => {
         setLoading(true)
         const response = await axiosInstance.get(
           `/legacy/device?${
-            wardId ? `ward=${wardId}&` : ''
+            wardId ? `ward=${wardId}&` : hosId ? `ward=${hosId}` : ''
           }page=${page}&perpage=${size} ${search ? `&filter=${search}` : ''}`
         )
         setDevices(response.data.data?.devices)
@@ -61,18 +61,16 @@ const HomeTms = () => {
         setLoading(false)
       }
     },
-    [perPage, wardId]
+    [perPage, wardId, hosId]
   )
 
   const handlePageChange = (page: number) => {
     fetchDevices(page)
-    // fetchDeviceCount()
     setCurrentPage(page)
   }
 
   const handlePerRowsChange = async (newPerPage: number, page: number) => {
     setPerPage(newPerPage)
-    // fetchDeviceCount()
     fetchDevices(page, newPerPage)
     cookies.set('homeRowPerPageTms', newPerPage, cookieOptions)
   }
@@ -86,8 +84,7 @@ const HomeTms = () => {
 
   useEffect(() => {
     fetchDevices(1)
-    // fetchDeviceCount()
-  }, [wardId])
+  }, [wardId, hosId])
 
   useEffect(() => {
     return () => {

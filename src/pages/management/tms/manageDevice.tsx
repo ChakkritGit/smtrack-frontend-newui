@@ -38,7 +38,7 @@ import { GlobalContext } from '../../../contexts/globalContext'
 const ManageDevice = () => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
-  const { wardId, globalSearch, cookieDecode, hosId, shouldFetch } =
+  const { wardId, globalSearch, hosId, shouldFetch } =
     useSelector((state: RootState) => state.utils)
   const { searchRef, isFocused, setIsFocused, isCleared, setIsCleared } =
     useContext(GlobalContext) as GlobalContextType
@@ -47,7 +47,6 @@ const ManageDevice = () => {
   const [totalRows, setTotalRows] = useState(0)
   const [perPage, setPerPage] = useState(10)
   const [currentPage, setCurrentPage] = useState(1)
-  const { token } = cookieDecode || {}
   const [formData, setFormData] = useState<AddDeviceForm>({
     ward: '',
     wardName: '',
@@ -66,7 +65,7 @@ const ManageDevice = () => {
         setLoading(true)
         const response = await axiosInstance.get(
           `/legacy/device?${
-            wardId ? `ward=${wardId}&` : ''
+            wardId ? `ward=${wardId}&` : hosId ? `ward=${hosId}` : ''
           }page=${page}&perpage=${size} ${search ? `&filter=${search}` : ''}`
         )
         setDevices(response.data.data?.devices)
@@ -84,7 +83,7 @@ const ManageDevice = () => {
         setLoading(false)
       }
     },
-    [perPage, wardId]
+    [perPage, wardId, hosId]
   )
 
   const handlePageChange = (page: number) => {
@@ -193,9 +192,8 @@ const ManageDevice = () => {
   }
 
   useEffect(() => {
-    if (!token) return
     fetchDevices(1)
-  }, [token, wardId])
+  }, [wardId, hosId])
 
   const shouldFetchFunc = async () => {
     await fetchDevices(1, 10, globalSearch)

@@ -86,7 +86,6 @@ const ManageDevice = () => {
   const {
     wardId,
     globalSearch,
-    cookieDecode,
     tokenDecode,
     hosId,
     shouldFetch
@@ -112,7 +111,6 @@ const ManageDevice = () => {
   const editModalRef = useRef<HTMLDialogElement>(null)
   const moveModalRef = useRef<HTMLDialogElement>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
-  const { token } = cookieDecode || {}
   const { role } = tokenDecode || {}
   const [formData, setFormData] = useState<AddDeviceForm>({
     id: '',
@@ -222,7 +220,7 @@ const ManageDevice = () => {
           responseType<DeviceResponseType>
         >(
           `/devices/device?${
-            wardId ? `ward=${wardId}&` : ''
+            wardId ? `ward=${wardId}&` : hosId ? `ward=${hosId}` : ''
           }page=${page}&perpage=${size}${search ? `&filter=${search}` : ''}`
         )
         setDevices(response.data.data?.devices)
@@ -240,7 +238,7 @@ const ManageDevice = () => {
         setLoading(false)
       }
     },
-    [perPage, wardId]
+    [perPage, wardId, hosId]
   )
 
   const handlePageChange = (page: number) => {
@@ -906,9 +904,8 @@ const ManageDevice = () => {
   }
 
   useEffect(() => {
-    if (!token) return
     fetchDevices(1)
-  }, [token, wardId])
+  }, [wardId, hosId])
 
   const shouldFetchFunc = async () => {
     await fetchDevices(1, 10, globalSearch)
@@ -1382,7 +1379,9 @@ const ManageDevice = () => {
               <div className='col-span-1 flex justify-center'>
                 <div className='form-control'>
                   <label className='label cursor-pointer image-hover flex flex-col justify-center'>
-                    <span className='label-text text-wrap'>{t('userPicture')}</span>
+                    <span className='label-text text-wrap'>
+                      {t('userPicture')}
+                    </span>
                     <input
                       key={formData.imagePreview}
                       ref={fileInputRef}
@@ -1506,7 +1505,9 @@ const ManageDevice = () => {
                 {/* remark */}
                 <div className='form-control w-full'>
                   <label className='label flex-col items-start w-full mb-3'>
-                    <span className='label-text text-wrap mb-2'>{t('remmark')}</span>
+                    <span className='label-text text-wrap mb-2'>
+                      {t('remmark')}
+                    </span>
                     <input
                       type='text'
                       name='remark'
@@ -1521,7 +1522,9 @@ const ManageDevice = () => {
                 {/* tag */}
                 <div className='form-control w-full'>
                   <label className='label flex-col items-start w-full mb-3'>
-                    <span className='label-text text-wrap mb-2'>{t('tag')}</span>
+                    <span className='label-text text-wrap mb-2'>
+                      {t('tag')}
+                    </span>
                     <input
                       type='text'
                       name='tag'
@@ -1670,7 +1673,10 @@ const ManageDevice = () => {
             </div>
           ) : (
             <div>
-              <div role='tablist' className='tabs tabs-border justify-evenly mt-4'>
+              <div
+                role='tablist'
+                className='tabs tabs-border justify-evenly mt-4'
+              >
                 <a
                   role='tab'
                   className={`tab ${
@@ -2085,7 +2091,9 @@ const ManageDevice = () => {
                           </div>
                           <div className='grid grid-cols-1 md:grid-cols-2 md:gap-3'>
                             <label className='label flex-col items-start w-full mb-3'>
-                              <span className='label-text text-wrap mb-2'>Gateway</span>
+                              <span className='label-text text-wrap mb-2'>
+                                Gateway
+                              </span>
                               <input
                                 type='text'
                                 name='gatway'
@@ -2104,7 +2112,9 @@ const ManageDevice = () => {
                               />
                             </label>
                             <label className='label flex-col items-start w-full mb-3'>
-                              <span className='label-text text-wrap mb-2'>Dns</span>
+                              <span className='label-text text-wrap mb-2'>
+                                Dns
+                              </span>
                               <input
                                 type='text'
                                 name='gatway'

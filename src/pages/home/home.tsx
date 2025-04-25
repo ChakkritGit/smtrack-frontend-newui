@@ -85,7 +85,7 @@ const Home = () => {
       try {
         const response = await axiosInstance.get(
           `/dashboard/count?${
-            wardId ? `ward=${wardId}&` : ''
+            wardId ? `ward=${wardId}&` : hosId ? `ward=${hosId}` : ''
           }page=${page}&perpage=${size}`
         )
         setDeviceCount(response.data.data)
@@ -100,7 +100,7 @@ const Home = () => {
         }
       }
     },
-    [perPage, wardId]
+    [perPage, wardId, hosId]
   )
 
   const fetchDevices = useCallback(
@@ -113,7 +113,7 @@ const Home = () => {
           responseType<DeviceResponseType>
         >(
           `/devices/device?${
-            wardId ? `ward=${wardId}&` : ''
+            wardId ? `ward=${wardId}&` : hosId ? `ward=${hosId}` : ''
           }page=${page}&perpage=${size}${search ? `&filter=${search}` : ''}`
         )
         setDevices(response.data.data?.devices)
@@ -131,7 +131,7 @@ const Home = () => {
         setLoading(false)
       }
     },
-    [perPage, wardId]
+    [perPage, wardId, hosId]
   )
 
   const changListAndGrid = (selected: number) => {
@@ -226,7 +226,7 @@ const Home = () => {
     }
 
     return () => {}
-  }, [devices, socketData, currentPage, perPage, globalSearch, isFocused])
+  }, [devices, socketData, currentPage, perPage, globalSearch, isFocused, hosId])
 
   const shouldFetchFunc = async () =>  {
     await fetchDevices(1, 10, globalSearch)
