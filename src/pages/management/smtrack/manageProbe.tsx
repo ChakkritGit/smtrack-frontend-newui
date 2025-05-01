@@ -704,7 +704,7 @@ const ManageProbe = () => {
   ]
 
   const doorArray = [
-    { value: 'OFF', name: "0" },
+    { value: 'OFF', name: t('doorInacctive') },
     { value: '1', name: t('probeDoor1') },
     { value: '2', name: t('probeDoor2') },
     { value: '3', name: t('probeDoor3') }
@@ -2055,7 +2055,9 @@ const ManageProbe = () => {
                   {/* 1 */}
                   <div className='form-control w-full'>
                     <label className='label flex-col items-start w-full mb-3'>
-                      <span className='label-text text-wrap mb-2'>{t('choiceOne')}</span>
+                      <span className='label-text text-wrap mb-2'>
+                        {t('choiceOne')}
+                      </span>
                       <div className='flex flex-col gap-3'>
                         <label className='flex items-center gap-2'>
                           <input
@@ -2131,7 +2133,9 @@ const ManageProbe = () => {
                   {/* 2 */}
                   <div className='form-control w-full'>
                     <label className='label flex-col items-start w-full mb-3'>
-                      <span className='label-text text-wrap mb-2'>{t('choiceTwo')}</span>
+                      <span className='label-text text-wrap mb-2'>
+                        {t('choiceTwo')}
+                      </span>
                       <div className='flex flex-col gap-3'>
                         <label className='flex items-center gap-2'>
                           <input
@@ -2247,7 +2251,9 @@ const ManageProbe = () => {
                   {/* 4 */}
                   <div className='form-control w-full'>
                     <label className='label flex-col items-start w-full mb-3'>
-                      <span className='label-text text-wrap mb-2'>{t('choiceFour')}</span>
+                      <span className='label-text text-wrap mb-2'>
+                        {t('choiceFour')}
+                      </span>
                       <div className='flex flex-col gap-3'>
                         <label className='flex items-center gap-2'>
                           <input
@@ -2285,7 +2291,9 @@ const ManageProbe = () => {
               <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-4 w-full'>
                 <div className='form-control w-full items-center justify-center'>
                   <label className='label flex-col items-center justify-center w-full'>
-                    <span className='label-text text-wrap mb-2'>{t('firstDay')}</span>
+                    <span className='label-text text-wrap mb-2'>
+                      {t('firstDay')}
+                    </span>
                     <Select
                       isDisabled={scheduleDay.firstDay === 'ALL'}
                       key={String(scheduleDay.firstDay)}
@@ -2316,7 +2324,9 @@ const ManageProbe = () => {
                 </div>
                 <div className='form-control w-full items-center justify-center'>
                   <label className='label flex-col items-center justify-center w-full'>
-                    <span className='label-text text-wrap mb-2'>{t('seccondDay')}</span>
+                    <span className='label-text text-wrap mb-2'>
+                      {t('seccondDay')}
+                    </span>
                     <Select
                       isDisabled={scheduleDay.seccondDay === 'ALL'}
                       key={String(scheduleDay.seccondDay)}
@@ -2347,7 +2357,9 @@ const ManageProbe = () => {
                 </div>
                 <div className='form-control w-full items-center justify-center'>
                   <label className='label flex-col items-center justify-center w-full'>
-                    <span className='label-text text-wrap mb-2'>{t('thirdDay')}</span>
+                    <span className='label-text text-wrap mb-2'>
+                      {t('thirdDay')}
+                    </span>
                     <Select
                       isDisabled={scheduleDay.thirdDay === 'ALL'}
                       key={String(scheduleDay.thirdDay)}
@@ -2378,7 +2390,9 @@ const ManageProbe = () => {
                 </div>
                 <div className='form-control w-full items-center justify-center'>
                   <label className='label flex-col items-center justify-center'>
-                    <span className='label-text text-wrap mb-2'>{t('everyDays')}</span>
+                    <span className='label-text text-wrap mb-2'>
+                      {t('everyDays')}
+                    </span>
                     <input
                       type='checkbox'
                       className='toggle toggle-md'
@@ -2412,7 +2426,9 @@ const ManageProbe = () => {
               </div>
 
               <div className='grid grid-cols-1 lg:grid-cols-3 gap-4 mt-5 w-full'>
-                <span className='label-text text-wrap mb-2'>{t('firstTime')}</span>
+                <span className='label-text text-wrap mb-2'>
+                  {t('firstTime')}
+                </span>
                 <Select
                   // key={String(scheduleTime.firstTime)}
                   options={filterOptions(
@@ -2460,7 +2476,9 @@ const ManageProbe = () => {
               </div>
 
               <div className='grid grid-cols-1 lg:grid-cols-3 gap-4 mt-4 w-full'>
-                <span className='label-text text-wrap mb-2'>{t('seccondTime')}</span>
+                <span className='label-text text-wrap mb-2'>
+                  {t('seccondTime')}
+                </span>
                 <Select
                   options={filterOptions(
                     mapOptions<ScheduleHour, keyof ScheduleHour>(
@@ -2507,7 +2525,9 @@ const ManageProbe = () => {
               </div>
 
               <div className='grid grid-cols-1 lg:grid-cols-3 gap-4 mt-4 w-full'>
-                <span className='label-text text-wrap mb-2'>{t('thirdTime')}</span>
+                <span className='label-text text-wrap mb-2'>
+                  {t('thirdTime')}
+                </span>
                 <Select
                   // key={String(scheduleTime.firstTime)}
                   options={filterOptions(

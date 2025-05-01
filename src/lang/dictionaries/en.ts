@@ -94,14 +94,15 @@ export default {
     choiceThree: '3. Repetition of message.',
     choiceFour: '4. Notification to the app.',
     messageimmediately: 'Immediately',
-    messageAfter: 'After (Minutes)',
+    messageAfter: 'After (5Minutes)',
     messageSend: 'Send',
     messageDonotSend: 'Do not Send',
     messageOneTime: 'One Time',
-    messageEvery: 'Every (Minutes)',
+    messageEvery: 'Every (5Minutes)',
     messageOn: 'On',
     messageOff: 'Off',
     notificationButtonSubmit: 'Save',
+    doorInacctive: 'Disable the door',
 
     // device cards
     deviceOnline: 'Online',

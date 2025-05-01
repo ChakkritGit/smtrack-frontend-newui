@@ -93,11 +93,11 @@ export default {
     choiceThree: '3. ส่งข้อความซ้ำ',
     choiceFour: '4. การแจ้งเตือนไปยังแอป',
     messageimmediately: 'ส่งทันที',
-    messageAfter: 'ส่งหลังจาก (นาที)',
+    messageAfter: 'ส่งหลังจาก (5นาที)',
     messageSend: 'ส่ง',
     messageDonotSend: 'ไม่ต้องส่ง',
     messageOneTime: 'ครั้งเดียว',
-    messageEvery: 'ส่งทุก ๆ (นาที)',
+    messageEvery: 'ส่งทุก ๆ (5นาที)',
     messageOn: 'เปิด',
     messageOff: 'ปิด',
     notificationButtonSubmit: 'บันทึก',
@@ -112,6 +112,7 @@ export default {
     InternetBackToNormal: 'อินเทอร์เน็ตกลับมาปกติ',
     doorNum: 'ประตู',
     doorAlertText: 'ตั้งค่าเสียงประตู',
+    doorInacctive: 'ปิดใช้งานประตู',
 
     // device cards
     deviceOnline: 'ออนไลน์',
