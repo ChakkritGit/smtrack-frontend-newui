@@ -404,6 +404,8 @@ export default {
     year: 'Years',
     month: 'Months',
     day: 'Days',
+    hour: 'hour',
+    minute: 'minute',
     sourceSeq: 'Source sequence',
     destSeq: 'Destination sequence',
     optimizeGraph: 'Optimize Chart',

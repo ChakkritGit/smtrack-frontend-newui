@@ -378,11 +378,19 @@ const Home = () => {
           const updateAt = new Date(i.updateAt)
           const now = new Date()
           const diffInMilliseconds = now.getTime() - updateAt.getTime()
-          const diffDate = new Date(diffInMilliseconds)
 
-          const years = diffDate.getUTCFullYear() - 1970
-          const months = diffDate.getUTCMonth()
-          const days = diffDate.getUTCDate() - 1
+          const totalMinutes = Math.floor(diffInMilliseconds / (1000 * 60))
+          const minutes = totalMinutes % 60
+
+          const totalHours = Math.floor(diffInMilliseconds / (1000 * 60 * 60))
+          const hours = totalHours % 24
+
+          const totalDays = Math.floor(
+            diffInMilliseconds / (1000 * 60 * 60 * 24)
+          )
+          const days = totalDays % 30
+          const months = Math.floor(totalDays / 30) % 12
+          const years = Math.floor(totalDays / 365)
 
           return (
             <span>
@@ -393,7 +401,11 @@ const Home = () => {
                 : months > 0
                 ? `${months} ${t('month')} ${days} ${t('day')}`
                 : days > 0
-                ? `${days} ${t('day')}`
+                ? `${days} ${t('day')} ${hours} ${t('hour')}`
+                : hours > 0
+                ? `${hours} ${t('hour')} ${minutes} ${t('minute')}`
+                : minutes > 0
+                ? `${minutes} ${t('minute')}`
                 : t('amoment')}
             </span>
           )

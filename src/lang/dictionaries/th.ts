@@ -403,6 +403,8 @@ export default {
     year: 'ปี',
     month: 'เดือน',
     day: 'วัน',
+    hour: 'ชั่วโมง',
+    minute: 'นาที',
     sourceSeq: 'ลำดับต้นทาง',
     destSeq: 'ลำดับปลายทาง',
     optimizeGraph: 'ปรับกราฟให้เหมาะสม',
