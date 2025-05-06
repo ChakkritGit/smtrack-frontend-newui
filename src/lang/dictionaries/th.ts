@@ -475,6 +475,7 @@ export default {
     showFPS: 'เฟรมเรท',
     exit: 'กด ESC หรือ ปุ่มปิด เพื่อปิด',
     selectData: 'เลือกวันที่',
+    amoment: 'เมื่อสักครู่',
 
     // connect
     ipAddress: 'IP',

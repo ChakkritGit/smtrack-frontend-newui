@@ -476,6 +476,7 @@ export default {
     showFPS: 'Frame Rate',
     exit: 'Press ESC key or click the button below to close',
     selectData: 'Pick a date',
+    amoment: 'Just now',
 
     // connect
     ipAddress: 'IP',

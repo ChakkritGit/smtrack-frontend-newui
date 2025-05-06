@@ -392,7 +392,9 @@ const Home = () => {
                   )}`
                 : months > 0
                 ? `${months} ${t('month')} ${days} ${t('day')}`
-                : `${days} ${t('day')}`}
+                : days > 0
+                ? `${days} ${t('day')}`
+                : t('amoment')}
             </span>
           )
         },
@@ -495,7 +497,9 @@ const Home = () => {
               <button
                 className={` ${
                   cancelOnline
-                    ? `h-[40px] min-[40px] max-h-[40px] ${i18nInit === 'th' ? 'w-[190px]' : 'w-[163px]'} bg-base-300 rounded-box`
+                    ? `h-[40px] min-[40px] max-h-[40px] ${
+                        i18nInit === 'th' ? 'w-[190px]' : 'w-[163px]'
+                      } bg-base-300 rounded-box`
                     : 'btn h-[36px] w-[84px] min-h-0 p-2 font-normal btn-ghost border text-base-content'
                 } max-w-[190px] flex items-center justify-center border !border-base-content/70 px-1.5 duration-300 transition-all ease-linear overflow-hidden `}
                 onClick={() => {
