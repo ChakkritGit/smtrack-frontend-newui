@@ -140,12 +140,12 @@ const Home = () => {
     [perPage, wardId, hosId]
   )
 
-  const fetchDeviceOnline = useCallback(async () => {
+  const fetchDeviceOnline = useCallback(async (hosid?: string) => {
     try {
       setLoading(true)
       const response = await axiosInstance.get<
         responseType<DevicesOnlineType[]>
-      >(`/devices/online`)
+      >(`/devices/online${hosid ? `?hospital=${hosid}` : ''}`)
       setDevicesOnline(response.data.data)
     } catch (error) {
       if (error instanceof AxiosError) {
@@ -321,6 +321,17 @@ const Home = () => {
     }
   }, [globalSearch, currentPage, perPage, isCleared, isFocused])
 
+  useEffect(() => {
+    if (onlineAll === 2) {
+      if (hosId) {
+        fetchDeviceOnline(hosId)
+      }
+      if (hosId === '') {
+        fetchDeviceOnline()
+      }
+    }
+  }, [onlineAll, hosId])
+
   const openAdjustModal = (probe: ProbeType[], sn: string) => {
     setProbeData(probe)
     setSerial(sn)
@@ -373,7 +384,7 @@ const Home = () => {
         center: true
       }
     ],
-    []
+    [t]
   )
 
   const subColumns: TableColumn<ProbeType>[] = useMemo(
@@ -476,7 +487,7 @@ const Home = () => {
                       onClick={() => {
                         setOnlineAll(2)
                         setDeviceConnect('')
-                        fetchDeviceOnline()
+                        fetchDeviceOnline(hosId)
                       }}
                     >
                       <span className={`font-medium`}>
@@ -546,9 +557,7 @@ const Home = () => {
             </button>
           </div>
           <div className='divider divider-horizontal mx-0 py-2 hidden lg:flex'></div>
-          <div className={`${onlineAll === 2 ? 'pointer-events-none opacity-30' : ''}`}>
-            <HospitalAndWard />
-          </div>
+          <HospitalAndWard />
           <div className='flex items-center gap-2'>
             <button
               disabled={onlineAll === 2}
