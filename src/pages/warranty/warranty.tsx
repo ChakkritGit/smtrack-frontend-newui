@@ -575,7 +575,7 @@ const Warranty = () => {
           progressComponent={<Loading />}
           noDataComponent={<DataTableNoData />}
           paginationRowsPerPageOptions={[10, 20, 50, 100, 150, 200]}
-          className='md:!max-h-[calc(100dvh-300px)]'
+          className='md:!max-h-[calc(100dvh-360px)]'
         />
       </div>
     )

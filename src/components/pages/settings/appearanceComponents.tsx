@@ -37,7 +37,7 @@ const AppearanceComponents = () => {
   return (
     <div>
       <span className='text-[24px]'>{t('themeMode')}</span>
-      <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 p-3 my-3 max-h-[250px] md:max-h-[450px] overflow-y-scroll'>
+      <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 p-3 my-3'>
         <button
           onClick={changeToSystem}
           className='outline-base-content text-start outline-offset-4'

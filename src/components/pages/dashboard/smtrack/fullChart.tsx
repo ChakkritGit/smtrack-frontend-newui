@@ -305,7 +305,7 @@ const FullChartComponent = (props: FullChartPropType) => {
         breakpoint: 5124,
         options: {
           chart: {
-            height: 2480
+            height: 2445
           }
         }
       },
@@ -313,7 +313,7 @@ const FullChartComponent = (props: FullChartPropType) => {
         breakpoint: 3844,
         options: {
           chart: {
-            height: 1780
+            height: 1745
           }
         }
       },
@@ -321,7 +321,7 @@ const FullChartComponent = (props: FullChartPropType) => {
         breakpoint: 2564,
         options: {
           chart: {
-            height: 1080
+            height: 1045
           }
         }
       },
@@ -329,7 +329,7 @@ const FullChartComponent = (props: FullChartPropType) => {
         breakpoint: 1924,
         options: {
           chart: {
-            height: 680
+            height: 635
           }
         }
       },
@@ -337,7 +337,7 @@ const FullChartComponent = (props: FullChartPropType) => {
         breakpoint: 1284,
         options: {
           chart: {
-            height: 580
+            height: 545
           }
         }
       },
@@ -345,7 +345,7 @@ const FullChartComponent = (props: FullChartPropType) => {
         breakpoint: 724,
         options: {
           chart: {
-            height: 480
+            height: 445
           }
         }
       },
@@ -353,7 +353,7 @@ const FullChartComponent = (props: FullChartPropType) => {
         breakpoint: 484,
         options: {
           chart: {
-            height: 380
+            height: 345
           }
         }
       }
@@ -366,7 +366,7 @@ const FullChartComponent = (props: FullChartPropType) => {
   )
 
   return (
-    <div className={`mt-3 ${isLoading ? 'h-[calc(100dvh-200px)]' : ''}`}>
+    <div className={`mt-3 ${isLoading ? 'h-[calc(100dvh-260px)]' : ''}`}>
       {isLoading ? <Loading /> : chart}
     </div>
   )
