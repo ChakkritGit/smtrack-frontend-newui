@@ -51,7 +51,8 @@ const Home = () => {
     tokenDecode,
     socketData,
     ambientDisabled,
-    shouldFetch
+    shouldFetch,
+    i18nInit
   } = useSelector((state: RootState) => state.utils)
   const {
     hospital,
@@ -494,9 +495,9 @@ const Home = () => {
               <button
                 className={` ${
                   cancelOnline
-                    ? 'h-[40px] min-[40px] max-h-[40px] !max-w-[190px] bg-base-300 rounded-box'
-                    : 'btn w-max h-[36px] min-h-0 p-2 font-normal btn-ghost border text-base-content'
-                } !max-w-[84px] flex items-center justify-center border !border-base-content/70 px-1.5 duration-300 transition-all ease-linear overflow-hidden `}
+                    ? `h-[40px] min-[40px] max-h-[40px] ${i18nInit === 'th' ? 'w-[190px]' : 'w-[163px]'} bg-base-300 rounded-box`
+                    : 'btn h-[36px] w-[84px] min-h-0 p-2 font-normal btn-ghost border text-base-content'
+                } max-w-[190px] flex items-center justify-center border !border-base-content/70 px-1.5 duration-300 transition-all ease-linear overflow-hidden `}
                 onClick={() => {
                   if (!cancelOnline) {
                     setCanCelOnline(true)
@@ -678,6 +679,12 @@ const Home = () => {
             progressPending={loading}
             progressComponent={<Loading />}
             noDataComponent={<DataTableNoData />}
+            onRowClicked={i => {
+              cookies.set('deviceKey', i.id, cookieOptions) // it's mean setSerial
+              dispatch(setDeviceKey(i.id))
+              navigate('/dashboard')
+              window.scrollTo(0, 0)
+            }}
             paginationRowsPerPageOptions={[10, 25, 50, 75, 100]}
             className='md:!max-h-[calc(100dvh-530px)]'
           />
