@@ -22,11 +22,14 @@ import {
 import { DeviceCountType } from '../../types/smtrack/devices/deviceCount'
 import { AxiosError } from 'axios'
 import { useTranslation } from 'react-i18next'
-import { RiLayoutGridLine, RiListUnordered } from 'react-icons/ri'
+import { RiCloseLine, RiLayoutGridLine, RiListUnordered } from 'react-icons/ri'
 import { cookieOptions, cookies } from '../../constants/utils/utilsConstants'
 import { useNavigate } from 'react-router-dom'
 import { responseType } from '../../types/smtrack/utilsRedux/utilsReduxType'
-import { DeviceResponseType } from '../../types/global/deviceResponseType'
+import {
+  DeviceResponseType,
+  DevicesOnlineType
+} from '../../types/global/deviceResponseType'
 import { DeviceType } from '../../types/smtrack/devices/deviceType'
 import { columnData, subColumnData } from '../../components/pages/home/column'
 import { GlobalContext } from '../../contexts/globalContext'
@@ -79,6 +82,9 @@ const Home = () => {
   const { role } = tokenDecode || {}
   const firstFetch = useRef<boolean>(false)
   const deviceFetchHistory = useRef<Record<string, number>>({})
+  const [onlineAll, setOnlineAll] = useState(1)
+  const [cancelOnline, setCanCelOnline] = useState(false)
+  const [devicesOnline, setDevicesOnline] = useState<DevicesOnlineType[]>([])
 
   const fetchDeviceCount = useCallback(
     async (page: number, size = perPage) => {
@@ -133,6 +139,27 @@ const Home = () => {
     },
     [perPage, wardId, hosId]
   )
+
+  const fetchDeviceOnline = useCallback(async () => {
+    try {
+      setLoading(true)
+      const response = await axiosInstance.get<
+        responseType<DevicesOnlineType[]>
+      >(`/devices/online`)
+      setDevicesOnline(response.data.data)
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        if (error.response?.status === 401) {
+          dispatch(setTokenExpire(true))
+        }
+        console.error(error.message)
+      } else {
+        console.error(error)
+      }
+    } finally {
+      setLoading(false)
+    }
+  }, [])
 
   const changListAndGrid = (selected: number) => {
     localStorage.setItem('listGrid', String(selected))
@@ -226,9 +253,17 @@ const Home = () => {
     }
 
     return () => {}
-  }, [devices, socketData, currentPage, perPage, globalSearch, isFocused, hosId])
+  }, [
+    devices,
+    socketData,
+    currentPage,
+    perPage,
+    globalSearch,
+    isFocused,
+    hosId
+  ])
 
-  const shouldFetchFunc = async () =>  {
+  const shouldFetchFunc = async () => {
     await fetchDevices(1, 10, globalSearch)
     dispatch(setSholdFetch())
   }
@@ -299,6 +334,48 @@ const Home = () => {
     [t, navigate]
   )
 
+  const devicesOnlineColumns: TableColumn<DevicesOnlineType>[] = useMemo(
+    () => [
+      {
+        name: t('deviceSerialTb'),
+        selector: i => i.id ?? '—',
+        sortable: false,
+        center: true
+      },
+      {
+        name: t('deviceNameTb'),
+        selector: i => i.name ?? '—',
+        sortable: false,
+        center: false
+      },
+      {
+        name: t('hosName'),
+        selector: i => i.hospitalName,
+        sortable: false,
+        center: false
+      },
+      {
+        name: t('wardName'),
+        selector: i => i.wardName,
+        sortable: false,
+        center: false
+      },
+      {
+        name: t('deviceConnectTb'),
+        cell: () => (
+          <div
+            className={`w-max h-[24px] px-2 text-black flex items-center justify-center rounded-field bg-green-400 duration-300 ease-linear`}
+          >
+            {t('deviceOnline')}
+          </div>
+        ),
+        sortable: false,
+        center: true
+      }
+    ],
+    []
+  )
+
   const subColumns: TableColumn<ProbeType>[] = useMemo(
     () => subColumnData(t, devicesFiltered),
     [t, devicesFiltered]
@@ -325,19 +402,23 @@ const Home = () => {
           {t('showAllBox')}
         </span>
         <div className='flex items-center justify-end w-full'>
-          {role === 'SUPER' && (
-            <div className='flex items-center gap-2 bg-base-300 p-2 px-3 rounded-field w-max'>
-              <span className='truncate max-w-[150px] md:max-w-[300px]'>
-                {hospital?.filter(f => f.id?.includes(hosId))[0]?.hosName ??
-                  userProfile?.ward?.hospital?.hosName}
-              </span>
-              <span>-</span>
-              <span className='truncate max-w-[100px] md:max-w-[250px]'>
-                {ward?.filter(w => w.id?.includes(wardId))[0]?.wardName ??
-                  'ALL'}
-              </span>
-            </div>
-          )}
+          <div className='flex items-center gap-2 bg-base-300 p-2 px-3 rounded-field w-max'>
+            {(role === 'SUPER' ||
+              role === 'SERVICE' ||
+              role === 'ADMIN' ||
+              role === 'LEGACY_ADMIN') && (
+              <>
+                <span className='truncate max-w-[150px] md:max-w-[300px]'>
+                  {hospital?.filter(f => f.id?.includes(hosId))[0]?.hosName ??
+                    userProfile?.ward?.hospital?.hosName}
+                </span>
+                <span>-</span>
+              </>
+            )}
+            <span className='truncate max-w-[100px] md:max-w-[250px]'>
+              {ward?.filter(w => w.id?.includes(wardId))[0]?.wardName ?? 'ALL'}
+            </span>
+          </div>
         </div>
       </div>
       <HomeCount
@@ -349,45 +430,132 @@ const Home = () => {
         <span className='font-medium text-[20px]'>{t('detailAllBox')}</span>
         <div className='flex items-end lg:items-center gap-3 flex-col lg:flex-row lg:h-[40px]'>
           <div className='flex items-center gap-3'>
-            <button
-              className={`flex items-center justify-center !border-base-content/70 btn w-max h-[36px] min-h-0 p-2 font-normal ${
-                deviceConnect === 'online'
-                  ? 'btn-primary bg-opacity-50 text-primary-content !border-primary'
-                  : 'btn-ghost border border-base-content text-base-content'
-              }`}
-              onClick={() => handleFilterConnect('online')}
-            >
-              <div className={`w-[10px] h-[10px] ${deviceConnect === 'online' ? 'bg-primary-content' : 'bg-green-500'} rounded-field`}></div>
-              <span
-                className={`font-medium`}
+            {role === 'SUPER' ? (
+              <button
+                className={` ${
+                  cancelOnline
+                    ? 'h-[40px] min-[40px] max-h-[40px] overflow-hidden bg-base-300 rounded-box'
+                    : 'btn w-max h-[36px] min-h-0 p-2 font-normal btn-ghost border text-base-content'
+                } flex items-center justify-center border !border-base-content/70 px-1.5 duration-300 transition-all ease-out`}
+                onClick={() => {
+                  if (!cancelOnline) {
+                    setCanCelOnline(true)
+                    setDeviceConnect('online')
+                    setOnlineAll(1)
+                  }
+                }}
               >
-                {t('deviceOnline')}
-              </span>
-            </button>
+                {cancelOnline ? (
+                  <div className='flex items-center gap-1.5'>
+                    <div
+                      className={`${
+                        onlineAll === 1
+                          ? 'bg-primary text-primary-content'
+                          : 'hover:opacity-70 duration-300 ease-out transition-all'
+                      } flex items-center gap-1.5 rounded-box p-1 w-max h-[30px] px-2 cursor-pointer`}
+                      onClick={() => {
+                        setOnlineAll(1)
+                        setDeviceConnect('online')
+                      }}
+                    >
+                      <div
+                        className={`w-[10px] h-[10px] ${
+                          deviceConnect === 'online'
+                            ? 'bg-primary-content'
+                            : 'bg-green-500'
+                        } rounded-field`}
+                      ></div>
+                      <span className={`font-medium`}>{t('deviceOnline')}</span>
+                    </div>
+                    <div
+                      className={`${
+                        onlineAll === 2
+                          ? 'bg-primary text-primary-content'
+                          : 'hover:opacity-70 duration-300 ease-out transition-all'
+                      } rounded-box p-1 w-max h-[30px] px-2 cursor-pointer`}
+                      onClick={() => {
+                        setOnlineAll(2)
+                        setDeviceConnect('')
+                        fetchDeviceOnline()
+                      }}
+                    >
+                      <span className={`font-medium`}>
+                        {t('tabWarrantyAll')}
+                      </span>
+                    </div>
+                    <div
+                      className='flex items-center justify-center bg-primary text-primary-content p-1 w-[30px] h-[30px] rounded-box cursor-pointer hover:opacity-70 duration-300 ease-linear transition-all'
+                      onClick={() => {
+                        setCanCelOnline(false)
+                        setDeviceConnect('')
+                        setOnlineAll(1)
+                      }}
+                    >
+                      <RiCloseLine size={24} />
+                    </div>
+                  </div>
+                ) : (
+                  <>
+                    <div
+                      className={`w-[10px] h-[10px] ${
+                        deviceConnect === 'online'
+                          ? 'bg-primary-content'
+                          : 'bg-green-500'
+                      } rounded-field`}
+                    ></div>
+                    <span className={`font-medium`}>{t('deviceOnline')}</span>
+                  </>
+                )}
+              </button>
+            ) : (
+              <button
+                className={`flex items-center justify-center !border-base-content/70 btn w-max h-[36px] min-h-0 p-2 font-normal ${
+                  deviceConnect === 'online'
+                    ? 'btn-primary bg-opacity-50 text-primary-content !border-primary'
+                    : 'btn-ghost border border-base-content text-base-content'
+                }`}
+                onClick={() => handleFilterConnect('online')}
+              >
+                <div
+                  className={`w-[10px] h-[10px] ${
+                    deviceConnect === 'online'
+                      ? 'bg-primary-content'
+                      : 'bg-green-500'
+                  } rounded-field`}
+                ></div>
+                <span className={`font-medium`}>{t('deviceOnline')}</span>
+              </button>
+            )}
             <button
-              className={`flex items-center justify-center !border-base-content/70 btn w-max h-[36px] min-h-0 p-2 font-normal ${
+              disabled={onlineAll === 2}
+              className={`flex items-center justify-center !border-base-content/70 btn w-max h-[36px] min-h-0 p-2 font-normal disabled:opacity-30 ${
                 deviceConnect === 'offline'
                   ? 'btn-primary bg-opacity-50 text-primary-content !border-primary'
                   : 'btn-ghost border border-base-content text-base-content'
               }`}
               onClick={() => handleFilterConnect('offline')}
             >
-              <div className={`w-[10px] h-[10px] ${deviceConnect === 'offline' ? 'bg-primary-content' : 'bg-red-500'} rounded-field`}></div>
-              <span
-                className={`font-medium`}
-              >
-                {t('deviceOffline')}
-              </span>
+              <div
+                className={`w-[10px] h-[10px] ${
+                  deviceConnect === 'offline'
+                    ? 'bg-primary-content'
+                    : 'bg-red-500'
+                } rounded-field`}
+              ></div>
+              <span className={`font-medium`}>{t('deviceOffline')}</span>
             </button>
           </div>
           <div className='divider divider-horizontal mx-0 py-2 hidden lg:flex'></div>
-          <HospitalAndWard />
+          <div className={`${onlineAll === 2 ? 'pointer-events-none opacity-30' : ''}`}>
+            <HospitalAndWard />
+          </div>
           <div className='flex items-center gap-2'>
             <button
+              disabled={onlineAll === 2}
               className={`flex items-center justify-center btn ${
                 listAndGrid === 1
                   ? 'btn-primary text-primary-content'
-                  : 'btn-ghost border-base-content text-base-content'
+                  : 'btn-ghost border-base-content disabled:border-base-content/30 text-base-content disabled:text-base-content/30'
               } w-[36px] h-[36px] min-h-0 p-2 tooltip tooltip-top`}
               onClick={() => changListAndGrid(1)}
               data-tip={t('list')}
@@ -397,10 +565,11 @@ const Home = () => {
               <RiListUnordered size={20} />
             </button>
             <button
+              disabled={onlineAll === 2}
               className={`flex items-center justify-center btn ${
                 listAndGrid === 2
                   ? 'btn-primary text-primary-content'
-                  : 'btn-ghost border border-base-content text-base-content'
+                  : 'btn-ghost border-base-content disabled:border-base-content/30 text-base-content disabled:text-base-content/30'
               } w-[36px] h-[36px] min-h-0 p-2 tooltip tooltip-top`}
               onClick={() => changListAndGrid(2)}
               data-tip={t('grid')}
@@ -412,43 +581,64 @@ const Home = () => {
           </div>
         </div>
       </div>
-      {listAndGrid === 1 ? (
+      {onlineAll !== 2 ? (
+        listAndGrid === 1 ? (
+          <div className='dataTableWrapper bg-base-100 rounded-field p-3 duration-300 ease-linear'>
+            <DataTable
+              responsive
+              fixedHeader
+              pagination
+              paginationServer
+              pointerOnHover
+              expandableRows
+              columns={columns}
+              data={devicesFiltered}
+              paginationTotalRows={totalRows}
+              paginationDefaultPage={currentPage}
+              paginationPerPage={perPage}
+              progressPending={loading}
+              progressComponent={<Loading />}
+              noDataComponent={<DataTableNoData />}
+              expandableRowsComponent={ExpandedComponent}
+              onChangeRowsPerPage={handlePerRowsChange}
+              onChangePage={handlePageChange}
+              onRowClicked={handleRowClicked}
+              paginationRowsPerPageOptions={[10, 25, 50]}
+              className='md:!max-h-[calc(100dvh-530px)]'
+            />
+          </div>
+        ) : (
+          <HomeDeviceCard
+            devicesFiltered={devicesFiltered}
+            totalRows={totalRows}
+            currentPage={currentPage}
+            perPage={perPage}
+            loading={loading}
+            ambientDisabled={ambientDisabled}
+            handlePerRowsChange={handlePerRowsChange}
+            handlePageChange={handlePageChange}
+            openAdjustModal={openAdjustModal}
+          />
+        )
+      ) : (
         <div className='dataTableWrapper bg-base-100 rounded-field p-3 duration-300 ease-linear'>
           <DataTable
             responsive
             fixedHeader
             pagination
-            paginationServer
             pointerOnHover
-            expandableRows
-            columns={columns}
-            data={devicesFiltered}
-            paginationTotalRows={totalRows}
-            paginationDefaultPage={currentPage}
-            paginationPerPage={perPage}
+            columns={devicesOnlineColumns}
+            data={devicesOnline}
+            paginationTotalRows={10}
+            paginationDefaultPage={1}
+            paginationPerPage={10}
             progressPending={loading}
             progressComponent={<Loading />}
             noDataComponent={<DataTableNoData />}
-            expandableRowsComponent={ExpandedComponent}
-            onChangeRowsPerPage={handlePerRowsChange}
-            onChangePage={handlePageChange}
-            onRowClicked={handleRowClicked}
             paginationRowsPerPageOptions={[10, 25, 50]}
             className='md:!max-h-[calc(100dvh-530px)]'
           />
         </div>
-      ) : (
-        <HomeDeviceCard
-          devicesFiltered={devicesFiltered}
-          totalRows={totalRows}
-          currentPage={currentPage}
-          perPage={perPage}
-          loading={loading}
-          ambientDisabled={ambientDisabled}
-          handlePerRowsChange={handlePerRowsChange}
-          handlePageChange={handlePageChange}
-          openAdjustModal={openAdjustModal}
-        />
       )}
 
       <Adjustments

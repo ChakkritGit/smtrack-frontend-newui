@@ -25,6 +25,7 @@ import sha256 from 'crypto-js/sha256'
 import hmacSHA512 from 'crypto-js/hmac-sha512'
 import Base64 from 'crypto-js/enc-base64'
 import { getOKLCHColor } from '../constants/utils/color'
+import { useTranslation } from 'react-i18next'
 
 const Routes = () => {
   const dispatch = useDispatch()
@@ -36,7 +37,8 @@ const Routes = () => {
     userProfile,
     blurDisabled,
     transitionDisabled,
-    grayscaleMode
+    grayscaleMode,
+    i18nInit
   } = useSelector((state: RootState) => state.utils)
   const [hospital, setHospital] = useState<HospitalType[]>([])
   const [activeIndex, setActiveIndex] = useState(0)
@@ -49,6 +51,8 @@ const Routes = () => {
   const system = window.matchMedia('(prefers-color-scheme: dark)').matches
     ? 'dark'
     : 'light'
+
+  const { i18n } = useTranslation()
 
   const decodeToken = async (getToken: string) => {
     const decoded: TokenType = await jwtDecode(getToken)
@@ -300,6 +304,12 @@ const Routes = () => {
         .forEach(el => el.remove())
     }
   }, [transitionDisabled])
+
+  useEffect(() => {
+    if (i18nInit) {
+      i18n.changeLanguage(i18nInit)
+    }
+  }, [i18n, i18nInit])
 
   return (
     <GlobalContext.Provider value={contextValue}>

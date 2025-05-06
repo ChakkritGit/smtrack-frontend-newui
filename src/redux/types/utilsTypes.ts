@@ -29,6 +29,7 @@ const BLUR_DISABLED = 'BLUR_DISABLED'
 const TRANSITION_DISABLED = 'TRANSITION_DISABLED'
 const AMBIENT_DISABLED = 'AMBIENT_DISABLED'
 const FPS_DISABLED = 'FPS_DISABLED'
+const I18N_INIT = 'I18N_INIT'
 const RESET_UTILS = 'RESET_UTILS'
 
 interface UtilsState {
@@ -54,6 +55,7 @@ interface UtilsState {
   transitionDisabled: boolean
   ambientDisabled: boolean
   fpsDisabled: boolean
+  i18nInit: string
   tokenExpire: boolean
 }
 
@@ -81,6 +83,7 @@ type UtilsAction =
   | { type: typeof TRANSITION_DISABLED }
   | { type: typeof AMBIENT_DISABLED }
   | { type: typeof FPS_DISABLED }
+  | { type: typeof I18N_INIT; payload: string }
   | { type: typeof RESET_UTILS }
 
 export {
@@ -107,6 +110,7 @@ export {
   TRANSITION_DISABLED,
   AMBIENT_DISABLED,
   FPS_DISABLED,
+  I18N_INIT,
   RESET_UTILS
 }
 export type { UtilsState, UtilsAction }

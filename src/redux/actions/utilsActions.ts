@@ -29,6 +29,7 @@ import {
   BLUR_DISABLED,
   TRANSITION_DISABLED,
   AMBIENT_DISABLED,
+  I18N_INIT,
   FPS_DISABLED
 } from '../types/utilsTypes'
 
@@ -135,6 +136,11 @@ const setFpsDisabled = () => ({
   type: FPS_DISABLED
 })
 
+const setI18nInit = (lang: string) => ({
+  type: I18N_INIT,
+  payload: lang
+})
+
 const resetUtils = () => ({
   type: RESET_UTILS
 })
@@ -163,5 +169,6 @@ export {
   setTransitionDisabled,
   setAmbientDisabled,
   setFpsDisabled,
+  setI18nInit,
   resetUtils
 }

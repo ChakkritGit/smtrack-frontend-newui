@@ -26,6 +26,7 @@ import {
   BLUR_DISABLED,
   TRANSITION_DISABLED,
   AMBIENT_DISABLED,
+  I18N_INIT,
   FPS_DISABLED
 } from '../types/utilsTypes'
 
@@ -52,6 +53,7 @@ const initialState: UtilsState = {
   transitionDisabled: localStorage.getItem('transitionDisabled') === 'false' ? false : true,
   ambientDisabled: localStorage.getItem('ambientDisabled') === 'true' ? true : false,
   fpsDisabled: localStorage.getItem('fpsDisabled') === 'true' ? true : false,
+  i18nInit: localStorage.getItem("lang") || 'th',
   soundMode: cookies.get('soundMode') ?? false
 }
 
@@ -106,6 +108,8 @@ const utilsReducer = (
       return { ...state, ambientDisabled: !state.ambientDisabled }
     case FPS_DISABLED:
       return { ...state, fpsDisabled: !state.fpsDisabled }
+    case I18N_INIT:
+      return { ...state, i18nInit: action.payload }
     case RESET_UTILS:
       return initialState
     default:

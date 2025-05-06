@@ -474,6 +474,7 @@ export default {
     ambientMode: 'แสงแบบล้อมรอบ',
     showFPS: 'เฟรมเรท',
     exit: 'กด ESC หรือ ปุ่มปิด เพื่อปิด',
+    selectData: 'เลือกวันที่',
 
     // connect
     ipAddress: 'IP',

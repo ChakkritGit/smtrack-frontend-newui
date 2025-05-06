@@ -475,6 +475,7 @@ export default {
     ambientMode: 'Ambient Light',
     showFPS: 'Frame Rate',
     exit: 'Press ESC key or click the button below to close',
+    selectData: 'Pick a date',
 
     // connect
     ipAddress: 'IP',

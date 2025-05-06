@@ -8,7 +8,12 @@ import { useEffect, useState } from 'react'
 import Swal from 'sweetalert2'
 import axiosInstance from '../../../constants/axios/axiosInstance'
 import { responseType } from '../../../types/smtrack/utilsRedux/utilsReduxType'
-import { cookieOptions, cookies } from '../../../constants/utils/utilsConstants'
+import {
+  cookieOptions,
+  cookies,
+  formatThaiDate,
+  formatThaiDateSend
+} from '../../../constants/utils/utilsConstants'
 import { AxiosError } from 'axios'
 import {
   RiDashboardLine,
@@ -17,29 +22,31 @@ import {
   RiTableFill
 } from 'react-icons/ri'
 import FullTableTmsComponent from '../../../components/pages/dashboard/tms/fullTableTms'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import {
   setDeviceKey,
   setTokenExpire
 } from '../../../redux/actions/utilsActions'
 import toast from 'react-hot-toast'
 import * as XLSX from 'xlsx'
+import { DayPicker } from 'react-day-picker'
+import { enUS, th } from 'react-day-picker/locale'
+import { RootState } from '../../../redux/reducers/rootReducer'
 
 const FullTableTms = () => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
   const navigate = useNavigate()
   const location = useLocation() as Location<{ deviceLogs: DeviceLogTms }>
+  const { i18nInit } = useSelector((state: RootState) => state.utils)
   const { deviceLogs } = location.state ?? {
     deviceLogs: { sn: '', minTemp: 0, maxTemp: 0 }
   }
   const [pageNumber, setPagenumber] = useState(1)
   const [dataLog, setDataLog] = useState<LogChartTms[]>([])
   const [isLoading, setIsLoading] = useState(false)
-  const [filterDate, setFilterDate] = useState({
-    startDate: '',
-    endDate: ''
-  })
+  const [startDate, setStartDate] = useState<Date | undefined>()
+  const [endDate, setEndDate] = useState<Date | undefined>()
 
   useEffect(() => {
     if (!deviceLogs) {
@@ -125,12 +132,11 @@ const FullTableTms = () => {
   }
 
   const Logcustom = async () => {
-    const { endDate, startDate } = filterDate
-    let startDateNew = new Date(filterDate.startDate)
-    let endDateNew = new Date(filterDate.endDate)
-    let timeDiff = Math.abs(endDateNew.getTime() - startDateNew.getTime())
-    let diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24))
-    if (startDate !== '' && endDate !== '') {
+    let startDateNew = startDate
+    let endDateNew = endDate
+    if (startDateNew && endDateNew) {
+      let timeDiff = Math.abs(endDateNew.getTime() - startDateNew.getTime())
+      let diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24))
       if (diffDays <= 31) {
         try {
           setDataLog([])
@@ -138,9 +144,11 @@ const FullTableTms = () => {
           const responseData = await axiosInstance.get<
             responseType<LogChartTms[]>
           >(
-            `/legacy/graph?filter=${filterDate.startDate},${
-              filterDate.endDate
-            }&sn=${deviceLogs?.sn ? deviceLogs?.sn : cookies.get('deviceKey')}`
+            `/legacy/graph?filter=${formatThaiDateSend(
+              startDateNew
+            )},${formatThaiDateSend(endDateNew)}&sn=${
+              deviceLogs?.sn ? deviceLogs?.sn : cookies.get('deviceKey')
+            }`
           )
           setDataLog(responseData.data.data)
         } catch (error) {
@@ -333,22 +341,45 @@ const FullTableTms = () => {
       </div>
       {pageNumber === 4 && (
         <div className='flex items-end justify-center flex-col md:items-center md:flex-row gap-3 mt-3'>
-          <input
-            type='date'
-            className='input input-bordered w-full md:max-w-xs'
-            onChange={e =>
-              setFilterDate({ ...filterDate, startDate: e.target.value })
-            }
-          />
-          <input
-            type='date'
-            className='input input-bordered w-full md:max-w-xs'
-            onChange={e =>
-              setFilterDate({ ...filterDate, endDate: e.target.value })
-            }
-          />
-          <button className='btn btn-neutral' onClick={() => Logcustom()}>
-            Search
+          <button
+            popoverTarget='startDate-popover'
+            className='input input-border w-full md:w-56'
+          >
+            {startDate ? formatThaiDate(startDate) : t('selectData')}
+          </button>
+
+          <div popover='auto' id='startDate-popover' className='dropdown'>
+            <DayPicker
+              className='react-day-picker'
+              mode='single'
+              selected={startDate}
+              onSelect={setStartDate}
+              locale={i18nInit === 'th' ? th : enUS}
+            />
+          </div>
+
+          <button
+            popoverTarget='endDate-popover'
+            className='input input-border w-full md:w-56'
+          >
+            {endDate ? formatThaiDate(endDate) : t('selectData')}
+          </button>
+
+          <div popover='auto' id='endDate-popover' className='dropdown'>
+            <DayPicker
+              className='react-day-picker'
+              mode='single'
+              selected={endDate}
+              onSelect={setEndDate}
+              locale={i18nInit === 'th' ? th : enUS}
+            />
+          </div>
+
+          <button
+            className='btn btn-neutral w-full md:w-24'
+            onClick={() => Logcustom()}
+          >
+            {t('searchButton')}
           </button>
         </div>
       )}

@@ -587,6 +587,26 @@ const useSwiperSync = () => {
 const breakText = (text: string, length = 25) =>
   text?.match(new RegExp(`.{1,${length}}`, 'g'))?.join('\n')
 
+
+const formatThaiDate = (date: Date): string => {
+  const day = date.getDate()
+  const month = date.getMonth() + 1
+  const year = date.getFullYear() + 543
+  return `${day}/${month}/${year}`
+}
+
+const formatThaiDateSend = (date: Date): string => {
+  const day = date.getDate()
+  const month = date.getMonth() + 1
+  const year = date.getFullYear()
+
+  const thaiYear = year
+  const formatted = `${thaiYear}-${String(month).padStart(2, '0')}-${String(
+    day
+  ).padStart(2, '0')}`
+  return formatted
+}
+
 export {
   accessToken,
   cookieDecodeObject,
@@ -605,5 +625,7 @@ export {
   swalMoveDevice,
   extractValues,
   useSwiperSync,
-  breakText
+  breakText,
+  formatThaiDate,
+  formatThaiDateSend
 }

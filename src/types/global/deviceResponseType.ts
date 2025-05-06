@@ -1,8 +1,16 @@
-import { DeviceType } from "../smtrack/devices/deviceType"
+import { DeviceType } from '../smtrack/devices/deviceType'
 
 type DeviceResponseType = {
-  devices: DeviceType[],
+  devices: DeviceType[]
   total: number
 }
 
-export type { DeviceResponseType }
+type DevicesOnlineType = {
+  hospitalName: string
+  id: string
+  name: string
+  updateAt: string
+  wardName: string
+}
+
+export type { DeviceResponseType, DevicesOnlineType }

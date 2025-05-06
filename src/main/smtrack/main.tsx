@@ -172,7 +172,7 @@ const MainSmtrack = () => {
               <span className='text-[1rem] max-w-[320px] break-words'>
                 {changText(socketData.message, t)}
               </span>
-              <span className='text-sm mt-1'>
+              <span className='text-base mt-1'>
                 {new Date(socketData.time).toLocaleString('th-TH', {
                   day: '2-digit',
                   month: '2-digit',

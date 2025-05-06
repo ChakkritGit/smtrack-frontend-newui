@@ -1288,7 +1288,7 @@ const ManageDevice = () => {
           onChangeRowsPerPage={handlePerRowsChange}
           onChangePage={handlePageChange}
           paginationRowsPerPageOptions={[10, 20, 50, 100, 150, 200]}
-          className='md:!max-h-[calc(100dvh-350px)]'
+          className='md:!max-h-[calc(100dvh-420px)]'
         />
       </div>
 
