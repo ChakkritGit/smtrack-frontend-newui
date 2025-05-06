@@ -65,7 +65,7 @@ const ManageDevice = () => {
         setLoading(true)
         const response = await axiosInstance.get(
           `/legacy/device?${
-            wardId ? `ward=${wardId}&` : hosId ? `ward=${hosId}` : ''
+            wardId ? `ward=${wardId}&` : hosId ? `ward=${hosId}&` : ''
           }page=${page}&perpage=${size} ${search ? `&filter=${search}` : ''}`
         )
         setDevices(response.data.data?.devices)

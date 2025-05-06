@@ -91,7 +91,7 @@ const Home = () => {
       try {
         const response = await axiosInstance.get(
           `/dashboard/count?${
-            wardId ? `ward=${wardId}&` : hosId ? `ward=${hosId}` : ''
+            wardId ? `ward=${wardId}&` : hosId ? `ward=${hosId}&` : ''
           }page=${page}&perpage=${size}`
         )
         setDeviceCount(response.data.data)
@@ -119,7 +119,7 @@ const Home = () => {
           responseType<DeviceResponseType>
         >(
           `/devices/device?${
-            wardId ? `ward=${wardId}&` : hosId ? `ward=${hosId}` : ''
+            wardId ? `ward=${wardId}&` : hosId ? `ward=${hosId}&` : ''
           }page=${page}&perpage=${size}${search ? `&filter=${search}` : ''}`
         )
         setDevices(response.data.data?.devices)
@@ -372,12 +372,39 @@ const Home = () => {
         center: false
       },
       {
+        name: t('deviceTime'),
+        cell: i => {
+          const updateAt = new Date(i.updateAt)
+          const now = new Date()
+          const diffInMilliseconds = now.getTime() - updateAt.getTime()
+          const diffDate = new Date(diffInMilliseconds)
+
+          const years = diffDate.getUTCFullYear() - 1970
+          const months = diffDate.getUTCMonth()
+          const days = diffDate.getUTCDate() - 1
+
+          return (
+            <span>
+              {years > 0
+                ? `${years} ${t('year')} ${months} ${t('month')} ${days} ${t(
+                    'day'
+                  )}`
+                : months > 0
+                ? `${months} ${t('month')} ${days} ${t('day')}`
+                : `${days} ${t('day')}`}
+            </span>
+          )
+        },
+        sortable: false,
+        center: true
+      },
+      {
         name: t('deviceConnectTb'),
         cell: () => (
           <div
-            className={`w-max h-[24px] px-2 text-black flex items-center justify-center rounded-field bg-green-400 duration-300 ease-linear`}
+            className={`w-max h-[24px] px-2 text-black flex items-center justify-center rounded-field bg-red-400 duration-300 ease-linear`}
           >
-            {t('deviceOnline')}
+            {t('deviceOffline')}
           </div>
         ),
         sortable: false,
@@ -441,17 +468,39 @@ const Home = () => {
         <span className='font-medium text-[20px]'>{t('detailAllBox')}</span>
         <div className='flex items-end lg:items-center gap-3 flex-col lg:flex-row lg:h-[40px]'>
           <div className='flex items-center gap-3'>
+            <button
+              disabled={onlineAll === 2}
+              className={`flex items-center justify-center !border-base-content/70 btn w-max h-[36px] disabled:opacity-30 min-h-0 p-2 font-normal ${
+                deviceConnect === 'online'
+                  ? 'btn-primary bg-opacity-50 text-primary-content !border-primary'
+                  : 'btn-ghost border border-base-content text-base-content'
+              }`}
+              onClick={() => {
+                handleFilterConnect('online')
+                setCanCelOnline(false)
+                setOnlineAll(1)
+              }}
+            >
+              <div
+                className={`w-[10px] h-[10px] ${
+                  deviceConnect === 'online'
+                    ? 'bg-primary-content'
+                    : 'bg-green-500'
+                } rounded-field`}
+              ></div>
+              <span className={`font-medium`}>{t('deviceOnline')}</span>
+            </button>
             {role === 'SUPER' ? (
               <button
                 className={` ${
                   cancelOnline
-                    ? 'h-[40px] min-[40px] max-h-[40px] overflow-hidden bg-base-300 rounded-box'
+                    ? 'h-[40px] min-[40px] max-h-[40px] !max-w-[190px] bg-base-300 rounded-box'
                     : 'btn w-max h-[36px] min-h-0 p-2 font-normal btn-ghost border text-base-content'
-                } flex items-center justify-center border !border-base-content/70 px-1.5 duration-300 transition-all ease-out`}
+                } !max-w-[84px] flex items-center justify-center border !border-base-content/70 px-1.5 duration-300 transition-all ease-linear overflow-hidden `}
                 onClick={() => {
                   if (!cancelOnline) {
                     setCanCelOnline(true)
-                    setDeviceConnect('online')
+                    setDeviceConnect('offline')
                     setOnlineAll(1)
                   }
                 }}
@@ -461,27 +510,29 @@ const Home = () => {
                     <div
                       className={`${
                         onlineAll === 1
-                          ? 'bg-primary text-primary-content'
+                          ? 'bg-primary text-primary-content btn btn-ghost border-0'
                           : 'hover:opacity-70 duration-300 ease-out transition-all'
                       } flex items-center gap-1.5 rounded-box p-1 w-max h-[30px] px-2 cursor-pointer`}
                       onClick={() => {
                         setOnlineAll(1)
-                        setDeviceConnect('online')
+                        setDeviceConnect('offline')
                       }}
                     >
                       <div
                         className={`w-[10px] h-[10px] ${
-                          deviceConnect === 'online'
+                          deviceConnect === 'offline'
                             ? 'bg-primary-content'
-                            : 'bg-green-500'
+                            : 'bg-red-500'
                         } rounded-field`}
                       ></div>
-                      <span className={`font-medium`}>{t('deviceOnline')}</span>
+                      <span className={`font-medium text-sm`}>
+                        {t('deviceOffline')}
+                      </span>
                     </div>
                     <div
                       className={`${
                         onlineAll === 2
-                          ? 'bg-primary text-primary-content'
+                          ? 'bg-primary text-primary-content btn btn-ghost border-0'
                           : 'hover:opacity-70 duration-300 ease-out transition-all'
                       } rounded-box p-1 w-max h-[30px] px-2 cursor-pointer`}
                       onClick={() => {
@@ -490,12 +541,12 @@ const Home = () => {
                         fetchDeviceOnline(hosId)
                       }}
                     >
-                      <span className={`font-medium`}>
+                      <span className={`font-medium text-sm`}>
                         {t('tabWarrantyAll')}
                       </span>
                     </div>
                     <div
-                      className='flex items-center justify-center bg-primary text-primary-content p-1 w-[30px] h-[30px] rounded-box cursor-pointer hover:opacity-70 duration-300 ease-linear transition-all'
+                      className='flex items-center justify-center bg-primary text-primary-content btn btn-ghost border-0 p-1 w-[30px] h-[30px] rounded-box cursor-pointer hover:opacity-70 duration-300 ease-linear transition-all'
                       onClick={() => {
                         setCanCelOnline(false)
                         setDeviceConnect('')
@@ -509,52 +560,35 @@ const Home = () => {
                   <>
                     <div
                       className={`w-[10px] h-[10px] ${
-                        deviceConnect === 'online'
+                        deviceConnect === 'offline'
                           ? 'bg-primary-content'
-                          : 'bg-green-500'
+                          : 'bg-red-500'
                       } rounded-field`}
                     ></div>
-                    <span className={`font-medium`}>{t('deviceOnline')}</span>
+                    <span className={`font-medium`}>{t('deviceOffline')}</span>
                   </>
                 )}
               </button>
             ) : (
               <button
-                className={`flex items-center justify-center !border-base-content/70 btn w-max h-[36px] min-h-0 p-2 font-normal ${
-                  deviceConnect === 'online'
+                disabled={onlineAll === 2}
+                className={`flex items-center justify-center !border-base-content/70 btn w-max h-[36px] min-h-0 p-2 font-normal disabled:opacity-30 ${
+                  deviceConnect === 'offline'
                     ? 'btn-primary bg-opacity-50 text-primary-content !border-primary'
                     : 'btn-ghost border border-base-content text-base-content'
                 }`}
-                onClick={() => handleFilterConnect('online')}
+                onClick={() => handleFilterConnect('offline')}
               >
                 <div
                   className={`w-[10px] h-[10px] ${
-                    deviceConnect === 'online'
+                    deviceConnect === 'offline'
                       ? 'bg-primary-content'
-                      : 'bg-green-500'
+                      : 'bg-red-500'
                   } rounded-field`}
                 ></div>
-                <span className={`font-medium`}>{t('deviceOnline')}</span>
+                <span className={`font-medium`}>{t('deviceOffline')}</span>
               </button>
             )}
-            <button
-              disabled={onlineAll === 2}
-              className={`flex items-center justify-center !border-base-content/70 btn w-max h-[36px] min-h-0 p-2 font-normal disabled:opacity-30 ${
-                deviceConnect === 'offline'
-                  ? 'btn-primary bg-opacity-50 text-primary-content !border-primary'
-                  : 'btn-ghost border border-base-content text-base-content'
-              }`}
-              onClick={() => handleFilterConnect('offline')}
-            >
-              <div
-                className={`w-[10px] h-[10px] ${
-                  deviceConnect === 'offline'
-                    ? 'bg-primary-content'
-                    : 'bg-red-500'
-                } rounded-field`}
-              ></div>
-              <span className={`font-medium`}>{t('deviceOffline')}</span>
-            </button>
           </div>
           <div className='divider divider-horizontal mx-0 py-2 hidden lg:flex'></div>
           <HospitalAndWard />
@@ -644,7 +678,7 @@ const Home = () => {
             progressPending={loading}
             progressComponent={<Loading />}
             noDataComponent={<DataTableNoData />}
-            paginationRowsPerPageOptions={[10, 25, 50]}
+            paginationRowsPerPageOptions={[10, 25, 50, 75, 100]}
             className='md:!max-h-[calc(100dvh-530px)]'
           />
         </div>
