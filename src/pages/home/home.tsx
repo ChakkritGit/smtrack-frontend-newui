@@ -514,11 +514,11 @@ const Home = () => {
               <button
                 className={` ${
                   cancelOnline
-                    ? `h-[40px] min-[40px] max-h-[40px] ${
-                        i18nInit === 'th' ? 'w-[190px]' : 'w-[163px]'
-                      } bg-base-300 rounded-box`
+                    ? `h-[36px] min-[36px] max-h-[36px] ${
+                        i18nInit === 'th' ? 'w-[185px]' : 'w-[155px]'
+                      } bg-base-300/50 rounded-box`
                     : 'btn h-[36px] w-[84px] min-h-0 p-2 font-normal btn-ghost border text-base-content'
-                } max-w-[190px] flex items-center justify-center border !border-base-content/70 px-1.5 duration-300 transition-all ease-linear overflow-hidden `}
+                } max-w-[190px] flex items-center justify-center border !border-base-content/70 px-1.5 duration-300 transition-all ease-in-out overflow-hidden `}
                 onClick={() => {
                   if (!cancelOnline) {
                     setCanCelOnline(true)
@@ -533,8 +533,8 @@ const Home = () => {
                       className={`${
                         onlineAll === 1
                           ? 'bg-primary text-primary-content btn btn-ghost border-0'
-                          : 'hover:opacity-70 duration-300 ease-out transition-all'
-                      } flex items-center gap-1.5 rounded-box p-1 w-max h-[30px] px-2 cursor-pointer`}
+                          : 'flex items-center justify-center hover:opacity-85 hover:bg-neutral/10 duration-300 ease-out transition-all'
+                      } flex items-center gap-1.5 rounded-box p-1 w-max h-[27px] px-2 cursor-pointer`}
                       onClick={() => {
                         setOnlineAll(1)
                         setDeviceConnect('offline')
@@ -555,8 +555,8 @@ const Home = () => {
                       className={`${
                         onlineAll === 2
                           ? 'bg-primary text-primary-content btn btn-ghost border-0'
-                          : 'hover:opacity-70 duration-300 ease-out transition-all'
-                      } rounded-box p-1 w-max h-[30px] px-2 cursor-pointer`}
+                          : 'flex items-center justify-center hover:opacity-85 hover:bg-neutral/10 duration-300 ease-out transition-all'
+                      } rounded-box p-1 w-max h-[27px] px-2 cursor-pointer`}
                       onClick={() => {
                         setOnlineAll(2)
                         setDeviceConnect('')
@@ -568,7 +568,7 @@ const Home = () => {
                       </span>
                     </div>
                     <div
-                      className='flex items-center justify-center bg-primary text-primary-content btn btn-ghost border-0 p-1 w-[30px] h-[30px] rounded-box cursor-pointer hover:opacity-70 duration-300 ease-linear transition-all'
+                      className='flex items-center justify-center bg-primary text-primary-content btn btn-ghost border-0 p-1 w-[27px] h-[27px] rounded-box cursor-pointer hover:opacity-70 duration-300 ease-linear transition-all'
                       onClick={() => {
                         setCanCelOnline(false)
                         setDeviceConnect('')
