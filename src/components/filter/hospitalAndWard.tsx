@@ -50,12 +50,14 @@ const HospitalAndWard = () => {
         label: item[labelKey] as unknown as string
       }))[0]
 
-  const getHospital = (hospitalID: string | undefined) => {
+  const getHospital = async (hospitalID: string | undefined) => {
     if (hospitalID !== '') {
       updateLocalStorageAndDispatch('hosId', hospitalID, setHosId, dispatch)
     } else {
       cookies.remove('hosId', cookieOptions)
+      cookies.remove('wardId', cookieOptions)
       dispatch(setHosId(''))
+      dispatch(setWardId(''))
     }
   }
 
