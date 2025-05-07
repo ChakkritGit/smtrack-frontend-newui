@@ -131,6 +131,10 @@ const HomeTms = () => {
   }
 
   useEffect(() => {
+    fetchDevices(1)
+  }, [hosId])
+
+  useEffect(() => {
     if (globalSearch === '') return
     if (shouldFetch) {
       shouldFetchFunc()

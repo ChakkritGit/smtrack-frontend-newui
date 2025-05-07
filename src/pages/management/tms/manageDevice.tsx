@@ -191,6 +191,10 @@ const ManageDevice = () => {
     }))
   }
 
+    useEffect(() => {
+      fetchDevices(1)
+    }, [hosId])
+
   useEffect(() => {
     fetchDevices(1)
   }, [wardId, hosId])

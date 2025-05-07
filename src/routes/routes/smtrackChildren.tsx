@@ -15,9 +15,10 @@ import Notification from '../../pages/notification/notification'
 import RepairPdf from '../../components/pdf/repairPdf'
 import WarrantyPdf from '../../components/pdf/WarrantyPdf'
 import Changelog from '../../components/changelog/changelog'
-import VideoPlayer from '../../test/testtwo'
-import DynamicVideoColor from '../../test/test'
+// import VideoPlayer from '../../test/testtwo'
+// import DynamicVideoColor from '../../test/test'
 import TestWrapper from '../../test/testWrapper'
+import ChartPdf from '../../test/chartPdf'
 
 const smtrackChildren: RouteObject[] = [
   {
@@ -113,14 +114,19 @@ const smtrackChildren: RouteObject[] = [
           element: <TestWrapper />,
           errorElement: <ErrorScreen />,
           children: [
+            // {
+            //   path: '/test',
+            //   element: <DynamicVideoColor />,
+            //   errorElement: <ErrorScreen />
+            // },
+            // {
+            //   path: 'test2',
+            //   element: <VideoPlayer />,
+            //   errorElement: <ErrorScreen />
+            // },
             {
               path: '/test',
-              element: <DynamicVideoColor />,
-              errorElement: <ErrorScreen />
-            },
-            {
-              path: 'test2',
-              element: <VideoPlayer />,
+              element: <ChartPdf />,
               errorElement: <ErrorScreen />
             }
           ]

@@ -83,13 +83,9 @@ type selectFirmwareOption = {
 const ManageDevice = () => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
-  const {
-    wardId,
-    globalSearch,
-    tokenDecode,
-    hosId,
-    shouldFetch
-  } = useSelector((state: RootState) => state.utils)
+  const { wardId, globalSearch, tokenDecode, hosId, shouldFetch } = useSelector(
+    (state: RootState) => state.utils
+  )
   const { searchRef, isFocused, setIsFocused, isCleared, setIsCleared } =
     useContext(GlobalContext) as GlobalContextType
   const [devices, setDevices] = useState<DeviceType[]>([])
@@ -902,6 +898,10 @@ const ManageDevice = () => {
       })
     }
   }
+
+  useEffect(() => {
+    fetchDevices(1)
+  }, [hosId])
 
   useEffect(() => {
     fetchDevices(1)

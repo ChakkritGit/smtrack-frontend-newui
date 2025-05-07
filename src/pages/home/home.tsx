@@ -196,6 +196,11 @@ const Home = () => {
   }
 
   useEffect(() => {
+    fetchDeviceCount(1)
+    fetchDevices(1)
+  }, [hosId])
+
+  useEffect(() => {
     const filter = devices?.filter(f => {
       const matchesConnection =
         deviceConnect === '' ||
