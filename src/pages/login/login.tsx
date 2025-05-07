@@ -133,8 +133,8 @@ const Login = () => {
           <div className='text-end'>
             <LanguageList />
           </div>
-          <h1 className='text-4xl md:text-5xl font-bold text-neutral'>SMTrack+</h1>
-          <span className='font-medium'>
+          <h1 className='text-4xl md:text-5xl font-bold text-neutral-content'>SMTrack+</h1>
+          <span className='font-medium text-neutral-content'>
             Real-time temperature monitoring with alerts for exceeding limits
           </span>
           <div
