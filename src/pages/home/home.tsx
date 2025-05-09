@@ -86,6 +86,9 @@ const Home = () => {
   const [onlineAll, setOnlineAll] = useState(1)
   const [cancelOnline, setCanCelOnline] = useState(false)
   const [devicesOnline, setDevicesOnline] = useState<DevicesOnlineType[]>([])
+  const [devicesOnlineFilter, setDevicesOnlineFilter] = useState<
+    DevicesOnlineType[]
+  >([])
 
   const fetchDeviceCount = useCallback(
     async (page: number, size = perPage) => {
@@ -338,6 +341,19 @@ const Home = () => {
     }
   }, [onlineAll, hosId])
 
+  useEffect(() => {
+    if (onlineAll === 2) {
+      const filter = devicesOnline?.filter(
+        f =>
+          f.name?.toLowerCase().includes(globalSearch.toLowerCase()) ||
+          f.hospitalName?.toLowerCase().includes(globalSearch.toLowerCase()) ||
+          f.wardName?.toLowerCase().includes(globalSearch.toLowerCase()) ||
+          f.id?.toLowerCase().includes(globalSearch.toLowerCase())
+      )
+      setDevicesOnlineFilter(filter)
+    }
+  }, [devicesOnline, onlineAll, globalSearch])
+
   const openAdjustModal = (probe: ProbeType[], sn: string) => {
     setProbeData(probe)
     setSerial(sn)
@@ -568,7 +584,8 @@ const Home = () => {
                       </span>
                     </div>
                     <div
-                      className='flex items-center justify-center bg-primary text-primary-content btn btn-ghost border-0 p-1 w-[27px] h-[27px] rounded-box cursor-pointer hover:opacity-70 duration-300 ease-linear transition-all'
+                      className='flex items-center justify-center bg-primary text-primary-content btn 
+                      btn-ghost border-0 p-1 w-[27px] h-[27px] cursor-pointer hover:opacity-70 duration-300 ease-linear transition-all'
                       onClick={() => {
                         setCanCelOnline(false)
                         setDeviceConnect('')
@@ -693,7 +710,7 @@ const Home = () => {
             pagination
             pointerOnHover
             columns={devicesOnlineColumns}
-            data={devicesOnline}
+            data={devicesOnlineFilter}
             paginationTotalRows={10}
             paginationDefaultPage={1}
             paginationPerPage={10}
