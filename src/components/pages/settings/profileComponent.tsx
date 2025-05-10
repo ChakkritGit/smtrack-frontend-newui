@@ -196,7 +196,7 @@ const ProfileComponent = (props: ProfileProps) => {
     <div className='w-full'>
       <div className='relative mb-20'>
         <div
-          className='w-full h-56 relative rounded-tl-btn rounded-tr-btn before:absolute before:inset-x-0 before:bottom-0 before:h-20
+          className='w-full h-56 relative rounded-tl-selector rounded-tr-selector before:absolute before:inset-x-0 before:bottom-0 before:h-20
           before:bg-gradient-to-t before:from-base-content/50 before:to-transparent'
           style={{
             backgroundImage: `url(${
@@ -209,24 +209,24 @@ const ProfileComponent = (props: ProfileProps) => {
         ></div>
         <div className='form-control absolute bottom-0 rounded-full translate-y-[40%] w-full md:w-auto flex justify-center items-center md:items-start md:left-7'>
           <label htmlFor='imageFileSelect' className='cursor-pointer relative'>
-            <div className='avatar rounded-full border-[5px] border-base-100 relative'>
-              <div className='w-28 md:w-36 rounded'>
+            <div className='avatar rounded-selector border-[5px] border-base-100 relative'>
+              <div className='w-28 md:w-36 rounded-selector'>
                 {!imageProcessing ? (
                   <img
                     src={image.imagePreview ?? DefaultUser}
-                    className='rounded-full bg-base-100'
+                    className='rounded-selector bg-base-100'
                     alt='user-avatar'
                   />
                 ) : (
                   <img
                     src={DefaultUser}
-                    className='rounded-full bg-base-100'
+                    className='rounded-selector bg-base-100'
                     alt='user-avatar'
                   />
                 )}
               </div>
 
-              <div className='absolute hover:opacity-85 duration-300 ease-linear flex items-center justify-center bottom-0 right-0 bg-base-200 p-2 rounded-full border-[3px] border-base-100'>
+              <div className='absolute hover:opacity-85 duration-300 ease-linear flex items-center justify-center bottom-1 right-1 bg-base-200 p-2 rounded-selector border-[3px] border-base-100'>
                 <RiCameraLine size={20} className='text-base-content/80' />
               </div>
             </div>

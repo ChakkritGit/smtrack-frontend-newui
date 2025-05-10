@@ -1,6 +1,7 @@
 @import "tailwindcss";
+
 @plugin "daisyui" {
-  themes: 'all';
+  themes: all;
 }
 
 @font-face {
@@ -63,7 +64,8 @@
   @apply !border-base-content/20 !bg-base-100 !rounded-field h-[40px] !border-2;
 }
 
-.react-select__indicator, .react-select__dropdown-indicator {
+.react-select__indicator,
+.react-select__dropdown-indicator {
   @apply fill-base-content;
 }
 
@@ -111,7 +113,7 @@
 .custom-role-select {
   &>.react-select__menu>div:nth-child(1) {
     justify-content: unset !important;
-    max-height: 250px;
+    max-height: 140px;
   }
 }
 
@@ -420,7 +422,10 @@ div:where(.swal2-container).swal2-noanimation {
 }
 
 .modal {
-  &.modal-open, &[open], &:target {
+
+  &.modal-open,
+  &[open],
+  &:target {
     @apply !bg-black/30 backdrop-blur;
   }
 }

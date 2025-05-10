@@ -55,7 +55,7 @@ const AddHopitalSelect = () => {
       )}
       onChange={e => getHospital(e?.value)}
       autoFocus={false}
-      className='react-select-container custom-menu-select w-full'
+      className='react-select-container custom-menu-select w-full z-20'
       classNamePrefix='react-select'
     />
   )

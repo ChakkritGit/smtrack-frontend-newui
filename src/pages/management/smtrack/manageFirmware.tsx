@@ -508,8 +508,8 @@ const ManageFirmware = () => {
     return (
       <FirmwarePagination
         data={firmwareListFilter}
-        initialPerPage={10}
-        itemPerPage={[10, 30, 50, 100]}
+        initialPerPage={12}
+        itemPerPage={[12, 30, 50, 100]}
         renderItem={(item, index) => (
           <div
             key={index}

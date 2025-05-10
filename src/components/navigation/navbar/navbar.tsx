@@ -577,7 +577,7 @@ const Navbar = () => {
           </div>
         )}
         <div className='flex-none gap-2 hidden lg:block'>
-          <div className='dropdown dropdown-end'>
+          <div className='dropdown dropdown-start'>
             <div
               tabIndex={0}
               role='button'
@@ -600,22 +600,22 @@ const Navbar = () => {
             </div>
             <ul
               tabIndex={0}
-              className='menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-max p-2 shadow'
+              className='menu menu-sm dropdown-content w-37 bg-base-100 rounded-box z-[1] mt-3 p-2 shadow'
             >
-              <li className='h-9'>
+              <li className='h-7.5'>
                 <button
                   onClick={() => profileModalRef?.current?.showModal()}
-                  className='text-[16px] h-9 flex items-center gap-2 w-full text-left cursor-pointer'
+                  className='text-[14px] h-9 flex items-center gap-2 w-full text-left cursor-pointer'
                 >
                   <RiIdCardLine />
                   {t('profile')}
                 </button>
               </li>
 
-              <li className='h-9'>
+              <li className='h-7.5'>
                 <button
                   onClick={() => settingModalRef?.current?.showModal()}
-                  className='text-[16px] h-9 flex items-center gap-2 w-full text-left cursor-pointer'
+                  className='text-[14px] h-9 flex items-center gap-2 w-full text-left cursor-pointer'
                 >
                   <RiNotification4Line />
                   {t('titleNotification')}
@@ -624,7 +624,7 @@ const Navbar = () => {
 
               <div className='divider divider-vertical m-0 before:h-[1px] after:h-[1px]'></div>
 
-              <li className='h-9'>
+              <li className='h-7.5'>
                 <button
                   onClick={() =>
                     Swal.fire({
@@ -653,7 +653,7 @@ const Navbar = () => {
                       }
                     })
                   }
-                  className='text-red-500 text-[16px] h-9 flex items-center gap-2 w-full text-left'
+                  className='text-red-500 text-[14px] h-9 flex items-center gap-2 w-full text-left'
                 >
                   <RiLogoutBoxRLine />
                   {t('tabLogout')}
