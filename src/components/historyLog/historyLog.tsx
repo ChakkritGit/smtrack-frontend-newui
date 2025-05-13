@@ -139,7 +139,7 @@ const HistoryLog = () => {
               )}
             />
           ) : (
-            <div className='flex items-center justify-center h-[calc(100dvh-300px)]'>
+            <div className='flex items-center justify-center h-[calc(100dvh-310px)]'>
               <div>{t('nodata')}</div>
             </div>
           )
