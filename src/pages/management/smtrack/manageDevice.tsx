@@ -1392,7 +1392,7 @@ const ManageDevice = () => {
                     />
                     {imageProcessing ? (
                       <div className='mt-4 flex justify-center w-32 h-32 md:w-48 md:h-48'>
-                        <span className='loading loading-spinner loading-md'></span>
+                        <span className='loading loading-dots loading-md'></span>
                       </div>
                     ) : (
                       <div className='mt-4 relative'>

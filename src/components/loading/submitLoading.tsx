@@ -43,7 +43,7 @@ export const SubmitLoading = (props: LoadingModalProps) => {
     <dialog ref={modalRef} className='modal'>
       <div className='modal-box flex items-center justify-center w-[100px] h-[100px]'>
         <div className='flex items-center justify-center bg-base-100 rounded-field'>
-          <span className='loading loading-spinner loading-lg'></span>
+          <span className='loading loading-dots loading-lg'></span>
         </div>
       </div>
     </dialog>,

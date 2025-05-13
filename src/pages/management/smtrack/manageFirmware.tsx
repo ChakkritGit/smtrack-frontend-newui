@@ -865,7 +865,7 @@ const ManageFirmware = () => {
       >
         <div className='modal-box'>
           <div className='flex flex-col items-center justify-center gap-2'>
-            <span className='loading loading-spinner w-16'></span>
+            <span className='loading loading-dots w-16'></span>
             <span className='font-medium'>
               {onProgress}/{selectedDevices.length}
             </span>

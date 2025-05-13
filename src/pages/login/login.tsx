@@ -232,7 +232,7 @@ const Login = () => {
                 className='btn btn-neutral w-full text-[16px]'
               >
                 {loading ? (
-                  <span className='loading loading-spinner loading-md'></span>
+                  <span className='loading loading-dots loading-md'></span>
                 ) : (
                   t('loginButton')
                 )}

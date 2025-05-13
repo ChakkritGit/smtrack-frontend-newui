@@ -19,7 +19,7 @@ const Loading = () => {
         <span className='text-red-500'>{t('descriptionWrong')} {t('tooLoad')}</span>
       ) : (
         <>
-          <span className='loading loading-spinner loading-md bg-base-content'></span>
+          <span className='loading loading-dots loading-md bg-base-content'></span>
           {/* <span className='text-base-content'>{t('loading')}</span> */}
         </>
       )}

@@ -336,7 +336,7 @@ const Notifications = () => {
                   <div>
                     <div className='divider my-0 before:h-[1px] after:h-[1px]'></div>
                     <div className='flex items-center justify-center p-4 pt-3'>
-                      <span className='loading loading-spinner loading-md'></span>
+                      <span className='loading loading-dots loading-md'></span>
                     </div>
                   </div>
                 }
@@ -399,7 +399,7 @@ const Notifications = () => {
                   <div>
                     <div className='divider my-0 before:h-[1px] after:h-[1px]'></div>
                     <div className='flex items-center justify-center p-4 pt-3'>
-                      <span className='loading loading-spinner loading-md'></span>
+                      <span className='loading loading-dots loading-md'></span>
                     </div>
                   </div>
                 }
