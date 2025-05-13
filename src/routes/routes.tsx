@@ -10,7 +10,11 @@ import { RouterProvider } from 'react-router-dom'
 import { router } from './createRoutes'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../redux/reducers/rootReducer'
-import { setTokenDecode, setTokenExpire } from '../redux/actions/utilsActions'
+import {
+  setTheme,
+  setTokenDecode,
+  setTokenExpire
+} from '../redux/actions/utilsActions'
 import {
   responseType,
   TokenType
@@ -104,6 +108,23 @@ const Routes = () => {
       document.exitFullscreen()
     }
   }
+
+  const getSpecialTheme = (): string | null => {
+    const today = new Date()
+    const day = today.getDate()
+    const month = today.getMonth() + 1
+
+    if (month === 2 && day === 14) return 'valentine'
+    if (month === 10 && day === 31) return 'halloween'
+    return null
+  }
+
+  useEffect(() => {
+    const specialTheme = getSpecialTheme()
+    if (specialTheme) {
+      dispatch(setTheme(specialTheme))
+    }
+  }, [])
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {

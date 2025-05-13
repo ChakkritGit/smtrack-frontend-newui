@@ -62,8 +62,19 @@ const FullChartTms = () => {
   const [isLoading, setIsLoading] = useState(false)
   const canvasChartRef = useRef<HTMLDivElement | null>(null)
   const tableInfoRef = useRef<HTMLDivElement | null>(null)
+  const abortRef = useRef<AbortController | null>(null)
+
+  const abortPrevRequest = () => {
+    if (abortRef.current) {
+      abortRef.current.abort()
+    }
+  }
 
   const logDay = async () => {
+    abortPrevRequest()
+    const controller = new AbortController()
+    abortRef.current = controller
+
     setPagenumber(1)
     setDataLog([])
     setIsLoading(true)
@@ -71,7 +82,10 @@ const FullChartTms = () => {
       const response = await axiosInstance.get<responseType<LogChartTms[]>>(
         `/legacy/graph?filter=day&sn=${
           deviceLogs?.sn ? deviceLogs?.sn : cookies.get('deviceKey')
-        }`
+        }`,
+        {
+          signal: controller.signal
+        }
       )
       setDataLog(response.data.data)
     } catch (error) {
@@ -89,6 +103,10 @@ const FullChartTms = () => {
   }
 
   const logWeek = async () => {
+    abortPrevRequest()
+    const controller = new AbortController()
+    abortRef.current = controller
+
     setPagenumber(2)
     setDataLog([])
     setIsLoading(true)
@@ -96,7 +114,10 @@ const FullChartTms = () => {
       const response = await axiosInstance.get<responseType<LogChartTms[]>>(
         `/legacy/graph?filter=week&sn=${
           deviceLogs?.sn ? deviceLogs?.sn : cookies.get('deviceKey')
-        }`
+        }`,
+        {
+          signal: controller.signal
+        }
       )
       setDataLog(response.data.data)
     } catch (error) {
@@ -114,6 +135,10 @@ const FullChartTms = () => {
   }
 
   const logMonth = async () => {
+    abortPrevRequest()
+    const controller = new AbortController()
+    abortRef.current = controller
+
     setPagenumber(3)
     setDataLog([])
     setIsLoading(true)
@@ -121,7 +146,10 @@ const FullChartTms = () => {
       const response = await axiosInstance.get<responseType<LogChartTms[]>>(
         `/legacy/graph?filter=month&sn=${
           deviceLogs?.sn ? deviceLogs?.sn : cookies.get('deviceKey')
-        }`
+        }`,
+        {
+          signal: controller.signal
+        }
       )
       setDataLog(response.data.data)
     } catch (error) {
@@ -139,6 +167,10 @@ const FullChartTms = () => {
   }
 
   const Logcustom = async () => {
+    abortPrevRequest()
+    const controller = new AbortController()
+    abortRef.current = controller
+
     let startDateNew = startDate
     let endDateNew = endDate
     if (startDateNew && endDateNew) {
@@ -155,7 +187,10 @@ const FullChartTms = () => {
               startDateNew
             )},${formatThaiDateSend(endDateNew)}&sn=${
               deviceLogs?.sn ? deviceLogs?.sn : cookies.get('deviceKey')
-            }`
+            }`,
+            {
+              signal: controller.signal
+            }
           )
           setDataLog(responseData.data.data)
         } catch (error) {
@@ -364,28 +399,44 @@ const FullChartTms = () => {
           <a
             role='tab'
             className={`tab ${pageNumber === 1 ? 'tab-active' : ''}`}
-            onClick={() => logDay()}
+            onClick={() => {
+              if (pageNumber !== 1) {
+                logDay()
+              }
+            }}
           >
             {t('chartDay')}
           </a>
           <a
             role='tab'
             className={`tab ${pageNumber === 2 ? 'tab-active' : ''}`}
-            onClick={() => logWeek()}
+            onClick={() => {
+              if (pageNumber !== 2) {
+                logWeek()
+              }
+            }}
           >
             {t('chartWeek')}
           </a>
           <a
             role='tab'
             className={`tab ${pageNumber === 3 ? 'tab-active' : ''}`}
-            onClick={() => logMonth()}
+            onClick={() => {
+              if (pageNumber !== 3) {
+                logMonth()
+              }
+            }}
           >
             {t('month')}
           </a>
           <a
             role='tab'
             className={`tab ${pageNumber === 4 ? 'tab-active' : ''}`}
-            onClick={() => setPagenumber(4)}
+            onClick={() => {
+              if (pageNumber !== 4) {
+                setPagenumber(4)
+              }
+            }}
           >
             {t('chartCustom')}
           </a>

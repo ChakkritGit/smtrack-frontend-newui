@@ -89,7 +89,7 @@ const Settings = () => {
               localStorage.setItem('settingTab', '1')
             }}
             className={`${
-              tab === '1' ? '!btn-neutral' : 'btn-ghost'
+              tab === '1' ? '!btn-neutral pointer-events-none' : 'btn-ghost'
             } btn font-normal flex-nowrap text-[16px] justify-start w-full flex`}
           >
             <a className='text-[16px] h-9 flex items-center gap-2'>
@@ -107,7 +107,7 @@ const Settings = () => {
               localStorage.setItem('settingTab', '2')
             }}
             className={`${
-              tab === '2' ? '!btn-neutral' : 'btn-ghost'
+              tab === '2' ? '!btn-neutral pointer-events-none' : 'btn-ghost'
             } btn font-normal flex-nowrap text-[16px] justify-start w-full flex`}
           >
             <a className='text-[16px] h-9 flex items-center gap-2'>
@@ -125,7 +125,7 @@ const Settings = () => {
               localStorage.setItem('settingTab', '3')
             }}
             className={`${
-              tab === '3' ? '!btn-neutral' : 'btn-ghost'
+              tab === '3' ? '!btn-neutral pointer-events-none' : 'btn-ghost'
             } btn font-normal flex-nowrap text-[16px] justify-start w-full flex`}
           >
             <a className='text-[16px] h-9 flex items-center gap-2'>
@@ -143,7 +143,7 @@ const Settings = () => {
               localStorage.setItem('settingTab', '4')
             }}
             className={`${
-              tab === '4' ? '!btn-neutral' : 'btn-ghost'
+              tab === '4' ? '!btn-neutral pointer-events-none' : 'btn-ghost'
             } btn font-normal flex-nowrap text-[16px] justify-start w-full flex`}
           >
             <a className='text-[16px] h-9 flex items-center gap-2'>

@@ -92,7 +92,7 @@ const Sidebar = () => {
             <Link
               to={'/'}
               className={`btn font-normal flex-nowrap justify-start w-full ${
-                location.pathname === '/' ? 'btn-neutral' : 'btn-ghost'
+                location.pathname === '/' ? 'btn-neutral pointer-events-none' : 'btn-ghost'
               } flex ${isExpand ? 'tooltip tooltip-right z-50' : ''}`}
               data-tip={t('sideShowAllBox')}
             >
@@ -109,7 +109,7 @@ const Sidebar = () => {
             </Link>
             <Link
               to={'/dashboard'}
-              className={`btn font-normal flex-nowrap justify-start w-full ${
+              className={`btn font-normal flex-nowrap justify-start w-full ${location.pathname === '/dashboard' ? 'pointer-events-none' : ''} ${
                 location.pathname === '/dashboard' ||
                 location.pathname.split('/')[2] === 'chart' ||
                 location.pathname.split('/')[2] === 'table' ||
@@ -140,7 +140,7 @@ const Sidebar = () => {
                 <Link
                   to={'/users'}
                   className={`btn font-normal flex-nowrap justify-start w-full ${
-                    location.pathname === '/users' ? 'btn-neutral' : 'btn-ghost'
+                    location.pathname === '/users' ? 'btn-neutral pointer-events-none' : 'btn-ghost'
                   } flex ${isExpand ? 'tooltip tooltip-right z-50' : ''}`}
                   data-tip={t('sidePermission')}
                 >
@@ -159,17 +159,13 @@ const Sidebar = () => {
                   <Link
                     to={'/management'}
                     className={`btn font-normal flex-nowrap justify-start w-full ${
-                      location.pathname === '/management' ||
-                      location.pathname === '/management/logadjust' ||
-                      location.pathname === '/management/flasher'
-                        ? 'btn-neutral'
+                      location.pathname === '/management'
+                        ? 'btn-neutral pointer-events-none'
                         : 'btn-ghost'
                     } flex ${isExpand ? 'tooltip tooltip-right z-50' : ''}`}
                     data-tip={t('sideManage')}
                   >
-                    {location.pathname === '/management' ||
-                    location.pathname === '/management/logadjust' ||
-                    location.pathname === '/management/flasher' ? (
+                    {location.pathname === '/management' ? (
                       <RiListSettingsFill size={24} />
                     ) : (
                       <RiListSettingsLine size={24} />
@@ -242,7 +238,7 @@ const Sidebar = () => {
             <Link
               to={'/settings'}
               className={`btn font-normal flex-nowrap justify-start w-full ${
-                location.pathname === '/settings' ? 'btn-neutral' : 'btn-ghost'
+                location.pathname === '/settings' ? 'btn-neutral pointer-events-none' : 'btn-ghost'
               } flex ${isExpand ? 'tooltip tooltip-right z-50' : ''}`}
               data-tip={t('sideSetting')}
             >
@@ -263,7 +259,7 @@ const Sidebar = () => {
                 isExpand ? 'text-center' : 'text-right'
               } hover:underline cursor-pointer`}
             >
-              Version 2.0.0b19b
+              Version 2.0.0b19c
             </Link>
           </div>
         </div>

@@ -31,12 +31,12 @@ const Management = () => {
 
   const manageMenu = useMemo(
     () => (
-      <div className='flex items-center gap-2 border-b-2 border-neutral w-full mt-3'>
+      <div className='flex items-center gap-2 border-b-2 border-base-content w-full mt-3'>
         <a
           className={`flex items-center text-sm md:text-lg border-2 border-b-0 p-2 rounded-tl-md rounded-tr-md cursor-pointer ${
             tab === 1
-              ? 'font-bold bg-neutral border-neutral text-neutral-content'
-              : 'font-medium border-neutral/70 text-neutral'
+              ? 'font-bold bg-primary border-primary text-primary-content'
+              : 'font-medium border-base-content/70 text-base-content'
           }`}
           onClick={() => {
             cookies.set('manageHospitalTab', 1, cookieOptions)
@@ -56,8 +56,8 @@ const Management = () => {
             <a
               className={`flex items-center text-sm md:text-lg border-2 border-b-0 p-2 rounded-tl-md rounded-tr-md cursor-pointer ${
                 tab === 2
-                  ? 'font-bold bg-neutral border-neutral text-neutral-content'
-                  : 'font-medium border-neutral/70 text-neutral'
+                  ? 'font-bold bg-primary border-primary text-primary-content'
+                  : 'font-medium border-base-content/70 text-base-content'
               }`}
               onClick={() => {
                 cookies.set('manageHospitalTab', 2, cookieOptions)
@@ -76,8 +76,8 @@ const Management = () => {
             <a
               className={`flex items-center text-sm md:text-lg border-2 border-b-0 p-2 rounded-tl-md rounded-tr-md cursor-pointer ${
                 tab === 3
-                  ? 'font-bold bg-neutral border-neutral text-neutral-content'
-                  : 'font-medium border-neutral/70 text-neutral'
+                  ? 'font-bold bg-primary border-primary text-primary-content'
+                  : 'font-medium border-base-content/70 text-base-content'
               }`}
               onClick={() => {
                 cookies.set('manageHospitalTab', 3, cookieOptions)

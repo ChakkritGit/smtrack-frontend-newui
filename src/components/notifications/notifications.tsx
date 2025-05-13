@@ -213,7 +213,6 @@ const Notifications = () => {
 
       document.getElementsByTagName('head')[0].appendChild(link)
       document.title =
-        (notificationarray.length > 0 ? `(${notificationarray.length}) ` : '') +
         Profile?.ward.hospital.hosName +
         ' - ' +
         `${path.pathname.split('/')[1] !== '' ? capitalized : 'Home'}`
@@ -477,9 +476,7 @@ const Notifications = () => {
         onClick={handleClick}
       >
         {notificationList.length > 0 && (
-          <span className='indicator-item badge badge-primary px-1 top-3 right-4 lg:right-3'>
-            {notificationList.length > 99 ? '99+' : notificationList.length}
-          </span>
+          <span className='absolute bg-primary h-2.5 w-2.5 px-1 top-0.5 right-2 rounded-full'></span>
         )}
         <RiNotification4Line size={24} />
       </div>

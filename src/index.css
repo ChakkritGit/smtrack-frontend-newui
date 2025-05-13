@@ -60,6 +60,15 @@
   /* outline: 1px solid red !important; */
 }
 
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 .react-select__control {
   @apply !border-base-content/20 !bg-base-100 !rounded-field h-[40px] !border-2;
 }

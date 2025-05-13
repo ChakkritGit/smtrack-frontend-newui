@@ -636,7 +636,7 @@ const Home = () => {
               disabled={onlineAll === 2}
               className={`flex items-center justify-center btn ${
                 listAndGrid === 1
-                  ? 'btn-primary text-primary-content'
+                  ? 'btn-primary text-primary-content pointer-events-none'
                   : 'btn-ghost border-base-content disabled:border-base-content/30 text-base-content disabled:text-base-content/30'
               } w-[36px] h-[36px] min-h-0 p-2 tooltip tooltip-top`}
               onClick={() => changListAndGrid(1)}
@@ -650,7 +650,7 @@ const Home = () => {
               disabled={onlineAll === 2}
               className={`flex items-center justify-center btn ${
                 listAndGrid === 2
-                  ? 'btn-primary text-primary-content'
+                  ? 'btn-primary text-primary-content pointer-events-none'
                   : 'btn-ghost border-base-content disabled:border-base-content/30 text-base-content disabled:text-base-content/30'
               } w-[36px] h-[36px] min-h-0 p-2 tooltip tooltip-top`}
               onClick={() => changListAndGrid(2)}

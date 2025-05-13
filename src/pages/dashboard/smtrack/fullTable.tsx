@@ -54,6 +54,13 @@ const FullTable = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [isPause, setIsPaused] = useState(false)
   const swiperRef = useRef<SwiperType>(null)
+  const abortRef = useRef<AbortController | null>(null)
+
+  const abortPrevRequest = () => {
+    if (abortRef.current) {
+      abortRef.current.abort()
+    }
+  }
 
   const togglePause = useCallback(() => {
     setIsPaused(prev => !prev)
@@ -75,6 +82,10 @@ const FullTable = () => {
   }, [deviceLogs])
 
   const logDay = async () => {
+    abortPrevRequest()
+    const controller = new AbortController()
+    abortRef.current = controller
+
     setPagenumber(1)
     setDataLog([])
     setIsLoading(true)
@@ -82,7 +93,10 @@ const FullTable = () => {
       const response = await axiosInstance.get<responseType<DeviceLogs[]>>(
         `/log/graph?sn=${
           deviceLogs?.id ? deviceLogs?.id : cookies.get('deviceKey')
-        }&filter=day`
+        }&filter=day`,
+        {
+          signal: controller.signal
+        }
       )
       setDataLog(response.data.data)
     } catch (error) {
@@ -100,6 +114,10 @@ const FullTable = () => {
   }
 
   const logWeek = async () => {
+    abortPrevRequest()
+    const controller = new AbortController()
+    abortRef.current = controller
+
     setPagenumber(2)
     setDataLog([])
     setIsLoading(true)
@@ -107,7 +125,10 @@ const FullTable = () => {
       const response = await axiosInstance.get<responseType<DeviceLogs[]>>(
         `/log/graph?sn=${
           deviceLogs?.id ? deviceLogs?.id : cookies.get('deviceKey')
-        }&filter=week`
+        }&filter=week`,
+        {
+          signal: controller.signal
+        }
       )
       setDataLog(response.data.data)
     } catch (error) {
@@ -125,6 +146,10 @@ const FullTable = () => {
   }
 
   const logMonth = async () => {
+    abortPrevRequest()
+    const controller = new AbortController()
+    abortRef.current = controller
+
     setPagenumber(3)
     setDataLog([])
     setIsLoading(true)
@@ -132,7 +157,10 @@ const FullTable = () => {
       const response = await axiosInstance.get<responseType<DeviceLogs[]>>(
         `/log/graph?sn=${
           deviceLogs?.id ? deviceLogs?.id : cookies.get('deviceKey')
-        }&filter=month`
+        }&filter=month`,
+        {
+          signal: controller.signal
+        }
       )
       setDataLog(response.data.data)
     } catch (error) {
@@ -150,6 +178,10 @@ const FullTable = () => {
   }
 
   const Logcustom = async () => {
+    abortPrevRequest()
+    const controller = new AbortController()
+    abortRef.current = controller
+
     let startDateNew = startDate
     let endDateNew = endDate
 
@@ -167,7 +199,10 @@ const FullTable = () => {
               deviceLogs?.id ? deviceLogs?.id : cookies.get('deviceKey')
             }&filter=${formatThaiDateSend(startDateNew)},${formatThaiDateSend(
               endDateNew
-            )}`
+            )}`,
+            {
+              signal: controller.signal
+            }
           )
           setDataLog(responseData.data.data)
         } catch (error) {
@@ -367,28 +402,44 @@ const FullTable = () => {
           <a
             role='tab'
             className={`tab ${pageNumber === 1 ? 'tab-active' : ''}`}
-            onClick={() => logDay()}
+            onClick={() => {
+              if (pageNumber !== 1) {
+                logDay()
+              }
+            }}
           >
             {t('chartDay')}
           </a>
           <a
             role='tab'
             className={`tab ${pageNumber === 2 ? 'tab-active' : ''}`}
-            onClick={() => logWeek()}
+            onClick={() => {
+              if (pageNumber !== 2) {
+                logWeek()
+              }
+            }}
           >
             {t('chartWeek')}
           </a>
           <a
             role='tab'
             className={`tab ${pageNumber === 3 ? 'tab-active' : ''}`}
-            onClick={() => logMonth()}
+            onClick={() => {
+              if (pageNumber !== 3) {
+                logMonth()
+              }
+            }}
           >
             {t('month')}
           </a>
           <a
             role='tab'
             className={`tab ${pageNumber === 4 ? 'tab-active' : ''}`}
-            onClick={() => setPagenumber(4)}
+            onClick={() => {
+              if (pageNumber !== 4) {
+                setPagenumber(4)
+              }
+            }}
           >
             {t('chartCustom')}
           </a>
