@@ -612,6 +612,31 @@ const ManageHospital = () => {
       sortable: false
     },
     {
+      name: t('lastModified'),
+      cell: item => (
+        <div className='flex items-center gap-2'>
+          <span>
+            {new Date(item.updateAt)?.toLocaleString('th-TH', {
+              day: '2-digit',
+              month: '2-digit',
+              year: '2-digit',
+              timeZone: 'UTC'
+            })}
+          </span>
+          <span>
+            {new Date(item.updateAt)?.toLocaleString('th-TH', {
+              hour: '2-digit',
+              minute: '2-digit',
+              timeZone: 'UTC'
+            })}
+          </span>
+        </div>
+      ),
+      sortable: false,
+      center: true,
+      width: '150px'
+    },
+    {
       name: t('action'),
       cell: (item, index) =>
         tokenDecode?.hosId !== item.id && (
@@ -654,6 +679,31 @@ const ManageHospital = () => {
       cell: item => item.wardName,
       // center: true,
       sortable: false
+    },
+    {
+      name: t('lastModified'),
+      cell: item => (
+        <div className='flex items-center gap-2'>
+          <span>
+            {new Date(item.updateAt)?.toLocaleString('th-TH', {
+              day: '2-digit',
+              month: '2-digit',
+              year: '2-digit',
+              timeZone: 'UTC'
+            })}
+          </span>
+          <span>
+            {new Date(item.updateAt)?.toLocaleString('th-TH', {
+              hour: '2-digit',
+              minute: '2-digit',
+              timeZone: 'UTC'
+            })}
+          </span>
+        </div>
+      ),
+      sortable: false,
+      center: true,
+      width: '150px'
     },
     {
       name: t('action'),
@@ -778,7 +828,9 @@ const ManageHospital = () => {
             <div className='col-span-1 flex justify-center'>
               <div className='form-control'>
                 <label className='label cursor-pointer image-hover flex flex-col justify-center'>
-                  <span className='label-text text-wrap'>{t('hosPicture')}</span>
+                  <span className='label-text text-wrap'>
+                    {t('hosPicture')}
+                  </span>
                   <input
                     key={hospitalForm.imagePreview}
                     ref={fileInputRef}
@@ -892,7 +944,9 @@ const ManageHospital = () => {
               {/* hosLatitude */}
               <div className='form-control w-full'>
                 <label className='label flex-col items-start w-full mb-3'>
-                  <span className='label-text text-wrap mb-2'>{t('hosLat')}</span>
+                  <span className='label-text text-wrap mb-2'>
+                    {t('hosLat')}
+                  </span>
                   <input
                     name='hosLatitude'
                     type='text'
@@ -907,7 +961,9 @@ const ManageHospital = () => {
               {/* hosLongitude */}
               <div className='form-control w-full'>
                 <label className='label flex-col items-start w-full mb-3'>
-                  <span className='label-text text-wrap mb-2'>{t('hosLong')}</span>
+                  <span className='label-text text-wrap mb-2'>
+                    {t('hosLong')}
+                  </span>
                   <input
                     name='hosLongitude'
                     type='text'
@@ -922,7 +978,9 @@ const ManageHospital = () => {
               {/* userContact */}
               <div className='form-control w-full'>
                 <label className='label flex-col items-start w-full mb-3'>
-                  <span className='label-text text-wrap mb-2'>{t('userContact')}</span>
+                  <span className='label-text text-wrap mb-2'>
+                    {t('userContact')}
+                  </span>
                   <input
                     name='userContact'
                     type='text'
@@ -965,7 +1023,9 @@ const ManageHospital = () => {
             <div className='col-span-1 flex justify-center'>
               <div className='form-control'>
                 <label className='label cursor-pointer image-hover flex flex-col justify-center'>
-                  <span className='label-text text-wrap'>{t('hosPicture')}</span>
+                  <span className='label-text text-wrap'>
+                    {t('hosPicture')}
+                  </span>
                   <input
                     key={hospitalForm.imagePreview}
                     ref={fileInputRef}
@@ -1079,7 +1139,9 @@ const ManageHospital = () => {
               {/* hosLatitude */}
               <div className='form-control w-full'>
                 <label className='label flex-col items-start w-full mb-3'>
-                  <span className='label-text text-wrap mb-2'>{t('hosLat')}</span>
+                  <span className='label-text text-wrap mb-2'>
+                    {t('hosLat')}
+                  </span>
                   <input
                     name='hosLatitude'
                     type='text'
@@ -1094,7 +1156,9 @@ const ManageHospital = () => {
               {/* hosLongitude */}
               <div className='form-control w-full'>
                 <label className='label flex-col items-start w-full mb-3'>
-                  <span className='label-text text-wrap mb-2'>{t('hosLong')}</span>
+                  <span className='label-text text-wrap mb-2'>
+                    {t('hosLong')}
+                  </span>
                   <input
                     name='hosLongitude'
                     type='text'
@@ -1109,7 +1173,9 @@ const ManageHospital = () => {
               {/* userContact */}
               <div className='form-control w-full'>
                 <label className='label flex-col items-start w-full mb-3'>
-                  <span className='label-text text-wrap mb-2'>{t('userContact')}</span>
+                  <span className='label-text text-wrap mb-2'>
+                    {t('userContact')}
+                  </span>
                   <input
                     name='userContact'
                     type='text'

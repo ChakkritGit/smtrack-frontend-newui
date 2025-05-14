@@ -134,22 +134,28 @@ const ManageCsv = () => {
                   key={index}
                   className='flex items-center gap-1 justify-between py-2.5 border-b border-base-content/10 hover:bg-base-200 duration-300 ease-linear'
                 >
-                  <div className='flex flex-col gap-0.5'>
+                  <div className='flex flex-col gap-1.5'>
                     <div
                       className='flex items-center gap-1.5 tooltip tooltip-bottom'
                       data-tip={item.fileName}
                     >
                       <PiFileCsvFill size={24} className='text-primary' />
-                      <span className='text-lg font-medium truncate max-w-[180px]'>
-                        {item.fileName}
-                      </span>
+                      <div className='flex items-center'>
+                        <span className='text-lg font-medium truncate max-w-[115px] md:max-w-[500px]'>
+                          {item.fileName}
+                        </span>
+                        <div className='divider divider-horizontal py-[5px] mx-0.5'></div>
+                        <span className='text-[13.25px] opacity-80'>
+                          {item.fileSize}
+                        </span>
+                      </div>
                     </div>
-                    <span className='text-[13.25px] ml-1.5'>
-                      {item.fileSize}
-                    </span>
-                    <span className='text-[13.25px] ml-1.5'>
+                    <div className='flex items-center gap-2 text-[13.25px] ml-1.5 opacity-80'>
+                      <span>{t('lastModified')}</span>
+                      <span>
                       {item.createDate}
                     </span>
+                    </div>
                   </div>
 
                   <div className='flex items-center gap-3 mr-3'>

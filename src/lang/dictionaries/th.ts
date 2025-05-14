@@ -479,6 +479,7 @@ export default {
     exit: 'กด ESC หรือ ปุ่มปิด เพื่อปิด',
     selectData: 'เลือกวันที่',
     amoment: 'เมื่อสักครู่',
+    lastModified: 'อัปเดทเมื่อ',
 
     // connect
     ipAddress: 'IP',

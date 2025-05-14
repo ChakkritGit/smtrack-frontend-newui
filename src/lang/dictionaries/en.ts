@@ -480,6 +480,7 @@ export default {
     exit: 'Press ESC key or click the button below to close',
     selectData: 'Pick a date',
     amoment: 'Just now',
+    lastModified: 'Last Modified',
 
     // connect
     ipAddress: 'IP',

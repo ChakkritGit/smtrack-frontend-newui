@@ -651,6 +651,31 @@ const ManageProbe = () => {
       center: true
     },
     {
+      name: t('lastModified'),
+      cell: item => (
+        <div className='flex items-center gap-2'>
+          <span>
+            {new Date(String(item.updateAt))?.toLocaleString('th-TH', {
+              day: '2-digit',
+              month: '2-digit',
+              year: '2-digit',
+              timeZone: 'UTC'
+            })}
+          </span>
+          <span>
+            {new Date(String(item.updateAt))?.toLocaleString('th-TH', {
+              hour: '2-digit',
+              minute: '2-digit',
+              timeZone: 'UTC'
+            })}
+          </span>
+        </div>
+      ),
+      sortable: false,
+      center: true,
+      width: '150px'
+    },
+    {
       name: t('action'),
       cell: item => (
         <div className='flex items-center justify-center gap-3 p-3'>

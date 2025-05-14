@@ -960,28 +960,28 @@ const ManageDevice = () => {
         </span>
       ),
       sortable: false,
-      width: '170px'
+      width: '130px'
       // center: true
     },
     {
       name: t('deviceLocationTb'),
       cell: item => (item.location ? item.location : '—'),
       sortable: false,
-      width: '150px'
+      width: '140px'
       // center: true
     },
     {
       name: t('hospitals'),
       cell: item => (item.hospitalName ? item.hospitalName : '—'),
       sortable: false,
-      width: '150px'
+      width: '145px'
       // center: true
     },
     {
       name: t('ward'),
       cell: item => (item.wardName ? item.wardName : '—'),
       sortable: false,
-      width: '150px'
+      width: '140px'
       // center: true
     },
     {
@@ -989,7 +989,7 @@ const ManageDevice = () => {
       selector: item => (item.firmware ? item.firmware : '—'),
       sortable: false,
       center: true,
-      width: '130px'
+      width: '100px'
     },
     {
       name: t('status'),
@@ -1009,8 +1009,7 @@ const ManageDevice = () => {
         }
       },
       sortable: false,
-      center: true,
-      width: '130px'
+      center: true
     },
     ...(role === 'SUPER'
       ? [
@@ -1038,10 +1037,36 @@ const ManageDevice = () => {
               </div>
             ),
             sortable: false,
-            center: true
+            center: true,
+            width: '125px'
           }
         ]
       : []),
+    {
+      name: t('lastModified'),
+      cell: (item: DeviceType) => (
+        <div className='flex items-center gap-2'>
+          <span>
+            {new Date(item.updateAt).toLocaleString('th-TH', {
+              day: '2-digit',
+              month: '2-digit',
+              year: '2-digit',
+              timeZone: 'UTC'
+            })}
+          </span>
+          <span>
+            {new Date(item.updateAt).toLocaleString('th-TH', {
+              hour: '2-digit',
+              minute: '2-digit',
+              timeZone: 'UTC'
+            })}
+          </span>
+        </div>
+      ),
+      sortable: false,
+      center: true,
+      width: '150px'
+    },
     {
       name: t('action'),
       cell: item => (

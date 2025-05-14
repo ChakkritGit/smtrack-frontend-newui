@@ -424,6 +424,31 @@ const Repair = () => {
       center: true
     },
     {
+      name: t('lastModified'),
+      cell: item => (
+        <div className='flex items-center gap-2'>
+          <span>
+            {new Date(item.updateAt).toLocaleString('th-TH', {
+              day: '2-digit',
+              month: '2-digit',
+              year: '2-digit',
+              timeZone: 'UTC'
+            })}
+          </span>
+          <span>
+            {new Date(item.updateAt).toLocaleString('th-TH', {
+              hour: '2-digit',
+              minute: '2-digit',
+              timeZone: 'UTC'
+            })}
+          </span>
+        </div>
+      ),
+      sortable: false,
+      center: true,
+      width: '150px'
+    },
+    {
       name: t('action'),
       cell: (item, index) => (
         <div key={index} className='flex items-center justify-center gap-3 p-3'>
@@ -434,43 +459,42 @@ const Repair = () => {
           >
             <RiPrinterLine size={20} />
           </button>
-          {(role === 'SUPER' ||
-            role === 'SERVICE') && (
-              <>
-                <div className='divider divider-horizontal mx-0'></div>
-                <button
-                  className='btn btn-ghost flex text-white min-w-[32px] max-w-[32px] min-h-[32px] max-h-[32px] p-0 bg-primary'
-                  onClick={() => openEditModal(item)}
-                >
-                  <RiEditLine size={20} />
-                </button>
-                <button
-                  className='btn btn-ghost flex text-white min-w-[32px] max-w-[32px] min-h-[32px] max-h-[32px] p-0 bg-red-500'
-                  onClick={() =>
-                    Swal.fire({
-                      title: t('deleteRepairTitle'),
-                      text: t('notReverseText'),
-                      icon: 'warning',
-                      showCancelButton: true,
-                      confirmButtonText: t('confirmButton'),
-                      cancelButtonText: t('cancelButton'),
-                      reverseButtons: false,
-                      customClass: {
-                        actions: 'custom-action',
-                        confirmButton: 'custom-confirmButton',
-                        cancelButton: 'custom-cancelButton'
-                      }
-                    }).then(result => {
-                      if (result.isConfirmed) {
-                        deleteRepair(item.id)
-                      }
-                    })
-                  }
-                >
-                  <RiDeleteBin7Line size={20} />
-                </button>
-              </>
-            )}
+          {(role === 'SUPER' || role === 'SERVICE') && (
+            <>
+              <div className='divider divider-horizontal mx-0'></div>
+              <button
+                className='btn btn-ghost flex text-white min-w-[32px] max-w-[32px] min-h-[32px] max-h-[32px] p-0 bg-primary'
+                onClick={() => openEditModal(item)}
+              >
+                <RiEditLine size={20} />
+              </button>
+              <button
+                className='btn btn-ghost flex text-white min-w-[32px] max-w-[32px] min-h-[32px] max-h-[32px] p-0 bg-red-500'
+                onClick={() =>
+                  Swal.fire({
+                    title: t('deleteRepairTitle'),
+                    text: t('notReverseText'),
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: t('confirmButton'),
+                    cancelButtonText: t('cancelButton'),
+                    reverseButtons: false,
+                    customClass: {
+                      actions: 'custom-action',
+                      confirmButton: 'custom-confirmButton',
+                      cancelButton: 'custom-cancelButton'
+                    }
+                  }).then(result => {
+                    if (result.isConfirmed) {
+                      deleteRepair(item.id)
+                    }
+                  })
+                }
+              >
+                <RiDeleteBin7Line size={20} />
+              </button>
+            </>
+          )}
         </div>
       ),
       sortable: false,
@@ -685,7 +709,9 @@ const Repair = () => {
               {repairForm.warrantyStatus === '4' && (
                 <div className='form-control w-full'>
                   <label className='label flex-col items-start w-full mb-3'>
-                    <span className='label-text text-wrap mb-2'>{t('hisDetail')}</span>
+                    <span className='label-text text-wrap mb-2'>
+                      {t('hisDetail')}
+                    </span>
                     <textarea
                       name='remark'
                       value={repairForm.remark}
@@ -703,7 +729,9 @@ const Repair = () => {
           <div className='grid grid-cols-1 gap-4 w-full'>
             <div className='form-control w-full'>
               <label className='label flex-col items-start w-full mb-3'>
-                <span className='label-text text-wrap mb-2'>{t('hisDetail')}</span>
+                <span className='label-text text-wrap mb-2'>
+                  {t('hisDetail')}
+                </span>
                 <textarea
                   name='detail'
                   value={repairForm.detail}
@@ -938,7 +966,9 @@ const Repair = () => {
               {repairForm.warrantyStatus === '4' && (
                 <div className='form-control w-full'>
                   <label className='label flex-col items-start w-full mb-3'>
-                    <span className='label-text text-wrap mb-2'>{t('hisDetail')}</span>
+                    <span className='label-text text-wrap mb-2'>
+                      {t('hisDetail')}
+                    </span>
                     <textarea
                       name='remark'
                       value={repairForm.remark}
@@ -956,7 +986,9 @@ const Repair = () => {
           <div className='grid grid-cols-1 gap-4 w-full'>
             <div className='form-control w-full'>
               <label className='label flex-col items-start w-full mb-3'>
-                <span className='label-text text-wrap mb-2'>{t('hisDetail')}</span>
+                <span className='label-text text-wrap mb-2'>
+                  {t('hisDetail')}
+                </span>
                 <textarea
                   name='detail'
                   value={repairForm.detail}

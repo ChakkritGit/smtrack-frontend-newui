@@ -523,23 +523,26 @@ const ManageFirmware = () => {
               </div>
               <div className='flex flex-col gap-1'>
                 <span className='text-base font-medium'>{item.fileName}</span>
-                <span className='text-sm'>{item.fileSize}</span>
-                <div className='flex items-center gap-2'>
-                  <span className='text-sm'>
-                    {new Date(item.createDate).toLocaleString('th-TH', {
-                      day: '2-digit',
-                      month: '2-digit',
-                      year: '2-digit',
-                      timeZone: 'UTC'
-                    })}
-                  </span>
-                  <span className='text-sm'>
-                    {new Date(item.createDate).toLocaleString('th-TH', {
-                      hour: '2-digit',
-                      minute: '2-digit',
-                      timeZone: 'UTC'
-                    })}
-                  </span>
+                <span className='text-[14px] opacity-80'>{item.fileSize}</span>
+                <div className='flex items-center gap-2 text-[14px] opacity-80'>
+                  <span>{t('lastModified')}</span>
+                  <div className='flex items-center gap-2'>
+                    <span className='text-sm'>
+                      {new Date(item.createDate).toLocaleString('th-TH', {
+                        day: '2-digit',
+                        month: '2-digit',
+                        year: '2-digit',
+                        timeZone: 'UTC'
+                      })}
+                    </span>
+                    <span className='text-sm'>
+                      {new Date(item.createDate).toLocaleString('th-TH', {
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        timeZone: 'UTC'
+                      })}
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
