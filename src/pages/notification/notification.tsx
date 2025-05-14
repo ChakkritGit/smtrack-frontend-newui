@@ -190,7 +190,13 @@ const Notification = () => {
             <div>
               {notificationList.length > 0 ? (
                 <NotificationPagination
-                  data={notificationList.sort((a, b) => new Date(b._time).getTime() - new Date(a._time).getTime()) as NotificationTmsHistoryType[]}
+                  data={
+                    notificationList.sort(
+                      (a, b) =>
+                        new Date(b._time).getTime() -
+                        new Date(a._time).getTime()
+                    ) as NotificationTmsHistoryType[]
+                  }
                   initialPerPage={10}
                   itemPerPage={[10, 30, 50, 100]}
                   renderItem={(item, index) => (
@@ -230,7 +236,13 @@ const Notification = () => {
             <div>
               {notificationList.length > 0 ? (
                 <NotificationPagination
-                  data={notificationList.sort((a, b) => new Date(b._time).getTime() - new Date(a._time).getTime()) as NotificationHistoryType[]}
+                  data={
+                    notificationList.sort(
+                      (a, b) =>
+                        new Date(b._time).getTime() -
+                        new Date(a._time).getTime()
+                    ) as NotificationHistoryType[]
+                  }
                   initialPerPage={10}
                   itemPerPage={[10, 30, 50, 100]}
                   renderItem={(item, index) => (
@@ -246,10 +258,19 @@ const Notification = () => {
                           <span>{subTextNotiDetails(item?.message)}</span>
                           <div className='flex flex-col items-end opacity-70'>
                             <span className='text-[14px]'>
-                              {item?._time?.substring(11, 16)}
+                              {new Date(item._time).toLocaleString('th-TH', {
+                                hour: '2-digit',
+                                minute: '2-digit',
+                                timeZone: 'UTC'
+                              })}
                             </span>
                             <span className='w-max text-[14px]'>
-                              {item?._time?.substring(0, 10)}
+                              {new Date(item._time).toLocaleString('th-TH', {
+                                day: '2-digit',
+                                month: '2-digit',
+                                year: '2-digit',
+                                timeZone: 'UTC'
+                              })}
                             </span>
                           </div>
                         </div>

@@ -480,6 +480,7 @@ export default {
     selectData: 'เลือกวันที่',
     amoment: 'เมื่อสักครู่',
     lastModified: 'อัปเดทเมื่อ',
+    createAt: 'สร้างเมื่อ',
 
     // connect
     ipAddress: 'IP',
@@ -520,7 +521,8 @@ export default {
     selectedFile: 'กรุณาเลือกไฟล์หรือวางไฟล์',
     deleteFirmware: 'คุณต้องการลบเฟิร์มแวร์หรือไม่',
     deleteFirmwareText: 'คุณจะไม่สามารถกู้คืนไฟล์ที่ลบได้',
-    deleteCsv: 'คุณต้องการลบไฟล์ csv นี้หรือไม่',
+    deleteCsv: 'คุณต้องการลบไฟล์',
+    deleteCsvNext: 'นี้หรือไม่?',
     deleteCsvText: 'คุณจะไม่สามารถกู้คืนไฟล์ที่ลบได้',
     logoutDialog: 'คุณต้องการออกจากระบบหรือไม่',
     logoutDialogText: 'คุณจะถูกนำไปยังหน้าล็อกอิน',

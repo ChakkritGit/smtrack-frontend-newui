@@ -50,7 +50,7 @@ const ManageCsv = () => {
 
   const deleteCsv = async (fileName: string) => {
     const result = await Swal.fire({
-      title: t('deleteCsv'),
+      title: `${t('deleteCsv')} ${fileName} ${t('deleteCsvNext')}`,
       text: t('deleteCsvText'),
       icon: 'warning',
       showCancelButton: true,
@@ -151,10 +151,24 @@ const ManageCsv = () => {
                       </div>
                     </div>
                     <div className='flex items-center gap-2 text-[13.25px] ml-1.5 opacity-80'>
-                      <span>{t('lastModified')}</span>
-                      <span>
-                      {item.createDate}
-                    </span>
+                      <span>{t('createAt')}</span>
+                      <div className='flex items-center gap-2'>
+                        <span>
+                          {new Date(item.createDate).toLocaleString('th-TH', {
+                            day: '2-digit',
+                            month: '2-digit',
+                            year: '2-digit',
+                            timeZone: 'UTC'
+                          })}
+                        </span>
+                        <span>
+                          {new Date(item.createDate).toLocaleString('th-TH', {
+                            hour: '2-digit',
+                            minute: '2-digit',
+                            timeZone: 'UTC'
+                          })}
+                        </span>
+                      </div>
                     </div>
                   </div>
 

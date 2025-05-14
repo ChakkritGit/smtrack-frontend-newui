@@ -278,10 +278,25 @@ const Notifications = () => {
                           <span className='font-medium'>{item.message}</span>
                           <div className='flex flex-col items-end opacity-70'>
                             <span className='text-[14px]'>
-                              {item.createdAt.substring(11, 16)}
+                              {new Date(item.createdAt).toLocaleString(
+                                'th-TH',
+                                {
+                                  hour: '2-digit',
+                                  minute: '2-digit',
+                                  timeZone: 'UTC'
+                                }
+                              )}
                             </span>
                             <span className='w-max text-[14px]'>
-                              {item.createdAt.substring(0, 10)}
+                              {new Date(item.createdAt).toLocaleString(
+                                'th-TH',
+                                {
+                                  day: '2-digit',
+                                  month: '2-digit',
+                                  year: '2-digit',
+                                  timeZone: 'UTC'
+                                }
+                              )}
                             </span>
                           </div>
                         </div>
@@ -343,10 +358,19 @@ const Notifications = () => {
                           </span>
                           <div className='flex flex-col items-end opacity-70'>
                             <span className='text-[14px]'>
-                              {item.createAt.substring(11, 16)}
+                              {new Date(item.createAt).toLocaleString('th-TH', {
+                                hour: '2-digit',
+                                minute: '2-digit',
+                                timeZone: 'UTC'
+                              })}
                             </span>
                             <span className='w-max text-[14px]'>
-                              {item.createAt.substring(0, 10)}
+                              {new Date(item.createAt).toLocaleString('th-TH', {
+                                day: '2-digit',
+                                month: '2-digit',
+                                year: '2-digit',
+                                timeZone: 'UTC'
+                              })}
                             </span>
                           </div>
                         </div>

@@ -481,6 +481,7 @@ export default {
     selectData: 'Pick a date',
     amoment: 'Just now',
     lastModified: 'Last Modified',
+    createAt: 'Create At',
 
     // connect
     ipAddress: 'IP',
@@ -524,7 +525,8 @@ export default {
     selectedFile: 'Please selected file or drop file!',
     deleteFirmware: 'Do you want to delete firmware?',
     deleteFirmwareText: 'You will not be able to recover this file',
-    deleteCsv: 'Do you want to delete csv file?',
+    deleteCsv: 'Do you want to delete',
+    deleteCsvNext: 'file?',
     deleteCsvText: 'You will not be able to recover this file',
     logoutDialog: 'Do you want to logout?',
     logoutDialogText: 'You will be redirected to the login page!',
