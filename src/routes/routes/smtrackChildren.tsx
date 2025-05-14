@@ -19,6 +19,7 @@ import Changelog from '../../components/changelog/changelog'
 // import DynamicVideoColor from '../../test/test'
 import TestWrapper from '../../test/testWrapper'
 import ChartPdf from '../../test/chartPdf'
+import ManageCsv from '../../pages/reports/manageCsv'
 
 const smtrackChildren: RouteObject[] = [
   {
@@ -65,9 +66,14 @@ const smtrackChildren: RouteObject[] = [
         element: <Management />,
         errorElement: <ErrorScreen />
       },
+      // {
+      //   path: 'management/:id',
+      //   element: <>management/:id</>,
+      //   errorElement: <ErrorScreen />
+      // },
       {
-        path: 'management/:id',
-        element: <>management/:id</>,
+        path: 'management/csv',
+        element: <ManageCsv />,
         errorElement: <ErrorScreen />
       }
     ]

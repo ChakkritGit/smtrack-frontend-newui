@@ -7,6 +7,7 @@ import { setSearch } from '../../../redux/actions/utilsActions'
 import ManageDeviceAndProbe from './manageDeviceAndProbe'
 import ManageHospital from '../manageHospital'
 import HistoryLog from '../../../components/historyLog/historyLog'
+import { PiFileCsvDuotone } from 'react-icons/pi'
 import {
   RiBox3Fill,
   RiBox3Line,
@@ -15,10 +16,12 @@ import {
   RiHospitalFill,
   RiHospitalLine
 } from 'react-icons/ri'
+import { useNavigate } from 'react-router-dom'
 
 const Management = () => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
+  const navigate = useNavigate()
   const { tokenDecode } = useSelector((state: RootState) => state.utils)
   const [tab, setTab] = useState(cookies.get('manageHospitalTab') ?? 1)
   const { role } = tokenDecode ?? {}
@@ -93,6 +96,17 @@ const Management = () => {
                 {t('tabAdjustHistory')}
               </span>
             </a>
+            {role === 'SUPER' && (
+              <a
+                className={`flex items-center text-sm md:text-lg border-2 border-b-0 p-2 rounded-tl-md rounded-tr-md cursor-pointer font-medium border-base-content/70 text-base-content`}
+                onClick={() => navigate('/management/csv')}
+              >
+                <PiFileCsvDuotone size={24} />
+                <span className='hidden md:block md:ml-2'>
+                  {t('tabManageCsv')}
+                </span>
+              </a>
+            )}
           </>
         )}
       </div>

@@ -30,7 +30,6 @@ import { Location, useLocation, useNavigate } from 'react-router-dom'
 import { setTokenExpire } from '../../redux/actions/utilsActions'
 import { FaThermometerHalf } from 'react-icons/fa'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import Loading from '../skeleton/table/loading'
 
 const Notifications = () => {
   const dispatch = useDispatch()
@@ -43,7 +42,6 @@ const Notifications = () => {
   const [page, setPage] = useState(1)
   const [notificationList, setNotification] = useState<NotificationType[]>([])
   const [fetchMore, setFetchMore] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
   const { role = 'USER' } = tokenDecode || {}
 
   const fetchNotification = async (pages: number) => {
@@ -74,23 +72,6 @@ const Notifications = () => {
       }
     }
   }
-
-  useEffect(() => {
-    let subscribed = true
-    ;(async () => {
-      if (subscribed) {
-        await fetchNotification(1)
-      }
-    })()
-    return () => {
-      subscribed = false
-    }
-  }, [])
-
-  useEffect(() => {
-    if (page === 1) return
-    fetchNotification(page)
-  }, [page])
 
   const handleLoadMoreData = () => {
     if (fetchMore) {
@@ -232,6 +213,180 @@ const Notifications = () => {
     }
   }
 
+  const NotificationList = useMemo(
+    () => (
+      <ul
+        tabIndex={1}
+        className='dropdown-content bg-base-100 text-base-content rounded-box top-px z-10 mt-16 right-0 w-[360px] md:w-[480px] border border-white/5 shadow-2xl outline-1 outline-black/5'
+      >
+        <div className='flex items-center justify-between rounded-t-box p-2 h-[54px] bg-base-100/70 backdrop-blur-md border-b border-base-content/10 sticky top-0 z-10'>
+          <span className='text-base ml-2'>{t('titleNotification')}</span>
+          <button
+            className='btn btn-ghost border border-base-content/20 flex p-0 duration-300 ease-linear max-h-[34px] min-h-[34px] max-w-[34px] min-w-[34px] tooltip tooltip-left'
+            data-tip={t('isExapndText')}
+            onClick={() => {
+              document.activeElement instanceof HTMLElement &&
+                document.activeElement.blur()
+
+              if (location.pathname !== '/notification') {
+                navigate('/notification')
+              }
+            }}
+          >
+            <RiArrowRightUpLine size={20} />
+          </button>
+        </div>
+        {role === 'LEGACY_ADMIN' || role === 'LEGACY_USER' || tmsMode ? (
+          <div
+            id='scrollableDiv'
+            className='h-[520px] max-h-[calc(100dvh-180px)] md:max-h-[520px] overflow-y-scroll'
+          >
+            {notificationList.length > 0 ? (
+              <InfiniteScroll
+                dataLength={notificationList.length}
+                next={handleLoadMoreData}
+                hasMore={fetchMore}
+                scrollableTarget='scrollableDiv'
+                loader={
+                  <div>
+                    <div className='divider my-0 before:h-[1px] after:h-[1px]'></div>
+                    <div className='flex items-center justify-center p-4 pt-3'>
+                      <span className='loading loading-dots loading-md'></span>
+                    </div>
+                  </div>
+                }
+                endMessage={
+                  <div>
+                    <div className='divider my-0 before:h-[1px] after:h-[1px]'></div>
+                    <div className='flex items-center justify-center p-4 pt-3 opacity-70'>
+                      <p className='text-sm'>{t('noMoreLoad')}</p>
+                    </div>
+                  </div>
+                }
+              >
+                <div>
+                  {notificationList.map((item, index) => (
+                    <li
+                      className='flex items-center gap-3 py-2 px-3 hover:bg-base-200 duration-300 ease-linear'
+                      key={index}
+                    >
+                      <div className='bg-primary/10 text-primary/70 rounded-field p-1'>
+                        <RiAlarmWarningFill size={24} />
+                      </div>
+                      <div className='flex flex-col gap-1 w-full'>
+                        <div className='flex items-center justify-between gap-3'>
+                          <span className='font-medium'>{item.message}</span>
+                          <div className='flex flex-col items-end opacity-70'>
+                            <span className='text-[14px]'>
+                              {item.createdAt.substring(11, 16)}
+                            </span>
+                            <span className='w-max text-[14px]'>
+                              {item.createdAt.substring(0, 10)}
+                            </span>
+                          </div>
+                        </div>
+                        <span className='text-[14px] opacity-70'>
+                          {item?.mcuId}
+                        </span>
+                      </div>
+                    </li>
+                  ))}
+                </div>
+              </InfiniteScroll>
+            ) : (
+              <div className='flex items-center justify-center loading-hieght-full'>
+                <div>{t('notificationEmpty')}</div>
+              </div>
+            )}
+          </div>
+        ) : (
+          <div
+            id='scrollableDiv'
+            className='h-[520px] max-h-[calc(100dvh-230px)] md:max-h-[520px] overflow-y-scroll'
+          >
+            {notificationList.length > 0 ? (
+              <InfiniteScroll
+                dataLength={notificationList.length}
+                next={handleLoadMoreData}
+                hasMore={fetchMore}
+                scrollableTarget='scrollableDiv'
+                loader={
+                  <div>
+                    <div className='divider my-0 before:h-[1px] after:h-[1px]'></div>
+                    <div className='flex items-center justify-center p-4 pt-3'>
+                      <span className='loading loading-dots loading-md'></span>
+                    </div>
+                  </div>
+                }
+                endMessage={
+                  <div>
+                    <div className='divider my-0 before:h-[1px] after:h-[1px]'></div>
+                    <div className='flex items-center justify-center p-4 pt-3 opacity-70'>
+                      <p className='text-sm'>{t('noMoreLoad')}</p>
+                    </div>
+                  </div>
+                }
+              >
+                <div>
+                  {notificationList.map((item, index) => (
+                    <li
+                      className='flex items-center gap-3 py-2 px-3 hover:bg-base-200 duration-300 ease-linear'
+                      key={index}
+                    >
+                      <div className='bg-primary/10 text-primary/70 rounded-field p-1'>
+                        {subTextNotiDetailsIcon(item.message)}
+                      </div>
+                      <div className='flex flex-col gap-1 w-full'>
+                        <div className='flex items-center justify-between gap-3'>
+                          <span className='font-medium'>
+                            {subTextNotiDetails(item.message)}
+                          </span>
+                          <div className='flex flex-col items-end opacity-70'>
+                            <span className='text-[14px]'>
+                              {item.createAt.substring(11, 16)}
+                            </span>
+                            <span className='w-max text-[14px]'>
+                              {item.createAt.substring(0, 10)}
+                            </span>
+                          </div>
+                        </div>
+                        <span className='text-[14px] opacity-70'>
+                          {item.device.name}
+                        </span>
+                      </div>
+                    </li>
+                  ))}
+                </div>
+              </InfiniteScroll>
+            ) : (
+              <div className='flex items-center justify-center loading-hieght-full'>
+                <div>{t('notificationEmpty')}</div>
+              </div>
+            )}
+          </div>
+        )}
+      </ul>
+    ),
+    [notificationList, t, fetchMore, tmsMode, role, location.pathname]
+  )
+
+  useEffect(() => {
+    let subscribed = true
+    ;(async () => {
+      if (subscribed) {
+        await fetchNotification(1)
+      }
+    })()
+    return () => {
+      subscribed = false
+    }
+  }, [])
+
+  useEffect(() => {
+    if (page === 1) return
+    fetchNotification(page)
+  }, [page])
+
   useEffect(() => {
     if (notificationList.length > 0) {
       const img = new Image()
@@ -302,170 +457,6 @@ const Notifications = () => {
     }
   }, [location, userProfile, notificationList, themeMode])
 
-  const NotificationList = useMemo(
-    () => (
-      <ul
-        tabIndex={1}
-        className='dropdown-content bg-base-100 text-base-content rounded-box top-px z-10 mt-16 right-0 w-[360px] md:w-[480px] border border-white/5 shadow-2xl outline-1 outline-black/5'
-      >
-        <div className='flex items-center justify-between rounded-t-box p-2 h-[54px] bg-base-100/70 backdrop-blur-md border-b border-base-content/10 shadow-sm sticky top-0 z-10'>
-          <span className='text-base ml-2'>{t('titleNotification')}</span>
-          <button
-            className='btn btn-ghost border border-base-content/20 flex p-0 duration-300 ease-linear max-h-[34px] min-h-[34px] max-w-[34px] min-w-[34px] tooltip tooltip-left'
-            data-tip={t('isExapndText')}
-            onClick={() => navigate('/notification')}
-          >
-            <RiArrowRightUpLine size={20} />
-          </button>
-        </div>
-        {isLoading ? (
-          <Loading />
-        ) : role === 'LEGACY_ADMIN' || role === 'LEGACY_USER' || tmsMode ? (
-          <div
-            id='scrollableDiv'
-            className='h-[520px] max-h-[calc(100dvh-180px)] md:max-h-[520px] overflow-y-scroll'
-          >
-            {notificationList.length > 0 ? (
-              <InfiniteScroll
-                dataLength={notificationList.length}
-                next={handleLoadMoreData}
-                hasMore={fetchMore}
-                scrollableTarget='scrollableDiv'
-                loader={
-                  <div>
-                    <div className='divider my-0 before:h-[1px] after:h-[1px]'></div>
-                    <div className='flex items-center justify-center p-4 pt-3'>
-                      <span className='loading loading-dots loading-md'></span>
-                    </div>
-                  </div>
-                }
-                endMessage={
-                  <div>
-                    <div className='divider my-0 before:h-[1px] after:h-[1px]'></div>
-                    <div className='flex items-center justify-center p-4 pt-3 opacity-70'>
-                      <p className='text-sm'>{t('noMoreLoad')}</p>
-                    </div>
-                  </div>
-                }
-              >
-                <div>
-                  {notificationList.map((item, index) => (
-                    <li
-                      className='flex items-center gap-3 py-2 px-3'
-                      key={index}
-                    >
-                      <div className='bg-primary/10 text-primary/70 rounded-field p-1'>
-                        <RiAlarmWarningFill size={24} />
-                      </div>
-                      <div className='flex flex-col gap-1 w-full'>
-                        <div className='flex items-center justify-between gap-3'>
-                          <span className='font-medium'>{item.message}</span>
-                          <div className='flex flex-col items-end opacity-70'>
-                            <span className='text-[14px]'>
-                              {item.createdAt.substring(11, 16)}
-                            </span>
-                            <span className='w-max text-[14px]'>
-                              {item.createdAt.substring(0, 10)}
-                            </span>
-                          </div>
-                        </div>
-                        <span className='text-[14px] opacity-70'>
-                          {item?.mcuId}
-                        </span>
-                      </div>
-                    </li>
-                  ))}
-                </div>
-              </InfiniteScroll>
-            ) : (
-              <div className='flex items-center justify-center loading-hieght-full'>
-                <div>{t('notificationEmpty')}</div>
-              </div>
-            )}
-          </div>
-        ) : (
-          <div
-            id='scrollableDiv'
-            className='h-[520px] max-h-[calc(100dvh-230px)] md:max-h-[520px] overflow-y-scroll'
-          >
-            {notificationList.length > 0 ? (
-              <InfiniteScroll
-                dataLength={notificationList.length}
-                next={handleLoadMoreData}
-                hasMore={fetchMore}
-                scrollableTarget='scrollableDiv'
-                loader={
-                  <div>
-                    <div className='divider my-0 before:h-[1px] after:h-[1px]'></div>
-                    <div className='flex items-center justify-center p-4 pt-3'>
-                      <span className='loading loading-dots loading-md'></span>
-                    </div>
-                  </div>
-                }
-                endMessage={
-                  <div>
-                    <div className='divider my-0 before:h-[1px] after:h-[1px]'></div>
-                    <div className='flex items-center justify-center p-4 pt-3 opacity-70'>
-                      <p className='text-sm'>{t('noMoreLoad')}</p>
-                    </div>
-                  </div>
-                }
-              >
-                <div>
-                  {notificationList.map((item, index) => (
-                    <li
-                      className='flex items-center gap-3 py-2 px-3'
-                      key={index}
-                    >
-                      <div className='bg-primary/10 text-primary/70 rounded-field p-1'>
-                        {subTextNotiDetailsIcon(item.message)}
-                      </div>
-                      <div className='flex flex-col gap-1 w-full'>
-                        <div className='flex items-center justify-between gap-3'>
-                          <span className='font-medium'>
-                            {subTextNotiDetails(item.message)}
-                          </span>
-                          <div className='flex flex-col items-end opacity-70'>
-                            <span className='text-[14px]'>
-                              {item.createAt.substring(11, 16)}
-                            </span>
-                            <span className='w-max text-[14px]'>
-                              {item.createAt.substring(0, 10)}
-                            </span>
-                          </div>
-                        </div>
-                        <span className='text-[14px] opacity-70'>
-                          {item.device.name}
-                        </span>
-                      </div>
-                    </li>
-                  ))}
-                </div>
-              </InfiniteScroll>
-            ) : (
-              <div className='flex items-center justify-center loading-hieght-full'>
-                <div>{t('notificationEmpty')}</div>
-              </div>
-            )}
-          </div>
-        )}
-      </ul>
-    ),
-    [notificationList, t, isLoading, fetchMore, tmsMode, role]
-  )
-
-  const handleClick = () => {
-    setIsLoading(true)
-    setPage(1)
-    setNotification([])
-    setFetchMore(false)
-
-    setTimeout(async () => {
-      await fetchNotification(1)
-      setIsLoading(false)
-    }, 500)
-  }
-
   return (
     <div className='dropdown dropdown-end'>
       <div
@@ -473,10 +464,9 @@ const Notifications = () => {
         data-tip={t('titleNotification')}
         role='button'
         className='indicator flex btn btn-ghost justify-end tooltip tooltip-left md:tooltip-bottom'
-        onClick={handleClick}
       >
         {notificationList.length > 0 && (
-          <span className='absolute bg-primary h-2.5 w-2.5 px-1 top-0.5 right-2 rounded-full'></span>
+          <span className='absolute bg-primary h-3 w-3 px-1 top-0.5 right-1.5 rounded-full'></span>
         )}
         <RiNotification4Line size={24} />
       </div>

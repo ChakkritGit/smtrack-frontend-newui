@@ -116,7 +116,7 @@ const MainSmtrack = () => {
 
       return () => clearTimeout(timer)
     }
-  }, [location, token, tokenDecode, isFirstLoad])
+  }, [location.pathname, token, tokenDecode, isFirstLoad])
 
   useEffect(() => {
     socket.on('connect', handleConnect)

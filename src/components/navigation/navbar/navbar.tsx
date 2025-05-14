@@ -576,11 +576,11 @@ const Navbar = () => {
           </div>
         )}
         <div className='flex-none gap-2 hidden lg:block'>
-          <div className='dropdown dropdown-start'>
+          <div className='dropdown dropdown-center'>
             <div
               tabIndex={0}
               role='button'
-              className='btn btn-ghost gap-3 px-1'
+              className='btn btn-ghost gap-3 px-1 min-w-[125px]'
             >
               <div className='avatar'>
                 <div className='w-8 rounded-field'>

@@ -880,7 +880,7 @@
   prefersdark: false;
   color-scheme: "light";
   --color-base-100: oklch(98% 0.001 106.423);
-  --color-base-200: oklch(97% 0.001 106.424);
+  --color-base-200: oklch(95% 0.001 106.424);
   --color-base-300: oklch(92% 0.003 48.717);
   --color-base-content: oklch(21% 0.006 56.043);
   --color-primary: oklch(75% 0.183 55.934);

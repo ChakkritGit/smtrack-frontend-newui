@@ -14,12 +14,12 @@ const NotFound = () => {
       <div
         className={`w-full fixed ${
           blurDisabled
-            ? 'blur-[100px] bg-yellow-500/40 h-[50px] top-0 shadow-2xl shadow-yellow-500/100 z-10'
+            ? 'blur-[100px] bg-amber-500/40 h-[50px] top-0 shadow-2xl shadow-amber-500/100 z-10'
             : ''
         }`}
       ></div>
       <div className='flex items-center justify-center gap-3 flex-col'>
-        <RiAlertLine className='text-yellow-600 text-[48px] md:text-[64px]' />
+        <RiAlertLine className='text-amber-600 text-[48px] md:text-[64px]' />
         <span className='text-[42px] md:text-[82px] font-medium'>404</span>
         <span className='text-[18px] md:text-[24px]'>
           {t('descriptionError')}

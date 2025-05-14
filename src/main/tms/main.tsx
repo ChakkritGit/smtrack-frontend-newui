@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router-dom'
+import { Outlet, useLocation } from 'react-router-dom'
 import { RootState } from '../../redux/reducers/rootReducer'
 import { useDispatch, useSelector } from 'react-redux'
 import { SubmitLoading } from '../../components/loading/submitLoading'
@@ -32,6 +32,7 @@ const MainTms = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const { toasts } = useToasterStore()
+  const location = useLocation()
   const {
     submitLoading,
     cookieDecode,
@@ -115,7 +116,7 @@ const MainTms = () => {
 
       return () => clearTimeout(timer)
     }
-  }, [location, token, tokenDecode, isFirstLoad])
+  }, [location.pathname, token, tokenDecode, isFirstLoad])
 
   useEffect(() => {
     socket.on('connect', handleConnect)

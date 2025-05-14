@@ -235,7 +235,7 @@ const Notification = () => {
                   itemPerPage={[10, 30, 50, 100]}
                   renderItem={(item, index) => (
                     <li
-                      className={`flex items-center gap-3 py-2 px-3 border-b border-base-content/5`}
+                      className={`flex items-center gap-3 py-2 px-3 border-b border-base-content/5 hover:bg-base-200 duration-300 ease-linear`}
                       key={index}
                     >
                       <div className='bg-primary/10 text-primary/70 rounded-field p-1'>
