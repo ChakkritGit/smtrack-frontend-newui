@@ -42,7 +42,7 @@ const Routes = () => {
     blurDisabled,
     transitionDisabled,
     grayscaleMode,
-    i18nInit
+    i18nInit,
   } = useSelector((state: RootState) => state.utils)
   const [hospital, setHospital] = useState<HospitalType[]>([])
   const [activeIndex, setActiveIndex] = useState(0)
@@ -128,14 +128,14 @@ const Routes = () => {
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key.toLowerCase() === 'f') {
+      if (e.key.toLowerCase() === 'f' && !isFocused) {
         toggleFullscreen()
       }
     }
 
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [])
+  }, [isFocused])
 
   useEffect(() => {
     if (!token) return

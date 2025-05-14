@@ -9,7 +9,7 @@ import {
 import { useNavigate } from 'react-router-dom'
 import { CsvListType } from '../../types/smtrack/reports/csvType'
 import { AxiosError } from 'axios'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import {
   setSubmitLoading,
   setTokenExpire
@@ -19,12 +19,15 @@ import { responseType } from '../../types/smtrack/utilsRedux/utilsReduxType'
 import Loading from '../../components/skeleton/table/loading'
 import CsvPaginationProps from '../../components/pagination/csvPagination'
 import Swal from 'sweetalert2'
+import { RootState } from '../../redux/reducers/rootReducer'
 
 const ManageCsv = () => {
+  const { globalSearch } = useSelector((state: RootState) => state.utils)
   const dispatch = useDispatch()
   const { t } = useTranslation()
   const navigate = useNavigate()
   const [csvList, setCsvList] = useState<CsvListType[]>([])
+  const [csvListFilter, setCsvListFilter] = useState<CsvListType[]>([])
   const [isLoading, setIsLoading] = useState(false)
 
   const fetchCsvList = async () => {
@@ -102,6 +105,11 @@ const ManageCsv = () => {
     fetchCsvList()
   }, [])
 
+  useEffect(() => {
+    const filter = csvList.filter(f => f.fileName?.toLowerCase().includes(globalSearch.toLowerCase()))
+    setCsvListFilter(filter)
+  }, [csvList, globalSearch])
+
   return (
     <div className='p-3 px-[16px]'>
       <div className='breadcrumbs text-sm mt-3'>
@@ -123,10 +131,10 @@ const ManageCsv = () => {
       <div className='bg-base-100 rounded-field py-4 px-5 mt-3'>
         {isLoading ? (
           <Loading />
-        ) : csvList.length > 0 ? (
+        ) : csvListFilter.length > 0 ? (
           <div>
             <CsvPaginationProps
-              data={csvList}
+              data={csvListFilter}
               initialPerPage={10}
               itemPerPage={[10, 30, 50, 100]}
               renderItem={(item, index) => (
@@ -197,7 +205,7 @@ const ManageCsv = () => {
           </div>
         ) : (
           <div className='flex items-center justify-center loading-hieght-full'>
-            <div>{t('notificationEmpty')}</div>
+            <div>{t('nodata')}</div>
           </div>
         )}
       </div>
