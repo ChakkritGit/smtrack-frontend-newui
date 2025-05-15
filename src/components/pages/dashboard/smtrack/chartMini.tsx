@@ -1,6 +1,6 @@
 import Chart from 'react-apexcharts'
 import { useTranslation } from 'react-i18next'
-import { DeviceLogType } from '../../../../types/smtrack/logs/deviceLog'
+import { DeviceLogType } from '../../../../types/smtrack/devices/deviceType'
 
 interface ChartMiniProps {
   logData: DeviceLogType[]
@@ -13,8 +13,11 @@ const ChartMini = (props: ChartMiniProps) => {
   const { logData, tempMin, tempMax } = props
 
   const tempAvgValues = logData.map(item => item.temp)
-  const minTempAvg = Math.min(...tempAvgValues)
-  const maxTempAvg = Math.max(...tempAvgValues)
+  const minTemp = Math.min(...tempAvgValues, tempMin)
+  const maxTemp = Math.max(...tempAvgValues, tempMax)
+
+  const limitMin = Math.floor(minTemp - 3.2)
+  const limitMax = Math.ceil(maxTemp + 3.2)
 
   const mappedData = logData.map(item => {
     const time = new Date(item.sendTime).getTime()
@@ -236,18 +239,18 @@ const ChartMini = (props: ChartMiniProps) => {
             fontWeight: 600
           }
         },
-        min: tempMin - 3.5 - minTempAvg / 1.3,
-        max: tempMax + 3.5 + maxTempAvg / 1.3
+        min: limitMin,
+        max: limitMax
       },
       {
         show: false,
-        min: tempMin - 3.5 - minTempAvg / 1.3,
-        max: tempMax + 3.5 + maxTempAvg / 1.3
+        min: limitMin,
+        max: limitMax
       },
       {
         show: false,
-        min: tempMin - 3.5 - minTempAvg / 1.3,
-        max: tempMax + 3.5 + maxTempAvg / 1.3
+        min: limitMin,
+        max: limitMax
       },
       {
         show: false,
@@ -290,7 +293,7 @@ const ChartMini = (props: ChartMiniProps) => {
         inverseColors: true,
         opacityFrom: 0.45,
         opacityTo: 0,
-        stops: [minTempAvg, tempMax + maxTempAvg + 50]
+        stops: [minTemp, tempMax + maxTemp + 50]
       }
     },
     legend: {

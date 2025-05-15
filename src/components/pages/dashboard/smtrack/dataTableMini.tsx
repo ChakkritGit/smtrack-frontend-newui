@@ -2,9 +2,9 @@ import DataTable, { TableColumn } from 'react-data-table-component'
 import { useTranslation } from 'react-i18next'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { DeviceLogType } from '../../../../types/smtrack/logs/deviceLog'
 import { RootState } from '../../../../redux/reducers/rootReducer'
 import DataTableNoData from '../../../skeleton/table/noData'
+import { DeviceLogType } from '../../../../types/smtrack/devices/deviceType'
 
 interface TableMiniProps {
   logData: DeviceLogType[]

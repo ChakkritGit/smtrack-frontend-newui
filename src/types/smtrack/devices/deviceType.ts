@@ -1,7 +1,27 @@
 import { ConfigType } from '../configs/configType'
-import { DeviceLogType } from '../logs/deviceLog'
 import { ProbeType } from '../probe/probeType'
 import { WarrantiesType } from '../warranties/warranties'
+
+type DeviceLogType = {
+  battery: number
+  createAt: string
+  door1: boolean
+  door2: boolean
+  door3: boolean
+  extMemory: boolean
+  humidity: number
+  humidityDisplay: number
+  id: string
+  internet: boolean
+  plug: boolean
+  probe: string
+  sendTime: string
+  serial: string
+  temp: number
+  tempDisplay: number
+  tempInternal: number
+  updateAt: string
+}
 
 type DevicesType = {
   createAt: string
@@ -90,5 +110,6 @@ export type {
   DeviceListType,
   DeviceLog,
   DeviceLogs,
-  FirmwareListType
+  FirmwareListType,
+  DeviceLogType
 }

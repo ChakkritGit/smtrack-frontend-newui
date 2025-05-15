@@ -16,8 +16,11 @@ const FullChartComponent = (props: FullChartPropType) => {
   const { dataLog, tempMin, tempMax, isLoading } = props
 
   const tempAvgValues = dataLog ? dataLog.map(item => item.temp) : [0]
-  const minTempAvg = Math.min(...tempAvgValues)
-  const maxTempAvg = Math.max(...tempAvgValues)
+  const minTemp = Math.min(...tempAvgValues, tempMin)
+  const maxTemp = Math.max(...tempAvgValues, tempMax)
+
+  const limitMin = Math.floor(minTemp - 3.2)
+  const limitMax = Math.ceil(maxTemp + 3.2)
 
   const mappedData = dataLog.map(item => {
     const time = new Date(item._time).getTime()
@@ -89,7 +92,7 @@ const FullChartComponent = (props: FullChartPropType) => {
           speed: 500
         }
       },
-      stacked: true,
+      stacked: false,
       zoom: {
         type: 'x',
         enabled: true,
@@ -239,18 +242,18 @@ const FullChartComponent = (props: FullChartPropType) => {
             fontWeight: 600
           }
         },
-        min: tempMin - 3.5 - minTempAvg / 1.3,
-        max: tempMax + 3.5 + maxTempAvg / 1.3
+        min: limitMin,
+        max: limitMax
       },
       {
         show: false,
-        min: tempMin - 3.5 - minTempAvg / 1.3,
-        max: tempMax + 3.5 + maxTempAvg / 1.3
+        min: limitMin,
+        max: limitMax
       },
       {
         show: false,
-        min: tempMin - 3.5 - minTempAvg / 1.3,
-        max: tempMax + 3.5 + maxTempAvg / 1.3
+        min: limitMin,
+        max: limitMax
       },
       {
         show: false,
@@ -293,7 +296,7 @@ const FullChartComponent = (props: FullChartPropType) => {
         inverseColors: true,
         opacityFrom: 0.45,
         opacityTo: 0,
-        stops: [minTempAvg, tempMax + maxTempAvg + 35]
+        stops: [minTemp, tempMax + maxTemp + 35]
       }
     },
     legend: {
