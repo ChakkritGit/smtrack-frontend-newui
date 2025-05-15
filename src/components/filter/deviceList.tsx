@@ -1,7 +1,7 @@
 import Select from 'react-select'
 import axiosInstance from '../../constants/axios/axiosInstance'
 import { AxiosError } from 'axios'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { responseType } from '../../types/smtrack/utilsRedux/utilsReduxType'
 import { DeviceListType } from '../../types/smtrack/devices/deviceType'
 import { Option } from '../../types/global/hospitalAndWard'
@@ -69,28 +69,33 @@ const DeviceList = () => {
     setDeviceListFilter(filter)
   }, [deviceList, wardId])
 
-  return (
-    <Select
-      options={mapOptions<DeviceListType, keyof DeviceListType>(
-        deviceListFilter,
-        'id',
-        'name'
-      )}
-      value={mapDefaultValue<DeviceListType, keyof DeviceListType>(
-        deviceListFilter,
-        deviceKey,
-        'id',
-        'name'
-      )}
-      onChange={e => {
-        cookies.set('deviceKey', String(e?.value), cookieOptions)
-        dispatch(setDeviceKey(String(e?.value)))
-      }}
-      autoFocus={false}
-      className='react-select-container custom-device-select z-[75] min-w-full md:min-w-[315px]'
-      classNamePrefix='react-select'
-    />
-  )
+  const SelectDevice = useMemo(() => {
+    return (
+      <Select
+        id='deviceKey'
+        options={mapOptions<DeviceListType, keyof DeviceListType>(
+          deviceListFilter,
+          'id',
+          'name'
+        )}
+        value={mapDefaultValue<DeviceListType, keyof DeviceListType>(
+          deviceListFilter,
+          deviceKey,
+          'id',
+          'name'
+        )}
+        onChange={e => {
+          cookies.set('deviceKey', String(e?.value), cookieOptions)
+          dispatch(setDeviceKey(String(e?.value)))
+        }}
+        autoFocus={false}
+        className={`react-select-container custom-device-select z-40 w-full`}
+        classNamePrefix='react-select'
+      />
+    )
+  }, [deviceListFilter, deviceKey])
+
+  return SelectDevice
 }
 
 export default DeviceList

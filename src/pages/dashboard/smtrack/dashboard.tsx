@@ -37,15 +37,31 @@ const Dashboard = () => {
   const swiperInfoRef = useRef<SwiperType>(null)
   const [isPause, setIsPaused] = useState(false)
   const deviceFetchHistory = useRef<Record<string, number>>({})
+  const abortRef = useRef<AbortController | null>(null)
+  const intervalRef = useRef<NodeJS.Timeout | null>(null)
+
+  const abortPrevRequest = () => {
+    if (abortRef.current) {
+      abortRef.current.abort()
+    }
+  }
 
   const togglePause = useCallback(() => {
     setIsPaused(prev => !prev)
   }, [isPause])
 
-  const fetchDeviceLogs = useCallback(async () => {
+  const fetchDeviceLogs = async () => {
+    if (!deviceKey) return
+
+    const controller = new AbortController()
+    abortRef.current = controller
+
     try {
       const response = await axiosInstance.get<responseType<DeviceLogsType>>(
-        `/devices/device/${deviceKey}`
+        `/devices/device/${deviceKey}`,
+        {
+          signal: controller.signal
+        }
       )
       setDeviceLogs(response.data.data)
     } catch (error) {
@@ -61,7 +77,7 @@ const Dashboard = () => {
     } finally {
       setLoading(false)
     }
-  }, [deviceKey])
+  }
 
   useEffect(() => {
     const handleDeviceData = () => {
@@ -76,7 +92,7 @@ const Dashboard = () => {
 
           if (currentTime - lastFetchTime >= 30000) {
             deviceFetchHistory.current[deviceName] = currentTime
-
+            abortPrevRequest()
             fetchDeviceLogs()
           }
         }
@@ -88,19 +104,26 @@ const Dashboard = () => {
     }
 
     return () => {}
-  }, [deviceLogs, socketData])
+  }, [deviceLogs, socketData, deviceKey])
 
   useEffect(() => {
-    if (!deviceKey) return
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current)
+    }
+
+    intervalRef.current = setInterval(() => {
+      fetchDeviceLogs()
+    }, 30000)
+
+    abortPrevRequest()
     setLoading(true)
     fetchDeviceLogs()
-  }, [deviceKey])
 
-  useEffect(() => {
-    if (!deviceKey) return
-    setInterval(() => {
-      fetchDeviceLogs()
-    }, 300000)
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current)
+      }
+    }
   }, [deviceKey])
 
   const CardInfoComponent = useMemo(() => {
@@ -141,6 +164,31 @@ const Dashboard = () => {
     }
   }, [deviceKey])
 
+  const DeviceDetailLog = useMemo(() => {
+    if (!deviceLogs) return
+
+    return (
+      <>
+        <div className='flex items-center gap-4 mt-4 flex-wrap lg:flex-wrap xl:flex-nowrap'>
+          <div className='w-full xl:w-[35%] lg:h-[330px] bg-base-100 rounded-field overflow-hidden'>
+            {CardInfoComponent}
+          </div>
+          <div className='grid grid-cols-2 md:grid-cols-4 xl:grid-cols-5 gap-4 w-full xl:w-[65%] justify-items-center'>
+            {CardStatusComponent}
+          </div>
+        </div>
+        <div className='grid grid-cols-1 lg:grid-cols-2 mt-4 gap-3'>
+          <div className='w-full min-h-[385px]'>
+            <ChartSwiperWrapper deviceLogs={deviceLogs} isPause={isPause} />
+          </div>
+          <div className='w-full min-h-[385px]'>
+            <DataTableWrapper deviceLogs={deviceLogs} isPause={isPause} />
+          </div>
+        </div>
+      </>
+    )
+  }, [deviceKey, deviceLogs, isPause])
+
   return (
     <div className='p-3 px-[16px]'>
       <dialog ref={modalRef} className='modal'>
@@ -162,64 +210,36 @@ const Dashboard = () => {
           </label>
         </div>
       </dialog>
-      {deviceKey && (
-        <>
-          <div className='flex items-center justify-between flex-wrap lg:flex-nowrap xl:flex-nowrap gap-3 mt-[16px]'>
-            <label htmlFor='react-select-11-input'>
-              <DeviceList />
+      <div className='flex items-center justify-between flex-wrap lg:flex-nowrap xl:flex-nowrap gap-3 mt-[16px]'>
+        <label htmlFor='react-select-9-input' className='min-w-[315px] w-max'>
+          <DeviceList />
+        </label>
+        <div className='flex items-center gap-3 justify-end w-full flex-wrap'>
+          {deviceLogs && deviceLogs?.probe?.length > 1 && (
+            <label
+              htmlFor='button'
+              className='tooltip tooltip-left'
+              data-tip={isPause ? t('startSlide') : t('stopSlide')}
+            >
+              <button
+                name={isPause ? t('startSlide') : t('stopSlide')}
+                aria-label={isPause ? t('startSlide') : t('stopSlide')}
+                className='btn btn-neutral bg-opacity-15 text-primary border-primary border-2 p-0 hover:opacity-50 hover:border-primary hover:bg-transparent duration-300 ease-linear max-h-[28px] min-h-[28px] max-w-[28px] min-w-[28px]'
+                onClick={togglePause}
+              >
+                {isPause ? <RiPlayLine size={20} /> : <RiStopLine size={20} />}
+              </button>
             </label>
-            <div className='flex items-center gap-3 justify-end w-full flex-wrap'>
-              {deviceLogs && deviceLogs?.probe?.length > 1 && (
-                <label
-                  htmlFor='button'
-                  className='tooltip tooltip-left'
-                  data-tip={isPause ? t('startSlide') : t('stopSlide')}
-                >
-                  <button
-                    name={isPause ? t('startSlide') : t('stopSlide')}
-                    aria-label={isPause ? t('startSlide') : t('stopSlide')}
-                    className='btn btn-neutral bg-opacity-15 text-primary border-primary border-2 p-0 hover:opacity-50 hover:border-primary hover:bg-transparent duration-300 ease-linear max-h-[28px] min-h-[28px] max-w-[28px] min-w-[28px]'
-                    onClick={togglePause}
-                  >
-                    {isPause ? (
-                      <RiPlayLine size={20} />
-                    ) : (
-                      <RiStopLine size={20} />
-                    )}
-                  </button>
-                </label>
-              )}
-              <HospitalAndWard />
-            </div>
-          </div>
-          {loading ? (
-            <div className='flex items-center justify-center loading-hieght-full'>
-              <Loading />
-            </div>
-          ) : (
-            <>
-              <div className='flex items-center gap-4 mt-4 flex-wrap lg:flex-wrap xl:flex-nowrap'>
-                <div className='w-full xl:w-[35%] lg:h-[330px] bg-base-100 rounded-field overflow-hidden'>
-                  {CardInfoComponent}
-                </div>
-                <div className='grid grid-cols-2 md:grid-cols-4 xl:grid-cols-5 gap-4 w-full xl:w-[65%] justify-items-center'>
-                  {CardStatusComponent}
-                </div>
-              </div>
-              <div className='grid grid-cols-1 lg:grid-cols-2 mt-4 gap-3'>
-                <div className='w-full min-h-[385px]'>
-                  <ChartSwiperWrapper
-                    deviceLogs={deviceLogs}
-                    isPause={isPause}
-                  />
-                </div>
-                <div className='w-full min-h-[385px]'>
-                  <DataTableWrapper deviceLogs={deviceLogs} isPause={isPause} />
-                </div>
-              </div>
-            </>
           )}
-        </>
+          <HospitalAndWard />
+        </div>
+      </div>
+      {loading ? (
+        <div className='flex items-center justify-center loading-hieght-full'>
+          <Loading />
+        </div>
+      ) : (
+        DeviceDetailLog
       )}
     </div>
   )
