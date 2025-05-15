@@ -219,6 +219,10 @@ const scheduleDayArray: Schedule[] = [
 
 const scheduleTimeArray: ScheduleHour[] = [
   {
+    scheduleHourKey: 'OFF',
+    scheduleHourLabel: 'OFF'
+  },
+  {
     scheduleHourKey: '00',
     scheduleHourLabel: '00'
   },
@@ -586,7 +590,6 @@ const useSwiperSync = () => {
 
 const breakText = (text: string, length = 25) =>
   text?.match(new RegExp(`.{1,${length}}`, 'g'))?.join('\n')
-
 
 const formatThaiDate = (date: Date): string => {
   const day = date.getDate()

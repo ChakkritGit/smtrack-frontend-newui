@@ -169,7 +169,9 @@ const AppMute = (props: AppMuteProps) => {
           {/* 1 */}
           <div className='form-control w-full'>
             <label className='label flex-col items-start w-full mb-3'>
-              <span className='label-text mb-2 text-wrap'>{t('choiceOne')}</span>
+              <span className='label-text mb-2 text-wrap'>
+                {t('choiceOne')}
+              </span>
               <div className='flex flex-col gap-3'>
                 <label className='flex items-center gap-2'>
                   <input
@@ -248,7 +250,9 @@ const AppMute = (props: AppMuteProps) => {
           {/* 2 */}
           <div className='form-control w-full'>
             <label className='label flex-col items-start w-full mb-3'>
-              <span className='label-text mb-2 text-wrap'>{t('choiceTwo')}</span>
+              <span className='label-text mb-2 text-wrap'>
+                {t('choiceTwo')}
+              </span>
               <div className='flex flex-col gap-3'>
                 <label className='flex items-center gap-2'>
                   <input
@@ -286,7 +290,9 @@ const AppMute = (props: AppMuteProps) => {
           {/* 3 */}
           <div className='form-control w-full'>
             <label className='label flex-col items-start w-full mb-3'>
-              <span className='label-text mb-2 text-wrap'>{t('choiceThree')}</span>
+              <span className='label-text mb-2 text-wrap'>
+                {t('choiceThree')}
+              </span>
               <div className='flex flex-col gap-3'>
                 <label className='flex items-center gap-2'>
                   <input
@@ -365,7 +371,9 @@ const AppMute = (props: AppMuteProps) => {
           {/* 4 */}
           <div className='form-control w-full'>
             <label className='label flex-col items-start w-full mb-3'>
-              <span className='label-text mb-2 text-wrap'>{t('choiceFour')}</span>
+              <span className='label-text mb-2 text-wrap'>
+                {t('choiceFour')}
+              </span>
               <div className='flex flex-col gap-3'>
                 <label className='flex items-center gap-2'>
                   <input
@@ -562,6 +570,7 @@ const AppMute = (props: AppMuteProps) => {
           classNamePrefix='react-select'
         />
         <Select
+          isDisabled={scheduleTime.firstTime === 'OFF'}
           name='scheduleMinuteArray'
           // key={String(scheduleTime.firstMinute)}
           options={mapOptions<ScheduleMinute, keyof ScheduleMinute>(
@@ -608,6 +617,7 @@ const AppMute = (props: AppMuteProps) => {
           classNamePrefix='react-select'
         />
         <Select
+          isDisabled={scheduleTime.secondTime === 'OFF'}
           name='scheduleMinuteArray'
           // key={String(scheduleTime.firstMinute)}
           options={mapOptions<ScheduleMinute, keyof ScheduleMinute>(
@@ -655,6 +665,7 @@ const AppMute = (props: AppMuteProps) => {
           classNamePrefix='react-select'
         />
         <Select
+          isDisabled={scheduleTime.thirdTime === 'OFF'}
           name='scheduleMinuteArray'
           // key={String(scheduleTime.firstMinute)}
           options={mapOptions<ScheduleMinute, keyof ScheduleMinute>(

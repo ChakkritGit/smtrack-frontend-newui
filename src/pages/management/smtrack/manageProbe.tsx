@@ -302,9 +302,18 @@ const ManageProbe = () => {
         firstDay: scheduleDay.firstDay,
         secondDay: scheduleDay.seccondDay,
         thirdDay: scheduleDay.thirdDay,
-        firstTime: `${scheduleTime.firstTime}${scheduleTime.firstMinute}`,
-        secondTime: `${scheduleTime.secondTime}${scheduleTime.seccondMinute}`,
-        thirdTime: `${scheduleTime.thirdTime}${scheduleTime.thirdMinute}`,
+        firstTime:
+          scheduleTime.firstTime !== 'OFF'
+            ? `${scheduleTime.firstTime}${scheduleTime.firstMinute}`
+            : 'OFF',
+        secondTime:
+          scheduleTime.secondTime !== 'OFF'
+            ? `${scheduleTime.secondTime}${scheduleTime.seccondMinute}`
+            : 'OFF',
+        thirdTime:
+          scheduleTime.thirdTime !== 'OFF'
+            ? `${scheduleTime.thirdTime}${scheduleTime.thirdMinute}`
+            : 'OFF',
         notiDelay: muteMode.choichOne === 'immediately' ? 0 : sendTime.after,
         notiMobile: muteMode.choichfour === 'on' ? true : false,
         notiRepeat: muteMode.choichthree === 'onetime' ? 0 : sendTime.every,
@@ -469,12 +478,30 @@ const ManageProbe = () => {
       thirdDay: probe.thirdDay
     })
     setScheduleTime({
-      firstTime: probe.firstTime.substring(0, 2),
-      secondTime: probe.secondTime.substring(0, 2),
-      thirdTime: probe.thirdTime.substring(0, 2),
-      firstMinute: probe.firstTime.substring(2, 4),
-      seccondMinute: probe.secondTime.substring(2, 4),
-      thirdMinute: probe.thirdTime.substring(2, 4)
+      firstTime:
+        probe.firstTime !== 'OFF'
+          ? probe.firstTime.substring(0, 2)
+          : probe.firstTime,
+      secondTime:
+        probe.secondTime !== 'OFF'
+          ? probe.secondTime.substring(0, 2)
+          : probe.secondTime,
+      thirdTime:
+        probe.thirdTime !== 'OFF'
+          ? probe.thirdTime.substring(0, 2)
+          : probe.thirdTime,
+      firstMinute:
+        probe.firstTime !== 'OFF'
+          ? probe.firstTime.substring(2, 4)
+          : probe.firstTime,
+      seccondMinute:
+        probe.secondTime !== 'OFF'
+          ? probe.secondTime.substring(2, 4)
+          : probe.secondTime,
+      thirdMinute:
+        probe.thirdTime !== 'OFF'
+          ? probe.thirdTime.substring(2, 4)
+          : probe.thirdTime
     })
     editModalRef.current?.showModal()
   }
@@ -2480,6 +2507,7 @@ const ManageProbe = () => {
                   classNamePrefix='react-select'
                 />
                 <Select
+                  isDisabled={scheduleTime.firstTime === 'OFF'}
                   // key={String(scheduleTime.firstMinute)}
                   options={mapOptions<ScheduleMinute, keyof ScheduleMinute>(
                     scheduleMinuteArray,
@@ -2529,6 +2557,7 @@ const ManageProbe = () => {
                   classNamePrefix='react-select'
                 />
                 <Select
+                  isDisabled={scheduleTime.secondTime === 'OFF'}
                   // key={String(scheduleTime.firstMinute)}
                   options={mapOptions<ScheduleMinute, keyof ScheduleMinute>(
                     scheduleMinuteArray,
@@ -2579,6 +2608,7 @@ const ManageProbe = () => {
                   classNamePrefix='react-select'
                 />
                 <Select
+                  isDisabled={scheduleTime.thirdTime === 'OFF'}
                   // key={String(scheduleTime.firstMinute)}
                   options={mapOptions<ScheduleMinute, keyof ScheduleMinute>(
                     scheduleMinuteArray,

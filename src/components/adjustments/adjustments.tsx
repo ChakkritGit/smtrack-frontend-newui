@@ -206,9 +206,9 @@ const Adjustments = (props: AdjustmentsProps) => {
       firstDay: scheduleDay.firstDay,
       secondDay: scheduleDay.seccondDay,
       thirdDay: scheduleDay.thirdDay,
-      firstTime: `${scheduleTime.firstTime}${scheduleTime.firstMinute}`,
-      secondTime: `${scheduleTime.secondTime}${scheduleTime.seccondMinute}`,
-      thirdTime: `${scheduleTime.thirdTime}${scheduleTime.thirdMinute}`,
+      firstTime: scheduleTime.firstTime !== 'OFF' ? `${scheduleTime.firstTime}${scheduleTime.firstMinute}` : 'OFF',
+      secondTime: scheduleTime.secondTime !== 'OFF' ? `${scheduleTime.secondTime}${scheduleTime.seccondMinute}` : 'OFF',
+      thirdTime: scheduleTime.thirdTime !== 'OFF' ? `${scheduleTime.thirdTime}${scheduleTime.thirdMinute}` : 'OFF',
       notiDelay: muteMode.choichOne === 'immediately' ? 0 : sendTime.after,
       notiMobile: muteMode.choichfour === 'on' ? true : false,
       notiRepeat: muteMode.choichthree === 'onetime' ? 0 : sendTime.every,
@@ -461,12 +461,12 @@ const Adjustments = (props: AdjustmentsProps) => {
         thirdDay: filter?.thirdDay
       })
       setScheduleTime({
-        firstTime: filter?.firstTime.substring(0, 2),
-        secondTime: filter?.secondTime.substring(0, 2),
-        thirdTime: filter?.thirdTime.substring(0, 2),
-        firstMinute: filter?.firstTime.substring(2, 4),
-        seccondMinute: filter?.secondTime.substring(2, 4),
-        thirdMinute: filter?.thirdTime.substring(2, 4)
+        firstTime: filter?.firstTime !== 'OFF' ? filter?.firstTime.substring(0, 2) : filter?.firstTime,
+        secondTime: filter?.secondTime !== 'OFF' ? filter?.secondTime.substring(0, 2) : filter?.secondTime,
+        thirdTime: filter?.thirdTime !== 'OFF' ? filter?.thirdTime.substring(0, 2) : filter?.thirdTime,
+        firstMinute: filter?.firstTime !== 'OFF' ? filter?.firstTime.substring(2, 4) : filter?.firstTime,
+        seccondMinute: filter?.secondTime !== 'OFF' ? filter?.secondTime.substring(2, 4) : filter?.secondTime,
+        thirdMinute: filter?.thirdTime !== 'OFF' ? filter?.thirdTime.substring(2, 4) : filter?.thirdTime
       })
     }
   }, [tab, probe, selectedProbe])
