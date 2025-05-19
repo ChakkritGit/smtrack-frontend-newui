@@ -136,8 +136,8 @@
 //   })
 // }
 
-const MAX_WIDTH = 720
-const MAX_HEIGHT = 720
+const maxWidth = 720
+const maxHeight = 720
 
 const calculateSize = (
   img: HTMLImageElement,
@@ -174,7 +174,7 @@ const resizeImage = (file: File): Promise<File> => {
     reader.onload = e => {
       const img = new Image()
       img.onload = () => {
-        const [newWidth, newHeight] = calculateSize(img, MAX_WIDTH, MAX_HEIGHT)
+        const [newWidth, newHeight] = calculateSize(img, maxWidth, maxHeight)
         const canvas = document.createElement('canvas')
         canvas.width = newWidth
         canvas.height = newHeight
