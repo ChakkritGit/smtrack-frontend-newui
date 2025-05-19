@@ -482,6 +482,7 @@ export default {
     amoment: 'Just now',
     lastModified: 'Last Modified',
     createAt: 'Create At',
+    imageSizeLimit: 'Image size must be less than 5MB',
 
     // connect
     ipAddress: 'IP',

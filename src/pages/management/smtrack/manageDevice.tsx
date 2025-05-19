@@ -468,6 +468,25 @@ const ManageDevice = () => {
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (file) {
+      if (file.size > 5 * 1024 * 1024) {
+        editModalRef.current?.close()
+        Swal.fire({
+          title: t('alertHeaderWarning'),
+          text: t('imageSizeLimit'),
+          icon: 'warning',
+          showConfirmButton: false,
+          timer: 2500
+        }).finally(() => {
+          editModalRef.current?.showModal()
+          setFormData({
+            ...formData,
+            image: null
+          })
+          if (fileInputRef.current) fileInputRef.current.value = ''
+        })
+        return
+      }
+
       setImageProcessing(true)
       await new Promise(resolve => setTimeout(resolve, 500))
       const reSized = await resizeImage(file)

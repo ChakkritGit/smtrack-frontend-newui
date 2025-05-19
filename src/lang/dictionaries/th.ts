@@ -481,6 +481,7 @@ export default {
     amoment: 'เมื่อสักครู่',
     lastModified: 'อัปเดทเมื่อ',
     createAt: 'สร้างเมื่อ',
+    imageSizeLimit: 'ขนาดไฟล์รูปภาพไม่เกิน 5MB',
 
     // connect
     ipAddress: 'IP',

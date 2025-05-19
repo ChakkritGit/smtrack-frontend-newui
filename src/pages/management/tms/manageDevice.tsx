@@ -38,8 +38,9 @@ import { GlobalContext } from '../../../contexts/globalContext'
 const ManageDevice = () => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
-  const { wardId, globalSearch, hosId, shouldFetch } =
-    useSelector((state: RootState) => state.utils)
+  const { wardId, globalSearch, hosId, shouldFetch } = useSelector(
+    (state: RootState) => state.utils
+  )
   const { searchRef, isFocused, setIsFocused, isCleared, setIsCleared } =
     useContext(GlobalContext) as GlobalContextType
   const [devices, setDevices] = useState<DeviceTmsType[]>([])
@@ -191,9 +192,9 @@ const ManageDevice = () => {
     }))
   }
 
-    useEffect(() => {
-      fetchDevices(1)
-    }, [hosId])
+  useEffect(() => {
+    fetchDevices(1)
+  }, [hosId])
 
   useEffect(() => {
     fetchDevices(1)
@@ -471,10 +472,10 @@ const ManageDevice = () => {
       <dialog ref={addModalRef} className='modal overflow-y-scroll py-10'>
         <form
           onSubmit={handleSubmit}
-          className='modal-box w-5/6 max-w-2xl h-max max-h-max'
+          className='modal-box w-full max-w-4xl min-h-[500px] flex flex-col justify-between'
         >
-          <h3 className='font-bold text-lg'>{t('addDeviceButton')}</h3>
           <div className='grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 w-full'>
+            <h3 className='font-bold text-lg'>{t('addDeviceButton')}</h3>
             {/* Right Column - 2/3 of the grid (70%) */}
             <div className='col-span-2 grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4'>
               {/* Hospital */}

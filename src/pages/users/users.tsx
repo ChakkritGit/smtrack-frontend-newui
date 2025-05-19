@@ -48,9 +48,8 @@ import AddHopitalSelect from '../../components/selects/addHopitalSelect'
 
 const Users = () => {
   const dispatch = useDispatch()
-  const { globalSearch, wardId, tokenDecode, tmsMode, ambientDisabled } = useSelector(
-    (state: RootState) => state.utils
-  )
+  const { globalSearch, wardId, tokenDecode, tmsMode, ambientDisabled } =
+    useSelector((state: RootState) => state.utils)
   const { t } = useTranslation()
   const { role } = tokenDecode || {}
   const [users, setUsers] = useState<UsersType[]>([])
@@ -151,6 +150,30 @@ const Users = () => {
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (file) {
+      if (file.size > 5 * 1024 * 1024) {
+        addModalRef.current?.close()
+        editModalRef.current?.close()
+        Swal.fire({
+          title: t('alertHeaderWarning'),
+          text: t('imageSizeLimit'),
+          icon: 'warning',
+          showConfirmButton: false,
+          timer: 2500
+        }).finally(() => {
+          if (addModalRef.current?.open) {
+            addModalRef.current?.showModal()
+          } else {
+            editModalRef.current?.showModal()
+          }
+          setFormData({
+            ...formData,
+            imageFile: null
+          })
+          if (fileInputRef.current) fileInputRef.current.value = ''
+        })
+        return
+      }
+
       setImageProcessing(true)
       await new Promise(resolve => setTimeout(resolve, 500))
       const reSized = await resizeImage(file)
@@ -598,10 +621,12 @@ const Users = () => {
                           />
                         </div>
                       </div>
-                      {ambientDisabled && <div
-                        className='blur-[128px] w-24 h-24 absolute opacity-75 z-10 duration-700 ease-linear'
-                        style={{ backgroundColor: bgColor }}
-                      ></div>}
+                      {ambientDisabled && (
+                        <div
+                          className='blur-[128px] w-24 h-24 absolute opacity-75 z-10 duration-700 ease-linear'
+                          style={{ backgroundColor: bgColor }}
+                        ></div>
+                      )}
                     </div>
                   </div>
                   <div className='flex flex-col items-center justify-center'>
@@ -678,7 +703,9 @@ const Users = () => {
             <button
               disabled={userConnect !== ''}
               key={'Inactive'}
-              className={`flex items-center justify-center btn w-max h-[36px] min-h-0 p-2 font-normal ${userConnect !== '' ? 'opacity-50' : ''} ${
+              className={`flex items-center justify-center btn w-max h-[36px] min-h-0 p-2 font-normal ${
+                userConnect !== '' ? 'opacity-50' : ''
+              } ${
                 userInactive
                   ? 'btn-neutral text-white'
                   : 'btn-ghost border border-base-content/50 text-base-content'
@@ -705,7 +732,9 @@ const Users = () => {
             <div className='col-span-1 flex justify-center'>
               <div className='form-control'>
                 <label className='label cursor-pointer image-hover flex flex-col justify-center'>
-                  <span className='label-text text-wrap'>{t('userPicture')}</span>
+                  <span className='label-text text-wrap'>
+                    {t('userPicture')}
+                  </span>
                   <input
                     key={formData.imagePreview}
                     ref={fileInputRef}
@@ -834,7 +863,9 @@ const Users = () => {
               {/* Role */}
               <div className='form-control w-full'>
                 <label className='label flex-col items-start w-full mb-3'>
-                  <span className='label-text text-wrap mb-2'>{t('userRole')}</span>
+                  <span className='label-text text-wrap mb-2'>
+                    {t('userRole')}
+                  </span>
                   <RoleSelect
                     formData={formData}
                     roleToken={role}
@@ -880,7 +911,9 @@ const Users = () => {
               <div className='col-span-1 flex justify-center'>
                 <div className='form-control'>
                   <label className='label cursor-pointer image-hover flex flex-col justify-center'>
-                    <span className='label-text text-wrap'>{t('userPicture')}</span>
+                    <span className='label-text text-wrap'>
+                      {t('userPicture')}
+                    </span>
                     <input
                       key={formData.imagePreview}
                       ref={fileInputRef}
@@ -922,7 +955,9 @@ const Users = () => {
                 {/* Ward */}
                 <div className='form-control w-full'>
                   <label className='label flex-col items-start w-full mb-3'>
-                    <span className='label-text text-wrap mb-2'>{t('ward')}</span>
+                    <span className='label-text text-wrap mb-2'>
+                      {t('ward')}
+                    </span>
                     <WardSelect formData={formData} setFormData={setFormData} />
                   </label>
                 </div>
@@ -930,7 +965,9 @@ const Users = () => {
                 {/* Status */}
                 <div className='form-control w-full'>
                   <label className='label flex-col items-start w-full mb-3'>
-                    <span className='label-text text-wrap mb-2'>{t('userStatus')}</span>
+                    <span className='label-text text-wrap mb-2'>
+                      {t('userStatus')}
+                    </span>
                     <StatusSelect
                       formData={formData}
                       setFormData={setFormData}
@@ -977,7 +1014,9 @@ const Users = () => {
                 {/* Role */}
                 <div className='form-control w-full'>
                   <label className='label flex-col items-start w-full mb-3'>
-                    <span className='label-text text-wrap mb-2'>{t('userRole')}</span>
+                    <span className='label-text text-wrap mb-2'>
+                      {t('userRole')}
+                    </span>
                     <RoleSelect
                       formData={formData}
                       roleToken={role}
