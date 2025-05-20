@@ -186,6 +186,50 @@ const Users = () => {
     }
   }
 
+  const handleFileDrop: React.DragEventHandler<HTMLLabelElement> = async e => {
+    e.preventDefault()
+    const file = e.dataTransfer.files?.[0]
+    if (file) {
+      await processImage(file)
+    }
+  }
+
+  const processImage = async (file: File) => {
+    if (file.size > 5 * 1024 * 1024) {
+      addModalRef.current?.close()
+      editModalRef.current?.close()
+      Swal.fire({
+        title: t('alertHeaderWarning'),
+        text: t('imageSizeLimit'),
+        icon: 'warning',
+        showConfirmButton: false,
+        timer: 2500
+      }).finally(() => {
+        if (addModalRef.current?.open) {
+          addModalRef.current?.showModal()
+        } else {
+          editModalRef.current?.showModal()
+        }
+        setFormData(prev => ({
+          ...prev,
+          imageFile: null
+        }))
+        if (fileInputRef.current) fileInputRef.current.value = ''
+      })
+      return
+    }
+
+    setImageProcessing(true)
+    await new Promise(resolve => setTimeout(resolve, 500))
+    const reSized = await resizeImage(file)
+    setFormData(prev => ({
+      ...prev,
+      imageFile: reSized,
+      imagePreview: URL.createObjectURL(file)
+    }))
+    setImageProcessing(false)
+  }
+
   const resetForm = () => {
     setFormData({
       username: '',
@@ -731,7 +775,11 @@ const Users = () => {
             {/* Image Upload - Left Column (30%) */}
             <div className='col-span-1 flex justify-center'>
               <div className='form-control'>
-                <label className='label cursor-pointer image-hover flex flex-col justify-center'>
+                <label
+                  className='label cursor-pointer image-hover flex flex-col justify-center'
+                  onDrop={handleFileDrop}
+                  onDragOver={e => e.preventDefault()}
+                >
                   <span className='label-text text-wrap'>
                     {t('userPicture')}
                   </span>
@@ -910,7 +958,11 @@ const Users = () => {
               {/* Image Upload - Left Column (30%) */}
               <div className='col-span-1 flex justify-center'>
                 <div className='form-control'>
-                  <label className='label cursor-pointer image-hover flex flex-col justify-center'>
+                  <label
+                    className='label cursor-pointer image-hover flex flex-col justify-center'
+                    onDrop={handleFileDrop}
+                    onDragOver={e => e.preventDefault()}
+                  >
                     <span className='label-text text-wrap'>
                       {t('userPicture')}
                     </span>
