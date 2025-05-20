@@ -127,6 +127,12 @@ const getOKLCHColor = (themeMode: string, system: string): string => {
       return 'oklch(98% 0.001 106.423 /0.8)'
     case 'tinystar':
       return 'oklch(96% 0.018 272.314 /0.8)'
+    case 'darkcaramellatte':
+      return 'oklch(27% 0.006 286.033 /0.8)'
+    case 'hotspace':
+      return 'oklch(98% 0.001 106.423 /0.8)'
+    case 'goblinjuggly':
+      return 'oklch(98% 0.001 106.423 /0.8)'
     default:
       return system === 'dark'
         ? 'oklch(25.33% 0.016 252.42 / 0.8)'

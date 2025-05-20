@@ -71,7 +71,7 @@ const Sidebar = () => {
       ></label>
       <div
         className={`menu bg-base-100 text-base-content min-h-full flex flex-col !items-center justify-between ${
-          transitionDisabled ? '!transition-all !ease-linear !duration-300' : ''
+          transitionDisabled ? '!transition-all !ease-out !duration-300' : ''
         } ${isExpand ? 'w-[100px]' : 'w-[235px]'}`}
       >
         <div>
@@ -80,7 +80,7 @@ const Sidebar = () => {
               onClick={() => navigate('/')}
               src={ward?.hospital.hosPic ? ward.hospital.hosPic : DefaultPic}
               alt='Hospital-img'
-              className={`btn btn-ghost rounded-box bg-white transition-all ease-linear duration-300 ${
+              className={`btn btn-ghost rounded-box bg-white transition-all ease-out duration-300 ${
                 isExpand ? 'w-24 h-max' : 'max-w-32 h-28'
               } object-contain p-0 hover:bg-transparent`}
             />
@@ -339,7 +339,7 @@ const Sidebar = () => {
                 isExpand ? 'text-center' : 'text-right'
               } hover:underline cursor-pointer`}
             >
-              Version 2.0.0b21a
+              Version 2.0.0b21b
             </Link>
           </div>
         </div>

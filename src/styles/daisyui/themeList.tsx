@@ -63,7 +63,10 @@ const themeList = [
   'tinyocean',
   'windowsxp',
   'hugepenguin',
-  'tinystar'
+  'tinystar',
+  'darkcaramellatte',
+  'hotspace',
+  'goblinjuggly'
 ]
 
 type ThemeListProps = {
