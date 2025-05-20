@@ -7,7 +7,7 @@ import {
   cookies
 } from '../../constants/utils/utilsConstants'
 import { setCookieEncode } from '../../redux/actions/utilsActions'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import LanguageList from '../../components/language/languageList'
@@ -16,11 +16,13 @@ import { Helmet } from 'react-helmet-async'
 import Footer from '../../components/footer/footer'
 import { responseType } from '../../types/smtrack/utilsRedux/utilsReduxType'
 import { LoginType } from '../../types/global/login'
+import { RootState } from '../../redux/reducers/rootReducer'
 
 const Login = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const { loadingStyle } = useSelector((state: RootState) => state.utils)
   const [showPassword, setShowPassword] = useState(false)
   const usernameRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
@@ -232,7 +234,7 @@ const Login = () => {
                 className='btn btn-neutral w-full text-[16px]'
               >
                 {loading ? (
-                  <span className='loading loading-dots loading-md'></span>
+                  <span className={`loading ${loadingStyle} loading-md`}></span>
                 ) : (
                   t('loginButton')
                 )}

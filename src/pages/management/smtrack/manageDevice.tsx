@@ -83,7 +83,7 @@ type selectFirmwareOption = {
 const ManageDevice = () => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
-  const { wardId, globalSearch, tokenDecode, hosId, shouldFetch } = useSelector(
+  const { wardId, globalSearch, tokenDecode, hosId, shouldFetch, loadingStyle } = useSelector(
     (state: RootState) => state.utils
   )
   const { searchRef, isFocused, setIsFocused, isCleared, setIsCleared } =
@@ -1484,7 +1484,7 @@ const ManageDevice = () => {
                     />
                     {imageProcessing ? (
                       <div className='mt-4 flex justify-center w-32 h-32 md:w-48 md:h-48'>
-                        <span className='loading loading-dots loading-md'></span>
+                        <span className={`loading ${loadingStyle} loading-md`}></span>
                       </div>
                     ) : (
                       <div className='mt-4 relative'>

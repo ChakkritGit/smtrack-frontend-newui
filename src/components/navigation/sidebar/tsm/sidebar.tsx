@@ -35,7 +35,7 @@ const Sidebar = () => {
   const navigate = useNavigate()
   const { t } = useTranslation()
   const location = useLocation()
-  const { isExpand, userProfile, tmsMode, tokenDecode, switchingMode, transitionDisabled } =
+  const { isExpand, userProfile, tmsMode, tokenDecode, switchingMode, transitionDisabled, loadingStyle } =
     useSelector((state: RootState) => state.utils)
   const { ward: wardData } = useContext(GlobalContext) as GlobalContextType
   const { ward } = userProfile || {}
@@ -196,7 +196,7 @@ const Sidebar = () => {
                   {!isExpand ? (
                     <div className='flex items-center gap-2'>
                       {switchingMode && (
-                        <span className='loading loading-dots loading-xs'></span>
+                        <span className={`loading ${loadingStyle} loading-xs`}></span>
                       )}
                       <span className='text-[12px] truncate'>
                         {!switchingMode ? t('currentMode') : t('switchingMode')}
@@ -204,7 +204,7 @@ const Sidebar = () => {
                     </div>
                   ) : (
                     switchingMode && (
-                      <span className='loading loading-dots loading-xs mb-2'></span>
+                      <span className={`loading ${loadingStyle} loading-xs mb-2`}></span>
                     )
                   )}
                   <input
@@ -259,7 +259,7 @@ const Sidebar = () => {
                 isExpand ? 'text-center' : 'text-right'
               } hover:underline cursor-pointer`}
             >
-              Version 2.0.0b21b
+              Version 2.0.0b21c
             </Link>
           </div>
         </div>

@@ -436,6 +436,7 @@ export default {
     darkMode: 'Dark',
     systemMode: 'System',
     themeMode: 'Theme',
+    loadingMode: 'Loading',
     reportText: 'Report',
     switchModeMain: '*Switch mode smtrack and TMS',
     readAll: 'Read All',

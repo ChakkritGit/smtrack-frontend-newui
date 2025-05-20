@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useSelector } from 'react-redux'
+import { RootState } from '../../../redux/reducers/rootReducer'
 
 const Loading = () => {
+  const { loadingStyle } = useSelector((state: RootState) => state.utils)
   const { t } = useTranslation()
   const [timeoutError, setTimeoutError] = useState(false)
 
@@ -19,7 +22,7 @@ const Loading = () => {
         <span className='text-red-500'>{t('descriptionWrong')} {t('tooLoad')}</span>
       ) : (
         <>
-          <span className='loading loading-dots loading-md bg-base-content'></span>
+          <span className={`loading ${loadingStyle} loading-md bg-base-content`}></span>
           {/* <span className='text-base-content'>{t('loading')}</span> */}
         </>
       )}

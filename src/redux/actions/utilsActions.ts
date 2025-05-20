@@ -30,7 +30,8 @@ import {
   TRANSITION_DISABLED,
   AMBIENT_DISABLED,
   I18N_INIT,
-  FPS_DISABLED
+  FPS_DISABLED,
+  LOADING_STYLE
 } from '../types/utilsTypes'
 
 const setCookieEncode = (dataEncode?: string) => ({
@@ -141,6 +142,11 @@ const setI18nInit = (lang: string) => ({
   payload: lang
 })
 
+const setLoadingStyle = (style: string) => ({
+  type: LOADING_STYLE,
+  payload: style
+})
+
 const resetUtils = () => ({
   type: RESET_UTILS
 })
@@ -170,5 +176,6 @@ export {
   setAmbientDisabled,
   setFpsDisabled,
   setI18nInit,
+  setLoadingStyle,
   resetUtils
 }

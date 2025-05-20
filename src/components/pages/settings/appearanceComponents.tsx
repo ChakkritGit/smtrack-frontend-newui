@@ -10,6 +10,7 @@ import {
   setTransitionDisabled
 } from '../../../redux/actions/utilsActions'
 import { ThemeListTwoComponent } from '../../../styles/daisyui/themeList'
+import LoadingList from '../../../styles/daisyui/loadingList'
 
 const AppearanceComponents = () => {
   const { t } = useTranslation()
@@ -37,16 +38,20 @@ const AppearanceComponents = () => {
 
   return (
     <div>
-      <span className='text-[24px]'>{t('themeMode')}</span>
+      <span className='text-[18px] font-medium'>{t('themeMode')}</span>
       <ThemeListTwoComponent
         changeTheme={changeTheme}
         changeToSystem={changeToSystem}
         themeMode={themeMode}
         t={t}
       />
+      <div className='mt-3'>
+        <span className='text-[18px] font-medium'>{t('loadingMode')}</span>
+        <LoadingList />
+      </div>
       <div className='divider divider-vertical my-2 before:h-[1px] after:h-[1px]'></div>
       <div className='mt-3'>
-        <span className='text-[24px]'>{t('filterColor')}</span>
+        <span className='text-[18px] font-medium'>{t('filterColor')}</span>
         <div>
           <div className=' flex items-center justify-between mt-3'>
             <span>{t('blur')}</span>
@@ -102,7 +107,7 @@ const AppearanceComponents = () => {
       </div>
       <div className='divider divider-vertical my-2 before:h-[1px] after:h-[1px]'></div>
       <div className='mt-3'>
-        <span className='text-[24px]'>{t('animation')}</span>
+        <span className='text-[18px] font-medium'>{t('animation')}</span>
         <div className=' flex items-center justify-between mt-3'>
           <span>{t('transition')}</span>
           <input

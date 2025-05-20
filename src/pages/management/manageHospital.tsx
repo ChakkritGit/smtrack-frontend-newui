@@ -58,7 +58,7 @@ const ManageHospital = () => {
   const { hospital, fetchHospital } = useContext(
     GlobalContext
   ) as GlobalContextType
-  const { globalSearch, tokenDecode, hosId } = useSelector(
+  const { globalSearch, tokenDecode, hosId, loadingStyle } = useSelector(
     (state: RootState) => state.utils
   )
   const [filterHospital, setFilterHospital] = useState<HospitalsType[]>([])
@@ -913,7 +913,7 @@ const ManageHospital = () => {
                   />
                   {imageProcessing ? (
                     <div className='mt-4 flex justify-center w-32 h-32 md:w-48 md:h-48'>
-                      <span className='loading loading-dots loading-md'></span>
+                      <span className={`loading ${loadingStyle} loading-md`}></span>
                     </div>
                   ) : (
                     <div className='mt-4 relative'>
@@ -1112,7 +1112,7 @@ const ManageHospital = () => {
                   />
                   {imageProcessing ? (
                     <div className='mt-4 flex justify-center w-32 h-32 md:w-48 md:h-48'>
-                      <span className='loading loading-dots loading-md'></span>
+                      <span className={`loading ${loadingStyle} loading-md`}></span>
                     </div>
                   ) : (
                     <div className='mt-4 relative'>

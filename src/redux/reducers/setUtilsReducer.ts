@@ -27,7 +27,8 @@ import {
   TRANSITION_DISABLED,
   AMBIENT_DISABLED,
   I18N_INIT,
-  FPS_DISABLED
+  FPS_DISABLED,
+  LOADING_STYLE
 } from '../types/utilsTypes'
 
 const initialState: UtilsState = {
@@ -54,6 +55,7 @@ const initialState: UtilsState = {
   ambientDisabled: localStorage.getItem('ambientDisabled') === 'true' ? true : false,
   fpsDisabled: localStorage.getItem('fpsDisabled') === 'true' ? true : false,
   i18nInit: localStorage.getItem("lang") || 'th',
+  loadingStyle: localStorage.getItem('loadingStyle') ?? 'loading-spinner',
   soundMode: cookies.get('soundMode') ?? false
 }
 
@@ -110,6 +112,8 @@ const utilsReducer = (
       return { ...state, fpsDisabled: !state.fpsDisabled }
     case I18N_INIT:
       return { ...state, i18nInit: action.payload }
+    case LOADING_STYLE:
+      return { ...state, loadingStyle: action.payload }
     case RESET_UTILS:
       return initialState
     default:

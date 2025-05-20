@@ -75,7 +75,7 @@ const mapDefaultValue = <T, K extends keyof T>(
 const ManageFirmware = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
-  const { globalSearch } = useSelector((state: RootState) => state.utils)
+  const { globalSearch, loadingStyle } = useSelector((state: RootState) => state.utils)
   const [firmwareList, setFirmwareList] = useState<FirmwareListType[]>([])
   const [firmwareListFilter, setFirmwareListFilter] = useState<
     FirmwareListType[]
@@ -868,7 +868,7 @@ const ManageFirmware = () => {
       >
         <div className='modal-box'>
           <div className='flex flex-col items-center justify-center gap-2'>
-            <span className='loading loading-dots w-16'></span>
+            <span className={`loading ${loadingStyle} w-16`}></span>
             <span className='font-medium'>
               {onProgress}/{selectedDevices.length}
             </span>

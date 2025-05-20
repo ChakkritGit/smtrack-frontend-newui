@@ -48,7 +48,7 @@ import AddHopitalSelect from '../../components/selects/addHopitalSelect'
 
 const Users = () => {
   const dispatch = useDispatch()
-  const { globalSearch, wardId, tokenDecode, tmsMode, ambientDisabled } =
+  const { globalSearch, wardId, tokenDecode, tmsMode, ambientDisabled, loadingStyle } =
     useSelector((state: RootState) => state.utils)
   const { t } = useTranslation()
   const { role } = tokenDecode || {}
@@ -793,7 +793,7 @@ const Users = () => {
                   />
                   {imageProcessing ? (
                     <div className='mt-4 flex justify-center w-32 h-32 md:w-48 md:h-48'>
-                      <span className='loading loading-dots loading-md'></span>
+                      <span className={`loading ${loadingStyle} loading-md`}></span>
                     </div>
                   ) : (
                     <div className='mt-4 relative'>
@@ -976,7 +976,7 @@ const Users = () => {
                     />
                     {imageProcessing ? (
                       <div className='mt-4 flex justify-center w-32 h-32 md:w-48 md:h-48'>
-                        <span className='loading loading-dots loading-md'></span>
+                        <span className={`loading ${loadingStyle} loading-md`}></span>
                       </div>
                     ) : (
                       <div className='mt-4 relative'>
