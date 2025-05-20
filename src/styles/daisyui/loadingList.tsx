@@ -4,7 +4,7 @@ import { RootState } from '../../redux/reducers/rootReducer'
 import { setLoadingStyle } from '../../redux/actions/utilsActions'
 
 const LoadingList = () => {
-    const dispatch = useDispatch()
+  const dispatch = useDispatch()
   const { loadingStyle } = useSelector((state: RootState) => state.utils)
 
   const saveLoadingStyle = (style: string) => {
@@ -15,7 +15,9 @@ const LoadingList = () => {
   return (
     <div className='grid grid-cols-2 gap-0.5 py-3 max-h-[200px] overflow-y-scroll'>
       <div
-        className='flex items-center gap-3 w-full justify-between mt-3 cursor-pointer hover:bg-base-200 transition-all duration-300 ease-out px-4 py-3 rounded-selector'
+        className={`flex items-center gap-3 w-full justify-between cursor-pointer hover:bg-base-200 transition-all duration-300 ease-out px-4 py-3 rounded-selector ${
+          loadingStyle === 'loading-spinner' ? 'bg-base-300/50' : ''
+        }`}
         onClick={() => saveLoadingStyle('loading-spinner')}
       >
         <span className='loading loading-spinner loading-md'></span>
@@ -30,7 +32,9 @@ const LoadingList = () => {
         </div>
       </div>
       <div
-        className='flex items-center gap-3 w-full justify-between cursor-pointer hover:bg-base-200 transition-all duration-300 ease-out px-4 py-3 rounded-selector'
+        className={`flex items-center gap-3 w-full justify-between cursor-pointer hover:bg-base-200 transition-all duration-300 ease-out px-4 py-3 rounded-selector ${
+          loadingStyle === 'loading-dots' ? 'bg-base-300/50' : ''
+        }`}
         onClick={() => saveLoadingStyle('loading-dots')}
       >
         <span className='loading loading-dots loading-md'></span>
@@ -45,7 +49,9 @@ const LoadingList = () => {
         </div>
       </div>
       <div
-        className='flex items-center gap-3 w-full justify-between cursor-pointer hover:bg-base-200 transition-all duration-300 ease-out px-4 py-3 rounded-selector'
+        className={`flex items-center gap-3 w-full justify-between cursor-pointer hover:bg-base-200 transition-all duration-300 ease-out px-4 py-3 rounded-selector ${
+          loadingStyle === 'loading-ring' ? 'bg-base-300/50' : ''
+        }`}
         onClick={() => saveLoadingStyle('loading-ring')}
       >
         <span className='loading loading-ring loading-md'></span>
@@ -60,7 +66,9 @@ const LoadingList = () => {
         </div>
       </div>
       <div
-        className='flex items-center gap-3 w-full justify-between cursor-pointer hover:bg-base-200 transition-all duration-300 ease-out px-4 py-3 rounded-selector'
+        className={`flex items-center gap-3 w-full justify-between cursor-pointer hover:bg-base-200 transition-all duration-300 ease-out px-4 py-3 rounded-selector ${
+          loadingStyle === 'loading-ball' ? 'bg-base-300/50' : ''
+        }`}
         onClick={() => saveLoadingStyle('loading-ball')}
       >
         <span className='loading loading-ball loading-md'></span>
@@ -75,7 +83,9 @@ const LoadingList = () => {
         </div>
       </div>
       <div
-        className='flex items-center gap-3 w-full justify-between cursor-pointer hover:bg-base-200 transition-all duration-300 ease-out px-4 py-3 rounded-selector'
+        className={`flex items-center gap-3 w-full justify-between cursor-pointer hover:bg-base-200 transition-all duration-300 ease-out px-4 py-3 rounded-selector ${
+          loadingStyle === 'loading-bars' ? 'bg-base-300/50' : ''
+        }`}
         onClick={() => saveLoadingStyle('loading-bars')}
       >
         <span className='loading loading-bars loading-md'></span>
@@ -90,7 +100,9 @@ const LoadingList = () => {
         </div>
       </div>
       <div
-        className='flex items-center gap-3 w-full justify-between cursor-pointer hover:bg-base-200 transition-all duration-300 ease-out px-4 py-3 rounded-selector'
+        className={`flex items-center gap-3 w-full justify-between cursor-pointer hover:bg-base-200 transition-all duration-300 ease-out px-4 py-3 rounded-selector ${
+          loadingStyle === 'loading-infinity' ? 'bg-base-300/50' : ''
+        }`}
         onClick={() => saveLoadingStyle('loading-infinity')}
       >
         <span className='loading loading-infinity loading-md'></span>
