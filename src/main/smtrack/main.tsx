@@ -23,7 +23,13 @@ import { changIcon, changText } from '../../constants/utils/webSocket'
 import { useTranslation } from 'react-i18next'
 import { socket } from '../../services/websocket'
 import { SocketResponseType } from '../../types/global/socketType'
-import notificationSound from '../../assets/sounds/notification.mp3'
+import n1 from '../../assets/sounds/n1.mp3'
+import n2 from '../../assets/sounds/n2.wav'
+import n3 from '../../assets/sounds/n3.wav'
+import n4 from '../../assets/sounds/n4.wav'
+import n5 from '../../assets/sounds/n5.wav'
+import n6 from '../../assets/sounds/n6.wav'
+import n7 from '../../assets/sounds/n7.wav'
 import BottomBar from '../../components/navigation/bottomBar/bottomBar'
 import TokenExpire from '../../components/modal/tokenExpire'
 import Footer from '../../components/footer/footer'
@@ -40,14 +46,31 @@ const MainSmtrack = () => {
     socketData,
     soundMode,
     popUpMode,
-    themeMode
+    themeMode,
+    sound
   } = useSelector((state: RootState) => state.utils)
   const { token } = cookieDecode || {}
   const { id, role, hosId } = tokenDecode || {}
-  const notiSound = new Audio(notificationSound)
   const [isFirstLoad, setIsFirstLoad] = useState(true)
   const isPlayingRef = useRef<boolean>(false)
   const toastLimit = 5
+
+  const src =
+    sound === 1
+      ? n1
+      : sound === 2
+      ? n2
+      : sound === 3
+      ? n3
+      : sound === 4
+      ? n4
+      : sound === 5
+      ? n5
+      : sound === 6
+      ? n6
+      : n7
+
+  const audioNotification = new Audio(src)
 
   const fetchUserProfile = async () => {
     if (id) {
@@ -150,16 +173,19 @@ const MainSmtrack = () => {
       return
     }
 
-    if (socketData && !popUpMode && !soundMode && isMessageValid) {
-      if (!isPlayingRef.current) {
-        notiSound.play()
-        isPlayingRef.current = true
+    audioNotification.addEventListener('canplaythrough', () => {
+      if (socketData && !popUpMode && !soundMode && isMessageValid) {
+        if (!isPlayingRef.current) {
+          audioNotification.play()
 
-        setTimeout(() => {
-          isPlayingRef.current = false
-        }, 3000)
+          isPlayingRef.current = true
+
+          setTimeout(() => {
+            isPlayingRef.current = false
+          }, 3000)
+        }
       }
-    }
+    })
 
     if (socketData && !popUpMode) {
       toast(
@@ -215,7 +241,7 @@ const MainSmtrack = () => {
 
   return (
     <main>
-      <div className='drawer lg:drawer-open bg-base-100 w-auto duration-300 ease-linear'>
+      <div className='drawer lg:drawer-open w-auto duration-300 ease-linear'>
         <input id='my-drawer-2' type='checkbox' className='drawer-toggle' />
         <div className='drawer-content'>
           <Navbar />

@@ -31,6 +31,7 @@ const AMBIENT_DISABLED = 'AMBIENT_DISABLED'
 const FPS_DISABLED = 'FPS_DISABLED'
 const I18N_INIT = 'I18N_INIT'
 const LOADING_STYLE = 'LOADING_STYLE'
+const SOUND = 'SOUND'
 const RESET_UTILS = 'RESET_UTILS'
 
 interface UtilsState {
@@ -58,6 +59,7 @@ interface UtilsState {
   fpsDisabled: boolean
   i18nInit: string
   loadingStyle: string
+  sound: number
   tokenExpire: boolean
 }
 
@@ -87,6 +89,7 @@ type UtilsAction =
   | { type: typeof FPS_DISABLED }
   | { type: typeof I18N_INIT; payload: string }
   | { type: typeof LOADING_STYLE; payload: string }
+  | { type: typeof SOUND; payload: number }
   | { type: typeof RESET_UTILS }
 
 export {
@@ -115,6 +118,7 @@ export {
   FPS_DISABLED,
   I18N_INIT,
   LOADING_STYLE,
+  SOUND,
   RESET_UTILS
 }
 export type { UtilsState, UtilsAction }

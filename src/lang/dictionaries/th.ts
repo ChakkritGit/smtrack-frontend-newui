@@ -319,6 +319,7 @@ export default {
     Readed: 'อ่านแล้ว',
     notificationAll: 'ทั้งหมด',
     notificationSound: 'เสียง',
+    notificationSoundList: 'เสียงแจ้งเตือน',
     notificationPopup: 'การแจ้งเตือน',
     notificationEmpty: 'ไม่มีการแจ้งเตือน',
 
@@ -484,6 +485,7 @@ export default {
     createAt: 'สร้างเมื่อ',
     imageSizeLimit: 'ขนาดไฟล์รูปภาพไม่เกิน 5MB',
     default: 'ค่าเริ่มต้น',
+    clickToPlay: 'คลิกเพื่อเล่น',
 
     // connect
     ipAddress: 'IP',

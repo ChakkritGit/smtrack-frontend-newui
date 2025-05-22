@@ -31,7 +31,8 @@ import {
   AMBIENT_DISABLED,
   I18N_INIT,
   FPS_DISABLED,
-  LOADING_STYLE
+  LOADING_STYLE,
+  SOUND
 } from '../types/utilsTypes'
 
 const setCookieEncode = (dataEncode?: string) => ({
@@ -147,6 +148,11 @@ const setLoadingStyle = (style: string) => ({
   payload: style
 })
 
+const setSound = (sound: number) => ({
+  type: SOUND,
+  payload: sound
+})
+
 const resetUtils = () => ({
   type: RESET_UTILS
 })
@@ -177,5 +183,6 @@ export {
   setFpsDisabled,
   setI18nInit,
   setLoadingStyle,
+  setSound,
   resetUtils
 }

@@ -309,6 +309,7 @@ export default {
     Readed: 'Readed',
     notificationAll: 'All',
     notificationSound: 'Sound',
+    notificationSoundList: 'Notification Sound',
     notificationPopup: 'Notofications',
     tempBackToNormal: 'The temperature is back to normal',
     tempBelowLimmit: 'Temperature is below the limit',
@@ -485,6 +486,7 @@ export default {
     createAt: 'Create At',
     imageSizeLimit: 'Image size must be less than 5MB',
     default: 'Default',
+    clickToPlay: 'Click to play',
 
     // connect
     ipAddress: 'IP',

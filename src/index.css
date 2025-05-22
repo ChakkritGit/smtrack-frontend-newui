@@ -60,6 +60,10 @@
   /* outline: 1px solid red !important; */
 }
 
+body {
+  @apply h-full;
+}
+
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
@@ -431,16 +435,11 @@ div:where(.swal2-container).swal2-noanimation {
 }
 
 .modal {
-
   &.modal-open,
   &[open],
   &:target {
     @apply !bg-black/30 backdrop-blur;
   }
-}
-
-body {
-  @apply h-full;
 }
 
 .go2072408551 {

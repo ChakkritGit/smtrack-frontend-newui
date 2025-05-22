@@ -14,6 +14,7 @@ type WarrantiesType = {
   status: boolean
   createAt: string
   updateAt: string
+  comment: string
   device: DevicesType
 }
 

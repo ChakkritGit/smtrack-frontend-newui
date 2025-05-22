@@ -6,7 +6,7 @@ const LanguageComponents = () => {
 
   return (
     <div className='min-h-[15rem]'>
-      <span className='text-[24px]'>{t('tabLanguage')}</span>
+      <span className='text-[18px] font-medium'>{t('tabLanguage')}</span>
       <div className='flex items-center justify-between'>
         <span>{t('changeLanguage')}</span>
         <LanguageList />

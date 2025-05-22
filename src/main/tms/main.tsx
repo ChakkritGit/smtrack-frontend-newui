@@ -22,7 +22,13 @@ import toast, { ToastOptions, useToasterStore } from 'react-hot-toast'
 import { RiCloseLargeFill } from 'react-icons/ri'
 import { useTranslation } from 'react-i18next'
 import { changIcon, changText } from '../../constants/utils/webSocket'
-import notificationSound from '../../assets/sounds/notification.mp3'
+import n1 from '../../assets/sounds/n1.mp3'
+import n2 from '../../assets/sounds/n2.wav'
+import n3 from '../../assets/sounds/n3.wav'
+import n4 from '../../assets/sounds/n4.wav'
+import n5 from '../../assets/sounds/n5.wav'
+import n6 from '../../assets/sounds/n6.wav'
+import n7 from '../../assets/sounds/n7.wav'
 import { cookieOptions, cookies } from '../../constants/utils/utilsConstants'
 import BottomBar from '../../components/navigation/bottomBar/bottomBar'
 import TokenExpire from '../../components/modal/tokenExpire'
@@ -40,14 +46,31 @@ const MainTms = () => {
     socketData,
     soundMode,
     popUpMode,
-    themeMode
+    themeMode,
+    sound
   } = useSelector((state: RootState) => state.utils)
   const { token } = cookieDecode || {}
   const { id, hosId, role } = tokenDecode || {}
-  const notiSound = new Audio(notificationSound)
   const [isFirstLoad, setIsFirstLoad] = useState(true)
   const isPlayingRef = useRef<boolean>(false)
   const toastLimit = 5
+
+  const src =
+    sound === 1
+      ? n1
+      : sound === 2
+      ? n2
+      : sound === 3
+      ? n3
+      : sound === 4
+      ? n4
+      : sound === 5
+      ? n5
+      : sound === 6
+      ? n6
+      : n7
+
+  const audioNotification = new Audio(src)
 
   const fetchUserProfile = async () => {
     if (id) {
@@ -141,7 +164,6 @@ const MainTms = () => {
 
   useEffect(() => {
     const isMessageValid = socketData?.message?.toLowerCase() ?? ''
-
     if (
       isMessageValid?.includes('device offline') ||
       isMessageValid?.includes('device online')
@@ -150,16 +172,20 @@ const MainTms = () => {
       return
     }
 
-    if (socketData && !popUpMode && !soundMode && isMessageValid) {
-      if (!isPlayingRef.current) {
-        notiSound.play()
-        isPlayingRef.current = true
+    audioNotification.addEventListener('canplaythrough', () => {
+      if (socketData && !popUpMode && !soundMode && isMessageValid) {
+        if (!isPlayingRef.current) {
+          console.log('Audio loaded and ready to play')
+          audioNotification.play()
 
-        setTimeout(() => {
-          isPlayingRef.current = false
-        }, 3000)
+          isPlayingRef.current = true
+
+          setTimeout(() => {
+            isPlayingRef.current = false
+          }, 3000)
+        }
       }
-    }
+    })
 
     if (socketData && !popUpMode) {
       toast(
@@ -209,12 +235,13 @@ const MainTms = () => {
         }
       )
     }
+
     dispatch(setSocketData(null))
   }, [socketData, soundMode, popUpMode])
 
   return (
     <main>
-      <div className='drawer lg:drawer-open bg-base-100 w-auto duration-300 ease-linear'>
+      <div className='drawer lg:drawer-open w-auto duration-300 ease-linear'>
         <input id='my-drawer-2' type='checkbox' className='drawer-toggle' />
         <div className='drawer-content'>
           <Navbar />

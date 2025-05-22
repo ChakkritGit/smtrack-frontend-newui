@@ -65,7 +65,8 @@ const Warranty = () => {
     invoice: '',
     model: '',
     product: '',
-    saleDepartment: ''
+    saleDepartment: '',
+    comment: ''
   })
 
   const fetchWarranty = useCallback(async () => {
@@ -115,17 +116,30 @@ const Warranty = () => {
       warrantyForm.product !== '' &&
       warrantyForm.saleDepartment !== ''
     ) {
-      const body = {
-        devName: warrantyForm.devName,
-        product: warrantyForm.product,
-        model: warrantyForm.model,
-        installDate: warrantyForm.installDate,
-        customerName: warrantyForm.customerName,
-        customerAddress: warrantyForm.customerAddress,
-        saleDepartment: warrantyForm.saleDepartment,
-        invoice: warrantyForm.invoice,
-        expire: warrantyForm.expire
-      }
+      const body = warrantyForm.comment
+        ? {
+            devName: warrantyForm.devName,
+            product: warrantyForm.product,
+            model: warrantyForm.model,
+            installDate: warrantyForm.installDate,
+            customerName: warrantyForm.customerName,
+            customerAddress: warrantyForm.customerAddress,
+            saleDepartment: warrantyForm.saleDepartment,
+            invoice: warrantyForm.invoice,
+            expire: warrantyForm.expire,
+            comment: warrantyForm.comment
+          }
+        : {
+            devName: warrantyForm.devName,
+            product: warrantyForm.product,
+            model: warrantyForm.model,
+            installDate: warrantyForm.installDate,
+            customerName: warrantyForm.customerName,
+            customerAddress: warrantyForm.customerAddress,
+            saleDepartment: warrantyForm.saleDepartment,
+            invoice: warrantyForm.invoice,
+            expire: warrantyForm.expire
+          }
       try {
         await axiosInstance.post<responseType<WarrantiesType>>(
           '/devices/warranty',
@@ -188,17 +202,30 @@ const Warranty = () => {
       warrantyForm.product !== '' &&
       warrantyForm.saleDepartment !== ''
     ) {
-      const body = {
-        devName: warrantyForm.devName,
-        product: warrantyForm.product,
-        model: warrantyForm.model,
-        installDate: warrantyForm.installDate,
-        customerName: warrantyForm.customerName,
-        customerAddress: warrantyForm.customerAddress,
-        saleDepartment: warrantyForm.saleDepartment,
-        invoice: warrantyForm.invoice,
-        expire: warrantyForm.expire
-      }
+      const body = warrantyForm.comment
+        ? {
+            devName: warrantyForm.devName,
+            product: warrantyForm.product,
+            model: warrantyForm.model,
+            installDate: warrantyForm.installDate,
+            customerName: warrantyForm.customerName,
+            customerAddress: warrantyForm.customerAddress,
+            saleDepartment: warrantyForm.saleDepartment,
+            invoice: warrantyForm.invoice,
+            expire: warrantyForm.expire,
+            comment: warrantyForm.comment
+          }
+        : {
+            devName: warrantyForm.devName,
+            product: warrantyForm.product,
+            model: warrantyForm.model,
+            installDate: warrantyForm.installDate,
+            customerName: warrantyForm.customerName,
+            customerAddress: warrantyForm.customerAddress,
+            saleDepartment: warrantyForm.saleDepartment,
+            invoice: warrantyForm.invoice,
+            expire: warrantyForm.expire
+          }
       try {
         await axiosInstance.put<responseType<WarrantiesType>>(
           `/devices/warranty/${warrantyForm.id}`,
@@ -257,7 +284,8 @@ const Warranty = () => {
       invoice: '',
       model: '',
       product: '',
-      saleDepartment: ''
+      saleDepartment: '',
+      comment: ''
     })
   }
 
@@ -315,7 +343,8 @@ const Warranty = () => {
       invoice: warranty.invoice,
       model: warranty.model,
       product: warranty.product,
-      saleDepartment: warranty.saleDepartment
+      saleDepartment: warranty.saleDepartment,
+      comment: warranty.comment ?? '—'
     })
     editModalRef.current?.showModal()
   }
@@ -345,7 +374,10 @@ const Warranty = () => {
 
   const manageMenu = useMemo(
     () => (
-      <div role='tablist' className='tabs tabs-border justify-evenly w-72 md:w-max mt-3'>
+      <div
+        role='tablist'
+        className='tabs tabs-border justify-evenly w-72 md:w-max mt-3'
+      >
         <a
           role='tab'
           className={`tab text-sm md:text-base ${
@@ -658,6 +690,7 @@ const Warranty = () => {
                 onChange={handleChange}
                 className='input input-bordered w-full'
                 maxLength={23}
+                autoFocus={true}
               />
             </label>
           </div>
@@ -872,6 +905,23 @@ const Warranty = () => {
             </label>
           </div>
 
+          <div className='form-control w-full'>
+            <label className='label flex-col items-start w-full mb-3'>
+              <span className='label-text text-wrap mb-2'>
+                <span className='font-medium text-red-500 mr-1'>*</span>
+                {t('remmark')}
+              </span>
+              <input
+                name='comment'
+                type='text'
+                value={warrantyForm.comment}
+                onChange={handleChange}
+                className='input input-bordered w-full'
+                maxLength={256}
+              />
+            </label>
+          </div>
+
           {/* Modal Actions */}
           <div className='modal-action mt-6'>
             <button
@@ -911,6 +961,7 @@ const Warranty = () => {
                 onChange={handleChange}
                 className='input input-bordered w-full'
                 maxLength={23}
+                autoFocus={true}
               />
             </label>
           </div>
@@ -1122,6 +1173,23 @@ const Warranty = () => {
                 autoFocus={false}
                 className='react-select-container custom-menu-select z-[100] min-w-full'
                 classNamePrefix='react-select'
+              />
+            </label>
+          </div>
+
+          <div className='form-control w-full'>
+            <label className='label flex-col items-start w-full mb-3'>
+              <span className='label-text text-wrap mb-2'>
+                <span className='font-medium text-red-500 mr-1'>*</span>
+                {t('remmark')}
+              </span>
+              <input
+                name='comment'
+                type='text'
+                value={warrantyForm.comment}
+                onChange={handleChange}
+                className='input input-bordered w-full'
+                maxLength={256}
               />
             </label>
           </div>
