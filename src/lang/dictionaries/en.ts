@@ -484,6 +484,7 @@ export default {
     lastModified: 'Last Modified',
     createAt: 'Create At',
     imageSizeLimit: 'Image size must be less than 5MB',
+    default: 'Default',
 
     // connect
     ipAddress: 'IP',

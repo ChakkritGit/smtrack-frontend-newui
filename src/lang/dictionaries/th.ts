@@ -483,6 +483,7 @@ export default {
     lastModified: 'อัปเดทเมื่อ',
     createAt: 'สร้างเมื่อ',
     imageSizeLimit: 'ขนาดไฟล์รูปภาพไม่เกิน 5MB',
+    default: 'ค่าเริ่มต้น',
 
     // connect
     ipAddress: 'IP',

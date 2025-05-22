@@ -612,7 +612,7 @@ const Navbar = () => {
               <li className='h-7.5'>
                 <button
                   onClick={() => profileModalRef?.current?.showModal()}
-                  className='text-[14px] h-9 flex items-center gap-2 w-full text-left cursor-pointer'
+                  className='text-[14px] h-9 flex items-center gap-2 w-full text-left cursor-pointer hover:bg-base-200'
                 >
                   <RiIdCardLine />
                   {t('profile')}
@@ -622,7 +622,7 @@ const Navbar = () => {
               <li className='h-7.5'>
                 <button
                   onClick={() => settingModalRef?.current?.showModal()}
-                  className='text-[14px] h-9 flex items-center gap-2 w-full text-left cursor-pointer'
+                  className='text-[14px] h-9 flex items-center gap-2 w-full text-left cursor-pointer hover:bg-base-200'
                 >
                   <RiNotification4Line />
                   {t('titleNotification')}
@@ -660,7 +660,7 @@ const Navbar = () => {
                       }
                     })
                   }
-                  className='text-red-500 text-[14px] h-9 flex items-center gap-2 w-full text-left'
+                  className='text-red-500 text-[14px] h-9 flex items-center gap-2 w-full text-left hover:bg-base-200'
                 >
                   <RiLogoutBoxRLine />
                   {t('tabLogout')}

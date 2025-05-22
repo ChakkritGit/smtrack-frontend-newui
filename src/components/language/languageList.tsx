@@ -42,8 +42,8 @@ const LanguageList = () => {
           <li onClick={() => changeLanguage('th')}>
             <button
               className={`${
-                i18nInit === 'th' ? 'menu-active' : ''
-              } flex items-center justify-start h-7.5`}
+                i18nInit === 'th' ? 'bg-base-200' : ''
+              } flex items-center justify-start h-7.5 hover:bg-base-200`}
             >
               <span className='pe-2 font-mono text-[.5625rem] font-bold tracking-[0.09375rem] opacity-40'>
                 TH
@@ -54,8 +54,8 @@ const LanguageList = () => {
           <li onClick={() => changeLanguage('en')}>
             <button
               className={`${
-                i18nInit === 'en' ? 'menu-active' : ''
-              } flex items-center justify-start h-7.5`}
+                i18nInit === 'en' ? 'bg-base-200' : ''
+              } flex items-center justify-start h-7.5 hover:bg-base-200`}
             >
               <span className='pe-2 font-mono text-[.5625rem] font-bold tracking-[0.09375rem] opacity-40'>
                 EN
