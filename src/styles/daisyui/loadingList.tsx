@@ -24,7 +24,10 @@ const LoadingList = () => {
       >
         <div className='flex items-center gap-3'>
           <span className='loading loading-spinner loading-md'></span>
-          <span className='text-[14px]'>{t('default')}</span>
+          <span>
+            Spinner{` `}
+            <span className='opacity-50 text-[14px]'>({t('default')})</span>
+          </span>
         </div>
         <div>
           {loadingStyle === 'loading-spinner' ? (
