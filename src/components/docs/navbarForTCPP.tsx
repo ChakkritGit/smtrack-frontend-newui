@@ -6,7 +6,7 @@ const NavbarForTCPP = () => {
   const location = useLocation()
 
   return (
-    <div className='flex flex-col justify-center pt-3 px-5 bg-base-100 border-b border-base-content/10 shadow-sm sticky top-0 left-0 z-40'>
+    <div className='flex flex-col justify-center pt-3 px-5 bg-base-100 border-b border-base-content/15 sticky top-0 left-0 z-40'>
       <div className='flex items-center justify-between'>
         <div className='flex items-center gap-3 w-max'>
           <Link to={'/'}>
@@ -32,14 +32,14 @@ const NavbarForTCPP = () => {
           <Link
             to={'/policies'}
             className={`text-[12px] md:text-[15px] ${
-              location.pathname === '/policies' ? 'font-bold text-neutral' : ''
+              location.pathname === '/policies' ? 'font-bold text-primary' : ''
             }`}
           >
             Overview
           </Link>
           <div
             className={`h-[3px] w-full rounded-t-sm ${
-              location.pathname === '/policies' ? 'bg-neutral' : ''
+              location.pathname === '/policies' ? 'bg-primary' : ''
             } `}
           ></div>
         </div>
@@ -48,7 +48,7 @@ const NavbarForTCPP = () => {
             to={'/privacy-policy'}
             className={`text-[12px] md:text-[15px] ${
               location.pathname === '/privacy-policy'
-                ? 'font-bold text-neutral'
+                ? 'font-bold text-primary'
                 : ''
             }`}
           >
@@ -56,7 +56,7 @@ const NavbarForTCPP = () => {
           </Link>
           <div
             className={`h-[3px] w-full rounded-t-sm ${
-              location.pathname === '/privacy-policy' ? 'bg-neutral' : ''
+              location.pathname === '/privacy-policy' ? 'bg-primary' : ''
             } `}
           ></div>
         </div>
@@ -65,7 +65,7 @@ const NavbarForTCPP = () => {
             to={'/terms-conditions'}
             className={`text-[12px] md:text-[15px] ${
               location.pathname === '/terms-conditions'
-                ? 'font-bold text-neutral'
+                ? 'font-bold text-primary'
                 : ''
             }`}
           >
@@ -73,7 +73,7 @@ const NavbarForTCPP = () => {
           </Link>
           <div
             className={`h-[3px] w-full rounded-t-sm ${
-              location.pathname === '/terms-conditions' ? 'bg-neutral' : ''
+              location.pathname === '/terms-conditions' ? 'bg-primary' : ''
             } `}
           ></div>
         </div>
