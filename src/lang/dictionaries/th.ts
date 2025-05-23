@@ -550,6 +550,7 @@ export default {
     backToPre: 'กลับ',
     privacy: 'นโยบายความเป็นส่วนตัว',
     terms: 'ข้อกำหนดและเงื่อนไข',
+    policies: 'นโยบายการใช้งาน',
     resetHour: 'ชั่วโมง',
     resetMinute: 'นาที',
 

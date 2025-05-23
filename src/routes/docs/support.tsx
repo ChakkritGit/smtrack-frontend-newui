@@ -191,10 +191,10 @@ const Support = () => {
         <p className='flex items-center justify-center flex-wrap text-sm text-gray-500 mt-4 leading-7 tracking-wide'>
           {t('contactAgree')}{' '}
           <p
-            onClick={() => navigate('/privacy-policy')}
-            className='link link-primary font-semibold ml-2'
+            onClick={() => navigate('/policies')}
+            className='link link-primary font-semibold ml-1'
           >
-            {t('contactAgreeLink')}
+            {t('policies')}
           </p>
         </p>
       </div>

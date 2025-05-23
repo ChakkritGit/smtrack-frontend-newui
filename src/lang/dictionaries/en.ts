@@ -554,6 +554,7 @@ export default {
     backToPre: 'Back',
     privacy: 'Privacy & Policy',
     terms: 'Terms & Conditions',
+    policies: 'Terms of Service',
     resetHour: 'Hour',
     resetMinute: 'Minute',
 

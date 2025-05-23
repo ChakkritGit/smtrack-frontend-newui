@@ -1,6 +1,7 @@
 import { useMemo, useRef, useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
+  RiBookOpenLine,
   RiColorFilterAiFill,
   RiColorFilterAiLine,
   RiIdCardFill,
@@ -19,6 +20,7 @@ import LanguageComponents from '../../components/pages/settings/languageComponen
 import ResetPassword from '../../components/pages/settings/resetPassword'
 import { cookieOptions, cookies } from '../../constants/utils/utilsConstants'
 import Swal from 'sweetalert2'
+import { Link } from 'react-router-dom'
 
 interface FormState {
   imagePreview: string | null
@@ -150,6 +152,15 @@ const Settings = () => {
               <RiTranslate2 size={24} />
               <span className='hidden md:block'>{t('tabLanguage')}</span>
             </a>
+          </li>
+          <li className='btn btn-ghost font-normal flex-nowrap text-[16px] justify-start w-full flex'>
+            <Link
+              to={'/policies'}
+              className='text-[16px] h-9 flex items-center gap-2'
+            >
+              <RiBookOpenLine size={24} />
+              <span>{t('policies')}</span>
+            </Link>
           </li>
           <li
             onClick={() =>

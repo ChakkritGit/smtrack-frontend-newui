@@ -1,5 +1,5 @@
 import { AxiosError } from 'axios'
-import { FormEvent, useEffect, useRef, useState } from 'react'
+import { FormEvent, useRef, useState } from 'react'
 import axiosInstance from '../../constants/axios/axiosInstance'
 import {
   accessToken,
@@ -8,10 +8,16 @@ import {
 } from '../../constants/utils/utilsConstants'
 import { setCookieEncode } from '../../redux/actions/utilsActions'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import LanguageList from '../../components/language/languageList'
-import { RiAtLine, RiEyeLine, RiEyeOffLine, RiKey2Line } from 'react-icons/ri'
+import {
+  RiAtLine,
+  RiBookOpenLine,
+  RiEyeLine,
+  RiEyeOffLine,
+  RiKey2Line
+} from 'react-icons/ri'
 import { Helmet } from 'react-helmet-async'
 import Footer from '../../components/footer/footer'
 import { responseType } from '../../types/smtrack/utilsRedux/utilsReduxType'
@@ -28,7 +34,7 @@ const Login = () => {
   const passwordRef = useRef<HTMLInputElement>(null)
   const [alertMessage, setAlertMessage] = useState('')
   const [loading, setLoading] = useState(false)
-  const [currentDate, setCurrentDate] = useState(new Date())
+  // const [currentDate, setCurrentDate] = useState(new Date())
   const modalAlert = useRef<HTMLDialogElement>(null)
 
   const handleLogin = async (e: FormEvent) => {
@@ -104,25 +110,25 @@ const Login = () => {
     }
   }
 
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setCurrentDate(new Date())
-    }, 1000)
+  // useEffect(() => {
+  //   const intervalId = setInterval(() => {
+  //     setCurrentDate(new Date())
+  //   }, 1000)
 
-    return () => clearInterval(intervalId)
-  }, [])
+  //   return () => clearInterval(intervalId)
+  // }, [])
 
-  const formattedDate = currentDate.toLocaleDateString(t('thTime'), {
-    weekday: 'long',
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  })
-  const formattedTime = currentDate.toLocaleTimeString(t('thTime'), {
-    hour: '2-digit',
-    minute: '2-digit'
-    // second: '2-digit'
-  })
+  // const formattedDate = currentDate.toLocaleDateString(t('thTime'), {
+  //   weekday: 'long',
+  //   year: 'numeric',
+  //   month: 'long',
+  //   day: 'numeric'
+  // })
+  // const formattedTime = currentDate.toLocaleTimeString(t('thTime'), {
+  //   hour: '2-digit',
+  //   minute: '2-digit'
+  //   // second: '2-digit'
+  // })
 
   return (
     <div className='min-h-dvh flex flex-col items-center justify-center gap-7'>
@@ -135,7 +141,9 @@ const Login = () => {
           <div className='text-end'>
             <LanguageList />
           </div>
-          <h1 className='text-4xl md:text-5xl font-bold text-neutral-content'>SMTrack+</h1>
+          <h1 className='text-4xl md:text-5xl font-bold text-neutral-content'>
+            SMTrack+
+          </h1>
           <span className='font-medium text-neutral-content'>
             Real-time temperature monitoring with alerts for exceeding limits
           </span>
@@ -246,15 +254,19 @@ const Login = () => {
             {t('neddHelp')}{' '}
             <span
               onClick={() => navigate('/support')}
-              className='link link-primary'
+              className='link link-neutral underline-offset-[3px]'
             >
               {t('contactSupport')}
             </span>
           </span>
         </div>
       </div>
-      <div className='flex items-center justify-end w-[370px] sm:w-[500px] md:w-[500px] lg:w-[600px] px-10'>
-        <span>{`${formattedDate} ${formattedTime}`}</span>
+      <div className='flex items-center justify-end text-[14px] w-[370px] sm:w-[500px] md:w-[500px] lg:w-[600px] px-10'>
+        {/* <span>{`${formattedDate} ${formattedTime}`}</span> */}
+        <Link to={'/policies'} className='flex items-center gap-2 active:underline underline-offset-[3px]'>
+          <RiBookOpenLine size={16} />
+          <span>{t('policies')}</span>
+        </Link>
       </div>
       <div className='absolute bottom-0 left-0 right-0'>
         <Footer />
@@ -263,9 +275,7 @@ const Login = () => {
       <dialog ref={modalAlert} className='modal'>
         <div className='modal-box'>
           <h3 className='font-bold text-lg'>{t('alertHeaderError')}</h3>
-          <p className='py-2 text-sm opacity-70'>
-            {t('exit')}
-          </p>
+          <p className='py-2 text-sm opacity-70'>{t('exit')}</p>
           <p className='py-2'>{t('titleNotAccess')}</p>
           <div className='modal-action mt-3'>
             <form method='dialog'>
