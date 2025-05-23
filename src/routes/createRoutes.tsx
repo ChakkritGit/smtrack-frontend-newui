@@ -11,6 +11,7 @@ import Support from './docs/support'
 import TermsConditions from './docs/termsConditions'
 import PrivacyPolicy from './docs/privacyPolicy'
 import ErrorScreen from './error/error'
+import Overview from '../components/docs/overview'
 
 const router = (role: string, tmsMode: boolean) =>
   createBrowserRouter([
@@ -39,6 +40,10 @@ const router = (role: string, tmsMode: boolean) =>
             : smtrackChildren
         }
       ]
+    },
+    {
+      path: '/policies',
+      element: <Overview />
     },
     {
       path: '/privacy-policy',
