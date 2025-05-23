@@ -30,6 +30,24 @@ export default defineConfig({
         drop_console: true,
         drop_debugger: true
       }
+    },
+    rollupOptions: {
+      output: {
+        manualChunks (id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('apexcharts')) return 'vendor_apexcharts'
+            if (id.includes('pdfjs-dist')) return 'vendor_pdfjs'
+            if (id.includes('xlsx')) return 'vendor_xlsx'
+            if (id.includes('sweetalert2')) return 'vendor_sweetalert'
+            if (id.includes('html2canvas')) return 'vendor_html2canvas'
+            if (id.includes('@react-pdf')) return 'vendor_react_pdf'
+            if (id.includes('fontkit')) return 'vendor_fontkit'
+            if (id.includes('reading-time-estimator')) return 'vendor_reading_time_estimator'
+            if (id.includes('heic2any')) return 'vendor_heic'
+            return 'vendor'
+          }
+        }
+      }
     }
   },
   server: {

@@ -552,11 +552,21 @@ export default {
     // time
     thTime: 'en-EN',
     backToPre: 'Back',
+    resetHour: 'Hour',
+    resetMinute: 'Minute',
+
+    // privacy & terms
     privacy: 'Privacy & Policy',
     terms: 'Terms & Conditions',
     policies: 'Terms of Service',
-    resetHour: 'Hour',
-    resetMinute: 'Minute',
+    overview: 'Overview',
+    privacyTerms: 'Privacy & Terms',
+    aboutOverview:
+      'This is the overview page for the Terms and Conditions, Privacy Policy. You can find all the relevant information regarding our policies here.',
+    aboutPrivacy:
+      'Read our privacy policy to understand how we collect, use, and protect your personal information.',
+    aboutTerms:
+      'Read our terms and conditions to understand the rules and regulations of using our services.',
 
     // reload sw
     appOffline: 'App ready to work offline',
