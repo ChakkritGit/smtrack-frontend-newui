@@ -31,8 +31,8 @@ const NavbarForTCPP = () => {
         <div className='flex flex-col items-center gap-0.5'>
           <Link
             to={'/policies'}
-            className={`text-[12px] md:text-[15px] ${
-              location.pathname === '/policies' ? 'font-bold text-primary' : ''
+            className={`text-[12px] md:text-[15px] font-medium ${
+              location.pathname === '/policies' ? 'text-primary' : ''
             }`}
           >
             Overview
@@ -46,9 +46,9 @@ const NavbarForTCPP = () => {
         <div className='flex flex-col items-center gap-0.5'>
           <Link
             to={'/privacy-policy'}
-            className={`text-[12px] md:text-[15px] ${
+            className={`text-[12px] md:text-[15px] font-medium ${
               location.pathname === '/privacy-policy'
-                ? 'font-bold text-primary'
+                ? 'text-primary'
                 : ''
             }`}
           >
@@ -63,9 +63,9 @@ const NavbarForTCPP = () => {
         <div className='flex flex-col items-center gap-0.5'>
           <Link
             to={'/terms-conditions'}
-            className={`text-[12px] md:text-[15px] ${
+            className={`text-[12px] md:text-[15px] font-medium ${
               location.pathname === '/terms-conditions'
-                ? 'font-bold text-primary'
+                ? 'text-primary'
                 : ''
             }`}
           >

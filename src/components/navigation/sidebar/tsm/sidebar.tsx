@@ -35,8 +35,15 @@ const Sidebar = () => {
   const navigate = useNavigate()
   const { t } = useTranslation()
   const location = useLocation()
-  const { isExpand, userProfile, tmsMode, tokenDecode, switchingMode, transitionDisabled, loadingStyle } =
-    useSelector((state: RootState) => state.utils)
+  const {
+    isExpand,
+    userProfile,
+    tmsMode,
+    tokenDecode,
+    switchingMode,
+    transitionDisabled,
+    loadingStyle
+  } = useSelector((state: RootState) => state.utils)
   const { ward: wardData } = useContext(GlobalContext) as GlobalContextType
   const { ward } = userProfile || {}
   const { role } = tokenDecode || {}
@@ -52,9 +59,7 @@ const Sidebar = () => {
 
   return (
     <aside
-      className={`drawer-side z-[90] ${
-        isExpand ? '!overflow-visible' : ''
-      }`}
+      className={`drawer-side z-[90] ${isExpand ? '!overflow-visible' : ''}`}
     >
       <label
         htmlFor='my-drawer-2'
@@ -62,9 +67,9 @@ const Sidebar = () => {
         className='drawer-overlay'
       ></label>
       <div
-        className={`menu bg-base-100 text-base-content min-h-full flex flex-col !items-center justify-between ${transitionDisabled ? '!transition-all !ease-out !duration-300' : ''} ${
-          isExpand ? 'w-[100px]' : 'w-[235px]'
-        }`}
+        className={`menu bg-base-100 text-base-content min-h-full flex flex-col !items-center justify-between ${
+          transitionDisabled ? '!transition-all !ease-out !duration-300' : ''
+        } ${isExpand ? 'w-[100px]' : 'w-[235px]'}`}
       >
         <div>
           <div className='flex items-center justify-center flex-col gap-5 p-3'>
@@ -92,7 +97,9 @@ const Sidebar = () => {
             <Link
               to={'/'}
               className={`btn font-normal flex-nowrap justify-start w-full ${
-                location.pathname === '/' ? 'btn-neutral pointer-events-none' : 'btn-ghost'
+                location.pathname === '/'
+                  ? 'btn-neutral pointer-events-none'
+                  : 'btn-ghost'
               } flex ${isExpand ? 'tooltip tooltip-right z-50' : ''}`}
               data-tip={t('sideShowAllBox')}
             >
@@ -109,7 +116,9 @@ const Sidebar = () => {
             </Link>
             <Link
               to={'/dashboard'}
-              className={`btn font-normal flex-nowrap justify-start w-full ${location.pathname === '/dashboard' ? 'pointer-events-none' : ''} ${
+              className={`btn font-normal flex-nowrap justify-start w-full ${
+                location.pathname === '/dashboard' ? 'pointer-events-none' : ''
+              } ${
                 location.pathname === '/dashboard' ||
                 location.pathname.split('/')[2] === 'chart' ||
                 location.pathname.split('/')[2] === 'table' ||
@@ -140,7 +149,9 @@ const Sidebar = () => {
                 <Link
                   to={'/users'}
                   className={`btn font-normal flex-nowrap justify-start w-full ${
-                    location.pathname === '/users' ? 'btn-neutral pointer-events-none' : 'btn-ghost'
+                    location.pathname === '/users'
+                      ? 'btn-neutral pointer-events-none'
+                      : 'btn-ghost'
                   } flex ${isExpand ? 'tooltip tooltip-right z-50' : ''}`}
                   data-tip={t('sidePermission')}
                 >
@@ -196,7 +207,9 @@ const Sidebar = () => {
                   {!isExpand ? (
                     <div className='flex items-center gap-2'>
                       {switchingMode && (
-                        <span className={`loading ${loadingStyle} loading-xs`}></span>
+                        <span
+                          className={`loading ${loadingStyle} loading-xs`}
+                        ></span>
                       )}
                       <span className='text-[12px] truncate'>
                         {!switchingMode ? t('currentMode') : t('switchingMode')}
@@ -204,7 +217,9 @@ const Sidebar = () => {
                     </div>
                   ) : (
                     switchingMode && (
-                      <span className={`loading ${loadingStyle} loading-xs mb-2`}></span>
+                      <span
+                        className={`loading ${loadingStyle} loading-xs mb-2`}
+                      ></span>
                     )
                   )}
                   <input
@@ -238,7 +253,9 @@ const Sidebar = () => {
             <Link
               to={'/settings'}
               className={`btn font-normal flex-nowrap justify-start w-full ${
-                location.pathname === '/settings' ? 'btn-neutral pointer-events-none' : 'btn-ghost'
+                location.pathname === '/settings'
+                  ? 'btn-neutral pointer-events-none'
+                  : 'btn-ghost'
               } flex ${isExpand ? 'tooltip tooltip-right z-50' : ''}`}
               data-tip={t('sideSetting')}
             >
@@ -259,7 +276,7 @@ const Sidebar = () => {
                 isExpand ? 'text-center' : 'text-right'
               } hover:underline cursor-pointer`}
             >
-              Version 2.0.0b22d
+              Version 2.0.0b22e
             </Link>
           </div>
         </div>

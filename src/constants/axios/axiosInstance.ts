@@ -14,6 +14,8 @@ import { setCookieEncode } from '../../redux/actions/utilsActions'
 class AxiosService {
   private static instance: AxiosService
   private axiosInstance: AxiosInstance
+  private isRefreshing = false
+  private failedQueue: any[] = []
 
   private constructor () {
     const BASE_URL = import.meta.env.VITE_APP_API
@@ -37,6 +39,18 @@ class AxiosService {
     return this.axiosInstance
   }
 
+  private processQueue (error: any, token: string | null = null) {
+    this.failedQueue.forEach(prom => {
+      if (error) {
+        prom.reject(error)
+      } else {
+        prom.resolve(token)
+      }
+    })
+
+    this.failedQueue = []
+  }
+
   private initializeInterceptors () {
     this.axiosInstance.interceptors.request.use(
       (config: InternalAxiosRequestConfig) => {
@@ -56,24 +70,36 @@ class AxiosService {
         const originalRequest = error.config
 
         if (error.response?.status === 401 && !originalRequest._retry) {
+          if (this.isRefreshing) {
+            return new Promise((resolve, reject) => {
+              this.failedQueue.push({
+                resolve: (token: string) => {
+                  originalRequest.headers.Authorization = 'Bearer ' + token
+                  resolve(this.axiosInstance(originalRequest))
+                },
+                reject: (err: any) => reject(err)
+              })
+            })
+          }
+
           originalRequest._retry = true
+          this.isRefreshing = true
+
+          const state = store.getState()
+          const storeRefreshToken = state.utils.cookieDecode?.refreshToken
 
           try {
-            const state = store.getState()
-            const storeRefreshToken = state.utils.cookieDecode?.refreshToken
             const response = await axios.post(
               `${import.meta.env.VITE_APP_API}/auth/refresh`,
-              {
-                token: storeRefreshToken
-              }
+              { token: storeRefreshToken }
             )
 
             const { token, refreshToken } = response.data.data
 
             const tokenObject = {
               hosId: state.utils.cookieDecode?.hosId,
-              refreshToken: refreshToken,
-              token: token,
+              refreshToken,
+              token,
               id: state.utils.cookieDecode?.id,
               wardId: state.utils.cookieDecode?.wardId
             }
@@ -88,12 +114,17 @@ class AxiosService {
 
             this.axiosInstance.defaults.headers.Authorization = `Bearer ${token}`
             originalRequest.headers.Authorization = `Bearer ${token}`
+
+            this.processQueue(null, token)
             return this.axiosInstance(originalRequest)
           } catch (refreshError) {
-            console.error('Refresh token expired or invalid:', refreshError)
+            this.processQueue(refreshError, null)
             return Promise.reject(refreshError)
+          } finally {
+            this.isRefreshing = false
           }
         }
+
         return Promise.reject(error)
       }
     )

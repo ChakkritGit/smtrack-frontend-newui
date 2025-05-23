@@ -83,7 +83,7 @@ const ThemeListComponent = (props: ThemeListProps) => {
       <span className='text-xs opacity-50'>{t('systemMode')}</span>
       <button
         data-set-theme='system'
-        className={`flex items-center justify-between p-2 rounded-box hover:bg-base-200 active:bg-neutral cursor-pointer ${
+        className={`flex items-center justify-between p-2 rounded-selector hover:bg-base-200 active:bg-neutral cursor-pointer ${
           themeMode === '' ? 'bg-base-300/50' : ''
         }`}
         onClick={changeToSystem}
@@ -115,7 +115,7 @@ const ThemeListComponent = (props: ThemeListProps) => {
         <button
           key={index}
           data-set-theme={theme}
-          className={`flex items-center justify-between p-2 rounded-box hover:bg-base-200 active:bg-neutral cursor-pointer ${
+          className={`flex items-center justify-between p-2 rounded-selector hover:bg-base-200 active:bg-neutral cursor-pointer ${
             theme === themeMode ? 'bg-base-300/50' : ''
           }`}
           onClick={() => changeTheme(theme)}
@@ -153,7 +153,7 @@ const ThemeListTwoComponent = (props: ThemeListProps) => {
     <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-2 py-3 pl-3 pr-2 max-h-[220px] md:max-h-[270px] lg:max-h-[280px] overflow-y-scroll'>
       <button
         data-set-theme='system'
-        className={`flex items-center justify-between p-2 rounded-box hover:bg-base-200 active:bg-neutral cursor-pointer ${
+        className={`flex items-center justify-between p-2 rounded-selector hover:bg-base-200 active:bg-neutral cursor-pointer ${
           themeMode === '' ? 'bg-base-300/50' : ''
         }`}
         onClick={changeToSystem}
@@ -184,7 +184,7 @@ const ThemeListTwoComponent = (props: ThemeListProps) => {
         <button
           key={index}
           data-set-theme={theme}
-          className={`flex items-center justify-between p-2 rounded-box hover:bg-base-200 active:bg-neutral cursor-pointer ${
+          className={`flex items-center justify-between p-2 rounded-selector hover:bg-base-200 active:bg-neutral cursor-pointer ${
             theme === themeMode ? 'bg-base-300/50' : ''
           }`}
           onClick={() => changeTheme(theme)}

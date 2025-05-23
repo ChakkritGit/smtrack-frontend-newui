@@ -254,7 +254,7 @@ const Login = () => {
             {t('neddHelp')}{' '}
             <span
               onClick={() => navigate('/support')}
-              className='link link-neutral underline-offset-[3px]'
+              className='text-primary active:underline underline-offset-[3px] cursor-pointer'
             >
               {t('contactSupport')}
             </span>

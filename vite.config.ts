@@ -1,11 +1,17 @@
 import react from '@vitejs/plugin-react'
-import { defineConfig } from 'vite'
+import { defineConfig, splitVendorChunkPlugin } from 'vite'
 import path from 'path'
 import tailwindcss from '@tailwindcss/vite'
+import { visualizer } from 'rollup-plugin-visualizer'
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), tailwindcss()],
+  plugins: [
+    react(),
+    tailwindcss(),
+    visualizer({ open: true, filename: 'stats.html' }),
+    splitVendorChunkPlugin()
+  ],
   build: {
     chunkSizeWarningLimit: 100000, // Unit is in KB => 100MB
     // rollupOptions: {
@@ -17,6 +23,13 @@ export default defineConfig({
     // }
     commonjsOptions: {
       transformMixedEsModules: true
+    },
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true
+      }
     }
   },
   server: {

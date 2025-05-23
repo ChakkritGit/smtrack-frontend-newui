@@ -275,7 +275,9 @@ const Sidebar = () => {
                   {!isExpand ? (
                     <div className='flex items-center gap-2'>
                       {switchingMode && (
-                        <span className={`loading ${loadingStyle} loading-xs`}></span>
+                        <span
+                          className={`loading ${loadingStyle} loading-xs`}
+                        ></span>
                       )}
                       <span className='text-[12px] truncate'>
                         {!switchingMode ? t('currentMode') : t('switchingMode')}
@@ -283,7 +285,9 @@ const Sidebar = () => {
                     </div>
                   ) : (
                     switchingMode && (
-                      <span className={`loading ${loadingStyle} loading-xs mb-2`}></span>
+                      <span
+                        className={`loading ${loadingStyle} loading-xs mb-2`}
+                      ></span>
                     )
                   )}
                   <input
@@ -340,7 +344,7 @@ const Sidebar = () => {
                 isExpand ? 'text-center' : 'text-right'
               } hover:underline cursor-pointer`}
             >
-              Version 2.0.0b22d
+              Version 2.0.0b22e
             </Link>
           </div>
         </div>

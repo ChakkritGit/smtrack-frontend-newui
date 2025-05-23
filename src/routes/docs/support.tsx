@@ -97,110 +97,110 @@ const Support = () => {
   }
 
   return (
-    <div className='min-h-screen flex items-center justify-center p-5'>
-      <div className='card bg-base-100 w-full max-w-3xl shadow-xl p-4 md:p-8'>
-        <h2 className='text-2xl font-bold text-center leading-7 tracking-wide'>
-          {t('getInTouch')}
-        </h2>
-        <p className='text-center text-gray-500 mb-5 leading-7 tracking-wide'>
-          {t('contactDes')}
-        </p>
-        <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
-          <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
-            <input
-              type='text'
-              name='firstName'
-              placeholder='ชื่อ'
-              className='input input-bordered w-full'
-              value={formData.firstName}
-              onChange={handleChange}
-            />
-            <input
-              type='text'
-              name='lastName'
-              placeholder='นามสกุล'
-              className='input input-bordered w-full'
-              value={formData.lastName}
-              onChange={handleChange}
-            />
-          </div>
-          <input
-            type='email'
-            name='email'
-            placeholder='อีเมล'
-            className='input input-bordered w-full'
-            value={formData.email}
-            onChange={handleChange}
-          />
-          <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
-            <label htmlFor='countryCode'>
-              <select
-                id='countryCode'
-                name='countryCode'
-                className='select select-bordered w-full'
-                value={formData.countryCode}
-                onChange={handleChange}
-                defaultValue={'+66'}
-              >
-                {countryCodes.map((item, index) => (
-                  <option key={index} value={item.code}>
-                    {item.country} ({item.code})
-                  </option>
-                ))}
-              </select>
-            </label>
-            <input
-              type='tel'
-              name='phone'
-              placeholder='เบอร์โทร'
-              className='input input-bordered w-full'
-              value={formData.phone}
-              onChange={handleChange}
-              maxLength={12}
-            />
-          </div>
-          <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
-            <input
-              type='text'
-              name='hospitalName'
-              placeholder='ชื่อโรงพยาบาล'
-              className='input input-bordered w-full'
-              value={formData.hospitalName}
-              onChange={handleChange}
-            />
-            <input
-              type='text'
-              name='ward'
-              placeholder='ชื่อวอร์ด'
-              className='input input-bordered w-full'
-              value={formData.ward}
-              onChange={handleChange}
-            />
-          </div>
-          <textarea
-            name='message'
-            placeholder='เราสามารถช่วยอะไรคุณได้บ้าง?'
-            className='textarea textarea-bordered w-full'
-            value={formData.message}
-            onChange={handleChange}
-          ></textarea>
-          <button className='btn btn-neutral w-full text-lg mt-3'>
-            {t('contactSubmit')}
-          </button>
-        </form>
-        <p className='flex items-center justify-center flex-wrap text-sm text-gray-500 mt-4 leading-7 tracking-wide'>
-          {t('contactAgree')}{' '}
-          <p
-            onClick={() => navigate('/policies')}
-            className='link link-primary font-semibold ml-1'
-          >
-            {t('policies')}
+    <div>
+      <div className='min-h-screen flex items-center justify-center p-5'>
+        <div className='card bg-base-100 w-full max-w-3xl shadow-xl p-4 md:p-8'>
+          <h2 className='text-2xl font-bold text-center leading-7 tracking-wide'>
+            {t('getInTouch')}
+          </h2>
+          <p className='text-center text-gray-500 mb-5 leading-7 tracking-wide'>
+            {t('contactDes')}
           </p>
-        </p>
+          <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
+            <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
+              <input
+                type='text'
+                name='firstName'
+                placeholder='ชื่อ'
+                className='input input-bordered w-full'
+                value={formData.firstName}
+                onChange={handleChange}
+              />
+              <input
+                type='text'
+                name='lastName'
+                placeholder='นามสกุล'
+                className='input input-bordered w-full'
+                value={formData.lastName}
+                onChange={handleChange}
+              />
+            </div>
+            <input
+              type='email'
+              name='email'
+              placeholder='อีเมล'
+              className='input input-bordered w-full'
+              value={formData.email}
+              onChange={handleChange}
+            />
+            <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
+              <label htmlFor='countryCode'>
+                <select
+                  id='countryCode'
+                  name='countryCode'
+                  className='select select-bordered w-full'
+                  value={formData.countryCode}
+                  onChange={handleChange}
+                  defaultValue={'+66'}
+                >
+                  {countryCodes.map((item, index) => (
+                    <option key={index} value={item.code}>
+                      {item.country} ({item.code})
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <input
+                type='tel'
+                name='phone'
+                placeholder='เบอร์โทร'
+                className='input input-bordered w-full'
+                value={formData.phone}
+                onChange={handleChange}
+                maxLength={12}
+              />
+            </div>
+            <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
+              <input
+                type='text'
+                name='hospitalName'
+                placeholder='ชื่อโรงพยาบาล'
+                className='input input-bordered w-full'
+                value={formData.hospitalName}
+                onChange={handleChange}
+              />
+              <input
+                type='text'
+                name='ward'
+                placeholder='ชื่อวอร์ด'
+                className='input input-bordered w-full'
+                value={formData.ward}
+                onChange={handleChange}
+              />
+            </div>
+            <textarea
+              name='message'
+              placeholder='เราสามารถช่วยอะไรคุณได้บ้าง?'
+              className='textarea textarea-bordered w-full'
+              value={formData.message}
+              onChange={handleChange}
+            ></textarea>
+            <button className='btn btn-neutral w-full text-lg mt-3'>
+              {t('contactSubmit')}
+            </button>
+          </form>
+          <p className='flex items-center justify-center flex-wrap text-sm text-gray-500 mt-4 leading-7 tracking-wide'>
+            {t('contactAgree')}{' '}
+            <p
+              onClick={() => navigate('/policies')}
+              className='link link-primary font-semibold ml-1'
+            >
+              {t('policies')}
+            </p>
+          </p>
+        </div>
       </div>
-      <div className='absolute bottom-0 left-0 right-0'>
-        <Footer />
-      </div>
+      <Footer position />
     </div>
   )
 }

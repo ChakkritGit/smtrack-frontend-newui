@@ -159,7 +159,7 @@ const Settings = () => {
               className='text-[16px] h-9 flex items-center gap-2'
             >
               <RiBookOpenLine size={24} />
-              <span>{t('policies')}</span>
+              <span className='hidden md:block'>{t('policies')}</span>
             </Link>
           </li>
           <li
