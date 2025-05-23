@@ -15,7 +15,7 @@ const Overview = () => {
           policies here.
         </p>
         <div className='flex items-center flex-col md:flex-row gap-5 mt-5'>
-          <Link to={'/privacy-policy'} className='p-4 w-90 md:w-80 h-55 bg-base-200/50 rounded-selector border border-base-content/10 shadow-md hover:bg-base-100 hover:scale-95 duration-300 ease-out cursor-pointer'>
+          <Link to={'/privacy-policy'} className='p-4 w-90 md:w-80 h-55 bg-base-100 rounded-selector border border-base-content/10 shadow-md hover:bg-base-200/50 hover:scale-95 duration-300 ease-out cursor-pointer'>
             <RiChatPrivateLine size={48} />
             <h2 className='text-[16px] md:text-[24px] font-medium mt-3'>
               Privacy and Policy
@@ -25,7 +25,7 @@ const Overview = () => {
               protect your personal information.
             </p>
           </Link>
-          <Link to={'/terms-conditions'} className='p-4 w-90 md:w-80 h-55 bg-base-200/50 rounded-selector border border-base-content/10 shadow-md hover:bg-base-100 hover:scale-95 duration-300 ease-out cursor-pointer'>
+          <Link to={'/terms-conditions'} className='p-4 w-90 md:w-80 h-55 bg-base-100 rounded-selector border border-base-content/10 shadow-md hover:bg-base-200/50 hover:scale-95 duration-300 ease-out cursor-pointer'>
             <RiFilePaper2Line size={48} />
             <h2 className='text-[16px] md:text-[24px] font-medium mt-3'>
               Terms and Conditions
