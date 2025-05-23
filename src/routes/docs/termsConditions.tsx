@@ -154,7 +154,7 @@ const TermsConditions = () => {
             terms will end; (b) you must cease using the application, and (if
             necessary) delete it from your device.
           </p>
-          <p className='text-base font-bold block mt-5 leading-7 tracking-wide'>
+          <p className='text-base font-medium block mt-5 leading-7 tracking-wide'>
             Changes to These Terms and Conditions
           </p>
           <p className='block mt-3 leading-7 tracking-wide'>
@@ -166,7 +166,7 @@ const TermsConditions = () => {
           <p className='block mt-5 leading-7 tracking-wide'>
             These terms and conditions are effective as of 2024-11-05
           </p>
-          <p className='text-base font-bold block mt-5 leading-7 tracking-wide'>
+          <p className='text-base font-medium block mt-5 leading-7 tracking-wide'>
             Contact Us
           </p>
           <p className='block mt-3 leading-7 tracking-wide'>

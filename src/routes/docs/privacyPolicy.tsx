@@ -45,7 +45,7 @@ const PrivacyPolicy = () => {
           </p>
         </div>
         <div className='mt-7'>
-          <p className='text-base font-bold leading-7 tracking-wide'>
+          <p className='text-base font-medium leading-7 tracking-wide'>
             Privacy Policy
           </p>
           <p className='block mt-2 leading-7 tracking-wide'>
@@ -54,7 +54,7 @@ const PrivacyPolicy = () => {
             COMPANY LIMITED (hereby referred to as "Service Provider") as a Free
             service. This service is intended for use "AS IS".
           </p>
-          <p className='text-base font-bold block mt-5 leading-7 tracking-wide'>
+          <p className='text-base font-medium block mt-5 leading-7 tracking-wide'>
             Information Collection and Use
           </p>
           <p className='block mt-2 leading-7 tracking-wide'>
@@ -81,7 +81,7 @@ const PrivacyPolicy = () => {
             Service Provider request will be retained by them and used as
             described in this privacy policy.
           </p>
-          <p className='text-base font-bold block mt-5 leading-7 tracking-wide'>
+          <p className='text-base font-medium block mt-5 leading-7 tracking-wide'>
             Third Party Access
           </p>
           <p className='block mt-2 leading-7 tracking-wide'>
@@ -118,7 +118,7 @@ const PrivacyPolicy = () => {
               privacy statement.
             </li>
           </ul>
-          <p className='text-base font-bold block mt-5 leading-7 tracking-wide'>
+          <p className='text-base font-medium block mt-5 leading-7 tracking-wide'>
             Opt-Out Rights
           </p>
           <p className='block mt-2 leading-7 tracking-wide'>
@@ -127,7 +127,7 @@ const PrivacyPolicy = () => {
             may be available as part of your mobile device or via the mobile
             application marketplace or network.
           </p>
-          <p className='text-base font-bold block mt-5 leading-7 tracking-wide'>
+          <p className='text-base font-medium block mt-5 leading-7 tracking-wide'>
             Data Retention Policy
           </p>
           <p className='block mt-2 leading-7 tracking-wide'>
@@ -138,7 +138,7 @@ const PrivacyPolicy = () => {
             siamatic.thanesgroup@gmail.com and they will respond in a reasonable
             time.
           </p>
-          <p className='text-base font-bold block mt-5 leading-7 tracking-wide'>
+          <p className='text-base font-medium block mt-5 leading-7 tracking-wide'>
             Children
           </p>
           <p className='block mt-2 leading-7 tracking-wide'>
@@ -156,7 +156,7 @@ const PrivacyPolicy = () => {
             please contact the Service Provider (siamatic.thanesgroup@gmail.com)
             so that they will be able to take the necessary actions.
           </p>
-          <p className='text-base font-bold block mt-5 leading-7 tracking-wide'>
+          <p className='text-base font-medium block mt-5 leading-7 tracking-wide'>
             Security
           </p>
           <p className='block mt-2 leading-7 tracking-wide'>
@@ -165,7 +165,7 @@ const PrivacyPolicy = () => {
             physical, electronic, and procedural safeguards to protect
             information the Service Provider processes and maintains.
           </p>
-          <p className='text-base font-bold block mt-5 leading-7 tracking-wide'>
+          <p className='text-base font-medium block mt-5 leading-7 tracking-wide'>
             Changes
           </p>
           <p className='block mt-2 leading-7 tracking-wide'>
@@ -178,7 +178,7 @@ const PrivacyPolicy = () => {
           <p className='block mt-5 leading-7 tracking-wide'>
             This privacy policy is effective as of 2024-10-04
           </p>
-          <p className='text-base font-bold block mt-5 leading-7 tracking-wide'>
+          <p className='text-base font-medium block mt-5 leading-7 tracking-wide'>
             Your Consent
           </p>
           <p className='block mt-2 leading-7 tracking-wide'>
@@ -186,7 +186,7 @@ const PrivacyPolicy = () => {
             your information as set forth in this Privacy Policy now and as
             amended by us.
           </p>
-          <p className='text-base font-bold block mt-5 leading-7 tracking-wide'>
+          <p className='text-base font-medium block mt-5 leading-7 tracking-wide'>
             Contact Us
           </p>
           <p className='block mt-2 leading-7 tracking-wide'>

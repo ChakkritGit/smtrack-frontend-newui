@@ -5,72 +5,94 @@ on:
     branches: [ "dev" ]
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Set dynamic image tag
-      run: echo "TAG=siamatic/smtrack-frontend:2.0.0b22e-${GITHUB_SHA::7}" >> $GITHUB_ENV
+      - name: Set dynamic image tag
+        run: echo "TAG=siamatic/smtrack-frontend:2.0.0b22f-${GITHUB_SHA::7}" >> $GITHUB_ENV
 
-    - name: Login to docker hub
-      uses: docker/login-action@v3
-      with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
 
-    - name: Build and push
-      uses: docker/build-push-action@v6
-      with:
-        context: .
-        push: true
-        tags: ${{ env.TAG }}
-        build-args: |
-          VITE_APP_API=${{secrets.VITE_APP_API}}
-          VITE_APP_IMG=${{secrets.VITE_APP_IMG}}
-          VITE_APP_AUTH=${{secrets.VITE_APP_AUTH}}
-          VITE_APP_SOCKET=${{secrets.VITE_APP_SOCKET}}
-          VITE_APP_DOMAIN=${{secrets.VITE_APP_DOMAIN}}
-          VITE_APP_MQTT=${{secrets.VITE_APP_MQTT}}
-          VITE_APP_MQTT_PORT=${{secrets.VITE_APP_MQTT_PORT}}
-          VITE_APP_MQTT_USERNAME=${{secrets.VITE_APP_MQTT_USERNAME}}
-          VITE_APP_MQTT_PASSWORD=${{secrets.VITE_APP_MQTT_PASSWORD}}
-          VITE_APP_VERSION=${{secrets.VITE_APP_VERSION}}
-          VITE_APP_SECRETKEY=${{secrets.VITE_APP_SECRETKEY}}
-          VITE_APP_MAXAGE=${{secrets.VITE_APP_MAXAGE}}
-          VITE_APP_NODE_ENV=${{secrets.VITE_APP_NODE_ENV}}
+      - name: Build and push Docker image with cache
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: ${{ env.TAG }}
+          build-args: |
+            VITE_APP_API=${{secrets.VITE_APP_API}}
+            VITE_APP_IMG=${{secrets.VITE_APP_IMG}}
+            VITE_APP_AUTH=${{secrets.VITE_APP_AUTH}}
+            VITE_APP_SOCKET=${{secrets.VITE_APP_SOCKET}}
+            VITE_APP_DOMAIN=${{secrets.VITE_APP_DOMAIN}}
+            VITE_APP_MQTT=${{secrets.VITE_APP_MQTT}}
+            VITE_APP_MQTT_PORT=${{secrets.VITE_APP_MQTT_PORT}}
+            VITE_APP_MQTT_USERNAME=${{secrets.VITE_APP_MQTT_USERNAME}}
+            VITE_APP_MQTT_PASSWORD=${{secrets.VITE_APP_MQTT_PASSWORD}}
+            VITE_APP_VERSION=${{secrets.VITE_APP_VERSION}}
+            VITE_APP_SECRETKEY=${{secrets.VITE_APP_SECRETKEY}}
+            VITE_APP_MAXAGE=${{secrets.VITE_APP_MAXAGE}}
+            VITE_APP_NODE_ENV=${{secrets.VITE_APP_NODE_ENV}}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
-    - name: Update Kubernetes manifests
-      run: |
-        git config --global user.email "nongtonnee@gmail.com"
-        git config --global user.name "ChakkritGit"
+      - name: Update Kubernetes manifests
+        run: |
+          git config --global user.email "nongtonnee@gmail.com"
+          git config --global user.name "ChakkritGit"
 
-        sed -i -E "s|image: siamatic/smtrack-frontend:[^ ]+|image: ${{ env.TAG }}|g" k8s/deploy.yaml
+          sed -i -E "s|image: siamatic/smtrack-frontend:[^ ]+|image: ${{ env.TAG }}|g" k8s/deploy.yaml
 
-        git add k8s/deploy.yaml
-        git commit -m "Update deployment image to ${{ env.TAG }}"
-        git push
+          git add k8s/deploy.yaml
+          git commit -m "Update deployment image to ${{ env.TAG }}"
+          git push
 
-    - name: Send success message to slack
-      id: slack
-      uses: slackapi/slack-github-action@v1.27.0
-      with:
-        payload: |
-          {
-            "text": "✅ GitHub Action build ${{ env.TAG }} result: ${{ job.status }} 🫩🫩",
-            "blocks": [
-              {
-                "type": "section",
-                "text": {
-                  "type": "mrkdwn",
-                  "text": "✅ GitHub Action build *${{ env.TAG }}* result: *${{ job.status }}* 🫩🫩"
+      - name: Send Slack success message
+        if: ${{ success() }}
+        uses: slackapi/slack-github-action@v1.27.0
+        with:
+          payload: |
+            {
+              "text": "✅ GitHub Action build *${{ env.TAG }}* succeeded 🫩🫩",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "✅ GitHub Action build *${{ env.TAG }}* succeeded 🫩🫩"
+                  }
                 }
-              }
-            ]
-          }
-      env:
-        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
-        SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+              ]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+
+      - name: Send Slack failure message
+        if: ${{ failure() }}
+        uses: slackapi/slack-github-action@v1.27.0
+        with:
+          payload: |
+            {
+              "text": "❌ GitHub Action build *${{ env.TAG }}* failed 🫩🫩",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "❌ GitHub Action build *${{ env.TAG }}* failed 🫩🫩"
+                  }
+                }
+              ]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
