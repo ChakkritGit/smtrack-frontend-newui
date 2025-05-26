@@ -18,7 +18,6 @@ import { RootState } from '../../../redux/reducers/rootReducer'
 import { useDispatch, useSelector } from 'react-redux'
 import { AxiosError } from 'axios'
 import {
-  setHosId,
   setSholdFetch,
   setSubmitLoading,
   setTokenExpire
@@ -56,6 +55,7 @@ const ManageDevice = () => {
     sn: '',
     name: ''
   })
+  const [hosIdforManageDev, setHosIdforManageDev] = useState<string>('')
 
   const addModalRef = useRef<HTMLDialogElement>(null)
   const editModalRef = useRef<HTMLDialogElement>(null)
@@ -98,6 +98,7 @@ const ManageDevice = () => {
   }
 
   const resetForm = () => {
+    setHosIdforManageDev('')
     setFormData({
       ward: '',
       wardName: '',
@@ -113,6 +114,7 @@ const ManageDevice = () => {
     dispatch(setSubmitLoading())
 
     if (
+      hosIdforManageDev !== '' &&
       formData.ward !== '' &&
       hosId !== '' &&
       formData.sn !== '' &&
@@ -120,7 +122,7 @@ const ManageDevice = () => {
     ) {
       const body = {
         ward: formData.ward,
-        hospital: hosId,
+        hospital: hosIdforManageDev,
         sn: formData.sn,
         name: formData.name
       }
@@ -259,7 +261,7 @@ const ManageDevice = () => {
   }
 
   const openEditModal = (device: DeviceTmsType) => {
-    dispatch(setHosId(device.hospital))
+    setHosIdforManageDev(device.hospital)
     setFormData({
       id: device.id,
       hospital: device.hospital,
@@ -276,6 +278,7 @@ const ManageDevice = () => {
     e.preventDefault()
     dispatch(setSubmitLoading())
     if (
+      hosIdforManageDev !== '' &&
       formData.ward !== '' &&
       hosId !== '' &&
       formData.sn !== '' &&
@@ -284,7 +287,7 @@ const ManageDevice = () => {
       try {
         const body = {
           ward: formData.ward,
-          hospital: hosId,
+          hospital: hosIdforManageDev,
           wardName: formData.wardName,
           hospitalName: formData.hospitalName,
           sn: formData.sn,
@@ -474,7 +477,7 @@ const ManageDevice = () => {
           onSubmit={handleSubmit}
           className='modal-box w-full max-w-4xl min-h-[500px] flex flex-col justify-between'
         >
-          <div className='grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 w-full'>
+          <div className='grid grid-cols-1 md:grid-cols-2 gap-4 w-full'>
             <h3 className='font-bold text-lg'>{t('addDeviceButton')}</h3>
             {/* Right Column - 2/3 of the grid (70%) */}
             <div className='col-span-2 grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4'>
@@ -486,8 +489,10 @@ const ManageDevice = () => {
                     {t('userHospitals')}
                   </span>
                   <HopitalSelect
+                    hosIdforManageDev={hosIdforManageDev}
                     formData={formData}
                     setFormData={setFormData}
+                    setHosIdforManageDev={setHosIdforManageDev}
                   />
                 </label>
               </div>
@@ -500,6 +505,7 @@ const ManageDevice = () => {
                     {t('userWard')}
                   </span>
                   <WardSelectTms
+                    hosIdforManageDev={hosIdforManageDev}
                     formData={formData}
                     setFormData={setFormData}
                   />
@@ -566,10 +572,10 @@ const ManageDevice = () => {
       <dialog ref={editModalRef} className='modal overflow-y-scroll py-10'>
         <form
           onSubmit={handleUpdate}
-          className='modal-box w-11/12 max-w-5xl h-max max-h-max'
+          className='modal-box w-full max-w-4xl min-h-[500px] flex flex-col justify-between'
         >
-          <h3 className='font-bold text-lg'>{t('editUserButton')}</h3>
-          <div className='grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 w-full'>
+          <div className='grid grid-cols-1 md:grid-cols-2 gap-4 w-full'>
+            <h3 className='font-bold text-lg'>{t('editUserButton')}</h3>
             {/* Right Column - 2/3 of the grid (70%) */}
             <div className='col-span-2 grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4'>
               {/* Hospital */}
@@ -580,8 +586,10 @@ const ManageDevice = () => {
                     {t('userHospitals')}
                   </span>
                   <HopitalSelect
+                    hosIdforManageDev={hosIdforManageDev}
                     formData={formData}
                     setFormData={setFormData}
+                    setHosIdforManageDev={setHosIdforManageDev}
                   />
                 </label>
               </div>
@@ -594,6 +602,7 @@ const ManageDevice = () => {
                     {t('userWard')}
                   </span>
                   <WardSelectTms
+                    hosIdforManageDev={hosIdforManageDev}
                     formData={formData}
                     setFormData={setFormData}
                   />

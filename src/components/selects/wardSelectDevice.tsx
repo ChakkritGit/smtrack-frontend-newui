@@ -16,14 +16,15 @@ import { AddDeviceForm } from '../../types/tms/devices/deviceType'
 
 interface WardSelectType {
   formData: AddDeviceForm
+  hosIdforManageDev: string
   setFormData: Dispatch<SetStateAction<AddDeviceForm>>
 }
 
 const WardSelectDevice = (props: WardSelectType) => {
-  const { hosId, tmsMode, tokenDecode } = useSelector(
+  const { tmsMode, tokenDecode } = useSelector(
     (state: RootState) => state.utils
   )
-  const { formData, setFormData } = props
+  const { formData, setFormData, hosIdforManageDev } = props
   const { ward } = useContext(GlobalContext) as GlobalContextType
   const [filterWard, setFilterWard] = useState<WardType[]>([])
   const { role } = tokenDecode || {}
@@ -62,7 +63,7 @@ const WardSelectDevice = (props: WardSelectType) => {
 
   useEffect(() => {
     const filteredWard = ward.filter(item =>
-      hosId ? item?.hosId?.toLowerCase().includes(hosId?.toLowerCase()) : item
+      hosIdforManageDev ? item?.hosId?.toLowerCase().includes(hosIdforManageDev?.toLowerCase()) : item
     )
     setFilterWard(filteredWard)
 
@@ -83,7 +84,7 @@ const WardSelectDevice = (props: WardSelectType) => {
       )
       setFilterWard(filterNewSystem)
     }
-  }, [ward, hosId, role, tmsMode])
+  }, [ward, hosIdforManageDev, role, tmsMode])
 
   return (
     <Select

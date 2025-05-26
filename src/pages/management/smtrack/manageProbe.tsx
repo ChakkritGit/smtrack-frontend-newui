@@ -805,7 +805,7 @@ const ManageProbe = () => {
           noDataComponent={<DataTableNoData />}
           paginationPerPage={10}
           paginationRowsPerPageOptions={[10, 20, 50, 100]}
-          className='md:!max-h-[calc(100dvh-420px)]'
+          className='md:!max-h-[calc(100dvh-410px)]'
         />
       </div>
 

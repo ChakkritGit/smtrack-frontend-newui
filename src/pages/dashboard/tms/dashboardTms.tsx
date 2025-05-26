@@ -21,7 +21,9 @@ const DashboardTms = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const { deviceKey, switchingMode } = useSelector((state: RootState) => state.utils)
+  const { deviceKey, switchingMode } = useSelector(
+    (state: RootState) => state.utils
+  )
   const [deviceLogs, setDeviceLogs] = useState<DeviceLogTms>()
   const [loading, setLoading] = useState(false)
   const modalRef = useRef<HTMLDialogElement>(null)
@@ -59,6 +61,31 @@ const DashboardTms = () => {
     return <CardStatusTms deviceData={deviceLogs} />
   }, [deviceKey, deviceLogs])
 
+  const DeviceDetailLog = useMemo(() => {
+    if (!deviceLogs) return
+
+    return (
+      <>
+        <div className='flex items-start gap-4 mt-4 flex-wrap lg:flex-wrap xl:flex-nowrap'>
+          <div className='w-full xl:w-[50%] lg:h-[295px] bg-base-100 rounded-field overflow-hidden'>
+            {CardInfoComponent}
+          </div>
+          <div className='grid grid-cols-2 md:grid-cols-4 xl:grid-cols-12 gap-4 w-full xl:w-[50%]'>
+            {CardStatusComponent}
+          </div>
+        </div>
+        <div className='grid grid-cols-1 lg:grid-cols-2 mt-4 gap-3'>
+          <div className='w-full min-h-[385px]'>
+            <ChartSwiperWrapperTms deviceLogs={deviceLogs} />
+          </div>
+          <div className='w-full min-h-[385px]'>
+            <DataTableWrapperTms deviceLogs={deviceLogs} />
+          </div>
+        </div>
+      </>
+    )
+  }, [deviceKey, deviceLogs])
+
   useEffect(() => {
     if (!deviceKey && !switchingMode) {
       modalRef.current?.showModal()
@@ -90,37 +117,16 @@ const DashboardTms = () => {
           <DeviceTmsList />
         </div>
       </dialog>
-      {deviceKey && (
-        <>
-          <div className='flex items-center justify-between flex-wrap lg:flex-nowrap xl:flex-nowrap gap-3 mt-[16px]'>
-            <DeviceTmsList />
-            <HospitalAndWard />
-          </div>
-          {loading ? (
-            <div className='flex items-center justify-center h-[calc(100dvh-200px)]'>
-              <Loading />
-            </div>
-          ) : (
-            <>
-              <div className='flex items-start gap-4 mt-4 flex-wrap lg:flex-wrap xl:flex-nowrap'>
-                <div className='w-full xl:w-[50%] lg:h-[295px] bg-base-100 rounded-field overflow-hidden'>
-                  {CardInfoComponent}
-                </div>
-                <div className='grid grid-cols-2 md:grid-cols-4 xl:grid-cols-12 gap-4 w-full xl:w-[50%]'>
-                  {CardStatusComponent}
-                </div>
-              </div>
-              <div className='grid grid-cols-1 lg:grid-cols-2 mt-4 gap-3'>
-                <div className='w-full min-h-[385px]'>
-                  <ChartSwiperWrapperTms deviceLogs={deviceLogs} />
-                </div>
-                <div className='w-full min-h-[385px]'>
-                  <DataTableWrapperTms deviceLogs={deviceLogs} />
-                </div>
-              </div>
-            </>
-          )}
-        </>
+      <div className='flex items-center justify-between flex-wrap lg:flex-nowrap xl:flex-nowrap gap-3 mt-[16px]'>
+        <DeviceTmsList />
+        <HospitalAndWard />
+      </div>
+      {loading ? (
+        <div className='flex items-center justify-center h-[calc(100dvh-200px)]'>
+          <Loading />
+        </div>
+      ) : (
+        DeviceDetailLog
       )}
     </div>
   )

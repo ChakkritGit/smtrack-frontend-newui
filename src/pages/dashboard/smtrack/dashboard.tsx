@@ -50,7 +50,7 @@ const Dashboard = () => {
     setIsPaused(prev => !prev)
   }, [isPause])
 
-  const fetchDeviceLogs = async () => {
+  const fetchDeviceLogs = useCallback(async () => {
     if (!deviceKey) return
 
     const controller = new AbortController()
@@ -77,7 +77,7 @@ const Dashboard = () => {
     } finally {
       setLoading(false)
     }
-  }
+  }, [deviceKey])
 
   useEffect(() => {
     const handleDeviceData = () => {

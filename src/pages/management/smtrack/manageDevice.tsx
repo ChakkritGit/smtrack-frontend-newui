@@ -31,7 +31,6 @@ import {
 } from 'react-icons/ri'
 import { IoSwapVertical } from 'react-icons/io5'
 import {
-  setHosId,
   setSholdFetch,
   setSubmitLoading,
   setTokenExpire
@@ -83,9 +82,14 @@ type selectFirmwareOption = {
 const ManageDevice = () => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
-  const { wardId, globalSearch, tokenDecode, hosId, shouldFetch, loadingStyle } = useSelector(
-    (state: RootState) => state.utils
-  )
+  const {
+    wardId,
+    globalSearch,
+    tokenDecode,
+    hosId,
+    shouldFetch,
+    loadingStyle
+  } = useSelector((state: RootState) => state.utils)
   const { searchRef, isFocused, setIsFocused, isCleared, setIsCleared } =
     useContext(GlobalContext) as GlobalContextType
   const [devices, setDevices] = useState<DeviceType[]>([])
@@ -154,6 +158,7 @@ const ManageDevice = () => {
     hour: '',
     minute: ''
   })
+  const [hosIdforManageDev, setHosIdforManageDev] = useState<string>('')
 
   const fetchFirmware = useCallback(async () => {
     try {
@@ -317,7 +322,7 @@ const ManageDevice = () => {
         if (key === 'remark' || key === 'tag') {
           formDataObj.append(key, value as string)
         } else if (key === 'hospital') {
-          formDataObj.append(key, hosId)
+          formDataObj.append(key, hosIdforManageDev)
         } else {
           formDataObj.append(key, value as string)
         }
@@ -544,6 +549,7 @@ const ManageDevice = () => {
   }
 
   const resetForm = () => {
+    setHosIdforManageDev('')
     setFormData({
       id: '',
       name: '',
@@ -560,7 +566,7 @@ const ManageDevice = () => {
 
   const openEditModal = (device: DeviceType) => {
     fetchFirmware()
-    dispatch(setHosId(device.hospital))
+    setHosIdforManageDev(device.hospital)
     setFormData({
       id: device.id,
       name: device.name,
@@ -1484,7 +1490,9 @@ const ManageDevice = () => {
                     />
                     {imageProcessing ? (
                       <div className='mt-4 flex justify-center w-32 h-32 md:w-48 md:h-48'>
-                        <span className={`loading ${loadingStyle} loading-md`}></span>
+                        <span
+                          className={`loading ${loadingStyle} loading-md`}
+                        ></span>
                       </div>
                     ) : (
                       <div className='mt-4 relative'>
@@ -1520,7 +1528,9 @@ const ManageDevice = () => {
                       {t('hospitalsName')}
                     </span>
                     <HopitalSelect
+                      hosIdforManageDev={hosIdforManageDev}
                       formData={formData}
+                      setHosIdforManageDev={setHosIdforManageDev}
                       setFormData={setFormData}
                     />
                   </label>
@@ -1534,6 +1544,7 @@ const ManageDevice = () => {
                       {t('ward')}
                     </span>
                     <WardSelectDevice
+                      hosIdforManageDev={hosIdforManageDev}
                       formData={formData}
                       setFormData={setFormData}
                     />

@@ -1,23 +1,21 @@
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '../../redux/reducers/rootReducer'
 import { Dispatch, SetStateAction, useContext } from 'react'
 import { GlobalContextType } from '../../types/global/globalContext'
 import { GlobalContext } from '../../contexts/globalContext'
 import { Hospital, Option } from '../../types/global/hospitalAndWard'
-import { setHosId } from '../../redux/actions/utilsActions'
 import Select from 'react-select'
 import { AddDeviceForm } from '../../types/tms/devices/deviceType'
 
 interface HosSelectType {
   formData: AddDeviceForm
+  hosIdforManageDev: string
   setFormData: Dispatch<SetStateAction<AddDeviceForm>>
+  setHosIdforManageDev: Dispatch<SetStateAction<string>>
 }
 
 const HopitalSelect = (props: HosSelectType) => {
-  const dispatch = useDispatch()
-  const { hosId } = useSelector((state: RootState) => state.utils)
   const { hospital } = useContext(GlobalContext) as GlobalContextType
-  const { formData, setFormData } = props
+  const { formData, setFormData, hosIdforManageDev, setHosIdforManageDev } =
+    props
 
   const mapOptions = <T, K extends keyof T>(
     data: T[],
@@ -42,22 +40,25 @@ const HopitalSelect = (props: HosSelectType) => {
         label: item[labelKey] as unknown as string
       }))[0]
 
-  const getHospital = (hospitalID: string | undefined, hosName: string | undefined) => {
+  const getHospital = (
+    hospitalID: string | undefined,
+    hosName: string | undefined
+  ) => {
     if (hospitalID !== '') {
-      dispatch(setHosId(String(hospitalID)))
-      setFormData({...formData, hospitalName: hosName})
+      setHosIdforManageDev(String(hospitalID))
+      setFormData({ ...formData, hospitalName: hosName })
     } else {
-      dispatch(setHosId(''))
+      setHosIdforManageDev('')
     }
   }
 
   return (
     <Select
-      key={hosId}
+      key={hosIdforManageDev}
       options={mapOptions<Hospital, keyof Hospital>(hospital, 'id', 'hosName')}
       value={mapDefaultValue<Hospital, keyof Hospital>(
         hospital,
-        hosId ? hosId : '',
+        hosIdforManageDev ? hosIdforManageDev : '',
         'id',
         'hosName'
       )}

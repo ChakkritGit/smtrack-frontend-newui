@@ -66,7 +66,7 @@ function PreviewPDF () {
   const [instance, _update] = usePDF({ document: pdfViewer })
 
   return (
-    <div className='p-3 h-[calc(100dvh-130px)]'>
+    <div className='p-3 h-[calc(100dvh-180px)]'>
       <div className='breadcrumbs text-sm mt-3'>
         <ul>
           <li>

@@ -15,13 +15,14 @@ import Select from 'react-select'
 import { AddDeviceForm } from '../../../types/tms/devices/deviceType'
 
 interface WardSelectType {
+  hosIdforManageDev: string
   formData: AddDeviceForm
   setFormData: Dispatch<SetStateAction<AddDeviceForm>>
 }
 
 const WardSelectTms = (props: WardSelectType) => {
-  const { hosId, tmsMode, tokenDecode } = useSelector((state: RootState) => state.utils)
-  const { formData, setFormData } = props
+  const { tmsMode, tokenDecode } = useSelector((state: RootState) => state.utils)
+  const { formData, setFormData, hosIdforManageDev } = props
   const { ward } = useContext(GlobalContext) as GlobalContextType
   const [filterWard, setFilterWard] = useState<WardType[]>([])
   const { role } = tokenDecode || {}
@@ -60,7 +61,7 @@ const WardSelectTms = (props: WardSelectType) => {
 
   useEffect(() => {
     const filteredWard = ward.filter(item =>
-      hosId ? item?.hosId?.toLowerCase().includes(hosId?.toLowerCase()) : item
+      hosIdforManageDev ? item?.hosId?.toLowerCase().includes(hosIdforManageDev?.toLowerCase()) : item
     )
 
     if (
@@ -80,7 +81,7 @@ const WardSelectTms = (props: WardSelectType) => {
       )
       setFilterWard(filterNewSystem)
     }
-  }, [ward, hosId, role, tmsMode])
+  }, [ward, hosIdforManageDev, role, tmsMode])
 
   return (
     <Select
