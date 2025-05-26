@@ -8,17 +8,28 @@ interface ChartMiniProps {
   maxTemp: number | undefined
 }
 
+const movingAverage = (
+  data: { x: number; y: number }[],
+  windowSize: number
+): { x: number; y: number }[] => {
+  return data.map((point, i, arr) => {
+    const start = Math.max(0, i - windowSize + 1)
+    const window = arr.slice(start, i + 1)
+    const avg = window.reduce((sum, p) => sum + p.y, 0) / window.length
+    return { x: point.x, y: Number(avg.toFixed(2)) }
+  })
+}
+
 const ChartMiniTms = (props: ChartMiniProps) => {
   const { t } = useTranslation()
   const { deviceLogs } = props
 
-  const mappedData = deviceLogs?.log
-    ? deviceLogs.log.map(item => ({
-        time: new Date(item.createdAt).getTime(),
-        tempAvg: Number(item.tempValue),
-        probe: item.mcuId ?? 'unknown'
-      }))
-    : []
+  const mappedData =
+    deviceLogs?.log?.map(item => ({
+      time: new Date(item.createdAt).getTime(),
+      tempAvg: Number(item.tempValue),
+      probe: item.mcuId ?? 'unknown'
+    })) ?? []
 
   const groupedByProbe: Record<string, { x: number; y: number }[]> = {}
 
@@ -29,14 +40,27 @@ const ChartMiniTms = (props: ChartMiniProps) => {
     groupedByProbe[item.probe].push({ x: item.time, y: item.tempAvg })
   })
 
-  const series: ApexAxisChartSeries = Object.keys(groupedByProbe).map(
+  const processedByProbe: typeof groupedByProbe = {}
+  Object.keys(groupedByProbe).forEach(probe => {
+    const smoothed = movingAverage(groupedByProbe[probe], 3)
+    const sampled = smoothed.filter((_, idx) => idx % 3 === 0)
+    processedByProbe[probe] = sampled
+  })
+
+  const series: ApexAxisChartSeries = Object.keys(processedByProbe).map(
     probe => ({
       type: 'line',
       name: probe,
-      data: groupedByProbe[probe],
+      data: processedByProbe[probe],
       zIndex: 50
     })
   )
+
+  const allYValues = Object.values(processedByProbe)
+    .flat()
+    .map(p => p.y)
+  const minY = Math.floor(Math.min(...allYValues)) - 3
+  const maxY = Math.ceil(Math.max(...allYValues)) + 3
 
   const dynamicColors = [
     'oklch(65% 0.25 30)',
@@ -71,34 +95,20 @@ const ChartMiniTms = (props: ChartMiniProps) => {
     'oklch(60% 0.20 320)'
   ]
 
-  const dynamicStrokeWidths = Array.from(
-    { length: series.length },
-    (_, _i) => 2.0
-  )
-
+  const dynamicStrokeWidths = Array.from({ length: series.length }, () => 1.2)
   const dynamicStrokeCurves = Array(series.length).fill('smooth')
 
   const options: ApexCharts.ApexOptions = {
     chart: {
       animations: {
         enabled: true,
-        animateGradually: {
-          enabled: true,
-          delay: 300
-        },
-        dynamicAnimation: {
-          speed: 500
-        }
+        animateGradually: { enabled: true, delay: 300 },
+        dynamicAnimation: { speed: 500 }
       },
       stacked: false,
-      zoom: {
-        type: 'x',
-        enabled: false,
-        autoScaleYaxis: false
-      },
+      zoom: { type: 'x', enabled: false },
       toolbar: {
         show: false,
-        autoSelected: 'zoom',
         tools: {
           download: false,
           selection: false
@@ -149,14 +159,13 @@ const ChartMiniTms = (props: ChartMiniProps) => {
             toolbar: {
               exportToSVG: 'Download SVG',
               exportToPNG: 'Download PNG',
-              // "menu": "Menu",
               selection: 'เลือก',
               selectionZoom: 'ซูมเลือก',
               zoomIn: 'ซูมเข้า',
               zoomOut: 'ซูมออก',
               pan: 'การแพน',
               reset: 'ยกเลิกการซูม'
-            } //make it component
+            }
           }
         }
       ],
@@ -164,47 +173,25 @@ const ChartMiniTms = (props: ChartMiniProps) => {
     },
     tooltip: {
       theme: 'apexcharts-tooltip',
-      x: {
-        format: 'dd MMM yy HH:mm'
-      },
-      style: {
-        fontSize: '14px'
-      }
+      x: { format: 'dd MMM yy HH:mm' },
+      style: { fontSize: '14px' }
     },
     grid: {
-      show: true,
       strokeDashArray: 5,
-      borderColor: 'oklch(61% 0 238 / var(--tw-text-opacity, .15))',
-      xaxis: {
-        lines: {
-          show: true
-        }
-      },
-      yaxis: {
-        lines: {
-          show: true
-        }
-      }
+      borderColor: 'oklch(61% 0 238 / var(--tw-text-opacity, .15))'
     },
-    dataLabels: {
-      enabled: false
-    },
-    markers: {
-      size: 0
-    },
+    dataLabels: { enabled: false },
+    markers: { size: 0 },
     stroke: {
       lineCap: 'round',
       curve: dynamicStrokeCurves,
       width: dynamicStrokeWidths
     },
-    xaxis: {
-      type: 'datetime'
-    },
+    xaxis: { type: 'datetime' },
     yaxis: {
-      show: true,
-      axisTicks: {
-        show: true
-      },
+      min: minY,
+      max: maxY,
+      axisTicks: { show: true },
       axisBorder: {
         show: true,
         color: 'oklch(65% 0.25 30 / 1)',
@@ -221,14 +208,10 @@ const ChartMiniTms = (props: ChartMiniProps) => {
     },
     noData: {
       text: t('nodata'),
-      align: 'center',
-      verticalAlign: 'middle',
-      offsetX: 0,
-      offsetY: 0,
       style: {
         color: 'oklch(61% 0 238 / var(--tw-text-opacity, 1))',
         fontSize: '14px',
-        fontFamily: 'anuphan'
+        fontFamily: 'Anuphan'
       }
     },
     colors: dynamicColors,

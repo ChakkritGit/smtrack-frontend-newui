@@ -15,14 +15,14 @@ const FullChartTmsComponent = (props: FullChartPropType) => {
   const { t } = useTranslation()
   const { dataLog, isLoading } = props
 
-  const mappedData = dataLog?.map(item => ({
-    time: new Date(item._time).getTime(),
-    tempAvg: Number(item._value),
-    probe: item.probe ?? 'unknown'
-  })) ?? []
+  const mappedData =
+    dataLog?.map(item => ({
+      time: new Date(item._time).getTime(),
+      tempAvg: parseFloat(Number(item._value).toFixed(2)),
+      probe: item.probe ?? 'unknown'
+    })) ?? []
 
   const groupedByProbe: Record<string, { x: number; y: number }[]> = {}
-
   mappedData.forEach(item => {
     if (!groupedByProbe[item.probe]) {
       groupedByProbe[item.probe] = []
@@ -30,11 +30,32 @@ const FullChartTmsComponent = (props: FullChartPropType) => {
     groupedByProbe[item.probe].push({ x: item.time, y: item.tempAvg })
   })
 
-  const series: ApexAxisChartSeries = Object.keys(groupedByProbe).map(
+  const processedGrouped: Record<string, { x: number; y: number }[]> = {}
+  Object.entries(groupedByProbe).forEach(([probe, data]) => {
+    const smoothed: { x: number; y: number }[] = []
+    for (let i = 0; i < data.length; i++) {
+      const slice = data.slice(Math.max(0, i - 1), Math.min(data.length, i + 2))
+      const avgY = slice.reduce((sum, p) => sum + p.y, 0) / slice.length
+      if (i % 3 === 0) {
+        smoothed.push({ x: data[i].x, y: parseFloat(avgY.toFixed(2)) })
+      }
+    }
+    processedGrouped[probe] = smoothed
+  })
+
+  const allYs = Object.values(processedGrouped)
+    .flat()
+    .map(p => p.y)
+  const minY = Math.min(...allYs)
+  const maxY = Math.max(...allYs)
+  const yMin = Math.floor(minY) - 7
+  const yMax = Math.ceil(maxY) + 7
+
+  const series: ApexAxisChartSeries = Object.keys(processedGrouped).map(
     probe => ({
       type: 'line',
       name: probe,
-      data: groupedByProbe[probe],
+      data: processedGrouped[probe],
       zIndex: 50
     })
   )
@@ -72,25 +93,13 @@ const FullChartTmsComponent = (props: FullChartPropType) => {
     'oklch(60% 0.20 320)'
   ]
 
-  const dynamicStrokeWidths = Array.from(
-    { length: series.length },
-    (_, _i) => 2.0
-  )
-
-  const dynamicStrokeCurves = Array(series.length).fill('smooth')
-
   const options: ApexCharts.ApexOptions = {
     chart: {
       height: 680,
       animations: {
         enabled: false,
-        animateGradually: {
-          enabled: true,
-          delay: 300
-        },
-        dynamicAnimation: {
-          speed: 500
-        }
+        animateGradually: { enabled: true, delay: 300 },
+        dynamicAnimation: { speed: 500 }
       },
       stacked: false,
       zoom: {
@@ -177,49 +186,27 @@ const FullChartTmsComponent = (props: FullChartPropType) => {
       show: true,
       strokeDashArray: 5,
       borderColor: 'oklch(61% 0 238 / var(--tw-text-opacity, .15))',
-      xaxis: {
-        lines: {
-          show: true
-        }
-      },
-      yaxis: {
-        lines: {
-          show: true
-        }
-      }
+      xaxis: { lines: { show: true } },
+      yaxis: { lines: { show: true } }
     },
-    dataLabels: {
-      enabled: false
-    },
-    markers: {
-      size: 0
-    },
+    dataLabels: { enabled: false },
+    markers: { size: 0 },
     stroke: {
       lineCap: 'round',
-      curve: dynamicStrokeCurves,
-      width: dynamicStrokeWidths
+      curve: Array(series.length).fill('smooth'),
+      width: Array(series.length).fill(1.2)
     },
-    xaxis: {
-      type: 'datetime'
-    },
+    xaxis: { type: 'datetime' },
     yaxis: {
-      show: true,
-      axisTicks: {
-        show: true
-      },
-      axisBorder: {
-        show: true,
-        color: 'oklch(65% 0.25 30 / 1)',
-        width: 3
-      },
+      min: yMin,
+      max: yMax,
       labels: {
         style: {
           fontFamily: 'Anuphan',
-          colors: 'oklch(65% 0.25 30 / 1)',
           fontSize: '12px',
           fontWeight: 600
         }
-      },
+      }
     },
     noData: {
       text: t('nodata'),
@@ -234,67 +221,15 @@ const FullChartTmsComponent = (props: FullChartPropType) => {
       }
     },
     colors: dynamicColors,
-    legend: {
-      position: 'bottom',
-      horizontalAlign: 'right'
-    },
+    legend: { position: 'bottom', horizontalAlign: 'right' },
     responsive: [
-      {
-        breakpoint: 5124,
-        options: {
-          chart: {
-            height: 2445
-          }
-        }
-      },
-      {
-        breakpoint: 3844,
-        options: {
-          chart: {
-            height: 1745
-          }
-        }
-      },
-      {
-        breakpoint: 2564,
-        options: {
-          chart: {
-            height: 1045
-          }
-        }
-      },
-      {
-        breakpoint: 1924,
-        options: {
-          chart: {
-            height: 635
-          }
-        }
-      },
-      {
-        breakpoint: 1284,
-        options: {
-          chart: {
-            height: 545
-          }
-        }
-      },
-      {
-        breakpoint: 724,
-        options: {
-          chart: {
-            height: 445
-          }
-        }
-      },
-      {
-        breakpoint: 484,
-        options: {
-          chart: {
-            height: 345
-          }
-        }
-      }
+      { breakpoint: 5124, options: { chart: { height: 2445 } } },
+      { breakpoint: 3844, options: { chart: { height: 1745 } } },
+      { breakpoint: 2564, options: { chart: { height: 1045 } } },
+      { breakpoint: 1924, options: { chart: { height: 635 } } },
+      { breakpoint: 1284, options: { chart: { height: 545 } } },
+      { breakpoint: 724, options: { chart: { height: 445 } } },
+      { breakpoint: 484, options: { chart: { height: 345 } } }
     ]
   }
 
