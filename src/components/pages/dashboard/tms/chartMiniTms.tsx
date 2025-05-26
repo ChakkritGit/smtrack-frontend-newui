@@ -25,7 +25,7 @@ const ChartMiniTms = (props: ChartMiniProps) => {
   const { deviceLogs } = props
 
   const mappedData =
-    deviceLogs?.log?.map(item => ({
+    deviceLogs?.log?.slice(0, 170).map(item => ({
       time: new Date(item.createdAt).getTime(),
       tempAvg: Number(item.tempValue),
       probe: item.mcuId ?? 'unknown'

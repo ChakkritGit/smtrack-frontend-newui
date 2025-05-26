@@ -48,7 +48,7 @@ const Dashboard = () => {
 
   const togglePause = useCallback(() => {
     setIsPaused(prev => !prev)
-  }, [isPause])
+  }, [])
 
   const fetchDeviceLogs = useCallback(async () => {
     if (!deviceKey) return
@@ -136,7 +136,7 @@ const Dashboard = () => {
         ambientDisabled={ambientDisabled}
       />
     )
-  }, [deviceKey, deviceLogs, activeIndex, swiperInfoRef, isPause])
+  }, [deviceKey, deviceLogs, activeIndex, isPause])
 
   const CardStatusComponent = useMemo(() => {
     return (
