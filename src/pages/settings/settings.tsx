@@ -153,15 +153,15 @@ const Settings = () => {
               <span className='hidden md:block'>{t('tabLanguage')}</span>
             </a>
           </li>
-          <li className='btn btn-ghost font-normal flex-nowrap text-[16px] justify-start w-full flex'>
-            <Link
-              to={'/policies'}
-              className='text-[16px] h-9 flex items-center gap-2'
-            >
+          <Link
+            to={'/policies'}
+            className='btn btn-ghost font-normal flex-nowrap text-[16px] justify-start w-full flex'
+          >
+            <a className='text-[16px] h-9 flex items-center gap-2'>
               <RiBookOpenLine size={24} />
               <span className='hidden md:block'>{t('policies')}</span>
-            </Link>
-          </li>
+            </a>
+          </Link>
           <li
             onClick={() =>
               Swal.fire({
