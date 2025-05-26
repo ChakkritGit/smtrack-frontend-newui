@@ -31,7 +31,7 @@ const ManagementTms = () => {
 
   const manageMenu = useMemo(
     () => (
-      <div className='flex items-center gap-2 border-b-2 border-base-content w-full mt-3'>
+      <div className='flex items-center gap-2 border-b border-base-content w-full mt-3'>
         <a
           className={`flex items-center text-sm md:text-lg border border-b-0 p-2 rounded-tl-md rounded-tr-md cursor-pointer ${
             tab === 1
