@@ -908,7 +908,6 @@ const Warranty = () => {
           <div className='form-control w-full'>
             <label className='label flex-col items-start w-full mb-3'>
               <span className='label-text text-wrap mb-2'>
-                <span className='font-medium text-red-500 mr-1'>*</span>
                 {t('remmark')}
               </span>
               <input
@@ -1180,7 +1179,6 @@ const Warranty = () => {
           <div className='form-control w-full'>
             <label className='label flex-col items-start w-full mb-3'>
               <span className='label-text text-wrap mb-2'>
-                <span className='font-medium text-red-500 mr-1'>*</span>
                 {t('remmark')}
               </span>
               <input

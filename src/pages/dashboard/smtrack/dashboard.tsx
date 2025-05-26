@@ -224,7 +224,7 @@ const Dashboard = () => {
               <button
                 name={isPause ? t('startSlide') : t('stopSlide')}
                 aria-label={isPause ? t('startSlide') : t('stopSlide')}
-                className='btn btn-neutral bg-opacity-15 text-primary border-primary border-2 p-0 hover:opacity-50 hover:border-primary hover:bg-transparent duration-300 ease-linear max-h-[28px] min-h-[28px] max-w-[28px] min-w-[28px]'
+                className='btn btn-neutral bg-opacity-15 text-primary border-primary border p-0 hover:opacity-50 hover:border-primary hover:bg-transparent duration-300 ease-linear max-h-[28px] min-h-[28px] max-w-[28px] min-w-[28px]'
                 onClick={togglePause}
               >
                 {isPause ? <RiPlayLine size={20} /> : <RiStopLine size={20} />}

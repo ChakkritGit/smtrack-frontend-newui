@@ -63,7 +63,7 @@ const ChartMiniTms = (props: ChartMiniProps) => {
   const maxY = Math.ceil(Math.max(...allYValues)) + 3
 
   const dynamicColors = [
-    'oklch(65% 0.25 30)',
+    'oklch(70% 0.1973 44.47)',
     'oklch(65% 0.25 60)',
     'oklch(65% 0.25 90)',
     'oklch(65% 0.25 120)',
@@ -194,13 +194,13 @@ const ChartMiniTms = (props: ChartMiniProps) => {
       axisTicks: { show: true },
       axisBorder: {
         show: true,
-        color: 'oklch(65% 0.25 30 / 1)',
+        color: 'oklch(73.24% 0.1973 44.47 / 1)',
         width: 2.5
       },
       labels: {
         style: {
           fontFamily: 'Anuphan',
-          colors: 'oklch(65% 0.25 30 / 1)',
+          colors: 'oklch(70% 0.1973 44.47 / 1)',
           fontSize: '12px',
           fontWeight: 600
         }

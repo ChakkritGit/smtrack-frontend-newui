@@ -36,7 +36,7 @@ const Management = () => {
     () => (
       <div className='flex items-center gap-2 border-b-2 border-base-content w-full mt-3'>
         <a
-          className={`flex items-center text-sm md:text-lg border-2 border-b-0 p-2 rounded-tl-md rounded-tr-md cursor-pointer ${
+          className={`flex items-center text-sm md:text-lg border border-b-0 p-2 rounded-tl-md rounded-tr-md cursor-pointer ${
             tab === 1
               ? 'font-bold bg-primary border-primary text-primary-content'
               : 'font-medium border-base-content/70 text-base-content'
@@ -57,7 +57,7 @@ const Management = () => {
           role === 'LEGACY_ADMIN') && (
           <>
             <a
-              className={`flex items-center text-sm md:text-lg border-2 border-b-0 p-2 rounded-tl-md rounded-tr-md cursor-pointer ${
+              className={`flex items-center text-sm md:text-lg border border-b-0 p-2 rounded-tl-md rounded-tr-md cursor-pointer ${
                 tab === 2
                   ? 'font-bold bg-primary border-primary text-primary-content'
                   : 'font-medium border-base-content/70 text-base-content'
@@ -77,7 +77,7 @@ const Management = () => {
               </span>
             </a>
             <a
-              className={`flex items-center text-sm md:text-lg border-2 border-b-0 p-2 rounded-tl-md rounded-tr-md cursor-pointer ${
+              className={`flex items-center text-sm md:text-lg border border-b-0 p-2 rounded-tl-md rounded-tr-md cursor-pointer ${
                 tab === 3
                   ? 'font-bold bg-primary border-primary text-primary-content'
                   : 'font-medium border-base-content/70 text-base-content'
@@ -98,7 +98,7 @@ const Management = () => {
             </a>
             {role === 'SUPER' && (
               <a
-                className={`flex items-center text-sm md:text-lg border-2 border-b-0 p-2 rounded-tl-md rounded-tr-md cursor-pointer font-medium border-base-content/70 text-base-content`}
+                className={`flex items-center text-sm md:text-lg border border-b-0 p-2 rounded-tl-md rounded-tr-md cursor-pointer font-medium border-base-content/70 text-base-content`}
                 onClick={() => navigate('/management/csv')}
               >
                 <PiFileCsvDuotone size={24} />

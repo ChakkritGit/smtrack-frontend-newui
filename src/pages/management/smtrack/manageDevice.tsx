@@ -1503,7 +1503,7 @@ const ManageDevice = () => {
                               : defaultPic
                           }
                           alt='Preview'
-                          className={`w-32 h-32 md:w-48 md:h-48 rounded-field object-cover border-2 border-dashed border-base-300 ${
+                          className={`w-32 h-32 md:w-48 md:h-48 rounded-field object-cover border border-dashed border-base-300 ${
                             formData.imagePreview || defaultPic
                               ? 'border-none'
                               : ''

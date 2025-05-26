@@ -74,7 +74,7 @@ body {
 }
 
 .react-select__control {
-  @apply !border-base-content/20 !bg-base-100 !rounded-field h-[40px] !border-2;
+  @apply !border-base-content/20 !bg-base-100 !rounded-field h-[40px] !border;
 }
 
 .react-select__indicator,
@@ -89,6 +89,10 @@ body {
 .react-select__single-value,
 .react-select__input-container {
   @apply !text-base-content;
+}
+
+.react-select__placeholder {
+  @apply !text-base-content/50;
 }
 
 .react-select__indicator-separator {

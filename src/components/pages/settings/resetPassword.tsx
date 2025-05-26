@@ -122,7 +122,7 @@ const ResetPassword = () => {
                 </label>
                 <button
                   type='button'
-                  className='absolute right-2 top-1/2 -translate-y-1/2 border-2 border-base-content/30 w-7 h-7 p-1 flex items-center justify-center cursor-pointer rounded-field text-base-content/30 hover:opacity-50 duration-300 ease-linear z-10'
+                  className='absolute right-2 top-1/2 -translate-y-1/2 border border-base-content/30 w-7 h-7 p-1 flex items-center justify-center cursor-pointer rounded-field text-base-content/30 hover:opacity-50 duration-300 ease-linear z-10'
                   onClick={() => setShowPassword(prev => !prev)}
                 >
                   {showPassword ? (
@@ -158,7 +158,7 @@ const ResetPassword = () => {
                 </label>
                 <button
                   type='button'
-                  className='absolute right-2 top-1/2 -translate-y-1/2 border-2 border-base-content/30 w-7 h-7 p-1 flex items-center justify-center cursor-pointer rounded-field text-base-content/30 hover:opacity-50 duration-300 ease-linear z-10'
+                  className='absolute right-2 top-1/2 -translate-y-1/2 border border-base-content/30 w-7 h-7 p-1 flex items-center justify-center cursor-pointer rounded-field text-base-content/30 hover:opacity-50 duration-300 ease-linear z-10'
                   onClick={() => setShowPassword(prev => !prev)}
                 >
                   {showPassword ? (

@@ -587,7 +587,7 @@ const ManageFirmware = () => {
   const uploadJSXStyle = useMemo(() => {
     return (
       <div
-        className={`flex items-center justify-center h-[25rem] border-2 border-dashed rounded-field ${
+        className={`flex items-center justify-center h-[25rem] border border-dashed rounded-field ${
           error
             ? 'border-error bg-error/15'
             : file

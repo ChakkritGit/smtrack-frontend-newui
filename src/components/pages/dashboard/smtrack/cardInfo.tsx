@@ -160,7 +160,7 @@ const CardInFoComponent = (props: PropsType) => {
               deviceData?.probe?.map(item => {
                 return (
                   <SwiperSlide key={item.id}>
-                    <span className='badge badge-soft badge-secondary bg-opacity-15 font-bold border-2 mb-2'>
+                    <span className='badge badge-soft badge-secondary bg-opacity-15 font-bold border mb-2'>
                       P{item.channel}
                     </span>
                     <div className='flex items-center gap-3'>
@@ -180,7 +180,7 @@ const CardInFoComponent = (props: PropsType) => {
               })
             ) : (
               <SwiperSlide>
-                <span className='badge badge-soft badge-secondary bg-opacity-15 font-bold border-2 mb-2'>
+                <span className='badge badge-soft badge-secondary bg-opacity-15 font-bold border mb-2'>
                   P—
                 </span>
                 <div className='flex items-center gap-3'>
