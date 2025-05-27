@@ -34,7 +34,6 @@ const Login = () => {
   const passwordRef = useRef<HTMLInputElement>(null)
   const [alertMessage, setAlertMessage] = useState('')
   const [loading, setLoading] = useState(false)
-  // const [currentDate, setCurrentDate] = useState(new Date())
   const modalAlert = useRef<HTMLDialogElement>(null)
 
   const handleLogin = async (e: FormEvent) => {
@@ -109,26 +108,6 @@ const Login = () => {
       setLoading(false)
     }
   }
-
-  // useEffect(() => {
-  //   const intervalId = setInterval(() => {
-  //     setCurrentDate(new Date())
-  //   }, 1000)
-
-  //   return () => clearInterval(intervalId)
-  // }, [])
-
-  // const formattedDate = currentDate.toLocaleDateString(t('thTime'), {
-  //   weekday: 'long',
-  //   year: 'numeric',
-  //   month: 'long',
-  //   day: 'numeric'
-  // })
-  // const formattedTime = currentDate.toLocaleTimeString(t('thTime'), {
-  //   hour: '2-digit',
-  //   minute: '2-digit'
-  //   // second: '2-digit'
-  // })
 
   return (
     <div className='min-h-dvh flex flex-col items-center justify-center gap-7'>
@@ -260,7 +239,6 @@ const Login = () => {
         </div>
       </div>
       <div className='flex items-center justify-end text-[14px] w-[370px] sm:w-[500px] md:w-[500px] lg:w-[600px] px-10'>
-        {/* <span>{`${formattedDate} ${formattedTime}`}</span> */}
         <Link
           to={'/policies'}
           className='flex items-center gap-2 active:underline underline-offset-[3px]'

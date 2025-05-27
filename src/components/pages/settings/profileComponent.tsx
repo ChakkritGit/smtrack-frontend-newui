@@ -226,8 +226,8 @@ const ProfileComponent = (props: ProfileProps) => {
                 )}
               </div>
 
-              <div className='absolute hover:opacity-85 duration-300 ease-linear flex items-center justify-center bottom-1 right-1 bg-base-200 p-2 rounded-selector border-[3px] border-base-100'>
-                <RiCameraLine size={20} className='text-base-content/80' />
+              <div className='absolute hover:opacity-85 duration-300 ease-linear flex items-center justify-center bottom-1 right-1 bg-base-200 p-1.5 md:p-2 rounded-selector border-[3px] border-base-100'>
+                <RiCameraLine className='text-[18px] md:text-[20px] text-base-content/80' />
               </div>
             </div>
 

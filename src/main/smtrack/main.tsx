@@ -193,7 +193,11 @@ const MainSmtrack = () => {
         (toa: ToastOptions) => (
           <>
             <div
-              className={`flex flex-col ${location.pathname === '/notification' ? 'cursor-default' : 'cursor-pointer'}`}
+              className={`flex flex-col ${
+                location.pathname === '/notification'
+                  ? 'cursor-default'
+                  : 'cursor-pointer'
+              }`}
               onClick={() => {
                 if (location.pathname !== '/notification') {
                   navigate('/notification')
