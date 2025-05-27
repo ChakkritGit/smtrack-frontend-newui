@@ -438,7 +438,7 @@ const Navbar = () => {
       <div ref={searchWrapperRef} className='relative'>
         <div className='form-control'>
           <label
-            className={`input input-bordered bg-base-200/50 ${
+            className={`input  bg-base-200/50 ${
               searchOpen ? 'flex w-[210px]' : 'hidden'
             } border-none h-10 w-[250px] items-center gap-2 lg:flex duration-300 ease-linear`}
           >

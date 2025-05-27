@@ -533,7 +533,7 @@ const ManageDevice = () => {
                     type='text'
                     value={formData.sn}
                     onChange={handleChange}
-                    className='input input-bordered w-full'
+                    className='input  w-full'
                     maxLength={23}
                   />
                 </label>
@@ -551,7 +551,7 @@ const ManageDevice = () => {
                     type='text'
                     value={formData.name}
                     onChange={handleChange}
-                    className='input input-bordered w-full'
+                    className='input  w-full'
                     maxLength={80}
                   />
                 </label>
@@ -630,7 +630,7 @@ const ManageDevice = () => {
                     type='text'
                     value={formData.sn}
                     onChange={handleChange}
-                    className='input input-bordered w-full'
+                    className='input  w-full'
                     maxLength={23}
                   />
                 </label>
@@ -648,7 +648,7 @@ const ManageDevice = () => {
                     type='text'
                     value={formData.name}
                     onChange={handleChange}
-                    className='input input-bordered w-full'
+                    className='input  w-full'
                     maxLength={80}
                   />
                 </label>

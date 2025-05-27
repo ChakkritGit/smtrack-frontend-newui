@@ -855,7 +855,7 @@ const Users = () => {
                     type='text'
                     value={formData.username}
                     onChange={handleChange}
-                    className='input input-bordered w-full'
+                    className='input  w-full'
                     maxLength={50}
                   />
                 </label>
@@ -873,7 +873,7 @@ const Users = () => {
                     type={showPassword ? 'text' : 'password'}
                     value={formData.password}
                     onChange={handleChange}
-                    className='input input-bordered w-full pr-14'
+                    className='input  w-full pr-14'
                     maxLength={128}
                   />
                   <button
@@ -902,7 +902,7 @@ const Users = () => {
                     type='text'
                     value={formData.display}
                     onChange={handleChange}
-                    className='input input-bordered w-full'
+                    className='input  w-full'
                     maxLength={80}
                   />
                 </label>
@@ -1039,7 +1039,7 @@ const Users = () => {
                       name='username'
                       value={formData.username}
                       onChange={handleChange}
-                      className='input input-bordered w-full'
+                      className='input  w-full'
                       maxLength={50}
                     />
                   </label>
@@ -1057,7 +1057,7 @@ const Users = () => {
                       name='display'
                       value={formData.display}
                       onChange={handleChange}
-                      className='input input-bordered w-full'
+                      className='input  w-full'
                       maxLength={80}
                     />
                   </label>
@@ -1101,7 +1101,7 @@ const Users = () => {
             <div className='mt-4'>
               <div className='mt-3'>
                 <div className='form-control w-full relative'>
-                  <label className='input input-bordered flex items-center gap-2 pr-14 w-full'>
+                  <label className='input  flex items-center gap-2 pr-14 w-full'>
                     <span className='hidden md:block opacity-50'>
                       {t('newPassword')}
                     </span>

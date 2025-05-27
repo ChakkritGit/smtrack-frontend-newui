@@ -141,9 +141,7 @@ const Login = () => {
           <div className='text-end'>
             <LanguageList />
           </div>
-          <h1 className='text-4xl md:text-5xl font-bold'>
-            SMTrack+
-          </h1>
+          <h1 className='text-4xl md:text-5xl font-bold'>SMTrack+</h1>
           <span className='font-medium'>
             Real-time temperature monitoring with alerts for exceeding limits
           </span>
@@ -192,7 +190,7 @@ const Login = () => {
         </div>
         <div className='card-body px-5 sm:px-7 lg:px-10'>
           <form onSubmit={handleLogin} className='flex flex-col gap-4'>
-            <label className='input input-bordered flex items-center gap-2 w-full'>
+            <label className='input  flex items-center gap-2 w-full'>
               <RiAtLine
                 fill='currentColor'
                 width={16}
@@ -209,7 +207,7 @@ const Login = () => {
               />
             </label>
             <div className='relative'>
-              <label className='input input-bordered flex items-center gap-2 pr-16 w-full'>
+              <label className='input  flex items-center gap-2 pr-16 w-full'>
                 <RiKey2Line
                   fill='currentColor'
                   width={16}
@@ -263,7 +261,10 @@ const Login = () => {
       </div>
       <div className='flex items-center justify-end text-[14px] w-[370px] sm:w-[500px] md:w-[500px] lg:w-[600px] px-10'>
         {/* <span>{`${formattedDate} ${formattedTime}`}</span> */}
-        <Link to={'/policies'} className='flex items-center gap-2 active:underline underline-offset-[3px]'>
+        <Link
+          to={'/policies'}
+          className='flex items-center gap-2 active:underline underline-offset-[3px]'
+        >
           <RiBookOpenLine size={16} />
           <span>{t('policies')}</span>
         </Link>

@@ -112,7 +112,7 @@ const Support = () => {
                 type='text'
                 name='firstName'
                 placeholder='ชื่อ'
-                className='input input-bordered w-full'
+                className='input  w-full'
                 value={formData.firstName}
                 onChange={handleChange}
               />
@@ -120,7 +120,7 @@ const Support = () => {
                 type='text'
                 name='lastName'
                 placeholder='นามสกุล'
-                className='input input-bordered w-full'
+                className='input  w-full'
                 value={formData.lastName}
                 onChange={handleChange}
               />
@@ -129,7 +129,7 @@ const Support = () => {
               type='email'
               name='email'
               placeholder='อีเมล'
-              className='input input-bordered w-full'
+              className='input  w-full'
               value={formData.email}
               onChange={handleChange}
             />
@@ -154,7 +154,7 @@ const Support = () => {
                 type='tel'
                 name='phone'
                 placeholder='เบอร์โทร'
-                className='input input-bordered w-full'
+                className='input  w-full'
                 value={formData.phone}
                 onChange={handleChange}
                 maxLength={12}
@@ -165,7 +165,7 @@ const Support = () => {
                 type='text'
                 name='hospitalName'
                 placeholder='ชื่อโรงพยาบาล'
-                className='input input-bordered w-full'
+                className='input  w-full'
                 value={formData.hospitalName}
                 onChange={handleChange}
               />
@@ -173,7 +173,7 @@ const Support = () => {
                 type='text'
                 name='ward'
                 placeholder='ชื่อวอร์ด'
-                className='input input-bordered w-full'
+                className='input  w-full'
                 value={formData.ward}
                 onChange={handleChange}
               />

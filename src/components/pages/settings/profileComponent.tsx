@@ -286,7 +286,7 @@ const ProfileComponent = (props: ProfileProps) => {
       ) : (
         <form onSubmit={handleSubmit}>
           <div className='form-control'>
-            <label className='input input-bordered flex items-center gap-2 w-full'>
+            <label className='input  flex items-center gap-2 w-full'>
               <span className='opacity-50'>{t('userDisplayName')}</span>
               <input
                 type='text'

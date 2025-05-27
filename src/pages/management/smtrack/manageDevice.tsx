@@ -1407,7 +1407,7 @@ const ManageDevice = () => {
                     type='text'
                     value={formData.id}
                     onChange={handleChange}
-                    className='input input-bordered w-full'
+                    className='input  w-full'
                     maxLength={23}
                   />
                 </label>
@@ -1425,7 +1425,7 @@ const ManageDevice = () => {
                     type='text'
                     value={formData.name}
                     onChange={handleChange}
-                    className='input input-bordered w-full'
+                    className='input  w-full'
                     maxLength={80}
                   />
                 </label>
@@ -1563,7 +1563,7 @@ const ManageDevice = () => {
                       name='name'
                       value={formData.name}
                       onChange={handleChange}
-                      className='input input-bordered w-full'
+                      className='input  w-full'
                       maxLength={50}
                     />
                   </label>
@@ -1581,7 +1581,7 @@ const ManageDevice = () => {
                       name='location'
                       value={formData.location}
                       onChange={handleChange}
-                      className='input input-bordered w-full'
+                      className='input  w-full'
                       maxLength={80}
                     />
                   </label>
@@ -1599,7 +1599,7 @@ const ManageDevice = () => {
                       name='position'
                       value={formData.position}
                       onChange={handleChange}
-                      className='input input-bordered w-full'
+                      className='input  w-full'
                       maxLength={80}
                     />
                   </label>
@@ -1616,7 +1616,7 @@ const ManageDevice = () => {
                       name='remark'
                       value={formData.remark}
                       onChange={handleChange}
-                      className='input input-bordered w-full'
+                      className='input  w-full'
                       maxLength={80}
                     />
                   </label>
@@ -1633,7 +1633,7 @@ const ManageDevice = () => {
                       name='tag'
                       value={formData.tag}
                       onChange={handleChange}
-                      className='input input-bordered w-full'
+                      className='input  w-full'
                       maxLength={80}
                     />
                   </label>
@@ -1900,7 +1900,7 @@ const ManageDevice = () => {
                                   }
                                 })
                               }
-                              className='input input-bordered w-full'
+                              className='input  w-full'
                               maxLength={50}
                             />
                           </label>
@@ -1925,7 +1925,7 @@ const ManageDevice = () => {
                                   }
                                 })
                               }
-                              className='input input-bordered w-full'
+                              className='input  w-full'
                               maxLength={50}
                             />
                           </label>
@@ -1964,7 +1964,7 @@ const ManageDevice = () => {
                                   }
                                 })
                               }
-                              className='input input-bordered w-full'
+                              className='input  w-full'
                               maxLength={50}
                             />
                           </label>
@@ -1992,7 +1992,7 @@ const ManageDevice = () => {
                                   }
                                 })
                               }
-                              className='input input-bordered w-full'
+                              className='input  w-full'
                               maxLength={50}
                             />
                           </label>
@@ -2020,7 +2020,7 @@ const ManageDevice = () => {
                                   }
                                 })
                               }
-                              className='input input-bordered w-full'
+                              className='input  w-full'
                               maxLength={50}
                             />
                           </label>
@@ -2049,7 +2049,7 @@ const ManageDevice = () => {
                                   }
                                 })
                               }
-                              className='input input-bordered w-full'
+                              className='input  w-full'
                               maxLength={50}
                             />
                           </label>
@@ -2077,7 +2077,7 @@ const ManageDevice = () => {
                                   }
                                 })
                               }
-                              className='input input-bordered w-full'
+                              className='input  w-full'
                               maxLength={50}
                             />
                           </label>
@@ -2162,7 +2162,7 @@ const ManageDevice = () => {
                                     }
                                   })
                                 }
-                                className='input input-bordered w-full'
+                                className='input  w-full'
                                 maxLength={50}
                               />
                             </label>
@@ -2187,7 +2187,7 @@ const ManageDevice = () => {
                                     }
                                   })
                                 }
-                                className='input input-bordered w-full'
+                                className='input  w-full'
                                 maxLength={50}
                               />
                             </label>
@@ -2210,7 +2210,7 @@ const ManageDevice = () => {
                                     }
                                   })
                                 }
-                                className='input input-bordered w-full'
+                                className='input  w-full'
                                 maxLength={50}
                               />
                             </label>
@@ -2231,7 +2231,7 @@ const ManageDevice = () => {
                                     }
                                   })
                                 }
-                                className='input input-bordered w-full'
+                                className='input  w-full'
                                 maxLength={50}
                               />
                             </label>

@@ -181,7 +181,7 @@ const Notification = () => {
           type='date'
           value={datePicker}
           onChange={e => setDatePicker(e.target.value)}
-          className='input input-bordered w-full md:max-w-xs'
+          className='input  w-full md:max-w-xs'
         />
       </div>
       <div className='bg-base-100 rounded-field py-4 px-5'>

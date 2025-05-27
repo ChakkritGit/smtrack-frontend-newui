@@ -561,7 +561,7 @@ const Repair = () => {
                     name='info'
                     type='text'
                     value={repairForm.info}
-                    className='input input-bordered w-full'
+                    className='input  w-full'
                     onChange={handleChange}
                   />
                 </label>
@@ -576,7 +576,7 @@ const Repair = () => {
                     name='address'
                     type='text'
                     value={repairForm.address}
-                    className='input input-bordered w-full'
+                    className='input  w-full'
                     onChange={handleChange}
                   />
                 </label>
@@ -592,7 +592,7 @@ const Repair = () => {
                     type='tel'
                     value={repairForm.phone}
                     onChange={handleChange}
-                    className='input input-bordered w-full'
+                    className='input  w-full'
                     maxLength={12}
                   />
                 </label>
@@ -818,7 +818,7 @@ const Repair = () => {
                     name='info'
                     type='text'
                     value={repairForm.info}
-                    className='input input-bordered w-full'
+                    className='input  w-full'
                     onChange={handleChange}
                   />
                 </label>
@@ -833,7 +833,7 @@ const Repair = () => {
                     name='address'
                     type='text'
                     value={repairForm.address}
-                    className='input input-bordered w-full'
+                    className='input  w-full'
                     onChange={handleChange}
                   />
                 </label>
@@ -849,7 +849,7 @@ const Repair = () => {
                     type='tel'
                     value={repairForm.phone}
                     onChange={handleChange}
-                    className='input input-bordered w-full'
+                    className='input  w-full'
                     maxLength={12}
                   />
                 </label>

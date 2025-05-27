@@ -746,7 +746,7 @@ const Adjustments = (props: AdjustmentsProps) => {
                   <input
                     name='tempMin'
                     autoFocus={false}
-                    className='input input-bordered text-center w-full'
+                    className='input  text-center w-full'
                     type='number'
                     step={0.01}
                     min={probeFiltered?.name === 'PT100' ? -180 : -40}
@@ -816,7 +816,7 @@ const Adjustments = (props: AdjustmentsProps) => {
                   <input
                     name='tempMax'
                     autoFocus={false}
-                    className='input input-bordered text-center w-full'
+                    className='input  text-center w-full'
                     type='number'
                     step={0.01}
                     min={probeFiltered?.name === 'PT100' ? -180 : -40}
@@ -883,7 +883,7 @@ const Adjustments = (props: AdjustmentsProps) => {
                   <input
                     name='humiMin'
                     autoFocus={false}
-                    className='input input-bordered text-center w-full'
+                    className='input  text-center w-full'
                     type='number'
                     step={0.01}
                     min={0}
@@ -947,7 +947,7 @@ const Adjustments = (props: AdjustmentsProps) => {
                   <input
                     name='humiMax'
                     autoFocus={false}
-                    className='input input-bordered text-center w-full'
+                    className='input  text-center w-full'
                     type='number'
                     step={0.01}
                     min={0}
@@ -1085,7 +1085,7 @@ const Adjustments = (props: AdjustmentsProps) => {
                     id='tempMin'
                     name='tempMin'
                     autoFocus={false}
-                    className='input input-bordered text-center w-full'
+                    className='input  text-center w-full'
                     type='number'
                     step={0.01}
                     min={probeFiltered?.name === 'PT100' ? -180 : -40}
@@ -1111,7 +1111,7 @@ const Adjustments = (props: AdjustmentsProps) => {
                   <input
                     name='tempMax'
                     autoFocus={false}
-                    className='input input-bordered text-center w-full'
+                    className='input  text-center w-full'
                     type='number'
                     step={0.01}
                     min={probeFiltered?.name === 'PT100' ? -180 : -40}
@@ -1145,7 +1145,7 @@ const Adjustments = (props: AdjustmentsProps) => {
                     id='humiMin'
                     name='humiMin'
                     autoFocus={false}
-                    className='input input-bordered text-center w-full'
+                    className='input  text-center w-full'
                     type='number'
                     step={0.01}
                     min={0}
@@ -1171,7 +1171,7 @@ const Adjustments = (props: AdjustmentsProps) => {
                   <input
                     name='humiMax'
                     autoFocus={false}
-                    className='input input-bordered text-center w-full'
+                    className='input  text-center w-full'
                     type='number'
                     step={0.01}
                     min={0}
@@ -1313,7 +1313,7 @@ const Adjustments = (props: AdjustmentsProps) => {
                     id='adjustTemp'
                     name='adjustTemp'
                     autoFocus={false}
-                    className='input input-bordered text-center w-full'
+                    className='input  text-center w-full'
                     type='number'
                     step={0.01}
                     min={probeFiltered?.name === 'PT100' ? -180 : -40}
@@ -1358,7 +1358,7 @@ const Adjustments = (props: AdjustmentsProps) => {
                     id='adjustMumi'
                     name='adjustMumi'
                     autoFocus={false}
-                    className='input input-bordered text-center w-full'
+                    className='input  text-center w-full'
                     type='number'
                     step={0.01}
                     min={0}
@@ -1425,7 +1425,7 @@ const Adjustments = (props: AdjustmentsProps) => {
                   <input
                     name='adjustTemp'
                     autoFocus={false}
-                    className='input input-bordered text-center w-full'
+                    className='input  text-center w-full'
                     type='number'
                     step={0.01}
                     min={probeFiltered?.name === 'PT100' ? -180 : -40}
@@ -1516,7 +1516,7 @@ const Adjustments = (props: AdjustmentsProps) => {
                   <input
                     name='adjustHumi'
                     autoFocus={false}
-                    className='input input-bordered text-center w-full'
+                    className='input  text-center w-full'
                     type='number'
                     step={0.01}
                     min={0}

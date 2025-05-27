@@ -953,7 +953,7 @@ const ManageHospital = () => {
                     type='text'
                     value={hospitalForm.hosName}
                     onChange={handleChange}
-                    className='input input-bordered w-full'
+                    className='input  w-full'
                     maxLength={80}
                   />
                 </label>
@@ -971,7 +971,7 @@ const ManageHospital = () => {
                     type='text'
                     value={hospitalForm.hosAddress}
                     onChange={handleChange}
-                    className='input input-bordered w-full'
+                    className='input  w-full'
                     maxLength={120}
                   />
                 </label>
@@ -989,7 +989,7 @@ const ManageHospital = () => {
                     type='tel'
                     value={hospitalForm.hosTel}
                     onChange={handleChange}
-                    className='input input-bordered w-full'
+                    className='input  w-full'
                     maxLength={12}
                   />
                 </label>
@@ -1007,7 +1007,7 @@ const ManageHospital = () => {
                     type='tel'
                     value={hospitalForm.userTel}
                     onChange={handleChange}
-                    className='input input-bordered w-full'
+                    className='input  w-full'
                     maxLength={12}
                   />
                 </label>
@@ -1024,7 +1024,7 @@ const ManageHospital = () => {
                     type='text'
                     value={hospitalForm.hosLatitude}
                     onChange={handleChange}
-                    className='input input-bordered w-full'
+                    className='input  w-full'
                     maxLength={18}
                   />
                 </label>
@@ -1041,7 +1041,7 @@ const ManageHospital = () => {
                     type='text'
                     value={hospitalForm.hosLongitude}
                     onChange={handleChange}
-                    className='input input-bordered w-full'
+                    className='input  w-full'
                     maxLength={18}
                   />
                 </label>
@@ -1058,7 +1058,7 @@ const ManageHospital = () => {
                     type='text'
                     value={hospitalForm.userContact}
                     onChange={handleChange}
-                    className='input input-bordered w-full'
+                    className='input  w-full'
                     maxLength={120}
                   />
                 </label>
@@ -1152,7 +1152,7 @@ const ManageHospital = () => {
                     type='text'
                     value={hospitalForm.hosName}
                     onChange={handleChange}
-                    className='input input-bordered w-full'
+                    className='input  w-full'
                     maxLength={80}
                   />
                 </label>
@@ -1170,7 +1170,7 @@ const ManageHospital = () => {
                     type='text'
                     value={hospitalForm.hosAddress}
                     onChange={handleChange}
-                    className='input input-bordered w-full'
+                    className='input  w-full'
                     maxLength={120}
                   />
                 </label>
@@ -1188,7 +1188,7 @@ const ManageHospital = () => {
                     type='tel'
                     value={hospitalForm.hosTel}
                     onChange={handleChange}
-                    className='input input-bordered w-full'
+                    className='input  w-full'
                     maxLength={12}
                   />
                 </label>
@@ -1206,7 +1206,7 @@ const ManageHospital = () => {
                     type='tel'
                     value={hospitalForm.userTel}
                     onChange={handleChange}
-                    className='input input-bordered w-full'
+                    className='input  w-full'
                     maxLength={12}
                   />
                 </label>
@@ -1223,7 +1223,7 @@ const ManageHospital = () => {
                     type='text'
                     value={hospitalForm.hosLatitude}
                     onChange={handleChange}
-                    className='input input-bordered w-full'
+                    className='input  w-full'
                     maxLength={18}
                   />
                 </label>
@@ -1240,7 +1240,7 @@ const ManageHospital = () => {
                     type='text'
                     value={hospitalForm.hosLongitude}
                     onChange={handleChange}
-                    className='input input-bordered w-full'
+                    className='input  w-full'
                     maxLength={18}
                   />
                 </label>
@@ -1257,7 +1257,7 @@ const ManageHospital = () => {
                     type='text'
                     value={hospitalForm.userContact}
                     onChange={handleChange}
-                    className='input input-bordered w-full'
+                    className='input  w-full'
                     maxLength={120}
                   />
                 </label>
@@ -1317,7 +1317,7 @@ const ManageHospital = () => {
                       type='text'
                       value={wardForm.wardName}
                       onChange={handleWardChange}
-                      className='input input-bordered w-full'
+                      className='input  w-full'
                       maxLength={80}
                     />
                   </label>
@@ -1393,7 +1393,7 @@ const ManageHospital = () => {
                       type='text'
                       value={wardForm.wardName}
                       onChange={handleWardChange}
-                      className='input input-bordered w-full'
+                      className='input  w-full'
                       maxLength={80}
                     />
                   </label>

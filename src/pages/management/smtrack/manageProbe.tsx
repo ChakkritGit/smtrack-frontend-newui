@@ -918,7 +918,7 @@ const ManageProbe = () => {
                         type='text'
                         value={formData.position}
                         onChange={handleChange}
-                        className='input input-bordered w-full'
+                        className='input  w-full'
                         maxLength={23}
                       />
                     </label>
@@ -1031,7 +1031,7 @@ const ManageProbe = () => {
                   </button>
                   <input
                     autoFocus={false}
-                    className='input input-bordered text-center w-full'
+                    className='input  text-center w-full'
                     type='number'
                     step={0.01}
                     min={-40}
@@ -1094,7 +1094,7 @@ const ManageProbe = () => {
                   </button>
                   <input
                     autoFocus={false}
-                    className='input input-bordered text-center w-full'
+                    className='input  text-center w-full'
                     type='number'
                     step={0.01}
                     value={formData.tempMax}
@@ -1155,7 +1155,7 @@ const ManageProbe = () => {
                   </button>
                   <input
                     autoFocus={false}
-                    className='input input-bordered text-center w-full'
+                    className='input  text-center w-full'
                     type='number'
                     step={0.01}
                     value={formData.humiMin}
@@ -1216,7 +1216,7 @@ const ManageProbe = () => {
                   </button>
                   <input
                     autoFocus={false}
-                    className='input input-bordered text-center w-full'
+                    className='input  text-center w-full'
                     type='number'
                     step={0.01}
                     value={formData.humiMax}
@@ -1343,7 +1343,7 @@ const ManageProbe = () => {
                 <div className='flex justify-between gap-2 w-full'>
                   <input
                     autoFocus={false}
-                    className='input input-bordered text-center w-full'
+                    className='input  text-center w-full'
                     type='number'
                     step={0.01}
                     min={-40}
@@ -1368,7 +1368,7 @@ const ManageProbe = () => {
                   />
                   <input
                     autoFocus={false}
-                    className='input input-bordered text-center w-full'
+                    className='input  text-center w-full'
                     type='number'
                     step={0.01}
                     value={formData.tempMax}
@@ -1395,7 +1395,7 @@ const ManageProbe = () => {
                 <div className='flex justify-between gap-2 w-full'>
                   <input
                     autoFocus={false}
-                    className='input input-bordered text-center w-full'
+                    className='input  text-center w-full'
                     type='number'
                     step={0.01}
                     value={formData.humiMin}
@@ -1418,7 +1418,7 @@ const ManageProbe = () => {
                   />
                   <input
                     autoFocus={false}
-                    className='input input-bordered text-center w-full'
+                    className='input  text-center w-full'
                     type='number'
                     step={0.01}
                     value={formData.humiMax}
@@ -1572,7 +1572,7 @@ const ManageProbe = () => {
                         type='text'
                         value={formData.position}
                         onChange={handleChange}
-                        className='input input-bordered w-full'
+                        className='input  w-full'
                         maxLength={23}
                       />
                     </label>
@@ -1685,7 +1685,7 @@ const ManageProbe = () => {
                   </button>
                   <input
                     autoFocus={false}
-                    className='input input-bordered text-center w-full'
+                    className='input  text-center w-full'
                     type='number'
                     step={0.01}
                     min={-40}
@@ -1748,7 +1748,7 @@ const ManageProbe = () => {
                   </button>
                   <input
                     autoFocus={false}
-                    className='input input-bordered text-center w-full'
+                    className='input  text-center w-full'
                     type='number'
                     step={0.01}
                     value={formData.tempMax}
@@ -1809,7 +1809,7 @@ const ManageProbe = () => {
                   </button>
                   <input
                     autoFocus={false}
-                    className='input input-bordered text-center w-full'
+                    className='input  text-center w-full'
                     type='number'
                     step={0.01}
                     value={formData.humiMin}
@@ -1870,7 +1870,7 @@ const ManageProbe = () => {
                   </button>
                   <input
                     autoFocus={false}
-                    className='input input-bordered text-center w-full'
+                    className='input  text-center w-full'
                     type='number'
                     step={0.01}
                     value={formData.humiMax}
@@ -1997,7 +1997,7 @@ const ManageProbe = () => {
                 <div className='flex justify-between gap-2 w-full'>
                   <input
                     autoFocus={false}
-                    className='input input-bordered text-center w-full'
+                    className='input  text-center w-full'
                     type='number'
                     step={0.01}
                     min={-40}
@@ -2022,7 +2022,7 @@ const ManageProbe = () => {
                   />
                   <input
                     autoFocus={false}
-                    className='input input-bordered text-center w-full'
+                    className='input  text-center w-full'
                     type='number'
                     step={0.01}
                     value={formData.tempMax}
@@ -2049,7 +2049,7 @@ const ManageProbe = () => {
                 <div className='flex justify-between gap-2 w-full'>
                   <input
                     autoFocus={false}
-                    className='input input-bordered text-center w-full'
+                    className='input  text-center w-full'
                     type='number'
                     step={0.01}
                     value={formData.humiMin}
@@ -2072,7 +2072,7 @@ const ManageProbe = () => {
                   />
                   <input
                     autoFocus={false}
-                    className='input input-bordered text-center w-full'
+                    className='input  text-center w-full'
                     type='number'
                     step={0.01}
                     value={formData.humiMax}
@@ -2155,7 +2155,7 @@ const ManageProbe = () => {
                               -
                             </button>
                             <input
-                              className='input input-bordered join-item'
+                              className='input  join-item'
                               type='number'
                               min={5}
                               max={30}
@@ -2273,7 +2273,7 @@ const ManageProbe = () => {
                               -
                             </button>
                             <input
-                              className='input input-bordered join-item'
+                              className='input  join-item'
                               type='number'
                               min={5}
                               max={30}

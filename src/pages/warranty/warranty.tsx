@@ -688,7 +688,7 @@ const Warranty = () => {
                 type='text'
                 value={warrantyForm.invoice}
                 onChange={handleChange}
-                className='input input-bordered w-full'
+                className='input  w-full'
                 maxLength={23}
                 autoFocus={true}
               />
@@ -707,7 +707,7 @@ const Warranty = () => {
                 type='text'
                 value={warrantyForm.product}
                 onChange={handleChange}
-                className='input input-bordered w-full'
+                className='input  w-full'
                 maxLength={23}
               />
             </label>
@@ -760,7 +760,7 @@ const Warranty = () => {
                 type='text'
                 value={warrantyForm.model}
                 onChange={handleChange}
-                className='input input-bordered w-full'
+                className='input  w-full'
                 maxLength={23}
               />
             </label>
@@ -778,7 +778,7 @@ const Warranty = () => {
                   </span>
                   <input
                     type='date'
-                    className='input input-bordered w-full'
+                    className='input  w-full'
                     onChange={e =>
                       setWarrantyForm({
                         ...warrantyForm,
@@ -798,7 +798,7 @@ const Warranty = () => {
                   </span>
                   <input
                     type='date'
-                    className='input input-bordered w-full'
+                    className='input  w-full'
                     min={formattedMinDate}
                     onChange={e =>
                       setWarrantyForm({
@@ -866,7 +866,7 @@ const Warranty = () => {
                 type='text'
                 value={warrantyForm.customerAddress}
                 onChange={handleChange}
-                className='input input-bordered w-full'
+                className='input  w-full'
                 maxLength={23}
               />
             </label>
@@ -915,7 +915,7 @@ const Warranty = () => {
                 type='text'
                 value={warrantyForm.comment}
                 onChange={handleChange}
-                className='input input-bordered w-full'
+                className='input  w-full'
                 maxLength={256}
               />
             </label>
@@ -958,7 +958,7 @@ const Warranty = () => {
                 type='text'
                 value={warrantyForm.invoice}
                 onChange={handleChange}
-                className='input input-bordered w-full'
+                className='input  w-full'
                 maxLength={23}
                 autoFocus={true}
               />
@@ -977,7 +977,7 @@ const Warranty = () => {
                 type='text'
                 value={warrantyForm.product}
                 onChange={handleChange}
-                className='input input-bordered w-full'
+                className='input  w-full'
                 maxLength={23}
               />
             </label>
@@ -1030,7 +1030,7 @@ const Warranty = () => {
                 type='text'
                 value={warrantyForm.model}
                 onChange={handleChange}
-                className='input input-bordered w-full'
+                className='input  w-full'
                 maxLength={23}
               />
             </label>
@@ -1048,7 +1048,7 @@ const Warranty = () => {
                   </span>
                   <input
                     type='date'
-                    className='input input-bordered w-full'
+                    className='input  w-full'
                     value={warrantyForm.installDate}
                     onChange={e =>
                       setWarrantyForm({
@@ -1069,7 +1069,7 @@ const Warranty = () => {
                   </span>
                   <input
                     type='date'
-                    className='input input-bordered w-full'
+                    className='input  w-full'
                     value={warrantyForm.expire}
                     onChange={e =>
                       setWarrantyForm({
@@ -1137,7 +1137,7 @@ const Warranty = () => {
                 type='text'
                 value={warrantyForm.customerAddress}
                 onChange={handleChange}
-                className='input input-bordered w-full'
+                className='input  w-full'
                 maxLength={23}
               />
             </label>
@@ -1186,7 +1186,7 @@ const Warranty = () => {
                 type='text'
                 value={warrantyForm.comment}
                 onChange={handleChange}
-                className='input input-bordered w-full'
+                className='input  w-full'
                 maxLength={256}
               />
             </label>

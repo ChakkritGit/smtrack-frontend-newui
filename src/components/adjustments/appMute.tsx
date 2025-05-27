@@ -219,7 +219,7 @@ const AppMute = (props: AppMuteProps) => {
                     </button>
                     <input
                       name='after'
-                      className='input input-bordered join-item'
+                      className='input  join-item'
                       type='number'
                       min={5}
                       max={30}
@@ -340,7 +340,7 @@ const AppMute = (props: AppMuteProps) => {
                     </button>
                     <input
                       name='every'
-                      className='input input-bordered join-item'
+                      className='input  join-item'
                       type='number'
                       min={5}
                       max={30}
