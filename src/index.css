@@ -447,7 +447,7 @@ div:where(.swal2-container).swal2-noanimation {
 }
 
 .go2072408551 {
-  @apply !bg-base-100 !text-base-content !p-3 !pl-5 !max-w-[435px];
+  @apply !bg-base-100 !text-base-content !py-3 !pl-5 !pr-2 !max-w-[435px] !rounded-selector;
 }
 
 input::-webkit-outer-spin-button,

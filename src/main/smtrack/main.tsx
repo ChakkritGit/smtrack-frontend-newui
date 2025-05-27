@@ -190,7 +190,7 @@ const MainSmtrack = () => {
     if (socketData && !popUpMode) {
       toast(
         (_t: ToastOptions) => (
-          <div className='flex items-center justify-between gap-4 min-w-[220px]'>
+          <div className='flex justify-between gap-4 min-w-[220px]'>
             <div className='flex flex-col'>
               <span className='text-base font-bold max-w-[320px] break-words'>
                 {socketData.device ? socketData.device : '- -'}
@@ -210,12 +210,14 @@ const MainSmtrack = () => {
                 })}
               </span>
             </div>
-            <button
-              className='flex items-center justify-center bg-base-300/50 text-base-content/60 border-none rounded-full p-2 cursor-pointer hover:bg-red-500/20 hover:text-red-700 duration-300 ease-linear'
-              onClick={() => toast.dismiss(_t.id)}
-            >
-              <RiCloseLargeFill size={24} />
-            </button>
+            <div>
+              <button
+                className='flex items-center justify-center text-base-content/60 border-none rounded-full p-2 cursor-pointer hover:bg-red-500/20 hover:text-red-700 duration-300 ease-linear'
+                onClick={() => toast.dismiss(_t.id)}
+              >
+                <RiCloseLargeFill size={18} />
+              </button>
+            </div>
           </div>
         ),
         {
