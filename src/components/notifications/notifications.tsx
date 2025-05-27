@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
 import {
-  RiAlarmWarningFill,
   RiArrowRightUpLine,
   RiNotification4Line
 } from 'react-icons/ri'
@@ -274,7 +273,7 @@ const Notifications = () => {
                       key={index}
                     >
                       <div className='bg-primary/10 text-primary/70 rounded-field p-1'>
-                        <RiAlarmWarningFill size={24} />
+                        <PiSirenLight size={24} />
                       </div>
                       <div className='flex flex-col gap-1 w-full'>
                         <div className='flex items-center justify-between gap-3'>

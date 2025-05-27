@@ -128,7 +128,7 @@ const Routes = () => {
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key.toLowerCase() === 'f' && !isFocused) {
+      if (e.ctrlKey && e.altKey && e.key.toLowerCase() === 'f' && !isFocused) {
         toggleFullscreen()
       }
     }

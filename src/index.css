@@ -356,6 +356,10 @@ div:where(.swal2-container) button:where(.swal2-styled):where(.swal2-confirm) {
   @apply !btn;
 }
 
+.swal2-confirm {
+  @apply !bg-primary hover:!bg-primary/90 !text-primary-content duration-300 ease-out;
+}
+
 div:where(.swal2-container) button:where(.swal2-styled):where(.swal2-cancel) {
   @apply !btn;
 }
