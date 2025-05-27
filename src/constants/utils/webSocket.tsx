@@ -1,52 +1,48 @@
-import { MdOutlineSdCard, MdOutlineSdCardAlert } from 'react-icons/md'
-import {
-  RiAlarmWarningFill,
-  RiDoorClosedLine,
-  RiDoorOpenLine
-} from 'react-icons/ri'
-import {
-  TbPlugConnected,
-  TbPlugConnectedX,
-  TbReportAnalytics
-} from 'react-icons/tb'
-import {
-  FaTemperatureArrowDown,
-  FaTemperatureArrowUp,
-  FaTemperatureEmpty
-} from 'react-icons/fa6'
 import { TFunction } from 'i18next'
+import {
+  PiDoorLight,
+  PiDoorOpenLight,
+  PiNoteLight,
+  PiPlugsConnectedLight,
+  PiPlugsLight,
+  PiSimCardLight,
+  PiSirenLight,
+  PiThermometerColdLight,
+  PiThermometerHotLight,
+  PiThermometerSimpleLight
+} from 'react-icons/pi'
 
 const changIcon = (text: string) => {
   if (text.split(':')[1]?.substring(1, 5) === 'DOOR') {
     if (text.split(' ')[3] === 'opened') {
-      return <RiDoorOpenLine size={28} className='text-red-500' />
+      return <PiDoorOpenLight size={28} className='text-red-500' />
     } else {
-      return <RiDoorClosedLine size={28} className='text-primary' />
+      return <PiDoorLight size={28} className='text-primary' />
     }
   } else if (text.split(' ')[0] === 'Power') {
     if (text.split(' ')[1] === 'off') {
-      return <TbPlugConnectedX size={28} className='text-red-500' />
+      return <PiPlugsLight size={28} className='text-red-500' />
     } else {
-      return <TbPlugConnected size={28} className='text-primary' />
+      return <PiPlugsConnectedLight size={28} className='text-primary' />
     }
   } else if (text.split(' ')[0] === 'SDCard') {
     if (text.split(' ')[1] === 'failed') {
-      return <MdOutlineSdCardAlert size={28} className='text-red-500' />
+      return <PiSimCardLight size={28} className='text-red-500' />
     } else {
-      return <MdOutlineSdCard size={28} className='text-primary' />
+      return <PiSimCardLight size={28} className='text-primary' />
     }
   } else if (text.split(' ')[0]?.substring(0, 5) === 'PROBE') {
     if (text.split(' ')[4] === 'high') {
-      return <FaTemperatureArrowUp size={28} className='text-red-500' />
+      return <PiThermometerHotLight size={28} className='text-red-500' />
     } else if (text.split(' ')[4] === 'low') {
-      return <FaTemperatureArrowDown size={28} className='text-red-500' />
+      return <PiThermometerColdLight size={28} className='text-red-500' />
     } else {
-      return <FaTemperatureEmpty size={28} className='text-primary' />
+      return <PiThermometerSimpleLight size={28} className='text-primary' />
     }
   } else if (text.split('/')[0] === 'REPORT') {
-    return <TbReportAnalytics size={28} className='text-primary' />
+    return <PiNoteLight size={28} className='text-primary' />
   } else {
-    return <RiAlarmWarningFill size={28} className='text-red-500' />
+    return <PiSirenLight size={28} className='text-red-500' />
   }
 }
 

@@ -1,4 +1,4 @@
-import { Outlet, useLocation } from 'react-router-dom'
+import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { RootState } from '../../redux/reducers/rootReducer'
 import { useDispatch, useSelector } from 'react-redux'
 import { SubmitLoading } from '../../components/loading/submitLoading'
@@ -54,6 +54,7 @@ const MainTms = () => {
   const [isFirstLoad, setIsFirstLoad] = useState(true)
   const isPlayingRef = useRef<boolean>(false)
   const toastLimit = 5
+  const navigate = useNavigate()
 
   const src =
     sound === 1
@@ -189,16 +190,23 @@ const MainTms = () => {
 
     if (socketData && !popUpMode) {
       toast(
-        (_t: ToastOptions) => (
-          <div className='flex justify-between gap-4 min-w-[220px]'>
-            <div className='flex flex-col'>
-              <span className='text-sm font-bold max-w-[320px] break-words'>
+        (toa: ToastOptions) => (
+          <>
+            <div
+              className='flex flex-col cursor-pointer'
+              onClick={() => {
+                if (location.pathname !== '/notification') {
+                  navigate('/notification')
+                }
+              }}
+            >
+              <span className='text-sm font-medium max-w-[190px] break-words block'>
                 {socketData.device ? socketData.device : '- -'}
               </span>
-              <span className='text-sm max-w-[320px] break-words'>
+              <span className='text-sm max-w-[190px] break-words block'>
                 {changText(socketData.message, t)}
               </span>
-              <span className='text-sm mt-1'>
+              <span className='text-xs mt-1'>
                 {new Date(socketData.time).toLocaleString('th-TH', {
                   day: '2-digit',
                   month: '2-digit',
@@ -212,13 +220,13 @@ const MainTms = () => {
             </div>
             <div>
               <button
-                className='flex items-center justify-center text-base-content/60 border-none rounded-full p-2 cursor-pointer hover:bg-red-500/20 hover:text-red-700 duration-300 ease-linear'
-                onClick={() => toast.dismiss(_t.id)}
+                className='flex items-center justify-center text-base-content/50 border-none rounded-full p-2 cursor-pointer hover:bg-red-500/20 hover:text-red-700 duration-300 ease-out'
+                onClick={() => toast.dismiss(toa.id)}
               >
                 <RiCloseLargeFill size={18} />
               </button>
             </div>
-          </div>
+          </>
         ),
         {
           icon: changIcon(socketData.message),

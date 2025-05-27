@@ -447,7 +447,11 @@ div:where(.swal2-container).swal2-noanimation {
 }
 
 .go2072408551 {
-  @apply !bg-base-100 !text-base-content !py-3 !pl-5 !pr-2 !max-w-[435px] !rounded-selector;
+  @apply !bg-base-100 !text-base-content !py-3.5 !pl-5 !pr-2 !min-w-[320px] !max-w-[320px] !rounded-selector !shadow-sm;
+}
+
+.go3958317564 {
+  @apply !justify-between !gap-3.5 w-full pl-2;
 }
 
 input::-webkit-outer-spin-button,

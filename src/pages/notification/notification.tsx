@@ -1,21 +1,8 @@
 import { useTranslation } from 'react-i18next'
-import {
-  RiAlarmWarningFill,
-  RiDoorClosedLine,
-  RiDoorOpenLine,
-  RiSignalWifi3Line,
-  RiSignalWifiErrorLine
-} from 'react-icons/ri'
+import { RiAlarmWarningFill } from 'react-icons/ri'
 import { RootState } from '../../redux/reducers/rootReducer'
 import { useDispatch, useSelector } from 'react-redux'
 import { extractValues } from '../../constants/utils/utilsConstants'
-import { FaTemperatureArrowDown, FaTemperatureArrowUp } from 'react-icons/fa6'
-import {
-  TbPlugConnected,
-  TbPlugConnectedX,
-  TbReportAnalytics
-} from 'react-icons/tb'
-import { MdOutlineSdCard, MdOutlineSdCardAlert } from 'react-icons/md'
 import { useCallback, useEffect, useState } from 'react'
 import axiosInstance from '../../constants/axios/axiosInstance'
 import { responseType } from '../../types/smtrack/utilsRedux/utilsReduxType'
@@ -27,7 +14,20 @@ import { AxiosError } from 'axios'
 import { setTokenExpire } from '../../redux/actions/utilsActions'
 import Loading from '../../components/skeleton/table/loading'
 import NotificationPagination from '../../components/pagination/notificationPagination'
-import { FaThermometerHalf } from 'react-icons/fa'
+import {
+  PiDoorLight,
+  PiDoorOpenLight,
+  PiNoteLight,
+  PiPlugsConnectedLight,
+  PiPlugsLight,
+  PiSimCardLight,
+  PiSirenLight,
+  PiThermometerColdLight,
+  PiThermometerHotLight,
+  PiThermometerSimpleLight,
+  PiWifiHighLight,
+  PiWifiSlashLight
+} from 'react-icons/pi'
 
 const Notification = () => {
   const dispatch = useDispatch()
@@ -95,41 +95,41 @@ const Notification = () => {
     if (text.split('/')[0] === 'PROBE1') {
       if (text.split('/')[1] === 'TEMP') {
         if (text.split('/')[2] === 'OVER') {
-          return <FaTemperatureArrowUp size={24} />
+          return <PiThermometerHotLight size={24} />
         } else if (text.split('/')[2] === 'LOWER') {
-          return <FaTemperatureArrowDown size={24} />
+          return <PiThermometerColdLight size={24} />
         } else {
-          return <FaThermometerHalf size={24} />
+          return <PiThermometerSimpleLight size={24} />
         }
       }
       const probe = text.split('/')
       return probe[2] === 'ON' ? (
-        <RiDoorOpenLine size={24} />
+        <PiDoorOpenLight size={24} />
       ) : (
-        <RiDoorClosedLine size={24} />
+        <PiDoorLight size={24} />
       )
     } else if (text.split('/')[0] === 'AC') {
       if (text.split('/')[1] === 'ON') {
-        return <TbPlugConnected size={24} />
+        return <PiPlugsConnectedLight size={24} />
       } else {
-        return <TbPlugConnectedX size={24} />
+        return <PiPlugsLight size={24} />
       }
     } else if (text.split('/')[0] === 'SD') {
       if (text.split('/')[1] === 'ON') {
-        return <MdOutlineSdCardAlert size={24} />
+        return <PiSimCardLight size={24} />
       } else {
-        return <MdOutlineSdCard size={24} />
+        return <PiSimCardLight size={24} />
       }
     } else if (text.split('/')[0] === 'REPORT') {
-      return <TbReportAnalytics size={24} />
+      return <PiNoteLight size={24} />
     } else if (text.split('/')[0] === 'INTERNET') {
       if (text.split('/')[1] === 'ON') {
-        return <RiSignalWifiErrorLine size={24} />
+        return <PiWifiSlashLight size={24} />
       } else {
-        return <RiSignalWifi3Line size={24} />
+        return <PiWifiHighLight size={24} />
       }
     } else {
-      return <RiAlarmWarningFill size={24} />
+      return <PiSirenLight size={24} />
     }
   }
 

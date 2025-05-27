@@ -2,11 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import {
   RiAlarmWarningFill,
   RiArrowRightUpLine,
-  RiDoorClosedLine,
-  RiDoorOpenLine,
-  RiNotification4Line,
-  RiSignalWifi3Line,
-  RiSignalWifiErrorLine
+  RiNotification4Line
 } from 'react-icons/ri'
 import axiosInstance from '../../constants/axios/axiosInstance'
 import {
@@ -16,26 +12,31 @@ import {
 import { AxiosError } from 'axios'
 import { useTranslation } from 'react-i18next'
 import { NotificationType } from '../../types/global/notification'
-import { FaTemperatureArrowDown, FaTemperatureArrowUp } from 'react-icons/fa6'
-import {
-  TbPlugConnected,
-  TbPlugConnectedX,
-  TbReportAnalytics
-} from 'react-icons/tb'
-import { MdOutlineSdCard, MdOutlineSdCardAlert } from 'react-icons/md'
 import { extractValues } from '../../constants/utils/utilsConstants'
 import { RootState } from '../../redux/reducers/rootReducer'
 import { useDispatch, useSelector } from 'react-redux'
 import { Location, useLocation, useNavigate } from 'react-router-dom'
 import { setTokenExpire } from '../../redux/actions/utilsActions'
-import { FaThermometerHalf } from 'react-icons/fa'
 import InfiniteScroll from 'react-infinite-scroll-component'
+import {
+  PiDoorLight,
+  PiDoorOpenLight,
+  PiNoteLight,
+  PiPlugsConnectedLight,
+  PiPlugsLight,
+  PiSimCardLight,
+  PiSirenLight,
+  PiThermometerColdLight,
+  PiThermometerHotLight,
+  PiThermometerSimpleLight,
+  PiWifiHighLight,
+  PiWifiSlashLight
+} from 'react-icons/pi'
 
 const Notifications = () => {
   const dispatch = useDispatch()
-  const { tokenDecode, tmsMode, userProfile, themeMode, loadingStyle } = useSelector(
-    (state: RootState) => state.utils
-  )
+  const { tokenDecode, tmsMode, userProfile, themeMode, loadingStyle } =
+    useSelector((state: RootState) => state.utils)
   const location = useLocation()
   const { t } = useTranslation()
   const navigate = useNavigate()
@@ -136,41 +137,41 @@ const Notifications = () => {
     if (text.split('/')[0] === 'PROBE1') {
       if (text.split('/')[1] === 'TEMP') {
         if (text.split('/')[2] === 'OVER') {
-          return <FaTemperatureArrowUp size={24} />
+          return <PiThermometerHotLight size={24} />
         } else if (text.split('/')[2] === 'LOWER') {
-          return <FaTemperatureArrowDown size={24} />
+          return <PiThermometerColdLight size={24} />
         } else {
-          return <FaThermometerHalf size={24} />
+          return <PiThermometerSimpleLight size={24} />
         }
       }
       const probe = text.split('/')
       return probe[2] === 'ON' ? (
-        <RiDoorOpenLine size={24} />
+        <PiDoorOpenLight size={24} />
       ) : (
-        <RiDoorClosedLine size={24} />
+        <PiDoorLight size={24} />
       )
     } else if (text.split('/')[0] === 'AC') {
       if (text.split('/')[1] === 'ON') {
-        return <TbPlugConnected size={24} />
+        return <PiPlugsConnectedLight size={24} />
       } else {
-        return <TbPlugConnectedX size={24} />
+        return <PiPlugsLight size={24} />
       }
     } else if (text.split('/')[0] === 'SD') {
       if (text.split('/')[1] === 'ON') {
-        return <MdOutlineSdCardAlert size={24} />
+        return <PiSimCardLight size={24} />
       } else {
-        return <MdOutlineSdCard size={24} />
+        return <PiSimCardLight size={24} />
       }
     } else if (text.split('/')[0] === 'REPORT') {
-      return <TbReportAnalytics size={24} />
+      return <PiNoteLight size={24} />
     } else if (text.split('/')[0] === 'INTERNET') {
       if (text.split('/')[1] === 'ON') {
-        return <RiSignalWifiErrorLine size={24} />
+        return <PiWifiSlashLight size={24} />
       } else {
-        return <RiSignalWifi3Line size={24} />
+        return <PiWifiHighLight size={24} />
       }
     } else {
-      return <RiAlarmWarningFill size={24} />
+      return <PiSirenLight size={24} />
     }
   }
 
@@ -251,7 +252,9 @@ const Notifications = () => {
                   <div>
                     <div className='divider my-0 before:h-[1px] after:h-[1px]'></div>
                     <div className='flex items-center justify-center p-4 pt-3'>
-                      <span className={`loading ${loadingStyle} loading-md`}></span>
+                      <span
+                        className={`loading ${loadingStyle} loading-md`}
+                      ></span>
                     </div>
                   </div>
                 }
@@ -329,7 +332,9 @@ const Notifications = () => {
                   <div>
                     <div className='divider my-0 before:h-[1px] after:h-[1px]'></div>
                     <div className='flex items-center justify-center p-4 pt-3'>
-                      <span className={`loading ${loadingStyle} loading-md`}></span>
+                      <span
+                        className={`loading ${loadingStyle} loading-md`}
+                      ></span>
                     </div>
                   </div>
                 }
