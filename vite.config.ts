@@ -2,7 +2,7 @@ import react from '@vitejs/plugin-react'
 import { defineConfig, splitVendorChunkPlugin } from 'vite'
 import path from 'path'
 import tailwindcss from '@tailwindcss/vite'
-const visualizer = (await import('rollup-plugin-visualizer')).visualizer
+import { visualizer } from "rollup-plugin-visualizer"
 
 // https://vite.dev/config/
 export default defineConfig({

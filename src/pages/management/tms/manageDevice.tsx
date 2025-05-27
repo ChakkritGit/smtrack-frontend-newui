@@ -37,7 +37,7 @@ import { GlobalContext } from '../../../contexts/globalContext'
 const ManageDevice = () => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
-  const { wardId, globalSearch, hosId, shouldFetch } = useSelector(
+  const { wardId, globalSearch, hosId, shouldFetch, tokenDecode } = useSelector(
     (state: RootState) => state.utils
   )
   const { searchRef, isFocused, setIsFocused, isCleared, setIsCleared } =
@@ -55,6 +55,7 @@ const ManageDevice = () => {
     sn: '',
     name: ''
   })
+  const { role } = tokenDecode || {}
   const [hosIdforManageDev, setHosIdforManageDev] = useState<string>('')
 
   const addModalRef = useRef<HTMLDialogElement>(null)
@@ -391,12 +392,12 @@ const ManageDevice = () => {
       name: t('action'),
       cell: item => (
         <div className='flex items-center justify-center gap-3 p-3'>
-          <button
+          {role === 'SUPER' && <button
             className='btn btn-ghost flex text-white min-w-[32px] max-w-[32px] min-h-[32px] max-h-[32px] p-0 bg-red-500'
             onClick={() => deleteDevice(item.sn)}
           >
             <RiDeleteBin7Line size={20} />
-          </button>
+          </button>}
           <button
             className='btn btn-ghost flex text-white min-w-[32px] max-w-[32px] min-h-[32px] max-h-[32px] p-0 bg-primary'
             onClick={() => openEditModal(item)}
@@ -444,12 +445,14 @@ const ManageDevice = () => {
         <span className='text-[20px] font-medium'></span>
         <div className='flex flex-col lg:flex-row mt-3 lg:mt-0 lg:items-center items-end gap-4'>
           <HospitalAndWard />
-          <button
-            className='btn btn-neutral max-w-[130px]'
-            onClick={() => addModalRef.current?.showModal()}
-          >
-            {t('addDeviceButton')}
-          </button>
+          {role === 'SUPER' && (
+            <button
+              className='btn btn-neutral max-w-[130px]'
+              onClick={() => addModalRef.current?.showModal()}
+            >
+              {t('addDeviceButton')}
+            </button>
+          )}
         </div>
       </div>
       <div className='dataTableWrapper bg-base-100 rounded-field p-3 mt-5 duration-300 ease-linear'>
@@ -468,7 +471,7 @@ const ManageDevice = () => {
           onChangeRowsPerPage={handlePerRowsChange}
           onChangePage={handlePageChange}
           paginationRowsPerPageOptions={[10, 20, 50, 100, 150, 200]}
-          className='md:!max-h-[calc(100dvh-300px)]'
+          className='md:!max-h-[calc(100dvh-360px)]'
         />
       </div>
 
