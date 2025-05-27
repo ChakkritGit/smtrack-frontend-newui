@@ -27,6 +27,7 @@ class AppRenderer {
   private constructor () {
     this.disableConsoleInProduction()
     this.renderApp()
+    this.fullScreen()
   }
 
   public static getInstance (): AppRenderer {
@@ -36,11 +37,35 @@ class AppRenderer {
     return AppRenderer.instance
   }
 
+  private fullScreen (): void {
+    const toggleFullscreen = () => {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(err => {
+          console.error(`Error enabling fullscreen: ${err.message}`)
+        })
+      } else {
+        document.exitFullscreen()
+      }
+    }
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.ctrlKey && e.altKey && e.key.toLowerCase() === 'f') {
+        toggleFullscreen()
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+  }
+
   private disableConsoleInProduction (): void {
     if (import.meta.env.VITE_APP_NODE_ENV === 'production') {
       console.log = () => {}
-      // console.error = () => {}
+      console.info = () => {}
+      console.table = () => {}
+      console.debug = () => {}
+      console.trace = () => {}
       // console.warn = () => {}
+      // console.error = () => {}
     }
   }
 

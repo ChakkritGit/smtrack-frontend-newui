@@ -99,16 +99,6 @@ const Routes = () => {
     }
   }
 
-  const toggleFullscreen = () => {
-    if (!document.fullscreenElement) {
-      document.documentElement.requestFullscreen().catch(err => {
-        console.error(`Error enabling fullscreen: ${err.message}`)
-      })
-    } else {
-      document.exitFullscreen()
-    }
-  }
-
   const getSpecialTheme = (): string | null => {
     const today = new Date()
     const day = today.getDate()
@@ -125,17 +115,6 @@ const Routes = () => {
       dispatch(setTheme(specialTheme))
     }
   }, [])
-
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.ctrlKey && e.altKey && e.key.toLowerCase() === 'f' && !isFocused) {
-        toggleFullscreen()
-      }
-    }
-
-    window.addEventListener('keydown', handleKeyDown)
-    return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [isFocused])
 
   useEffect(() => {
     if (!token) return

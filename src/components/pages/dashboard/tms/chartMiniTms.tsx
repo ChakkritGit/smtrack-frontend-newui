@@ -8,27 +8,15 @@ interface ChartMiniProps {
   maxTemp: number | undefined
 }
 
-const movingAverage = (
-  data: { x: number; y: number }[],
-  windowSize: number
-): { x: number; y: number }[] => {
-  return data.map((point, i, arr) => {
-    const start = Math.max(0, i - windowSize + 1)
-    const window = arr.slice(start, i + 1)
-    const avg = window.reduce((sum, p) => sum + p.y, 0) / window.length
-    return { x: point.x, y: Number(avg.toFixed(2)) }
-  })
-}
-
 const ChartMiniTms = (props: ChartMiniProps) => {
   const { t } = useTranslation()
   const { deviceLogs } = props
 
   const mappedData =
-    deviceLogs?.log?.slice(0, 170).map(item => ({
+    deviceLogs?.log?.map(item => ({
       time: new Date(item.createdAt).getTime(),
       tempAvg: Number(item.tempValue),
-      probe: item.mcuId ?? 'unknown'
+      probe: item.probe ?? 'unknown'
     })) ?? []
 
   const groupedByProbe: Record<string, { x: number; y: number }[]> = {}
@@ -40,23 +28,16 @@ const ChartMiniTms = (props: ChartMiniProps) => {
     groupedByProbe[item.probe].push({ x: item.time, y: item.tempAvg })
   })
 
-  const processedByProbe: typeof groupedByProbe = {}
-  Object.keys(groupedByProbe).forEach(probe => {
-    const smoothed = movingAverage(groupedByProbe[probe], 3)
-    const sampled = smoothed.filter((_, idx) => idx % 3 === 0)
-    processedByProbe[probe] = sampled
-  })
-
-  const series: ApexAxisChartSeries = Object.keys(processedByProbe).map(
+  const series: ApexAxisChartSeries = Object.keys(groupedByProbe).map(
     probe => ({
-      type: 'line',
+      type: 'area',
       name: probe,
-      data: processedByProbe[probe],
+      data: groupedByProbe[probe],
       zIndex: 50
     })
   )
 
-  const allYValues = Object.values(processedByProbe)
+  const allYValues = Object.values(groupedByProbe)
     .flat()
     .map(p => p.y)
   const minY = Math.floor(Math.min(...allYValues)) - 3
@@ -101,7 +82,7 @@ const ChartMiniTms = (props: ChartMiniProps) => {
   const options: ApexCharts.ApexOptions = {
     chart: {
       animations: {
-        enabled: true,
+        enabled: false,
         animateGradually: { enabled: true, delay: 300 },
         dynamicAnimation: { speed: 500 }
       },
@@ -215,6 +196,50 @@ const ChartMiniTms = (props: ChartMiniProps) => {
       }
     },
     colors: dynamicColors,
+    fill: {
+      type: 'gradient',
+      gradient: {
+        shade: 'light',
+        type: 'vertical',
+        shadeIntensity: 0.35,
+        gradientToColors: [
+          'oklch(70% 0.1973 44.47 / var(--tw-text-opacity, 0.45))',
+          'oklch(65% 0.25 60 / var(--tw-text-opacity, 0.45))',
+          'oklch(65% 0.25 90 / var(--tw-text-opacity, 0.45))',
+          'oklch(65% 0.25 120 / var(--tw-text-opacity, 0.45))',
+          'oklch(65% 0.25 150 / var(--tw-text-opacity, 0.45))',
+          'oklch(65% 0.25 180 / var(--tw-text-opacity, 0.45))',
+          'oklch(65% 0.25 210 / var(--tw-text-opacity, 0.45))',
+          'oklch(65% 0.25 240 / var(--tw-text-opacity, 0.45))',
+          'oklch(65% 0.25 270 / var(--tw-text-opacity, 0.45))',
+          'oklch(65% 0.25 300 / var(--tw-text-opacity, 0.45))',
+          'oklch(65% 0.25 330 / var(--tw-text-opacity, 0.45))',
+          'oklch(65% 0.25 0 / var(--tw-text-opacity, 0.45))',
+          'oklch(72% 0.27 15 / var(--tw-text-opacity, 0.45))',
+          'oklch(72% 0.27 45 / var(--tw-text-opacity, 0.45))',
+          'oklch(72% 0.27 75 / var(--tw-text-opacity, 0.45))',
+          'oklch(72% 0.27 105 / var(--tw-text-opacity, 0.45))',
+          'oklch(72% 0.27 135 / var(--tw-text-opacity, 0.45))',
+          'oklch(72% 0.27 165 / var(--tw-text-opacity, 0.45))',
+          'oklch(72% 0.27 195 / var(--tw-text-opacity, 0.45))',
+          'oklch(72% 0.27 225 / var(--tw-text-opacity, 0.45))',
+          'oklch(72% 0.27 255 / var(--tw-text-opacity, 0.45))',
+          'oklch(72% 0.27 285 / var(--tw-text-opacity, 0.45))',
+          'oklch(72% 0.27 315 / var(--tw-text-opacity, 0.45))',
+          'oklch(72% 0.27 345 / var(--tw-text-opacity, 0.45))',
+          'oklch(60% 0.20 20 / var(--tw-text-opacity, 0.45))',
+          'oklch(60% 0.20 70 / var(--tw-text-opacity, 0.45))',
+          'oklch(60% 0.20 140 / var(--tw-text-opacity, 0.45))',
+          'oklch(60% 0.20 200 / var(--tw-text-opacity, 0.45))',
+          'oklch(60% 0.20 260 / var(--tw-text-opacity, 0.45))',
+          'oklch(60% 0.20 320 / var(--tw-text-opacity, 0.45))'
+        ],
+        inverseColors: true,
+        opacityFrom: 0.32,
+        opacityTo: 0,
+        stops: [0, 100]
+      }
+    },
     legend: {
       position: 'bottom',
       horizontalAlign: 'right'

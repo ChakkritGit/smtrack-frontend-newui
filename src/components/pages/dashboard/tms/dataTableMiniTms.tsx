@@ -47,7 +47,7 @@ const DataTableMiniTms = (props: TableMiniProps) => {
     {
       name: t('deviceSerialTb'),
       cell: item => (
-        <span title={item.mcuId}>...{item.mcuId.substring(15)}</span>
+        <span title={item.mcuId}>...{item.mcuId.length > 10 ? item.mcuId.substring(15) : item.mcuId}</span>
       ),
       sortable: false,
       center: true
@@ -55,6 +55,12 @@ const DataTableMiniTms = (props: TableMiniProps) => {
     {
       name: t('deviceTime'),
       cell: item => item.createdAt.substring(11, 16),
+      sortable: false,
+      center: true
+    },
+    {
+      name: t('deviceProbeTb'),
+      cell: item => <span title={item.mcuId}>{item.probe}</span>,
       sortable: false,
       center: true
     },

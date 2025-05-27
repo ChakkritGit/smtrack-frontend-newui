@@ -30,20 +30,7 @@ const FullChartTmsComponent = (props: FullChartPropType) => {
     groupedByProbe[item.probe].push({ x: item.time, y: item.tempAvg })
   })
 
-  const processedGrouped: Record<string, { x: number; y: number }[]> = {}
-  Object.entries(groupedByProbe).forEach(([probe, data]) => {
-    const smoothed: { x: number; y: number }[] = []
-    for (let i = 0; i < data.length; i++) {
-      const slice = data.slice(Math.max(0, i - 1), Math.min(data.length, i + 2))
-      const avgY = slice.reduce((sum, p) => sum + p.y, 0) / slice.length
-      if (i % 3 === 0) {
-        smoothed.push({ x: data[i].x, y: parseFloat(avgY.toFixed(2)) })
-      }
-    }
-    processedGrouped[probe] = smoothed
-  })
-
-  const allYs = Object.values(processedGrouped)
+  const allYs = Object.values(groupedByProbe)
     .flat()
     .map(p => p.y)
   const minY = Math.min(...allYs)
@@ -51,11 +38,11 @@ const FullChartTmsComponent = (props: FullChartPropType) => {
   const yMin = Math.floor(minY) - 7
   const yMax = Math.ceil(maxY) + 7
 
-  const series: ApexAxisChartSeries = Object.keys(processedGrouped).map(
+  const series: ApexAxisChartSeries = Object.keys(groupedByProbe).map(
     probe => ({
-      type: 'line',
+      type: 'area',
       name: probe,
-      data: processedGrouped[probe],
+      data: groupedByProbe[probe],
       zIndex: 50
     })
   )
@@ -227,6 +214,50 @@ const FullChartTmsComponent = (props: FullChartPropType) => {
       }
     },
     colors: dynamicColors,
+    fill: {
+      type: 'gradient',
+      gradient: {
+        shade: 'light',
+        type: 'vertical',
+        shadeIntensity: 0.35,
+        gradientToColors: [
+          'oklch(70% 0.1973 44.47 / var(--tw-text-opacity, 0.45))',
+          'oklch(65% 0.25 60 / var(--tw-text-opacity, 0.45))',
+          'oklch(65% 0.25 90 / var(--tw-text-opacity, 0.45))',
+          'oklch(65% 0.25 120 / var(--tw-text-opacity, 0.45))',
+          'oklch(65% 0.25 150 / var(--tw-text-opacity, 0.45))',
+          'oklch(65% 0.25 180 / var(--tw-text-opacity, 0.45))',
+          'oklch(65% 0.25 210 / var(--tw-text-opacity, 0.45))',
+          'oklch(65% 0.25 240 / var(--tw-text-opacity, 0.45))',
+          'oklch(65% 0.25 270 / var(--tw-text-opacity, 0.45))',
+          'oklch(65% 0.25 300 / var(--tw-text-opacity, 0.45))',
+          'oklch(65% 0.25 330 / var(--tw-text-opacity, 0.45))',
+          'oklch(65% 0.25 0 / var(--tw-text-opacity, 0.45))',
+          'oklch(72% 0.27 15 / var(--tw-text-opacity, 0.45))',
+          'oklch(72% 0.27 45 / var(--tw-text-opacity, 0.45))',
+          'oklch(72% 0.27 75 / var(--tw-text-opacity, 0.45))',
+          'oklch(72% 0.27 105 / var(--tw-text-opacity, 0.45))',
+          'oklch(72% 0.27 135 / var(--tw-text-opacity, 0.45))',
+          'oklch(72% 0.27 165 / var(--tw-text-opacity, 0.45))',
+          'oklch(72% 0.27 195 / var(--tw-text-opacity, 0.45))',
+          'oklch(72% 0.27 225 / var(--tw-text-opacity, 0.45))',
+          'oklch(72% 0.27 255 / var(--tw-text-opacity, 0.45))',
+          'oklch(72% 0.27 285 / var(--tw-text-opacity, 0.45))',
+          'oklch(72% 0.27 315 / var(--tw-text-opacity, 0.45))',
+          'oklch(72% 0.27 345 / var(--tw-text-opacity, 0.45))',
+          'oklch(60% 0.20 20 / var(--tw-text-opacity, 0.45))',
+          'oklch(60% 0.20 70 / var(--tw-text-opacity, 0.45))',
+          'oklch(60% 0.20 140 / var(--tw-text-opacity, 0.45))',
+          'oklch(60% 0.20 200 / var(--tw-text-opacity, 0.45))',
+          'oklch(60% 0.20 260 / var(--tw-text-opacity, 0.45))',
+          'oklch(60% 0.20 320 / var(--tw-text-opacity, 0.45))'
+        ],
+        inverseColors: true,
+        opacityFrom: 0.32,
+        opacityTo: 0,
+        stops: [0, 100]
+      }
+    },
     legend: { position: 'bottom', horizontalAlign: 'right' },
     responsive: [
       { breakpoint: 5124, options: { chart: { height: 2445 } } },

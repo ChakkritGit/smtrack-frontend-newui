@@ -72,6 +72,7 @@ type DeviceLogsTms = {
   mcuId: string
   message?: string
   plugin: boolean
+  probe: string
   realValue: number
   tempValue: number
   time: string
