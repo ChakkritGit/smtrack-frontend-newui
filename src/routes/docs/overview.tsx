@@ -1,11 +1,12 @@
 import { RiChatPrivateLine, RiFilePaper2Line } from 'react-icons/ri'
-import Footer from '../footer/footer'
+import Footer from '../../components/footer/footer'
 import NavbarForTCPP from './navbarForTCPP'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
 const Overview = () => {
   const { t } = useTranslation()
+  document.title = t('overview')
 
   return (
     <div>

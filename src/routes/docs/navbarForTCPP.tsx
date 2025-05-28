@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'react-router-dom'
 import Logo from '../../assets/images/app-logo.png'
 import { useTranslation } from 'react-i18next'
-import LanguageList from '../language/languageList'
+import LanguageList from '../../components/language/languageList'
 
 const NavbarForTCPP = () => {
   const { t } = useTranslation()

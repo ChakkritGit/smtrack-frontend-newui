@@ -1,8 +1,8 @@
 import { useTranslation } from 'react-i18next'
 import { readingTime } from 'reading-time-estimator'
-import { privacy } from '../../components/docs/constants'
+import { privacy } from './constants'
 import { RiLinkM } from 'react-icons/ri'
-import NavbarForTCPP from '../../components/docs/navbarForTCPP'
+import NavbarForTCPP from './navbarForTCPP'
 import Footer from '../../components/footer/footer'
 import toast from 'react-hot-toast'
 import { useSelector } from 'react-redux'
@@ -12,6 +12,7 @@ const PrivacyPolicy = () => {
   const { t } = useTranslation()
   const { i18nInit } = useSelector((state: RootState) => state.utils)
   const result = readingTime(privacy, 300)
+  document.title = t('privacy')
 
   return (
     <div>
