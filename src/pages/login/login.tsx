@@ -120,7 +120,7 @@ const Login = () => {
           <div className='text-end'>
             <LanguageList />
           </div>
-          <h1 className='text-4xl md:text-5xl font-bold'>SMTrack+</h1>
+          <h1 className='text-4xl md:text-5xl font-medium'>SMTrack+</h1>
           <span className='font-medium'>
             Real-time temperature monitoring with alerts for exceeding limits
           </span>

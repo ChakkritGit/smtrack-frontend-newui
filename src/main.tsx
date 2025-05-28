@@ -8,18 +8,20 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
 
-import { Profiler, StrictMode } from 'react'
+import { Profiler, StrictMode, Suspense, lazy } from 'react'
 import { createRoot } from 'react-dom/client'
 import { Provider } from 'react-redux'
 import { I18nextProvider } from 'react-i18next'
 import { Toaster } from 'react-hot-toast'
 import { HelmetProvider } from 'react-helmet-async'
 import { StyleSheetManager } from 'styled-components'
-import Routes from './routes/routes.tsx'
+// import Routes from './routes/routes.tsx'
+const Routes = lazy(() => import('./routes/routes.tsx'))
 import i18n from './lang/i18n.ts'
 import isPropValid from '@emotion/is-prop-valid'
 import store from './redux/store/index.ts'
 import FrameRate from './constants/utils/frameRate.tsx'
+import SplashScreen from './components/loading/splashScreen.tsx'
 
 class AppRenderer {
   private static instance: AppRenderer
@@ -107,7 +109,9 @@ class AppRenderer {
             <HelmetProvider>
               <Provider store={store}>
                 <I18nextProvider i18n={i18n}>
-                  <Routes />
+                  <Suspense fallback={<SplashScreen />} name='splash_screen'>
+                    <Routes />
+                  </Suspense>
                   <FrameRate />
                   <Toaster position='bottom-right' reverseOrder={false} />
                 </I18nextProvider>
