@@ -52,7 +52,7 @@ const SplashScreen = () => {
           <img src={Logo} alt='SM-LOGO' className='' />
         </div>
       </div>
-      <span className='text-lg font-medium opacity-70'>Siamatic Co. Ltd</span>
+      <span className='text-lg font-medium opacity-70 absolute bottom-3.5'>Siamatic Co. Ltd</span>
     </div>
   )
 }
