@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { RootState } from '../../redux/reducers/rootReducer'
 import { useSelector } from 'react-redux'
 import { getOKLCHColor } from '../../constants/utils/color'
-import Logo from '../../assets/images/sm-logo.png'
+import Logo from '../../assets/images/app-logo.png'
 
 const SplashScreen = () => {
   const { themeMode } = useSelector((state: RootState) => state.utils)
@@ -43,16 +43,16 @@ const SplashScreen = () => {
 
   return (
     <div
-      className='w-full h-dvh flex flex-col gap-1 md:gap-1.5 items-center justify-center'
+      className='w-full h-dvh flex flex-col gap-1.5 md:gap-3 items-center justify-center'
       data-theme={themeMode}
     >
       {/* <span className='text-4xl md:text-5xl font-medium'>SMTrack+</span> */}
       <div className='avatar'>
-        <div className='w-24 md:w-36 rounded'>
+        <div className='w-16 md:w-28 rounded-selector'>
           <img src={Logo} alt='SM-LOGO' className='' />
         </div>
       </div>
-      <span className='font-medium'>Siamatic Co. Ltd</span>
+      <span className='text-lg font-medium opacity-70'>Siamatic Co. Ltd</span>
     </div>
   )
 }
