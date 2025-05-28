@@ -19,6 +19,12 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://www.siamatic.dev/policies</loc>
+    <lastmod>2025-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
     <loc>https://www.siamatic.dev/support</loc>
     <lastmod>2025-03-29</lastmod>
     <changefreq>monthly</changefreq>
