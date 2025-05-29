@@ -400,6 +400,7 @@ export default {
     loadingResoures: 'Loading resources...',
     preparingInterface: 'Preparing interface..',
     almostready: 'Almost ready...',
+    routesLoadError: 'Error loading application.',
     processing: 'Processing...',
     downloaded: 'Downloaded',
     loadingConfig: 'Loading settings...',

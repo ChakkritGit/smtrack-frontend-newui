@@ -399,6 +399,7 @@ export default {
     loadingResoures: 'กำลังโหลดทรัพยากร...',
     preparingInterface: 'กำลังเตรียมอินเทอร์เฟซ...',
     almostready: 'เกือบพร้อมแล้ว...',
+    routesLoadError: 'เกิดข้อผิดพลาดขณะโหลดแอพพลิเคชั่น',
     processing: 'กำลังประมวลผล...',
     downloaded: 'ดาวน์โหลดแล้ว',
     loadingConfig: 'กำลังโหลดการตั้งค่า...',
