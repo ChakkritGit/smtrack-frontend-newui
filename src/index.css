@@ -275,6 +275,18 @@ body {
   }
 }
 
+#pagination-next-page, #pagination-last-page, #pagination-previous-page, #pagination-first-page {
+  &>svg {
+    @apply !fill-base-content;
+  }
+}
+
+#pagination-next-page:disabled, #pagination-last-page:disabled, #pagination-previous-page:disabled, #pagination-first-page:disabled {
+  &>svg {
+    @apply !fill-base-content/35;
+  }
+}
+
 .dataTableSubWrapper {
   &>div:nth-child(1) {
     @apply rounded-none;

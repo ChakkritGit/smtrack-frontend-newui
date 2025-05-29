@@ -1203,8 +1203,8 @@ const ManageDevice = () => {
                 className='btn btn-primary tooltip tooltip-left flex text-primary-content min-w-[32px] max-w-[32px] min-h-[32px] max-h-[32px] p-0'
                 onClick={() =>
                   Swal.fire({
-                    title: t('deactivateDevice'),
-                    text: t('deactivateDeviceText'),
+                    title: t('activateDevice'),
+                    text: t('activateDeviceText'),
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonText: t('confirmButton'),

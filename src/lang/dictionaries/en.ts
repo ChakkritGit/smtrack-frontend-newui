@@ -520,8 +520,11 @@ export default {
     CustomMessageLogData:
       'The selected time periods are more than 30 days apart.',
     deactivateDevice: 'Do you want to deactivate a device?',
+    activateDevice: 'Do you want to activate a device?',
     deactivateDeviceText:
       'If you deactivated it, the device will stop working immediately!',
+    activateDeviceText:
+      'If you activated it, the device will start working immediately!',
     moveDeviceActive:
       'Cannot move a device that is currently in use. Please turn off the device before transferring data.',
     reactivateDevice: 'Do you want to reactivate a device?',
