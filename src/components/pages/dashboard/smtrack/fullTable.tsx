@@ -97,22 +97,26 @@ const FullTableComponent = (props: FullTablePropType) => {
 
         return (
           <div className='flex items-center gap-2'>
-            {doors.slice(0, doorCount).map(doorKey => (
-              <div
-                key={doorKey}
-                className={`w-[24px] h-[24px] flex items-center justify-center rounded-field ${
-                  item.door1 || item.door2 || item.door3
-                    ? 'bg-red-500 text-white'
-                    : 'border border-primary text-primary'
-                } duration-300 ease-linear`}
-              >
-                {item.door1 || item.door2 || item.door3 ? (
-                  <RiDoorOpenLine size={14} />
-                ) : (
-                  <RiDoorClosedLine size={14} />
-                )}
-              </div>
-            ))}
+            {doors.slice(0, doorCount).map(doorKey => {
+              const isOpen = item[doorKey]
+
+              return (
+                <div
+                  key={doorKey}
+                  className={`w-[24px] h-[24px] flex items-center justify-center rounded-field ${
+                    isOpen
+                      ? 'bg-red-500 text-white'
+                      : 'border border-primary text-primary'
+                  } duration-300 ease-linear`}
+                >
+                  {isOpen ? (
+                    <RiDoorOpenLine size={14} />
+                  ) : (
+                    <RiDoorClosedLine size={14} />
+                  )}
+                </div>
+              )
+            })}
           </div>
         )
       },
