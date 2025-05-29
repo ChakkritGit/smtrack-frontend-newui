@@ -1,25 +1,27 @@
+import { lazy } from 'react'
 import { RouteObject } from 'react-router-dom'
 import { HideFlashFW, HideSetting } from '../../middleware/Auth'
-import ErrorScreen from '../error/error'
-import Home from '../../pages/home/home'
-import Dashboard from '../../pages/dashboard/smtrack/dashboard'
-import FullChart from '../../pages/dashboard/smtrack/fullChart'
-import PreviewPDF from '../../components/pdf/previewPdf'
-import FullTable from '../../pages/dashboard/smtrack/fullTable'
-import Users from '../../pages/users/users'
-import Management from '../../pages/management/smtrack/management'
-import Warranty from '../../pages/warranty/warranty'
-import Repair from '../../pages/repair/repair'
-import Settings from '../../pages/settings/settings'
-import Notification from '../../pages/notification/notification'
-import RepairPdf from '../../components/pdf/repairPdf'
-import WarrantyPdf from '../../components/pdf/WarrantyPdf'
-import Changelog from '../../components/changelog/changelog'
-import VideoPlayer from '../../test/testtwo'
-import DynamicVideoColor from '../../test/test'
-import TestWrapper from '../../test/testWrapper'
-import ChartPdf from '../../test/chartPdf'
-import ManageCsv from '../../pages/reports/manageCsv'
+
+const ErrorScreen = lazy(() => import('../error/error'))
+const Home = lazy(() => import('../../pages/home/home'))
+const Dashboard = lazy(() => import('../../pages/dashboard/smtrack/dashboard'))
+const FullChart = lazy(() => import('../../pages/dashboard/smtrack/fullChart'))
+const PreviewPDF = lazy(() => import('../../components/pdf/previewPdf'))
+const FullTable = lazy(() => import('../../pages/dashboard/smtrack/fullTable'))
+const Users = lazy(() => import('../../pages/users/users'))
+const Management = lazy(() => import('../../pages/management/smtrack/management'))
+const Warranty = lazy(() => import('../../pages/warranty/warranty'))
+const Repair = lazy(() => import('../../pages/repair/repair'))
+const Settings = lazy(() => import('../../pages/settings/settings'))
+const Notification = lazy(() => import('../../pages/notification/notification'))
+const RepairPdf = lazy(() => import('../../components/pdf/repairPdf'))
+const WarrantyPdf = lazy(() => import('../../components/pdf/WarrantyPdf'))
+const Changelog = lazy(() => import('../../components/changelog/changelog'))
+const VideoPlayer = lazy(() => import('../../test/testtwo'))
+const DynamicVideoColor = lazy(() => import('../../test/test'))
+const TestWrapper = lazy(() => import('../../test/testWrapper'))
+const ChartPdf = lazy(() => import('../../test/chartPdf'))
+const ManageCsv = lazy(() => import('../../pages/reports/manageCsv'))
 
 const smtrackChildren: RouteObject[] = [
   {

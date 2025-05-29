@@ -1,16 +1,18 @@
+import { lazy } from 'react'
 import { HideSettingManageTms, HideSettingTms } from '../../middleware/Auth'
 import { RouteObject } from 'react-router-dom'
-import ErrorScreen from '../error/error'
-import HomeTms from '../../pages/home/homeTms'
-import DashboardTms from '../../pages/dashboard/tms/dashboardTms'
-import FullChartTms from '../../pages/dashboard/tms/fullChartTms'
-import PreviewPDF from '../../components/pdf/previewPdf'
-import FullTableTms from '../../pages/dashboard/tms/fullTableTms'
-import Users from '../../pages/users/users'
-import ManagementTms from '../../pages/management/tms/managementTms'
-import Settings from '../../pages/settings/settings'
-import Notification from '../../pages/notification/notification'
-import Changelog from '../../components/changelog/changelog'
+
+const ErrorScreen = lazy(() => import('../error/error'))
+const HomeTms = lazy(() => import('../../pages/home/homeTms'))
+const DashboardTms = lazy(() => import('../../pages/dashboard/tms/dashboardTms'))
+const FullChartTms = lazy(() => import('../../pages/dashboard/tms/fullChartTms'))
+const PreviewPDF = lazy(() => import('../../components/pdf/previewPdf'))
+const FullTableTms = lazy(() => import('../../pages/dashboard/tms/fullTableTms'))
+const Users = lazy(() => import('../../pages/users/users'))
+const ManagementTms = lazy(() => import('../../pages/management/tms/managementTms'))
+const Settings = lazy(() => import('../../pages/settings/settings'))
+const Notification = lazy(() => import('../../pages/notification/notification'))
+const Changelog = lazy(() => import('../../components/changelog/changelog'))
 
 const tmsChildren: RouteObject[] = [
   {

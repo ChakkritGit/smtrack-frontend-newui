@@ -211,7 +211,6 @@ class AppRenderer {
     const root = createRoot(rootElement)
 
     try {
-
       root.render(
         <StrictMode>
           <StyleSheetManager shouldForwardProp={isPropValid}>
