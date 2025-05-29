@@ -223,7 +223,9 @@ const SplashScreen = ({
           <ProgressBar
             progress={progress}
             showPercentage={showPercentage}
-            className='mt-6'
+            className={`mt-6 transition-all duration-800 delay-300 ease-out ${
+              visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+            }`}
             t={t}
           />
         )
@@ -232,11 +234,19 @@ const SplashScreen = ({
           <CircularProgress
             progress={progress}
             showPercentage={showPercentage}
-            className='mt-6'
+            className={`mt-6 transition-all duration-800 delay-300 ease-out ${
+              visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+            }`}
           />
         )
       case 'dots':
-        return <DotsLoading className='mt-6' />
+        return (
+          <DotsLoading
+            className={`mt-6 transition-all duration-800 delay-300 ease-out ${
+              visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+            }`}
+          />
+        )
       default:
         return null
     }
@@ -244,23 +254,35 @@ const SplashScreen = ({
 
   return (
     <div
-      className={`fixed inset-0 z-[9999] flex flex-col gap-1.5 md:gap-3 items-center justify-center transition-opacity duration-700 ease-in-out bg-base-100 ${
+      className={`fixed inset-0 z-[9999] flex flex-col gap-1.5 md:gap-3 items-center justify-center transition-opacity duration-800 delay-300 ease-in-out bg-base-100 ${
         visible ? 'opacity-100 visible' : 'opacity-0 invisible'
       }`}
       data-theme={themeMode}
     >
-      <div className='avatar'>
-        <div className='w-16 md:w-28 rounded-selector'>
+      <div
+        className={`avatar transition-all duration-800 delay-300 ease-out ${
+          visible
+            ? 'scale-100 opacity-100 blur-none'
+            : 'scale-[2000%] opacity-0 blur-3xl'
+        }`}
+      >
+        <div className='w-16 md:w-28 rounded-2xl'>
           <img
             src={Logo}
             alt='SM-LOGO'
-            className='transition-all duration-300 hover:scale-105'
+            className={`scale-105 transition-all duration-800 delay-300 ease-out ${
+              visible ? 'scale-100' : 'scale-[1800%]'
+            }`}
           />
         </div>
       </div>
 
       {progressType !== 'none' && (
-        <div className='text-center mt-4'>
+        <div
+          className={`text-center mt-4 transition-all duration-800 delay-200 ease-out ${
+            visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+          }`}
+        >
           <p className='text-sm opacity-70 min-h-[1.25rem]'>
             {loadingStage || t('loading')}
           </p>
@@ -269,7 +291,11 @@ const SplashScreen = ({
 
       {renderProgress()}
 
-      <span className='text-lg font-medium opacity-70 absolute bottom-10 md:bottom-3.5'>
+      <span
+        className={`text-lg font-medium opacity-70 absolute bottom-10 md:bottom-3.5 transition-all duration-800 delay-300 ease-out ${
+          visible ? 'opacity-70 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}
+      >
         Siamatic Co. Ltd
       </span>
     </div>
