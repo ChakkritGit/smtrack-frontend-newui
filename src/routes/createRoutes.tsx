@@ -1,17 +1,19 @@
+import { lazy } from 'react'
 import { createBrowserRouter } from 'react-router-dom'
 import { smtrackChildren } from './routes/smtrackChildren'
 import { tmsChildren } from './routes/tmsChildren'
-import MainSmtrack from '../main/smtrack/main'
-import MainTms from '../main/tms/main'
 import { AuthRoute } from '../middleware/authprotect'
 import { LogoutAuth } from '../middleware/Auth'
-import NotFound from './error/notFound'
-import App from './docs/app'
-import Support from './docs/support'
-import TermsConditions from './docs/termsConditions'
-import PrivacyPolicy from './docs/privacyPolicy'
-import ErrorScreen from './error/error'
-import Overview from './docs/overview'
+import SplashScreen from '../components/loading/splashScreen'
+const MainTms = import('../main/tms/main')
+const MainSmtrack = import('../main/smtrack/main')
+const Overview = lazy(() => import('./docs/overview'))
+const PrivacyPolicy = lazy(() => import('./docs/privacyPolicy'))
+const TermsConditions = lazy(() => import('./docs/termsConditions'))
+const Support = lazy(() => import('./docs/support'))
+const App = lazy(() => import('./docs/app'))
+const NotFound = lazy(() => import('./error/notFound'))
+const ErrorScreen = lazy(() => import('./error/error'))
 
 const router = (role: string, tmsMode: boolean) =>
   createBrowserRouter([
@@ -26,9 +28,17 @@ const router = (role: string, tmsMode: boolean) =>
               ? !(role === 'LEGACY_ADMIN' || role === 'LEGACY_USER')
               : role === 'LEGACY_ADMIN' || role === 'LEGACY_USER'
           ) ? (
-            <MainTms />
+            <SplashScreen
+              progressType='linear'
+              showPercentage
+              componentPromise={MainTms}
+            />
           ) : (
-            <MainSmtrack />
+            <SplashScreen
+              progressType='linear'
+              showPercentage
+              componentPromise={MainSmtrack}
+            />
           ),
           errorElement: <ErrorScreen />,
           children: (

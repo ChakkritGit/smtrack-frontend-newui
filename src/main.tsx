@@ -144,7 +144,7 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
 
-import { StrictMode } from 'react'
+import { lazy, StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { Provider } from 'react-redux'
 import { I18nextProvider } from 'react-i18next'
@@ -153,7 +153,7 @@ import { StyleSheetManager } from 'styled-components'
 import i18n from './lang/i18n.ts'
 import isPropValid from '@emotion/is-prop-valid'
 import store from './redux/store/index.ts'
-import SplashScreen from './components/loading/splashScreen.tsx'
+const Routes = lazy(() => import('./routes/routes.tsx'))
 
 class AppRenderer {
   private static instance: AppRenderer
@@ -211,7 +211,6 @@ class AppRenderer {
     const root = createRoot(rootElement)
 
     try {
-      const routesPromise = import('./routes/routes.tsx')
 
       root.render(
         <StrictMode>
@@ -219,11 +218,7 @@ class AppRenderer {
             <HelmetProvider>
               <Provider store={store}>
                 <I18nextProvider i18n={i18n}>
-                  <SplashScreen
-                    progressType='linear'
-                    showPercentage
-                    routesPromise={routesPromise}
-                  />
+                  <Routes />
                 </I18nextProvider>
               </Provider>
             </HelmetProvider>

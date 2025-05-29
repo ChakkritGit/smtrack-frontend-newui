@@ -315,11 +315,11 @@ import {
 import { RootState } from '../../redux/reducers/rootReducer'
 import { useSelector } from 'react-redux'
 import { getOKLCHColor } from '../../constants/utils/color'
-import Logo from '../../assets/images/app-logo.png'
 import { useTranslation } from 'react-i18next'
 import { TFunction } from 'i18next'
-import FrameRate from '../../constants/utils/frameRate'
 import { Toaster } from 'react-hot-toast'
+import Logo from '../../assets/images/app-logo.png'
+import FrameRate from '../../constants/utils/frameRate'
 
 interface ProgressBarProps {
   progress: number
@@ -423,7 +423,7 @@ interface SplashScreenProps {
   progressType?: 'linear' | 'circular' | 'dots' | 'none'
   showPercentage?: boolean
   animationDuration?: number
-  routesPromise?: Promise<{ default: ComponentType<any> }>
+  componentPromise?: Promise<{ default: ComponentType<any> }>
 }
 
 const PRE_ROUTES_LOAD_PROGRESS_TARGET = 80
@@ -434,7 +434,7 @@ const SplashScreen = ({
   progressType = 'linear',
   showPercentage = false,
   animationDuration = 2000,
-  routesPromise
+  componentPromise
 }: SplashScreenProps) => {
   const { t } = useTranslation()
   const [visible, setVisible] = useState(true)
@@ -456,8 +456,8 @@ const SplashScreen = ({
     setLoadingStageMessage(t('initial'))
     setProgress(0)
 
-    if (routesPromise) {
-      routesPromise
+    if (componentPromise) {
+      componentPromise
         .then(({ default: LoadedRoutes }) => {
           setRoutesComponent(() => LoadedRoutes)
           setAreRoutesLoaded(true)
@@ -469,7 +469,7 @@ const SplashScreen = ({
     } else {
       setAreRoutesLoaded(true)
     }
-  }, [routesPromise, t])
+  }, [componentPromise, t])
 
   useEffect(() => {
     const htmlElement = document.documentElement
