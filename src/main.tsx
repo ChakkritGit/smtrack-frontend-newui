@@ -15,7 +15,6 @@ import { I18nextProvider } from 'react-i18next'
 import { Toaster } from 'react-hot-toast'
 import { HelmetProvider } from 'react-helmet-async'
 import { StyleSheetManager } from 'styled-components'
-// import Routes from './routes/routes.tsx'
 const Routes = lazy(() => import('./routes/routes.tsx'))
 import i18n from './lang/i18n.ts'
 import isPropValid from '@emotion/is-prop-valid'
@@ -109,7 +108,15 @@ class AppRenderer {
             <HelmetProvider>
               <Provider store={store}>
                 <I18nextProvider i18n={i18n}>
-                  <Suspense fallback={<SplashScreen />} name='splash_screen'>
+                  <Suspense
+                    fallback={
+                      <SplashScreen
+                        progressType='linear'
+                        duration={2500}
+                        showPercentage
+                      />
+                    }
+                  >
                     <Routes />
                   </Suspense>
                   <FrameRate />
