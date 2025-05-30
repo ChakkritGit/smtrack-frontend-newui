@@ -52,7 +52,7 @@ const MainSmtrack = () => {
   const { token } = cookieDecode || {}
   const { id, role, hosId } = tokenDecode || {}
   const [isFirstLoad, setIsFirstLoad] = useState(true)
-  const [showAnimation, setShowAnimation] = useState(true)
+  const [showAnimation, setShowAnimation] = useState(false)
   const isPlayingRef = useRef<boolean>(false)
   const toastLimit = 5
   const navigate = useNavigate()
