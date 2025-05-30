@@ -52,6 +52,7 @@ const MainSmtrack = () => {
   const { token } = cookieDecode || {}
   const { id, role, hosId } = tokenDecode || {}
   const [isFirstLoad, setIsFirstLoad] = useState(true)
+  const [showAnimation, setShowAnimation] = useState(true)
   const isPlayingRef = useRef<boolean>(false)
   const toastLimit = 5
   const navigate = useNavigate()
@@ -255,7 +256,12 @@ const MainSmtrack = () => {
 
   return (
     <main>
-      <div className='drawer lg:drawer-open w-auto duration-300 ease-linear initial-Launched-Main'>
+      <div
+        className={`drawer lg:drawer-open w-auto duration-300 ease-linear ${
+          showAnimation ? 'initial-Launched-Main' : ''
+        }`}
+        onAnimationEnd={() => setShowAnimation(false)}
+      >
         <input id='my-drawer-2' type='checkbox' className='drawer-toggle' />
         <div className='drawer-content'>
           <Navbar />
