@@ -37,11 +37,13 @@ const columnData = (
       name: t('deviceNameTb'),
       cell: item => (
         <div
-          className='tooltip'
+          className='tooltip w-[200px]'
           data-tip={item.name ?? '—'}
           onClick={() => handleRowClicked(item)}
         >
-          <span className='truncate max-w-[150px]'>{item.name ?? '—'}</span>
+          <div className='truncate max-w-[150px]'>
+            <span>{item.name ?? '—'}</span>
+          </div>
         </div>
       ),
       sortable: false,
@@ -52,11 +54,13 @@ const columnData = (
       name: t('deviceLocationTb'),
       cell: item => (
         <div
-          className='truncate'
-          title={item.location ?? '—'}
+          className='flex justify-center tooltip w-[150px]'
+          data-tip={item.location ?? '—'}
           onClick={() => handleRowClicked(item)}
         >
-          <span>{item.location ?? '—'}</span>
+          <div className='truncate max-w-[130px]'>
+            <span>{item.location ?? '—'}</span>
+          </div>
         </div>
       ),
       sortable: false,
