@@ -37,7 +37,7 @@ const columnData = (
       name: t('deviceNameTb'),
       cell: item => (
         <div
-          className='tooltip w-[200px]'
+          className='flex justify-center tooltip w-[200px]'
           data-tip={item.name ?? '—'}
           onClick={() => handleRowClicked(item)}
         >

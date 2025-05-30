@@ -54,7 +54,7 @@ const MainTms = () => {
   const [isFirstLoad, setIsFirstLoad] = useState(true)
   const isPlayingRef = useRef<boolean>(false)
   const [showAnimation, setShowAnimation] = useState(false)
-  const toastLimit = 5
+  const toastLimit = 1
   const navigate = useNavigate()
 
   const src =

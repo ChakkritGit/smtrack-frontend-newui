@@ -54,7 +54,7 @@ const MainSmtrack = () => {
   const [isFirstLoad, setIsFirstLoad] = useState(true)
   const [showAnimation, setShowAnimation] = useState(false)
   const isPlayingRef = useRef<boolean>(false)
-  const toastLimit = 5
+  const toastLimit = 1
   const navigate = useNavigate()
 
   const src =
