@@ -144,7 +144,7 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
 
-import { lazy, StrictMode } from 'react'
+import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { Provider } from 'react-redux'
 import { I18nextProvider } from 'react-i18next'
@@ -153,7 +153,8 @@ import { StyleSheetManager } from 'styled-components'
 import i18n from './lang/i18n.ts'
 import isPropValid from '@emotion/is-prop-valid'
 import store from './redux/store/index.ts'
-const Routes = lazy(() => import('./routes/routes.tsx'))
+import Routes from './routes/routes.tsx'
+// const Routes = lazy(() => import('./routes/routes.tsx'))
 
 class AppRenderer {
   private static instance: AppRenderer
