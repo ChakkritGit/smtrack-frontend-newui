@@ -53,7 +53,7 @@ const MainTms = () => {
   const { id, hosId, role } = tokenDecode || {}
   const [isFirstLoad, setIsFirstLoad] = useState(true)
   const isPlayingRef = useRef<boolean>(false)
-  const [showAnimation, setShowAnimation] = useState(true)
+  const [showAnimation, setShowAnimation] = useState(false)
   const toastLimit = 5
   const navigate = useNavigate()
 

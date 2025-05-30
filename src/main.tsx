@@ -144,7 +144,7 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
 
-import { StrictMode } from 'react'
+import { Profiler, StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { Provider } from 'react-redux'
 import { I18nextProvider } from 'react-i18next'
@@ -154,6 +154,8 @@ import i18n from './lang/i18n.ts'
 import isPropValid from '@emotion/is-prop-valid'
 import store from './redux/store/index.ts'
 import Routes from './routes/routes.tsx'
+import FrameRate from './constants/utils/frameRate.tsx'
+import { Toaster } from 'react-hot-toast'
 // const Routes = lazy(() => import('./routes/routes.tsx'))
 
 class AppRenderer {
@@ -214,15 +216,42 @@ class AppRenderer {
     try {
       root.render(
         <StrictMode>
-          <StyleSheetManager shouldForwardProp={isPropValid}>
-            <HelmetProvider>
-              <Provider store={store}>
-                <I18nextProvider i18n={i18n}>
-                  <Routes />
-                </I18nextProvider>
-              </Provider>
-            </HelmetProvider>
-          </StyleSheetManager>
+          <Profiler
+            id='app'
+            onRender={(
+              id,
+              phase,
+              actualDuration,
+              baseDuration,
+              startTime,
+              commitTime
+            ) => {
+              if (import.meta.env.VITE_APP_NODE_ENV === 'development') {
+                console.table([
+                  {
+                    Component: id,
+                    Phase: phase,
+                    'Actual Duration (ms)': actualDuration.toFixed(2),
+                    'Base Duration (ms)': baseDuration.toFixed(2),
+                    'Start Time (ms)': startTime.toFixed(2),
+                    'Commit Time (ms)': commitTime.toFixed(2)
+                  }
+                ])
+              }
+            }}
+          >
+            <StyleSheetManager shouldForwardProp={isPropValid}>
+              <HelmetProvider>
+                <Provider store={store}>
+                  <I18nextProvider i18n={i18n}>
+                    <Routes />
+                    <FrameRate />
+                    <Toaster position='bottom-right' reverseOrder={false} />
+                  </I18nextProvider>
+                </Provider>
+              </HelmetProvider>
+            </StyleSheetManager>
+          </Profiler>
         </StrictMode>
       )
     } catch (error) {
