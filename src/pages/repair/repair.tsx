@@ -385,19 +385,46 @@ const Repair = () => {
     },
     {
       name: t('userNameForm'),
-      selector: item => item.info ?? '- -',
+      cell: item => (
+        <div
+          className='flex justify-center tooltip w-[200px]'
+          data-tip={item.info ?? '—'}
+        >
+          <div className='truncate max-w-[200px]'>
+            <span>{item.info ?? '—'}</span>
+          </div>
+        </div>
+      ),
       sortable: false,
       center: true
     },
     {
       name: t('hisDetail'),
-      selector: item => item.detail ?? '- -',
+      cell: item => (
+        <div
+          className='flex justify-center tooltip w-[200px]'
+          data-tip={item.detail ?? '—'}
+        >
+          <div className='truncate max-w-[200px]'>
+            <span>{item.detail ?? '—'}</span>
+          </div>
+        </div>
+      ),
       sortable: false,
       center: true
     },
     {
       name: t('hosAddress'),
-      selector: item => item.address ?? '- -',
+      cell: item => (
+        <div
+          className='flex justify-center tooltip w-[200px]'
+          data-tip={item.address ?? '—'}
+        >
+          <div className='truncate max-w-[200px]'>
+            <span>{item.address ?? '—'}</span>
+          </div>
+        </div>
+      ),
       sortable: false,
       center: true
     },

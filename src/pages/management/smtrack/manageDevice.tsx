@@ -1021,37 +1021,59 @@ const ManageDevice = () => {
     {
       name: t('deviceNameBox'),
       cell: item => (
-        <span
-          className='max-w-[80px] block truncate text-left'
-          style={{ direction: 'rtl' }}
-        >
-          {item.name ? item.name : '—'}
-        </span>
+        <div className='tooltip w-[130px]' data-tip={item.name ?? '—'}>
+          <div className='truncate max-w-[120px]'>
+            <span
+              className='max-w-[80px] block truncate text-left'
+              style={{ direction: 'rtl' }}
+            >
+              {item.name ? item.name : '—'}
+            </span>
+          </div>
+        </div>
       ),
       sortable: false,
+      center: true,
       width: '130px'
-      // center: true
     },
     {
       name: t('deviceLocationTb'),
-      cell: item => (item.location ? item.location : '—'),
+      cell: item => (
+        <div className='tooltip w-[140px]' data-tip={item.location ?? '—'}>
+          <div className='truncate max-w-[130px]'>
+            <span>{item.location ?? '—'}</span>
+          </div>
+        </div>
+      ),
       sortable: false,
+      center: true,
       width: '140px'
-      // center: true
     },
     {
       name: t('hospitals'),
-      cell: item => (item.hospitalName ? item.hospitalName : '—'),
+      cell: item => (
+        <div className='tooltip w-[145px]' data-tip={item.hospitalName ?? '—'}>
+          <div className='truncate max-w-[130px]'>
+            <span>{item.hospitalName ?? '—'}</span>
+          </div>
+        </div>
+      ),
       sortable: false,
+      center: true,
       width: '145px'
-      // center: true
     },
     {
       name: t('ward'),
-      cell: item => (item.wardName ? item.wardName : '—'),
+      cell: item => (
+        <div className='tooltip w-[140px]' data-tip={item.wardName ?? '—'}>
+          <div className='truncate max-w-[130px]'>
+            <span>{item.wardName ?? '—'}</span>
+          </div>
+        </div>
+      ),
       sortable: false,
+      center: true,
       width: '140px'
-      // center: true
     },
     {
       name: t('firmWareVer'),

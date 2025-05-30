@@ -656,22 +656,27 @@ const ManageHospital = () => {
     },
     {
       name: t('hosName'),
-      cell: item => item.hosName,
-      // center: true,
-      sortable: false
+      cell: item => (
+        <div className='tooltip w-[190px]' data-tip={item.hosName ?? '—'}>
+          <div className='truncate max-w-[180px]'>
+            <span>{item.hosName ?? '—'}</span>
+          </div>
+        </div>
+      ),
+      sortable: false,
+      center: false
     },
     {
       name: t('hosAddress'),
-      cell: item =>
-        item.hosAddress ? (
-          <span className='truncate max-w-[200px]' title={item.hosAddress}>
-            {item.hosAddress}
-          </span>
-        ) : (
-          '—'
-        ),
-      // center: true,
-      sortable: false
+      cell: item => (
+        <div className='tooltip w-[200px]' data-tip={item.hosAddress ?? '—'}>
+          <div className='truncate max-w-[200px]'>
+            <span>{item.hosAddress ?? '—'}</span>
+          </div>
+        </div>
+      ),
+      sortable: false,
+      center: false
     },
     {
       name: t('hosTel'),
@@ -913,7 +918,9 @@ const ManageHospital = () => {
                   />
                   {imageProcessing ? (
                     <div className='mt-4 flex justify-center w-32 h-32 md:w-48 md:h-48'>
-                      <span className={`loading ${loadingStyle} loading-md`}></span>
+                      <span
+                        className={`loading ${loadingStyle} loading-md`}
+                      ></span>
                     </div>
                   ) : (
                     <div className='mt-4 relative'>
@@ -1112,7 +1119,9 @@ const ManageHospital = () => {
                   />
                   {imageProcessing ? (
                     <div className='mt-4 flex justify-center w-32 h-32 md:w-48 md:h-48'>
-                      <span className={`loading ${loadingStyle} loading-md`}></span>
+                      <span
+                        className={`loading ${loadingStyle} loading-md`}
+                      ></span>
                     </div>
                   ) : (
                     <div className='mt-4 relative'>

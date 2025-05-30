@@ -356,21 +356,39 @@ const ManageDevice = () => {
     },
     {
       name: t('deviceNameBox'),
-      cell: item => item.name,
-      sortable: false
-      // center: true
+      cell: item => (
+        <div className='tooltip w-[180px]' data-tip={item.name ?? '—'}>
+          <div className='truncate max-w-[150px]'>
+            <span>{item.name ?? '—'}</span>
+          </div>
+        </div>
+      ),
+      sortable: false,
+      center: false
     },
     {
       name: t('hospitalsName'),
-      cell: item => item.hospitalName,
-      sortable: false
-      // center: true
+      cell: item => (
+        <div className='tooltip w-[180px]' data-tip={item.hospitalName ?? '—'}>
+          <div className='truncate max-w-[150px]'>
+            <span>{item.hospitalName ?? '—'}</span>
+          </div>
+        </div>
+      ),
+      sortable: false,
+      center: false
     },
     {
       name: t('wardsName'),
-      cell: item => item.wardName,
-      sortable: false
-      // center: true
+      cell: item => (
+        <div className='tooltip w-[180px]' data-tip={item.wardName ?? '—'}>
+          <div className='truncate max-w-[150px]'>
+            <span>{item.wardName ?? '—'}</span>
+          </div>
+        </div>
+      ),
+      sortable: false,
+      center: false
     },
     {
       name: t('token'),
@@ -398,12 +416,14 @@ const ManageDevice = () => {
       name: t('action'),
       cell: item => (
         <div className='flex items-center justify-center gap-3 p-3'>
-          {role === 'SUPER' && <button
-            className='btn btn-ghost flex text-white min-w-[32px] max-w-[32px] min-h-[32px] max-h-[32px] p-0 bg-red-500'
-            onClick={() => deleteDevice(item.sn)}
-          >
-            <RiDeleteBin7Line size={20} />
-          </button>}
+          {role === 'SUPER' && (
+            <button
+              className='btn btn-ghost flex text-white min-w-[32px] max-w-[32px] min-h-[32px] max-h-[32px] p-0 bg-red-500'
+              onClick={() => deleteDevice(item.sn)}
+            >
+              <RiDeleteBin7Line size={20} />
+            </button>
+          )}
           <button
             className='btn btn-ghost flex text-white min-w-[32px] max-w-[32px] min-h-[32px] max-h-[32px] p-0 bg-primary'
             onClick={() => openEditModal(item)}

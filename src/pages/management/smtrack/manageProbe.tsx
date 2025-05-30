@@ -667,7 +667,16 @@ const ManageProbe = () => {
     },
     {
       name: t('probeLocation'),
-      cell: item => item.position ?? '—',
+      cell: item => (
+        <div
+          className='flex justify-center tooltip w-[180px]'
+          data-tip={item.position ?? '—'}
+        >
+          <div className='truncate max-w-[150px]'>
+            <span>{item.position ?? '—'}</span>
+          </div>
+        </div>
+      ),
       sortable: false,
       center: true
     },

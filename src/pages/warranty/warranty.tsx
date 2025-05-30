@@ -463,14 +463,20 @@ const Warranty = () => {
 
   const columns: TableColumn<WarrantiesType>[] = [
     {
-      name: t('deviceNameTb'),
-      selector: item => item.device.name ?? '- -',
+      name: t('deviceSerialTb'),
+      selector: item => item.device.id,
       sortable: false,
       center: true
     },
     {
-      name: t('deviceSerialTb'),
-      selector: item => item.device.id,
+      name: t('deviceNameTb'),
+      cell: item => (
+        <div className='flex justify-center tooltip w-[200px]' data-tip={item.device.name ?? '—'}>
+          <div className='truncate max-w-[200px]'>
+            <span>{item.device.name ?? '—'}</span>
+          </div>
+        </div>
+      ),
       sortable: false,
       center: true
     },
@@ -907,9 +913,7 @@ const Warranty = () => {
 
           <div className='form-control w-full'>
             <label className='label flex-col items-start w-full mb-3'>
-              <span className='label-text text-wrap mb-2'>
-                {t('remmark')}
-              </span>
+              <span className='label-text text-wrap mb-2'>{t('remmark')}</span>
               <input
                 name='comment'
                 type='text'
@@ -1178,9 +1182,7 @@ const Warranty = () => {
 
           <div className='form-control w-full'>
             <label className='label flex-col items-start w-full mb-3'>
-              <span className='label-text text-wrap mb-2'>
-                {t('remmark')}
-              </span>
+              <span className='label-text text-wrap mb-2'>{t('remmark')}</span>
               <input
                 name='comment'
                 type='text'

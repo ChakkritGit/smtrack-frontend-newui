@@ -377,21 +377,48 @@ const Home = () => {
       },
       {
         name: t('deviceNameTb'),
-        selector: i => i.name ?? '—',
+        cell: item => (
+          <div
+            className='flex justify-center tooltip w-[280px]'
+            data-tip={item.name ?? '—'}
+          >
+            <div className='truncate max-w-[150px]'>
+              <span>{item.name ?? '—'}</span>
+            </div>
+          </div>
+        ),
         sortable: false,
-        center: false
+        center: true
       },
       {
         name: t('hosName'),
-        selector: i => i.hospitalName,
+        cell: item => (
+          <div
+            className='flex justify-center tooltip w-[280px]'
+            data-tip={item.hospitalName ?? '—'}
+          >
+            <div className='truncate max-w-[150px]'>
+              <span>{item.hospitalName ?? '—'}</span>
+            </div>
+          </div>
+        ),
         sortable: false,
-        center: false
+        center: true
       },
       {
         name: t('wardName'),
-        selector: i => i.wardName,
+        cell: item => (
+          <div
+            className='flex justify-center tooltip w-[280px]'
+            data-tip={item.wardName ?? '—'}
+          >
+            <div className='truncate max-w-[150px]'>
+              <span>{item.wardName ?? '—'}</span>
+            </div>
+          </div>
+        ),
         sortable: false,
-        center: false
+        center: true
       },
       {
         name: t('deviceTime'),

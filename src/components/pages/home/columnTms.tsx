@@ -29,53 +29,60 @@ const columnTms = (
       center: true,
       width: '200px'
     },
-    ...(role === 'SUPER' ? [
-      {
-        name: t('hosName'),
-        cell: (item: DeviceTmsType) => (
-          <div
-            className='tooltip'
-            data-tip={item.hospitalName ?? '—'}
-            onClick={() => handleRowClicked(item)}
-          >
-            <span className='truncate max-w-[150px]'>{item.hospitalName ?? '—'}</span>
-          </div>
-        ),
-        sortable: false,
-        // center: true
-        width: '280px'
-      },
-    ] : []),
-    ...((role === 'SUPER' || role === 'LEGACY_ADMIN' || role === 'ADMIN') ? [
-      {
-        name: t('wardName'),
-        cell: (item: DeviceTmsType) => (
-          <div
-            className='tooltip'
-            data-tip={item.wardName ?? '—'}
-            onClick={() => handleRowClicked(item)}
-          >
-            <span className='truncate max-w-[150px]'>{item.wardName ?? '—'}</span>
-          </div>
-        ),
-        sortable: false,
-        // center: true
-        width: '280px'
-      },
-    ] : []),
+    ...(role === 'SUPER'
+      ? [
+          {
+            name: t('hosName'),
+            cell: (item: DeviceTmsType) => (
+              <div
+                className='tooltip w-[280px]'
+                data-tip={item.hospitalName ?? '—'}
+                onClick={() => handleRowClicked(item)}
+              >
+                <div className='truncate max-w-[150px]'>
+                  <span>{item.hospitalName ?? '—'}</span>
+                </div>
+              </div>
+            ),
+            sortable: false,
+            width: '280px'
+          }
+        ]
+      : []),
+    ...(role === 'SUPER' || role === 'LEGACY_ADMIN' || role === 'ADMIN'
+      ? [
+          {
+            name: t('wardName'),
+            cell: (item: DeviceTmsType) => (
+              <div
+                className='tooltip w-[280px]'
+                data-tip={item.wardName ?? '—'}
+                onClick={() => handleRowClicked(item)}
+              >
+                <div className='truncate max-w-[150px]'>
+                  <span>{item.wardName ?? '—'}</span>
+                </div>
+              </div>
+            ),
+            sortable: false,
+            width: '280px'
+          }
+        ]
+      : []),
     {
       name: t('deviceNameTb'),
-      cell: item => (
+      cell: (item: DeviceTmsType) => (
         <div
-          className='tooltip'
+          className='tooltip w-[280px]'
           data-tip={item.name ?? '—'}
           onClick={() => handleRowClicked(item)}
         >
-          <span className='truncate max-w-[150px]'>{item.name ?? '—'}</span>
+          <div className='truncate max-w-[150px]'>
+            <span>{item.name ?? '—'}</span>
+          </div>
         </div>
       ),
       sortable: false,
-      // center: true
       width: '280px'
     },
     {
