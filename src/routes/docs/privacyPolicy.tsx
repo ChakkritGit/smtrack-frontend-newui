@@ -46,7 +46,7 @@ const PrivacyPolicy = () => {
           {i18nInit === 'th' ? 'คัดลอกลิ้งค์' : 'Copy Link'}
         </div>
       </div>
-      <div className='max-w-[720px] mx-auto py-14 px-5'>
+      <div className='max-w-[720px] mx-auto py-7 px-5'>
         <div className='flex items-center justify-center'>
           <p className='text-[24px] font-normal tracking-wide'>
             {t('privacy')}

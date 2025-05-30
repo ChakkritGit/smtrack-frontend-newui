@@ -17,7 +17,7 @@ const TermsConditions = () => {
   return (
     <div>
       <NavbarForTCPP />
-      <div className='flex items-center justify-end gap-1 p-3 border-b border-base-content/15'>
+      <div className='hidden md:flex items-center justify-end gap-1 p-3 border-b border-base-content/15'>
         <span className='text-[12px] md:text-[14px]'>
           {i18nInit === 'th'
             ? `มีผลบังคับใช้ตั้งแต่วันที่ 5 พฤศจิกายน 2024`
@@ -47,7 +47,7 @@ const TermsConditions = () => {
           {i18nInit === 'th' ? 'คัดลอกลิ้งค์' : 'Copy Link'}
         </div>
       </div>
-      <div className='max-w-[720px] mx-auto py-14 px-5'>
+      <div className='max-w-[720px] mx-auto py-7 px-5'>
         <div className='flex items-center justify-center'>
           <p className='text-[24px] font-normal tracking-wide'>{t('terms')}</p>
         </div>

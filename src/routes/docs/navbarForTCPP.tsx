@@ -8,8 +8,8 @@ const NavbarForTCPP = () => {
   const location = useLocation()
 
   return (
-    <div className='flex flex-col justify-center pt-3 px-5 bg-base-100 border-b border-base-content/15 sticky top-0 left-0 z-40'>
-      <div className='flex items-center justify-between'>
+    <div className='hidden md:flex flex-col justify-center pt-3 px-5 bg-base-100 border-b border-base-content/15 sticky top-0 left-0 z-40'>
+      <div className='hidden md:flex items-center justify-between'>
         <div className='flex items-center gap-3 w-max'>
           <Link to={'/'}>
             <img
