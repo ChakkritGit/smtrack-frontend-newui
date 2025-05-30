@@ -693,7 +693,7 @@ const SplashScreen = ({
         className={`avatar transition-all duration-800 delay-300 ease-out ${
           visible
             ? 'scale-100 opacity-100 blur-none'
-            : 'scale-[2000%] opacity-0 blur-3xl'
+            : 'scale-[500%] md:scale-[2000%] opacity-0 blur-3xl'
         }`}
       >
         <div className='w-16 md:w-28 rounded-2xl'>
@@ -701,7 +701,7 @@ const SplashScreen = ({
             src={Logo}
             alt='SM-LOGO'
             className={`scale-105 transition-all duration-800 delay-300 ease-out ${
-              visible ? 'scale-100' : 'scale-[1800%]'
+              visible ? 'scale-100' : 'scale-200 md:scale-[1800%]'
             }`}
           />
         </div>

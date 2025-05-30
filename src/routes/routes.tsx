@@ -42,7 +42,7 @@ const Routes = () => {
     blurDisabled,
     transitionDisabled,
     grayscaleMode,
-    i18nInit,
+    i18nInit
   } = useSelector((state: RootState) => state.utils)
   const [hospital, setHospital] = useState<HospitalType[]>([])
   const [activeIndex, setActiveIndex] = useState(0)

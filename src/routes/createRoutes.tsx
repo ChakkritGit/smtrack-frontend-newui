@@ -5,6 +5,8 @@ import { tmsChildren } from './routes/tmsChildren'
 import { AuthRoute } from '../middleware/authprotect'
 import { LogoutAuth } from '../middleware/Auth'
 import SplashScreen from '../components/loading/splashScreen'
+import ErrorScreen from './error/error'
+import NotFound from './error/notFound'
 const MainTms = import('../main/tms/main')
 const MainSmtrack = import('../main/smtrack/main')
 const Overview = lazy(() => import('./docs/overview'))
@@ -12,8 +14,6 @@ const PrivacyPolicy = lazy(() => import('./docs/privacyPolicy'))
 const TermsConditions = lazy(() => import('./docs/termsConditions'))
 const Support = lazy(() => import('./docs/support'))
 const App = lazy(() => import('./docs/app'))
-const NotFound = lazy(() => import('./error/notFound'))
-const ErrorScreen = lazy(() => import('./error/error'))
 
 const router = (role: string, tmsMode: boolean) =>
   createBrowserRouter([

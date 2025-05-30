@@ -1,8 +1,8 @@
 import { lazy } from 'react'
 import { RouteObject } from 'react-router-dom'
 import { HideFlashFW, HideSetting } from '../../middleware/Auth'
+import ErrorScreen from '../error/error'
 
-const ErrorScreen = lazy(() => import('../error/error'))
 const Home = lazy(() => import('../../pages/home/home'))
 const Dashboard = lazy(() => import('../../pages/dashboard/smtrack/dashboard'))
 const FullChart = lazy(() => import('../../pages/dashboard/smtrack/fullChart'))

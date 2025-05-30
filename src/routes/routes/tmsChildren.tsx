@@ -1,8 +1,8 @@
 import { lazy } from 'react'
 import { HideSettingManageTms, HideSettingTms } from '../../middleware/Auth'
 import { RouteObject } from 'react-router-dom'
+import ErrorScreen from '../error/error'
 
-const ErrorScreen = lazy(() => import('../error/error'))
 const HomeTms = lazy(() => import('../../pages/home/homeTms'))
 const DashboardTms = lazy(() => import('../../pages/dashboard/tms/dashboardTms'))
 const FullChartTms = lazy(() => import('../../pages/dashboard/tms/fullChartTms'))

@@ -36,7 +36,7 @@ ENV VITE_SECRET_KEY=$VITE_APP_NODE_ENV
 
 RUN bun run build
 
-FROM nginx:alpine
+FROM fholzer/nginx-brotli
 
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
@@ -44,4 +44,4 @@ COPY --from=builder /app/dist /usr/share/nginx/html
 
 EXPOSE 7258
 
-CMD ["nginx", "-g", "daemon off;"]
+# CMD ["nginx", "-g", "daemon off;"]

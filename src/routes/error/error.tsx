@@ -25,7 +25,7 @@ const ErrorScreen = () => {
 
   return (
     <div className='p-3 h-dvh flex items-center justify-center gap-3'>
-      <div className={`w-full fixed ${blurDisabled ? 'h-[64px] bg-red-500/40 blur-2xl top-0 shadow-2xl shadow-red-500/70 z-10' : ''}`}></div>
+      <div className={`w-full fixed ${blurDisabled ? 'blur-[100px] bg-red-500/40 h-[50px] top-0 shadow-2xl shadow-red-500/100 z-10' : ''}`}></div>
       <div className='flex items-center justify-center gap-3 flex-col'>
         <RiBugLine className='text-red-500 text-[48px] md:text-[64px]' />
         <pre className='max-w-[720px] whitespace-pre-wrap break-words max-h-[520px] overflow-y-scroll py-1 no-scrollbar'>{String(error)}</pre>
