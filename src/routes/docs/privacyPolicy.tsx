@@ -17,7 +17,7 @@ const PrivacyPolicy = () => {
   return (
     <div>
       <NavbarForTCPP />
-      <div className='flex items-center justify-end gap-1 p-3 border-b border-base-content/15'>
+      <div className='hidden md:flex items-center justify-end gap-1 p-3 border-b border-base-content/15'>
         <span className='text-[12px] md:text-[14px]'>
           {i18nInit === 'th'
             ? 'มีผลบังคับใช้ตั้งแต่วันที่ 4 ตุลาคม 2024'
