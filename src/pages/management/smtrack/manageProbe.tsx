@@ -549,13 +549,9 @@ const ManageProbe = () => {
   const selectProbeType = (e: SingleValue<Option>) => {
     const selectedValue = e?.value
     if (!selectedValue) return
-    const typeSensor =
-      selectedValue === 'SHT-31'
-        ? `${selectedValue}|Digital Sensor`
-        : `${selectedValue}|Analog Sensor`
     setFormData({
       ...formData,
-      type: typeSensor
+      type: selectedValue
     })
   }
 
@@ -786,8 +782,8 @@ const ManageProbe = () => {
   ]
 
   const ProbeName = [
-    { value: 'SHT-31', name: 'SHT-31' },
-    { value: 'PT100', name: 'PT100' }
+    { value: 'SHT-31|Digital Sensor', name: 'SHT-31|Digital Sensor' },
+    { value: 'PT100|Analog Sensor', name: 'PT100|Analog Sensor' }
   ]
 
   // const ProbeType = [
@@ -879,24 +875,6 @@ const ManageProbe = () => {
                         className='input  w-full'
                         maxLength={23}
                       />
-                      {/* <Select
-                        options={mapOptions<OptionData, keyof OptionData>(
-                          ProbeName,
-                          'value',
-                          'name'
-                        )}
-                        value={mapDefaultValue<OptionData, keyof OptionData>(
-                          ProbeName,
-                          String(formData.name),
-                          'value',
-                          'name'
-                        )}
-                        onChange={selectProbeName}
-                        autoFocus={false}
-                        menuPlacement='top'
-                        className='react-select-container custom-menu-select z-[75] min-w-full'
-                        classNamePrefix='react-select'
-                      /> */}
                     </label>
                   </div>
 
@@ -915,7 +893,7 @@ const ManageProbe = () => {
                         )}
                         value={mapDefaultValue<OptionData, keyof OptionData>(
                           ProbeName,
-                          String(formData.name),
+                          String(formData.type),
                           'value',
                           'name'
                         )}
@@ -1577,7 +1555,7 @@ const ManageProbe = () => {
                         )}
                         value={mapDefaultValue<OptionData, keyof OptionData>(
                           ProbeName,
-                          String(formData.name),
+                          String(formData.type),
                           'value',
                           'name'
                         )}
