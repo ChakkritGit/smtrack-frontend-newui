@@ -235,7 +235,7 @@ const subColumnData = (
       center: true
     },
     {
-      name: t('probeNameSubTb'),
+      name: t('refrigeratorName'),
       cell: (items, index) => (
         <span key={index}>{items.name ?? 'Name is not assigned'}</span>
       ),
