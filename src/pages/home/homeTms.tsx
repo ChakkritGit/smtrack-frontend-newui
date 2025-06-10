@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../redux/reducers/rootReducer'
-import { useCallback, useContext, useEffect, useMemo, useState } from 'react'
+import { useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import axiosInstance from '../../constants/axios/axiosInstance'
 import { AxiosError } from 'axios'
@@ -35,11 +35,18 @@ const HomeTms = () => {
   const [totalRows, setTotalRows] = useState(0)
   const [perPage, setPerPage] = useState(cookies.get('homeRowPerPageTms') ?? 10)
   const [currentPage, setCurrentPage] = useState(1)
+    const firstFetch = useRef<boolean>(false)
   const { role } = tokenDecode || {}
 
   const fetchDevices = useCallback(
-    async (page: number, size = perPage, search?: string) => {
+    async (
+      checkPoint: string,
+      page: number,
+      size = perPage,
+      search?: string
+    ) => {
       try {
+        console.log('checkPoint: ', checkPoint)
         setLoading(true)
         const response = await axiosInstance.get(
           `/legacy/device?${
@@ -64,43 +71,84 @@ const HomeTms = () => {
     [perPage, wardId, hosId]
   )
 
-  const handlePageChange = (page: number) => {
-    fetchDevices(page)
-    setCurrentPage(page)
-  }
+const handlePageChange = (page: number) => {
+  setCurrentPage(page)
+}
 
-  const handlePerRowsChange = async (newPerPage: number, page: number) => {
-    setPerPage(newPerPage)
-    fetchDevices(page, newPerPage)
-    cookies.set('homeRowPerPageTms', newPerPage, cookieOptions)
-  }
+const handlePerRowsChange = async (newPerPage: number, page: number) => {
+  setPerPage(newPerPage)
+  setCurrentPage(page)
+  cookies.set('homeRowPerPageTms', newPerPage, cookieOptions)
+}
 
-  const handleRowClicked = (row: DeviceTmsType) => {
-    cookies.set('deviceKey', row.sn, cookieOptions) // it's mean setSerial
-    dispatch(setDeviceKey(row.sn))
-    navigate('/dashboard')
-    window.scrollTo(0, 0)
-  }
+const handleRowClicked = (row: DeviceTmsType) => {
+  cookies.set('deviceKey', row.sn, cookieOptions)
+  dispatch(setDeviceKey(row.sn))
+  navigate('/dashboard')
+  window.scrollTo(0, 0)
+}
 
-  useEffect(() => {
-    fetchDevices(1)
-  }, [wardId, hosId])
+useEffect(() => {
+  const performFetch = async () => {
+    if (firstFetch.current) return
+    firstFetch.current = true
 
-  useEffect(() => {
-    return () => {
-      dispatch(setSearch(''))
+    const run = async () => {
+      await fetchDevices('performFetch', currentPage, perPage, globalSearch)
     }
-  }, [])
 
-  const columns: TableColumn<DeviceTmsType>[] = useMemo(
-    () => columnTms(t, handleRowClicked, role),
-    [t, navigate]
-  )
+    await run()
 
-  const subColumns: TableColumn<TmsLogType>[] = useMemo(
-    () => subColumnData(t),
-    [t, devices]
-  )
+    if (shouldFetch && globalSearch !== '') {
+      await fetchDevices('shouldFetch', 1, perPage, globalSearch)
+      dispatch(setSholdFetch())
+    }
+  }
+
+  performFetch()
+}, [shouldFetch, globalSearch, currentPage, perPage])
+
+useEffect(() => {
+  if (firstFetch.current) {
+    if (hosId || wardId || hosId === '' || wardId === '') {
+      fetchDevices('hosId, wardId', 1, perPage, globalSearch)
+      setCurrentPage(1)
+    }
+  }
+}, [hosId, wardId])
+
+useEffect(() => {
+  if (firstFetch.current && devices.length > 0) {
+    fetchDevices('currentPage, perPage', currentPage, perPage, globalSearch)
+  }
+}, [currentPage, perPage])
+
+useEffect(() => {
+  const handleCk = (e: KeyboardEvent) => {
+    if (globalSearch && e.key?.toLowerCase() === 'enter' && isFocused) {
+      e.preventDefault()
+      searchRef.current?.blur()
+      setIsFocused(false)
+      fetchDevices('keydown' ,currentPage, perPage, globalSearch)
+    }
+  }
+
+  if (firstFetch.current) {
+    window.addEventListener('keydown', handleCk)
+  }
+
+  return () => {
+    window.removeEventListener('keydown', handleCk)
+  }
+}, [globalSearch, currentPage, perPage, isFocused])
+
+useEffect(() => {
+  if (firstFetch.current && isCleared) {
+    fetchDevices('isCleared', currentPage, perPage)
+    setIsCleared(false)
+  }
+}, [isCleared])
+
 
   const ExpandedComponent = ({ data }: { data: DeviceTmsType }) => {
     const { log } = data
@@ -125,49 +173,21 @@ const HomeTms = () => {
     )
   }
 
-  const shouldFetchFunc = async () => {
-    await fetchDevices(1, 10, globalSearch)
-    dispatch(setSholdFetch())
-  }
+  const columns: TableColumn<DeviceTmsType>[] = useMemo(
+    () => columnTms(t, handleRowClicked, role),
+    [t, navigate]
+  )
+
+  const subColumns: TableColumn<TmsLogType>[] = useMemo(
+    () => subColumnData(t),
+    [t, devices]
+  )
 
   useEffect(() => {
-    fetchDevices(1)
-  }, [hosId])
-
-  useEffect(() => {
-    if (globalSearch === '') return
-    if (shouldFetch) {
-      shouldFetchFunc()
-    }
-  }, [shouldFetch, globalSearch])
-
-  useEffect(() => {
-    const handleCk = (e: KeyboardEvent) => {
-      if (
-        globalSearch !== '' &&
-        e.key?.toLowerCase() === 'enter' &&
-        isFocused
-      ) {
-        e.preventDefault()
-        if (isFocused) {
-          searchRef.current?.blur()
-          setIsFocused(false)
-        }
-        fetchDevices(currentPage, perPage, globalSearch)
-      }
-    }
-
-    window.addEventListener('keydown', handleCk)
-
-    if (isCleared) {
-      fetchDevices(currentPage, perPage)
-      setIsCleared(false)
-    }
-
     return () => {
-      window.removeEventListener('keydown', handleCk)
+      dispatch(setSearch(''))
     }
-  }, [globalSearch, currentPage, perPage, isCleared, isFocused])
+  }, [])
 
   const dataTable = useMemo(
     () => (

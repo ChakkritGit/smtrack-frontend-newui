@@ -540,16 +540,23 @@ const ManageProbe = () => {
     }
   }
 
-  const selectProbeName = (e: SingleValue<Option>) => {
-    const selectedValue = e?.value
-    if (!selectedValue) return
-    setFormData({ ...formData, name: selectedValue })
-  }
+  // const selectProbeName = (e: SingleValue<Option>) => {
+  //   const selectedValue = e?.value
+  //   if (!selectedValue) return
+  //   setFormData({ ...formData, type: selectedValue })
+  // }
 
   const selectProbeType = (e: SingleValue<Option>) => {
     const selectedValue = e?.value
     if (!selectedValue) return
-    setFormData({ ...formData, type: selectedValue })
+    const typeSensor =
+      selectedValue === 'SHT-31'
+        ? `${selectedValue}|Digital Sensor`
+        : `${selectedValue}|Analog Sensor`
+    setFormData({
+      ...formData,
+      type: typeSensor
+    })
   }
 
   const delayTime = (e: SingleValue<Option>) => {
@@ -783,10 +790,10 @@ const ManageProbe = () => {
     { value: 'PT100', name: 'PT100' }
   ]
 
-  const ProbeType = [
-    { value: 'Digital Sensor', name: 'Digital Sensor' },
-    { value: 'Analog Sensor', name: 'Analog Sensor' }
-  ]
+  // const ProbeType = [
+  //   { value: 'Digital Sensor', name: 'Digital Sensor' },
+  //   { value: 'Analog Sensor', name: 'Analog Sensor' }
+  // ]
 
   return (
     <div>
@@ -862,9 +869,17 @@ const ManageProbe = () => {
                     <label className='label flex-col items-start w-full mb-3'>
                       <span className='label-text text-wrap mb-2'>
                         <span className='font-medium text-red-500 mr-1'>*</span>
-                        {t('probeName')}
+                        {t('refrigeratorName')}
                       </span>
-                      <Select
+                      <input
+                        name='name'
+                        type='text'
+                        value={formData.name}
+                        onChange={handleChange}
+                        className='input  w-full'
+                        maxLength={23}
+                      />
+                      {/* <Select
                         options={mapOptions<OptionData, keyof OptionData>(
                           ProbeName,
                           'value',
@@ -881,7 +896,7 @@ const ManageProbe = () => {
                         menuPlacement='top'
                         className='react-select-container custom-menu-select z-[75] min-w-full'
                         classNamePrefix='react-select'
-                      />
+                      /> */}
                     </label>
                   </div>
 
@@ -893,6 +908,24 @@ const ManageProbe = () => {
                         {t('probeType')}
                       </span>
                       <Select
+                        options={mapOptions<OptionData, keyof OptionData>(
+                          ProbeName,
+                          'value',
+                          'name'
+                        )}
+                        value={mapDefaultValue<OptionData, keyof OptionData>(
+                          ProbeName,
+                          String(formData.name),
+                          'value',
+                          'name'
+                        )}
+                        onChange={selectProbeType}
+                        autoFocus={false}
+                        menuPlacement='top'
+                        className='react-select-container custom-menu-select z-[75] min-w-full'
+                        classNamePrefix='react-select'
+                      />
+                      {/* <Select
                         options={mapOptions<OptionData, keyof OptionData>(
                           ProbeType,
                           'value',
@@ -909,7 +942,7 @@ const ManageProbe = () => {
                         menuPlacement='top'
                         className='react-select-container custom-menu-select z-[75] min-w-full'
                         classNamePrefix='react-select'
-                      />
+                      /> */}
                     </label>
                   </div>
                 </div>
@@ -1516,25 +1549,15 @@ const ManageProbe = () => {
                     <label className='label flex-col items-start w-full mb-3'>
                       <span className='label-text text-wrap mb-2'>
                         <span className='font-medium text-red-500 mr-1'>*</span>
-                        {t('probeName')}
+                        {t('refrigeratorName')}
                       </span>
-                      <Select
-                        options={mapOptions<OptionData, keyof OptionData>(
-                          ProbeName,
-                          'value',
-                          'name'
-                        )}
-                        value={mapDefaultValue<OptionData, keyof OptionData>(
-                          ProbeName,
-                          String(formData.name),
-                          'value',
-                          'name'
-                        )}
-                        onChange={selectProbeName}
-                        autoFocus={false}
-                        menuPlacement='top'
-                        className='react-select-container custom-menu-select z-[75] min-w-full'
-                        classNamePrefix='react-select'
+                      <input
+                        name='name'
+                        type='text'
+                        value={formData.name}
+                        onChange={handleChange}
+                        className='input  w-full'
+                        maxLength={23}
                       />
                     </label>
                   </div>
@@ -1548,13 +1571,13 @@ const ManageProbe = () => {
                       </span>
                       <Select
                         options={mapOptions<OptionData, keyof OptionData>(
-                          ProbeType,
+                          ProbeName,
                           'value',
                           'name'
                         )}
                         value={mapDefaultValue<OptionData, keyof OptionData>(
-                          ProbeType,
-                          String(formData.type),
+                          ProbeName,
+                          String(formData.name),
                           'value',
                           'name'
                         )}
