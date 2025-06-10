@@ -492,7 +492,7 @@ export default {
     imageSizeLimit: 'Image size must be less than 5MB',
     default: 'Default',
     clickToPlay: 'Click to play',
-    refrigeratorName: 'Refrigerator Name',
+    refrigeratorName: 'Refrigerator Serial',
 
     // connect
     ipAddress: 'IP',

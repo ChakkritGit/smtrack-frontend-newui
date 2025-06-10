@@ -491,7 +491,7 @@ export default {
     imageSizeLimit: 'ขนาดไฟล์รูปภาพไม่เกิน 5MB',
     default: 'ค่าเริ่มต้น',
     clickToPlay: 'คลิกเพื่อเล่น',
-    refrigeratorName: 'ชื่อตู้แช่',
+    refrigeratorName: 'ซีเรียลตู้แช่',
 
     // connect
     ipAddress: 'IP',
