@@ -647,7 +647,7 @@ const ManageProbe = () => {
 
   const columns: TableColumn<ProbeListType>[] = [
     {
-      name: t('probeName'),
+      name: t('refrigeratorName'),
       cell: item => item.name ?? '—',
       sortable: false,
       center: true
