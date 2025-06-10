@@ -193,15 +193,6 @@ const Navbar = () => {
     }
   }, [])
 
-  useEffect(() => {
-    if (
-      (globalSearch === '' && location.pathname === '/') ||
-      (globalSearch === '' && location.pathname === '/management')
-    ) {
-      setIsCleared(true)
-    }
-  }, [globalSearch, location])
-
   const searchRecommend = useMemo(() => {
     if (!isFocused) return null
 

@@ -90,6 +90,27 @@ const Home = () => {
     DevicesOnlineType[]
   >([])
 
+  const fetchDeviceOnline = useCallback(async (hosid?: string) => {
+    try {
+      setLoading(true)
+      const response = await axiosInstance.get<
+        responseType<DevicesOnlineType[]>
+      >(`/devices/online${hosid ? `?hospital=${hosid}` : ''}`)
+      setDevicesOnline(response.data.data)
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        if (error.response?.status === 401) {
+          dispatch(setTokenExpire(true))
+        }
+        console.error(error.message)
+      } else {
+        console.error(error)
+      }
+    } finally {
+      setLoading(false)
+    }
+  }, [])
+
   const fetchDeviceCount = useCallback(
     async (page: number, size = perPage) => {
       try {
@@ -144,191 +165,109 @@ const Home = () => {
     [perPage, wardId, hosId]
   )
 
-  const fetchDeviceOnline = useCallback(async (hosid?: string) => {
-    try {
-      setLoading(true)
-      const response = await axiosInstance.get<
-        responseType<DevicesOnlineType[]>
-      >(`/devices/online${hosid ? `?hospital=${hosid}` : ''}`)
-      setDevicesOnline(response.data.data)
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        if (error.response?.status === 401) {
-          dispatch(setTokenExpire(true))
-        }
-        console.error(error.message)
-      } else {
-        console.error(error)
-      }
-    } finally {
-      setLoading(false)
-    }
-  }, [])
-
-  const changListAndGrid = (selected: number) => {
-    localStorage.setItem('listGrid', String(selected))
-    setListandGrid(selected)
-  }
-
   const handlePageChange = (page: number) => {
-    fetchDevices(page)
-    fetchDeviceCount(page)
     setCurrentPage(page)
   }
 
   const handlePerRowsChange = async (newPerPage: number, page: number) => {
     setPerPage(newPerPage)
-    fetchDeviceCount(newPerPage)
-    fetchDevices(page, newPerPage)
+    setCurrentPage(page)
     cookies.set('homeRowPerPage', newPerPage, cookieOptions)
   }
 
-  const handleRowClicked = (row: DeviceType) => {
-    cookies.set('deviceKey', row.id, cookieOptions) // it's mean setSerial
-    dispatch(setDeviceKey(row.id))
-    navigate('/dashboard')
-    window.scrollTo(0, 0)
-  }
+  useEffect(() => {
+    const shouldFetchFromSocket = () => {
+      if (!socketData?.device || devices.length === 0) return false
+      const deviceName = socketData.device.toLowerCase()
+      const matched = devices.find(d =>
+        d.name?.toLowerCase().includes(deviceName)
+      )
+      if (!matched) return false
 
-  const handleFilterConnect = (status: string) => {
-    if (deviceConnect === status) {
-      setDeviceConnect('')
-    } else {
-      setDeviceConnect(status)
+      const now = Date.now()
+      const lastFetched = deviceFetchHistory.current[deviceName] || 0
+      if (now - lastFetched >= 30000) {
+        deviceFetchHistory.current[deviceName] = now
+        return true
+      }
+      return false
     }
-  }
 
-  useEffect(() => {
-    fetchDeviceCount(1)
-    fetchDevices(1)
-  }, [hosId])
+    const performFetch = async () => {
+      if (firstFetch.current) return
+      firstFetch.current = true
 
-  useEffect(() => {
-    const filter = devices?.filter(f => {
-      const matchesConnection =
-        deviceConnect === '' ||
-        (deviceConnect === 'online' && f.online === true) ||
-        (deviceConnect === 'offline' && f.online === false)
+      const run = async () => {
+        await fetchDevices(currentPage, perPage)
+        await fetchDeviceCount(currentPage, perPage)
+      }
 
-      return matchesConnection
-    })
+      await run()
 
-    setDevicesFiltered(filter)
-  }, [devices, globalSearch, deviceConnect])
-
-  useEffect(() => {
-    const handleDeviceData = () => {
-      if (socketData?.device && devices.length > 0) {
-        const deviceName = socketData.device.toLowerCase()
-
-        const matchedDevice = devices.find(f =>
-          f.name?.toLowerCase().includes(deviceName)
-        )
-
-        if (matchedDevice) {
-          const currentTime = Date.now()
-          const lastFetchTime = deviceFetchHistory.current[deviceName] || 0
-
-          if (currentTime - lastFetchTime >= 30000) {
-            deviceFetchHistory.current[deviceName] = currentTime
-
-            if (globalSearch !== '') {
-              if (isFocused) return
-              fetchDevices(currentPage, perPage, globalSearch)
-              fetchDeviceCount(currentPage, perPage)
-            } else {
-              fetchDevices(currentPage, perPage)
-              fetchDeviceCount(currentPage, perPage)
-            }
-          }
+      if (shouldFetchFromSocket()) {
+        if (!isFocused && globalSearch !== '') {
+          await fetchDevices(currentPage, perPage, globalSearch)
+          await fetchDeviceCount(currentPage, perPage)
+        } else if (!isFocused) {
+          await fetchDevices(currentPage, perPage)
+          await fetchDeviceCount(currentPage, perPage)
         }
       }
-    }
 
-    if (!firstFetch.current) {
-      if (globalSearch !== '') {
-        fetchDevices(currentPage, perPage, globalSearch)
-        fetchDeviceCount(currentPage, perPage)
-        firstFetch.current = true
-      } else {
-        fetchDevices(currentPage, perPage)
-        fetchDeviceCount(currentPage, perPage)
-        firstFetch.current = true
+      if (shouldFetch && globalSearch !== '') {
+        await fetchDevices(1, perPage, globalSearch)
+        await fetchDeviceCount(1, perPage)
+        dispatch(setSholdFetch())
       }
     }
 
-    if (socketData?.device) {
-      handleDeviceData()
-    }
-
-    return () => {}
-  }, [
-    devices,
-    socketData,
-    currentPage,
-    perPage,
-    globalSearch,
-    isFocused,
-    hosId
-  ])
-
-  const shouldFetchFunc = async () => {
-    await fetchDevices(1, 10, globalSearch)
-    dispatch(setSholdFetch())
-  }
+    performFetch()
+  }, [socketData, globalSearch, isFocused, shouldFetch, currentPage, perPage])
 
   useEffect(() => {
-    if (globalSearch === '') return
-    if (shouldFetch) {
-      shouldFetchFunc()
+    if (firstFetch.current) {
+      if (hosId || wardId || hosId === '' || wardId === '') {
+        fetchDevices(1, perPage, globalSearch)
+        fetchDeviceCount(1, perPage)
+        setCurrentPage(1)
+      }
     }
-  }, [shouldFetch, globalSearch])
+  }, [hosId, wardId])
 
   useEffect(() => {
-    fetchDevices(1)
-    fetchDeviceCount(1)
-  }, [wardId])
-
-  // useEffect(() => {
-  //   setInterval(() => {
-  //     fetchDevices(currentPage, perPage, globalSearch)
-  //     fetchDeviceCount(currentPage, perPage)
-  //   }, 300000)
-  // }, [currentPage, perPage, globalSearch])
-
-  useEffect(() => {
-    return () => {
-      dispatch(setSearch(''))
+    if (firstFetch.current && devices.length > 0) {
+      fetchDevices(currentPage, perPage, globalSearch)
+      fetchDeviceCount(currentPage, perPage)
     }
-  }, [])
+  }, [currentPage, perPage])
 
   useEffect(() => {
     const handleCk = (e: KeyboardEvent) => {
-      if (
-        globalSearch !== '' &&
-        e.key?.toLowerCase() === 'enter' &&
-        isFocused
-      ) {
+      if (globalSearch && e.key?.toLowerCase() === 'enter' && isFocused) {
         e.preventDefault()
-        if (isFocused) {
-          searchRef.current?.blur()
-          setIsFocused(false)
-        }
+        searchRef.current?.blur()
+        setIsFocused(false)
         fetchDevices(currentPage, perPage, globalSearch)
       }
     }
 
-    window.addEventListener('keydown', handleCk)
-
-    if (isCleared) {
-      fetchDevices(currentPage, perPage)
-      setIsCleared(false)
+    if (firstFetch.current) {
+      window.addEventListener('keydown', handleCk)
     }
 
     return () => {
       window.removeEventListener('keydown', handleCk)
     }
-  }, [globalSearch, currentPage, perPage, isCleared, isFocused])
+  }, [globalSearch, currentPage, perPage, isFocused])
+
+  useEffect(() => {
+    if (firstFetch.current) {
+      if (isCleared) {
+        fetchDevices(currentPage, perPage)
+        setIsCleared(false)
+      }
+    }
+  }, [isCleared])
 
   useEffect(() => {
     if (onlineAll === 2) {
@@ -353,6 +292,45 @@ const Home = () => {
       setDevicesOnlineFilter(filter)
     }
   }, [devicesOnline, onlineAll, globalSearch])
+
+  const changListAndGrid = (selected: number) => {
+    localStorage.setItem('listGrid', String(selected))
+    setListandGrid(selected)
+  }
+
+  const handleRowClicked = (row: DeviceType) => {
+    cookies.set('deviceKey', row.id, cookieOptions) // it's mean setSerial
+    dispatch(setDeviceKey(row.id))
+    navigate('/dashboard')
+    window.scrollTo(0, 0)
+  }
+
+  const handleFilterConnect = (status: string) => {
+    if (deviceConnect === status) {
+      setDeviceConnect('')
+    } else {
+      setDeviceConnect(status)
+    }
+  }
+
+  useEffect(() => {
+    const filter = devices?.filter(f => {
+      const matchesConnection =
+        deviceConnect === '' ||
+        (deviceConnect === 'online' && f.online === true) ||
+        (deviceConnect === 'offline' && f.online === false)
+
+      return matchesConnection
+    })
+
+    setDevicesFiltered(filter)
+  }, [devices, globalSearch, deviceConnect])
+
+  useEffect(() => {
+    return () => {
+      dispatch(setSearch(''))
+    }
+  }, [])
 
   const openAdjustModal = (probe: ProbeType[], sn: string) => {
     setProbeData(probe)
