@@ -135,7 +135,7 @@ const CardStatus = (props: PropsType) => {
                       )}
                     </div>
                     <span>{t('dashProbe')}</span>
-                    <span className='badge badge-soft badge-secondary bg-opacity-15 font-bold border'>
+                    <span className='badge badge-soft badge-neutral bg-opacity-15 font-bold border'>
                       P{item.channel}
                     </span>
                   </div>
@@ -181,7 +181,7 @@ const CardStatus = (props: PropsType) => {
                   <RiTempColdLine size={20} />
                 </div>
                 <span>{t('dashProbe')}</span>
-                <span className='badge badge-soft badge-secondary bg-opacity-15 font-bold border'>
+                <span className='badge badge-soft badge-neutral bg-opacity-15 font-bold border'>
                   P—
                 </span>
               </div>
@@ -369,7 +369,7 @@ const CardStatus = (props: PropsType) => {
                         {t('dashTempofDay')}
                       </span>
                     </label>
-                    <span className='badge badge-soft badge-secondary bg-opacity-15 font-bold border'>
+                    <span className='badge badge-soft badge-neutral bg-opacity-15 font-bold border'>
                       P{item.channel}
                     </span>
                   </div>
@@ -411,7 +411,7 @@ const CardStatus = (props: PropsType) => {
                     {t('dashTempofDay')}
                   </span>
                 </label>
-                <span className='badge badge-soft badge-secondary bg-opacity-15 font-bold border'>
+                <span className='badge badge-soft badge-neutral bg-opacity-15 font-bold border'>
                   P—
                 </span>
               </div>

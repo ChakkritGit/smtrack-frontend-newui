@@ -36,7 +36,7 @@ ENV VITE_SECRET_KEY=$VITE_APP_NODE_ENV
 
 RUN bun run build
 
-FROM fholzer/nginx-brotli
+FROM nginx:alpine
 
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
