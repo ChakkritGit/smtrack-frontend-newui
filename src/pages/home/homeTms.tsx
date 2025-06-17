@@ -1,6 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../redux/reducers/rootReducer'
-import { useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react'
+import {
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState
+} from 'react'
 import { useTranslation } from 'react-i18next'
 import axiosInstance from '../../constants/axios/axiosInstance'
 import { AxiosError } from 'axios'
@@ -35,7 +42,7 @@ const HomeTms = () => {
   const [totalRows, setTotalRows] = useState(0)
   const [perPage, setPerPage] = useState(cookies.get('homeRowPerPageTms') ?? 10)
   const [currentPage, setCurrentPage] = useState(1)
-    const firstFetch = useRef<boolean>(false)
+  const firstFetch = useRef<boolean>(false)
   const { role } = tokenDecode || {}
 
   const fetchDevices = useCallback(
@@ -71,84 +78,83 @@ const HomeTms = () => {
     [perPage, wardId, hosId]
   )
 
-const handlePageChange = (page: number) => {
-  setCurrentPage(page)
-}
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page)
+  }
 
-const handlePerRowsChange = async (newPerPage: number, page: number) => {
-  setPerPage(newPerPage)
-  setCurrentPage(page)
-  cookies.set('homeRowPerPageTms', newPerPage, cookieOptions)
-}
+  const handlePerRowsChange = async (newPerPage: number, page: number) => {
+    setPerPage(newPerPage)
+    setCurrentPage(page)
+    cookies.set('homeRowPerPageTms', newPerPage, cookieOptions)
+  }
 
-const handleRowClicked = (row: DeviceTmsType) => {
-  cookies.set('deviceKey', row.sn, cookieOptions)
-  dispatch(setDeviceKey(row.sn))
-  navigate('/dashboard')
-  window.scrollTo(0, 0)
-}
+  const handleRowClicked = (row: DeviceTmsType) => {
+    cookies.set('deviceKey', row.sn, cookieOptions)
+    dispatch(setDeviceKey(row.sn))
+    navigate('/dashboard')
+    window.scrollTo(0, 0)
+  }
 
-useEffect(() => {
-  const performFetch = async () => {
-    if (firstFetch.current) return
-    firstFetch.current = true
+  useEffect(() => {
+    const performFetch = async () => {
+      if (firstFetch.current) return
+      firstFetch.current = true
 
-    const run = async () => {
-      await fetchDevices('performFetch', currentPage, perPage, globalSearch)
+      const run = async () => {
+        await fetchDevices('performFetch', currentPage, perPage, globalSearch)
+      }
+
+      await run()
     }
-
-    await run()
 
     if (shouldFetch && globalSearch !== '') {
-      await fetchDevices('shouldFetch', 1, perPage, globalSearch)
+      fetchDevices('shouldFetch', 1, perPage, globalSearch)
       dispatch(setSholdFetch())
     }
-  }
 
-  performFetch()
-}, [shouldFetch, globalSearch, currentPage, perPage])
+    performFetch()
+  }, [shouldFetch, globalSearch, currentPage, perPage])
 
-useEffect(() => {
-  if (firstFetch.current) {
-    if (hosId || wardId || hosId === '' || wardId === '') {
-      fetchDevices('hosId, wardId', 1, perPage, globalSearch)
-      setCurrentPage(1)
+  useEffect(() => {
+    if (firstFetch.current) {
+      if (hosId || wardId || hosId === '' || wardId === '') {
+        fetchDevices('hosId, wardId', 1, perPage, globalSearch)
+        setCurrentPage(1)
+      }
     }
-  }
-}, [hosId, wardId])
+  }, [hosId, wardId])
 
-useEffect(() => {
-  if (firstFetch.current && devices.length > 0) {
-    fetchDevices('currentPage, perPage', currentPage, perPage, globalSearch)
-  }
-}, [currentPage, perPage])
-
-useEffect(() => {
-  const handleCk = (e: KeyboardEvent) => {
-    if (globalSearch && e.key?.toLowerCase() === 'enter' && isFocused) {
-      e.preventDefault()
-      searchRef.current?.blur()
-      setIsFocused(false)
-      fetchDevices('keydown' ,currentPage, perPage, globalSearch)
+  useEffect(() => {
+    if (firstFetch.current && devices.length > 0) {
+      fetchDevices('currentPage, perPage', currentPage, perPage, globalSearch)
     }
-  }
+  }, [currentPage, perPage])
 
-  if (firstFetch.current) {
-    window.addEventListener('keydown', handleCk)
-  }
+  useEffect(() => {
+    const handleCk = (e: KeyboardEvent) => {
+      if (globalSearch && e.key?.toLowerCase() === 'enter' && isFocused) {
+        e.preventDefault()
+        searchRef.current?.blur()
+        setIsFocused(false)
+        fetchDevices('keydown', currentPage, perPage, globalSearch)
+      }
+    }
 
-  return () => {
-    window.removeEventListener('keydown', handleCk)
-  }
-}, [globalSearch, currentPage, perPage, isFocused])
+    if (firstFetch.current) {
+      window.addEventListener('keydown', handleCk)
+    }
 
-useEffect(() => {
-  if (firstFetch.current && isCleared) {
-    fetchDevices('isCleared', currentPage, perPage)
-    setIsCleared(false)
-  }
-}, [isCleared])
+    return () => {
+      window.removeEventListener('keydown', handleCk)
+    }
+  }, [globalSearch, currentPage, perPage, isFocused])
 
+  useEffect(() => {
+    if (firstFetch.current && isCleared) {
+      fetchDevices('isCleared', currentPage, perPage)
+      setIsCleared(false)
+    }
+  }, [isCleared])
 
   const ExpandedComponent = ({ data }: { data: DeviceTmsType }) => {
     const { log } = data

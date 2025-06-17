@@ -213,12 +213,12 @@ const Home = () => {
           await fetchDeviceCount(currentPage, perPage)
         }
       }
+    }
 
-      if (shouldFetch && globalSearch !== '') {
-        await fetchDevices(1, perPage, globalSearch)
-        await fetchDeviceCount(1, perPage)
-        dispatch(setSholdFetch())
-      }
+    if (shouldFetch && globalSearch !== '') {
+      fetchDevices(1, perPage, globalSearch)
+      fetchDeviceCount(1, perPage)
+      dispatch(setSholdFetch())
     }
 
     performFetch()
