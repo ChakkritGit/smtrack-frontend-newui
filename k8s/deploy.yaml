@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: siamatic/smtrack-frontend:2.0.0b30a-b3f768d
+          image: siamatic/smtrack-frontend:2.0.0b30b-121ad32
           ports:
             - containerPort: 7258
           resources:
