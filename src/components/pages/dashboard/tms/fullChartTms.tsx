@@ -48,7 +48,7 @@ const FullChartTmsComponent = (props: FullChartPropType) => {
   )
 
   const dynamicColors = [
-    'oklch(70% 0.1973 44.47)',
+    'oklch(80% 0.20 20)',
     'oklch(65% 0.25 60)',
     'oklch(65% 0.25 90)',
     'oklch(65% 0.25 120)',
@@ -195,7 +195,7 @@ const FullChartTmsComponent = (props: FullChartPropType) => {
       labels: {
         style: {
           fontFamily: 'Anuphan',
-          colors: 'oklch(70% 0.1973 44.47 / 1)',
+          colors: 'oklch(80% 0.20 20 / 1)',
           fontSize: '12px',
           fontWeight: 600
         }
@@ -221,7 +221,7 @@ const FullChartTmsComponent = (props: FullChartPropType) => {
         type: 'vertical',
         shadeIntensity: 0.35,
         gradientToColors: [
-          'oklch(70% 0.1973 44.47 / var(--tw-text-opacity, 0.45))',
+          'oklch(80% 0.20 20 / var(--tw-text-opacity, 0.45))',
           'oklch(65% 0.25 60 / var(--tw-text-opacity, 0.45))',
           'oklch(65% 0.25 90 / var(--tw-text-opacity, 0.45))',
           'oklch(65% 0.25 120 / var(--tw-text-opacity, 0.45))',
