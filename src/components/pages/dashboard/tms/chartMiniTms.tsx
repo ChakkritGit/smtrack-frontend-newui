@@ -44,7 +44,7 @@ const ChartMiniTms = (props: ChartMiniProps) => {
   const maxY = Math.ceil(Math.max(...allYValues)) + 3
 
   const dynamicColors = [
-    'oklch(80% 0.20 20)',
+    'oklch(80% 0.25 150)',
     'oklch(65% 0.25 60)',
     'oklch(65% 0.25 90)',
     'oklch(65% 0.25 120)',
@@ -181,7 +181,7 @@ const ChartMiniTms = (props: ChartMiniProps) => {
       labels: {
         style: {
           fontFamily: 'Anuphan',
-          colors: 'oklch(80% 0.20 20 / 1)',
+          colors: 'oklch(80% 0.25 150 / 1)',
           fontSize: '12px',
           fontWeight: 600
         }
@@ -203,7 +203,7 @@ const ChartMiniTms = (props: ChartMiniProps) => {
         type: 'vertical',
         shadeIntensity: 0.35,
         gradientToColors: [
-          'oklch(80% 0.20 20 / var(--tw-text-opacity, 0.45))',
+          'oklch(80% 0.25 150 / var(--tw-text-opacity, 0.45))',
           'oklch(65% 0.25 60 / var(--tw-text-opacity, 0.45))',
           'oklch(65% 0.25 90 / var(--tw-text-opacity, 0.45))',
           'oklch(65% 0.25 120 / var(--tw-text-opacity, 0.45))',
