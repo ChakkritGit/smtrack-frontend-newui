@@ -78,7 +78,7 @@ const DataTableWrapper = (props: DataTableWrapperProps) => {
             )
             return (
               <SwiperSlide key={item.id}>
-                <span className='badge badge-soft badge-neutral bg-opacity-15 font-bold border ml-3'>
+                <span className='badge badge-soft badge-primary bg-opacity-15 font-bold border ml-3'>
                   P{item.channel}
                 </span>
                 <DataTableMini logData={filterItem.slice(0, 80)} />
@@ -87,7 +87,7 @@ const DataTableWrapper = (props: DataTableWrapperProps) => {
           })
         ) : (
           <SwiperSlide>
-            <span className='badge badge-soft badge-neutral bg-opacity-15 font-bold border ml-3'>
+            <span className='badge badge-soft badge-primary bg-opacity-15 font-bold border ml-3'>
               P—
             </span>
             <div className='flex items-center justify-center h-full'>—</div>
