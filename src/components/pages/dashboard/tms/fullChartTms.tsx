@@ -48,8 +48,8 @@ const FullChartTmsComponent = (props: FullChartPropType) => {
   )
 
   const dynamicColors = [
-    'oklch(80% 0.25 150)',
     'oklch(65% 0.25 60)',
+    'oklch(80% 0.25 150)',
     'oklch(65% 0.25 90)',
     'oklch(65% 0.25 120)',
     'oklch(65% 0.25 150)',
@@ -221,8 +221,8 @@ const FullChartTmsComponent = (props: FullChartPropType) => {
         type: 'vertical',
         shadeIntensity: 0.35,
         gradientToColors: [
-          'oklch(80% 0.25 150 / var(--tw-text-opacity, 0.45))',
           'oklch(65% 0.25 60 / var(--tw-text-opacity, 0.45))',
+          'oklch(80% 0.25 150 / var(--tw-text-opacity, 0.45))',
           'oklch(65% 0.25 90 / var(--tw-text-opacity, 0.45))',
           'oklch(65% 0.25 120 / var(--tw-text-opacity, 0.45))',
           'oklch(65% 0.25 150 / var(--tw-text-opacity, 0.45))',
