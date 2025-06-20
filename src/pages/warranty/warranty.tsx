@@ -66,7 +66,7 @@ const Warranty = () => {
     model: '',
     product: '',
     saleDepartment: '',
-    comment: ''
+    note: ''
   })
 
   const fetchWarranty = useCallback(async () => {
@@ -116,7 +116,7 @@ const Warranty = () => {
       warrantyForm.product !== '' &&
       warrantyForm.saleDepartment !== ''
     ) {
-      const body = warrantyForm.comment
+      const body = warrantyForm.note
         ? {
             devName: warrantyForm.devName,
             product: warrantyForm.product,
@@ -127,7 +127,7 @@ const Warranty = () => {
             saleDepartment: warrantyForm.saleDepartment,
             invoice: warrantyForm.invoice,
             expire: warrantyForm.expire,
-            comment: warrantyForm.comment
+            note: warrantyForm.note
           }
         : {
             devName: warrantyForm.devName,
@@ -202,7 +202,7 @@ const Warranty = () => {
       warrantyForm.product !== '' &&
       warrantyForm.saleDepartment !== ''
     ) {
-      const body = warrantyForm.comment
+      const body = warrantyForm.note
         ? {
             devName: warrantyForm.devName,
             product: warrantyForm.product,
@@ -213,7 +213,7 @@ const Warranty = () => {
             saleDepartment: warrantyForm.saleDepartment,
             invoice: warrantyForm.invoice,
             expire: warrantyForm.expire,
-            comment: warrantyForm.comment
+            note: warrantyForm.note
           }
         : {
             devName: warrantyForm.devName,
@@ -285,7 +285,7 @@ const Warranty = () => {
       model: '',
       product: '',
       saleDepartment: '',
-      comment: ''
+      note: ''
     })
   }
 
@@ -344,7 +344,7 @@ const Warranty = () => {
       model: warranty.model,
       product: warranty.product,
       saleDepartment: warranty.saleDepartment,
-      comment: warranty.comment ?? '—'
+      note: warranty.note ?? '—'
     })
     editModalRef.current?.showModal()
   }
@@ -918,9 +918,9 @@ const Warranty = () => {
             <label className='label flex-col items-start w-full mb-3'>
               <span className='label-text text-wrap mb-2'>{t('remmark')}</span>
               <input
-                name='comment'
+                name='note'
                 type='text'
-                value={warrantyForm.comment}
+                value={warrantyForm.note}
                 onChange={handleChange}
                 className='input  w-full'
                 maxLength={256}
@@ -1187,9 +1187,9 @@ const Warranty = () => {
             <label className='label flex-col items-start w-full mb-3'>
               <span className='label-text text-wrap mb-2'>{t('remmark')}</span>
               <input
-                name='comment'
+                name='note'
                 type='text'
-                value={warrantyForm.comment}
+                value={warrantyForm.note}
                 onChange={handleChange}
                 className='input  w-full'
                 maxLength={256}

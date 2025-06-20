@@ -22,7 +22,7 @@ type WarrantiesType = {
   product: string
   saleDepartment: string
   status: boolean
-  comment: string
+  note: string
   updateAt: string
 }
 

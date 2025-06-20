@@ -206,7 +206,7 @@ const WarrantyPdf = () => {
                 </View>
                 <View style={style.notice}>
                   <Text>
-                    {state?.comment ??
+                    {state?.note ??
                       'กรุณากรอกรายละเอียดข้อความให้ชัดเจนและโปรดแสดงบัตรรับประกันผลิตภัณฑ์แก่บริษัท ฯ ทุกครั้งเมื่อนำผลิตภัณฑ์เข้ารับบริการ'}
                   </Text>
                 </View>
