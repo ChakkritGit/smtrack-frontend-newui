@@ -471,7 +471,10 @@ const Warranty = () => {
     {
       name: t('deviceNameTb'),
       cell: item => (
-        <div className='flex justify-center tooltip w-[200px]' data-tip={item.device.name ?? '—'}>
+        <div
+          className='flex justify-center tooltip w-[200px]'
+          data-tip={item.device.name ?? '—'}
+        >
           <div className='truncate max-w-[200px]'>
             <span>{item.device.name ?? '—'}</span>
           </div>

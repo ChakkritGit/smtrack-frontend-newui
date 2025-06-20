@@ -56,7 +56,8 @@ const style = StyleSheet.create({
   secondHeaderTextTwo: {
     width: '50%',
     flexDirection: 'column',
-    alignItems: 'flex-start'
+    alignItems: 'flex-start',
+    gap: 3
   },
   contentWrapperRow: {
     marginTop: 20,

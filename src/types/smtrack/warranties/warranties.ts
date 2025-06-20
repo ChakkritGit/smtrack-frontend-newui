@@ -1,21 +1,29 @@
-import { DevicesType } from '../devices/deviceType'
-
 type WarrantiesType = {
-  id: string
-  devName: string
-  product: string
-  model: string
-  installDate: string
-  customerName: string
-  customerAddress: string
-  saleDepartment: string
-  invoice: string
-  expire: string
-  status: boolean
   createAt: string
-  updateAt: string
+  customerAddress: string
+  customerName: string
+  devName: string
+  device: {
+    id: string
+    location: string
+    name:string
+    position: string
+    probe: [
+      {
+        name: string
+      }
+    ]
+  }
+  expire: string
+  id: string
+  installDate: string
+  invoice: string
+  model: string
+  product: string
+  saleDepartment: string
+  status: boolean
   comment: string
-  device: DevicesType
+  updateAt: string
 }
 
 export type { WarrantiesType }
