@@ -162,7 +162,6 @@ const WarrantyPdf = () => {
                   </View>
                   <View style={style.secondHeaderTextTwo}>
                     <Text>{state?.device?.id ?? '—'}</Text>
-                    <Text>{state?.device?.id ?? '—'}</Text>
                     {state.device.probe.map((item, index) => (
                       <Text key={index + item.name}>{item.name ?? '—'}</Text>
                     ))}
