@@ -520,7 +520,7 @@ export default {
     deleteDeviceTitle: 'Do you want to delete a device?',
     notReverseText: 'You will not be able to reverse this',
     CustomMessageLogData:
-      'The selected time periods are more than 30 days apart.',
+      'The selected time periods are more than 31 days apart.',
     deactivateDevice: 'Do you want to deactivate a device?',
     activateDevice: 'Do you want to activate a device?',
     deactivateDeviceText:

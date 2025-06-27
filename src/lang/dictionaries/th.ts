@@ -518,7 +518,7 @@ export default {
     deleteUserTitle: 'คุณต้องการลบผู้ใช้หรือไม่',
     deleteDeviceTitle: 'คุณต้องการลบอุปกรณ์หรือไม่',
     notReverseText: 'คุณจะไม่สามารถย้อนกลับสิ่งนี้ได้',
-    customMessageLogData: 'ช่วงเวลาที่เลือกห่างกันมากกว่า 30 วัน',
+    customMessageLogData: 'ช่วงเวลาที่เลือกห่างกันมากกว่า 31 วัน',
     deactivateDevice: 'คุณต้องการปิดการใช้งานหรือไม่',
     activateDevice: 'คุณต้องการเปิดการใช้งานหรือไม่',
     deactivateDeviceText: 'หากคุณปิดการใช้งานอุปกรณ์จะหยุดทำงานทันที',
