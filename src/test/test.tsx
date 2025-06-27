@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
 import { Vibrant } from 'node-vibrant/browser'
-import Video from '../assets/images/dynamic.mp4'
 
 export default function DynamicVideoColor () {
   const videoRef = useRef<HTMLVideoElement>(null)
@@ -118,7 +117,7 @@ export default function DynamicVideoColor () {
           autoPlay
           muted
           loop
-          src={Video}
+          src={""}
           crossOrigin='anonymous'
           className='w-[320px] h-[180px] md:w-[720px] md:h-[405px] rounded-2xl z-20'
         />

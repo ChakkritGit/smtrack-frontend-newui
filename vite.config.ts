@@ -1,5 +1,5 @@
 import react from '@vitejs/plugin-react'
-import { defineConfig, splitVendorChunkPlugin } from 'vite'
+import { defineConfig } from 'vite'
 import path from 'path'
 import tailwindcss from '@tailwindcss/vite'
 import { visualizer } from "rollup-plugin-visualizer"
@@ -9,8 +9,7 @@ export default defineConfig({
   plugins: [
     react(),
     tailwindcss(),
-    visualizer({ open: true, filename: 'stats.html' }),
-    splitVendorChunkPlugin()
+    visualizer({ open: true, filename: 'stats.html' })
   ],
   build: {
     chunkSizeWarningLimit: 100000, // Unit is in KB => 100MB

@@ -1,5 +1,4 @@
 import { useRef, useState, useEffect } from 'react'
-import Video from '../assets/images/dynamic.mp4'
 import {
   TbPlayerPause,
   TbPlayerPlay,
@@ -128,7 +127,7 @@ const VideoPlayer = () => {
     <div className='relative w-full max-w-5xl mx-auto group mt-5'>
       <video
         ref={videoRef}
-        src={Video}
+        src={""}
         width={1080}
         autoPlay={false}
         controls={false}
