@@ -25,7 +25,7 @@ const PrivacyPolicy = () => {
         </span>
         <div className='divider divider-horizontal mx-0'></div>
         <span className='text-[12px] md:text-[14px]'>
-          {i18nInit === 'th' ? 'อ่าน 2 นาที' : result.text}
+          {i18nInit === 'th' ? 'อ่านน้อยกว่าหนึ่งนาที' : result.text}
         </span>
         <div className='divider divider-horizontal mx-0'></div>
         <div
