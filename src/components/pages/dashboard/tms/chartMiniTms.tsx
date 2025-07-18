@@ -181,7 +181,7 @@ const ChartMiniTms = (props: ChartMiniProps) => {
       labels: {
         style: {
           fontFamily: 'Anuphan',
-          colors: 'oklch(80% 0.25 150 / 1)',
+          colors: 'oklch(73.24% 0.1973 44.47 / 1)',
           fontSize: '12px',
           fontWeight: 600
         }
