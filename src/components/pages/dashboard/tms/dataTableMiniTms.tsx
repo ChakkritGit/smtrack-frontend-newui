@@ -89,9 +89,7 @@ const DataTableMiniTms = (props: TableMiniProps) => {
 
   return (
     <div
-      className={`dataTableWrapper mb-5 ${
-        tableData.length <= 0 ? 'dataTableWrapperWithNoData' : ''
-      }`}
+      className={`dataTableWrapper mb-5`}
     >
       <DataTable
         dense
@@ -103,7 +101,7 @@ const DataTableMiniTms = (props: TableMiniProps) => {
         noDataComponent={<DataTableNoData />}
         paginationPerPage={10}
         paginationRowsPerPageOptions={[10, 30, 50, 100]}
-        className='md:!max-h-[calc(100dvh-635px)] !max-h-[calc(100dvh-435px)]'
+        className='sm:!max-h-[calc(100dvh-524px)] md:!max-h-[calc(100dvh-635px)] lg:!max-h-[calc(100dvh-680px)] !max-h-[calc(100dvh-435px)]'
       />
     </div>
   )

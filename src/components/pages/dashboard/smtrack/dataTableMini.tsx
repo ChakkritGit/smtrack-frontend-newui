@@ -92,9 +92,9 @@ const DataTableMini = (props: TableMiniProps) => {
         columns={columns}
         data={reverseArray}
         noDataComponent={<DataTableNoData />}
-        paginationPerPage={12}
-        paginationRowsPerPageOptions={[12, 30, 50, 100]}
-        className='md:!max-h-[calc(100dvh-635px)] !max-h-[calc(100dvh-435px)]'
+        paginationPerPage={10}
+        paginationRowsPerPageOptions={[10, 30, 50, 100]}
+        className='sm:!max-h-[calc(100dvh-524px)] md:!max-h-[calc(100dvh-635px)] lg:!max-h-[calc(100dvh-680px)] !max-h-[calc(100dvh-435px)]'
       />
     </div>
   )

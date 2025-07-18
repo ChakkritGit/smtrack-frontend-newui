@@ -81,7 +81,7 @@ const DataTableWrapper = (props: DataTableWrapperProps) => {
                 <span className='badge badge-soft badge-primary bg-opacity-15 font-bold border ml-3'>
                   P{item.channel}
                 </span>
-                <DataTableMini logData={filterItem.slice(0, 80)} />
+                <DataTableMini logData={filterItem} />
               </SwiperSlide>
             )
           })
