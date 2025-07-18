@@ -94,7 +94,7 @@ const DataTableMini = (props: TableMiniProps) => {
         noDataComponent={<DataTableNoData />}
         paginationPerPage={10}
         paginationRowsPerPageOptions={[10, 30, 50, 100]}
-        className='sm:!max-h-[calc(100dvh-524px)] md:!max-h-[calc(100dvh-635px)] lg:!max-h-[calc(100dvh-680px)] !max-h-[calc(100dvh-435px)]'
+        className='!max-h-[calc(100dvh-435px)]'
       />
     </div>
   )
