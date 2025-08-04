@@ -610,6 +610,10 @@ const formatThaiDateSend = (date: Date): string => {
   return formatted
 }
 
+const delay = (ms: number) => {
+  return new Promise(resolve => setTimeout(resolve, ms))
+}
+
 export {
   accessToken,
   cookieDecodeObject,
@@ -630,5 +634,6 @@ export {
   useSwiperSync,
   breakText,
   formatThaiDate,
-  formatThaiDateSend
+  formatThaiDateSend,
+  delay
 }

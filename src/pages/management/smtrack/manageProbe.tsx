@@ -19,6 +19,7 @@ import Loading from '../../../components/skeleton/table/loading'
 import DataTableNoData from '../../../components/skeleton/table/noData'
 import { RiDeleteBin7Line, RiEditLine } from 'react-icons/ri'
 import {
+  delay,
   scheduleDayArray,
   scheduleMinuteArray,
   scheduleTimeArray
@@ -226,12 +227,13 @@ const ManageProbe = () => {
           icon: 'success',
           showConfirmButton: false,
           timer: 2500
-        }).finally(() =>
+        }).finally(async () => {
+          await delay(3000)
           client.publish(
             `siamatic/${deviceModel}/${version}/${formData.id}/adj`,
             'on'
           )
-        )
+        })
       } catch (error) {
         addModalRef.current?.close()
         if (error instanceof AxiosError) {

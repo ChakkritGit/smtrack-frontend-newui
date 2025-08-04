@@ -43,6 +43,7 @@ import {
 } from '../../../types/tms/devices/deviceType'
 import { responseType } from '../../../types/smtrack/utilsRedux/utilsReduxType'
 import {
+  delay,
   hoursOptions,
   minutesOptions,
   swalMoveDevice
@@ -355,12 +356,13 @@ const ManageDevice = () => {
           icon: 'success',
           showConfirmButton: false,
           timer: 2500
-        }).finally(() =>
+        }).finally(async () => {
+          await delay(3000)
           client.publish(
             `siamatic/${deviceModel}/${version}/${formData.id}/adj`,
             'on'
           )
-        )
+        })
       } catch (error) {
         editModalRef.current?.close()
         if (error instanceof AxiosError) {
@@ -708,6 +710,7 @@ const ManageDevice = () => {
         await fetchDevices(1)
         setOnNetwork(false)
         setCurrentTab(1)
+        await delay(3000)
 
         client.publish(
           `siamatic/${deviceModel}/${version}/${formData.id}/adj`,
@@ -770,6 +773,7 @@ const ManageDevice = () => {
         setOnNetwork(false)
         setCurrentTab(1)
 
+        await delay(3000)
         client.publish(
           `siamatic/${deviceModel}/${version}/${formData.id}/adj`,
           'on'
@@ -816,6 +820,7 @@ const ManageDevice = () => {
         setOnNetwork(false)
         setCurrentTab(1)
 
+        await delay(3000)
         client.publish(
           `siamatic/${deviceModel}/${version}/${formData.id}/adj`,
           'on'

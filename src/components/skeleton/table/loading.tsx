@@ -19,7 +19,7 @@ const Loading = () => {
   return (
     <div className='flex items-center justify-center w-full p-3 h-full gap-3'>
       {timeoutError ? (
-        <span className='text-red-500'>{t('descriptionWrong')} {t('tooLoad')}</span>
+        <span className='text-red-500'>{t('descriptionWrong')}</span>
       ) : (
         <>
           <span className={`loading ${loadingStyle} loading-md bg-base-content`}></span>

@@ -42,7 +42,7 @@ import {
   generateOptionsTwo
 } from '../../constants/utils/muteNoti'
 import { RootState } from '../../redux/reducers/rootReducer'
-import { cookies } from '../../constants/utils/utilsConstants'
+import { cookies, delay } from '../../constants/utils/utilsConstants'
 
 type AdjustmentsProps = {
   setProbeData: (value: SetStateAction<ProbeType[]>) => void
@@ -164,6 +164,7 @@ const Adjustments = (props: AdjustmentsProps) => {
       }).finally(async () => {
         await fetchDevices(1, 10)
         openAdjustModalRef.current?.showModal()
+        await delay(3000)
         client.publish(
           `siamatic/${deviceModel}/${version}/${serial}/adj`,
           'on'
@@ -229,6 +230,7 @@ const Adjustments = (props: AdjustmentsProps) => {
       }).finally(async () => {
         await fetchDevices(1, 10)
         openAdjustModalRef.current?.showModal()
+        await delay(3000)
         client.publish(
           `siamatic/${deviceModel}/${version}/${serial}/adj`,
           'on'
