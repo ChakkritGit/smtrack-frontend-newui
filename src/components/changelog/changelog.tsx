@@ -1,5 +1,5 @@
 import { RiStickyNoteFill } from 'react-icons/ri'
-import { V2, DateVersion } from './version'
+import { V2 } from './version'
 
 const Changelog = () => {
   return (
@@ -7,7 +7,7 @@ const Changelog = () => {
       <RiStickyNoteFill className='text-[32px] md:text-[64px]' />
       <h1 className='text-lg md:text-2xl font-bold my-3'>Changelog</h1>
       <div>
-        <DateVersion />
+        {/* <DateVersion /> */}
         <V2 />
       </div>
     </div>
