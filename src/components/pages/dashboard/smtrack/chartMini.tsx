@@ -77,6 +77,38 @@ const ChartMini = (props: ChartMiniProps) => {
     }
   ]
 
+  const dynamicOpacityFrom: number[] = []
+  const dynamicOpacityTo: number[] = []
+  const TARGET_OPACITY = 0.15
+
+  series.forEach(s => {
+    if (s.name === t('temperatureName')) {
+      if (s.data && Array.isArray(s.data)) {
+        const yValues = s.data.map((point: any) =>
+          typeof point === 'object' ? point.y : point
+        )
+        const maxValInSeries = Math.max(...yValues, -Infinity)
+
+        if (maxValInSeries > 0) {
+          dynamicOpacityFrom.push(TARGET_OPACITY)
+          dynamicOpacityTo.push(0)
+        } else {
+          dynamicOpacityFrom.push(0)
+          dynamicOpacityTo.push(TARGET_OPACITY)
+        }
+      } else {
+        dynamicOpacityFrom.push(TARGET_OPACITY)
+        dynamicOpacityTo.push(0)
+      }
+    } else if (s.name === t('humidityName')) {
+      dynamicOpacityFrom.push(TARGET_OPACITY)
+      dynamicOpacityTo.push(0)
+    } else {
+      dynamicOpacityFrom.push(0)
+      dynamicOpacityTo.push(0)
+    }
+  })
+
   const options: ApexCharts.ApexOptions = {
     chart: {
       animations: {
@@ -290,10 +322,10 @@ const ChartMini = (props: ChartMiniProps) => {
           'oklch(0% 0 0 / var(--tw-text-opacity, 0))',
           'oklch(0% 0 0 / var(--tw-text-opacity, 0))'
         ],
-        inverseColors: true,
-        opacityFrom: 0.45,
-        opacityTo: 0,
-        stops: [minTemp, tempMax + maxTemp + 50]
+        inverseColors: false,
+        opacityFrom: dynamicOpacityFrom,
+        opacityTo: dynamicOpacityTo,
+        stops: [0, 100]
       }
     },
     legend: {

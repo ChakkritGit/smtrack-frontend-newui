@@ -37,6 +37,22 @@ const ChartMiniTms = (props: ChartMiniProps) => {
     })
   )
 
+  const dynamicOpacityFrom: number[] = []
+  const dynamicOpacityTo: number[] = []
+
+  Object.keys(groupedByProbe).forEach(probe => {
+    const probeData = groupedByProbe[probe]
+    const maxValInProbe = Math.max(...probeData.map(p => p.y))
+
+    if (maxValInProbe > 0) {
+      dynamicOpacityFrom.push(0.15)
+      dynamicOpacityTo.push(0)
+    } else {
+      dynamicOpacityFrom.push(0)
+      dynamicOpacityTo.push(0.15)
+    }
+  })
+
   const allYValues = Object.values(groupedByProbe)
     .flat()
     .map(p => p.y)
@@ -234,9 +250,9 @@ const ChartMiniTms = (props: ChartMiniProps) => {
           'oklch(60% 0.20 260 / var(--tw-text-opacity, 0.45))',
           'oklch(60% 0.20 320 / var(--tw-text-opacity, 0.45))'
         ],
-        inverseColors: true,
-        opacityFrom: 0.32,
-        opacityTo: 0,
+        inverseColors: false,
+        opacityFrom: dynamicOpacityFrom,
+        opacityTo: dynamicOpacityTo,
         stops: [0, 100]
       }
     },
