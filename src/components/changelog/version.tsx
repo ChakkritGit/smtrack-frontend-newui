@@ -1,37 +1,40 @@
-const V2_0_1 = () => (
+import { TFunction } from 'i18next'
+
+interface VersionProps {
+  t: TFunction
+}
+
+const V2_0_1 = ({ t }: VersionProps) => (
   <div className='border-b py-3 px-2 border-base-content/10'>
-    <div className='mt-2'>
+    <div className='mt-2 flex items-center gap-3'>
       <span className='font-bold'>v2.0.1</span>
+      <div className='badge badge-accent font-medium px-1.5'>
+        {t('changelog.badgeNew')}
+      </div>
     </div>
     <div>
       <div className='ml-3'>
         <span className='font-bold text-lg'>-</span>
-        <span className='ml-3'>
-          อัปเดตเวอร์ชันของ Dependencies เพื่อเพิ่มความเสถียรและปลอดภัย
-        </span>
+        <span className='ml-3'>{t('changelog.v2_0_1.updateDeps')}</span>
       </div>
       <div className='ml-3'>
         <span className='font-bold text-lg'>-</span>
-        <span className='ml-3'>
-          ปรับปรุงการแสดงผลของกราฟ: พื้นที่ไล่ระดับสี (Gradient)
-          จะปรับทิศทางให้ถูกต้องอัตโนมัติ ไม่ว่าค่าข้อมูลจะเป็นบวกหรือลบ
-        </span>
+        <span className='ml-3'>{t('changelog.v2_0_1.fixGraphGradient')}</span>
       </div>
     </div>
   </div>
 )
 
-const V2 = () => (
+const V2 = ({ t }: VersionProps) => (
   <div className='border-b py-3 px-2 border-base-content/10'>
     <div className='mt-2'>
-      <span className='font-bold'>v2.0</span> - Stable version
+      <span className='font-bold'>v2.0</span>
+      {t('changelog.v2.titleSuffix')}
     </div>
     <div>
       <div className='ml-3'>
         <span className='font-bold text-lg'>-</span>
-        <span className='ml-3'>
-          New version as a complete rewrite of the app.
-        </span>
+        <span className='ml-3'>{t('changelog.v2.rewrite')}</span>
       </div>
     </div>
   </div>

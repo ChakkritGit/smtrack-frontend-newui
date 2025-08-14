@@ -579,6 +579,22 @@ export default {
 
     // reload sw
     appOffline: 'App ready to work offline',
-    newContentReload: 'New content available, click on reload button to update.'
+    newContentReload:
+      'New content available, click on reload button to update.',
+
+    // update version
+    changelog: {
+      badgeNew: 'New',
+      title: 'Changelog',
+      v2_0_1: {
+        updateDeps: 'Updated dependencies for improved stability and security.',
+        fixGraphGradient:
+          'Improved graph display: The gradient area now adjusts its direction correctly for both positive and negative values.'
+      },
+      v2: {
+        titleSuffix: ' - Stable version',
+        rewrite: 'New version as a complete rewrite of the app.'
+      }
+    }
   }
 }
