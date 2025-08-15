@@ -124,7 +124,7 @@ const ManageDevice = () => {
       const body = {
         ward: formData.ward,
         hospital: hosIdforManageDev,
-        sn: formData.serial,
+        serial: formData.serial,
         name: formData.name
       }
       try {
@@ -297,7 +297,7 @@ const ManageDevice = () => {
           hospital: hosIdforManageDev,
           wardName: formData.wardName,
           hospitalName: formData.hospitalName,
-          sn: formData.serial,
+          serial: formData.serial,
           name: formData.name
         }
         await axiosInstance.put<responseType<DeviceTmsType>>(
