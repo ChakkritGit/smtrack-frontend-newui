@@ -53,7 +53,8 @@ const ManageDevice = () => {
     hospital: '',
     hospitalName: '',
     serial: '',
-    name: ''
+    name: '',
+    sn: ''
   })
   const { role } = tokenDecode || {}
   const [hosIdforManageDev, setHosIdforManageDev] = useState<string>('')
@@ -276,7 +277,8 @@ const ManageDevice = () => {
       ward: device.ward,
       name: device.name,
       wardName: device.wardName,
-      serial: device.serial
+      serial: device.serial,
+      sn: device.sn
     })
     editModalRef.current?.showModal()
   }
@@ -301,7 +303,7 @@ const ManageDevice = () => {
           name: formData.name
         }
         await axiosInstance.put<responseType<DeviceTmsType>>(
-          `/legacy/device/${formData.id}`,
+          `/legacy/device/${formData.sn}`,
           body
         )
         editModalRef.current?.close()

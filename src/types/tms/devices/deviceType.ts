@@ -111,6 +111,7 @@ type AddDeviceForm = {
   imagePreview?: string | null
   config?: ConfigType | null
   serial?: string
+  sn?: string
 }
 
 type NetworkFormInit = {
