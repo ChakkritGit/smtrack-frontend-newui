@@ -579,7 +579,7 @@ export default {
     // update version
     changelog: {
       badgeNew: 'ใหม่',
-      title: 'ประวัติการเปลี่ยนแปลง',
+      title: 'มีอะไรใหม่?',
       v2_0_1: {
         updateDeps:
           'อัปเดตเวอร์ชันของ Dependencies เพื่อเพิ่มความเสถียรและปลอดภัย',

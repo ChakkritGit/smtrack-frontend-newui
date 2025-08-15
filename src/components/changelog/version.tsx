@@ -1,16 +1,23 @@
-import { TFunction } from 'i18next'
+import { i18n, TFunction } from 'i18next'
+import { dateThaiFormat } from '../../constants/utils/utilsConstants'
 
 interface VersionProps {
   t: TFunction
+  i18n: i18n
 }
 
-const V2_0_1 = ({ t }: VersionProps) => (
+const V2_0_1 = ({ t, i18n }: VersionProps) => (
   <div className='border-b py-3 px-2 border-base-content/10'>
-    <div className='mt-2 flex items-center gap-3'>
-      <span className='font-bold'>v2.0.1</span>
-      <div className='badge badge-accent font-medium px-1.5'>
-        {t('changelog.badgeNew')}
+    <div className='flex items-center justify-between mr-3'>
+      <div className='mt-2 flex items-center gap-3'>
+        <span className='font-bold'>v2.0.1</span>
+        <div className='badge badge-accent font-medium px-1.5'>
+          {t('changelog.badgeNew')}
+        </div>
       </div>
+      <span className='text-[14px] font-medium'>
+        {dateThaiFormat('2025-08-14', i18n)}
+      </span>
     </div>
     <div>
       <div className='ml-3'>
@@ -25,11 +32,16 @@ const V2_0_1 = ({ t }: VersionProps) => (
   </div>
 )
 
-const V2 = ({ t }: VersionProps) => (
+const V2 = ({ t, i18n }: VersionProps) => (
   <div className='border-b py-3 px-2 border-base-content/10'>
-    <div className='mt-2'>
-      <span className='font-bold'>v2.0</span>
-      {t('changelog.v2.titleSuffix')}
+    <div className='flex items-center justify-between mr-3'>
+      <div className='mt-2'>
+        <span className='font-bold'>v2.0</span>
+        {t('changelog.v2.titleSuffix')}
+      </div>
+      <span className='text-[14px] font-medium'>
+        {dateThaiFormat('2025-08-01', i18n)}
+      </span>
     </div>
     <div>
       <div className='ml-3'>

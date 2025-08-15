@@ -52,7 +52,7 @@ const ManageDevice = () => {
     wardName: '',
     hospital: '',
     hospitalName: '',
-    sn: '',
+    serial: '',
     name: ''
   })
   const { role } = tokenDecode || {}
@@ -105,7 +105,7 @@ const ManageDevice = () => {
       wardName: '',
       hospital: '',
       hospitalName: '',
-      sn: '',
+      serial: '',
       name: ''
     })
   }
@@ -118,13 +118,13 @@ const ManageDevice = () => {
       hosIdforManageDev !== '' &&
       formData.ward !== '' &&
       hosId !== '' &&
-      formData.sn !== '' &&
+      formData.serial !== '' &&
       formData.name !== ''
     ) {
       const body = {
         ward: formData.ward,
         hospital: hosIdforManageDev,
-        sn: formData.sn,
+        sn: formData.serial,
         name: formData.name
       }
       try {
@@ -276,7 +276,7 @@ const ManageDevice = () => {
       ward: device.ward,
       name: device.name,
       wardName: device.wardName,
-      sn: device.sn
+      serial: device.serial
     })
     editModalRef.current?.showModal()
   }
@@ -288,7 +288,7 @@ const ManageDevice = () => {
       hosIdforManageDev !== '' &&
       formData.ward !== '' &&
       hosId !== '' &&
-      formData.sn !== '' &&
+      formData.serial !== '' &&
       formData.name !== ''
     ) {
       try {
@@ -297,7 +297,7 @@ const ManageDevice = () => {
           hospital: hosIdforManageDev,
           wardName: formData.wardName,
           hospitalName: formData.hospitalName,
-          sn: formData.sn,
+          sn: formData.serial,
           name: formData.name
         }
         await axiosInstance.put<responseType<DeviceTmsType>>(
@@ -350,7 +350,7 @@ const ManageDevice = () => {
   const columns: TableColumn<DeviceTmsType>[] = [
     {
       name: t('deviceSerialTb'),
-      cell: item => <span title={item.sn}>{item.sn}</span>,
+      cell: item => <span title={item.sn}>{item.serial ?? '—'}</span>,
       sortable: false,
       center: true
     },
@@ -551,7 +551,7 @@ const ManageDevice = () => {
                   <input
                     name='sn'
                     type='text'
-                    value={formData.sn}
+                    value={formData.serial}
                     onChange={handleChange}
                     className='input  w-full'
                     maxLength={23}
@@ -648,7 +648,7 @@ const ManageDevice = () => {
                   <input
                     name='sn'
                     type='text'
-                    value={formData.sn}
+                    value={formData.serial}
                     onChange={handleChange}
                     className='input  w-full'
                     maxLength={23}

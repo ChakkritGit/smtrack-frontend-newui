@@ -38,9 +38,9 @@ const CardInfoTms = (props: PropsType) => {
                 <p className='font-bold'>{t('deviceSnBox')} • </p>
                 <p
                   className='truncate max-w-[150px] lg:max-w-[300px]'
-                  title={deviceData?.sn ?? '—'}
+                  title={deviceData?.serial ?? '—'}
                 >
-                  {deviceData?.sn ?? '—'}
+                  {deviceData?.serial ?? '—'}
                 </p>
               </div>
             </div>

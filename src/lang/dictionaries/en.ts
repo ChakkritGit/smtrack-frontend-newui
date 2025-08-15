@@ -585,7 +585,7 @@ export default {
     // update version
     changelog: {
       badgeNew: 'New',
-      title: 'Changelog',
+      title: `What's new?`,
       v2_0_1: {
         updateDeps: 'Updated dependencies for improved stability and security.',
         fixGraphGradient:

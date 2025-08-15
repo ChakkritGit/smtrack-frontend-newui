@@ -19,10 +19,10 @@ const columnTms = (
       cell: item => (
         <span
           className='tooltip'
-          data-tip={item.sn}
+          data-tip={item.serial ?? '—'}
           onClick={() => handleRowClicked(item)}
         >
-          {item.sn}
+          {item.serial ?? '—'}
         </span>
       ),
       sortable: false,

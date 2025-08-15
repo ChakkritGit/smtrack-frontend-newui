@@ -13,6 +13,7 @@ import {
 } from '../../types/tms/devices/probeType'
 import { useContext } from 'react'
 import { GlobalContext } from '../../contexts/globalContext'
+import { i18n } from 'i18next'
 
 const accessToken = (tokenObject: TokenDecodeType) =>
   CryptoJS.AES.encrypt(
@@ -614,6 +615,19 @@ const delay = (ms: number) => {
   return new Promise(resolve => setTimeout(resolve, ms))
 }
 
+const dateThaiFormat = (date: string, i18n: i18n): string => {
+  const currentLanguage = i18n.language
+  const dateObject = new Date(date)
+  const options: Intl.DateTimeFormatOptions = {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  }
+  const locale = currentLanguage === 'th' ? 'th-TH' : 'en-US'
+  const thaiDate = new Intl.DateTimeFormat(locale, options).format(dateObject)
+  return thaiDate
+}
+
 export {
   accessToken,
   cookieDecodeObject,
@@ -635,5 +649,6 @@ export {
   breakText,
   formatThaiDate,
   formatThaiDateSend,
-  delay
+  delay,
+  dateThaiFormat
 }

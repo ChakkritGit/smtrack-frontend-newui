@@ -28,7 +28,7 @@ const FullTableTmsComponent = (props: FullTablePropType) => {
     },
     {
       name: t('deviceSerialTb'),
-      cell: item => <span title={item.sn}>{item.sn}</span>,
+      cell: item => <span title={item.serial ?? '—'}>{item.serial ?? '—'}</span>,
       sortable: false,
       center: true
     },
@@ -57,7 +57,7 @@ const FullTableTmsComponent = (props: FullTablePropType) => {
     },
     {
       name: t('deviceProbeTb'),
-      cell: item => <span title={item.sn}>{item.probe}</span>,
+      cell: item => <span title={item.probe}>{item.probe}</span>,
       sortable: false,
       center: true
     },

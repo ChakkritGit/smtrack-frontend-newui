@@ -352,7 +352,7 @@ const FullChartTms = () => {
               ward: deviceLogs?.ward,
               image: ImagesOne,
               hospital: deviceLogs?.hospital,
-              devSn: deviceLogs?.sn,
+              devSn: deviceLogs?.serial,
               devName: deviceLogs?.name,
               chartIMG: waitExport,
               dateTime: String(new Date()).substring(0, 25),
@@ -389,7 +389,7 @@ const FullChartTms = () => {
               <RiBarChart2Fill size={16} className='mr-1' />
               <span>{t('fullChart')}</span>
               <span>-</span>
-              <span>{deviceLogs?.sn}</span>
+              <span>{deviceLogs?.serial ?? '—'}</span>
             </div>
           </li>
         </ul>
@@ -540,7 +540,7 @@ const FullChartTms = () => {
         <div ref={tableInfoRef} className='hidden'>
           <h4>{userProfile?.ward.hospital.hosName}</h4>
           <span>
-            {deviceLogs?.name ? deviceLogs?.name : '--'} | {deviceLogs?.sn}
+            {deviceLogs?.name ? deviceLogs?.name : '--'} | {deviceLogs?.serial}
           </span>
         </div>
         {ChartWrapper}

@@ -14,6 +14,7 @@ type DeviceTmsType = {
   token: string
   hospitalName: string
   wardName: string
+  serial: string
 }
 
 type TmsLogType = {
@@ -44,6 +45,7 @@ type DeviceListTmsType = {
   id: string
   name: string
   sn: string
+  serial: string
   ward: string
 }
 
@@ -57,6 +59,7 @@ type DeviceLogTms = {
   name: string
   record: number
   sn: string
+  serial: string
   ward: string
   wardName: string
   log: DeviceLogsTms[]
@@ -83,6 +86,7 @@ type LogChartTms = {
   probe: string
   result: string
   sn: string
+  serial: string
   table: number
   _field: string
   _measurement: string
@@ -106,7 +110,7 @@ type AddDeviceForm = {
   image?: File | null
   imagePreview?: string | null
   config?: ConfigType | null
-  sn?: string
+  serial?: string
 }
 
 type NetworkFormInit = {

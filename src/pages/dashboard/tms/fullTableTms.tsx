@@ -243,7 +243,7 @@ const FullTableTms = () => {
           const isHumidity = /hum/i.test(probe)
           return {
             No: index + 1,
-            DeviceSN: log.sn,
+            DeviceSN: log.serial,
             DeviceName: object.deviceData?.name,
             Date: new Date(log._time).toLocaleString('th-TH', {
               day: '2-digit',
@@ -300,7 +300,7 @@ const FullTableTms = () => {
               <RiTableFill size={16} className='mr-1' />
               <span>{t('fullChart')}</span>
               <span>-</span>
-              <span>{deviceLogs?.id}</span>
+              <span>{deviceLogs?.serial ?? '—'}</span>
             </div>
           </li>
         </ul>
