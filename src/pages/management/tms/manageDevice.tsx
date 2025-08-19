@@ -107,7 +107,8 @@ const ManageDevice = () => {
       hospital: '',
       hospitalName: '',
       serial: '',
-      name: ''
+      name: '',
+      sn: ''
     })
   }
 
@@ -120,13 +121,17 @@ const ManageDevice = () => {
       formData.ward !== '' &&
       hosId !== '' &&
       formData.serial !== '' &&
-      formData.name !== ''
+      formData.name !== '' &&
+      formData.sn !== ''
     ) {
       const body = {
         ward: formData.ward,
         hospital: hosIdforManageDev,
+        wardName: formData.wardName,
+        hospitalName: formData.hospitalName,
         serial: formData.serial,
-        name: formData.name
+        name: formData.name,
+        sn: formData.sn
       }
       try {
         const response = await axiosInstance.post<responseType<DeviceTmsType>>(
@@ -551,9 +556,27 @@ const ManageDevice = () => {
                     {t('deviceSerialTb')}
                   </span>
                   <input
-                    name='sn'
+                    name='serial'
                     type='text'
                     value={formData.serial}
+                    onChange={handleChange}
+                    className='input  w-full'
+                    maxLength={23}
+                  />
+                </label>
+              </div>
+
+              {/* sn */}
+              <div className='form-control w-full'>
+                <label className='label flex-col items-start w-full mb-3'>
+                  <span className='label-text text-wrap mb-2'>
+                    <span className='font-medium text-red-500 mr-1'>*</span>
+                    S/N
+                  </span>
+                  <input
+                    name='sn'
+                    type='text'
+                    value={formData.sn}
                     onChange={handleChange}
                     className='input  w-full'
                     maxLength={23}
@@ -648,7 +671,7 @@ const ManageDevice = () => {
                     {t('deviceSerialTb')}
                   </span>
                   <input
-                    name='sn'
+                    name='serial'
                     type='text'
                     value={formData.serial}
                     onChange={handleChange}
