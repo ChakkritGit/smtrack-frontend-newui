@@ -120,7 +120,6 @@ const ManageDevice = () => {
       hosIdforManageDev !== '' &&
       formData.ward !== '' &&
       hosId !== '' &&
-      formData.serial !== '' &&
       formData.name !== '' &&
       formData.sn !== ''
     ) {
@@ -129,7 +128,6 @@ const ManageDevice = () => {
         hospital: hosIdforManageDev,
         wardName: formData.wardName,
         hospitalName: formData.hospitalName,
-        serial: formData.serial,
         name: formData.name,
         sn: formData.sn
       }
@@ -549,7 +547,7 @@ const ManageDevice = () => {
               </div>
 
               {/* sn */}
-              <div className='form-control w-full'>
+              {/* <div className='form-control w-full'>
                 <label className='label flex-col items-start w-full mb-3'>
                   <span className='label-text text-wrap mb-2'>
                     <span className='font-medium text-red-500 mr-1'>*</span>
@@ -564,7 +562,7 @@ const ManageDevice = () => {
                     maxLength={23}
                   />
                 </label>
-              </div>
+              </div> */}
 
               {/* sn */}
               <div className='form-control w-full'>
