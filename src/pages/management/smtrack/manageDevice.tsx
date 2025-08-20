@@ -674,7 +674,7 @@ const ManageDevice = () => {
       body = {
         dhcp: true,
         ssid: networkForm?.wifi?.ssid,
-        password: networkForm?.wifi?.password,
+        password: networkForm?.wifi?.password ? networkForm?.wifi?.password : null,
         ip: null,
         subnet: null,
         gateway: null,
@@ -685,7 +685,7 @@ const ManageDevice = () => {
       body = {
         dhcp: false,
         ssid: networkForm?.wifi?.ssid,
-        password: networkForm?.wifi?.password,
+        password: networkForm?.wifi?.password ? networkForm?.wifi?.password : null,
         ip: networkForm?.wifi?.ip,
         subnet: networkForm?.wifi?.subnet,
         gateway: networkForm?.wifi?.gateway,
@@ -1933,15 +1933,14 @@ const ManageDevice = () => {
                           </label>
                           <label className='label flex-col items-start w-full mb-3'>
                             <span className='label-text text-wrap mb-2'>
-                              <span className='font-medium text-red-500 mr-1'>
+                              {/* <span className='font-medium text-red-500 mr-1'>
                                 *
-                              </span>
+                              </span> */}
                               Password
                             </span>
                             <input
                               type='text'
                               name='password'
-                              required
                               value={networkForm?.wifi?.password}
                               onChange={e =>
                                 setNetworkForm({
