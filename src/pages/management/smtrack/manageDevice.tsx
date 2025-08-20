@@ -851,22 +851,22 @@ const ManageDevice = () => {
     })
     setNetworkForm({
       wifi: {
-        ssid: config?.ssid ?? '—',
-        password: config?.password ?? '—',
-        macAddress: config?.mac ?? '—',
-        ip: config?.ip ?? '—',
-        subnet: config?.subnet ?? '—',
-        gateway: config?.gateway ?? '—',
-        dns: config?.dns ?? '—'
+        ssid: config?.ssid,
+        password: config?.password,
+        macAddress: config?.mac,
+        ip: config?.ip,
+        subnet: config?.subnet,
+        gateway: config?.gateway,
+        dns: config?.dns
       },
       lan: {
-        ip: config?.ipEth ?? '—',
-        subnet: config?.subnetEth ?? '—',
-        gateway: config?.gatewayEth ?? '—',
-        dns: config?.dnsEth ?? '—'
+        ip: config?.ipEth,
+        subnet: config?.subnetEth,
+        gateway: config?.gatewayEth,
+        dns: config?.dnsEth
       },
       sim: {
-        simSp: config?.simSP ?? '—'
+        simSp: config?.simSP
       }
     })
     setOnNetwork(true)
@@ -1917,7 +1917,7 @@ const ManageDevice = () => {
                               type='text'
                               name='ssid'
                               required
-                              value={networkForm?.wifi?.ssid}
+                              value={networkForm?.wifi?.ssid ?? '—'}
                               onChange={e =>
                                 setNetworkForm({
                                   ...networkForm,
@@ -1941,7 +1941,7 @@ const ManageDevice = () => {
                             <input
                               type='text'
                               name='password'
-                              value={networkForm?.wifi?.password}
+                              value={networkForm?.wifi?.password ?? '—'}
                               onChange={e =>
                                 setNetworkForm({
                                   ...networkForm,
@@ -1980,7 +1980,7 @@ const ManageDevice = () => {
                               name='ip'
                               required
                               disabled={networkObject.selectWifi}
-                              value={networkForm?.wifi?.ip}
+                              value={networkForm?.wifi?.ip ?? '—'}
                               onChange={e =>
                                 setNetworkForm({
                                   ...networkForm,
@@ -2008,7 +2008,7 @@ const ManageDevice = () => {
                               name='subnet'
                               required
                               disabled={networkObject.selectWifi}
-                              value={networkForm?.wifi?.subnet}
+                              value={networkForm?.wifi?.subnet ?? '—'}
                               onChange={e =>
                                 setNetworkForm({
                                   ...networkForm,
@@ -2036,7 +2036,7 @@ const ManageDevice = () => {
                               name='name'
                               required
                               disabled={networkObject.selectWifi}
-                              value={networkForm?.wifi?.macAddress}
+                              value={networkForm?.wifi?.macAddress ?? '—'}
                               onChange={e =>
                                 setNetworkForm({
                                   ...networkForm,
@@ -2065,7 +2065,7 @@ const ManageDevice = () => {
                               name='gatway'
                               required
                               disabled={networkObject.selectWifi}
-                              value={networkForm?.wifi?.gateway}
+                              value={networkForm?.wifi?.gateway ?? '—'}
                               onChange={e =>
                                 setNetworkForm({
                                   ...networkForm,
@@ -2093,7 +2093,7 @@ const ManageDevice = () => {
                               name='gatway'
                               required
                               disabled={networkObject.selectWifi}
-                              value={networkForm?.wifi?.dns}
+                              value={networkForm?.wifi?.dns ?? '—'}
                               onChange={e =>
                                 setNetworkForm({
                                   ...networkForm,
@@ -2178,7 +2178,7 @@ const ManageDevice = () => {
                                 type='text'
                                 name='ip'
                                 required
-                                value={networkForm?.lan?.ip}
+                                value={networkForm?.lan?.ip ?? '—'}
                                 onChange={e =>
                                   setNetworkForm({
                                     ...networkForm,
@@ -2203,7 +2203,7 @@ const ManageDevice = () => {
                                 type='text'
                                 name='subnet'
                                 required
-                                value={networkForm?.lan?.subnet}
+                                value={networkForm?.lan?.subnet ?? '—'}
                                 onChange={e =>
                                   setNetworkForm({
                                     ...networkForm,
@@ -2226,7 +2226,7 @@ const ManageDevice = () => {
                               <input
                                 type='text'
                                 name='gatway'
-                                value={networkForm?.lan?.gateway}
+                                value={networkForm?.lan?.gateway ?? '—'}
                                 onChange={e =>
                                   setNetworkForm({
                                     ...networkForm,
@@ -2247,7 +2247,7 @@ const ManageDevice = () => {
                               <input
                                 type='text'
                                 name='gatway'
-                                value={networkForm?.lan?.dns}
+                                value={networkForm?.lan?.dns ?? '—'}
                                 onChange={e =>
                                   setNetworkForm({
                                     ...networkForm,
