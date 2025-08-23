@@ -156,7 +156,6 @@ import store from './redux/store/index.ts'
 import Routes from './routes/routes.tsx'
 import FrameRate from './constants/utils/frameRate.tsx'
 import { Toaster } from 'react-hot-toast'
-// const Routes = lazy(() => import('./routes/routes.tsx'))
 
 class AppRenderer {
   private static instance: AppRenderer

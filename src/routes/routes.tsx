@@ -30,6 +30,7 @@ import hmacSHA512 from 'crypto-js/hmac-sha512'
 import Base64 from 'crypto-js/enc-base64'
 import { getOKLCHColor } from '../constants/utils/color'
 import { useTranslation } from 'react-i18next'
+import toast, { useToasterStore } from 'react-hot-toast'
 
 const Routes = () => {
   const dispatch = useDispatch()
@@ -55,8 +56,9 @@ const Routes = () => {
   const system = window.matchMedia('(prefers-color-scheme: dark)').matches
     ? 'dark'
     : 'light'
-
+  const toastLimit = 1
   const { i18n } = useTranslation()
+  const { toasts } = useToasterStore()
 
   const decodeToken = async (getToken: string) => {
     const decoded: TokenType = await jwtDecode(getToken)
@@ -108,6 +110,13 @@ const Routes = () => {
     if (month === 10 && day === 31) return 'halloween'
     return null
   }
+
+  useEffect(() => {
+    toasts
+      .filter(toasts => toasts.visible)
+      .filter((_, index) => index >= toastLimit)
+      .forEach(toasts => toast.dismiss(toasts.id))
+  }, [toasts])
 
   useEffect(() => {
     const specialTheme = getSpecialTheme()

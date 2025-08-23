@@ -17,7 +17,7 @@ import { AxiosError } from 'axios'
 import { SubmitLoading } from '../../components/loading/submitLoading'
 import Sidebar from '../../components/navigation/sidebar/smtrack/sidebar'
 import { cookieOptions, cookies } from '../../constants/utils/utilsConstants'
-import toast, { ToastOptions, useToasterStore } from 'react-hot-toast'
+import toast, { ToastOptions } from 'react-hot-toast'
 import { RiCloseLargeFill } from 'react-icons/ri'
 import { changIcon, changText } from '../../constants/utils/webSocket'
 import { useTranslation } from 'react-i18next'
@@ -38,7 +38,6 @@ const MainSmtrack = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const location = useLocation()
-  const { toasts } = useToasterStore()
   const {
     cookieDecode,
     tokenDecode,
@@ -54,7 +53,6 @@ const MainSmtrack = () => {
   const [isFirstLoad, setIsFirstLoad] = useState(true)
   const [showAnimation, setShowAnimation] = useState(false)
   const isPlayingRef = useRef<boolean>(false)
-  const toastLimit = 1
   const navigate = useNavigate()
 
   const src =
@@ -156,13 +154,6 @@ const MainSmtrack = () => {
       socket.off('receive_message', handleMessage)
     }
   }, [hosId, role])
-
-  useEffect(() => {
-    toasts
-      .filter(toasts => toasts.visible)
-      .filter((_, index) => index >= toastLimit)
-      .forEach(toasts => toast.dismiss(toasts.id))
-  }, [toasts])
 
   useEffect(() => {
     const isMessageValid = socketData?.message?.toLowerCase() ?? ''

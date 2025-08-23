@@ -18,7 +18,6 @@ import { socket } from '../../services/websocket'
 import { SocketResponseType } from '../../types/global/socketType'
 import Navbar from '../../components/navigation/navbar/navbar'
 import Sidebar from '../../components/navigation/sidebar/tsm/sidebar'
-import toast, { ToastOptions, useToasterStore } from 'react-hot-toast'
 import { RiCloseLargeFill } from 'react-icons/ri'
 import { useTranslation } from 'react-i18next'
 import { changIcon, changText } from '../../constants/utils/webSocket'
@@ -33,11 +32,11 @@ import { cookieOptions, cookies } from '../../constants/utils/utilsConstants'
 import BottomBar from '../../components/navigation/bottomBar/bottomBar'
 import TokenExpire from '../../components/modal/tokenExpire'
 import Footer from '../../components/footer/footer'
+import toast, { ToastOptions } from 'react-hot-toast'
 
 const MainTms = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
-  const { toasts } = useToasterStore()
   const location = useLocation()
   const {
     submitLoading,
@@ -54,7 +53,6 @@ const MainTms = () => {
   const [isFirstLoad, setIsFirstLoad] = useState(true)
   const isPlayingRef = useRef<boolean>(false)
   const [showAnimation, setShowAnimation] = useState(false)
-  const toastLimit = 1
   const navigate = useNavigate()
 
   const src =
@@ -156,13 +154,6 @@ const MainTms = () => {
       socket.off('receive_message', handleMessage)
     }
   }, [hosId, role])
-
-  useEffect(() => {
-    toasts
-      .filter(toasts => toasts.visible)
-      .filter((_, index) => index >= toastLimit)
-      .forEach(toasts => toast.dismiss(toasts.id))
-  }, [toasts])
 
   useEffect(() => {
     const isMessageValid = socketData?.message?.toLowerCase() ?? ''
