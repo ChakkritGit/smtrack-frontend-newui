@@ -732,7 +732,7 @@ const Adjustments = (props: AdjustmentsProps) => {
                     onClick={() => {
                       if (
                         adjustmentsForm.tempMin >
-                        (probeFiltered?.type === 'PT100|Analog Sensor' ? -180 : -40)
+                        (probeFiltered?.type === 'PT100' ? -180 : -40)
                       ) {
                         setAdjustmentsForm({
                           ...adjustmentsForm,
@@ -751,8 +751,8 @@ const Adjustments = (props: AdjustmentsProps) => {
                     className='input  text-center w-full'
                     type='number'
                     step={0.01}
-                    min={probeFiltered?.type === 'PT100|Analog Sensor' ? -180 : -40}
-                    max={probeFiltered?.type === 'PT100|Analog Sensor' ? 200 : 120}
+                    min={probeFiltered?.type === 'PT100' ? -180 : -40}
+                    max={probeFiltered?.type === 'PT100' ? 200 : 120}
                     value={adjustmentsForm.tempMin}
                     onChange={e => {
                       let value = e.target.value
@@ -777,7 +777,7 @@ const Adjustments = (props: AdjustmentsProps) => {
                     onClick={() => {
                       if (
                         adjustmentsForm.tempMin <
-                        (probeFiltered?.type === 'PT100|Analog Sensor' ? 200 : 120)
+                        (probeFiltered?.type === 'PT100' ? 200 : 120)
                       ) {
                         setAdjustmentsForm({
                           ...adjustmentsForm,
@@ -802,7 +802,7 @@ const Adjustments = (props: AdjustmentsProps) => {
                     onClick={() => {
                       if (
                         adjustmentsForm.tempMax >
-                        (probeFiltered?.type === 'PT100|Analog Sensor' ? -180 : -40)
+                        (probeFiltered?.type === 'PT100' ? -180 : -40)
                       ) {
                         setAdjustmentsForm({
                           ...adjustmentsForm,
@@ -821,8 +821,8 @@ const Adjustments = (props: AdjustmentsProps) => {
                     className='input  text-center w-full'
                     type='number'
                     step={0.01}
-                    min={probeFiltered?.type === 'PT100|Analog Sensor' ? -180 : -40}
-                    max={probeFiltered?.type === 'PT100|Analog Sensor' ? 200 : 120}
+                    min={probeFiltered?.type === 'PT100' ? -180 : -40}
+                    max={probeFiltered?.type === 'PT100' ? 200 : 120}
                     value={adjustmentsForm.tempMax}
                     onChange={e => {
                       let value = e.target.value
@@ -847,7 +847,7 @@ const Adjustments = (props: AdjustmentsProps) => {
                     onClick={() => {
                       if (
                         adjustmentsForm.tempMax <
-                        (probeFiltered?.type === 'PT100|Analog Sensor' ? 200 : 120)
+                        (probeFiltered?.type === 'PT100' ? 200 : 120)
                       ) {
                         setAdjustmentsForm({
                           ...adjustmentsForm,
@@ -1014,8 +1014,8 @@ const Adjustments = (props: AdjustmentsProps) => {
                       pearling
                       minDistance={1}
                       step={0.01}
-                      min={probeFiltered?.type === 'PT100|Analog Sensor' ? -180 : -40}
-                      max={probeFiltered?.type === 'PT100|Analog Sensor' ? 200 : 120}
+                      min={probeFiltered?.type === 'PT100' ? -180 : -40}
+                      max={probeFiltered?.type === 'PT100' ? 200 : 120}
                       renderThumb={(props, state) => {
                         const { key, ref, ...validProps } = props
                         return (
@@ -1090,8 +1090,8 @@ const Adjustments = (props: AdjustmentsProps) => {
                     className='input  text-center w-full'
                     type='number'
                     step={0.01}
-                    min={probeFiltered?.type === 'PT100|Analog Sensor' ? -180 : -40}
-                    max={probeFiltered?.type === 'PT100|Analog Sensor' ? 200 : 120}
+                    min={probeFiltered?.type === 'PT100' ? -180 : -40}
+                    max={probeFiltered?.type === 'PT100' ? 200 : 120}
                     value={adjustmentsForm.tempMin}
                     onChange={e => {
                       let value = e.target.value
@@ -1116,8 +1116,8 @@ const Adjustments = (props: AdjustmentsProps) => {
                     className='input  text-center w-full'
                     type='number'
                     step={0.01}
-                    min={probeFiltered?.type === 'PT100|Analog Sensor' ? -180 : -40}
-                    max={probeFiltered?.type === 'PT100|Analog Sensor' ? 200 : 120}
+                    min={probeFiltered?.type === 'PT100' ? -180 : -40}
+                    max={probeFiltered?.type === 'PT100' ? 200 : 120}
                     value={adjustmentsForm.tempMax}
                     onChange={e => {
                       let value = e.target.value
@@ -1223,8 +1223,8 @@ const Adjustments = (props: AdjustmentsProps) => {
                       pearling
                       minDistance={1}
                       step={0.01}
-                      min={probeFiltered?.type === 'PT100|Analog Sensor' ? -180 : -40}
-                      max={probeFiltered?.type === 'PT100|Analog Sensor' ? 200 : 120}
+                      min={probeFiltered?.type === 'PT100' ? -180 : -40}
+                      max={probeFiltered?.type === 'PT100' ? 200 : 120}
                       disabled={
                         isLoadingMqtt ||
                         role === 'ADMIN' ||
@@ -1318,8 +1318,8 @@ const Adjustments = (props: AdjustmentsProps) => {
                     className='input  text-center w-full'
                     type='number'
                     step={0.01}
-                    min={probeFiltered?.type === 'PT100|Analog Sensor' ? -180 : -40}
-                    max={probeFiltered?.type === 'PT100|Analog Sensor' ? 200 : 120}
+                    min={probeFiltered?.type === 'PT100' ? -180 : -40}
+                    max={probeFiltered?.type === 'PT100' ? 200 : 120}
                     value={adjustmentsForm.adjustTemp}
                     disabled={
                       isLoadingMqtt ||
@@ -1430,8 +1430,8 @@ const Adjustments = (props: AdjustmentsProps) => {
                     className='input  text-center w-full'
                     type='number'
                     step={0.01}
-                    min={probeFiltered?.type === 'PT100|Analog Sensor' ? -180 : -40}
-                    max={probeFiltered?.type === 'PT100|Analog Sensor' ? 200 : 120}
+                    min={probeFiltered?.type === 'PT100' ? -180 : -40}
+                    max={probeFiltered?.type === 'PT100' ? 200 : 120}
                     value={adjustmentsForm.adjustTemp}
                     disabled={
                       isLoadingMqtt ||

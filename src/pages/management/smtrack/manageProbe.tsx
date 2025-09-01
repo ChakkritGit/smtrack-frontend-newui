@@ -784,8 +784,8 @@ const ManageProbe = () => {
   ]
 
   const ProbeName = [
-    { value: 'SHT-31|Digital Sensor', name: 'SHT-31|Digital Sensor' },
-    { value: 'PT100|Analog Sensor', name: 'PT100|Analog Sensor' }
+    { value: 'SHT-31', name: 'SHT-31' },
+    { value: 'PT100', name: 'PT100' }
   ]
 
   // const ProbeType = [
