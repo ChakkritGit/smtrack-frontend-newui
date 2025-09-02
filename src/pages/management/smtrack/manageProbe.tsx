@@ -785,7 +785,8 @@ const ManageProbe = () => {
 
   const ProbeName = [
     { value: 'SHT-31', name: 'SHT-31' },
-    { value: 'PT100', name: 'PT100' }
+    { value: 'PT100', name: 'PT100' },
+    { value: 'THERMOCOUPLE', name: 'THERMOCOUPLE' }
   ]
 
   // const ProbeType = [
