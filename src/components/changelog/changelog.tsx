@@ -1,5 +1,5 @@
 import { MdOutlineUpdate } from 'react-icons/md'
-import { V2, V2_0_1 } from './version'
+import { V2, V2_0_1, V2_0_2 } from './version'
 import { useTranslation } from 'react-i18next'
 
 const Changelog = () => {
@@ -14,6 +14,7 @@ const Changelog = () => {
         </h1>
       </div>
       <div>
+        <V2_0_2 t={t} i18n={i18n} />
         <V2_0_1 t={t} i18n={i18n} />
         <V2 t={t} i18n={i18n} />
       </div>

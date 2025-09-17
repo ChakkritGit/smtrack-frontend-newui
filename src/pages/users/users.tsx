@@ -48,8 +48,15 @@ import AddHopitalSelect from '../../components/selects/addHopitalSelect'
 
 const Users = () => {
   const dispatch = useDispatch()
-  const { globalSearch, wardId, tokenDecode, tmsMode, ambientDisabled, loadingStyle } =
-    useSelector((state: RootState) => state.utils)
+  const {
+    globalSearch,
+    wardId,
+    tokenDecode,
+    tmsMode,
+    ambientDisabled,
+    loadingStyle,
+    hosId
+  } = useSelector((state: RootState) => state.utils)
   const { t } = useTranslation()
   const { role } = tokenDecode || {}
   const [users, setUsers] = useState<UsersType[]>([])
@@ -515,8 +522,14 @@ const Users = () => {
 
   useEffect(() => {
     const filterUsers = users?.filter(f => {
-      if (wardId && f.ward?.id !== wardId) {
-        return false
+      if (wardId) {
+        if (f.ward?.id !== wardId) {
+          return false
+        }
+      } else if (hosId) {
+        if (f.ward?.hosId !== hosId) {
+          return false
+        }
       }
 
       const matchesSearch =
@@ -547,7 +560,7 @@ const Users = () => {
       : filterUsers
 
     setUsersFilter(newFilter)
-  }, [users, globalSearch, wardId, tmsMode, userConnect, userInactive])
+  }, [users, globalSearch, wardId, hosId, tmsMode, userConnect, userInactive])
 
   useEffect(() => {
     if (!ambientDisabled) return
@@ -793,7 +806,9 @@ const Users = () => {
                   />
                   {imageProcessing ? (
                     <div className='mt-4 flex justify-center w-32 h-32 md:w-48 md:h-48'>
-                      <span className={`loading ${loadingStyle} loading-md`}></span>
+                      <span
+                        className={`loading ${loadingStyle} loading-md`}
+                      ></span>
                     </div>
                   ) : (
                     <div className='mt-4 relative'>
@@ -976,7 +991,9 @@ const Users = () => {
                     />
                     {imageProcessing ? (
                       <div className='mt-4 flex justify-center w-32 h-32 md:w-48 md:h-48'>
-                        <span className={`loading ${loadingStyle} loading-md`}></span>
+                        <span
+                          className={`loading ${loadingStyle} loading-md`}
+                        ></span>
                       </div>
                     ) : (
                       <div className='mt-4 relative'>

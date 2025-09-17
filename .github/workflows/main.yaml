@@ -12,9 +12,24 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Get Original Commit Message
+      id: get_commit_message
+      run: |
+        COMMIT_MESSAGE=$(git log -1 --pretty=%B)
+
+        if [[ $COMMIT_MESSAGE == "Merge branch"* ]]; then
+          COMMIT_MESSAGE=$(git log -1 --pretty=%B HEAD^2)
+        fi
+        
+        echo "message<<EOF" >> $GITHUB_OUTPUT
+        echo "$COMMIT_MESSAGE" >> $GITHUB_OUTPUT
+        echo "EOF" >> $GITHUB_OUTPUT
 
     - name: Set dynamic image tag
-      run: echo "TAG=siamatic/smtrack-frontend:2.0.1a11b-${GITHUB_SHA::7}" >> $GITHUB_ENV
+      run: echo "TAG=siamatic/smtrack-frontend:2.0.2-${GITHUB_SHA::7}" >> $GITHUB_ENV
 
     - name: Login to docker hub
       uses: docker/login-action@v3
@@ -53,19 +68,6 @@ jobs:
         git add k8s/deploy.yaml
         git commit -m "Update deployment image to ${{ env.TAG }}"
         git push
-
-    - name: Get Latest Commit Message
-      id: get_commit_message
-      run: |
-        COMMIT_MESSAGE=$(git log -1 --pretty=%B)
-
-        if [[ $COMMIT_MESSAGE == "Merge branch"* ]]; then
-          COMMIT_MESSAGE=$(git log -1 --pretty=%B HEAD^2)
-        fi
-
-        echo "message<<EOF" >> $GITHUB_OUTPUT
-        echo "$COMMIT_MESSAGE" >> $GITHUB_OUTPUT
-        echo "EOF" >> $GITHUB_OUTPUT
 
     - name: Send success message to slack
       id: slack

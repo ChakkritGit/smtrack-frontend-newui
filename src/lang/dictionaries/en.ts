@@ -586,6 +586,11 @@ export default {
     changelog: {
       badgeNew: 'New',
       title: `What's new?`,
+      v2_0_2: {
+        updateDeps: 'Updated dependencies for improved stability and security.',
+        fixFilterWard:
+          'Improve user filtering: when selecting a hospital and choosing all wards (ALL), display all users assigned to that hospital.'
+      },
       v2_0_1: {
         updateDeps: 'Updated dependencies for improved stability and security.',
         fixGraphGradient:
