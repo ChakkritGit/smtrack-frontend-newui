@@ -674,18 +674,18 @@ const ManageDevice = () => {
       body = {
         dhcp: true,
         ssid: networkForm?.wifi?.ssid,
-        password: networkForm?.wifi?.password ? networkForm?.wifi?.password : null,
-        ip: null,
-        subnet: null,
-        gateway: null,
-        dns: null,
-        mac: null
+        password: networkForm?.wifi?.password ? networkForm?.wifi?.password : '',
+        ip: '',
+        subnet: '',
+        gateway: '',
+        dns: '',
+        mac: ''
       }
     } else {
       body = {
         dhcp: false,
         ssid: networkForm?.wifi?.ssid,
-        password: networkForm?.wifi?.password ? networkForm?.wifi?.password : null,
+        password: networkForm?.wifi?.password ? networkForm?.wifi?.password : '',
         ip: networkForm?.wifi?.ip,
         subnet: networkForm?.wifi?.subnet,
         gateway: networkForm?.wifi?.gateway,
@@ -741,10 +741,10 @@ const ManageDevice = () => {
     if (networkObject.selectLan) {
       body = {
         dhcpEth: true,
-        ip: null,
-        subnet: null,
-        gateway: null,
-        dns: null
+        ip: '',
+        subnet: '',
+        gateway: '',
+        dns: ''
       }
     } else {
       body = {
