@@ -54,19 +54,32 @@ jobs:
         git commit -m "Update deployment image to ${{ env.TAG }}"
         git push
 
+    - name: Get Latest Commit Message
+      id: get_commit_message
+      run: |
+        COMMIT_MESSAGE=$(git log -1 --pretty=%B)
+
+        if [[ $COMMIT_MESSAGE == "Merge branch"* ]]; then
+          COMMIT_MESSAGE=$(git log -1 --pretty=%B HEAD^2)
+        fi
+
+        echo "message<<EOF" >> $GITHUB_OUTPUT
+        echo "$COMMIT_MESSAGE" >> $GITHUB_OUTPUT
+        echo "EOF" >> $GITHUB_OUTPUT
+
     - name: Send success message to slack
       id: slack
       uses: slackapi/slack-github-action@v1.27.0
       with:
         payload: |
           {
-            "text": "✅ GitHub Action build ${{ env.TAG }} result: ${{ job.status }} 🫩🫩 \n📝 Commit: ${{ github.event.head_commit.message }}",
+            "text": "✅ GitHub Action build ${{ env.TAG }} result: ${{ job.status }} 🫩🫩 \n📝 Commit: ${{ steps.get_commit_message.outputs.message }}",
             "blocks": [
               {
                 "type": "section",
                 "text": {
                   "type": "mrkdwn",
-                  "text": "✅ GitHub Action build *${{ env.TAG }}* result: *${{ job.status }}* 🫩🫩 \n📝 *Commit:* ${{ github.event.head_commit.message }}"
+                  "text": "✅ GitHub Action build *${{ env.TAG }}* result: *${{ job.status }}* 🫩🫩 \n📝 *Commit:* ${{ steps.get_commit_message.outputs.message }}"
                 }
               }
             ]
