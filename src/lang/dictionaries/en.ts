@@ -589,7 +589,8 @@ export default {
       v2_0_2: {
         updateDeps: 'Updated dependencies for improved stability and security.',
         fixFilterWard:
-          'Improve user filtering: when selecting a hospital and choosing all wards (ALL), display all users assigned to that hospital.'
+          'Improve user filtering: when selecting a hospital and choosing all wards (ALL), display all users assigned to that hospital.',
+        bugFixes: 'Bug Fixes and improve performance.'
       },
       v2_0_1: {
         updateDeps: 'Updated dependencies for improved stability and security.',

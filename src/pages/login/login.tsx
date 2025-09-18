@@ -115,7 +115,7 @@ const Login = () => {
         <title>SMTrack+ - Login</title>
       </Helmet>
 
-      <div className='card bg-base-100 w-[350px] sm:w-[500px] md:w-[500px] lg:w-[600px] h-max shadow-xl'>
+      <div className='card bg-base-100 w-11/12 sm:w-[480px] md:w-[480px] lg:w-[524px] h-max shadow-xl'>
         <div className='px-5 sm:px-7 lg:px-10 pt-5'>
           <div className='text-end'>
             <LanguageList />
@@ -169,11 +169,12 @@ const Login = () => {
         </div>
         <div className='card-body px-5 sm:px-7 lg:px-10'>
           <form onSubmit={handleLogin} className='flex flex-col gap-4'>
-            <label className='input  flex items-center gap-2 w-full'>
+            <label className='input  flex items-center gap-2 w-full h-12'>
               <RiAtLine
+                size={20}
                 fill='currentColor'
-                width={16}
-                hanging={16}
+                width={20}
+                height={20}
                 opacity={0.7}
               />
               <input
@@ -186,11 +187,12 @@ const Login = () => {
               />
             </label>
             <div className='relative'>
-              <label className='input  flex items-center gap-2 pr-16 w-full'>
+              <label className='input  flex items-center gap-2 pr-16 w-full h-12'>
                 <RiKey2Line
+                  size={20}
                   fill='currentColor'
-                  width={16}
-                  height={16}
+                  width={20}
+                  height={20}
                   opacity={0.7}
                 />
                 <input
@@ -203,7 +205,7 @@ const Login = () => {
               </label>
               <button
                 type='button'
-                className='absolute right-2 top-1/2 -translate-y-1/2 border border-base-content/30 w-7 h-7 p-1 flex items-center justify-center cursor-pointer rounded-field text-base-content/30 hover:opacity-50 duration-300 ease-linear z-10'
+                className='absolute right-2 top-1/2 -translate-y-1/2 border border-base-content/30 w-8 h-8 p-1 flex items-center justify-center cursor-pointer rounded-field text-base-content/30 hover:opacity-50 duration-300 ease-linear z-10'
                 onClick={() => setShowPassword(prev => !prev)}
               >
                 {showPassword ? (
@@ -216,7 +218,7 @@ const Login = () => {
             <div className='card-actions'>
               <button
                 type='submit'
-                className='btn btn-neutral w-full text-[16px]'
+                className='btn btn-neutral w-full text-[16px] h-12'
               >
                 {loading ? (
                   <span className={`loading ${loadingStyle} loading-md`}></span>

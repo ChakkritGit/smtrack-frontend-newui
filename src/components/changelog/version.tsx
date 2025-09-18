@@ -28,6 +28,10 @@ const V2_0_2 = ({ t, i18n }: VersionProps) => (
         <span className='font-bold text-lg'>-</span>
         <span className='ml-3'>{t('changelog.v2_0_2.fixFilterWard')}</span>
       </div>
+      <div className='ml-3'>
+        <span className='font-bold text-lg'>-</span>
+        <span className='ml-3'>{t('changelog.v2_0_2.bugFixes')}</span>
+      </div>
     </div>
   </div>
 )
