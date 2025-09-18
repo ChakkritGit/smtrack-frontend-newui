@@ -534,3 +534,8 @@ input[type=number] {
     scale: 1;
   }
 }
+
+input::-ms-reveal,
+input::-ms-clear {
+  @apply hidden;
+}
