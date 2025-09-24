@@ -324,6 +324,8 @@ const ManageDevice = () => {
           formDataObj.append(key, value as string)
         } else if (key === 'hospital') {
           formDataObj.append(key, hosIdforManageDev)
+        } else if (key === 'config') {
+          return
         } else {
           formDataObj.append(key, value as string)
         }
