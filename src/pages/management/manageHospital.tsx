@@ -709,33 +709,37 @@ const ManageHospital = () => {
       center: true,
       width: '150px'
     },
-    {
-      name: t('action'),
-      cell: (item, index) =>
-        tokenDecode?.hosId !== item.id && (
-          <div
-            className='flex items-center justify-center gap-3 p-3'
-            key={index}
-          >
-            <button
-              onClick={() => openEditHosModal(item)}
-              className='btn btn-ghost flex text-white min-w-[32px] max-w-[32px] min-h-[32px] max-h-[32px] p-0 bg-primary'
-            >
-              <RiEditLine size={20} />
-            </button>
-            {role === 'SUPER' && (
-              <button
-                onClick={() => deleteHospital(item.id)}
-                className='btn btn-ghost flex text-white min-w-[32px] max-w-[32px] min-h-[32px] max-h-[32px] p-0 bg-red-500'
-              >
-                <RiDeleteBin7Line size={20} />
-              </button>
-            )}
-          </div>
-        ),
-      center: true,
-      sortable: false
-    }
+    ...(role === 'SUPER' || role === 'SERVICE'
+      ? [
+          {
+            name: t('action'),
+            cell: (item: HospitalsType, index: number) =>
+              tokenDecode?.hosId !== item.id && (
+                <div
+                  className='flex items-center justify-center gap-3 p-3'
+                  key={index}
+                >
+                  <button
+                    onClick={() => openEditHosModal(item)}
+                    className='btn btn-ghost flex text-white min-w-[32px] max-w-[32px] min-h-[32px] max-h-[32px] p-0 bg-primary'
+                  >
+                    <RiEditLine size={20} />
+                  </button>
+                  {role === 'SUPER' && (
+                    <button
+                      onClick={() => deleteHospital(item.id)}
+                      className='btn btn-ghost flex text-white min-w-[32px] max-w-[32px] min-h-[32px] max-h-[32px] p-0 bg-red-500'
+                    >
+                      <RiDeleteBin7Line size={20} />
+                    </button>
+                  )}
+                </div>
+              ),
+            center: true,
+            sortable: false
+          }
+        ]
+      : [])
   ]
 
   const subWardColumns: TableColumn<WardType>[] = [
@@ -778,33 +782,37 @@ const ManageHospital = () => {
       center: true,
       width: '150px'
     },
-    {
-      name: t('action'),
-      cell: (item, index) =>
-        wardId !== item.id && (
-          <div
-            className='flex items-center justify-center gap-3 p-3'
-            key={index}
-          >
-            <button
-              onClick={() => openEditWardModal(item)}
-              className='btn btn-ghost flex text-white min-w-[32px] max-w-[32px] min-h-[32px] max-h-[32px] p-0 bg-primary'
-            >
-              <RiEditLine size={20} />
-            </button>
-            {role === 'SUPER' && (
-              <button
-                onClick={() => deleteWard(item.id)}
-                className='btn btn-ghost flex text-white min-w-[32px] max-w-[32px] min-h-[32px] max-h-[32px] p-0 bg-red-500'
-              >
-                <RiDeleteBin7Line size={20} />
-              </button>
-            )}
-          </div>
-        ),
-      center: true,
-      sortable: false
-    }
+    ...(role === 'SUPER' || role === 'SERVICE'
+      ? [
+          {
+            name: t('action'),
+            cell: (item: WardType, index: number) =>
+              wardId !== item.id && (
+                <div
+                  className='flex items-center justify-center gap-3 p-3'
+                  key={index}
+                >
+                  <button
+                    onClick={() => openEditWardModal(item)}
+                    className='btn btn-ghost flex text-white min-w-[32px] max-w-[32px] min-h-[32px] max-h-[32px] p-0 bg-primary'
+                  >
+                    <RiEditLine size={20} />
+                  </button>
+                  {role === 'SUPER' && (
+                    <button
+                      onClick={() => deleteWard(item.id)}
+                      className='btn btn-ghost flex text-white min-w-[32px] max-w-[32px] min-h-[32px] max-h-[32px] p-0 bg-red-500'
+                    >
+                      <RiDeleteBin7Line size={20} />
+                    </button>
+                  )}
+                </div>
+              ),
+            center: true,
+            sortable: false
+          }
+        ]
+      : [])
   ]
 
   const ExpandedComponent = memo(({ data }: { data: HospitalsType }) => (
@@ -853,19 +861,21 @@ const ManageHospital = () => {
         <span></span>
         <div className='flex flex-col lg:flex-row mt-3 lg:mt-0 lg:items-center items-end gap-3'>
           {(role === 'SUPER' || role === 'SERVICE') && (
-            <button
-              className='btn btn-neutral'
-              onClick={() => addHosModalRef.current?.showModal()}
-            >
-              {t('addHos')}
-            </button>
+            <>
+              <button
+                className='btn btn-neutral'
+                onClick={() => addHosModalRef.current?.showModal()}
+              >
+                {t('addHos')}
+              </button>
+              <button
+                className='btn btn-neutral'
+                onClick={() => addWardModalRef.current?.showModal()}
+              >
+                {t('addWard')}
+              </button>
+            </>
           )}
-          <button
-            className='btn btn-neutral'
-            onClick={() => addWardModalRef.current?.showModal()}
-          >
-            {t('addWard')}
-          </button>
         </div>
       </div>
       <div className='dataTableWrapper bg-base-100 rounded-field p-3 mt-5 duration-300 ease-linear'>
