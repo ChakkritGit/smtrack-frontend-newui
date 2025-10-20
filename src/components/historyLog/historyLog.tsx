@@ -89,7 +89,7 @@ const HistoryLog = () => {
               itemPerPage={[10, 30, 50, 100]}
               renderItem={(item, index) => (
                 <div
-                  className='collapse collapse-plus join-item border-base-300 border'
+                  className='collapse collapse-plus join-item border-base-300 border bg-base-100 rounded-3xl'
                   key={index}
                 >
                   <input
