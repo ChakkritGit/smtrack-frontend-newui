@@ -25,19 +25,31 @@ type BottomItemProps = {
 }
 
 const BottomNavItem = (props: BottomItemProps) => {
-  const { DefaultPic, isScrollingDown, t, themeMode, userProfile, role, blurDisabled } = props
+  const {
+    DefaultPic,
+    isScrollingDown,
+    t,
+    themeMode,
+    userProfile,
+    role,
+    blurDisabled
+  } = props
   const location = useLocation()
 
   return (
     <div
-      className={`dock overflow-hidden bottom-0 px-3 pb-2 sm:hidden ${blurDisabled ? 'bg-base-100/80 backdrop-blur' : 'bg-base-100'} z-[89]
+      className={`dock overflow-hidden bottom-0 px-3 pb-2 sm:hidden ${
+        blurDisabled ? 'bg-base-100/80 backdrop-blur' : 'bg-base-100'
+      } z-[89]
         ${
           isScrollingDown
             ? '!h-[0px] opacity-0'
             : 'h-[80px] shadow-sm opacity-100'
         }
         ${
-          ['cupcake', 'valentine', 'forest', 'pastel', 'acid'].includes(themeMode)
+          ['cupcake', 'valentine', 'forest', 'pastel', 'acid'].includes(
+            themeMode
+          )
             ? `bottom-5 mx-auto w-[95%] rounded-field !pb-0`
             : ''
         }`}
@@ -58,13 +70,18 @@ const BottomNavItem = (props: BottomItemProps) => {
           icon: [RiUser6Fill, RiUser6Line],
           text: t('sidePermission')
         },
-        ...(role === 'SUPER' || role === 'SERVICE' ? [
-          {
-            to: '/management',
-            icon: [RiListSettingsFill, RiListSettingsLine],
-            text: t('sideManage')
-          }
-        ] : [])
+        ...(role === 'SUPER' ||
+        role === 'SERVICE' ||
+        role === 'ADMIN' ||
+        role === 'LEGACY_ADMIN'
+          ? [
+              {
+                to: '/management',
+                icon: [RiListSettingsFill, RiListSettingsLine],
+                text: t('sideManage')
+              }
+            ]
+          : [])
       ]
         .filter(f => {
           if (role === 'USER' || role === 'LEGACY_USER' || role === 'GUEST') {
