@@ -14,6 +14,7 @@ import { GlobalContextType } from '../../../../types/global/globalContext'
 import { Swiper as SwiperType } from 'swiper/types'
 import ImageModal from '../../../ui/imageModal'
 import { getColor } from '../../../../constants/utils/color'
+import { UserRole } from '../../../../types/global/users/usersType'
 
 type PropsType = {
   deviceData: DeviceLogsType | undefined
@@ -21,13 +22,21 @@ type PropsType = {
   swiperInfoRef: RefObject<SwiperType | null>
   isPause: boolean
   ambientDisabled: boolean
+  role: UserRole | undefined
 }
 
 SwiperCore.use([Pagination])
 
 const CardInFoComponent = (props: PropsType) => {
   const { t } = useTranslation()
-  const { deviceData, fetchDevices, swiperInfoRef, isPause, ambientDisabled } = props
+  const {
+    deviceData,
+    fetchDevices,
+    swiperInfoRef,
+    isPause,
+    ambientDisabled,
+    role
+  } = props
   const [serial, setSerial] = useState<string>('')
   const [probeData, setProbeData] = useState<ProbeType[]>([])
   const [colors, setColors] = useState<string[]>([])
@@ -96,19 +105,24 @@ const CardInFoComponent = (props: PropsType) => {
             <span>{deviceData?.wardName ?? '—'}</span>
           </div>
         </div>
-        <button
-          aria-label={t('adjustMents')}
-          className='btn btn-ghost flex p-0 min-w-[30px] min-h-[30px] max-w-[30px] max-h-[30px] duration-300 ease-linear tooltip tooltip-left z-30'
-          data-tip={t('adjustMents')}
-          onClick={() =>
-            openAdjustModal(
-              deviceData?.probe as ProbeType[],
-              deviceData?.id as string
-            )
-          }
-        >
-          <RiSettings3Line size={24} />
-        </button>
+        {(role === 'SUPER' ||
+          role === 'SERVICE' ||
+          role === 'ADMIN' ||
+          role === 'LEGACY_ADMIN') && (
+          <button
+            aria-label={t('adjustMents')}
+            className='btn btn-ghost flex p-0 min-w-[30px] min-h-[30px] max-w-[30px] max-h-[30px] duration-300 ease-linear tooltip tooltip-left z-30'
+            data-tip={t('adjustMents')}
+            onClick={() =>
+              openAdjustModal(
+                deviceData?.probe as ProbeType[],
+                deviceData?.id as string
+              )
+            }
+          >
+            <RiSettings3Line size={24} />
+          </button>
+        )}
       </div>
       <div className='flex justify-between flex-col lg:flex-row gap-3 mt-2 h-full'>
         <div
@@ -123,10 +137,12 @@ const CardInFoComponent = (props: PropsType) => {
               />
             </div>
           </div>
-          {ambientDisabled && <div
-            className='blur-[128px] w-28 h-[85%] absolute opacity-75 z-10 duration-700 ease-linear'
-            style={{ backgroundColor: colors[0] }}
-          ></div>}
+          {ambientDisabled && (
+            <div
+              className='blur-[128px] w-28 h-[85%] absolute opacity-75 z-10 duration-700 ease-linear'
+              style={{ backgroundColor: colors[0] }}
+            ></div>
+          )}
         </div>
         <div className='w-full lg:w-[60%] lg:h-48 p-1'>
           <Swiper

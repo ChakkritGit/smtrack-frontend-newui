@@ -25,20 +25,21 @@ const Dashboard = () => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
   const navigate = useNavigate()
-  const { deviceKey, socketData, switchingMode, ambientDisabled } = useSelector(
+  const { deviceKey, socketData, switchingMode, ambientDisabled, tokenDecode } = useSelector(
     (state: RootState) => state.utils
   )
   const [deviceLogs, setDeviceLogs] = useState<DeviceLogsType>()
   const [loading, setLoading] = useState(false)
-  const modalRef = useRef<HTMLDialogElement>(null)
+  const [isPause, setIsPaused] = useState(false)
   const { activeIndex } = useSwiperSync() as GlobalContextType
   const swiperTempRef = useRef<SwiperType>(null)
   const swiperTempOfDayRef = useRef<SwiperType>(null)
   const swiperInfoRef = useRef<SwiperType>(null)
-  const [isPause, setIsPaused] = useState(false)
   const deviceFetchHistory = useRef<Record<string, number>>({})
   const abortRef = useRef<AbortController | null>(null)
+  const modalRef = useRef<HTMLDialogElement>(null)
   const intervalRef = useRef<NodeJS.Timeout | null>(null)
+  const { role } = tokenDecode || {}
 
   const abortPrevRequest = () => {
     if (abortRef.current) {
@@ -134,9 +135,10 @@ const Dashboard = () => {
         swiperInfoRef={swiperInfoRef}
         isPause={isPause}
         ambientDisabled={ambientDisabled}
+        role={role}
       />
     )
-  }, [deviceKey, deviceLogs, activeIndex, isPause])
+  }, [deviceKey, deviceLogs, activeIndex, isPause, role])
 
   const CardStatusComponent = useMemo(() => {
     return (
