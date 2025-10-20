@@ -11,11 +11,13 @@ import {
 import { DoorKey } from '../../../types/global/doorQty'
 import { calculateDate } from '../../../constants/utils/utilsConstants'
 import { ProbeType } from '../../../types/smtrack/probe/probeType'
+import { UserRole } from '../../../types/global/users/usersType'
 
 const columnData = (
   t: TFunctionNonStrict<'translation', undefined>,
   handleRowClicked: (row: DeviceType) => void,
-  openAdjustModal: (probe: ProbeType[], sn: string) => void
+  openAdjustModal: (probe: ProbeType[], sn: string) => void,
+  role: UserRole | undefined
 ): TableColumn<DeviceType>[] => {
   return [
     {
@@ -208,24 +210,33 @@ const columnData = (
       center: true,
       width: '140px'
     },
-    {
-      name: t('deviceActionTb'),
-      cell: item => (
-        <RiSettings3Line
-          size={24}
-          className='hover:fill-primary duration-300 ease-linear'
-          onClick={() => openAdjustModal(item.probe, item.id)}
-        />
-      ),
-      sortable: false,
-      center: true
-    }
+
+    ...(role === 'SUPER' ||
+    role === 'SERVICE' ||
+    role === 'ADMIN' ||
+    role === 'LEGACY_ADMIN'
+      ? [
+          {
+            name: t('deviceActionTb'),
+            cell: (item: DeviceType) => (
+              <RiSettings3Line
+                size={24}
+                className='hover:fill-primary duration-300 ease-linear'
+                onClick={() => openAdjustModal(item.probe, item.id)}
+              />
+            ),
+            sortable: false,
+            center: true
+          }
+        ]
+      : [])
   ]
 }
 
 const subColumnData = (
   t: TFunctionNonStrict<'translation', undefined>,
-  devicesFiltered: DeviceType[]
+  devicesFiltered: DeviceType[],
+  role: UserRole | undefined
 ): TableColumn<ProbeType>[] => {
   return [
     {
@@ -322,40 +333,49 @@ const subColumnData = (
       center: true,
       width: '80px'
     },
-    {
-      name: t('probeDoorSubTb'),
-      cell: items => {
-        const deviceLog = devicesFiltered
-          .find(dev => dev.id === items.sn)
-          ?.log.find(log => log.probe === items.channel)
+    ...(role === 'SUPER' ||
+    role === 'SERVICE' ||
+    role === 'ADMIN' ||
+    role === 'LEGACY_ADMIN'
+      ? [
+          {
+            name: t('probeDoorSubTb'),
+            cell: (items: ProbeType) => {
+              const deviceLog = devicesFiltered
+                .find(dev => dev.id === items.sn)
+                ?.log.find(log => log.probe === items.channel)
 
-        const doorCount: number = items.doorQty || 1
-        const doors: DoorKey[] = ['door1', 'door2', 'door3']
+              const doorCount: number = items.doorQty || 1
+              const doors: DoorKey[] = ['door1', 'door2', 'door3']
 
-        return (
-          <div className='flex items-center gap-2'>
-            {doors.slice(0, doorCount).map(doorKey => (
-              <div
-                key={doorKey}
-                className={`w-[24px] h-[24px] flex items-center justify-center rounded-field ${
-                  deviceLog?.door1 || deviceLog?.door2 || deviceLog?.door3
-                    ? 'bg-red-500 text-white'
-                    : 'border border-primary text-primary'
-                } duration-300 ease-linear`}
-              >
-                {deviceLog?.door1 || deviceLog?.door2 || deviceLog?.door3 ? (
-                  <RiDoorOpenLine size={14} />
-                ) : (
-                  <RiDoorClosedLine size={14} />
-                )}
-              </div>
-            ))}
-          </div>
-        )
-      },
-      sortable: false,
-      center: true
-    }
+              return (
+                <div className='flex items-center gap-2'>
+                  {doors.slice(0, doorCount).map(doorKey => (
+                    <div
+                      key={doorKey}
+                      className={`w-[24px] h-[24px] flex items-center justify-center rounded-field ${
+                        deviceLog?.door1 || deviceLog?.door2 || deviceLog?.door3
+                          ? 'bg-red-500 text-white'
+                          : 'border border-primary text-primary'
+                      } duration-300 ease-linear`}
+                    >
+                      {deviceLog?.door1 ||
+                      deviceLog?.door2 ||
+                      deviceLog?.door3 ? (
+                        <RiDoorOpenLine size={14} />
+                      ) : (
+                        <RiDoorClosedLine size={14} />
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )
+            },
+            sortable: false,
+            center: true
+          }
+        ]
+      : [])
   ]
 }
 

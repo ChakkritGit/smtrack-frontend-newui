@@ -341,8 +341,8 @@ const Home = () => {
   }
 
   const columns: TableColumn<DeviceType>[] = useMemo(
-    () => columnData(t, handleRowClicked, openAdjustModal),
-    [t, navigate]
+    () => columnData(t, handleRowClicked, openAdjustModal, role),
+    [t, navigate, role]
   )
 
   const devicesOnlineColumns: TableColumn<DevicesOnlineType>[] = useMemo(
@@ -456,8 +456,8 @@ const Home = () => {
   )
 
   const subColumns: TableColumn<ProbeType>[] = useMemo(
-    () => subColumnData(t, devicesFiltered),
-    [t, devicesFiltered]
+    () => subColumnData(t, devicesFiltered, role),
+    [t, devicesFiltered, role]
   )
 
   const ExpandedComponent = ({ data }: { data: DeviceType }) => {

@@ -676,7 +676,9 @@ const ManageDevice = () => {
       body = {
         dhcp: true,
         ssid: networkForm?.wifi?.ssid,
-        password: networkForm?.wifi?.password ? networkForm?.wifi?.password : '',
+        password: networkForm?.wifi?.password
+          ? networkForm?.wifi?.password
+          : '',
         ip: '',
         subnet: '',
         gateway: '',
@@ -687,7 +689,9 @@ const ManageDevice = () => {
       body = {
         dhcp: false,
         ssid: networkForm?.wifi?.ssid,
-        password: networkForm?.wifi?.password ? networkForm?.wifi?.password : '',
+        password: networkForm?.wifi?.password
+          ? networkForm?.wifi?.password
+          : '',
         ip: networkForm?.wifi?.ip,
         subnet: networkForm?.wifi?.subnet,
         gateway: networkForm?.wifi?.gateway,
@@ -1351,47 +1355,53 @@ const ManageDevice = () => {
         <span className='text-[20px] font-medium'></span>
         <div className='flex flex-col lg:flex-row mt-3 lg:mt-0 lg:items-center items-end lg:gap-3'>
           <HospitalAndWard />
-          <button
-            className='btn btn-neutral max-w-[130px]'
-            onClick={() => addModalRef.current?.showModal()}
-          >
-            {t('addDeviceButton')}
-          </button>
-          <div className='divider divider-horizontal mx-0 py-1'></div>
-          <button
-            className='btn flex btn-neutral p-0 w-[48px] h-[48px] min-w-[48px] min-h-[48px] tooltip tooltip-left'
-            data-tip={'Sync Device Time'}
-            onClick={() => {
-              socket.emit('send_schedule', 'time', (val: string) => {
-                if (val === 'OK') {
-                  Swal.fire({
-                    title: t('alertHeaderSuccess'),
-                    text: val,
-                    icon: 'success',
-                    timer: 2000,
-                    showConfirmButton: false
+          {(role === 'SUPER' || role === 'SERVICE') && (
+            <button
+              className='btn btn-neutral max-w-[130px]'
+              onClick={() => addModalRef.current?.showModal()}
+            >
+              {t('addDeviceButton')}
+            </button>
+          )}
+          {role === 'SUPER' && (
+            <>
+              <div className='divider divider-horizontal mx-0 py-1'></div>
+              <button
+                className='btn flex btn-neutral p-0 w-[48px] h-[48px] min-w-[48px] min-h-[48px] tooltip tooltip-left'
+                data-tip={'Sync Device Time'}
+                onClick={() => {
+                  socket.emit('send_schedule', 'time', (val: string) => {
+                    if (val === 'OK') {
+                      Swal.fire({
+                        title: t('alertHeaderSuccess'),
+                        text: val,
+                        icon: 'success',
+                        timer: 2000,
+                        showConfirmButton: false
+                      })
+                    }
                   })
-                }
-              })
 
-              socket.on(
-                'exception',
-                (message: { message: string; status: string }) => {
-                  if (message.status === 'error') {
-                    Swal.fire({
-                      title: t('alertHeaderError'),
-                      text: message.message,
-                      icon: 'error',
-                      timer: 2000,
-                      showConfirmButton: false
-                    })
-                  }
-                }
-              )
-            }}
-          >
-            <RiTimeLine size={24} />
-          </button>
+                  socket.on(
+                    'exception',
+                    (message: { message: string; status: string }) => {
+                      if (message.status === 'error') {
+                        Swal.fire({
+                          title: t('alertHeaderError'),
+                          text: message.message,
+                          icon: 'error',
+                          timer: 2000,
+                          showConfirmButton: false
+                        })
+                      }
+                    }
+                  )
+                }}
+              >
+                <RiTimeLine size={24} />
+              </button>
+            </>
+          )}
         </div>
       </div>
 
@@ -1669,7 +1679,7 @@ const ManageDevice = () => {
                 </div>
 
                 {/* network */}
-                <div className='form-control w-full'>
+                {(role === 'SUPER' || role === 'SERVICE') && <div className='form-control w-full'>
                   <label className='label flex-col items-start w-full mb-3'>
                     <span className='label-text text-wrap mb-2'>
                       {t('deviceNetwork')}
@@ -1683,7 +1693,7 @@ const ManageDevice = () => {
                       {t('deviceNetwork')}
                     </button>
                   </label>
-                </div>
+                </div>}
 
                 {/* hard reset */}
                 {role === 'SUPER' && (
