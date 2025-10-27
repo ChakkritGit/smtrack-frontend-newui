@@ -1,8 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import {
-  RiArrowRightUpLine,
-  RiNotification4Line
-} from 'react-icons/ri'
+import { RiArrowRightUpLine, RiNotification4Line } from 'react-icons/ri'
 import axiosInstance from '../../constants/axios/axiosInstance'
 import {
   responseType,
@@ -34,18 +31,20 @@ import {
 
 const Notifications = () => {
   const dispatch = useDispatch()
-  const { tokenDecode, tmsMode, userProfile, themeMode, loadingStyle } =
+  const { tokenDecode, tmsMode, userProfile, loadingStyle, popUpMode } =
     useSelector((state: RootState) => state.utils)
   const location = useLocation()
   const { t } = useTranslation()
   const navigate = useNavigate()
   const [page, setPage] = useState(1)
   const [notificationList, setNotification] = useState<NotificationType[]>([])
+  const [isNotiLoading, setIsNotiLoading] = useState(true)
   const [fetchMore, setFetchMore] = useState(false)
   const { role = 'USER' } = tokenDecode || {}
 
   const fetchNotification = async (pages: number) => {
     try {
+      setIsNotiLoading(true)
       const response = await axiosInstance.get<
         responseType<NotificationType[]>
       >(
@@ -70,6 +69,8 @@ const Notifications = () => {
       } else {
         console.error(error)
       }
+    } finally {
+      setIsNotiLoading(false)
     }
   }
 
@@ -416,12 +417,23 @@ const Notifications = () => {
   }, [page])
 
   useEffect(() => {
-    if (notificationList.length > 0) {
+    let isMounted = true
+
+    if (isNotiLoading) return
+
+    if (!popUpMode && notificationList.length > 0) {
       const img = new Image()
       img.src = userProfile?.ward.hospital.hosPic || 'app-logo.png'
       img.crossOrigin = 'anonymous'
 
-      img.onload = () => {
+      const handleImageLoad = () => {
+        if (!isMounted) {
+          console.log(
+            '↩️ Image loaded, but the component has unmounted or the effect has been re-invoked. Aborting favicon update.'
+          )
+          return
+        }
+
         console.log('✅ Image loaded successfully:', img.src)
 
         const canvas = document.createElement('canvas')
@@ -452,13 +464,9 @@ const Notifications = () => {
 
         ctx.drawImage(img, 0, 0, size, size)
 
-        // const rootStyle = getComputedStyle(document.documentElement)
-        // const primaryColor = rootStyle.getPropertyValue('--p').trim()
-
         const dotSize = 26
         const x = size - dotSize + 11
         const y = dotSize / 5 + 9
-        // ctx.fillStyle = primaryColor ? `oklch(${primaryColor}` : '#e74c3c'
         ctx.fillStyle = 'oklch(0.65 0.2639 29.44)'
         ctx.beginPath()
         ctx.arc(x, y, dotSize / 2, 0, Math.PI * 2)
@@ -473,6 +481,12 @@ const Notifications = () => {
           userProfile
         )
       }
+
+      img.onload = handleImageLoad
+
+      if (img.complete) {
+        handleImageLoad()
+      }
     } else {
       if (userProfile?.ward.hospital.hosPic) {
         changeFavicon(
@@ -483,7 +497,14 @@ const Notifications = () => {
         )
       }
     }
-  }, [location, userProfile, notificationList, themeMode])
+
+    return () => {
+      console.log(
+        '🧹 Cleanup function called. The next effect will run or the component will unmount.'
+      )
+      isMounted = false
+    }
+  }, [location, notificationList, popUpMode, userProfile, isNotiLoading])
 
   return (
     <div className='dropdown dropdown-end'>
@@ -493,7 +514,7 @@ const Notifications = () => {
         role='button'
         className='indicator flex btn btn-ghost justify-end tooltip tooltip-left md:tooltip-bottom'
       >
-        {notificationList.length > 0 && (
+        {!popUpMode && notificationList.length > 0 && (
           <span className='absolute bg-primary h-3 w-3 px-1 top-0.5 right-1.5 rounded-full'></span>
         )}
         <RiNotification4Line size={24} />
