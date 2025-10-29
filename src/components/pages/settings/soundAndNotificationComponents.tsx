@@ -16,6 +16,7 @@ import n4 from '../../../assets/sounds/n4.wav'
 import n5 from '../../../assets/sounds/n5.wav'
 import n6 from '../../../assets/sounds/n6.wav'
 import n7 from '../../../assets/sounds/n7.wav'
+import n8 from '../../../assets/sounds/n8.mp3'
 
 const SoundAndNotificationComponents = () => {
   const dispatch = useDispatch()
@@ -215,6 +216,26 @@ const SoundAndNotificationComponents = () => {
               <span>{t('notificationSoundList')} 7</span>
             </div>
             {sound === 7 && (
+              <div className='flex items-center justify-center w-5 h-5 p-0.5 bg-neutral text-neutral-content rounded-selector'>
+                <RiCheckLine size={18} />
+              </div>
+            )}
+          </div>
+          <div
+            className={`flex items-center gap-3 w-full justify-between cursor-pointer hover:bg-base-200 transition-all duration-300 ease-out px-4 py-3 rounded-selector ${
+              sound === 8 ? 'bg-base-300/50' : ''
+            }`}
+            onClick={() => {
+              new Audio(n8).play()
+              dispatch(setSound(8))
+              localStorage.setItem('sound', '8')
+            }}
+          >
+            <div className='flex items-center gap-2'>
+              <GiSoundWaves size={24} />
+              <span>{t('notificationSoundList')} 8</span>
+            </div>
+            {sound === 8 && (
               <div className='flex items-center justify-center w-5 h-5 p-0.5 bg-neutral text-neutral-content rounded-selector'>
                 <RiCheckLine size={18} />
               </div>

@@ -28,6 +28,7 @@ import n4 from '../../assets/sounds/n4.wav'
 import n5 from '../../assets/sounds/n5.wav'
 import n6 from '../../assets/sounds/n6.wav'
 import n7 from '../../assets/sounds/n7.wav'
+import n8 from '../../assets/sounds/n8.mp3'
 import { cookieOptions, cookies } from '../../constants/utils/utilsConstants'
 import BottomBar from '../../components/navigation/bottomBar/bottomBar'
 import TokenExpire from '../../components/modal/tokenExpire'
@@ -68,6 +69,8 @@ const MainTms = () => {
       ? n5
       : sound === 6
       ? n6
+      : sound === 7
+      ? n8
       : n7
 
   const audioNotification = new Audio(src)
