@@ -28,7 +28,7 @@ jobs:
         echo "EOF" >> $GITHUB_OUTPUT
 
     - name: Set dynamic image tag
-      run: echo "TAG=siamatic/smtrack-frontend:2.0.2a11-${GITHUB_SHA::7}" >> $GITHUB_ENV
+      run: echo "TAG=siamatic/smtrack-frontend:2.0.2a12-${GITHUB_SHA::7}" >> $GITHUB_ENV
 
     - name: Login to docker hub
       uses: docker/login-action@v3

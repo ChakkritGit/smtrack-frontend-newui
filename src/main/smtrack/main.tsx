@@ -70,8 +70,8 @@ const MainSmtrack = () => {
       : sound === 6
       ? n6
       : sound === 7
-      ? n8
-      : n7
+      ? n7
+      : n8
 
   const audioNotification = new Audio(src)
 
