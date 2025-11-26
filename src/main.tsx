@@ -218,24 +218,24 @@ class AppRenderer {
           <Profiler
             id='app'
             onRender={(
-              id,
-              phase,
-              actualDuration,
-              baseDuration,
-              startTime,
-              commitTime
+              // id,
+              // phase,
+              // actualDuration,
+              // baseDuration,
+              // startTime,
+              // commitTime
             ) => {
               if (import.meta.env.VITE_APP_NODE_ENV === 'development') {
-                console.table([
-                  {
-                    Component: id,
-                    Phase: phase,
-                    'Actual Duration (ms)': actualDuration.toFixed(2),
-                    'Base Duration (ms)': baseDuration.toFixed(2),
-                    'Start Time (ms)': startTime.toFixed(2),
-                    'Commit Time (ms)': commitTime.toFixed(2)
-                  }
-                ])
+                // console.table([
+                //   {
+                //     Component: id,
+                //     Phase: phase,
+                //     'Actual Duration (ms)': actualDuration.toFixed(2),
+                //     'Base Duration (ms)': baseDuration.toFixed(2),
+                //     'Start Time (ms)': startTime.toFixed(2),
+                //     'Commit Time (ms)': commitTime.toFixed(2)
+                //   }
+                // ])
               }
             }}
           >

@@ -224,27 +224,37 @@ const FullTableTms = () => {
     log: LogChartTms[]
   }) => {
     return new Promise<boolean>((resolve, reject) => {
+      // 1. เช็คความถูกต้องของข้อมูล
       if (!object.deviceData || object.log.length === 0) {
+        console.error('No data to export')
         return reject(false)
       }
 
       const workbook = XLSX.utils.book_new()
       const groupedData: Record<string, LogChartTms[]> = {}
 
+      // 2. จัดกลุ่มข้อมูลตาม Probe
       object.log.forEach(log => {
-        if (!groupedData[log.probe]) {
-          groupedData[log.probe] = []
+        const key = log.probe // หรือ log.probe.trim() ถ้าต้องการลบช่องว่าง
+        if (!groupedData[key]) {
+          groupedData[key] = []
         }
-        groupedData[log.probe].push(log)
+        groupedData[key].push(log)
       })
 
+      // 3. วนลูปสร้าง Sheet
       Object.keys(groupedData).forEach(probe => {
         const data = groupedData[probe].map((log, index) => {
           const isHumidity = /hum/i.test(probe)
+
+          // --- ส่วนที่แก้ไขให้ตรงกับ Type LogChartTms ---
           return {
             No: index + 1,
-            DeviceSN: log.serial,
+            // ใช้ sn จาก Header ของอุปกรณ์ (ชัวร์สุด) หรือจาก log.sn ตาม Type
+            DeviceSN: object.deviceData?.sn || log.sn,
             DeviceName: object.deviceData?.name,
+
+            // ใช้ _time อย่างเดียว เพราะ Type บังคับมาแล้ว
             Date: new Date(log._time).toLocaleString('th-TH', {
               day: '2-digit',
               month: '2-digit',
@@ -257,19 +267,34 @@ const FullTableTms = () => {
               second: '2-digit',
               timeZone: 'UTC'
             }),
+
+            // ใช้ _value อย่างเดียว
             [isHumidity ? 'Humidity' : 'Temperature']: log._value.toFixed(2)
           }
+          // ------------------------------------------
         })
 
         const worksheet = XLSX.utils.json_to_sheet(data)
-        XLSX.utils.book_append_sheet(workbook, worksheet, `Probe_${probe}`)
+
+        // 4. ตั้งชื่อ Sheet (Sanitize ตามที่เคยแก้ให้)
+        let safeProbeName = probe
+          .toString()
+          .trim()
+          .replace(/[\r\n\\/?*[\]:]/g, '')
+        let sheetName = `Probe_${safeProbeName}`
+        if (sheetName.length > 31) {
+          sheetName = sheetName.substring(0, 31)
+        }
+
+        XLSX.utils.book_append_sheet(workbook, worksheet, sheetName)
       })
 
       try {
+        // ใช้ sn จาก deviceData เพื่อตั้งชื่อไฟล์
         XLSX.writeFile(workbook, `Device_${object.deviceData.sn}_Data.xlsx`)
         resolve(true)
       } catch (error) {
-        console.error(error)
+        console.error('Error writing Excel file: ', error)
         reject(false)
       }
     })
@@ -364,7 +389,7 @@ const FullTableTms = () => {
             </button>
             <ul
               tabIndex={0}
-              className='dropdown-content menu bg-base-100 rounded-box z-[1] max-w-[180px] w-[140px] p-2 shadow'
+              className='dropdown-content menu bg-base-100 rounded-box z-1 max-w-[180px] w-[140px] p-2 shadow'
             >
               <li
                 onClick={() => {
