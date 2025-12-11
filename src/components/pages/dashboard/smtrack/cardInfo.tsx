@@ -158,6 +158,7 @@ const CardInFoComponent = (props: PropsType) => {
             }}
             onSlideChange={swiper => setActiveIndex(swiper.activeIndex)}
             onSwiper={swiper => (swiperInfoRef.current = swiper)}
+            roundLengths={true}
             effect={'creative'}
             creativeEffect={{
               prev: {

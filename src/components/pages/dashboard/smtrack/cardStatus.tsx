@@ -85,6 +85,7 @@ const CardStatus = (props: PropsType) => {
           }}
           onSlideChange={swiper => setActiveIndex(swiper.activeIndex)}
           onSwiper={swiper => (swiperTempRef.current = swiper)}
+          roundLengths={true}
           effect={'creative'}
           creativeEffect={{
             prev: {
@@ -97,7 +98,7 @@ const CardStatus = (props: PropsType) => {
             }
           }}
           modules={[Autoplay, Pagination, EffectCreative]}
-          className='mySwiper h-full'
+          className=' h-full'
         >
           {deviceData ? (
             deviceData?.probe?.map(item => {
@@ -322,6 +323,7 @@ const CardStatus = (props: PropsType) => {
           }}
           onSlideChange={swiper => setActiveIndex(swiper.activeIndex)}
           onSwiper={swiper => (swiperTempOfDayRef.current = swiper)}
+          roundLengths={true}
           effect={'creative'}
           creativeEffect={{
             prev: {
@@ -334,7 +336,7 @@ const CardStatus = (props: PropsType) => {
             }
           }}
           modules={[Autoplay, Pagination, EffectCreative]}
-          className='mySwiper h-full'
+          className=' h-full'
         >
           {deviceData ? (
             deviceData?.probe?.map(item => {

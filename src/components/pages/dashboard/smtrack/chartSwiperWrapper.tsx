@@ -29,6 +29,10 @@ const ChartSwiperWrapper = (props: ChartSwiperWrapperProps) => {
     if (swiperRef.current) {
       swiperRef.current.slideTo(activeIndex)
 
+      if (swiperRef.current.activeIndex !== activeIndex) {
+        swiperRef.current.slideTo(activeIndex)
+      }
+
       if (!isPause) {
         swiperRef.current.autoplay.start()
       } else {
@@ -57,6 +61,7 @@ const ChartSwiperWrapper = (props: ChartSwiperWrapperProps) => {
         }}
         onSlideChange={swiper => setActiveIndex(swiper.activeIndex)}
         onSwiper={swiper => (swiperRef.current = swiper)}
+        roundLengths={true}
         effect={'creative'}
         creativeEffect={{
           prev: {
@@ -69,7 +74,7 @@ const ChartSwiperWrapper = (props: ChartSwiperWrapperProps) => {
           }
         }}
         modules={[Autoplay, Pagination, EffectCreative]}
-        className='mySwiper h-full'
+        className='h-full'
       >
         {deviceLogs ? (
           deviceLogs?.probe?.map(item => {
