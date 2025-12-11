@@ -353,15 +353,13 @@ const subColumnData = (
                   {doors.slice(0, doorCount).map(doorKey => (
                     <div
                       key={doorKey}
-                      className={`w-[24px] h-[24px] flex items-center justify-center rounded-field ${
-                        deviceLog?.door1 || deviceLog?.door2 || deviceLog?.door3
+                      className={`w-6 h-6 flex items-center justify-center rounded-field ${
+                        deviceLog?.[doorKey]
                           ? 'bg-red-500 text-white'
                           : 'border border-primary text-primary'
                       } duration-300 ease-linear`}
                     >
-                      {deviceLog?.door1 ||
-                      deviceLog?.door2 ||
-                      deviceLog?.door3 ? (
+                      {deviceLog?.[doorKey] ? (
                         <RiDoorOpenLine size={14} />
                       ) : (
                         <RiDoorClosedLine size={14} />
