@@ -721,14 +721,14 @@ const ManageProbe = () => {
       cell: item => (
         <div className='flex items-center justify-center gap-3 p-3'>
           <button
-            className='btn btn-ghost flex text-white min-w-[32px] max-w-[32px] min-h-[32px] max-h-[32px] p-0 bg-primary'
+            className='btn btn-ghost flex text-white min-w-8 max-w-8 min-h-8 max-h-8 p-0 bg-primary'
             onClick={() => openEditModal(item)}
           >
             <RiEditLine size={20} />
           </button>
           {role === 'SUPER' && (
             <button
-              className='btn btn-ghost flex text-white min-w-[32px] max-w-[32px] min-h-[32px] max-h-[32px] p-0 bg-red-500'
+              className='btn btn-ghost flex text-white min-w-8 max-w-8 min-h-8 max-h-8 p-0 bg-red-500'
               onClick={() =>
                 Swal.fire({
                   title: t('deleteProbe'),
@@ -820,14 +820,14 @@ const ManageProbe = () => {
           noDataComponent={<DataTableNoData />}
           paginationPerPage={10}
           paginationRowsPerPageOptions={[10, 20, 50, 100]}
-          className='md:!max-h-[calc(100dvh-410px)]'
+          className='md:max-h-[calc(100dvh-410px)]!'
         />
       </div>
 
       <dialog ref={addModalRef} className='modal overflow-y-scroll py-10'>
         <form
           onSubmit={handleSubmit}
-          className='modal-box max-w-[55rem] h-max max-h-max'
+          className='modal-box max-w-220 h-max max-h-max'
         >
           <h3 className='font-bold text-lg'>{t('addProbe')}</h3>
           <div className='flex flex-col lg:flex-col xl:flex-row gap-4 mt-4 w-full'>
@@ -855,7 +855,7 @@ const ManageProbe = () => {
                           setFormData({ ...formData, sn: e?.value as string })
                         }
                         autoFocus={false}
-                        className='react-select-container custom-menu-select z-[75] min-w-full'
+                        className='react-select-container custom-menu-select z-75 min-w-full'
                         classNamePrefix='react-select'
                       />
                     </label>
@@ -1057,8 +1057,8 @@ const ManageProbe = () => {
                     className='input  text-center w-full'
                     type='number'
                     step={0.01}
-                    min={-40}
-                    max={120}
+                    min={formData?.type === 'PT100' ? -120 : -40}
+                    max={formData?.type === 'PT100' ? 200 : 120}
                     value={formData.tempMin}
                     onChange={e => {
                       let value = e.target.value
@@ -1120,6 +1120,8 @@ const ManageProbe = () => {
                     className='input  text-center w-full'
                     type='number'
                     step={0.01}
+                    min={formData?.type === 'PT100' ? -120 : -40}
+                    max={formData?.type === 'PT100' ? 200 : 120}
                     value={formData.tempMax}
                     onChange={e => {
                       let value = e.target.value
@@ -1181,6 +1183,8 @@ const ManageProbe = () => {
                     className='input  text-center w-full'
                     type='number'
                     step={0.01}
+                    min={0}
+                    max={100}
                     value={formData.humiMin}
                     onChange={e => {
                       let value = e.target.value
@@ -1242,6 +1246,8 @@ const ManageProbe = () => {
                     className='input  text-center w-full'
                     type='number'
                     step={0.01}
+                    min={0}
+                    max={100}
                     value={formData.humiMax}
                     onChange={e => {
                       let value = e.target.value
@@ -1301,8 +1307,8 @@ const ManageProbe = () => {
                       pearling
                       minDistance={1}
                       step={0.01}
-                      min={-40}
-                      max={120}
+                      min={formData?.type === 'PT100' ? -120 : -40}
+                      max={formData?.type === 'PT100' ? 200 : 120}
                       renderThumb={(props, state) => {
                         const { key, ref, ...validProps } = props
                         return (
@@ -1369,8 +1375,8 @@ const ManageProbe = () => {
                     className='input  text-center w-full'
                     type='number'
                     step={0.01}
-                    min={-40}
-                    max={120}
+                    min={formData?.type === 'PT100' ? -120 : -40}
+                    max={formData?.type === 'PT100' ? 200 : 120}
                     value={formData.tempMin}
                     onChange={e => {
                       let value = e.target.value
@@ -1394,6 +1400,8 @@ const ManageProbe = () => {
                     className='input  text-center w-full'
                     type='number'
                     step={0.01}
+                    min={formData?.type === 'PT100' ? -120 : -40}
+                    max={formData?.type === 'PT100' ? 200 : 120}
                     value={formData.tempMax}
                     onChange={e => {
                       let value = e.target.value
@@ -1421,6 +1429,8 @@ const ManageProbe = () => {
                     className='input  text-center w-full'
                     type='number'
                     step={0.01}
+                    min={0}
+                    max={100}
                     value={formData.humiMin}
                     onChange={e => {
                       let value = e.target.value
@@ -1444,6 +1454,8 @@ const ManageProbe = () => {
                     className='input  text-center w-full'
                     type='number'
                     step={0.01}
+                    min={0}
+                    max={100}
                     value={formData.humiMax}
                     onChange={e => {
                       let value = e.target.value
@@ -1701,8 +1713,8 @@ const ManageProbe = () => {
                     className='input  text-center w-full'
                     type='number'
                     step={0.01}
-                    min={-40}
-                    max={120}
+                    min={formData?.type === 'PT100' ? -120 : -40}
+                    max={formData?.type === 'PT100' ? 200 : 120}
                     value={formData.tempMin}
                     onChange={e => {
                       let value = e.target.value
@@ -1764,6 +1776,8 @@ const ManageProbe = () => {
                     className='input  text-center w-full'
                     type='number'
                     step={0.01}
+                    min={formData?.type === 'PT100' ? -120 : -40}
+                    max={formData?.type === 'PT100' ? 200 : 120}
                     value={formData.tempMax}
                     onChange={e => {
                       let value = e.target.value
@@ -1825,6 +1839,8 @@ const ManageProbe = () => {
                     className='input  text-center w-full'
                     type='number'
                     step={0.01}
+                    min={0}
+                    max={100}
                     value={formData.humiMin}
                     onChange={e => {
                       let value = e.target.value
@@ -1886,6 +1902,8 @@ const ManageProbe = () => {
                     className='input  text-center w-full'
                     type='number'
                     step={0.01}
+                    min={0}
+                    max={100}
                     value={formData.humiMax}
                     onChange={e => {
                       let value = e.target.value
@@ -1945,8 +1963,8 @@ const ManageProbe = () => {
                       pearling
                       minDistance={1}
                       step={0.01}
-                      min={-40}
-                      max={120}
+                      min={formData?.type === 'PT100' ? -120 : -40}
+                      max={formData?.type === 'PT100' ? 200 : 120}
                       renderThumb={(props, state) => {
                         const { key, ref, ...validProps } = props
                         return (
@@ -2013,8 +2031,8 @@ const ManageProbe = () => {
                     className='input  text-center w-full'
                     type='number'
                     step={0.01}
-                    min={-40}
-                    max={120}
+                    min={formData?.type === 'PT100' ? -120 : -40}
+                    max={formData?.type === 'PT100' ? 200 : 120}
                     value={formData.tempMin}
                     onChange={e => {
                       let value = e.target.value
@@ -2038,6 +2056,8 @@ const ManageProbe = () => {
                     className='input  text-center w-full'
                     type='number'
                     step={0.01}
+                    min={formData?.type === 'PT100' ? -120 : -40}
+                    max={formData?.type === 'PT100' ? 200 : 120}
                     value={formData.tempMax}
                     onChange={e => {
                       let value = e.target.value
@@ -2065,6 +2085,8 @@ const ManageProbe = () => {
                     className='input  text-center w-full'
                     type='number'
                     step={0.01}
+                    min={0}
+                    max={100}
                     value={formData.humiMin}
                     onChange={e => {
                       let value = e.target.value
@@ -2088,6 +2110,8 @@ const ManageProbe = () => {
                     className='input  text-center w-full'
                     type='number'
                     step={0.01}
+                    min={0}
+                    max={100}
                     value={formData.humiMax}
                     onChange={e => {
                       let value = e.target.value
