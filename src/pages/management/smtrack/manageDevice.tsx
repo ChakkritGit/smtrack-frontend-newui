@@ -1445,7 +1445,16 @@ const ManageDevice = () => {
                     name='id'
                     type='text'
                     value={formData.id}
-                    onChange={handleChange}
+                    onChange={e => {
+                      const value = e.target.value.replace(/\s/g, '')
+                      e.target.value = value
+                      handleChange(e)
+                    }}
+                    onKeyDown={e => {
+                      if (e.key === ' ') {
+                        e.preventDefault()
+                      }
+                    }}
                     className='input  w-full'
                     maxLength={23}
                   />

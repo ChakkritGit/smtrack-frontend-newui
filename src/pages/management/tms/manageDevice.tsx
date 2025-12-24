@@ -575,7 +575,16 @@ const ManageDevice = () => {
                     name='sn'
                     type='text'
                     value={formData.sn}
-                    onChange={handleChange}
+                    onChange={e => {
+                      const value = e.target.value.replace(/\s/g, '')
+                      e.target.value = value
+                      handleChange(e)
+                    }}
+                    onKeyDown={e => {
+                      if (e.key === ' ') {
+                        e.preventDefault()
+                      }
+                    }}
                     className='input  w-full'
                     maxLength={23}
                   />
@@ -627,7 +636,7 @@ const ManageDevice = () => {
           className='modal-box w-full max-w-4xl min-h-[500px] flex flex-col justify-between'
         >
           <div className='grid grid-cols-1 md:grid-cols-2 gap-4 w-full'>
-            <h3 className='font-bold text-lg'>{t('editUserButton')}</h3>
+            <h3 className='font-bold text-lg'>{t('editDeviceButton')}</h3>
             {/* Right Column - 2/3 of the grid (70%) */}
             <div className='col-span-2 grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4'>
               {/* Hospital */}
@@ -672,8 +681,17 @@ const ManageDevice = () => {
                     name='serial'
                     type='text'
                     value={formData.serial}
-                    onChange={handleChange}
-                    className='input  w-full'
+                    onChange={e => {
+                      const value = e.target.value.replace(/\s/g, '')
+                      e.target.value = value
+                      handleChange(e)
+                    }}
+                    onKeyDown={e => {
+                      if (e.key === ' ') {
+                        e.preventDefault()
+                      }
+                    }}
+                    className='input w-full'
                     maxLength={23}
                   />
                 </label>
