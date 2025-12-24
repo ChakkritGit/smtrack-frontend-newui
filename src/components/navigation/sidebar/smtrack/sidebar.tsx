@@ -344,7 +344,7 @@ const Sidebar = () => {
                 isExpand ? 'text-center' : 'text-right'
               } hover:underline cursor-pointer`}
             >
-              Version 2.0.2
+              Version 2.0.3
             </Link>
           </div>
         </div>
