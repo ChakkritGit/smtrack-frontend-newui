@@ -11,6 +11,7 @@ type NotificationType = {
     hospital: string
     name: string
     ward: string
+    serial: string
   }
   createdAt: string
 }

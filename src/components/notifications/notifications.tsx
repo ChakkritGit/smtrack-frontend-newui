@@ -305,7 +305,7 @@ const Notifications = () => {
                           </div>
                         </div>
                         <span className='text-[14px] opacity-70'>
-                          {item?.mcuId}
+                          {item?.device?.serial}
                         </span>
                       </div>
                     </li>
