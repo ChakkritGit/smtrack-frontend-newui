@@ -492,6 +492,7 @@ export default {
     default: 'ค่าเริ่มต้น',
     clickToPlay: 'คลิกเพื่อเล่น',
     refrigeratorName: 'ซีเรียลตู้แช่',
+    devicsmtrackTb: 'อุณหภูมิ',
 
     // connect
     ipAddress: 'IP',

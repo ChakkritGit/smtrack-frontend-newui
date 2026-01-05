@@ -493,6 +493,7 @@ export default {
     default: 'Default',
     clickToPlay: 'Click to play',
     refrigeratorName: 'Refrigerator Serial',
+    devicsmtrackTb: 'Temperature',
 
     // connect
     ipAddress: 'IP',

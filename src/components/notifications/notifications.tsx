@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { JSX, useEffect, useMemo, useState } from 'react'
 import { RiArrowRightUpLine, RiNotification4Line } from 'react-icons/ri'
 import axiosInstance from '../../constants/axios/axiosInstance'
 import {
@@ -84,94 +84,190 @@ const Notifications = () => {
     }
   }
 
+  // const subTextNotiDetails = (text: string) => {
+  //   const [topic, sub, status] = text.split('/')
+
+  //   switch (topic) {
+  //     case 'PROBE1':
+  //       if (sub === 'TEMP') {
+  //         const tempKeys: Record<string, string> = {
+  //           OVER: 'tempHigherLimmit',
+  //           LOWER: 'tempBelowLimmit'
+  //         }
+  //         return t(tempKeys[status] || 'tempBackToNormal')
+  //       }
+  //       // กรณี Door
+  //       const door1Status = status === 'ON' ? t('stateOn') : t('stateOff')
+  //       return `${t('deviceProbeTb')} ${topic.replace('PROBE', '')} ${t(
+  //         'doorNum'
+  //       )} ${sub.replace('DOOR', '')} ${door1Status}`
+  //     case 'PROBE2':
+  //       if (sub === 'TEMP') {
+  //         const tempKeys: Record<string, string> = {
+  //           OVER: 'tempHigherLimmit',
+  //           LOWER: 'tempBelowLimmit'
+  //         }
+  //         return t(tempKeys[status] || 'tempBackToNormal')
+  //       }
+  //       // กรณี Door
+  //       const door2Status = status === 'ON' ? t('stateOn') : t('stateOff')
+  //       return `${t('deviceProbeTb')} ${topic.replace('PROBE', '')} ${t(
+  //         'doorNum'
+  //       )} ${sub.replace('DOOR', '')} ${door2Status}`
+  //     case 'AC':
+  //       return sub === 'ON' ? t('plugBackToNormal') : t('plugProblem')
+
+  //     case 'SD':
+  //       return sub === 'ON' ? t('SdCardProblem') : t('SdCardBackToNormal')
+
+  //     case 'INTERNET':
+  //       return sub === 'ON' ? t('InternetProblem') : t('InternetBackToNormal')
+
+  //     case 'REPORT':
+  //       const { temperature, humidity } = extractValues(text) || {}
+  //       return `${t('reportText')}/ ${t('devicsmtrackTb')}: ${
+  //         temperature ?? '- -'
+  //       }°C, ${t('deviceHumiTb')}: ${humidity ?? '- -'}%`
+
+  //     default:
+  //       return text
+  //   }
+  // }
+
   const subTextNotiDetails = (text: string) => {
-    if (text.split('/')[0] === 'PROBE1') {
-      if (text.split('/')[1] === 'TEMP') {
-        if (text.split('/')[2] === 'OVER') {
-          return t('tempHigherLimmit')
-        } else if (text.split('/')[2] === 'LOWER') {
-          return t('tempBelowLimmit')
-        } else {
-          return t('tempBackToNormal')
+    const [topic, sub, status] = text.split('/')
+
+    if (topic.startsWith('PROBE')) {
+      const probeNum = topic.replace('PROBE', '')
+
+      // กรณีอุณหภูมิ (TEMP)
+      if (sub === 'TEMP') {
+        const tempMap: Record<string, string> = {
+          OVER: 'tempHigherLimmit',
+          LOWER: 'tempBelowLimmit'
         }
+        return t(tempMap[status] || 'tempBackToNormal')
       }
-      const probe = text.split('/')
-      const probeNumber = probe[0].replace('PROBE', '')
-      const doorNumber = probe[1].replace('DOOR', '')
-      const status = probe[2] === 'ON' ? t('stateOn') : t('stateOff')
-      return `${t('deviceProbeTb')} ${probeNumber} ${t(
-        'doorNum'
-      )} ${doorNumber} ${status}`
-    } else if (text.split('/')[0] === 'AC') {
-      if (text.split('/')[1] === 'ON') {
-        return t('plugBackToNormal')
-      } else {
-        return t('plugProblem')
+
+      // กรณี Door หรือ Sensor (ใช้ Logic ON/OFF เหมือนกัน)
+      if (sub.startsWith('DOOR') || sub === 'SENSOR') {
+        const state = status === 'ON' ? t('stateOn') : t('stateOff')
+
+        // ถ้าเป็น Door ให้แสดงคำว่า "ประตู x" ถ้าเป็น Sensor ให้แสดงคำว่า "SENSOR" (หรือใส่ t('sensorKey') ตามต้องการ)
+        const subName = sub.startsWith('DOOR')
+          ? `${t('doorNum')} ${sub.replace('DOOR', '')}`
+          : `${t('doorNum')} 1`
+
+        return `${t('deviceProbeTb')} ${probeNum} ${subName} ${state}`
       }
-    } else if (text.split('/')[0] === 'SD') {
-      if (text.split('/')[1] === 'ON') {
-        return t('SdCardProblem')
-      } else {
-        return t('SdCardBackToNormal')
-      }
-    } else if (text.split('/')[0] === 'REPORT') {
-      return `${t('reportText')}/ ${t('devicsmtrackTb')}: ${
-        extractValues(text)?.temperature
-          ? extractValues(text)?.temperature
-          : '- -'
-      }°C, ${t('deviceHumiTb')}: ${
-        extractValues(text)?.humidity ? extractValues(text)?.humidity : '- -'
-      }%`
-    } else if (text.split('/')[0] === 'INTERNET') {
-      if (text.split('/')[1] === 'ON') {
-        return t('InternetProblem')
-      } else {
-        return t('InternetBackToNormal')
-      }
-    } else {
-      return text
+    }
+
+    switch (topic) {
+      case 'AC':
+        return sub === 'ON' ? t('plugBackToNormal') : t('plugProblem')
+      case 'SD':
+        return sub === 'ON' ? t('SdCardProblem') : t('SdCardBackToNormal')
+      case 'INTERNET':
+        return sub === 'ON' ? t('InternetProblem') : t('InternetBackToNormal')
+      case 'REPORT':
+        const val = extractValues(text)
+        return `${t('reportText')}/ ${t('devicsmtrackTb')}: ${
+          val?.temperature ?? '- -'
+        }°C, ${t('deviceHumiTb')}: ${val?.humidity ?? '- -'}%`
+      default:
+        return text
     }
   }
 
+  // const subTextNotiDetailsIcon = (text: string) => {
+  //   if (text.split('/')[0] === 'PROBE1') {
+  //     if (text.split('/')[1] === 'TEMP') {
+  //       if (text.split('/')[2] === 'OVER') {
+  //         return <PiThermometerHotLight size={24} />
+  //       } else if (text.split('/')[2] === 'LOWER') {
+  //         return <PiThermometerColdLight size={24} />
+  //       } else {
+  //         return <PiThermometerSimpleLight size={24} />
+  //       }
+  //     }
+  //     const probe = text.split('/')
+  //     return probe[2] === 'ON' ? (
+  //       <PiDoorOpenLight size={24} />
+  //     ) : (
+  //       <PiDoorLight size={24} />
+  //     )
+  //   } else if (text.split('/')[0] === 'AC') {
+  //     if (text.split('/')[1] === 'ON') {
+  //       return <PiPlugsConnectedLight size={24} />
+  //     } else {
+  //       return <PiPlugsLight size={24} />
+  //     }
+  //   } else if (text.split('/')[0] === 'SD') {
+  //     if (text.split('/')[1] === 'ON') {
+  //       return <PiSimCardLight size={24} />
+  //     } else {
+  //       return <PiSimCardLight size={24} />
+  //     }
+  //   } else if (text.split('/')[0] === 'REPORT') {
+  //     return <PiNoteLight size={24} />
+  //   } else if (text.split('/')[0] === 'INTERNET') {
+  //     if (text.split('/')[1] === 'ON') {
+  //       return <PiWifiSlashLight size={24} />
+  //     } else {
+  //       return <PiWifiHighLight size={24} />
+  //     }
+  //   } else {
+  //     return <PiSirenLight size={24} />
+  //   }
+  // }
+
   const subTextNotiDetailsIcon = (text: string) => {
-    if (text.split('/')[0] === 'PROBE1') {
-      if (text.split('/')[1] === 'TEMP') {
-        if (text.split('/')[2] === 'OVER') {
-          return <PiThermometerHotLight size={24} />
-        } else if (text.split('/')[2] === 'LOWER') {
-          return <PiThermometerColdLight size={24} />
-        } else {
-          return <PiThermometerSimpleLight size={24} />
+    const [topic, sub, status] = text.split('/')
+    const iconSize = 24 // กำหนดขนาดที่เดียว แก้ไขง่าย
+
+    // 1. จัดการกลุ่ม PROBE (รองรับ PROBE1, PROBE2...)
+    if (topic.startsWith('PROBE')) {
+      if (sub === 'TEMP') {
+        const tempIcons: Record<string, JSX.Element> = {
+          OVER: <PiThermometerHotLight size={iconSize} />,
+          LOWER: <PiThermometerColdLight size={iconSize} />
         }
+        return tempIcons[status] || <PiThermometerSimpleLight size={iconSize} />
       }
-      const probe = text.split('/')
-      return probe[2] === 'ON' ? (
-        <PiDoorOpenLight size={24} />
+
+      // เคส DOOR และ SENSOR (ON = เปิด, OFF = ปิด)
+      return status === 'ON' ? (
+        <PiDoorOpenLight size={iconSize} />
       ) : (
-        <PiDoorLight size={24} />
+        <PiDoorLight size={iconSize} />
       )
-    } else if (text.split('/')[0] === 'AC') {
-      if (text.split('/')[1] === 'ON') {
-        return <PiPlugsConnectedLight size={24} />
-      } else {
-        return <PiPlugsLight size={24} />
-      }
-    } else if (text.split('/')[0] === 'SD') {
-      if (text.split('/')[1] === 'ON') {
-        return <PiSimCardLight size={24} />
-      } else {
-        return <PiSimCardLight size={24} />
-      }
-    } else if (text.split('/')[0] === 'REPORT') {
-      return <PiNoteLight size={24} />
-    } else if (text.split('/')[0] === 'INTERNET') {
-      if (text.split('/')[1] === 'ON') {
-        return <PiWifiSlashLight size={24} />
-      } else {
-        return <PiWifiHighLight size={24} />
-      }
-    } else {
-      return <PiSirenLight size={24} />
+    }
+
+    // 2. จัดการกลุ่มอื่นๆ ด้วย Switch
+    switch (topic) {
+      case 'AC':
+        return sub === 'ON' ? (
+          <PiPlugsConnectedLight size={iconSize} />
+        ) : (
+          <PiPlugsLight size={iconSize} />
+        )
+
+      case 'SD':
+        // ในโค้ดเดิมทั้ง ON/OFF ใช้ไอคอนเดียวกัน จึง return ได้เลย
+        return <PiSimCardLight size={iconSize} />
+
+      case 'INTERNET':
+        return sub === 'ON' ? (
+          <PiWifiSlashLight size={iconSize} />
+        ) : (
+          <PiWifiHighLight size={iconSize} />
+        )
+
+      case 'REPORT':
+        return <PiNoteLight size={iconSize} />
+
+      default:
+        return <PiSirenLight size={iconSize} />
     }
   }
 
