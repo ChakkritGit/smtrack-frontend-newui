@@ -27,6 +27,7 @@ interface ChartPreviewPdfType {
   hosImg: string | undefined
   probe: ProbeType[]
   deviceLogs: DeviceLog
+  currentSlideIndex: number
 }
 
 function PreviewPDF () {
@@ -58,6 +59,7 @@ function PreviewPDF () {
         dateTime={location?.state?.dateTime}
         hosImg={location?.state?.hosImg}
         deviceLogs={location?.state?.deviceLogs}
+        currentSlideIndex={location?.state?.currentSlideIndex}
       />
     ),
     [location.state]
@@ -105,7 +107,7 @@ function PreviewPDF () {
             width={'100%'}
             height={'100%'}
             style={{ borderRadius: 'var(--border-radius-small)' }}
-            className='!rounded-md'
+            className='rounded-md!'
           >
             {pdfViewer}
           </PDFViewer>

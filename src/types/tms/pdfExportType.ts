@@ -11,6 +11,7 @@ type pdftype = {
   dateTime?: string
   hosImg?: string
   deviceLogs: DeviceLog
+  currentSlideIndex: number
 }
 
 export type { pdftype }

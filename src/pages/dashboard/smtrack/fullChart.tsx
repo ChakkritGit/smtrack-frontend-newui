@@ -65,9 +65,14 @@ const FullChart = () => {
   const [isLoading, setIsLoading] = useState(false)
   const canvasChartRef = useRef<HTMLDivElement | null>(null)
   const tableInfoRef = useRef<HTMLDivElement | null>(null)
-  const [isPause, setIsPaused] = useState(false)
+  // const [isPause, setIsPaused] = useState(false)
   const swiperRef = useRef<SwiperType>(null)
   const abortRef = useRef<AbortController | null>(null)
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(0)
+
+  const handleSlideChange = (swiper: SwiperType) => {
+    setCurrentSlideIndex(swiper.realIndex)
+  }
 
   const abortPrevRequest = () => {
     if (abortRef.current) {
@@ -75,16 +80,16 @@ const FullChart = () => {
     }
   }
 
-  const togglePause = useCallback(() => {
-    setIsPaused(prev => !prev)
-    if (swiperRef.current) {
-      if (isPause) {
-        swiperRef.current.autoplay.start()
-      } else {
-        swiperRef.current.autoplay.stop()
-      }
-    }
-  }, [isPause])
+  // const togglePause = useCallback(() => {
+  //   setIsPaused(prev => !prev)
+  //   if (swiperRef.current) {
+  //     if (isPause) {
+  //       swiperRef.current.autoplay.start()
+  //     } else {
+  //       swiperRef.current.autoplay.stop()
+  //     }
+  //   }
+  // }, [isPause])
 
   const logDay = async () => {
     abortPrevRequest()
@@ -249,6 +254,8 @@ const FullChart = () => {
         tableInfoRef.current.style.display = 'flex'
         tableInfoRef.current.style.color = 'black'
         canvasChartRef.current.style.color = 'black'
+        canvasChartRef.current.style.position = 'relative'
+        canvasChartRef.current.style.zIndex = '-50'
 
         const canvas = canvasChartRef.current
 
@@ -285,6 +292,7 @@ const FullChart = () => {
               tableInfoRef.current.style.display = 'none'
               tableInfoRef.current.style.color = ''
               canvasChartRef.current.style.color = ''
+              canvasChartRef.current.style.zIndex = '1'
             }
           })
 
@@ -355,7 +363,8 @@ const FullChart = () => {
               dateTime: String(new Date()).substring(0, 25),
               hosImg: userProfile?.ward.hospital.hosPic,
               probe: deviceLogs.probe,
-              deviceLogs
+              deviceLogs,
+              currentSlideIndex: currentSlideIndex
             }
           })
         } catch (error) {
@@ -370,7 +379,7 @@ const FullChart = () => {
         }
       })()
     }
-  }, [submitLoading])
+  }, [submitLoading, currentSlideIndex])
 
   const chartWrapper = useMemo(() => {
     return (
@@ -380,12 +389,13 @@ const FullChart = () => {
         spaceBetween={30}
         centeredSlides={true}
         loop={deviceLogs?.probe && deviceLogs?.probe.length > 2}
-        autoplay={{
-          delay: 8000,
-          disableOnInteraction: false,
-          pauseOnMouseEnter: true,
-          waitForTransition: false
-        }}
+        onSlideChange={handleSlideChange}
+        // autoplay={{
+        //   delay: 8000,
+        //   disableOnInteraction: false,
+        //   pauseOnMouseEnter: true,
+        //   waitForTransition: false
+        // }}
         allowTouchMove={false}
         pagination={{
           dynamicBullets: true,
@@ -493,7 +503,7 @@ const FullChart = () => {
           </a>
         </div>
         <div className='flex items-center gap-3 justify-end w-full'>
-          {deviceLogs && deviceLogs?.probe?.length > 1 && (
+          {/* {deviceLogs && deviceLogs?.probe?.length > 1 && (
             <label
               htmlFor='button'
               className='tooltip tooltip-top flex'
@@ -506,7 +516,7 @@ const FullChart = () => {
                 {isPause ? <RiPlayLine size={20} /> : <RiStopLine size={20} />}
               </button>
             </label>
-          )}
+          )} */}
           <div className='dropdown dropdown-end z-50'>
             <button
               tabIndex={0}
@@ -532,7 +542,7 @@ const FullChart = () => {
                   <a>JPG</a>
                 </div>
               </li>
-              <div className='divider my-1 h-2 before:h-[1px] after:h-[1px]'></div>
+              <div className='divider my-1 h-2 before:h-px after:h-px'></div>
               <li
                 onClick={async () => {
                   dispatch(setSubmitLoading())
@@ -601,12 +611,26 @@ const FullChart = () => {
           </button>
         </div>
       )}
-      <div ref={canvasChartRef}>
+      <div ref={canvasChartRef} className='p-3'>
         <div ref={tableInfoRef} className='hidden'>
-          <h4>{userProfile?.ward.hospital.hosName}</h4>
-          <span>
-            {deviceLogs?.name ? deviceLogs?.name : '--'} | {deviceLogs?.id}
-          </span>
+          <div className='grid grid-cols-2 gap-3'>
+            <div className='flex items-center gap-3'>
+              <span>Hospital: </span>
+              <h4>{userProfile?.ward.hospital.hosName}</h4>
+            </div>
+            <div className='flex items-center gap-3'>
+              <span>S/N: </span>
+              <span> {deviceLogs?.id}</span>
+            </div>
+            <div className='flex items-center gap-3'>
+              <span>Name: </span>
+              <span>{deviceLogs?.name ? deviceLogs?.name : '--'}</span>
+            </div>
+            <div className='flex items-center gap-3'>
+              <span>Probe Name: </span>
+              <span>{deviceLogs?.probe[currentSlideIndex]?.name ?? '-'}</span>
+            </div>
+          </div>
         </div>
         {chartWrapper}
       </div>

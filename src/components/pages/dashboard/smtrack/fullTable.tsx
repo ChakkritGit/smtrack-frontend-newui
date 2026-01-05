@@ -16,11 +16,12 @@ interface FullTablePropType {
   tempMin: number
   tempMax: number
   isLoading: boolean
+  probeName: string
 }
 
 const FullTableComponent = (props: FullTablePropType) => {
   const { t } = useTranslation()
-  const { dataLog, deviceLogs, isLoading } = props
+  const { dataLog, deviceLogs, isLoading, probeName } = props
   const [reverseArray, setReverseArray] = useState<DeviceLogs[]>([])
 
   const columns: TableColumn<DeviceLogs>[] = [
@@ -32,13 +33,25 @@ const FullTableComponent = (props: FullTablePropType) => {
       sortable: false,
       center: true
     },
-    {
-      name: t('deviceSerialTb'),
-      cell: () => <span title={deviceLogs.id}>{deviceLogs.id}</span>,
-      sortable: false,
-      center: true,
-      width: '200px'
-    },
+    ...(probeName !== ''
+      ? [
+          {
+            name: t('probeNameSubTb'),
+            cell: () => <span title={probeName}>{probeName}</span>,
+            sortable: false,
+            center: true,
+            width: '200px'
+          }
+        ]
+      : [
+          {
+            name: t('deviceSerialTb'),
+            cell: () => <span title={deviceLogs.id}>{deviceLogs.id}</span>,
+            sortable: false,
+            center: true,
+            width: '200px'
+          }
+        ]),
     {
       name: t('deviceDate'),
       cell: items =>

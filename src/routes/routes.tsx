@@ -206,6 +206,7 @@ const Routes = () => {
     }),
     [hospital, ward, activeIndex, isFocused, searchRef, isCleared]
   )
+
   const hashText = useCallback(
     () =>
       Base64.stringify(

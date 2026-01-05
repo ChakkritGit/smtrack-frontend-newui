@@ -52,7 +52,7 @@ const FullTable = () => {
   const [startDate, setStartDate] = useState<Date | undefined>()
   const [endDate, setEndDate] = useState<Date | undefined>()
   const [isLoading, setIsLoading] = useState(false)
-  const [isPause, setIsPaused] = useState(false)
+  // const [isPause, setIsPaused] = useState(false)
   const swiperRef = useRef<SwiperType>(null)
   const abortRef = useRef<AbortController | null>(null)
 
@@ -62,16 +62,16 @@ const FullTable = () => {
     }
   }
 
-  const togglePause = useCallback(() => {
-    setIsPaused(prev => !prev)
-    if (swiperRef.current) {
-      if (isPause) {
-        swiperRef.current.autoplay.start()
-      } else {
-        swiperRef.current.autoplay.stop()
-      }
-    }
-  }, [isPause])
+  // const togglePause = useCallback(() => {
+  //   setIsPaused(prev => !prev)
+  //   if (swiperRef.current) {
+  //     if (isPause) {
+  //       swiperRef.current.autoplay.start()
+  //     } else {
+  //       swiperRef.current.autoplay.stop()
+  //     }
+  //   }
+  // }, [isPause])
 
   useEffect(() => {
     if (!deviceLogs) {
@@ -332,12 +332,12 @@ const FullTable = () => {
         spaceBetween={30}
         centeredSlides={true}
         loop={deviceLogs?.probe && deviceLogs?.probe.length > 2}
-        autoplay={{
-          delay: 8000,
-          disableOnInteraction: false,
-          pauseOnMouseEnter: true,
-          waitForTransition: false
-        }}
+        // autoplay={{
+        //   delay: 8000,
+        //   disableOnInteraction: false,
+        //   pauseOnMouseEnter: true,
+        //   waitForTransition: false
+        // }}
         pagination={{
           dynamicBullets: true,
           clickable: true
@@ -357,10 +357,12 @@ const FullTable = () => {
         className='mySwiper h-full custom-swiper-pagination'
       >
         {deviceLogs &&
-          deviceLogs?.probe?.map(item => {
+          deviceLogs?.probe?.map((item, index) => {
             const filterItem = dataLog.filter(itemTwo =>
               itemTwo.probe.includes(item.channel)
             )
+            const probeName = deviceLogs.probe[index]?.name || ''
+
             return (
               <SwiperSlide key={0}>
                 <FullTableComponent
@@ -369,6 +371,7 @@ const FullTable = () => {
                   tempMin={item.tempMin}
                   tempMax={item.tempMax}
                   isLoading={isLoading}
+                  probeName={probeName}
                 />
               </SwiperSlide>
             )
@@ -445,32 +448,32 @@ const FullTable = () => {
           </a>
         </div>
         <div className='flex items-center gap-3 justify-end w-full'>
-          {deviceLogs && deviceLogs?.probe?.length > 1 && (
+          {/* {deviceLogs && deviceLogs?.probe?.length > 1 && (
             <label
               htmlFor='button'
               className='tooltip tooltip-top flex'
               data-tip={isPause ? t('startSlide') : t('stopSlide')}
             >
               <button
-                className='btn btn-neutral bg-opacity-15 text-primary border-primary border p-0 hover:opacity-50 hover:border-primary hover:bg-transparent duration-300 ease-linear max-h-[28px] min-h-[28px] max-w-[28px] min-w-[28px]'
+                className='btn btn-neutral bg-opacity-15 text-primary border-primary border p-0 hover:opacity-50 hover:border-primary hover:bg-transparent duration-300 ease-linear max-h-7 min-h-7 max-w-7 min-w-7'
                 onClick={togglePause}
               >
                 {isPause ? <RiPlayLine size={20} /> : <RiStopLine size={20} />}
               </button>
             </label>
-          )}
+          )} */}
           <div className='dropdown dropdown-end z-50'>
             <button
               tabIndex={0}
               role='button'
               data-tip={t('menuButton')}
-              className='btn btn-ghost flex p-0 max-w-[30px] min-w-[30px] max-h-[30px] min-h-[30px] tooltip tooltip-left'
+              className='btn btn-ghost flex p-0 max-w-7.5 min-w-7.5 max-h-7.5 min-h-7.5 tooltip tooltip-left'
             >
               <RiMenuLine size={20} />
             </button>
             <ul
               tabIndex={0}
-              className='dropdown-content menu bg-base-100 rounded-box z-[1] max-w-[180px] w-[140px] p-2 shadow'
+              className='dropdown-content menu bg-base-100 rounded-box z-1 max-w-45 w-35 p-2 shadow'
             >
               <li
                 onClick={() => {

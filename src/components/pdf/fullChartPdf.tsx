@@ -4,8 +4,16 @@ import { pdftype } from '../../types/tms/pdfExportType'
 import { StylesPdf } from './style/styles'
 
 export default function Fullchartpdf (pdftype: pdftype) {
-  const { chartIMG, dateTime, devName, devSn, title, hosImg, deviceLogs } =
-    pdftype
+  const {
+    chartIMG,
+    dateTime,
+    devName,
+    devSn,
+    title,
+    hosImg,
+    deviceLogs,
+    currentSlideIndex
+  } = pdftype
 
   return (
     <Document
@@ -37,6 +45,16 @@ export default function Fullchartpdf (pdftype: pdftype) {
               >
                 <Text style={StylesPdf.tag}>Device SN:&nbsp;</Text>
                 <Text>{devSn}</Text>
+              </View>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  marginBottom: 10
+                }}
+              >
+                <Text style={StylesPdf.tag}>Probe Name:&nbsp;</Text>
+                <Text>{deviceLogs.probe[currentSlideIndex]?.name}</Text>
               </View>
               <View
                 style={{
