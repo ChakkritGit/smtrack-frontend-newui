@@ -567,7 +567,7 @@ const Navbar = () => {
           </div>
         )}
         <div className='flex-none gap-2 hidden lg:block'>
-          <div className='dropdown dropdown-center'>
+          <div className='dropdown dropdown-left'>
             <div
               tabIndex={0}
               role='button'
@@ -598,7 +598,7 @@ const Navbar = () => {
             </div>
             <ul
               tabIndex={0}
-              className='menu menu-sm dropdown-content w-37 bg-base-100 rounded-box z-[1] mt-3 p-2 shadow'
+              className='menu menu-sm dropdown-content w-37 bg-base-100 rounded-box z-1 mt-3 p-2 shadow'
             >
               <li className='h-7.5'>
                 <button
