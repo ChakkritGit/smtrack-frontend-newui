@@ -175,7 +175,7 @@ const ResetPassword = () => {
               <button type='button' className='btn' onClick={() => resetForm()}>
                 {t('cancelButton')}
               </button>
-              <button type='submit' className='btn btn-neutral'>
+              <button type='submit' className='btn btn-neutral shadow-lg shadow-neutral/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300'>
                 {t('submitButton')}
               </button>
             </div>

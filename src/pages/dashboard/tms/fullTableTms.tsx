@@ -452,7 +452,7 @@ const FullTableTms = () => {
           </div>
 
           <button
-            className='btn btn-neutral w-full md:w-24'
+            className='btn btn-neutral shadow-lg shadow-neutral/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 w-full md:w-24'
             onClick={() => Logcustom()}
           >
             {t('searchButton')}

@@ -1708,7 +1708,7 @@ const Adjustments = (props: AdjustmentsProps) => {
                   </div>
                   <button
                     type='button'
-                    className='btn btn-neutral'
+                    className='btn btn-neutral shadow-lg shadow-neutral/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300'
                     onClick={() => muteAlways(true)}
                   >
                     {t('messageSend')}
@@ -1776,7 +1776,7 @@ const Adjustments = (props: AdjustmentsProps) => {
                   </div>
                   <button
                     type='button'
-                    className='btn btn-neutral'
+                    className='btn btn-neutral shadow-lg shadow-neutral/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300'
                     onClick={() => muteDoorDuration(true)}
                   >
                     {t('messageSend')}
@@ -1822,7 +1822,7 @@ const Adjustments = (props: AdjustmentsProps) => {
                   </div>
                   <button
                     type='button'
-                    className='btn btn-neutral'
+                    className='btn btn-neutral shadow-lg shadow-neutral/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300'
                     onClick={() => muteAlert(true)}
                   >
                     {t('messageSend')}
@@ -1848,7 +1848,7 @@ const Adjustments = (props: AdjustmentsProps) => {
 
         {(tab === 1 || tab === 2) && (
           <div className={`modal-action ${isLoadingMqtt ? 'mt-0' : 'mt-6'}`}>
-            <button type='submit' className='btn btn-neutral'>
+            <button type='submit' className='btn btn-neutral shadow-lg shadow-neutral/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300'>
               {t('submitButton')}
             </button>
           </div>

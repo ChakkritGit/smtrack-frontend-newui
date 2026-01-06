@@ -182,7 +182,7 @@ const ManageCsv = () => {
 
                   <div className='flex items-center gap-3 mr-3'>
                     <button
-                      className='btn btn-neutral p-2'
+                      className='btn btn-neutral shadow-lg shadow-neutral/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 p-2'
                       onClick={() =>
                         window.open(
                           `https://drive.siamatic.co.th${item.filePath}`,

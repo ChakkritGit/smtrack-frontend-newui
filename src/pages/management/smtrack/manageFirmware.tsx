@@ -721,7 +721,7 @@ const ManageFirmware = () => {
           </div>
           <div className='modal-action'>
             <form onSubmit={handleSubmit}>
-              <button className='btn btn-neutral' disabled={file === undefined}>
+              <button className='btn btn-neutral shadow-lg shadow-neutral/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300' disabled={file === undefined}>
                 {t('uploadButton')}
               </button>
             </form>
@@ -840,7 +840,7 @@ const ManageFirmware = () => {
             {selectedDevicesOption !== t('selectOTA') && (
               <button
                 disabled={selectedDevices.length === 0}
-                className='btn btn-neutral'
+                className='btn btn-neutral shadow-lg shadow-neutral/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300'
                 onClick={() => handleUpdate()}
               >
                 {t('uploadButton')}
@@ -890,13 +890,13 @@ const ManageFirmware = () => {
     <div>
       <div className='flex items-center justify-end gap-3'>
         <button
-          className='btn btn-neutral'
+          className='btn btn-neutral shadow-lg shadow-neutral/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300'
           onClick={() => selectUploadModalRef.current?.showModal()}
         >
           {t('selectToUpdateButton')}
         </button>
         <button
-          className='btn btn-neutral'
+          className='btn btn-neutral shadow-lg shadow-neutral/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300'
           onClick={() => uploadModalRef.current?.showModal()}
         >
           {t('uploadButton')}

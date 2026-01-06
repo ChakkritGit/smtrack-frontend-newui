@@ -185,7 +185,7 @@ const Support = () => {
               value={formData.message}
               onChange={handleChange}
             ></textarea>
-            <button className='btn btn-neutral w-full text-lg mt-3'>
+            <button className='btn btn-neutral shadow-lg shadow-neutral/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 w-full text-lg mt-3'>
               {t('contactSubmit')}
             </button>
           </form>

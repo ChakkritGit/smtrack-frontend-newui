@@ -1357,7 +1357,7 @@ const ManageDevice = () => {
           <HospitalAndWard />
           {(role === 'SUPER' || role === 'SERVICE') && (
             <button
-              className='btn btn-neutral max-w-[130px]'
+              className='btn btn-neutral shadow-lg shadow-neutral/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 max-w-[130px]'
               onClick={() => addModalRef.current?.showModal()}
             >
               {t('addDeviceButton')}
@@ -1493,7 +1493,7 @@ const ManageDevice = () => {
             >
               {t('cancelButton')}
             </button>
-            <button type='submit' className='btn btn-neutral'>
+            <button type='submit' className='btn btn-neutral shadow-lg shadow-neutral/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300'>
               {t('submitButton')}
             </button>
           </div>
@@ -1695,7 +1695,7 @@ const ManageDevice = () => {
                     </span>
                     <button
                       type='button'
-                      className='btn btn-neutral w-full'
+                      className='btn btn-neutral shadow-lg shadow-neutral/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 w-full'
                       onClick={() => openEdit(formData.config)}
                     >
                       <RiSettings4Line size={20} />
@@ -1761,7 +1761,7 @@ const ManageDevice = () => {
                             classNamePrefix='react-select'
                           />
                           <button
-                            className='btn btn-neutral'
+                            className='btn btn-neutral shadow-lg shadow-neutral/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300'
                             type='button'
                             onClick={() => hardResetFun()}
                           >
@@ -1808,7 +1808,7 @@ const ManageDevice = () => {
                             classNamePrefix='react-select'
                           />
                           <button
-                            className='btn btn-neutral'
+                            className='btn btn-neutral shadow-lg shadow-neutral/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300'
                             type='button'
                             disabled={selectedFirmware === ''}
                             onClick={() => handleUpdateFirmware()}
@@ -2387,7 +2387,7 @@ const ManageDevice = () => {
                 {t('buttonErrorBack')}
               </button>
             )}
-            <button type='submit' className='btn btn-neutral'>
+            <button type='submit' className='btn btn-neutral shadow-lg shadow-neutral/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300'>
               {t('submitButton')}
             </button>
           </div>
@@ -2442,7 +2442,7 @@ const ManageDevice = () => {
             </button>
             <button
               type='submit'
-              className='btn btn-neutral'
+              className='btn btn-neutral shadow-lg shadow-neutral/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300'
               disabled={deviceId === ''}
             >
               {t('submitButton')}

@@ -456,7 +456,7 @@ const FullTable = () => {
               data-tip={isPause ? t('startSlide') : t('stopSlide')}
             >
               <button
-                className='btn btn-neutral bg-opacity-15 text-primary border-primary border p-0 hover:opacity-50 hover:border-primary hover:bg-transparent duration-300 ease-linear max-h-7 min-h-7 max-w-7 min-w-7'
+                className='btn btn-neutral shadow-lg shadow-neutral/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 bg-opacity-15 text-primary border-primary border p-0 hover:opacity-50 hover:border-primary hover:bg-transparent duration-300 ease-linear max-h-7 min-h-7 max-w-7 min-w-7'
                 onClick={togglePause}
               >
                 {isPause ? <RiPlayLine size={20} /> : <RiStopLine size={20} />}
@@ -537,7 +537,7 @@ const FullTable = () => {
           </div>
 
           <button
-            className='btn btn-neutral w-full md:w-24'
+            className='btn btn-neutral shadow-lg shadow-neutral/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 w-full md:w-24'
             onClick={() => Logcustom()}
           >
             {t('searchButton')}

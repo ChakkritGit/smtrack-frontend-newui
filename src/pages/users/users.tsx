@@ -735,7 +735,7 @@ const Users = () => {
         <div className='flex flex-col lg:flex-row mt-3 lg:mt-0 lg:items-center items-end gap-4'>
           <HospitalAndWard />
           <button
-            className='btn btn-neutral max-w-[130px]'
+            className='btn btn-neutral shadow-lg shadow-neutral/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 max-w-[130px]'
             onClick={() => addModalRef.current?.showModal()}
           >
             {t('addUserButton')}
@@ -952,7 +952,7 @@ const Users = () => {
             >
               {t('cancelButton')}
             </button>
-            <button type='submit' className='btn btn-neutral'>
+            <button type='submit' className='btn btn-neutral shadow-lg shadow-neutral/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300'>
               {t('submitButton')}
             </button>
           </div>
@@ -1103,7 +1103,7 @@ const Users = () => {
                       </span>
                       <button
                         type='button'
-                        className='btn btn-neutral w-full'
+                        className='btn btn-neutral shadow-lg shadow-neutral/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 w-full'
                         onClick={() => setOnEdit(true)}
                       >
                         <RiKey2Line size={20} />
@@ -1178,7 +1178,7 @@ const Users = () => {
                 {t('buttonErrorBack')}
               </button>
             )}
-            <button type='submit' className='btn btn-neutral'>
+            <button type='submit' className='btn btn-neutral shadow-lg shadow-neutral/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300'>
               {t('submitButton')}
             </button>
           </div>

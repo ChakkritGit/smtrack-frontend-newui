@@ -228,7 +228,7 @@ const Login = () => {
 
               <button
                 type='submit'
-                className='btn btn-neutral w-full h-12 text-[16px] rounded-xl font-semibold shadow-lg shadow-neutral/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 mt-2'
+                className='btn btn-neutral shadow-lg shadow-neutral/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 w-full h-12 text-[16px] rounded-xl font-semibold btn btn-neutral shadow-lg shadow-neutral/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 mt-2'
                 disabled={loading}
               >
                 {loading ? (

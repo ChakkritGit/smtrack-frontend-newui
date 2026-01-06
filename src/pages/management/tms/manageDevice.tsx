@@ -478,7 +478,7 @@ const ManageDevice = () => {
           <HospitalAndWard />
           {role === 'SUPER' && (
             <button
-              className='btn btn-neutral max-w-[130px]'
+              className='btn btn-neutral shadow-lg shadow-neutral/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 max-w-[130px]'
               onClick={() => addModalRef.current?.showModal()}
             >
               {t('addDeviceButton')}
@@ -623,7 +623,7 @@ const ManageDevice = () => {
             >
               {t('cancelButton')}
             </button>
-            <button type='submit' className='btn btn-neutral'>
+            <button type='submit' className='btn btn-neutral shadow-lg shadow-neutral/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300'>
               {t('submitButton')}
             </button>
           </div>
@@ -729,7 +729,7 @@ const ManageDevice = () => {
             >
               {t('cancelButton')}
             </button>
-            <button type='submit' className='btn btn-neutral'>
+            <button type='submit' className='btn btn-neutral shadow-lg shadow-neutral/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300'>
               {t('submitButton')}
             </button>
           </div>

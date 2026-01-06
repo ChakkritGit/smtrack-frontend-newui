@@ -863,13 +863,13 @@ const ManageHospital = () => {
           {(role === 'SUPER' || role === 'SERVICE') && (
             <>
               <button
-                className='btn btn-neutral'
+                className='btn btn-neutral shadow-lg shadow-neutral/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300'
                 onClick={() => addHosModalRef.current?.showModal()}
               >
                 {t('addHos')}
               </button>
               <button
-                className='btn btn-neutral'
+                className='btn btn-neutral shadow-lg shadow-neutral/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300'
                 onClick={() => addWardModalRef.current?.showModal()}
               >
                 {t('addWard')}
@@ -1095,7 +1095,7 @@ const ManageHospital = () => {
             >
               {t('cancelButton')}
             </button>
-            <button type='submit' className='btn btn-neutral'>
+            <button type='submit' className='btn btn-neutral shadow-lg shadow-neutral/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300'>
               {t('submitButton')}
             </button>
           </div>
@@ -1296,7 +1296,7 @@ const ManageHospital = () => {
             >
               {t('cancelButton')}
             </button>
-            <button type='submit' className='btn btn-neutral'>
+            <button type='submit' className='btn btn-neutral shadow-lg shadow-neutral/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300'>
               {t('submitButton')}
             </button>
           </div>
@@ -1383,7 +1383,7 @@ const ManageHospital = () => {
             >
               {t('cancelButton')}
             </button>
-            <button type='submit' className='btn btn-neutral'>
+            <button type='submit' className='btn btn-neutral shadow-lg shadow-neutral/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300'>
               {t('submitButton')}
             </button>
           </div>
@@ -1458,7 +1458,7 @@ const ManageHospital = () => {
             >
               {t('cancelButton')}
             </button>
-            <button type='submit' className='btn btn-neutral'>
+            <button type='submit' className='btn btn-neutral shadow-lg shadow-neutral/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300'>
               {t('submitButton')}
             </button>
           </div>

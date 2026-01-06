@@ -510,7 +510,7 @@ const FullChart = () => {
               data-tip={isPause ? t('startSlide') : t('stopSlide')}
             >
               <button
-                className='btn btn-neutral bg-opacity-15 text-primary border-primary border p-0 hover:opacity-50 hover:border-primary hover:bg-transparent duration-300 ease-linear max-h-[28px] min-h-[28px] max-w-[28px] min-w-[28px]'
+                className='btn btn-neutral shadow-lg shadow-neutral/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 bg-opacity-15 text-primary border-primary border p-0 hover:opacity-50 hover:border-primary hover:bg-transparent duration-300 ease-linear max-h-[28px] min-h-[28px] max-w-[28px] min-w-[28px]'
                 onClick={togglePause}
               >
                 {isPause ? <RiPlayLine size={20} /> : <RiStopLine size={20} />}
@@ -604,7 +604,7 @@ const FullChart = () => {
           </div>
 
           <button
-            className='btn btn-neutral w-full md:w-24'
+            className='btn btn-neutral shadow-lg shadow-neutral/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 w-full md:w-24'
             onClick={() => Logcustom()}
           >
             {t('searchButton')}

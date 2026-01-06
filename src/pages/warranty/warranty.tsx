@@ -670,7 +670,7 @@ const Warranty = () => {
         <span className='text-[20px] font-medium'></span>
         <div className='flex flex-col lg:flex-row mt-3 lg:mt-0 lg:items-center items-end lg:gap-3'>
           <button
-            className='btn btn-neutral max-w-[150px]'
+            className='btn btn-neutral shadow-lg shadow-neutral/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 max-w-[150px]'
             onClick={() => addModalRef.current?.showModal()}
           >
             {t('addWarrantyButton')}
@@ -940,7 +940,7 @@ const Warranty = () => {
             >
               {t('cancelButton')}
             </button>
-            <button type='submit' className='btn btn-neutral'>
+            <button type='submit' className='btn btn-neutral shadow-lg shadow-neutral/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300'>
               {t('submitButton')}
             </button>
           </div>
@@ -1209,7 +1209,7 @@ const Warranty = () => {
             >
               {t('cancelButton')}
             </button>
-            <button type='submit' className='btn btn-neutral'>
+            <button type='submit' className='btn btn-neutral shadow-lg shadow-neutral/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300'>
               {t('submitButton')}
             </button>
           </div>
