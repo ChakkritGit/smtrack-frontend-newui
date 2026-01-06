@@ -682,7 +682,7 @@ const Warranty = () => {
       <dialog ref={addModalRef} className='modal overflow-y-scroll py-10'>
         <form
           onSubmit={handleSubmit}
-          className='modal-box w-5/6 max-w-[50rem] h-max max-h-max'
+          className='modal-box w-5/6 max-w-[50rem] h-max max-h-[95%]'
         >
           <h3 className='font-bold text-lg'>{t('addWarrantyButton')}</h3>
           {/* Invoic */}
@@ -950,7 +950,7 @@ const Warranty = () => {
       <dialog ref={editModalRef} className='modal overflow-y-scroll py-10'>
         <form
           onSubmit={handleUpdate}
-          className='modal-box w-5/6 max-w-[50rem] h-max max-h-max'
+          className='modal-box w-5/6 max-w-200 h-max max-h-[95%]'
         >
           <h3 className='font-bold text-lg'>{t('editWarranty')}</h3>
           {/* Invoic */}
