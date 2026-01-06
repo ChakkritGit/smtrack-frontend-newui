@@ -79,7 +79,7 @@ const CardInFoComponent = (props: PropsType) => {
           <div className='flex items-center gap-2'>
             <p className='font-bold'>{t('deviceNameBox')} • </p>
             <p
-              className='max-w-[150px] lg:max-w-[300px] block truncate text-left'
+              className='max-w-37.5 lg:max-w-75 block truncate text-left'
               style={{ direction: 'rtl' }}
               title={deviceData?.name ?? '—'}
             >
@@ -89,18 +89,18 @@ const CardInFoComponent = (props: PropsType) => {
           <div className='flex items-center gap-2'>
             <p className='font-bold'>{t('deviceSnBox')} • </p>
             <p
-              className='max-w-[150px] lg:max-w-[300px] block truncate text-left'
+              className='max-w-37.5 lg:max-w-75 block truncate text-left'
               style={{ direction: 'rtl' }}
               title={deviceData?.id ?? '—'}
             >
               {deviceData?.id ?? '—'}
             </p>
           </div>
-          <div className='truncate max-w-[450px]'>
+          <div className='truncate max-w-112.5'>
             <span className='font-bold'>{t('hospitalsName')} • </span>
             <span>{deviceData?.hospitalName ?? '—'}</span>
           </div>
-          <div className='truncate max-w-[450px]'>
+          <div className='truncate max-w-112.5'>
             <span className='font-bold'>{t('wardsName')} • </span>
             <span>{deviceData?.wardName ?? '—'}</span>
           </div>
@@ -111,7 +111,7 @@ const CardInFoComponent = (props: PropsType) => {
           role === 'LEGACY_ADMIN') && (
           <button
             aria-label={t('adjustMents')}
-            className='btn btn-ghost flex p-0 min-w-[30px] min-h-[30px] max-w-[30px] max-h-[30px] duration-300 ease-linear tooltip tooltip-left z-30'
+            className='btn btn-ghost flex p-0 min-w-7.5 min-h-7.5 max-w-7.5 max-h-7.5 duration-300 ease-linear tooltip tooltip-left z-30'
             data-tip={t('adjustMents')}
             onClick={() =>
               openAdjustModal(
@@ -182,13 +182,13 @@ const CardInFoComponent = (props: PropsType) => {
                     </span>
                     <div className='flex items-center gap-3'>
                       <p className='font-bold'>• {t('tempValueUnit')}:</p>
-                      <p className='truncate max-w-[150px] lg:max-w-[300px]'>
+                      <p className='truncate max-w-37.5 lg:max-w-75'>
                         {item.tempMin ?? '—'} / {item.tempMax ?? '—'} °C
                       </p>
                     </div>
                     <div className='flex items-center gap-3'>
                       <p className='font-bold'>• {t('humValueUnit')}:</p>
-                      <p className='truncate max-w-[150px] lg:max-w-[300px]'>
+                      <p className='truncate max-w-37.5 lg:max-w-75'>
                         {item.humiMin ?? '—'} / {item.humiMax ?? '—'} %
                       </p>
                     </div>
@@ -202,13 +202,13 @@ const CardInFoComponent = (props: PropsType) => {
                 </span>
                 <div className='flex items-center gap-3'>
                   <p className='font-bold'>• {t('tempValueUnit')}:</p>
-                  <p className='truncate max-w-[150px] lg:max-w-[300px]'>
+                  <p className='truncate max-w-37.5 lg:max-w-75'>
                     — / — °C
                   </p>
                 </div>
                 <div className='flex items-center gap-3'>
                   <p className='font-bold'>• {t('humValueUnit')}:</p>
-                  <p className='truncate max-w-[150px] lg:max-w-[300px]'>
+                  <p className='truncate max-w-37.5 lg:max-w-75'>
                     — / — %
                   </p>
                 </div>
@@ -217,25 +217,25 @@ const CardInFoComponent = (props: PropsType) => {
           </Swiper>
           <div className='flex items-center gap-3'>
             <p className='font-bold'>•</p>
-            <p className='truncate max-w-[200px] lg:max-w-[300px]'>
+            <p className='truncate max-w-50 lg:max-w-75'>
               {deviceData?.location ?? '—'}
             </p>
           </div>
           <div className='flex items-center gap-3'>
             <p className='font-bold'>• {t('ipAddress')}:</p>
-            <p className='truncate max-w-[200px] lg:max-w-[300px]'>
+            <p className='truncate max-w-50 lg:max-w-75'>
               {deviceData?.config?.ip ?? '—'}
             </p>
           </div>
           <div className='flex items-center gap-3'>
             <p className='font-bold'>• {t('macAddress')}:</p>
-            <p className='truncate max-w-[200px] lg:max-w-[300px]'>
+            <p className='truncate max-w-50 lg:max-w-75'>
               {deviceData?.config?.mac ?? '—'}
             </p>
           </div>
           <div className='flex items-center gap-3'>
             <p className='font-bold'>• {t('firmWareVer')}:</p>
-            <p className='truncate max-w-[200px] lg:max-w-[300px]'>
+            <p className='truncate max-w-50 lg:max-w-75'>
               {deviceData?.firmware ?? '—'}
             </p>
           </div>

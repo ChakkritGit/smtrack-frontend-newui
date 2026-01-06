@@ -1,10 +1,10 @@
+import { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../../redux/reducers/rootReducer'
 import {
   setAmbientDisabled,
   setBlurDisabled,
-  setFpsDisabled,
   setGrayscaleMode,
   setTheme,
   setTransitionDisabled
@@ -12,136 +12,164 @@ import {
 import { ThemeListTwoComponent } from '../../../styles/daisyui/themeList'
 import LoadingList from '../../../styles/daisyui/loadingList'
 
+// 1. สร้าง Reusable Component สำหรับ Toggle Row
+interface ToggleRowProps {
+  label: string
+  checked: boolean
+  onChange: () => void
+  disabled?: boolean
+  id: string // รับ ID แยกเพื่อให้ไม่ซ้ำกัน
+  className?: string
+}
+
+const ToggleRow = ({
+  label,
+  checked,
+  onChange,
+  disabled = false,
+  id,
+  className = ''
+}: ToggleRowProps) => (
+  <div className={`flex items-center justify-between mt-3 ${className}`}>
+    <label
+      htmlFor={id}
+      className={`cursor-pointer ${disabled ? 'opacity-50' : ''}`}
+    >
+      {label}
+    </label>
+    <input
+      type='checkbox'
+      className='toggle'
+      id={id}
+      name={id}
+      checked={checked}
+      onChange={onChange}
+      disabled={disabled}
+    />
+  </div>
+)
+
 const AppearanceComponents = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
+
+  // 2. Performance: ดึงเฉพาะค่าที่ใช้จริงๆ (หรือถ้า reducer แยกดีแล้ว เขียนแบบเดิมก็ได้ แต่แบบนี้ชัดเจนกว่า)
   const {
     themeMode,
     grayscaleMode,
     blurDisabled,
     transitionDisabled,
-    ambientDisabled,
-    fpsDisabled,
-    tokenDecode
+    ambientDisabled
   } = useSelector((state: RootState) => state.utils)
-  const { role } = tokenDecode || {}
 
-  const changeTheme = (themeName: string) => {
-    dispatch(setTheme(themeName))
-    localStorage.setItem('theme', themeName)
-  }
+  // 3. Helper Functions wrapped with useCallback
+  const changeTheme = useCallback(
+    (themeName: string) => {
+      dispatch(setTheme(themeName))
+      localStorage.setItem('theme', themeName)
+    },
+    [dispatch]
+  )
 
-  const changeToSystem = () => {
+  const changeToSystem = useCallback(() => {
     dispatch(setTheme(''))
     localStorage.removeItem('theme')
-  }
+  }, [dispatch])
+
+  // Generic Handler สำหรับ Toggle
+  const handleToggle = useCallback(
+    (action: any, key: string, currentValue: boolean) => {
+      dispatch(action())
+      localStorage.setItem(key, String(!currentValue))
+    },
+    [dispatch]
+  )
 
   return (
     <div>
-      <span className='text-[18px] font-medium'>{t('themeMode')}</span>
-      <ThemeListTwoComponent
-        changeTheme={changeTheme}
-        changeToSystem={changeToSystem}
-        themeMode={themeMode}
-        t={t}
-      />
-      <div className='mt-3'>
+      {/* Theme Section */}
+      <section>
+        <span className='text-[18px] font-medium'>{t('themeMode')}</span>
+        <ThemeListTwoComponent
+          changeTheme={changeTheme}
+          changeToSystem={changeToSystem}
+          themeMode={themeMode}
+          t={t}
+        />
+      </section>
+
+      {/* Loading Mode Section */}
+      <section className='mt-3'>
         <span className='text-[18px] font-medium'>{t('loadingMode')}</span>
         <LoadingList />
-      </div>
-      <div className='divider divider-vertical my-2 before:h-[1px] after:h-[1px]'></div>
-      <div className='mt-3'>
+      </section>
+
+      <div className='divider divider-vertical my-2 before:h-px after:h-px'></div>
+
+      {/* Filter Color Section */}
+      <section className='mt-3'>
         <span className='text-[18px] font-medium'>{t('filterColor')}</span>
         <div>
-          <div className=' flex items-center justify-between mt-3'>
-            <span>{t('blur')}</span>
-            <input
-              type='checkbox'
-              className='toggle'
-              name='filterColor'
-              id='filterColor'
-              checked={blurDisabled}
-              onChange={() => {
-                dispatch(setBlurDisabled())
-                localStorage.setItem('blurDisabled', String(!blurDisabled))
-              }}
-            />
-          </div>
+          <ToggleRow
+            id='toggle-blur'
+            label={t('blur')}
+            checked={blurDisabled}
+            onChange={() =>
+              handleToggle(setBlurDisabled, 'blurDisabled', blurDisabled)
+            }
+          />
+
+          {/* Logic การซ่อน Grayscale: ใช้ CSS grid หรือ max-height transition */}
           <div
-            className={`ml-3 flex items-center justify-between mt-3 max-h-[24px] opacity-100 ${
-              !blurDisabled ? '!max-h-0 !opacity-0' : ''
-            } overflow-hidden duration-300 ease-linear`}
+            className={`transition-all duration-300 ease-in-out overflow-hidden ${
+              !blurDisabled ? 'max-h-0 opacity-0' : 'max-h-12.5 opacity-100'
+            }`}
           >
-            <span>{t('grayscale')}</span>
-            <input
-              type='checkbox'
-              className='toggle'
-              name='filterColor'
-              id='filterColor'
-              disabled={!blurDisabled}
+            <ToggleRow
+              id='toggle-grayscale'
+              className='ml-3'
+              label={t('grayscale')}
               checked={grayscaleMode}
-              onChange={() => {
-                dispatch(setGrayscaleMode())
-                localStorage.setItem('grayscaleMode', String(!grayscaleMode))
-              }}
+              disabled={!blurDisabled}
+              onChange={() =>
+                handleToggle(setGrayscaleMode, 'grayscaleMode', grayscaleMode)
+              }
             />
           </div>
-          <div className=' flex items-center justify-between mt-3'>
-            <span>{t('ambientMode')}</span>
-            <input
-              type='checkbox'
-              className='toggle'
-              name='filterColor'
-              id='filterColor'
-              checked={ambientDisabled}
-              onChange={() => {
-                dispatch(setAmbientDisabled())
-                localStorage.setItem(
-                  'ambientDisabled',
-                  String(!ambientDisabled)
-                )
-              }}
-            />
-          </div>
-        </div>
-      </div>
-      <div className='divider divider-vertical my-2 before:h-[1px] after:h-[1px]'></div>
-      <div className='mt-3'>
-        <span className='text-[18px] font-medium'>{t('animation')}</span>
-        <div className=' flex items-center justify-between mt-3'>
-          <span>{t('transition')}</span>
-          <input
-            type='checkbox'
-            className='toggle'
-            name='filterColor'
-            id='filterColor'
-            checked={transitionDisabled}
-            onChange={() => {
-              dispatch(setTransitionDisabled())
-              localStorage.setItem(
-                'transitionDisabled',
-                String(!transitionDisabled)
+
+          <ToggleRow
+            id='toggle-ambient'
+            label={t('ambientMode')}
+            checked={ambientDisabled}
+            onChange={() =>
+              handleToggle(
+                setAmbientDisabled,
+                'ambientDisabled',
+                ambientDisabled
               )
-            }}
+            }
           />
         </div>
-        {role === 'SUPER' && (
-          <div className=' flex items-center justify-between mt-3'>
-            <span>{t('showFPS')}</span>
-            <input
-              type='checkbox'
-              className='toggle'
-              name='filterColor'
-              id='filterColor'
-              checked={fpsDisabled}
-              onChange={() => {
-                dispatch(setFpsDisabled())
-                localStorage.setItem('fpsDisabled', String(!fpsDisabled))
-              }}
-            />
-          </div>
-        )}
-      </div>
+      </section>
+
+      <div className='divider divider-vertical my-2 before:h-px after:h-px'></div>
+
+      {/* Animation Section */}
+      <section className='mt-3'>
+        <span className='text-[18px] font-medium'>{t('animation')}</span>
+        <ToggleRow
+          id='toggle-transition'
+          label={t('transition')}
+          checked={transitionDisabled}
+          onChange={() =>
+            handleToggle(
+              setTransitionDisabled,
+              'transitionDisabled',
+              transitionDisabled
+            )
+          }
+        />
+      </section>
     </div>
   )
 }

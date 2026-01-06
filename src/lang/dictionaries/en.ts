@@ -586,7 +586,22 @@ export default {
     // update version
     changelog: {
       badgeNew: 'New',
-      title: `What's new?`,
+      title: "What's new?",
+      v2_0_7: {
+        bugFixes: 'Bug Fixes and stability improvements.'
+      },
+      v2_0_6: {
+        message: 'UI improvements and minor bug fixes.'
+      },
+      v2_0_5: {
+        message: 'Performance improvements for faster system response.'
+      },
+      v2_0_4: {
+        message: 'General bug fixes for better stability.'
+      },
+      v2_0_3: {
+        message: 'System maintenance update.'
+      },
       v2_0_2: {
         updateDeps: 'Updated dependencies for improved stability and security.',
         fixFilterWard:

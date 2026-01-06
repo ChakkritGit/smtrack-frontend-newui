@@ -1,5 +1,7 @@
+import { useCallback, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { RiCheckLine, RiSpeakerLine } from 'react-icons/ri'
+import { GiSoundWaves } from 'react-icons/gi'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../../redux/reducers/rootReducer'
 import {
@@ -8,7 +10,8 @@ import {
   setSoundMode
 } from '../../../redux/actions/utilsActions'
 import { cookieOptions, cookies } from '../../../constants/utils/utilsConstants'
-import { GiSoundWaves } from 'react-icons/gi'
+
+// Import sounds
 import n1 from '../../../assets/sounds/n1.mp3'
 import n2 from '../../../assets/sounds/n2.wav'
 import n3 from '../../../assets/sounds/n3.wav'
@@ -25,26 +28,68 @@ const SoundAndNotificationComponents = () => {
     (state: RootState) => state.utils
   )
 
+  // 1. รวม Assets ไว้ใน Array เพื่อให้จัดการง่าย (Scalable)
+  const soundAssets = useMemo(
+    () => [
+      {
+        id: 1,
+        src: n1,
+        label: `${t('notificationSoundList')} 1`,
+        isDefault: true
+      },
+      { id: 2, src: n2, label: `${t('notificationSoundList')} 2` },
+      { id: 3, src: n3, label: `${t('notificationSoundList')} 3` },
+      { id: 4, src: n4, label: `${t('notificationSoundList')} 4` },
+      { id: 5, src: n5, label: `${t('notificationSoundList')} 5` },
+      { id: 6, src: n6, label: `${t('notificationSoundList')} 6` },
+      { id: 7, src: n7, label: `${t('notificationSoundList')} 7` },
+      { id: 8, src: n8, label: `${t('notificationSoundList')} 8` }
+    ],
+    [t]
+  )
+
+  // 2. แยก Logic การเปลี่ยนเสียงออกมา (Clean Logic)
+  const handlePlaySound = useCallback(
+    (id: number, src: string) => {
+      const audio = new Audio(src)
+      audio.play().catch(e => console.error('Audio play failed', e))
+
+      dispatch(setSound(id))
+      localStorage.setItem('sound', String(id))
+    },
+    [dispatch]
+  )
+
+  // 3. Helper สำหรับ Toggle (Optional: เพื่อลดโค้ดซ้ำในการ dispatch/cookie)
+  const handleToggle = (
+    action: any,
+    cookieKey: string,
+    currentValue: boolean
+  ) => {
+    dispatch(action())
+    cookies.set(cookieKey, !currentValue, cookieOptions)
+  }
+
   return (
     <div>
       <span className='text-[18px] font-medium'>{t('titleNotification')}</span>
-      <label className='flex items-center justify-between mt-3'>
+
+      {/* Toggle: Mute All */}
+      <label className='flex items-center justify-between mt-3 cursor-pointer'>
         <span>{t('allNotification')}</span>
         <input
           id='muteAllNotification'
-          name='muteAllNotification'
           type='checkbox'
           className='toggle'
           checked={!popUpMode}
-          onChange={() => {
-            dispatch(setPopUpMode())
-            cookies.set('popUpMode', !popUpMode, cookieOptions)
-          }}
+          onChange={() => handleToggle(setPopUpMode, 'popUpMode', popUpMode)}
         />
       </label>
+
+      {/* Toggle: Mute Sound */}
       <label
-        className={`flex items-center justify-between mt-5 ml-3 ${
-          popUpMode ? 'opacity-50' : ''
+        className={`flex items-center justify-between mt-5 ml-3 cursor-pointer duration-200 ${
+          popUpMode ? 'opacity-50 pointer-events-none' : ''
         }`}
       >
         <div className='flex items-center gap-2'>
@@ -53,194 +98,67 @@ const SoundAndNotificationComponents = () => {
         </div>
         <input
           id='muteNotificationSound'
-          name='muteNotificationSound'
           type='checkbox'
           className='toggle'
           checked={!soundMode}
           disabled={popUpMode}
-          onChange={() => {
-            dispatch(setSoundMode())
-            cookies.set('soundMode', !soundMode, cookieOptions)
-          }}
+          onChange={() => handleToggle(setSoundMode, 'soundMode', soundMode)}
         />
       </label>
+
+      {/* Sound List */}
       <div
-        className={`mt-5 ${
+        className={`mt-5 transition-opacity duration-300 ${
+          // หมายเหตุ: เช็ค Logic เดิมของคุณดีๆ นะครับ
+          // ปกติถ้า soundMode = true (เปิดเสียง) ไม่ควร disable list
+          // แต่ถ้า Logic เดิมคุณถูกต้องแล้วก็ใช้ตามเดิมครับ
           soundMode || popUpMode ? 'opacity-50 pointer-events-none' : ''
         }`}
       >
-        <div className='divider divider-vertical my-2 before:h-[1px] after:h-[1px]'></div>
+        <div className='divider divider-vertical my-2 before:h-px after:h-px'></div>
         <div className='flex items-center gap-2'>
           <span className='text-[18px] font-medium'>
             {t('notificationSound')}
           </span>
           <span className='opacity-50'>({t('clickToPlay')})</span>
         </div>
-        <div className='grid grid-cols-1 md:grid-cols-2 gap-3 py-3'>
-          <div
-            className={`flex items-center gap-3 w-full justify-between cursor-pointer hover:bg-base-200 transition-all duration-300 ease-out px-4 py-3 rounded-selector ${
-              sound === 1 ? 'bg-base-300/50' : ''
-            }`}
-            onClick={() => {
-              new Audio(n1).play()
-              dispatch(setSound(1))
-              localStorage.setItem('sound', '1')
-            }}
-          >
-            <div className='flex items-center gap-2'>
-              <GiSoundWaves size={24} />
-              <span>
-                {t('notificationSoundList')} 1{' '}
-                <span className='opacity-50 text-[14px]'>({t('default')})</span>
-              </span>
-            </div>
 
-            {sound === 1 && (
-              <div className='flex items-center justify-center w-5 h-5 p-0.5 bg-neutral text-neutral-content rounded-selector'>
-                <RiCheckLine size={18} />
+        {/* 4. ใช้ Map เพื่อสร้างรายการเสียง (DRY Principle) */}
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-3 py-3'>
+          {soundAssets.map(item => (
+            <div
+              key={item.id}
+              role='button'
+              tabIndex={0}
+              className={`flex items-center gap-3 w-full justify-between cursor-pointer hover:bg-base-200 transition-all duration-300 ease-out px-4 py-3 rounded-selector border border-transparent ${
+                sound === item.id ? 'bg-base-300/50 border-base-300' : ''
+              }`}
+              onClick={() => handlePlaySound(item.id, item.src)}
+              onKeyDown={e => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  handlePlaySound(item.id, item.src)
+                }
+              }}
+            >
+              <div className='flex items-center gap-2'>
+                <GiSoundWaves size={24} />
+                <span>
+                  {item.label}{' '}
+                  {item.isDefault && (
+                    <span className='opacity-50 text-[14px]'>
+                      ({t('default')})
+                    </span>
+                  )}
+                </span>
               </div>
-            )}
-          </div>
-          <div
-            className={`flex items-center gap-3 w-full justify-between cursor-pointer hover:bg-base-200 transition-all duration-300 ease-out px-4 py-3 rounded-selector ${
-              sound === 2 ? 'bg-base-300/50' : ''
-            }`}
-            onClick={() => {
-              new Audio(n2).play()
-              dispatch(setSound(2))
-              localStorage.setItem('sound', '2')
-            }}
-          >
-            <div className='flex items-center gap-2'>
-              <GiSoundWaves size={24} />
-              <span>{t('notificationSoundList')} 2</span>
+
+              {sound === item.id && (
+                <div className='flex items-center justify-center w-5 h-5 p-0.5 bg-neutral text-neutral-content rounded-selector'>
+                  <RiCheckLine size={18} />
+                </div>
+              )}
             </div>
-            {sound === 2 && (
-              <div className='flex items-center justify-center w-5 h-5 p-0.5 bg-neutral text-neutral-content rounded-selector'>
-                <RiCheckLine size={18} />
-              </div>
-            )}
-          </div>
-          <div
-            className={`flex items-center gap-3 w-full justify-between cursor-pointer hover:bg-base-200 transition-all duration-300 ease-out px-4 py-3 rounded-selector ${
-              sound === 3 ? 'bg-base-300/50' : ''
-            }`}
-            onClick={() => {
-              new Audio(n3).play()
-              dispatch(setSound(3))
-              localStorage.setItem('sound', '3')
-            }}
-          >
-            <div className='flex items-center gap-2'>
-              <GiSoundWaves size={24} />
-              <span>{t('notificationSoundList')} 3</span>
-            </div>
-            {sound === 3 && (
-              <div className='flex items-center justify-center w-5 h-5 p-0.5 bg-neutral text-neutral-content rounded-selector'>
-                <RiCheckLine size={18} />
-              </div>
-            )}
-          </div>
-          <div
-            className={`flex items-center gap-3 w-full justify-between cursor-pointer hover:bg-base-200 transition-all duration-300 ease-out px-4 py-3 rounded-selector ${
-              sound === 4 ? 'bg-base-300/50' : ''
-            }`}
-            onClick={() => {
-              new Audio(n4).play()
-              dispatch(setSound(4))
-              localStorage.setItem('sound', '4')
-            }}
-          >
-            <div className='flex items-center gap-2'>
-              <GiSoundWaves size={24} />
-              <span>{t('notificationSoundList')} 4</span>
-            </div>
-            {sound === 4 && (
-              <div className='flex items-center justify-center w-5 h-5 p-0.5 bg-neutral text-neutral-content rounded-selector'>
-                <RiCheckLine size={18} />
-              </div>
-            )}
-          </div>
-          <div
-            className={`flex items-center gap-3 w-full justify-between cursor-pointer hover:bg-base-200 transition-all duration-300 ease-out px-4 py-3 rounded-selector ${
-              sound === 5 ? 'bg-base-300/50' : ''
-            }`}
-            onClick={() => {
-              new Audio(n5).play()
-              dispatch(setSound(5))
-              localStorage.setItem('sound', '5')
-            }}
-          >
-            <div className='flex items-center gap-2'>
-              <GiSoundWaves size={24} />
-              <span>{t('notificationSoundList')} 5</span>
-            </div>
-            {sound === 5 && (
-              <div className='flex items-center justify-center w-5 h-5 p-0.5 bg-neutral text-neutral-content rounded-selector'>
-                <RiCheckLine size={18} />
-              </div>
-            )}
-          </div>
-          <div
-            className={`flex items-center gap-3 w-full justify-between cursor-pointer hover:bg-base-200 transition-all duration-300 ease-out px-4 py-3 rounded-selector ${
-              sound === 6 ? 'bg-base-300/50' : ''
-            }`}
-            onClick={() => {
-              new Audio(n6).play()
-              dispatch(setSound(6))
-              localStorage.setItem('sound', '6')
-            }}
-          >
-            <div className='flex items-center gap-2'>
-              <GiSoundWaves size={24} />
-              <span>{t('notificationSoundList')} 6</span>
-            </div>
-            {sound === 6 && (
-              <div className='flex items-center justify-center w-5 h-5 p-0.5 bg-neutral text-neutral-content rounded-selector'>
-                <RiCheckLine size={18} />
-              </div>
-            )}
-          </div>
-          <div
-            className={`flex items-center gap-3 w-full justify-between cursor-pointer hover:bg-base-200 transition-all duration-300 ease-out px-4 py-3 rounded-selector ${
-              sound === 7 ? 'bg-base-300/50' : ''
-            }`}
-            onClick={() => {
-              new Audio(n7).play()
-              dispatch(setSound(7))
-              localStorage.setItem('sound', '7')
-            }}
-          >
-            <div className='flex items-center gap-2'>
-              <GiSoundWaves size={24} />
-              <span>{t('notificationSoundList')} 7</span>
-            </div>
-            {sound === 7 && (
-              <div className='flex items-center justify-center w-5 h-5 p-0.5 bg-neutral text-neutral-content rounded-selector'>
-                <RiCheckLine size={18} />
-              </div>
-            )}
-          </div>
-          <div
-            className={`flex items-center gap-3 w-full justify-between cursor-pointer hover:bg-base-200 transition-all duration-300 ease-out px-4 py-3 rounded-selector ${
-              sound === 8 ? 'bg-base-300/50' : ''
-            }`}
-            onClick={() => {
-              new Audio(n8).play()
-              dispatch(setSound(8))
-              localStorage.setItem('sound', '8')
-            }}
-          >
-            <div className='flex items-center gap-2'>
-              <GiSoundWaves size={24} />
-              <span>{t('notificationSoundList')} 8</span>
-            </div>
-            {sound === 8 && (
-              <div className='flex items-center justify-center w-5 h-5 p-0.5 bg-neutral text-neutral-content rounded-selector'>
-                <RiCheckLine size={18} />
-              </div>
-            )}
-          </div>
+          ))}
         </div>
       </div>
     </div>

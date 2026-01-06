@@ -15,7 +15,7 @@ const ImageModal = (props: ImageModalProps) => {
   const { modalRef, deviceData } = props
   return (
     <dialog ref={modalRef} className='modal overflow-y-scroll py-10'>
-      <form className='modal-box md:w-5/6 max-w-[50rem] h-max max-h-max'>
+      <form className='modal-box md:w-5/6 max-w-200 h-max max-h-[95%]'>
         <div className='flex justify-between gap-2'>
           <div>
             <h3 className='font-bold text-base'>{deviceData?.id}</h3>
@@ -25,7 +25,7 @@ const ImageModal = (props: ImageModalProps) => {
             type='button'
             name='close-modal'
             aria-label={t('closeButton')}
-            className='btn btn-ghost outline-none flex p-0 min-w-[30px] min-h-[30px] max-w-[30px] max-h-[30px] duration-300 ease-linear'
+            className='btn btn-ghost outline-none flex p-0 min-w-7.5 min-h-7.5 max-w-7.5 max-h-7.5 duration-300 ease-linear'
             onClick={() => modalRef.current?.close()}
           >
             <RiCloseLargeLine size={20} />

@@ -48,18 +48,9 @@ const Sidebar = () => {
   const { ward } = userProfile || {}
   const { role } = tokenDecode || {}
 
-  // const currentDate: Date = new Date()
-  // const formattedDate = currentDate
-  //   .toLocaleDateString('en-GB', {
-  //     day: '2-digit',
-  //     month: '2-digit',
-  //     year: '2-digit'
-  //   })
-  //   .replace(/\//g, '-')
-
   return (
     <aside
-      className={`drawer-side z-[90] ${isExpand ? '!overflow-visible' : ''}`}
+      className={`drawer-side z-90 ${isExpand ? 'overflow-visible!' : ''}`}
     >
       <label
         htmlFor='my-drawer-2'
@@ -67,9 +58,9 @@ const Sidebar = () => {
         className='drawer-overlay'
       ></label>
       <div
-        className={`menu bg-base-100 text-base-content min-h-full flex flex-col !items-center justify-between ${
-          transitionDisabled ? '!transition-all !ease-out !duration-300' : ''
-        } ${isExpand ? 'w-[100px]' : 'w-[235px]'}`}
+        className={`menu bg-base-100 text-base-content min-h-full flex flex-col items-center! justify-between ${
+          transitionDisabled ? 'transition-all! ease-out! duration-300!' : ''
+        } ${isExpand ? 'w-25' : 'w-58.75'}`}
       >
         <div>
           <div className='flex items-center justify-center flex-col gap-5 p-3'>
@@ -82,7 +73,7 @@ const Sidebar = () => {
               } object-contain p-0 hover:bg-transparent`}
             />
             <h3
-              className='text-[24px] truncate max-w-[180px] leading-9'
+              className='text-[24px] truncate max-w-45 leading-9'
               title={ward?.hospital.hosName}
             >
               {ward?.hospital.hosName
@@ -276,7 +267,7 @@ const Sidebar = () => {
                 isExpand ? 'text-center' : 'text-right'
               } hover:underline cursor-pointer`}
             >
-              Version 2.0.6
+              Version 2.0.7
             </Link>
           </div>
         </div>

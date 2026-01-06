@@ -40,6 +40,7 @@ type PropsType = {
   deviceData: DeviceLogsType | undefined
   swiperTempRef: RefObject<SwiperType | null>
   swiperTempOfDayRef: RefObject<SwiperType | null>
+  swiperDoorRef: RefObject<SwiperType | null>
   isPause: boolean
 }
 
@@ -47,27 +48,46 @@ SwiperCore.use([Pagination])
 
 const CardStatus = (props: PropsType) => {
   const { t } = useTranslation()
-  const { deviceData, swiperTempRef, swiperTempOfDayRef, isPause } = props
+  const {
+    deviceData,
+    swiperTempRef,
+    swiperTempOfDayRef,
+    swiperDoorRef,
+    isPause
+  } = props
   const { activeIndex, setActiveIndex } = useSwiperSync() as GlobalContextType
 
   useEffect(() => {
-    if (swiperTempRef.current && swiperTempOfDayRef.current) {
-      swiperTempRef.current.slideTo(activeIndex)
-      swiperTempOfDayRef.current.slideTo(activeIndex)
+    if (
+      swiperTempRef.current &&
+      swiperTempOfDayRef.current &&
+      swiperDoorRef.current
+    ) {
+      // เช็คก่อน slideTo ป้องกัน Loop
+      if (swiperTempRef.current.activeIndex !== activeIndex)
+        swiperTempRef.current.slideTo(activeIndex)
+
+      if (swiperTempOfDayRef.current.activeIndex !== activeIndex)
+        swiperTempOfDayRef.current.slideTo(activeIndex)
+
+      if (swiperDoorRef.current.activeIndex !== activeIndex)
+        swiperDoorRef.current.slideTo(activeIndex)
 
       if (!isPause) {
         swiperTempRef.current.autoplay.start()
         swiperTempOfDayRef.current.autoplay.start()
+        swiperDoorRef.current.autoplay.start()
       } else {
         swiperTempRef.current.autoplay.stop()
         swiperTempOfDayRef.current.autoplay.stop()
+        swiperDoorRef.current.autoplay.stop()
       }
     }
   }, [activeIndex, isPause])
 
   return (
     <>
-      <div className='bg-base-100 rounded-field w-full h-[155px] overflow-hidden'>
+      <div className='bg-base-100 rounded-field w-full h-38.75 overflow-hidden'>
         <Swiper
           key={'tempAndHumi'}
           slidesPerView={'auto'}
@@ -79,23 +99,14 @@ const CardStatus = (props: PropsType) => {
             disableOnInteraction: false,
             waitForTransition: false
           }}
-          pagination={{
-            dynamicBullets: true,
-            clickable: true
-          }}
+          pagination={{ dynamicBullets: true, clickable: true }}
           onSlideChange={swiper => setActiveIndex(swiper.activeIndex)}
           onSwiper={swiper => (swiperTempRef.current = swiper)}
           roundLengths={true}
           effect={'creative'}
           creativeEffect={{
-            prev: {
-              shadow: false,
-              translate: ['-120%', 0, -500]
-            },
-            next: {
-              shadow: false,
-              translate: ['120%', 0, -500]
-            }
+            prev: { shadow: false, translate: ['-120%', 0, -500] },
+            next: { shadow: false, translate: ['120%', 0, -500] }
           }}
           modules={[Autoplay, Pagination, EffectCreative]}
           className=' h-full'
@@ -109,7 +120,7 @@ const CardStatus = (props: PropsType) => {
                 <SwiperSlide className='p-3 h-full bg-base-100' key={item.id}>
                   <div className='flex items-center gap-2 h-[30%]'>
                     <div
-                      className={`flex items-center justify-center rounded-field bg-base-300 w-[32px] h-[32px] ${
+                      className={`flex items-center justify-center rounded-field bg-base-300 w-8 h-8 ${
                         probeLimitIcon(
                           item.tempMin,
                           item.tempMax,
@@ -178,7 +189,7 @@ const CardStatus = (props: PropsType) => {
           ) : (
             <SwiperSlide className='p-3 h-full bg-base-100'>
               <div className='flex items-center gap-2 h-[30%]'>
-                <div className='flex items-center justify-center rounded-field bg-base-300 w-[32px] h-[32px]'>
+                <div className='flex items-center justify-center rounded-field bg-base-300 w-8 h-8'>
                   <RiTempColdLine size={20} />
                 </div>
                 <span>{t('dashProbe')}</span>
@@ -193,10 +204,11 @@ const CardStatus = (props: PropsType) => {
           )}
         </Swiper>
       </div>
-      <div className='flex flex-col gap-2 p-3 bg-base-100 rounded-field w-full h-[155px]'>
+
+      <div className='flex flex-col gap-2 p-3 bg-base-100 rounded-field w-full h-38.75'>
         <div className='flex items-center gap-2'>
           <div
-            className={`flex items-center justify-center rounded-field bg-base-300 w-[32px] h-[32px] ${
+            className={`flex items-center justify-center rounded-field bg-base-300 w-8 h-8 ${
               !deviceData?.online
                 ? 'text-base-content bg-opacity-80 bg-red-500'
                 : ''
@@ -218,39 +230,101 @@ const CardStatus = (props: PropsType) => {
           {!deviceData?.online ? t('stateDisconnect') : t('stateConnect')}
         </div>
       </div>
-      <div className='flex flex-col gap-2 p-3 bg-base-100 rounded-field w-full h-[155px]'>
-        <div className='flex items-center gap-2'>
-          <div
-            className={`flex items-center justify-center rounded-field bg-base-300 w-[32px] h-[32px] ${
-              doorOpen(deviceData)
-                ? 'text-base-content bg-opacity-80 bg-red-500'
-                : ''
-            }`}
-          >
-            {doorOpen(deviceData) ? (
-              <RiDoorOpenLine size={20} />
-            ) : (
-              <RiDoorClosedLine size={20} />
-            )}
-          </div>
-          <span>{t('dashDoor')}</span>
-        </div>
-        <div
-          className={`flex items-center justify-center text-[20px] font-bold h-full ${
-            doorOpen(deviceData) ? 'text-red-500' : ''
-          }`}
+
+      {/* --- Door Swiper --- */}
+      <div className='bg-base-100 rounded-field w-full h-38.75 overflow-hidden'>
+        <Swiper
+          key={'doorSwiper'}
+          slidesPerView={'auto'}
+          spaceBetween={30}
+          centeredSlides={true}
+          loop={deviceData?.probe && deviceData?.probe.length > 2}
+          autoplay={{
+            delay: 8000,
+            disableOnInteraction: false,
+            waitForTransition: false
+          }}
+          pagination={{ dynamicBullets: true, clickable: true }}
+          onSlideChange={swiper => setActiveIndex(swiper.activeIndex)}
+          onSwiper={swiper => (swiperDoorRef.current = swiper)}
+          roundLengths={true}
+          effect={'creative'}
+          creativeEffect={{
+            prev: { shadow: false, translate: ['-120%', 0, -500] },
+            next: { shadow: false, translate: ['120%', 0, -500] }
+          }}
+          modules={[Autoplay, Pagination, EffectCreative]}
+          className=' h-full'
         >
-          {deviceData?.log && deviceData?.log?.length > 0
-            ? doorOpen(deviceData)
-              ? t('doorOpen')
-              : t('doorClose')
-            : '—'}
-        </div>
+          {deviceData ? (
+            deviceData?.probe?.map(item => {
+              const isDoorOpen = doorOpen(deviceData)
+              return (
+                <SwiperSlide className='p-3 h-full bg-base-100' key={item.id}>
+                  <div className='flex items-center gap-2 h-[30%]'>
+                    <div
+                      className={`flex items-center justify-center rounded-field bg-base-300 w-8 h-8 ${
+                        isDoorOpen
+                          ? 'text-base-content bg-opacity-80 bg-red-500'
+                          : ''
+                      }`}
+                    >
+                      {isDoorOpen ? (
+                        <RiDoorOpenLine size={20} />
+                      ) : (
+                        <RiDoorClosedLine size={20} />
+                      )}
+                    </div>
+                    <label
+                      className='tooltip tooltip-bottom'
+                      data-tip={t('dashDoor')}
+                    >
+                      <span className='truncate block max-w-13.75 lg:max-w-17.5'>
+                        {t('dashDoor')}
+                      </span>
+                    </label>
+                    <span className='badge badge-soft badge-primary bg-opacity-15 font-bold border'>
+                      P{item.channel}
+                    </span>
+                  </div>
+                  <div
+                    className={`flex items-center justify-center text-[20px] font-bold h-[70%] ${
+                      isDoorOpen ? 'text-red-500' : ''
+                    }`}
+                  >
+                    {deviceData?.log && deviceData?.log?.length > 0
+                      ? isDoorOpen
+                        ? t('doorOpen')
+                        : t('doorClose')
+                      : '—'}
+                  </div>
+                </SwiperSlide>
+              )
+            })
+          ) : (
+            <SwiperSlide className='p-3 h-full bg-base-100'>
+              <div className='flex items-center gap-2 h-[30%]'>
+                <div className='flex items-center justify-center rounded-field bg-base-300 w-8 h-8'>
+                  <RiDoorClosedLine size={20} />
+                </div>
+                <span>{t('dashDoor')}</span>
+                <span className='badge badge-soft badge-primary bg-opacity-15 font-bold border'>
+                  P—
+                </span>
+              </div>
+              <div className='flex items-center justify-center text-[20px] font-bold h-[70%]'>
+                —
+              </div>
+            </SwiperSlide>
+          )}
+        </Swiper>
       </div>
-      <div className='flex flex-col gap-2 p-3 bg-base-100 rounded-field w-full h-[155px]'>
+      {/* --- End Door Swiper --- */}
+
+      <div className='flex flex-col gap-2 p-3 bg-base-100 rounded-field w-full h-38.75'>
         <div className='flex items-center gap-2'>
           <div
-            className={`flex items-center justify-center rounded-field bg-base-300 w-[32px] h-[32px] ${
+            className={`flex items-center justify-center rounded-field bg-base-300 w-8 h-8 ${
               !unPlug(deviceData)
                 ? 'text-base-content bg-opacity-80 bg-red-500'
                 : ''
@@ -272,10 +346,11 @@ const CardStatus = (props: PropsType) => {
           {!unPlug(deviceData) ? t('stateProblem') : t('stateNormal') ?? '—'}
         </div>
       </div>
-      <div className='flex flex-col gap-2 p-3 bg-base-100 rounded-field w-full h-[155px]'>
+
+      <div className='flex flex-col gap-2 p-3 bg-base-100 rounded-field w-full h-38.75'>
         <div className='flex items-center gap-2'>
           <div
-            className={`flex items-center justify-center rounded-field bg-base-300 w-[32px] h-[32px] ${
+            className={`flex items-center justify-center rounded-field bg-base-300 w-8 h-8 ${
               deviceData?.log
                 ? deviceData?.log[0]?.battery <= 20
                   ? 'text-yellow-500 bg-opacity-80 bg-yellow-300'
@@ -305,7 +380,8 @@ const CardStatus = (props: PropsType) => {
             : '—'}
         </div>
       </div>
-      <div className='bg-base-100 rounded-field w-full h-[155px] overflow-hidden'>
+
+      <div className='bg-base-100 rounded-field w-full h-38.75 overflow-hidden'>
         <Swiper
           key={'tempOfDaya'}
           slidesPerView={'auto'}
@@ -317,57 +393,31 @@ const CardStatus = (props: PropsType) => {
             disableOnInteraction: false,
             waitForTransition: false
           }}
-          pagination={{
-            dynamicBullets: true,
-            clickable: true
-          }}
+          pagination={{ dynamicBullets: true, clickable: true }}
           onSlideChange={swiper => setActiveIndex(swiper.activeIndex)}
           onSwiper={swiper => (swiperTempOfDayRef.current = swiper)}
           roundLengths={true}
           effect={'creative'}
           creativeEffect={{
-            prev: {
-              shadow: false,
-              translate: ['-120%', 0, -500]
-            },
-            next: {
-              shadow: false,
-              translate: ['120%', 0, -500]
-            }
+            prev: { shadow: false, translate: ['-120%', 0, -500] },
+            next: { shadow: false, translate: ['120%', 0, -500] }
           }}
           modules={[Autoplay, Pagination, EffectCreative]}
           className=' h-full'
         >
           {deviceData ? (
             deviceData?.probe?.map(item => {
-              const findItem = deviceData.log.find(itemTwo =>
-                itemTwo.probe.includes(item.channel)
-              )
               return (
                 <SwiperSlide className='p-3 h-full bg-base-100' key={item.id}>
                   <div className='flex items-center gap-2 h-[30%]'>
-                    <div
-                      className={`flex items-center justify-center rounded-field bg-base-300 w-[32px] h-[32px] ${
-                        probeLimitIcon(
-                          item.tempMin,
-                          item.tempMax,
-                          findItem?.tempDisplay,
-                          item.humiMin,
-                          item.humiMax,
-                          findItem?.humidityDisplay
-                        )
-                          ? 'text-base-content bg-opacity-80 bg-red-500'
-                          : ''
-                      }`}
-                    >
+                    <div className='flex items-center justify-center rounded-field bg-base-300 w-8 h-8'>
                       <HiOutlineArrowsUpDown size={20} />
                     </div>
                     <label
-                      htmlFor='span'
                       className='tooltip tooltip-bottom'
                       data-tip={t('dashTempofDay')}
                     >
-                      <span className='truncate block max-w-[55px] lg:max-w-[70px]'>
+                      <span className='truncate block max-w-13.75 lg:max-w-17.5'>
                         {t('dashTempofDay')}
                       </span>
                     </label>
@@ -401,15 +451,14 @@ const CardStatus = (props: PropsType) => {
           ) : (
             <SwiperSlide className='p-3 h-full bg-base-100'>
               <div className='flex items-center gap-2 h-[30%]'>
-                <div className='flex items-center justify-center rounded-field bg-base-300 w-[32px] h-[32px]'>
+                <div className='flex items-center justify-center rounded-field bg-base-300 w-8 h-8'>
                   <HiOutlineArrowsUpDown size={20} />
                 </div>
                 <label
-                  htmlFor='span'
                   className='tooltip tooltip-bottom'
                   data-tip={t('dashTempofDay')}
                 >
-                  <span className='truncate block max-w-[55px] lg:max-w-[70px]'>
+                  <span className='truncate block max-w-13.75 lg:max-w-17.5'>
                     {t('dashTempofDay')}
                   </span>
                 </label>
@@ -424,10 +473,11 @@ const CardStatus = (props: PropsType) => {
           )}
         </Swiper>
       </div>
-      <div className='flex flex-col gap-2 p-3 bg-base-100 rounded-field w-full h-[155px]'>
+
+      <div className='flex flex-col gap-2 p-3 bg-base-100 rounded-field w-full h-38.75'>
         <div className='flex items-center gap-2'>
           <div
-            className={`flex items-center justify-center rounded-field bg-base-300 w-[32px] h-[32px] ${
+            className={`flex items-center justify-center rounded-field bg-base-300 w-8 h-8 ${
               !sdCard(deviceData)
                 ? 'text-base-content bg-opacity-80 bg-red-500'
                 : ''
@@ -449,9 +499,10 @@ const CardStatus = (props: PropsType) => {
           {!sdCard(deviceData) ? t('stateProblem') : t('stateNormal') ?? '—'}
         </div>
       </div>
-      <div className='flex flex-col gap-2 p-3 bg-base-100 rounded-field w-full h-[155px]'>
+
+      <div className='flex flex-col gap-2 p-3 bg-base-100 rounded-field w-full h-38.75'>
         <div className='flex items-center gap-2'>
-          <div className='flex items-center justify-center rounded-field bg-base-300 w-[32px] h-[32px]'>
+          <div className='flex items-center justify-center rounded-field bg-base-300 w-8 h-8'>
             <RiCollageLine size={20} />
           </div>
           <span>{t('dashProbeandDoor')}</span>
@@ -463,15 +514,16 @@ const CardStatus = (props: PropsType) => {
                   .length ?? '—'
               : '—'}
           </span>
-          <div className='w-[3px] h-7 py-2 bg-primary rounded-field'></div>
+          <div className='w-0.75 h-7 py-2 bg-primary rounded-field'></div>
           <span>
             {deviceData?.probe?.find(item => item.doorQty)?.doorQty ?? '—'}
           </span>
         </div>
       </div>
-      <div className='flex flex-col gap-2 p-3 bg-base-100 rounded-field w-full h-[155px]'>
+
+      <div className='flex flex-col gap-2 p-3 bg-base-100 rounded-field w-full h-38.75'>
         <div className='flex items-center gap-2'>
-          <div className='flex items-center justify-center rounded-field bg-base-300 w-[32px] h-[32px]'>
+          <div className='flex items-center justify-center rounded-field bg-base-300 w-8 h-8'>
             <RiShieldCheckLine size={20} />
           </div>
           <span>{t('dashWarranty')}</span>
@@ -506,9 +558,10 @@ const CardStatus = (props: PropsType) => {
           )}
         </div>
       </div>
-      <div className='flex flex-col gap-2 p-3 bg-base-100 rounded-field w-full h-[155px]'>
+
+      <div className='flex flex-col gap-2 p-3 bg-base-100 rounded-field w-full h-38.75'>
         <div className='flex items-center gap-2'>
-          <div className='flex items-center justify-center rounded-field bg-base-300 w-[32px] h-[32px]'>
+          <div className='flex items-center justify-center rounded-field bg-base-300 w-8 h-8'>
             <RiFolderSettingsLine size={20} />
           </div>
           <span>{t('dashRepair')}</span>

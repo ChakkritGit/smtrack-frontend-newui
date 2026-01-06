@@ -228,7 +228,7 @@ const ManageProbe = () => {
           showConfirmButton: false,
           timer: 2500
         }).finally(async () => {
-          await delay(3000)
+          await delay(1500)
           client.publish(
             `siamatic/${deviceModel}/${version}/${formData.id}/adj`,
             'on'
@@ -335,6 +335,12 @@ const ManageProbe = () => {
           icon: 'success',
           showConfirmButton: false,
           timer: 2500
+        }).finally(async () => {
+          await delay(1500)
+          client.publish(
+            `siamatic/${deviceModel}/${version}/${formData.id}/adj`,
+            'on'
+          )
         })
       } catch (error) {
         editModalRef.current?.close()
@@ -674,10 +680,10 @@ const ManageProbe = () => {
       name: t('probeLocation'),
       cell: item => (
         <div
-          className='flex justify-center tooltip w-[180px]'
+          className='flex justify-center tooltip w-45'
           data-tip={item.position ?? '—'}
         >
-          <div className='truncate max-w-[150px]'>
+          <div className='truncate max-w-37.5'>
             <span>{item.position ?? '—'}</span>
           </div>
         </div>
@@ -800,7 +806,7 @@ const ManageProbe = () => {
         <span className='text-[20px] font-medium'></span>
         <div className='flex flex-col lg:flex-row mt-3 lg:mt-0 lg:items-center items-end lg:gap-3'>
           <button
-            className='btn btn-neutral max-w-[130px]'
+            className='btn btn-neutral max-w-32.5'
             onClick={() => addModalRef.current?.showModal()}
           >
             {t('addProbe')}
@@ -903,7 +909,7 @@ const ManageProbe = () => {
                         onChange={selectProbeType}
                         autoFocus={false}
                         menuPlacement='top'
-                        className='react-select-container custom-menu-select z-[75] min-w-full'
+                        className='react-select-container custom-menu-select z-75 min-w-full'
                         classNamePrefix='react-select'
                       />
                       {/* <Select
@@ -972,7 +978,7 @@ const ManageProbe = () => {
                       onChange={delayTime}
                       autoFocus={false}
                       menuPlacement='top'
-                      className='react-select-container custom-menu-select z-[75] min-w-full'
+                      className='react-select-container custom-menu-select z-75 min-w-full'
                       classNamePrefix='react-select'
                     />
                   </label>
@@ -999,7 +1005,7 @@ const ManageProbe = () => {
                       onChange={doorSelected}
                       autoFocus={false}
                       menuPlacement='top'
-                      className='react-select-container custom-menu-select z-[75] min-w-full'
+                      className='react-select-container custom-menu-select z-75 min-w-full'
                       classNamePrefix='react-select'
                     />
                   </label>
@@ -1026,7 +1032,7 @@ const ManageProbe = () => {
                       onChange={channelSelected}
                       autoFocus={false}
                       menuPlacement='top'
-                      className='react-select-container custom-menu-select z-[75] min-w-full'
+                      className='react-select-container custom-menu-select z-75 min-w-full'
                       classNamePrefix='react-select'
                     />
                   </label>
@@ -1316,7 +1322,7 @@ const ManageProbe = () => {
                             {...validProps}
                             ref={ref as Ref<HTMLDivElement> | undefined}
                             key={key}
-                            className='flex items-center justify-center w-[42px] h-[32px] bg-orange-500 text-white font-bold text-[12px] shadow-md rounded-field p-1 cursor-pointer outline-orange-500/50'
+                            className='flex items-center justify-center w-10.5 h-8 bg-orange-500 text-white font-bold text-[12px] shadow-md rounded-field p-1 cursor-pointer outline-orange-500/50'
                           >
                             {state.valueNow}
                           </div>
@@ -1356,7 +1362,7 @@ const ManageProbe = () => {
                             {...validProps}
                             ref={ref as Ref<HTMLDivElement> | undefined}
                             key={key}
-                            className='flex items-center justify-center w-[42px] h-[32px] bg-blue-500 text-white font-bold text-[12px] shadow-md rounded-field p-1 cursor-pointer outline-blue-500/50'
+                            className='flex items-center justify-center w-10.5 h-8 bg-blue-500 text-white font-bold text-[12px] shadow-md rounded-field p-1 cursor-pointer outline-blue-500/50'
                           >
                             {state.valueNow}
                           </div>
@@ -1501,7 +1507,7 @@ const ManageProbe = () => {
       <dialog ref={editModalRef} className='modal overflow-y-scroll py-10'>
         <form
           onSubmit={handleUpdate}
-          className='modal-box max-w-[85rem] h-max max-h-max'
+          className='modal-box max-w-340 h-max max-h-max'
         >
           <h3 className='font-bold text-lg'>{t('editProbe')}</h3>
           <div className='flex flex-col lg:flex-col xl:flex-row gap-4 mt-4 w-full'>
@@ -1529,7 +1535,7 @@ const ManageProbe = () => {
                           setFormData({ ...formData, sn: e?.value as string })
                         }
                         autoFocus={false}
-                        className='react-select-container custom-menu-select z-[75] min-w-full'
+                        className='react-select-container custom-menu-select z-75 min-w-full'
                         classNamePrefix='react-select'
                       />
                     </label>
@@ -1577,7 +1583,7 @@ const ManageProbe = () => {
                         onChange={selectProbeType}
                         autoFocus={false}
                         menuPlacement='top'
-                        className='react-select-container custom-menu-select z-[75] min-w-full'
+                        className='react-select-container custom-menu-select z-75 min-w-full'
                         classNamePrefix='react-select'
                       />
                     </label>
@@ -1628,7 +1634,7 @@ const ManageProbe = () => {
                       onChange={delayTime}
                       autoFocus={false}
                       menuPlacement='top'
-                      className='react-select-container custom-menu-select z-[75] min-w-full'
+                      className='react-select-container custom-menu-select z-75 min-w-full'
                       classNamePrefix='react-select'
                     />
                   </label>
@@ -1655,7 +1661,7 @@ const ManageProbe = () => {
                       onChange={doorSelected}
                       autoFocus={false}
                       menuPlacement='top'
-                      className='react-select-container custom-menu-select z-[75] min-w-full'
+                      className='react-select-container custom-menu-select z-75 min-w-full'
                       classNamePrefix='react-select'
                     />
                   </label>
@@ -1682,7 +1688,7 @@ const ManageProbe = () => {
                       onChange={channelSelected}
                       autoFocus={false}
                       menuPlacement='top'
-                      className='react-select-container custom-menu-select z-[75] min-w-full'
+                      className='react-select-container custom-menu-select z-75 min-w-full'
                       classNamePrefix='react-select'
                     />
                   </label>
@@ -1972,7 +1978,7 @@ const ManageProbe = () => {
                             {...validProps}
                             ref={ref as Ref<HTMLDivElement> | undefined}
                             key={key}
-                            className='flex items-center justify-center w-[42px] h-[32px] bg-orange-500 text-white font-bold text-[12px] shadow-md rounded-field p-1 cursor-pointer outline-orange-500/50'
+                            className='flex items-center justify-center w-10.5 h-8 bg-orange-500 text-white font-bold text-[12px] shadow-md rounded-field p-1 cursor-pointer outline-orange-500/50'
                           >
                             {state.valueNow}
                           </div>
@@ -2012,7 +2018,7 @@ const ManageProbe = () => {
                             {...validProps}
                             ref={ref as Ref<HTMLDivElement> | undefined}
                             key={key}
-                            className='flex items-center justify-center w-[42px] h-[32px] bg-blue-500 text-white font-bold text-[12px] shadow-md rounded-field p-1 cursor-pointer outline-blue-500/50'
+                            className='flex items-center justify-center w-10.5 h-8 bg-blue-500 text-white font-bold text-[12px] shadow-md rounded-field p-1 cursor-pointer outline-blue-500/50'
                           >
                             {state.valueNow}
                           </div>
@@ -2406,7 +2412,7 @@ const ManageProbe = () => {
                       onChange={e => getScheduleDay(e, 'firstDay')}
                       autoFocus={false}
                       menuPlacement='top'
-                      className='react-select-container custom-menu-select z-[75] min-w-full'
+                      className='react-select-container custom-menu-select z-75 min-w-full'
                       classNamePrefix='react-select'
                     />
                   </label>
@@ -2439,7 +2445,7 @@ const ManageProbe = () => {
                       onChange={e => getScheduleDay(e, 'seccondDay')}
                       autoFocus={false}
                       menuPlacement='top'
-                      className='react-select-container custom-menu-select z-[75] min-w-full'
+                      className='react-select-container custom-menu-select z-75 min-w-full'
                       classNamePrefix='react-select'
                     />
                   </label>
@@ -2472,7 +2478,7 @@ const ManageProbe = () => {
                       onChange={e => getScheduleDay(e, 'thirdDay')}
                       autoFocus={false}
                       menuPlacement='top'
-                      className='react-select-container custom-menu-select z-[75] min-w-full'
+                      className='react-select-container custom-menu-select z-75 min-w-full'
                       classNamePrefix='react-select'
                     />
                   </label>
@@ -2540,7 +2546,7 @@ const ManageProbe = () => {
                   onChange={e => getScheduleTime(e, 'firstTime')}
                   autoFocus={false}
                   menuPlacement='top'
-                  className='react-select-container custom-menu-select z-[75] min-w-full'
+                  className='react-select-container custom-menu-select z-75 min-w-full'
                   classNamePrefix='react-select'
                 />
                 <Select
@@ -2560,7 +2566,7 @@ const ManageProbe = () => {
                   onChange={e => getScheduleTimeMinute(e, 'firstTimeMinute')}
                   autoFocus={false}
                   menuPlacement='top'
-                  className='react-select-container custom-menu-select z-[75] min-w-full'
+                  className='react-select-container custom-menu-select z-75 min-w-full'
                   classNamePrefix='react-select'
                 />
               </div>
@@ -2590,7 +2596,7 @@ const ManageProbe = () => {
                   onChange={e => getScheduleTime(e, 'seccondTime')}
                   autoFocus={false}
                   menuPlacement='top'
-                  className='react-select-container custom-menu-select z-[75] min-w-full'
+                  className='react-select-container custom-menu-select z-75 min-w-full'
                   classNamePrefix='react-select'
                 />
                 <Select
@@ -2610,7 +2616,7 @@ const ManageProbe = () => {
                   onChange={e => getScheduleTimeMinute(e, 'seccondTimeMinute')}
                   autoFocus={false}
                   menuPlacement='top'
-                  className='react-select-container custom-menu-select z-[75] min-w-full'
+                  className='react-select-container custom-menu-select z-75 min-w-full'
                   classNamePrefix='react-select'
                 />
               </div>
@@ -2641,7 +2647,7 @@ const ManageProbe = () => {
                   onChange={e => getScheduleTime(e, 'thirdTime')}
                   autoFocus={false}
                   menuPlacement='top'
-                  className='react-select-container custom-menu-select z-[75] min-w-full'
+                  className='react-select-container custom-menu-select z-75 min-w-full'
                   classNamePrefix='react-select'
                 />
                 <Select
@@ -2661,7 +2667,7 @@ const ManageProbe = () => {
                   onChange={e => getScheduleTimeMinute(e, 'thirdTimeMinute')}
                   autoFocus={false}
                   menuPlacement='top'
-                  className='react-select-container custom-menu-select z-[75] min-w-full'
+                  className='react-select-container custom-menu-select z-75 min-w-full'
                   classNamePrefix='react-select'
                 />
               </div>

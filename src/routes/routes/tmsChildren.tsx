@@ -1,6 +1,5 @@
-import { HideSettingManageTms, HideSettingTms } from '../../middleware/Auth'
 import { RouteObject } from 'react-router-dom'
-import ErrorScreen from '../error/error'
+import { HideSettingManageTms, HideSettingTms } from '../../middleware/Auth'
 import HomeTms from '../../pages/home/homeTms'
 import DashboardTms from '../../pages/dashboard/tms/dashboardTms'
 import FullChartTms from '../../pages/dashboard/tms/fullChartTms'
@@ -12,80 +11,59 @@ import Settings from '../../pages/settings/settings'
 import Changelog from '../../components/changelog/changelog'
 import Notification from '../../pages/notification/notification'
 
-// const HomeTms = lazy(() => import('../../pages/home/homeTms'))
-// const DashboardTms = lazy(() => import('../../pages/dashboard/tms/dashboardTms'))
-// const FullChartTms = lazy(() => import('../../pages/dashboard/tms/fullChartTms'))
-// const PreviewPDF = lazy(() => import('../../components/pdf/previewPdf'))
-// const FullTableTms = lazy(() => import('../../pages/dashboard/tms/fullTableTms'))
-// const Users = lazy(() => import('../../pages/users/users'))
-// const ManagementTms = lazy(() => import('../../pages/management/tms/managementTms'))
-// const Settings = lazy(() => import('../../pages/settings/settings'))
-// const Notification = lazy(() => import('../../pages/notification/notification'))
-// const Changelog = lazy(() => import('../../components/changelog/changelog'))
-
 const tmsChildren: RouteObject[] = [
   {
-    path: '/',
-    element: <HomeTms />,
-    errorElement: <ErrorScreen />
+    index: true, // หน้าแรกของ TMS
+    element: <HomeTms />
   },
   {
     path: 'dashboard',
-    element: <DashboardTms />,
-    errorElement: <ErrorScreen />
+    element: <DashboardTms />
   },
   {
     path: 'dashboard/chart',
-    element: <FullChartTms />,
-    errorElement: <ErrorScreen />
+    element: <FullChartTms />
   },
   {
     path: 'dashboard/chart/preview',
-    element: <PreviewPDF />,
-    errorElement: <ErrorScreen />
+    element: <PreviewPDF />
   },
   {
     path: 'dashboard/table',
-    element: <FullTableTms />,
-    errorElement: <ErrorScreen />
+    element: <FullTableTms />
   },
   {
+    // Middleware กลุ่ม 1
     element: <HideSettingTms />,
-    errorElement: <ErrorScreen />,
     children: [
       {
         path: 'users',
-        element: <Users />,
-        errorElement: <ErrorScreen />
+        element: <Users />
       }
     ]
   },
   {
+    // Middleware กลุ่ม 2
     element: <HideSettingManageTms />,
-    errorElement: <ErrorScreen />,
     children: [
       {
         path: 'management',
-        element: <ManagementTms />,
-        errorElement: <ErrorScreen />
+        element: <ManagementTms />
       }
     ]
   },
   {
     path: 'settings',
-    element: <Settings />,
-    errorElement: <ErrorScreen />
+    element: <Settings />
   },
   {
     path: 'notification',
-    element: <Notification />,
-    errorElement: <ErrorScreen />
+    element: <Notification />
   },
   {
     path: 'changelog',
-    element: <Changelog />,
-    errorElement: <ErrorScreen />
-  },
+    element: <Changelog />
+  }
 ]
 
 export { tmsChildren }

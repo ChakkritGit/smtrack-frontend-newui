@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import { Location, useLocation, useNavigate } from 'react-router-dom'
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import Swal from 'sweetalert2'
 import axiosInstance from '../../../constants/axios/axiosInstance'
 import { responseType } from '../../../types/smtrack/utilsRedux/utilsReduxType'
@@ -15,8 +15,6 @@ import {
   RiDashboardLine,
   RiFileExcel2Line,
   RiMenuLine,
-  RiPlayLine,
-  RiStopLine,
   RiTableFill
 } from 'react-icons/ri'
 import { useDispatch, useSelector } from 'react-redux'
@@ -253,6 +251,9 @@ const FullTable = () => {
               No: index + 1,
               DeviceSN: object.deviceData?.id,
               DeviceName: object.deviceData?.name,
+
+              ProbeName: i.name ?? '',
+
               TemperatureMin: i.tempMin,
               TemperatureMax: i.tempMax,
               Date: new Date(items._time).toLocaleString('th-TH', {

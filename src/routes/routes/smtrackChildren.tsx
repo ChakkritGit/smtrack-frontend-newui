@@ -1,6 +1,5 @@
 import { RouteObject } from 'react-router-dom'
-import { HideFlashFW, HideSetting } from '../../middleware/Auth'
-import ErrorScreen from '../error/error'
+import { HideSetting } from '../../middleware/Auth'
 import Home from '../../pages/home/home'
 import Dashboard from '../../pages/dashboard/smtrack/dashboard'
 import FullChart from '../../pages/dashboard/smtrack/fullChart'
@@ -16,160 +15,114 @@ import RepairPdf from '../../components/pdf/repairPdf'
 import Settings from '../../pages/settings/settings'
 import Notification from '../../pages/notification/notification'
 import Changelog from '../../components/changelog/changelog'
-import TestWrapper from '../../test/testWrapper'
-import DynamicVideoColor from '../../test/test'
-import VideoPlayer from '../../test/testtwo'
-import ChartPdf from '../../test/chartPdf'
-
-// const Home = lazy(() => import('../../pages/home/home'))
-// const Dashboard = lazy(() => import('../../pages/dashboard/smtrack/dashboard'))
-// const FullChart = lazy(() => import('../../pages/dashboard/smtrack/fullChart'))
-// const PreviewPDF = lazy(() => import('../../components/pdf/previewPdf'))
-// const FullTable = lazy(() => import('../../pages/dashboard/smtrack/fullTable'))
-// const Users = lazy(() => import('../../pages/users/users'))
-// const Management = lazy(() => import('../../pages/management/smtrack/management'))
-// const Warranty = lazy(() => import('../../pages/warranty/warranty'))
-// const Repair = lazy(() => import('../../pages/repair/repair'))
-// const Settings = lazy(() => import('../../pages/settings/settings'))
-// const Notification = lazy(() => import('../../pages/notification/notification'))
-// const RepairPdf = lazy(() => import('../../components/pdf/repairPdf'))
-// const WarrantyPdf = lazy(() => import('../../components/pdf/WarrantyPdf'))
-// const Changelog = lazy(() => import('../../components/changelog/changelog'))
-// const VideoPlayer = lazy(() => import('../../test/testtwo'))
-// const DynamicVideoColor = lazy(() => import('../../test/test'))
-// const TestWrapper = lazy(() => import('../../test/testWrapper'))
-// const ChartPdf = lazy(() => import('../../test/chartPdf'))
-// const ManageCsv = lazy(() => import('../../pages/reports/manageCsv'))
+// import TestWrapper from '../../test/testWrapper'
+// import DynamicVideoColor from '../../test/test'
+// import VideoPlayer from '../../test/testtwo'
+// import ChartPdf from '../../test/chartPdf'
 
 const smtrackChildren: RouteObject[] = [
   {
-    path: '/',
-    element: <Home />,
-    errorElement: <ErrorScreen />
+    index: true, // ใช้ index: true แทน path: '/' สำหรับหน้า Default
+    element: <Home />
   },
   {
     path: 'dashboard',
-    element: <Dashboard />,
-    errorElement: <ErrorScreen />
+    element: <Dashboard />
   },
   {
     path: 'dashboard/chart',
-    element: <FullChart />,
-    errorElement: <ErrorScreen />
+    element: <FullChart />
   },
   {
     path: 'dashboard/chart/preview',
-    element: <PreviewPDF />,
-    errorElement: <ErrorScreen />
+    element: <PreviewPDF />
   },
   {
     path: 'dashboard/table',
-    element: <FullTable />,
-    errorElement: <ErrorScreen />
+    element: <FullTable />
   },
   {
     path: 'dashboard/chart/compare',
-    element: <>dashboard/chart/compare</>,
-    errorElement: <ErrorScreen />
+    element: <>dashboard/chart/compare</>
   },
   {
+    // Group นี้มี Middleware คุม
     element: <HideSetting />,
-    errorElement: <ErrorScreen />,
     children: [
       {
         path: 'users',
-        element: <Users />,
-        errorElement: <ErrorScreen />
+        element: <Users />
       },
       {
         path: 'management',
-        element: <Management />,
-        errorElement: <ErrorScreen />
+        element: <Management />
       },
-      // {
-      //   path: 'management/:id',
-      //   element: <>management/:id</>,
-      //   errorElement: <ErrorScreen />
-      // },
       {
         path: 'management/csv',
-        element: <ManageCsv />,
-        errorElement: <ErrorScreen />
+        element: <ManageCsv />
       }
     ]
   },
   {
     path: 'warranty',
-    element: <Warranty />,
-    errorElement: <ErrorScreen />
+    element: <Warranty />
   },
   {
     path: 'warranty/preview',
-    element: <WarrantyPdf />,
-    errorElement: <ErrorScreen />
+    element: <WarrantyPdf />
   },
   {
     path: 'repair',
-    element: <Repair />,
-    errorElement: <ErrorScreen />
+    element: <Repair />
   },
   {
     path: 'repair/preview',
-    element: <RepairPdf />,
-    errorElement: <ErrorScreen />
+    element: <RepairPdf />
   },
   {
     path: 'settings',
-    element: <Settings />,
-    errorElement: <ErrorScreen />
+    element: <Settings />
   },
   {
     path: 'notification',
-    element: <Notification />,
-    errorElement: <ErrorScreen />
+    element: <Notification />
   },
   {
     path: 'changelog',
-    element: <Changelog />,
-    errorElement: <ErrorScreen />
-  },
-  ...(import.meta.env.VITE_APP_NODE_ENV === 'development'
-    ? [
-        {
-          path: 'test',
-          element: <TestWrapper />,
-          errorElement: <ErrorScreen />,
-          children: [
-            {
-              path: '/test',
-              element: <DynamicVideoColor />,
-              errorElement: <ErrorScreen />
-            },
-            {
-              path: 'test1',
-              element: <VideoPlayer />,
-              errorElement: <ErrorScreen />
-            },
-            {
-              path: 'test2',
-              element: <ChartPdf />,
-              errorElement: <ErrorScreen />
-            }
-          ]
-        }
-      ]
-    : []),
-  {
-    element: <HideFlashFW />,
-    errorElement: <ErrorScreen />,
-    children: [
-      {
-        path: 'management/flasher',
-        element: <>management/flasher</>,
-        errorElement: <ErrorScreen />
-      }
-    ]
+    element: <Changelog />
   }
+  // Dev Routes
+  // ...(import.meta.env.VITE_APP_NODE_ENV === 'development'
+  //   ? [
+  //       {
+  //         path: 'test',
+  //         element: <TestWrapper />,
+  //         children: [
+  //           {
+  //             path: '/test', // ระวัง: ใส่ / นำหน้า จะกลายเป็น Absolute Path (ต่อท้าย Domain) ไม่ต่อท้าย Parent
+  //             element: <DynamicVideoColor />
+  //           },
+  //           {
+  //             path: 'test1',
+  //             element: <VideoPlayer />
+  //           },
+  //           {
+  //             path: 'test2',
+  //             element: <ChartPdf />
+  //           }
+  //         ]
+  //       }
+  //     ]
+  //   : []),
+  // {
+  //   element: <HideFlashFW />,
+  //   children: [
+  //     {
+  //       path: 'management/flasher',
+  //       element: <>management/flasher</>
+  //     }
+  //   ]
+  // }
 ]
 
 export { smtrackChildren }
