@@ -42,7 +42,7 @@ const MainSmtrack = () => {
   const { id } = tokenDecode || {}
 
   // Local State
-  const [isFirstLoad, setIsFirstLoad] = useState(true)
+  // const [isFirstLoad, setIsFirstLoad] = useState(true)
   const [showAnimation, setShowAnimation] = useState(false)
 
   // Custom Hooks Execution
@@ -55,11 +55,11 @@ const MainSmtrack = () => {
 
     window.scrollTo(0, 0)
 
-    if (isFirstLoad) {
-      fetchUserProfile()
-      setIsFirstLoad(false)
-    }
-  }, [location.pathname, token, isFirstLoad, fetchUserProfile])
+    // if (isFirstLoad) {
+    fetchUserProfile()
+    // setIsFirstLoad(false)
+    // }
+  }, [location.pathname, token, fetchUserProfile])
 
   // Notification Toast Logic
   useEffect(() => {

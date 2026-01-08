@@ -42,7 +42,7 @@ const MainTms = () => {
   const { id } = tokenDecode || {}
 
   // Local State
-  const [isFirstLoad, setIsFirstLoad] = useState(true)
+  // const [isFirstLoad, setIsFirstLoad] = useState(true)
   const [showAnimation, setShowAnimation] = useState(false)
 
   // 1. Reuse Hooks Logic
@@ -55,11 +55,11 @@ const MainTms = () => {
 
     window.scrollTo(0, 0)
 
-    if (isFirstLoad) {
+    // if (isFirstLoad) {
       fetchUserProfile()
-      setIsFirstLoad(false)
-    }
-  }, [location.pathname, token, isFirstLoad, fetchUserProfile])
+      // setIsFirstLoad(false)
+    // }
+  }, [location.pathname, token, fetchUserProfile])
 
   // Notification Toast Logic (Duplicate from MainSmtrack - Can extract to another hook if needed)
   useEffect(() => {

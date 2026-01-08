@@ -472,10 +472,10 @@ const Warranty = () => {
       name: t('deviceNameTb'),
       cell: item => (
         <div
-          className='flex justify-center tooltip w-[200px]'
+          className='flex justify-center tooltip w-50'
           data-tip={item.device.name ?? '—'}
         >
-          <div className='truncate max-w-[200px]'>
+          <div className='truncate max-w-50'>
             <span>{item.device.name ?? '—'}</span>
           </div>
         </div>
@@ -573,7 +573,7 @@ const Warranty = () => {
         return (
           <div className='flex items-center justify-center gap-3 p-3'>
             <button
-              className='btn btn-ghost flex !text-white min-w-[32px] max-w-[32px] min-h-[32px] max-h-[32px] p-0 bg-primary'
+              className='btn btn-ghost flex text-white! min-w-8 max-w-8 min-h-8 max-h-8 p-0 bg-primary'
               key={item.id}
               onClick={() => navigate('/warranty/preview', { state: item })}
             >
@@ -583,7 +583,7 @@ const Warranty = () => {
               <>
                 <div className='divider divider-horizontal mx-0'></div>
                 <button
-                  className='btn btn-ghost flex text-white min-w-[32px] max-w-[32px] min-h-[32px] max-h-[32px] p-0 bg-primary'
+                  className='btn btn-ghost flex text-white min-w-8 max-w-8 min-h-8 max-h-8 p-0 bg-primary'
                   onClick={() => {
                     openEditModal(item)
                   }}
@@ -594,7 +594,7 @@ const Warranty = () => {
             )}
             {role === 'SUPER' && (
               <button
-                className='btn btn-ghost flex text-white min-w-[32px] max-w-[32px] min-h-[32px] max-h-[32px] p-0 bg-red-500'
+                className='btn btn-ghost flex text-white min-w-8 max-w-8 min-h-8 max-h-8 p-0 bg-red-500'
                 onClick={() =>
                   Swal.fire({
                     title: t('deleteWarranty'),
@@ -641,7 +641,7 @@ const Warranty = () => {
           progressComponent={<Loading />}
           noDataComponent={<DataTableNoData />}
           paginationRowsPerPageOptions={[10, 20, 50, 100, 150, 200]}
-          className='md:!max-h-[calc(100dvh-350px)]'
+          className='md:max-h-[calc(100dvh-350px)]!'
         />
       </div>
     )
@@ -664,13 +664,13 @@ const Warranty = () => {
   ]
 
   return (
-    <div className='p-3 px-[16px]'>
+    <div className='p-3 px-4'>
       {manageMenu}
       <div className='flex flex-col lg:flex-row lg:items-center justify-between mt-3'>
         <span className='text-[20px] font-medium'></span>
         <div className='flex flex-col lg:flex-row mt-3 lg:mt-0 lg:items-center items-end lg:gap-3'>
           <button
-            className='btn btn-neutral shadow-lg shadow-neutral/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 max-w-[150px]'
+            className='btn btn-neutral shadow-lg shadow-neutral/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 max-w-37.5'
             onClick={() => addModalRef.current?.showModal()}
           >
             {t('addWarrantyButton')}
@@ -682,7 +682,7 @@ const Warranty = () => {
       <dialog ref={addModalRef} className='modal overflow-y-scroll py-10'>
         <form
           onSubmit={handleSubmit}
-          className='modal-box w-5/6 max-w-[50rem] h-max max-h-[95%]'
+          className='modal-box w-5/6 max-w-200 h-max max-h-[95%]'
         >
           <h3 className='font-bold text-lg'>{t('addWarrantyButton')}</h3>
           {/* Invoic */}
@@ -751,7 +751,7 @@ const Warranty = () => {
                   })
                 }
                 autoFocus={false}
-                className='react-select-container custom-menu-select z-[75] min-w-full'
+                className='react-select-container custom-menu-select z-75 min-w-full'
                 classNamePrefix='react-select'
               />
             </label>
@@ -857,7 +857,7 @@ const Warranty = () => {
                 }
                 menuPlacement='top'
                 autoFocus={false}
-                className='react-select-container custom-menu-select z-[80] min-w-full'
+                className='react-select-container custom-menu-select z-80 min-w-full'
                 classNamePrefix='react-select'
               />
             </label>
@@ -908,7 +908,7 @@ const Warranty = () => {
                 }
                 menuPlacement='top'
                 autoFocus={false}
-                className='react-select-container custom-menu-select z-[100] min-w-full'
+                className='react-select-container custom-menu-select z-100 min-w-full'
                 classNamePrefix='react-select'
               />
             </label>
@@ -1019,7 +1019,7 @@ const Warranty = () => {
                   })
                 }
                 autoFocus={false}
-                className='react-select-container custom-menu-select z-[75] min-w-full'
+                className='react-select-container custom-menu-select z-75 min-w-full'
                 classNamePrefix='react-select'
               />
             </label>
@@ -1126,7 +1126,7 @@ const Warranty = () => {
                 }
                 menuPlacement='top'
                 autoFocus={false}
-                className='react-select-container custom-menu-select z-[80] min-w-full'
+                className='react-select-container custom-menu-select z-80 min-w-full'
                 classNamePrefix='react-select'
               />
             </label>
@@ -1177,7 +1177,7 @@ const Warranty = () => {
                 }
                 menuPlacement='top'
                 autoFocus={false}
-                className='react-select-container custom-menu-select z-[100] min-w-full'
+                className='react-select-container custom-menu-select z-100 min-w-full'
                 classNamePrefix='react-select'
               />
             </label>
