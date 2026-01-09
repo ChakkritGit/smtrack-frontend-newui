@@ -103,14 +103,14 @@ const DataTableWrapper = (props: DataTableWrapperProps) => {
   }, [deviceLogs, activeIndex, swiperRef, isPause])
 
   return (
-    <div className='flex flex-col gap-3 bg-base-100 w-full h-full rounded-field p-3'>
+    <div className='flex flex-col gap-3 bg-base-100 w-full h-full rounded-field p-3 shadow-sm shadow-neutral/05'>
       <div className='flex items-center justify-between px-3'>
         <div className='flex items-center gap-3'>
           <span className='text-[20px] font-bold'>{t('pageTable')}</span>
         </div>
         <button
           aria-label={t('fullTable')}
-          className='btn btn-ghost border border-base-content/20 flex p-0 duration-300 ease-linear max-h-[34px] min-h-[34px] max-w-[34px] min-w-[34px] tooltip tooltip-left'
+          className='btn btn-ghost border border-base-content/20 flex p-0 duration-300 ease-linear max-h-8.5 min-h-8.5 max-w-8.5 min-w-8.5 tooltip tooltip-left'
           data-tip={t('fullTable')}
           onClick={() =>
             navigate('/dashboard/table', {

@@ -194,7 +194,7 @@ const Dashboard = () => {
     return (
       <>
         <div className='flex items-center gap-4 mt-4 flex-wrap lg:flex-wrap xl:flex-nowrap'>
-          <div className='w-full xl:w-[35%] lg:h-82.5 bg-base-100 rounded-field overflow-hidden'>
+          <div className='w-full xl:w-[35%] lg:h-82.5 bg-base-100 rounded-field overflow-hidden shadow-sm shadow-neutral/05'>
             {CardInfoComponent}
           </div>
           <div className='grid grid-cols-2 md:grid-cols-4 xl:grid-cols-5 gap-4 w-full xl:w-[65%] justify-items-center'>
@@ -248,7 +248,7 @@ const Dashboard = () => {
               <button
                 name={isPause ? t('startSlide') : t('stopSlide')}
                 aria-label={isPause ? t('startSlide') : t('stopSlide')}
-                className='btn btn-neutral shadow-lg shadow-neutral/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 bg-opacity-15 text-primary border-primary border p-0 hover:opacity-50 hover:border-primary hover:bg-transparent duration-300 ease-linear max-h-7 min-h-7 max-w-7 min-w-7'
+                className='btn btn-neutral shadow-lg shadow-neutral/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 bg-opacity-15 text-primary border-primary border p-0 hover:opacity-50 hover:border-primary hover:bg-transparent ease-linear max-h-7 min-h-7 max-w-7 min-w-7'
                 onClick={togglePause}
               >
                 {isPause ? <RiPlayLine size={20} /> : <RiStopLine size={20} />}

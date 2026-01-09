@@ -510,15 +510,15 @@ input[type=number] {
 }
 
 .custom-action {
-  @apply !gap-0;
+  @apply gap-0!;
 }
 
 .custom-confirmButton {
-  @apply !bg-red-500 hover:!bg-red-700 !text-white;
+  @apply bg-red-500! hover:bg-red-700! text-white!;
 }
 
 .custom-cancelButton {
-  @apply !bg-gray-700 hover:!bg-gray-700/90 !text-white;
+  @apply bg-gray-700! hover:bg-gray-700/90! text-white!;
 }
 
 .initial-Launched-Main {

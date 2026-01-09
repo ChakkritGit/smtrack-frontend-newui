@@ -87,7 +87,7 @@ const CardStatus = (props: PropsType) => {
 
   return (
     <>
-      <div className='bg-base-100 rounded-field w-full h-38.75 overflow-hidden'>
+      <div className='bg-base-100 rounded-field w-full h-38.75 overflow-hidden shadow-sm shadow-neutral/05'>
         <Swiper
           key={'tempAndHumi'}
           slidesPerView={'auto'}
@@ -205,7 +205,7 @@ const CardStatus = (props: PropsType) => {
         </Swiper>
       </div>
 
-      <div className='flex flex-col gap-2 p-3 bg-base-100 rounded-field w-full h-38.75'>
+      <div className='flex flex-col gap-2 p-3 bg-base-100 rounded-field w-full h-38.75 shadow-sm shadow-neutral/05'>
         <div className='flex items-center gap-2'>
           <div
             className={`flex items-center justify-center rounded-field bg-base-300 w-8 h-8 ${
@@ -232,7 +232,7 @@ const CardStatus = (props: PropsType) => {
       </div>
 
       {/* --- Door Swiper --- */}
-      <div className='bg-base-100 rounded-field w-full h-38.75 overflow-hidden'>
+      <div className='bg-base-100 rounded-field w-full h-38.75 overflow-hidden shadow-sm shadow-neutral/05'>
         <Swiper
           key={'doorSwiper'}
           slidesPerView={'auto'}
@@ -321,7 +321,7 @@ const CardStatus = (props: PropsType) => {
       </div>
       {/* --- End Door Swiper --- */}
 
-      <div className='flex flex-col gap-2 p-3 bg-base-100 rounded-field w-full h-38.75'>
+      <div className='flex flex-col gap-2 p-3 bg-base-100 rounded-field w-full h-38.75 shadow-sm shadow-neutral/05'>
         <div className='flex items-center gap-2'>
           <div
             className={`flex items-center justify-center rounded-field bg-base-300 w-8 h-8 ${
@@ -347,7 +347,7 @@ const CardStatus = (props: PropsType) => {
         </div>
       </div>
 
-      <div className='flex flex-col gap-2 p-3 bg-base-100 rounded-field w-full h-38.75'>
+      <div className='flex flex-col gap-2 p-3 bg-base-100 rounded-field w-full h-38.75 shadow-sm shadow-neutral/05'>
         <div className='flex items-center gap-2'>
           <div
             className={`flex items-center justify-center rounded-field bg-base-300 w-8 h-8 ${
@@ -381,7 +381,7 @@ const CardStatus = (props: PropsType) => {
         </div>
       </div>
 
-      <div className='bg-base-100 rounded-field w-full h-38.75 overflow-hidden'>
+      <div className='bg-base-100 rounded-field w-full h-38.75 overflow-hidden shadow-sm shadow-neutral/05'>
         <Swiper
           key={'tempOfDaya'}
           slidesPerView={'auto'}
@@ -474,7 +474,7 @@ const CardStatus = (props: PropsType) => {
         </Swiper>
       </div>
 
-      <div className='flex flex-col gap-2 p-3 bg-base-100 rounded-field w-full h-38.75'>
+      <div className='flex flex-col gap-2 p-3 bg-base-100 rounded-field w-full h-38.75 shadow-sm shadow-neutral/05'>
         <div className='flex items-center gap-2'>
           <div
             className={`flex items-center justify-center rounded-field bg-base-300 w-8 h-8 ${
@@ -500,7 +500,7 @@ const CardStatus = (props: PropsType) => {
         </div>
       </div>
 
-      <div className='flex flex-col gap-2 p-3 bg-base-100 rounded-field w-full h-38.75'>
+      <div className='flex flex-col gap-2 p-3 bg-base-100 rounded-field w-full h-38.75 shadow-sm shadow-neutral/05'>
         <div className='flex items-center gap-2'>
           <div className='flex items-center justify-center rounded-field bg-base-300 w-8 h-8'>
             <RiCollageLine size={20} />
@@ -521,7 +521,7 @@ const CardStatus = (props: PropsType) => {
         </div>
       </div>
 
-      <div className='flex flex-col gap-2 p-3 bg-base-100 rounded-field w-full h-38.75'>
+      <div className='flex flex-col gap-2 p-3 bg-base-100 rounded-field w-full h-38.75 shadow-sm shadow-neutral/05'>
         <div className='flex items-center gap-2'>
           <div className='flex items-center justify-center rounded-field bg-base-300 w-8 h-8'>
             <RiShieldCheckLine size={20} />
@@ -559,7 +559,7 @@ const CardStatus = (props: PropsType) => {
         </div>
       </div>
 
-      <div className='flex flex-col gap-2 p-3 bg-base-100 rounded-field w-full h-38.75'>
+      <div className='flex flex-col gap-2 p-3 bg-base-100 rounded-field w-full h-38.75 shadow-sm shadow-neutral/05'>
         <div className='flex items-center gap-2'>
           <div className='flex items-center justify-center rounded-field bg-base-300 w-8 h-8'>
             <RiFolderSettingsLine size={20} />
