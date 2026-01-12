@@ -1,19 +1,40 @@
 import Chart from 'react-apexcharts'
 import { useTranslation } from 'react-i18next'
-import { DeviceLogs } from '../../../../types/smtrack/devices/deviceType'
+import { DeviceLog, DeviceLogs} from '../../../../types/smtrack/devices/deviceType'
 import Loading from '../../../skeleton/table/loading'
 import { useMemo } from 'react'
 
 interface FullChartPropType {
   dataLog: DeviceLogs[]
+  deviceLogs: DeviceLog
   tempMin: number
   tempMax: number
   isLoading: boolean
 }
 
+const doorOpen = (doorQty: number | undefined, deviceLog: DeviceLogs) => {
+  switch (doorQty) {
+    case 1:
+      // กรณีมี 1 ประตู: สนใจแค่ door1 เท่านั้น
+      return deviceLog.door1 ? 1 : 0
+
+    case 2:
+      // กรณีมี 2 ประตู: สนใจแค่ door1 หรือ door2 (ถ้า door1 เปิด จะ return door1 ก่อน)
+      return deviceLog.door1 || deviceLog.door2 ? 1 : 0
+
+    case 3:
+      // กรณีมี 3 ประตู: เช็คทั้ง 3 บาน
+      return deviceLog.door1 || deviceLog.door2 || deviceLog.door3 ? 1 : 0
+
+    default:
+      // กรณีไม่ระบุ doorQty หรือเป็น 0
+      return 0
+  }
+}
+
 const FullChartComponent = (props: FullChartPropType) => {
   const { t } = useTranslation()
-  const { dataLog, tempMin, tempMax, isLoading } = props
+  const { dataLog, tempMin, tempMax, isLoading, deviceLogs } = props
 
   const tempAvgValues = dataLog ? dataLog.map(item => item.temp) : [0]
   const minTemp = Math.min(...tempAvgValues, tempMin)
@@ -24,11 +45,13 @@ const FullChartComponent = (props: FullChartPropType) => {
 
   const mappedData = dataLog.map(item => {
     const time = new Date(item._time).getTime()
+    const doorQty = deviceLogs?.probe?.find(item => item.doorQty)?.doorQty
+
     return {
       time,
       tempAvg: item.temp,
       humidityAvg: item.humidity,
-      door: item.door1 || item.door2 || item.door3 ? 1 : 0
+      door: doorOpen(doorQty, item)
     }
   })
 

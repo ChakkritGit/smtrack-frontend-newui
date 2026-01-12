@@ -47,12 +47,30 @@ const humiLimit = (
 }
 
 const doorOpen = (deviceData: DeviceLogsType | undefined) => {
-  if (deviceData?.log) {
-    return (
-      deviceData?.log[0]?.door1 ||
-      deviceData?.log[0]?.door2 ||
-      deviceData?.log[0]?.door3
-    )
+  const logEntry = deviceData?.log?.[0]
+
+  // หาค่า doorQty (ตรวจสอบให้แน่ใจว่าเป็น number หรือจะ cast เป็น Number() ก็ได้)
+  const doorQty = deviceData?.probe?.find(item => item.doorQty)?.doorQty
+
+  // ถ้าไม่มี log ไม่ต้องไปต่อ
+  if (!logEntry) return undefined
+
+  switch (doorQty) {
+    case 1:
+      // กรณีมี 1 ประตู: สนใจแค่ door1 เท่านั้น
+      return logEntry.door1
+
+    case 2:
+      // กรณีมี 2 ประตู: สนใจแค่ door1 หรือ door2 (ถ้า door1 เปิด จะ return door1 ก่อน)
+      return logEntry.door1 || logEntry.door2
+
+    case 3:
+      // กรณีมี 3 ประตู: เช็คทั้ง 3 บาน
+      return logEntry.door1 || logEntry.door2 || logEntry.door3
+
+    default:
+      // กรณีไม่ระบุ doorQty หรือเป็น 0
+      return undefined
   }
 }
 

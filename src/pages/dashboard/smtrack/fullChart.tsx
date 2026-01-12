@@ -14,9 +14,7 @@ import {
   RiDashboardLine,
   RiFileImageLine,
   RiFilePdf2Line,
-  RiMenuLine,
-  RiPlayLine,
-  RiStopLine
+  RiMenuLine
 } from 'react-icons/ri'
 import Swal from 'sweetalert2'
 import { useDispatch, useSelector } from 'react-redux'
@@ -423,6 +421,7 @@ const FullChart = () => {
             return (
               <SwiperSlide>
                 <FullChartComponent
+                  deviceLogs={deviceLogs}
                   dataLog={filterItem}
                   tempMin={item.tempMin}
                   tempMax={item.tempMax}
@@ -522,13 +521,13 @@ const FullChart = () => {
               tabIndex={0}
               role='button'
               data-tip={t('menuButton')}
-              className='btn btn-ghost flex p-0 max-w-[30px] min-w-[30px] max-h-[30px] min-h-[30px] tooltip tooltip-top'
+              className='btn btn-ghost flex p-0 max-w-7.5 min-w-7.5 max-h-7.5 min-h-7.5 tooltip tooltip-top'
             >
               <RiMenuLine size={20} />
             </button>
             <ul
               tabIndex={0}
-              className='dropdown-content menu bg-base-100 rounded-box z-[1] max-w-[180px] w-[140px] p-2 shadow'
+              className='dropdown-content menu bg-base-100 rounded-box z-1 max-w-45 w-35 p-2 shadow'
             >
               <li onClick={() => handleDownload('png')}>
                 <div className='flex items-center gap-3 text-[16px]'>

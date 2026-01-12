@@ -1,16 +1,40 @@
 import Chart from 'react-apexcharts'
 import { useTranslation } from 'react-i18next'
-import { DeviceLogType } from '../../../../types/smtrack/devices/deviceType'
+import {
+  DeviceLogsType,
+  DeviceLogType
+} from '../../../../types/smtrack/devices/deviceType'
 
 interface ChartMiniProps {
   logData: DeviceLogType[]
+  probe: DeviceLogsType
   tempMin: number
   tempMax: number
 }
 
+const doorOpen = (doorQty: number | undefined, deviceLog: DeviceLogType) => {
+  switch (doorQty) {
+    case 1:
+      // กรณีมี 1 ประตู: สนใจแค่ door1 เท่านั้น
+      return deviceLog.door1 ? 1 : 0
+
+    case 2:
+      // กรณีมี 2 ประตู: สนใจแค่ door1 หรือ door2 (ถ้า door1 เปิด จะ return door1 ก่อน)
+      return deviceLog.door1 || deviceLog.door2 ? 1 : 0
+
+    case 3:
+      // กรณีมี 3 ประตู: เช็คทั้ง 3 บาน
+      return deviceLog.door1 || deviceLog.door2 || deviceLog.door3 ? 1 : 0
+
+    default:
+      // กรณีไม่ระบุ doorQty หรือเป็น 0
+      return 0
+  }
+}
+
 const ChartMini = (props: ChartMiniProps) => {
   const { t } = useTranslation()
-  const { logData, tempMin, tempMax } = props
+  const { logData, tempMin, tempMax, probe } = props
 
   const tempAvgValues = logData.map(item => item.temp)
   const minTemp = Math.min(...tempAvgValues, tempMin)
@@ -21,11 +45,13 @@ const ChartMini = (props: ChartMiniProps) => {
 
   const mappedData = logData.map(item => {
     const time = new Date(item.sendTime).getTime()
+    const doorQty = probe?.probe?.find(item => item.doorQty)?.doorQty
+
     return {
       time,
       tempAvg: item.tempDisplay,
       humidityAvg: item.humidityDisplay,
-      door: item.door1 || item.door2 || item.door3 ? 1 : 0
+      door: doorOpen(doorQty, item)
     }
   })
 

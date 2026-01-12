@@ -88,6 +88,7 @@ const ChartSwiperWrapper = (props: ChartSwiperWrapperProps) => {
                 </span>
                 <ChartMini
                   logData={filterItem.slice(0, 80)}
+                  probe={deviceLogs}
                   tempMin={item.tempMin}
                   tempMax={item.tempMax}
                 />
@@ -104,7 +105,7 @@ const ChartSwiperWrapper = (props: ChartSwiperWrapperProps) => {
         )}
       </Swiper>
     )
-  }, [deviceLogs, swiperRef, activeIndex, swiperRef, isPause])
+  }, [deviceLogs, swiperRef, activeIndex, swiperRef, isPause, deviceLogs])
 
   return (
     <div className='flex flex-col gap-3 bg-base-100 w-full h-full rounded-field p-3 shadow-sm shadow-neutral/05'>
