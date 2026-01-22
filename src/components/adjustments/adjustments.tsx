@@ -627,7 +627,7 @@ const Adjustments = (props: AdjustmentsProps) => {
     <dialog ref={openAdjustModalRef} className='modal overflow-y-scroll py-10'>
       <form
         onSubmit={tab === 1 ? handleSubmit : handleSubmitAppSetting}
-        className='modal-box md:w-5/6 max-w-[50rem] h-max max-h-max'
+        className='modal-box md:w-5/6 max-w-200 h-max max-h-max'
       >
         <div className='flex items-center justify-between gap-2'>
           <h3 className='font-bold text-base'>{serial}</h3>
@@ -635,7 +635,7 @@ const Adjustments = (props: AdjustmentsProps) => {
             type='button'
             name='close-modal'
             aria-label={t('closeButton')}
-            className='btn btn-ghost outline-none flex p-0 min-w-[30px] min-h-[30px] max-w-[30px] max-h-[30px] duration-300 ease-linear'
+            className='btn btn-ghost outline-none flex p-0 min-w-7.5 min-h-7.5 max-w-7.5 max-h-7.5 duration-300 ease-linear'
             onClick={resetForm}
           >
             <RiCloseLargeLine size={20} />
@@ -662,7 +662,7 @@ const Adjustments = (props: AdjustmentsProps) => {
                 setSelectedProbe(String(e?.value))
               }}
               autoFocus={false}
-              className='react-select-container z-[150] custom-menu-select w-full'
+              className='react-select-container z-150 custom-menu-select w-full'
               classNamePrefix='react-select'
             />
           </label>
@@ -1020,10 +1020,10 @@ const Adjustments = (props: AdjustmentsProps) => {
                         const { key, ref, ...validProps } = props
                         return (
                           <div
-                            {...validProps}
+                            {...(validProps as any)}
                             ref={ref as Ref<HTMLDivElement> | undefined}
                             key={key}
-                            className='flex items-center justify-center w-[42px] h-[32px] bg-orange-500 text-white font-bold text-[12px] shadow-md rounded-field p-1 cursor-pointer outline-orange-500/50'
+                            className='flex items-center justify-center w-10.5 h-8 bg-orange-500 text-white font-bold text-[12px] shadow-md rounded-field p-1 cursor-pointer outline-orange-500/50'
                             aria-label={t('Temperature-min-max')}
                           >
                             {state.valueNow}
@@ -1062,10 +1062,10 @@ const Adjustments = (props: AdjustmentsProps) => {
                         const { key, ref, ...validProps } = props
                         return (
                           <div
-                            {...validProps}
+                            {...(validProps as any)}
                             ref={ref as Ref<HTMLDivElement> | undefined}
                             key={key}
-                            className='flex items-center justify-center w-[42px] h-[32px] bg-blue-500 text-white font-bold text-[12px] shadow-md rounded-field p-1 cursor-pointer outline-blue-500/50'
+                            className='flex items-center justify-center w-10.5 h-8 bg-blue-500 text-white font-bold text-[12px] shadow-md rounded-field p-1 cursor-pointer outline-blue-500/50'
                             aria-label={t('Humidity-min-max')}
                           >
                             {state.valueNow}
@@ -1237,10 +1237,10 @@ const Adjustments = (props: AdjustmentsProps) => {
                         const { key, ref, ...validProps } = props
                         return (
                           <div
-                            {...validProps}
+                            {...(validProps as any)}
                             ref={ref as Ref<HTMLDivElement> | undefined}
                             key={key}
-                            className={`flex items-center justify-center w-[42px] h-[32px] bg-orange-500 text-white font-bold text-[12px] shadow-md rounded-field p-1 cursor-pointer outline-orange-500/50 ${
+                            className={`flex items-center justify-center w-10.5 h-8 bg-orange-500 text-white font-bold text-[12px] shadow-md rounded-field p-1 cursor-pointer outline-orange-500/50 ${
                               isLoadingMqtt ? 'cursor-not-allowed' : ''
                             }`}
                             aria-label={t('Temperature-adjustment')}
@@ -1288,10 +1288,10 @@ const Adjustments = (props: AdjustmentsProps) => {
                         const { key, ref, ...validProps } = props
                         return (
                           <div
-                            {...validProps}
+                            {...(validProps as any)}
                             ref={ref as Ref<HTMLDivElement> | undefined}
                             key={key}
-                            className={`flex items-center justify-center w-[42px] h-[32px] bg-blue-500 text-white font-bold text-[12px] shadow-md rounded-field p-1 cursor-pointer outline-blue-500/50 ${
+                            className={`flex items-center justify-center w-10.5 h-8 bg-blue-500 text-white font-bold text-[12px] shadow-md rounded-field p-1 cursor-pointer outline-blue-500/50 ${
                               isLoadingMqtt ? 'cursor-not-allowed' : ''
                             }`}
                             aria-label={t('Humidity-adjustment')}
@@ -1585,7 +1585,7 @@ const Adjustments = (props: AdjustmentsProps) => {
                 <div className='flex flex-col md:flex-row items-center justify-around gap-5 md:gap-2 mt-5'>
                   <div className='flex flex-col items-center gap-2'>
                     <span className='md:text-[14px]'>{t('currentTemp')}</span>
-                    <div className='flex items-center justify-center h-[55px] px-2 min-w-[55px] w-max rounded-field border-[2px] border-primary text-primary text-[18px] font-bold'>
+                    <div className='flex items-center justify-center h-13.75 px-2 min-w-13.75 w-max rounded-field border-2 border-primary text-primary text-[18px] font-bold'>
                       {mqData.temp ? `${mqData.temp.toFixed(2)}°C` : '—'}
                     </div>
                   </div>
@@ -1595,7 +1595,7 @@ const Adjustments = (props: AdjustmentsProps) => {
                     <span className='md:text-[14px]'>
                       {t('adjustAfterTemp')}
                     </span>
-                    <div className='flex items-center justify-center h-[55px] px-2 min-w-[55px] w-max rounded-field border-[2px] border-primary text-primary text-[18px] font-bold'>
+                    <div className='flex items-center justify-center h-13.75 px-2 min-w-13.75 w-max rounded-field border-2 border-primary text-primary text-[18px] font-bold'>
                       {mqData.temp
                         ? `${(
                             mqData.temp +
@@ -1610,7 +1610,7 @@ const Adjustments = (props: AdjustmentsProps) => {
                 <div className='flex flex-col md:flex-row items-center justify-around gap-5 md:gap-2 mt-5'>
                   <div className='flex flex-col items-center gap-2'>
                     <span className='md:text-[14px]'>{t('currentHum')}</span>
-                    <div className='flex items-center justify-center h-[55px] px-2 min-w-[55px] w-max rounded-field border-[2px] border-primary text-primary text-[18px] font-bold'>
+                    <div className='flex items-center justify-center h-13.75 px-2 min-w-13.75 w-max rounded-field border-2 border-primary text-primary text-[18px] font-bold'>
                       {mqData.humi ? `${mqData.humi.toFixed(2)}%` : '—'}
                     </div>
                   </div>
@@ -1620,7 +1620,7 @@ const Adjustments = (props: AdjustmentsProps) => {
                     <span className='md:text-[14px]'>
                       {t('adjustAfterHum')}
                     </span>
-                    <div className='flex items-center justify-center h-[55px] px-2 min-w-[55px] w-max rounded-field border-[2px] border-primary text-primary text-[18px] font-bold'>
+                    <div className='flex items-center justify-center h-13.75 px-2 min-w-13.75 w-max rounded-field border-2 border-primary text-primary text-[18px] font-bold'>
                       {mqData.humi
                         ? `${(
                             mqData.humi +
@@ -1702,7 +1702,7 @@ const Adjustments = (props: AdjustmentsProps) => {
                       }}
                       autoFocus={false}
                       menuPlacement='top'
-                      className='react-select-container w-full custom-menu-select z-[155] '
+                      className='react-select-container w-full custom-menu-select z-155 '
                       classNamePrefix='react-select'
                     />
                   </div>
@@ -1724,7 +1724,7 @@ const Adjustments = (props: AdjustmentsProps) => {
                   )}
                 </div>
               </div>
-              <div className='divider divider-vertical before:h-[1px] after:h-[1px] my-2'></div>
+              <div className='divider divider-vertical before:h-px after:h-px my-2'></div>
               <h3 className='font-bold text-base'>{t('dashDoor')}</h3>
               <div className='flex items-center justify-between'>
                 <span>{t('muteDoor')}</span>
@@ -1770,7 +1770,7 @@ const Adjustments = (props: AdjustmentsProps) => {
                       }}
                       autoFocus={false}
                       menuPlacement='top'
-                      className='react-select-container w-full custom-menu-select z-[155] '
+                      className='react-select-container w-full custom-menu-select z-155 '
                       classNamePrefix='react-select'
                     />
                   </div>
@@ -1816,7 +1816,7 @@ const Adjustments = (props: AdjustmentsProps) => {
                       }}
                       autoFocus={false}
                       menuPlacement='top'
-                      className='react-select-container w-full custom-menu-select z-[155] '
+                      className='react-select-container w-full custom-menu-select z-155 '
                       classNamePrefix='react-select'
                     />
                   </div>

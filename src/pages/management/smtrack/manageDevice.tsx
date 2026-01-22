@@ -1032,10 +1032,10 @@ const ManageDevice = () => {
     {
       name: t('deviceNameBox'),
       cell: item => (
-        <div className='tooltip w-[130px]' data-tip={item.name ?? '—'}>
-          <div className='truncate max-w-[120px]'>
+        <div className='tooltip w-32.5' data-tip={item.name ?? '—'}>
+          <div className='truncate max-w-30'>
             <span
-              className='max-w-[80px] block truncate text-left'
+              className='max-w-20 block truncate text-left'
               style={{ direction: 'rtl' }}
             >
               {item.name ? item.name : '—'}
@@ -1050,8 +1050,8 @@ const ManageDevice = () => {
     {
       name: t('deviceLocationTb'),
       cell: item => (
-        <div className='tooltip w-[140px]' data-tip={item.location ?? '—'}>
-          <div className='truncate max-w-[130px]'>
+        <div className='tooltip w-35' data-tip={item.location ?? '—'}>
+          <div className='truncate max-w-32.5'>
             <span>{item.location ?? '—'}</span>
           </div>
         </div>
@@ -1063,8 +1063,8 @@ const ManageDevice = () => {
     {
       name: t('hospitals'),
       cell: item => (
-        <div className='tooltip w-[145px]' data-tip={item.hospitalName ?? '—'}>
-          <div className='truncate max-w-[130px]'>
+        <div className='tooltip w-36.25' data-tip={item.hospitalName ?? '—'}>
+          <div className='truncate max-w-32.5'>
             <span>{item.hospitalName ?? '—'}</span>
           </div>
         </div>
@@ -1076,8 +1076,8 @@ const ManageDevice = () => {
     {
       name: t('ward'),
       cell: item => (
-        <div className='tooltip w-[140px]' data-tip={item.wardName ?? '—'}>
-          <div className='truncate max-w-[130px]'>
+        <div className='tooltip w-35' data-tip={item.wardName ?? '—'}>
+          <div className='truncate max-w-32.5'>
             <span>{item.wardName ?? '—'}</span>
           </div>
         </div>
@@ -1130,7 +1130,7 @@ const ManageDevice = () => {
                   }
                 }}
               >
-                <span className='truncate max-w-[80px]'>
+                <span className='truncate max-w-20'>
                   {item.token ?? '—'}
                 </span>
                 {item.token && (
@@ -1177,7 +1177,7 @@ const ManageDevice = () => {
             <>
               <button
                 data-tip={t('moveDevice')}
-                className='btn btn-primary tooltip tooltip-left flex text-primary-content min-w-[32px] max-w-[32px] min-h-[32px] max-h-[32px] p-0'
+                className='btn btn-primary tooltip tooltip-left flex text-primary-content min-w-8 max-w-8 min-h-8 max-h-8 p-0'
                 onClick={() => {
                   if (item.status) {
                     swalMoveDevice.fire({
@@ -1206,7 +1206,7 @@ const ManageDevice = () => {
             (item.status ? (
               <button
                 data-tip={t('deviceInactive')}
-                className='btn btn-ghost tooltip tooltip-left flex text-white min-w-[32px] max-w-[32px] min-h-[32px] max-h-[32px] p-0 bg-red-500'
+                className='btn btn-ghost tooltip tooltip-left flex text-white min-w-8 max-w-8 min-h-8 max-h-8 p-0 bg-red-500'
                 onClick={() =>
                   Swal.fire({
                     title: t('deactivateDevice'),
@@ -1233,7 +1233,7 @@ const ManageDevice = () => {
             ) : (
               <button
                 data-tip={t('deviceActive')}
-                className='btn btn-primary tooltip tooltip-left flex text-primary-content min-w-[32px] max-w-[32px] min-h-[32px] max-h-[32px] p-0'
+                className='btn btn-primary tooltip tooltip-left flex text-primary-content min-w-8 max-w-8 min-h-8 max-h-8 p-0'
                 onClick={() =>
                   Swal.fire({
                     title: t('activateDevice'),
@@ -1259,14 +1259,14 @@ const ManageDevice = () => {
               </button>
             ))}
           <button
-            className='btn btn-ghost flex text-primary-content min-w-[32px] max-w-[32px] min-h-[32px] max-h-[32px] p-0 bg-primary'
+            className='btn btn-ghost flex text-primary-content min-w-8 max-w-8 min-h-8 max-h-8 p-0 bg-primary'
             onClick={() => openEditModal(item)}
           >
             <RiEditLine size={20} />
           </button>
           {role === 'SUPER' && (
             <button
-              className='btn btn-ghost flex text-white min-w-[32px] max-w-[32px] min-h-[32px] max-h-[32px] p-0 bg-red-500'
+              className='btn btn-ghost flex text-white min-w-8 max-w-8 min-h-8 max-h-8 p-0 bg-red-500'
               onClick={() =>
                 Swal.fire({
                   title: t('deleteDeviceTitle'),
@@ -1357,17 +1357,17 @@ const ManageDevice = () => {
           <HospitalAndWard />
           {(role === 'SUPER' || role === 'SERVICE') && (
             <button
-              className='btn btn-neutral shadow-lg shadow-neutral/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 max-w-[130px]'
+              className='btn btn-neutral shadow-lg shadow-neutral/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 max-w-32.5'
               onClick={() => addModalRef.current?.showModal()}
             >
               {t('addDeviceButton')}
             </button>
           )}
-          {role === 'SUPER' && (
+          {(role === 'SUPER' || role === 'SERVICE') && (
             <>
               <div className='divider divider-horizontal mx-0 py-1'></div>
               <button
-                className='btn flex btn-neutral p-0 w-[48px] h-[48px] min-w-[48px] min-h-[48px] tooltip tooltip-left'
+                className='btn flex btn-neutral p-0 w-12 h-12 min-w-12 min-h-12 tooltip tooltip-left'
                 data-tip={'Sync Device Time'}
                 onClick={() => {
                   socket.emit('send_schedule', 'time', (val: string) => {
@@ -1421,7 +1421,7 @@ const ManageDevice = () => {
           onChangeRowsPerPage={handlePerRowsChange}
           onChangePage={handlePageChange}
           paginationRowsPerPageOptions={[10, 20, 50, 100, 150, 200]}
-          className='md:!max-h-[calc(100dvh-420px)]'
+          className='md:max-h-[calc(100dvh-420px)]!'
         />
       </div>
 
@@ -1731,7 +1731,7 @@ const ManageDevice = () => {
                             }
                             menuPlacement='top'
                             autoFocus={false}
-                            className='react-select-container z-[150] custom-menu-select w-full'
+                            className='react-select-container z-150 custom-menu-select w-full'
                             classNamePrefix='react-select'
                           />
                           <Select
@@ -1757,7 +1757,7 @@ const ManageDevice = () => {
                             }
                             menuPlacement='top'
                             autoFocus={false}
-                            className='react-select-container z-[150] custom-menu-select w-full'
+                            className='react-select-container z-150 custom-menu-select w-full'
                             classNamePrefix='react-select'
                           />
                           <button
@@ -1804,7 +1804,7 @@ const ManageDevice = () => {
                             }
                             menuPlacement='top'
                             autoFocus={false}
-                            className='react-select-container z-[150] custom-menu-select w-full'
+                            className='react-select-container z-150 custom-menu-select w-full'
                             classNamePrefix='react-select'
                           />
                           <button
@@ -2398,7 +2398,7 @@ const ManageDevice = () => {
       <dialog ref={moveModalRef} className='modal overflow-y-scroll py-10'>
         <form
           onSubmit={handleMoveDevice}
-          className='flex flex-col justify-between modal-box md:w-5/6 md:max-w-2xl min-h-[550px] max-h-max'
+          className='flex flex-col justify-between modal-box md:w-5/6 md:max-w-2xl min-h-137.5 max-h-max'
         >
           <div>
             <h3 className='font-bold text-lg mb-3'>{t('moveDevice')}</h3>
