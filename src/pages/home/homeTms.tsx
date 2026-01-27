@@ -46,12 +46,7 @@ const HomeTms = () => {
   const { role } = tokenDecode || {}
 
   const fetchDevices = useCallback(
-    async (
-      checkPoint: string,
-      page: number,
-      size = perPage,
-      search?: string
-    ) => {
+    async (page: number, size = perPage, search?: string) => {
       try {
         setLoading(true)
         const response = await axiosInstance.get(
@@ -100,14 +95,14 @@ const HomeTms = () => {
       firstFetch.current = true
 
       const run = async () => {
-        await fetchDevices('performFetch', currentPage, perPage, globalSearch)
+        await fetchDevices(currentPage, perPage, globalSearch)
       }
 
       await run()
     }
 
     if (shouldFetch && globalSearch !== '') {
-      fetchDevices('shouldFetch', 1, perPage, globalSearch)
+      fetchDevices(1, perPage, globalSearch)
       dispatch(setSholdFetch())
     }
 
@@ -117,7 +112,7 @@ const HomeTms = () => {
   useEffect(() => {
     if (firstFetch.current) {
       if (hosId || wardId || hosId === '' || wardId === '') {
-        fetchDevices('hosId, wardId', 1, perPage, globalSearch)
+        fetchDevices(1, perPage, globalSearch)
         setCurrentPage(1)
       }
     }
@@ -125,7 +120,7 @@ const HomeTms = () => {
 
   useEffect(() => {
     if (firstFetch.current && devices.length > 0) {
-      fetchDevices('currentPage, perPage', currentPage, perPage, globalSearch)
+      fetchDevices(currentPage, perPage, globalSearch)
     }
   }, [currentPage, perPage])
 
@@ -135,7 +130,7 @@ const HomeTms = () => {
         e.preventDefault()
         searchRef.current?.blur()
         setIsFocused(false)
-        fetchDevices('keydown', currentPage, perPage, globalSearch)
+        fetchDevices(currentPage, perPage, globalSearch)
       }
     }
 
@@ -150,7 +145,7 @@ const HomeTms = () => {
 
   useEffect(() => {
     if (firstFetch.current && isCleared) {
-      fetchDevices('isCleared', currentPage, perPage)
+      fetchDevices(currentPage, perPage)
       setIsCleared(false)
     }
   }, [isCleared])

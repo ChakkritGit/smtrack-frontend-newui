@@ -22,7 +22,12 @@ class AxiosService {
 
     this.axiosInstance = axios.create({
       baseURL: BASE_URL,
-      headers: { 'Content-Type': 'application/json' }
+      headers: { 'Content-Type': 'application/json' },
+      transitional: {
+        silentJSONParsing: true,
+        forcedJSONParsing: true,
+        clarifyTimeoutError: false
+      }
     })
 
     this.initializeInterceptors()
@@ -74,7 +79,14 @@ class AxiosService {
             return new Promise((resolve, reject) => {
               this.failedQueue.push({
                 resolve: (token: string) => {
-                  originalRequest.headers.Authorization = 'Bearer ' + token
+                  if (originalRequest.headers) {
+                    originalRequest.headers['Authorization'] = 'Bearer ' + token
+                  } else {
+                    originalRequest.headers = {
+                      Authorization: 'Bearer ' + token
+                    }
+                  }
+
                   resolve(this.axiosInstance(originalRequest))
                 },
                 reject: (err: any) => reject(err)
@@ -113,10 +125,14 @@ class AxiosService {
             cookies.update()
 
             this.axiosInstance.defaults.headers.Authorization = `Bearer ${token}`
-            originalRequest.headers.Authorization = `Bearer ${token}`
+            if (originalRequest.headers.set) {
+              originalRequest.headers.set('Authorization', `Bearer ${token}`)
+            } else {
+              originalRequest.headers['Authorization'] = `Bearer ${token}`
+            }
 
             this.processQueue(null, token)
-            return this.axiosInstance(originalRequest)
+            return axios(originalRequest)
           } catch (refreshError) {
             this.processQueue(refreshError, null)
             return Promise.reject(refreshError)
