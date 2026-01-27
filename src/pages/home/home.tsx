@@ -492,7 +492,10 @@ const Home = () => {
       <div className='dataTableSubWrapper bg-base-100 rounded-field duration-300 ease-linear'>
         <DataTable
           columns={subColumns}
-          data={data.probe}
+          data={data.probe.sort(
+            (a, b) => (Number(a.channel) || 0) - (Number(b.channel) || 0)
+          )}
+          noHeader
           noDataComponent={<DataTableNoData />}
           responsive
         />

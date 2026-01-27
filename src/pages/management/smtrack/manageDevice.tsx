@@ -85,9 +85,9 @@ const ManageDevice = () => {
   const { t } = useTranslation()
   const {
     wardId,
+    hosId,
     globalSearch,
     tokenDecode,
-    hosId,
     shouldFetch,
     loadingStyle
   } = useSelector((state: RootState) => state.utils)

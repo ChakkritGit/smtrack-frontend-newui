@@ -10,7 +10,10 @@ import {
 } from 'react'
 import { useTranslation } from 'react-i18next'
 import axiosInstance from '../../../constants/axios/axiosInstance'
-import { ProbeListType } from '../../../types/tms/devices/probeType'
+import {
+  ProbeListFormType,
+  ProbeListType
+} from '../../../types/tms/devices/probeType'
 import { responseType } from '../../../types/smtrack/utilsRedux/utilsReduxType'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../../redux/reducers/rootReducer'
@@ -34,6 +37,7 @@ import { Option } from '../../../types/global/hospitalAndWard'
 import { DeviceListType } from '../../../types/smtrack/devices/deviceType'
 import ReactSlider from 'react-slider'
 import { client } from '../../../services/mqtt'
+import HospitalAndWard from '../../../components/filter/hospitalAndWard'
 
 type OptionData = {
   value: string
@@ -58,7 +62,7 @@ type ScheduleMinute = {
 const ManageProbe = () => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
-  const { globalSearch, tokenDecode } = useSelector(
+  const { globalSearch, tokenDecode, wardId, hosId } = useSelector(
     (state: RootState) => state.utils
   )
   const addModalRef = useRef<HTMLDialogElement>(null)
@@ -67,7 +71,7 @@ const ManageProbe = () => {
   const [probeList, setProbeList] = useState<ProbeListType[]>([])
   const [probeListFilter, setProbeListFilter] = useState<ProbeListType[]>([])
   const [deviceList, setDeviceList] = useState<DeviceListType[]>([])
-  const [formData, setFormData] = useState<ProbeListType>({
+  const [formData, setFormData] = useState<ProbeListFormType>({
     channel: '',
     doorAlarmTime: '',
     doorQty: 0,
@@ -641,17 +645,37 @@ const ManageProbe = () => {
   }, [])
 
   useEffect(() => {
-    const filter = probeList?.filter(f => {
+    const filterHosAndWard = probeList?.filter(f => {
+      // 1. เช็ค Hospital (ถ้า hosId ไม่มีค่า ให้ถือว่าเป็น '' เพื่อไม่ให้ error)
+      const currentHosId = hosId || ''
+      const matchesHos = f.device?.hospital
+        ?.toLowerCase()
+        .includes(currentHosId.toLowerCase())
+
+      // 2. เช็ค Ward
+      // ถ้า wardId เป็น null, undefined หรือ '' ให้ matchesWard เป็น true ไปเลย (ไม่กรอง)
+      // ถ้ามีค่า ค่อยเช็คว่าตรงกับข้อมูลไหม
+      const matchesWard = !wardId
+        ? true
+        : f.device?.ward?.toLowerCase().includes(wardId.toLowerCase())
+
+      // 3. ต้องตรงทั้ง Hospital และ Ward (ถ้ามีการเลือก Ward)
+      return matchesHos && matchesWard
+    })
+
+    const resultFiltered = filterHosAndWard?.filter(f => {
+      const searchValue = globalSearch.toLowerCase()
+
       const matchesSearch =
-        f.sn?.toLowerCase().includes(globalSearch.toLowerCase()) ||
-        f.name?.toLowerCase().includes(globalSearch.toLowerCase()) ||
-        f.channel?.toLowerCase().includes(globalSearch.toLowerCase())
+        f.sn?.toLowerCase().includes(searchValue) ||
+        f.name?.toLowerCase().includes(searchValue) ||
+        f.channel?.toLowerCase().includes(searchValue)
 
       return matchesSearch
     })
 
-    setProbeListFilter(filter)
-  }, [probeList, globalSearch])
+    setProbeListFilter(resultFiltered)
+  }, [probeList, globalSearch, wardId, hosId])
 
   const columns: TableColumn<ProbeListType>[] = [
     {
@@ -805,6 +829,7 @@ const ManageProbe = () => {
       <div className='flex flex-col lg:flex-row lg:items-center justify-between mt-3'>
         <span className='text-[20px] font-medium'></span>
         <div className='flex flex-col lg:flex-row mt-3 lg:mt-0 lg:items-center items-end lg:gap-3'>
+          <HospitalAndWard />
           <button
             className='btn btn-neutral shadow-lg shadow-neutral/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 max-w-32.5'
             onClick={() => addModalRef.current?.showModal()}
@@ -1497,7 +1522,10 @@ const ManageProbe = () => {
             >
               {t('cancelButton')}
             </button>
-            <button type='submit' className='btn btn-neutral shadow-lg shadow-neutral/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300'>
+            <button
+              type='submit'
+              className='btn btn-neutral shadow-lg shadow-neutral/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300'
+            >
               {t('submitButton')}
             </button>
           </div>
@@ -2690,7 +2718,10 @@ const ManageProbe = () => {
             >
               {t('cancelButton')}
             </button>
-            <button type='submit' className='btn btn-neutral shadow-lg shadow-neutral/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300'>
+            <button
+              type='submit'
+              className='btn btn-neutral shadow-lg shadow-neutral/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300'
+            >
               {t('submitButton')}
             </button>
           </div>
