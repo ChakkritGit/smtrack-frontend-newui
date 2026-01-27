@@ -22,7 +22,7 @@
     "@types/swiper": "^6.0.0",
     "@types/upng-js": "^2.1.5",
     "apexcharts": "^5.3.6",
-    "axios": "^1.13.3",
+    "axios": "^1.13.2",
     "crypto-js": "^4.2.0",
     "esptool-js": "file:vendor\\esptool-js-0.5.4.tgz",
     "filesize": "^11.0.13",

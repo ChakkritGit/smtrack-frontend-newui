@@ -53,7 +53,6 @@ const HomeTms = () => {
       search?: string
     ) => {
       try {
-        console.log('checkPoint: ', checkPoint)
         setLoading(true)
         const response = await axiosInstance.get(
           `/legacy/device?${

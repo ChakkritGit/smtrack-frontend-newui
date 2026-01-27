@@ -28,7 +28,7 @@ jobs:
         echo "EOF" >> $GITHUB_OUTPUT
 
     - name: Set dynamic image tag
-      run: echo "TAG=siamatic/smtrack-frontend:2.0.11d-${GITHUB_SHA::7}" >> $GITHUB_ENV
+      run: echo "TAG=siamatic/smtrack-frontend:2.0.11e-${GITHUB_SHA::7}" >> $GITHUB_ENV
 
     - name: Login to docker hub
       uses: docker/login-action@v3
@@ -68,23 +68,23 @@ jobs:
         git commit -m "Update deployment image to ${{ env.TAG }}"
         git push
 
-    - name: Send success message to slack
-      id: slack
-      uses: slackapi/slack-github-action@v1.27.0
-      with:
-        payload: |
-          {
-            "text": "✅ GitHub Action build ${{ env.TAG }} result: ${{ job.status }} 🫩🫩 \n📝 Commit: ${{ steps.get_commit_message.outputs.message }}",
-            "blocks": [
-              {
-                "type": "section",
-                "text": {
-                  "type": "mrkdwn",
-                  "text": "✅ GitHub Action build *${{ env.TAG }}* result: *${{ job.status }}* 🫩🫩 \n📝 *Commit:* ${{ steps.get_commit_message.outputs.message }}"
-                }
-              }
-            ]
-          }
-      env:
-        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
-        SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+    # - name: Send success message to slack
+    #   id: slack
+    #   uses: slackapi/slack-github-action@v1.27.0
+    #   with:
+    #     payload: |
+    #       {
+    #         "text": "✅ GitHub Action build ${{ env.TAG }} result: ${{ job.status }} 🫩🫩 \n📝 Commit: ${{ steps.get_commit_message.outputs.message }}",
+    #         "blocks": [
+    #           {
+    #             "type": "section",
+    #             "text": {
+    #               "type": "mrkdwn",
+    #               "text": "✅ GitHub Action build *${{ env.TAG }}* result: *${{ job.status }}* 🫩🫩 \n📝 *Commit:* ${{ steps.get_commit_message.outputs.message }}"
+    #             }
+    #           }
+    #         ]
+    #       }
+    #   env:
+    #     SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+    #     SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
