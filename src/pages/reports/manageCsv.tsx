@@ -36,7 +36,7 @@ const ManageCsv = () => {
       const response = await axiosInstance.get<responseType<CsvListType[]>>(
         'https://drive.siamatic.co.th/api/csv'
       )
-      setCsvList(response.data?.data)
+      setCsvList(response.data.data)
     } catch (error) {
       if (error instanceof AxiosError) {
         if (error.response?.status === 401) {

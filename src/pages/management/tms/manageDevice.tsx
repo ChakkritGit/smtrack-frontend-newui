@@ -71,8 +71,8 @@ const ManageDevice = () => {
             wardId ? `ward=${wardId}&` : hosId ? `ward=${hosId}&` : ''
           }page=${page}&perpage=${size} ${search ? `&filter=${search}` : ''}`
         )
-        setDevices(response.data?.data?.devices)
-        setTotalRows(response.data?.data?.total)
+        setDevices(response.data.data?.devices)
+        setTotalRows(response.data.data?.total)
       } catch (error) {
         if (error instanceof AxiosError) {
           if (error.response?.status === 401) {
@@ -141,7 +141,7 @@ const ManageDevice = () => {
         resetForm()
         Swal.fire({
           title: t('alertHeaderSuccess'),
-          text: response.data?.data.token,
+          text: response.data.data.token,
           icon: 'success',
           confirmButtonText: t('copyToken'),
           showConfirmButton: true,
@@ -149,7 +149,7 @@ const ManageDevice = () => {
         }).finally(async () => {
           await fetchDevices(1)
           try {
-            navigator.clipboard.writeText(response.data?.data.token)
+            navigator.clipboard.writeText(response.data.data.token)
             toast.success(t('copyToClip'))
           } catch (error) {
             console.error('Failed to copy: ', error)

@@ -29,7 +29,7 @@ const UserListWithSetState = (props: MoveDeviceProps) => {
       const response = await axiosInstance.get<responseType<UsersType[]>>(
         '/auth/user'
       )
-      setUsers(response.data?.data)
+      setUsers(response.data.data)
     } catch (error) {
       if (error instanceof AxiosError) {
         if (error.response?.status === 401) {

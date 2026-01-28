@@ -75,7 +75,7 @@ const Warranty = () => {
       const response = await axiosInstance.get<responseType<WarrantiesType[]>>(
         '/devices/warranty'
       )
-      setWarrantyData(response.data?.data)
+      setWarrantyData(response.data.data)
     } catch (error) {
       handleApiError(error)
     } finally {
@@ -88,7 +88,7 @@ const Warranty = () => {
       const response = await axiosInstance.get<responseType<DeviceListType[]>>(
         '/devices/dashboard/device'
       )
-      setDeviceList(response.data?.data)
+      setDeviceList(response.data.data)
     } catch (error) {
       if (error instanceof AxiosError) {
         if (error.response?.status === 401) {

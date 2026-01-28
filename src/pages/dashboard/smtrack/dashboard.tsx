@@ -79,7 +79,7 @@ const Dashboard = () => {
             signal: controller.signal
           }
         )
-        setDeviceLogs(response.data?.data)
+        setDeviceLogs(response.data.data)
       } catch (error) {
         if (error instanceof AxiosError) {
           if (error.response?.status === 401) {

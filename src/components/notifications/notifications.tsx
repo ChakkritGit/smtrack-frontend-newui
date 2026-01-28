@@ -53,9 +53,9 @@ const Notifications = () => {
           : `/log/notification?page=${pages}&perpage=${10}`
       )
       setNotification(prevList =>
-        pages === 1 ? response.data?.data : prevList.concat(response.data?.data)
+        pages === 1 ? response.data.data : prevList.concat(response.data.data)
       )
-      if (response.data?.data.length < 10) {
+      if (response.data.data.length < 10) {
         setFetchMore(false)
       } else {
         setFetchMore(true)

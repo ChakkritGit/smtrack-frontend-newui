@@ -34,7 +34,7 @@ const DashboardTms = () => {
       const response = await axiosInstance.get<responseType<DeviceLogTms>>(
         `/legacy/device/${deviceKey}`
       )
-      setDeviceLogs(response.data?.data)
+      setDeviceLogs(response.data.data)
     } catch (error) {
       if (error instanceof AxiosError) {
         if (error.response?.status === 401) {

@@ -22,8 +22,8 @@ export const useUserProfile = (
         `/auth/user/${id}`
       )
 
-      cookies.set('userProfile', response.data?.data, cookieOptions)
-      dispatch(setUserProfile(response.data?.data))
+      cookies.set('userProfile', response.data.data, cookieOptions)
+      dispatch(setUserProfile(response.data.data))
     } catch (error) {
       if (error instanceof AxiosError && error.response?.status === 401) {
         dispatch(setTokenExpire(true))

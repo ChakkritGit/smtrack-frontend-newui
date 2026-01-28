@@ -193,7 +193,7 @@ const ManageDevice = () => {
         return 0
       }
 
-      const combinedList = response.data?.data
+      const combinedList = response.data.data
         .filter(
           filter =>
             !filter.fileName.startsWith('bootloader') &&
@@ -225,8 +225,8 @@ const ManageDevice = () => {
             wardId ? `ward=${wardId}&` : hosId ? `ward=${hosId}&` : ''
           }page=${page}&perpage=${size}${search ? `&filter=${search}` : ''}`
         )
-        setDevices(response.data?.data?.devices)
-        setTotalRows(response.data?.data?.total)
+        setDevices(response.data.data?.devices)
+        setTotalRows(response.data.data?.total)
       } catch (error) {
         if (error instanceof AxiosError) {
           if (error.response?.status === 401) {

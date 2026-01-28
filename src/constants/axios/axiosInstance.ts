@@ -94,7 +94,7 @@ class AxiosService {
               { token: storeRefreshToken }
             )
 
-            const { token, refreshToken } = response.data?.data
+            const { token, refreshToken } = response.data.data
 
             const tokenObject = {
               hosId: state.utils.cookieDecode?.hosId,

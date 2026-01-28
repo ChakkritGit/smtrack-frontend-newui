@@ -54,8 +54,8 @@ const HomeTms = () => {
             wardId ? `ward=${wardId}&` : hosId ? `ward=${hosId}&` : ''
           }page=${page}&perpage=${size} ${search ? `&filter=${search}` : ''}`
         )
-        setDevices(response.data?.data?.devices)
-        setTotalRows(response.data?.data?.total)
+        setDevices(response.data.data?.devices)
+        setTotalRows(response.data.data?.total)
       } catch (error) {
         if (error instanceof AxiosError) {
           if (error.response?.status === 401) {
