@@ -101,12 +101,17 @@ class AxiosService {
           const storeRefreshToken = state.utils.cookieDecode?.refreshToken
 
           try {
-            const response = await this.axiosInstance.post(
-              `${import.meta.env.VITE_APP_API}/auth/refresh`,
-              { token: storeRefreshToken }
-            )
+            const response = await this.axiosInstance.post('/auth/refresh', {
+              token: storeRefreshToken
+            })
 
-            const { token, refreshToken } = response.data.data
+            const refreshData = response.data?.data ?? response.data
+
+            if (!refreshData?.token) {
+              throw new Error('Invalid refresh token response')
+            }
+
+            const { token, refreshToken } = refreshData
 
             const tokenObject = {
               hosId: state.utils.cookieDecode?.hosId,

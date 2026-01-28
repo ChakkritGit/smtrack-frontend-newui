@@ -587,6 +587,9 @@ export default {
     changelog: {
       badgeNew: 'New',
       title: "What's new?",
+      v2_0_13: {
+        bugFixes: 'Bug Fixes and stability improvements.'
+      },
       v2_0_7: {
         bugFixes: 'Bug Fixes and stability improvements.'
       },

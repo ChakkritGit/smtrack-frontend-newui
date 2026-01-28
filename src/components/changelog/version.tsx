@@ -6,15 +6,36 @@ interface VersionProps {
   i18n: i18n
 }
 
+const V2_0_13 = ({ t, i18n }: VersionProps) => (
+  <div className='border-b py-3 px-2 border-base-content/10'>
+    <div className='flex items-center justify-between mr-3'>
+      <div className='mt-2 flex items-center gap-3'>
+        <span className='font-bold'>v2.0.13</span>
+        <div className='badge badge-accent font-medium px-1.5'>
+          {t('changelog.badgeNew')}
+        </div>
+      </div>
+      <span className='text-[14px] font-medium'>
+        {/* เปลี่ยนวันที่เป็นวันที่ปัจจุบัน */}
+        {dateThaiFormat('2026-01-28', i18n)}
+      </span>
+    </div>
+    <div>
+      <div className='ml-3'>
+        <span className='font-bold text-lg'>-</span>
+        {/* ต้องเพิ่ม key นี้ในไฟล์ json translation: "แก้ไขปัญหา" */}
+        <span className='ml-3'>{t('changelog.v2_0_13.bugFixes')}</span>
+      </div>
+    </div>
+  </div>
+)
+
 // เพิ่ม v2.0.7
 const V2_0_7 = ({ t, i18n }: VersionProps) => (
   <div className='border-b py-3 px-2 border-base-content/10'>
     <div className='flex items-center justify-between mr-3'>
       <div className='mt-2 flex items-center gap-3'>
         <span className='font-bold'>v2.0.7</span>
-        <div className='badge badge-accent font-medium px-1.5'>
-          {t('changelog.badgeNew')}
-        </div>
       </div>
       <span className='text-[14px] font-medium'>
         {/* เปลี่ยนวันที่เป็นวันที่ปัจจุบัน */}
@@ -190,4 +211,4 @@ const V2 = ({ t, i18n }: VersionProps) => (
   </div>
 )
 
-export { V2, V2_0_1, V2_0_2, V2_0_3, V2_0_4, V2_0_5, V2_0_6, V2_0_7 }
+export { V2, V2_0_1, V2_0_2, V2_0_3, V2_0_4, V2_0_5, V2_0_6, V2_0_7, V2_0_13 }
