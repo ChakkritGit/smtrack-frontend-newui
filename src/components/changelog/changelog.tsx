@@ -1,16 +1,7 @@
 import { MdOutlineUpdate } from 'react-icons/md'
-import {
-  V2,
-  V2_0_1,
-  V2_0_13,
-  V2_0_2,
-  V2_0_3,
-  V2_0_4,
-  V2_0_5,
-  V2_0_6,
-  V2_0_7
-} from './version'
 import { useTranslation } from 'react-i18next'
+import { CHANGELOG_DATA } from './changelogData'
+import VersionItem from './VersionItem'
 
 const Changelog = () => {
   const { t, i18n } = useTranslation()
@@ -23,16 +14,11 @@ const Changelog = () => {
           {t('changelog.title')}
         </h1>
       </div>
+
       <div>
-        <V2_0_13 t={t} i18n={i18n} />
-        <V2_0_7 t={t} i18n={i18n} />
-        <V2_0_6 t={t} i18n={i18n} />
-        <V2_0_5 t={t} i18n={i18n} />
-        <V2_0_4 t={t} i18n={i18n} />
-        <V2_0_3 t={t} i18n={i18n} />
-        <V2_0_2 t={t} i18n={i18n} />
-        <V2_0_1 t={t} i18n={i18n} />
-        <V2 t={t} i18n={i18n} />
+        {CHANGELOG_DATA.map(item => (
+          <VersionItem key={item.version} data={item} t={t} i18n={i18n} />
+        ))}
       </div>
     </div>
   )
