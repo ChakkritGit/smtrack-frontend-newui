@@ -39,11 +39,11 @@ const columnData = (
       name: t('deviceNameTb'),
       cell: item => (
         <div
-          className='flex justify-center tooltip w-[200px]'
+          className='flex justify-center tooltip w-50'
           data-tip={item.name ?? '—'}
           onClick={() => handleRowClicked(item)}
         >
-          <div className='truncate max-w-[150px]'>
+          <div className='truncate max-w-37.5'>
             <span>{item.name ?? '—'}</span>
           </div>
         </div>
@@ -56,11 +56,11 @@ const columnData = (
       name: t('deviceLocationTb'),
       cell: item => (
         <div
-          className='flex justify-center tooltip w-[150px]'
+          className='flex justify-center tooltip w-37.5'
           data-tip={item.location ?? '—'}
           onClick={() => handleRowClicked(item)}
         >
-          <div className='truncate max-w-[130px]'>
+          <div className='truncate max-w-32.5'>
             <span>{item.location ?? '—'}</span>
           </div>
         </div>
@@ -69,36 +69,51 @@ const columnData = (
       center: true,
       width: '150px'
     },
+    // --- แก้ไขส่วน Temperature ---
     {
       name: t('devicTemperatureTb'),
-      selector: item =>
-        item.log[0]?.tempDisplay
-          ? `${item.log[0]?.tempDisplay.toFixed(2)}°C`
-          : '—',
+      selector: item => {
+        // ค้นหา log ของ probe channel 1 ก่อน ถ้าไม่มีให้ใช้ตัวแรก
+        const log = item.log.find(l => l.probe === '1') ?? item.log[0]
+        return log?.tempDisplay ? `${log.tempDisplay.toFixed(2)}°C` : '—'
+      },
       sortable: false,
       center: true
     },
+    // --- แก้ไขส่วน Humidity ---
     {
       name: t('deviceHumiTb'),
-      selector: item =>
-        item.log[0]?.humidityDisplay
-          ? `${item.log[0]?.humidityDisplay.toFixed(2)}%`
-          : '—',
+      selector: item => {
+        // ค้นหา log ของ probe channel 1 ก่อน ถ้าไม่มีให้ใช้ตัวแรก
+        const log = item.log.find(l => l.probe === '1') ?? item.log[0]
+        return log?.humidityDisplay ? `${log.humidityDisplay.toFixed(2)}%` : '—'
+      },
       sortable: false,
       center: true
     },
     {
       name: t('deviceProbeTb'),
       cell: item => {
-        const [temp] = item.log.filter(log => log.serial === item.id)
+        // ตรงนี้อาจจะต้องพิจารณาด้วยว่าจะใช้ Channel 1 หรือไม่
+        // แต่ตามโค้ดเดิมใช้การ filter ด้วย serial ซึ่งอาจจะได้ตัวแรกมา
+        // หากต้องการเปลี่ยนให้จับคู่กับ Temp Channel 1 ให้แก้บรรทัด const [temp] ด้านล่างครับ
+
+        // Log เดิม: const [temp] = item.log.filter(log => log.serial === item.id)
+        // Log ใหม่ (แนะนำให้สอดคล้องกัน):
+        const temp = item.log.find(l => l.probe === '1') ?? item.log[0]
+
         const [probe] = item.probe.filter(probe => probe.sn === item.id)
+
+        // ตรวจสอบค่า null/undefined ก่อนเทียบค่า
         const isTempOutOfRange =
-          temp?.tempDisplay >= probe?.tempMax ||
-          temp?.tempDisplay <= probe?.tempMin
+          temp?.tempDisplay && probe
+            ? temp.tempDisplay >= probe.tempMax ||
+              temp.tempDisplay <= probe.tempMin
+            : false
 
         return (
           <div
-            className={`w-[24px] h-[24px] flex items-center justify-center rounded-field ${
+            className={`w-6 h-6 flex items-center justify-center rounded-field ${
               isTempOutOfRange
                 ? 'bg-red-500 text-white'
                 : 'border border-primary text-primary'
@@ -119,8 +134,11 @@ const columnData = (
     {
       name: t('deviceDoorTb'),
       cell: item => {
-        const doorCount: number = item.probe[0]?.doorQty || 1
+        const doorCount: number =
+          item.probe.find(p => p.channel === '1')?.doorQty || 1
         const doors: DoorKey[] = ['door1', 'door2', 'door3']
+        // ใช้ Log Channel 1 สำหรับสถานะประตูด้วยเพื่อให้ตรงกัน
+        const log = item.log.find(l => l.probe === '1') ?? item.log[0]
 
         return (
           <div
@@ -130,13 +148,13 @@ const columnData = (
             {doors.slice(0, doorCount).map(doorKey => (
               <div
                 key={doorKey}
-                className={`w-[24px] h-[24px] flex items-center justify-center rounded-field ${
-                  item.log[0]?.[doorKey]
+                className={`w-6 h-6 flex items-center justify-center rounded-field ${
+                  log?.[doorKey]
                     ? 'bg-red-500 text-white'
                     : 'border border-primary text-primary'
                 } duration-300 ease-linear`}
               >
-                {item.log[0]?.[doorKey] ? (
+                {log?.[doorKey] ? (
                   <RiDoorOpenLine size={14} />
                 ) : (
                   <RiDoorClosedLine size={14} />
@@ -153,7 +171,7 @@ const columnData = (
       name: t('deviceConnectTb'),
       cell: item => (
         <div
-          className={`w-max h-[24px] px-2 text-black flex items-center justify-center rounded-field ${
+          className={`w-max h-6 px-2 text-black flex items-center justify-center rounded-field ${
             item.online ? 'bg-green-400' : 'bg-red-400'
           } duration-300 ease-linear`}
           onClick={() => handleRowClicked(item)}
@@ -166,15 +184,19 @@ const columnData = (
     },
     {
       name: t('devicePlugTb'),
-      selector: item =>
-        item.log[0]?.plug ? t('stateNormal') : t('stateProblem'),
+      selector: item => {
+        const log = item.log.find(l => l.probe === '1') ?? item.log[0]
+        return log?.plug ? t('stateNormal') : t('stateProblem')
+      },
       sortable: false,
       center: true
     },
     {
       name: t('deviceBatteryTb'),
-      selector: item =>
-        item.log[0]?.battery ? `${item.log[0].battery}%` : '—',
+      selector: item => {
+        const log = item.log.find(l => l.probe === '1') ?? item.log[0]
+        return log?.battery ? `${log.battery}%` : '—'
+      },
       sortable: false,
       center: true
     },
@@ -183,7 +205,7 @@ const columnData = (
       cell: item => {
         return (
           <span
-            className={`w-max max-w-[150px] h-[24px] px-2 flex items-center justify-center rounded-field ${
+            className={`w-max max-w-37.5 h-6 px-2 flex items-center justify-center rounded-field ${
               calculateDate(item).daysRemaining <= 0
                 ? 'bg-red-500 text-white'
                 : ''
@@ -248,7 +270,7 @@ const subColumnData = (
     {
       name: t('refrigeratorName'),
       cell: (items, index) => (
-        <span key={index}>{items.name ?? 'Name is not assigned'}</span>
+        <span key={index}>{items.name ?? '—'}</span>
       ),
       sortable: false,
       center: true
@@ -256,7 +278,7 @@ const subColumnData = (
     {
       name: t('probeTypeSubTb'),
       cell: (items, index) => (
-        <span key={index}>{items.type ?? 'Type is not assigned'}</span>
+        <span key={index}>{items.type ?? '—'}</span>
       ),
       sortable: false,
       center: true
@@ -272,7 +294,7 @@ const subColumnData = (
           <span key={index}>
             {deviceLog?.tempDisplay
               ? `${deviceLog?.tempDisplay.toFixed(2)}°C`
-              : '- -'}
+              : '—'}
           </span>
         )
       },
@@ -290,7 +312,7 @@ const subColumnData = (
           <span key={index}>
             {deviceLog?.humidityDisplay
               ? `${deviceLog?.humidityDisplay.toFixed(2)}%`
-              : '- -'}
+              : '—'}
           </span>
         )
       },
@@ -315,7 +337,7 @@ const subColumnData = (
         return (
           <div
             key={index}
-            className={`w-[24px] h-[24px] flex items-center justify-center rounded-field ${
+            className={`w-6 h-6 flex items-center justify-center rounded-field ${
               isTempOutOfRange
                 ? 'bg-red-500 text-white'
                 : 'border border-primary text-primary'

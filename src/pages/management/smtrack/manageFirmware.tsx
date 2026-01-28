@@ -75,7 +75,9 @@ const mapDefaultValue = <T, K extends keyof T>(
 const ManageFirmware = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
-  const { globalSearch, loadingStyle } = useSelector((state: RootState) => state.utils)
+  const { globalSearch, loadingStyle } = useSelector(
+    (state: RootState) => state.utils
+  )
   const [firmwareList, setFirmwareList] = useState<FirmwareListType[]>([])
   const [firmwareListFilter, setFirmwareListFilter] = useState<
     FirmwareListType[]
@@ -213,8 +215,8 @@ const ManageFirmware = () => {
     setFilterUpdated(!filterUpdated)
   }
 
-  const handleChange = (files: File) => {
-    if (files) {
+  const handleChange = (files: File | File[]) => {
+    if (files && files instanceof File) {
       setFile(undefined)
       setSubmit(false)
       setError(false)
@@ -721,7 +723,10 @@ const ManageFirmware = () => {
           </div>
           <div className='modal-action'>
             <form onSubmit={handleSubmit}>
-              <button className='btn btn-neutral shadow-lg shadow-neutral/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300' disabled={file === undefined}>
+              <button
+                className='btn btn-neutral shadow-lg shadow-neutral/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300'
+                disabled={file === undefined}
+              >
                 {t('uploadButton')}
               </button>
             </form>
