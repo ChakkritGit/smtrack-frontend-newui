@@ -101,7 +101,7 @@ class AxiosService {
           const storeRefreshToken = state.utils.cookieDecode?.refreshToken
 
           try {
-            const response = await axios.post(
+            const response = await this.axiosInstance.post(
               `${import.meta.env.VITE_APP_API}/auth/refresh`,
               { token: storeRefreshToken }
             )
@@ -132,7 +132,7 @@ class AxiosService {
             }
 
             this.processQueue(null, token)
-            return axios(originalRequest)
+            return this.axiosInstance(originalRequest)
           } catch (refreshError) {
             this.processQueue(refreshError, null)
             return Promise.reject(refreshError)

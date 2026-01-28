@@ -215,9 +215,9 @@ const Navbar = () => {
       <div
         className={`${
           transitionDisabled ? 'search-anim' : ''
-        } absolute min-w-[280px] w-[280px] max-w-[300px] md:min-w-[450px] min-h-[50px] md:max-w-[500px]
-      max-h-[400px] bg-base-100 backdrop-blur transition-shadow shadow-2xl duration-300 ease-linear
-      border-base-content/15 border-[1px] py-3 pl-4 pr-1 top-[60px] overflow-y-scroll
+        } absolute min-w-70 w-70 max-w-75 md:min-w-112.5 min-h-12.5 md:max-w-125
+      max-h-100 bg-base-100 backdrop-blur transition-shadow shadow-2xl duration-300 ease-linear
+      border-base-content/15 border py-3 pl-4 pr-1 top-15 overflow-y-scroll
       rounded-box`}
       >
         {(location.pathname === '/' || location.pathname === '/management') &&
@@ -265,7 +265,7 @@ const Navbar = () => {
                     <RiHistoryLine size={18} />
                   </div>
                   <span
-                    className='max-w-[170px] md:max-w-[300px] block truncate text-left'
+                    className='max-w-42.5 md:max-w-75 block truncate text-left'
                     style={{ direction: 'rtl' }}
                   >
                     {t(item.text)}
@@ -364,7 +364,7 @@ const Navbar = () => {
                       <RiDeviceLine size={18} />
                     </div>
                     <span
-                      className='max-w-[150px] block truncate'
+                      className='max-w-37.5 block truncate'
                       style={{ direction: 'rtl', textAlign: 'left' }}
                     >
                       {item.name}
@@ -401,7 +401,7 @@ const Navbar = () => {
                   >
                     <div>{item.icon}</div>
                     <span
-                      className='max-w-[150px] block truncate'
+                      className='max-w-37.5 block truncate'
                       style={{ direction: 'rtl', textAlign: 'left' }}
                     >
                       {t(item.text)}
@@ -430,8 +430,8 @@ const Navbar = () => {
         <div className='form-control'>
           <label
             className={`input  bg-base-200/50 ${
-              searchOpen ? 'flex w-[210px]' : 'hidden'
-            } border-none h-10 w-[250px] items-center gap-2 lg:flex duration-300 ease-linear`}
+              searchOpen ? 'flex w-52.5' : 'hidden'
+            } border-none h-10 w-62.5 items-center gap-2 lg:flex duration-300 ease-linear`}
           >
             <svg
               xmlns='http://www.w3.org/2000/svg'
@@ -451,7 +451,7 @@ const Navbar = () => {
               onChange={e => dispatch(setSearch(e.target.value))}
               value={globalSearch}
               type='text'
-              className='grow !w-28 md:w-auto caret-primary placeholder:text-base-content/50'
+              className='grow w-28! md:w-auto caret-primary placeholder:text-base-content/50'
               placeholder={t('searchItemsNav')}
               autoComplete='off'
               ref={searchRef}
@@ -512,11 +512,11 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`text-base-content sticky top-0 z-[80] flex h-16 w-full justify-center ${
+      className={`text-base-content sticky top-0 z-80 flex h-16 w-full justify-center ${
         scrolled ? 'shadow-sm' : ''
       } ${
         blurDisabled ? 'bg-base-100/80 backdrop-blur' : 'bg-base-100'
-      } transition-shadow duration-300 ease-linear [transform:translate3d(0,0,0)]`}
+      } transition-shadow duration-300 ease-linear transform-[translate3d(0,0,0)]`}
     >
       <div className='navbar'>
         <div className='flex flex-1 lg:gap-3'>
@@ -571,7 +571,7 @@ const Navbar = () => {
             <div
               tabIndex={0}
               role='button'
-              className='btn btn-ghost gap-3 px-1 min-w-[125px]'
+              className='btn btn-ghost gap-3 px-1 min-w-31.25'
             >
               <div className='avatar'>
                 <div className='w-8 rounded-field'>
@@ -579,7 +579,7 @@ const Navbar = () => {
                 </div>
               </div>
               <div className='flex flex-col items-start'>
-                <span className='font-normal text-[14px] truncate max-w-[130px]'>
+                <span className='font-normal text-[14px] truncate max-w-32.5'>
                   {display ? display : '—'}
                 </span>
                 <span className='text-[12px]'>
@@ -620,7 +620,7 @@ const Navbar = () => {
                 </button>
               </li>
 
-              <div className='divider divider-vertical m-0 before:h-[1px] after:h-[1px]'></div>
+              <div className='divider divider-vertical m-0 before:h-px after:h-px'></div>
 
               <li className='h-7.5'>
                 <button
@@ -663,7 +663,7 @@ const Navbar = () => {
       </div>
 
       <dialog ref={profileModalRef} className='modal overflow-y-scroll py-10'>
-        <div className='modal-box max-w-[50rem] h-max max-h-max'>
+        <div className='modal-box max-w-200 h-max max-h-max'>
           <ProfileComponent
             key={'Navbar'}
             userProfile={userProfile}
@@ -693,7 +693,7 @@ const Navbar = () => {
       </dialog>
 
       <dialog ref={settingModalRef} className='modal overflow-y-scroll py-10'>
-        <div className='modal-box max-w-[40rem] h-max max-h-max'>
+        <div className='modal-box max-w-160 h-max max-h-max'>
           <SoundAndNotificationComponents />
         </div>
         <form method='dialog' className='modal-backdrop'>

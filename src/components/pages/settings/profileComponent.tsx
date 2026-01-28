@@ -93,13 +93,8 @@ const ProfileComponent = (props: ProfileProps) => {
     if (!userProfile?.id) return
 
     try {
-      const baseUrl =
-        import.meta.env.VITE_APP_NODE_ENV === 'development'
-          ? import.meta.env.VITE_APP_AUTH
-          : ''
-
       const response = await axiosInstance.get<responseType<UserProfileType>>(
-        `${baseUrl}/auth/user/${userProfile.id}`
+        `/auth/user/${userProfile.id}`
       )
 
       cookies.set('userProfile', response.data.data, cookieOptions)
