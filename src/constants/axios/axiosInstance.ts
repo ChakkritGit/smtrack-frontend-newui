@@ -22,12 +22,7 @@ class AxiosService {
 
     this.axiosInstance = axios.create({
       baseURL: BASE_URL,
-      headers: { 'Content-Type': 'application/json' },
-      transitional: {
-        silentJSONParsing: true,
-        forcedJSONParsing: true,
-        clarifyTimeoutError: false
-      }
+      headers: { 'Content-Type': 'application/json' }
     })
 
     this.initializeInterceptors()
@@ -79,14 +74,7 @@ class AxiosService {
             return new Promise((resolve, reject) => {
               this.failedQueue.push({
                 resolve: (token: string) => {
-                  if (originalRequest.headers) {
-                    originalRequest.headers['Authorization'] = 'Bearer ' + token
-                  } else {
-                    originalRequest.headers = {
-                      Authorization: 'Bearer ' + token
-                    }
-                  }
-
+                  originalRequest.headers.Authorization = 'Bearer ' + token
                   resolve(this.axiosInstance(originalRequest))
                 },
                 reject: (err: any) => reject(err)
@@ -103,17 +91,10 @@ class AxiosService {
           try {
             const response = await axios.post(
               `${import.meta.env.VITE_APP_API}/auth/refresh`,
-              { token: storeRefreshToken },
-              { headers: { 'Content-Type': 'application/json' } }
+              { token: storeRefreshToken }
             )
 
-            const refreshData = response.data?.data ?? response.data
-
-            if (!refreshData?.token) {
-              throw new Error('Invalid refresh token response')
-            }
-
-            const { token, refreshToken } = refreshData
+            const { token, refreshToken } = response.data.data
 
             const tokenObject = {
               hosId: state.utils.cookieDecode?.hosId,
@@ -132,11 +113,7 @@ class AxiosService {
             cookies.update()
 
             this.axiosInstance.defaults.headers.Authorization = `Bearer ${token}`
-            if (originalRequest.headers.set) {
-              originalRequest.headers.set('Authorization', `Bearer ${token}`)
-            } else {
-              originalRequest.headers['Authorization'] = `Bearer ${token}`
-            }
+            originalRequest.headers.Authorization = `Bearer ${token}`
 
             this.processQueue(null, token)
             return this.axiosInstance(originalRequest)
