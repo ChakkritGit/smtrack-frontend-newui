@@ -97,8 +97,8 @@ const ProfileComponent = (props: ProfileProps) => {
         `/auth/user/${userProfile.id}`
       )
 
-      cookies.set('userProfile', response.data.data, cookieOptions)
-      dispatch(setUserProfile(response.data.data))
+      cookies.set('userProfile', response.data?.data, cookieOptions)
+      dispatch(setUserProfile(response.data?.data))
     } catch (error) {
       // ถ้า error จากการ fetch อาจจะไม่ต้อง show modal แต่ handle token expire
       if (error instanceof AxiosError && error.response?.status === 401) {

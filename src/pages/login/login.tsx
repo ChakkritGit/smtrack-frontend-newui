@@ -77,7 +77,7 @@ const Login = () => {
       )
 
       const { hosId, token, refreshToken, id, wardId, role } =
-        response.data.data
+        response.data?.data
 
       // 5. Role Check
       if (role === 'GUEST') {

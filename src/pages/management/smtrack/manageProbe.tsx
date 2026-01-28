@@ -157,7 +157,7 @@ const ManageProbe = () => {
       const response = await axiosInstance.get<responseType<DeviceListType[]>>(
         '/devices/dashboard/device'
       )
-      setDeviceList(response.data.data)
+      setDeviceList(response.data?.data)
     } catch (error) {
       if (error instanceof AxiosError) {
         if (error.response?.status === 401) {
@@ -176,7 +176,7 @@ const ManageProbe = () => {
       const response = await axiosInstance.get<responseType<ProbeListType[]>>(
         `/devices/probe`
       )
-      setProbeList(response.data.data)
+      setProbeList(response.data?.data)
     } catch (error) {
       if (error instanceof AxiosError) {
         if (error.response?.status === 401) {

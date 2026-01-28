@@ -163,7 +163,7 @@ const Home = () => {
         const response = await axiosInstance.get<
           responseType<DevicesOnlineType[]>
         >(`/devices/online${query}`)
-        setDevicesOnline(response.data.data)
+        setDevicesOnline(response.data?.data)
       } catch (error) {
         handleAxiosError(error)
       } finally {
@@ -186,7 +186,7 @@ const Home = () => {
         const response = await axiosInstance.get(
           `/dashboard/count?${queryParams.toString()}`
         )
-        setDeviceCount(response.data.data)
+        setDeviceCount(response.data?.data)
       } catch (error) {
         handleAxiosError(error)
       }
@@ -209,8 +209,8 @@ const Home = () => {
         const response = await axiosInstance.get<
           responseType<DeviceResponseType>
         >(`/devices/device?${queryParams.toString()}`)
-        setDevices(response.data.data?.devices)
-        setTotalRows(response.data.data?.total)
+        setDevices(response.data?.data?.devices)
+        setTotalRows(response.data?.data?.total)
       } catch (error) {
         handleAxiosError(error)
       } finally {
@@ -224,7 +224,7 @@ const Home = () => {
 
   // 1. Devices Filtered (Main Table)
   const devicesFiltered = useMemo(() => {
-    return devices.filter(f => {
+    return devices?.filter(f => {
       if (deviceConnect === '') return true
       if (deviceConnect === 'online') return f.online === true
       if (deviceConnect === 'offline') return f.online === false

@@ -29,7 +29,7 @@ const HistoryLog = () => {
       const response = await axiosInstance.get<responseType<HistoryLohType[]>>(
         `/history/device?sn=${deviceId} ${datePicker ? `&filter=${datePicker}` : ''}`
       )
-      setHistoryLogs(response.data.data)
+      setHistoryLogs(response.data?.data)
     } catch (error) {
       if (error instanceof AxiosError) {
         if (error.response?.status === 401) {

@@ -70,7 +70,7 @@ const Routes = () => {
       const response = await axiosInstance.get<responseType<HospitalType[]>>(
         '/auth/hospital'
       )
-      setHospital(response.data.data)
+      setHospital(response.data?.data)
     } catch (error) {
       if (error instanceof AxiosError) {
         if (error.response?.status === 401) {
@@ -88,7 +88,7 @@ const Routes = () => {
       const response = await axiosInstance.get<responseType<WardType[]>>(
         '/auth/ward'
       )
-      setWard(response.data.data)
+      setWard(response.data?.data)
     } catch (error) {
       if (error instanceof AxiosError) {
         if (error.response?.status === 401) {

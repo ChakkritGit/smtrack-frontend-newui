@@ -80,7 +80,7 @@ const FullTableTms = () => {
           signal: controller.signal
         }
       )
-      setDataLog(response.data.data)
+      setDataLog(response.data?.data)
     } catch (error) {
       if (error instanceof AxiosError) {
         if (error.response?.status === 401) {
@@ -112,7 +112,7 @@ const FullTableTms = () => {
           signal: controller.signal
         }
       )
-      setDataLog(response.data.data)
+      setDataLog(response.data?.data)
     } catch (error) {
       if (error instanceof AxiosError) {
         if (error.response?.status === 401) {
@@ -144,7 +144,7 @@ const FullTableTms = () => {
           signal: controller.signal
         }
       )
-      setDataLog(response.data.data)
+      setDataLog(response.data?.data)
     } catch (error) {
       if (error instanceof AxiosError) {
         if (error.response?.status === 401) {

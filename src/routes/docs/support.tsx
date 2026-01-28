@@ -79,7 +79,7 @@ const Support = () => {
       )
       Swal.fire({
         title: t('alertHeaderSuccess'),
-        text: String(response.data.data),
+        text: String(response.data?.data),
         icon: 'success',
         timer: 2000,
         showConfirmButton: false

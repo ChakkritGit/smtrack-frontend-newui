@@ -257,7 +257,7 @@ const Notification = () => {
           : await axiosInstance.get<responseType<NotificationHistoryType[]>>(
               baeUrl
             )
-      setNotification(response.data.data)
+      setNotification(response.data?.data)
     } catch (error) {
       if (error instanceof AxiosError) {
         if (error.response?.status === 401) {
