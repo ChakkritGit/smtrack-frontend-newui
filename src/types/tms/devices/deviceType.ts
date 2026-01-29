@@ -15,6 +15,7 @@ type DeviceTmsType = {
   hospitalName: string
   wardName: string
   serial: string
+  online?: boolean
 }
 
 type TmsLogType = {

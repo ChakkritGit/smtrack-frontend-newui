@@ -38,7 +38,7 @@ const initialState: UtilsState = {
   tokenDecode: undefined,
   userProfile: cookies.get('userProfile') ?? undefined,
   globalSearch: '',
-  themeMode: localStorage.getItem('theme') ?? '',
+  themeMode: localStorage.getItem('theme') ?? 'lemonade',
   tmsMode: cookies.get('tmsMode') ?? false,
   isExpand: localStorage.getItem('expandaside') === 'true',
   hosId: cookies.get('hosId'),

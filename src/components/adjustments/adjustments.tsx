@@ -165,10 +165,7 @@ const Adjustments = (props: AdjustmentsProps) => {
         await fetchDevices(1, 10)
         openAdjustModalRef.current?.showModal()
         await delay(3000)
-        client.publish(
-          `siamatic/${deviceModel}/${version}/${serial}/adj`,
-          'on'
-        )
+        client.publish(`siamatic/${deviceModel}/${version}/${serial}/adj`, 'on')
       })
     } catch (error) {
       openAdjustModalRef.current?.close()
@@ -207,9 +204,18 @@ const Adjustments = (props: AdjustmentsProps) => {
       firstDay: scheduleDay.firstDay,
       secondDay: scheduleDay.seccondDay,
       thirdDay: scheduleDay.thirdDay,
-      firstTime: scheduleTime.firstTime !== 'OFF' ? `${scheduleTime.firstTime}${scheduleTime.firstMinute}` : 'OFF',
-      secondTime: scheduleTime.secondTime !== 'OFF' ? `${scheduleTime.secondTime}${scheduleTime.seccondMinute}` : 'OFF',
-      thirdTime: scheduleTime.thirdTime !== 'OFF' ? `${scheduleTime.thirdTime}${scheduleTime.thirdMinute}` : 'OFF',
+      firstTime:
+        scheduleTime.firstTime !== 'OFF'
+          ? `${scheduleTime.firstTime}${scheduleTime.firstMinute}`
+          : 'OFF',
+      secondTime:
+        scheduleTime.secondTime !== 'OFF'
+          ? `${scheduleTime.secondTime}${scheduleTime.seccondMinute}`
+          : 'OFF',
+      thirdTime:
+        scheduleTime.thirdTime !== 'OFF'
+          ? `${scheduleTime.thirdTime}${scheduleTime.thirdMinute}`
+          : 'OFF',
       notiDelay: muteMode.choichOne === 'immediately' ? 0 : sendTime.after,
       notiMobile: muteMode.choichfour === 'on' ? true : false,
       notiRepeat: muteMode.choichthree === 'onetime' ? 0 : sendTime.every,
@@ -231,10 +237,7 @@ const Adjustments = (props: AdjustmentsProps) => {
         await fetchDevices(1, 10)
         openAdjustModalRef.current?.showModal()
         await delay(3000)
-        client.publish(
-          `siamatic/${deviceModel}/${version}/${serial}/adj`,
-          'on'
-        )
+        client.publish(`siamatic/${deviceModel}/${version}/${serial}/adj`, 'on')
       })
     } catch (error) {
       openAdjustModalRef.current?.close()
@@ -463,12 +466,30 @@ const Adjustments = (props: AdjustmentsProps) => {
         thirdDay: filter?.thirdDay
       })
       setScheduleTime({
-        firstTime: filter?.firstTime !== 'OFF' ? filter?.firstTime.substring(0, 2) : filter?.firstTime,
-        secondTime: filter?.secondTime !== 'OFF' ? filter?.secondTime.substring(0, 2) : filter?.secondTime,
-        thirdTime: filter?.thirdTime !== 'OFF' ? filter?.thirdTime.substring(0, 2) : filter?.thirdTime,
-        firstMinute: filter?.firstTime !== 'OFF' ? filter?.firstTime.substring(2, 4) : filter?.firstTime,
-        seccondMinute: filter?.secondTime !== 'OFF' ? filter?.secondTime.substring(2, 4) : filter?.secondTime,
-        thirdMinute: filter?.thirdTime !== 'OFF' ? filter?.thirdTime.substring(2, 4) : filter?.thirdTime
+        firstTime:
+          filter?.firstTime !== 'OFF'
+            ? filter?.firstTime.substring(0, 2)
+            : filter?.firstTime,
+        secondTime:
+          filter?.secondTime !== 'OFF'
+            ? filter?.secondTime.substring(0, 2)
+            : filter?.secondTime,
+        thirdTime:
+          filter?.thirdTime !== 'OFF'
+            ? filter?.thirdTime.substring(0, 2)
+            : filter?.thirdTime,
+        firstMinute:
+          filter?.firstTime !== 'OFF'
+            ? filter?.firstTime.substring(2, 4)
+            : filter?.firstTime,
+        seccondMinute:
+          filter?.secondTime !== 'OFF'
+            ? filter?.secondTime.substring(2, 4)
+            : filter?.secondTime,
+        thirdMinute:
+          filter?.thirdTime !== 'OFF'
+            ? filter?.thirdTime.substring(2, 4)
+            : filter?.thirdTime
       })
     }
   }, [tab, probe, selectedProbe])
@@ -600,6 +621,18 @@ const Adjustments = (props: AdjustmentsProps) => {
         //
 
         client.on('message', (_topic, message) => {
+          try {
+            const mqData = JSON.parse(message.toString())
+            if (mqData) {
+              if (mqData.tempTemporary === '1') {
+                setMuteDoorSelect({ ...muteDoorSelect, tempTemporary: true })
+              } else {
+                setMuteDoorSelect({ ...muteDoorSelect, tempTemporary: false })
+              }
+            }
+          } catch (error) {
+            console.error(error)
+          }
           setMuteDoor(JSON.parse(message.toString()))
           setIsLoadingMuteMqtt(false)
         })
@@ -1848,7 +1881,10 @@ const Adjustments = (props: AdjustmentsProps) => {
 
         {(tab === 1 || tab === 2) && (
           <div className={`modal-action ${isLoadingMqtt ? 'mt-0' : 'mt-6'}`}>
-            <button type='submit' className='btn btn-neutral shadow-lg shadow-neutral/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300'>
+            <button
+              type='submit'
+              className='btn btn-neutral shadow-lg shadow-neutral/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300'
+            >
               {t('submitButton')}
             </button>
           </div>

@@ -13,7 +13,7 @@ import {
   scheduleTimeArray
 } from '../../constants/utils/utilsConstants'
 
-type AppMuteProps = {
+interface AppMuteProps {
   setMuteMode: Dispatch<
     SetStateAction<{
       choichOne: string
@@ -436,7 +436,7 @@ const AppMute = (props: AppMuteProps) => {
               onChange={e => getScheduleDay(e, 'firstDay')}
               autoFocus={false}
               menuPlacement='top'
-              className='react-select-container custom-menu-select z-[75] min-w-full'
+              className='react-select-container custom-menu-select z-75 min-w-full'
               classNamePrefix='react-select'
             />
           </label>
@@ -468,7 +468,7 @@ const AppMute = (props: AppMuteProps) => {
               onChange={e => getScheduleDay(e, 'seccondDay')}
               autoFocus={false}
               menuPlacement='top'
-              className='react-select-container custom-menu-select z-[75] min-w-full'
+              className='react-select-container custom-menu-select z-75 min-w-full'
               classNamePrefix='react-select'
             />
           </label>
@@ -500,7 +500,7 @@ const AppMute = (props: AppMuteProps) => {
               onChange={e => getScheduleDay(e, 'thirdDay')}
               autoFocus={false}
               menuPlacement='top'
-              className='react-select-container custom-menu-select z-[75] min-w-full'
+              className='react-select-container custom-menu-select z-75 min-w-full'
               classNamePrefix='react-select'
             />
           </label>
@@ -566,7 +566,7 @@ const AppMute = (props: AppMuteProps) => {
           onChange={e => getScheduleTime(e, 'firstTime')}
           autoFocus={false}
           menuPlacement='top'
-          className='react-select-container custom-menu-select z-[75] min-w-full'
+          className='react-select-container custom-menu-select z-75 min-w-full'
           classNamePrefix='react-select'
         />
         <Select
@@ -587,7 +587,7 @@ const AppMute = (props: AppMuteProps) => {
           onChange={e => getScheduleTimeMinute(e, 'firstTimeMinute')}
           autoFocus={false}
           menuPlacement='top'
-          className='react-select-container custom-menu-select z-[75] min-w-full'
+          className='react-select-container custom-menu-select z-75 min-w-full'
           classNamePrefix='react-select'
         />
       </div>
@@ -613,7 +613,7 @@ const AppMute = (props: AppMuteProps) => {
           onChange={e => getScheduleTime(e, 'seccondTime')}
           autoFocus={false}
           menuPlacement='top'
-          className='react-select-container custom-menu-select z-[75] min-w-full'
+          className='react-select-container custom-menu-select z-75 min-w-full'
           classNamePrefix='react-select'
         />
         <Select
@@ -634,7 +634,7 @@ const AppMute = (props: AppMuteProps) => {
           onChange={e => getScheduleTimeMinute(e, 'seccondTimeMinute')}
           autoFocus={false}
           menuPlacement='top'
-          className='react-select-container custom-menu-select z-[75] min-w-full'
+          className='react-select-container custom-menu-select z-75 min-w-full'
           classNamePrefix='react-select'
         />
       </div>
@@ -661,7 +661,7 @@ const AppMute = (props: AppMuteProps) => {
           onChange={e => getScheduleTime(e, 'thirdTime')}
           autoFocus={false}
           menuPlacement='top'
-          className='react-select-container custom-menu-select z-[75] min-w-full'
+          className='react-select-container custom-menu-select z-75 min-w-full'
           classNamePrefix='react-select'
         />
         <Select
@@ -682,7 +682,7 @@ const AppMute = (props: AppMuteProps) => {
           onChange={e => getScheduleTimeMinute(e, 'thirdTimeMinute')}
           autoFocus={false}
           menuPlacement='top'
-          className='react-select-container custom-menu-select z-[75] min-w-full'
+          className='react-select-container custom-menu-select z-75 min-w-full'
           classNamePrefix='react-select'
         />
       </div>

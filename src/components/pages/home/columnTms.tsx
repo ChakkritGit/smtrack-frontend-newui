@@ -7,6 +7,7 @@ import { TableColumn } from 'react-data-table-component'
 import { DoorKey } from '../../../types/global/doorQty'
 import { RiDoorClosedLine, RiDoorOpenLine } from 'react-icons/ri'
 import { UserRole } from '../../../types/global/users/usersType'
+import { CgUnavailable } from 'react-icons/cg'
 
 const columnTms = (
   t: TFunctionNonStrict<'translation', undefined>,
@@ -103,7 +104,7 @@ const columnTms = (
             {doors.slice(0, doorCount).map(doorKey => (
               <div
                 key={doorKey}
-                className={`w-[24px] h-[24px] flex items-center justify-center rounded-field ${
+                className={`w-6 h-6 flex items-center justify-center rounded-field ${
                   item.log[0]?.door
                     ? 'bg-red-500 text-white'
                     : 'border border-primary text-primary'
@@ -126,6 +127,25 @@ const columnTms = (
       name: t('devicePlugTb'),
       selector: item =>
         !item.log[0]?.plugin ? t('stateProblem') : t('stateNormal'),
+      sortable: false,
+      center: true
+    },
+    {
+      name: t('deviceConnectTb'),
+      cell: (item: DeviceTmsType) => {
+        if (item.online === undefined) return <CgUnavailable size={24} />
+
+        return (
+          <div
+            className={`w-max h-6 px-2 text-black flex items-center justify-center rounded-field ${
+              item.online ? 'bg-green-400' : 'bg-red-400'
+            } duration-300 ease-linear`}
+            onClick={() => handleRowClicked(item)}
+          >
+            {item.online ? t('deviceOnline') : t('deviceOffline')}
+          </div>
+        )
+      },
       sortable: false,
       center: true
     }
