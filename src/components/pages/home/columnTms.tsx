@@ -7,7 +7,6 @@ import { TableColumn } from 'react-data-table-component'
 import { DoorKey } from '../../../types/global/doorQty'
 import { RiDoorClosedLine, RiDoorOpenLine } from 'react-icons/ri'
 import { UserRole } from '../../../types/global/users/usersType'
-import { CgUnavailable } from 'react-icons/cg'
 
 const columnTms = (
   t: TFunctionNonStrict<'translation', undefined>,
@@ -133,7 +132,7 @@ const columnTms = (
     {
       name: t('deviceConnectTb'),
       cell: (item: DeviceTmsType) => {
-        if (item.online === undefined) return <CgUnavailable size={24} />
+        if (item.online === undefined) return null
 
         return (
           <div
