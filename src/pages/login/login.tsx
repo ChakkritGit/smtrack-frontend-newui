@@ -113,7 +113,7 @@ const Login = () => {
     // from-base-100: เริ่มต้นด้วยสีพื้นหลังปกติ (ขาว)
     // via-base-100: ตรงกลางยังคงขาวเพื่อให้ดูสะอาด
     // to-base-200/50: ปลายทางเป็นสีเทาจางๆ (50%)
-    <div className='min-h-dvh flex flex-col bg-linear-to-br from-base-100 via-base-100 to-base-200/50'>
+    <div className='min-h-dvh flex flex-col bg-base-200'>
       <Helmet prioritizeSeoTags>
         <title>SMTrack+ - Login</title>
       </Helmet>

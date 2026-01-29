@@ -162,7 +162,7 @@ const MainSmtrack = () => {
         <div className='drawer-content'>
           <Navbar />
           <section
-            className={`min-h-[calc(100dvh-120px)] pb-21 sm:pb-0 md:rounded-box bg-linear-to-br from-base-200 via-base-100 to-base-200/50 md:mx-3 md:mb-3 ${
+            className={`min-h-[calc(100dvh-120px)] pb-21 sm:pb-0 md:rounded-box bg-base-200 md:mx-3 md:mb-3 ${
               isSpecialTheme ? 'pb-25 sm:pb-0' : ''
             }`}
           >
