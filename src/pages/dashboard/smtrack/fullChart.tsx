@@ -249,16 +249,29 @@ const FullChart = () => {
   const handleDownload = useCallback(
     async (type: string) => {
       if (canvasChartRef.current && tableInfoRef.current) {
-        // 1. เตรียมหน้าจอ (แสดงหัวตาราง)
+        // 1. แสดงส่วนหัวตารางก่อน (แต่ไม่ต้องกลัวเรื่องสีกระพริบบนจอ)
         tableInfoRef.current.style.display = 'flex'
-        tableInfoRef.current.style.color = 'black'
-        canvasChartRef.current.style.color = 'black'
 
-        const canvas = canvasChartRef.current
+        const promise = html2canvas(canvasChartRef.current, {
+          scale: 3,
+          backgroundColor: '#ffffff', // บังคับพื้นหลังรูปเป็นสีขาว
+          useCORS: true,
+          onclone: clonedDoc => {
+            // 2. ค้นหา element ในเอกสารที่ถูก Clone ออกมา
+            // และสั่งเปลี่ยนธีมเป็น light เฉพาะในรูปภาพ
+            const clonedRoot =
+              clonedDoc.querySelector('[data-theme]') ||
+              clonedDoc.documentElement
+            clonedRoot.setAttribute('data-theme', 'light')
 
-        const promise = html2canvas(canvas, {
-          scale: 3, // เพิ่มความชัด
-          useCORS: true
+            // 3. บังคับสี SVG Text (แกนกราฟ) ให้เป็นสีดำสนิท
+            // เพราะบางครั้ง SVG จะไม่ยอมเปลี่ยนสีตาม data-theme ในทันทีที่ Clone
+            const svgTexts = clonedDoc.querySelectorAll('text, tspan')
+            svgTexts.forEach(el => {
+              el.setAttribute('fill', '#000000')
+              el.style.fill = '#000000'
+            })
+          }
         })
           .then(canvasImage => {
             const dataURL = canvasImage.toDataURL(
@@ -267,15 +280,12 @@ const FullChart = () => {
             )
             const link = document.createElement('a')
             link.href = dataURL
-            link.download = `${
-              pageNumber === 1 ? 'Day' : 'Chart'
-            }_${Date.now()}.${type}`
+            link.download = `Chart_${Date.now()}.${type}`
             document.body.appendChild(link)
             link.click()
             document.body.removeChild(link)
           })
           .finally(() => {
-            // คืนค่าหน้าจอจริง
             if (tableInfoRef.current)
               tableInfoRef.current.style.display = 'none'
           })
@@ -299,7 +309,24 @@ const FullChart = () => {
       const originalHeight = canvasChartRef.current.style.height
 
       html2canvas(canvasChartRef.current!, {
-        scale: 2
+        scale: 3,
+        backgroundColor: '#ffffff', // บังคับพื้นหลังรูปเป็นสีขาว
+        useCORS: true,
+        onclone: clonedDoc => {
+          // 2. ค้นหา element ในเอกสารที่ถูก Clone ออกมา
+          // และสั่งเปลี่ยนธีมเป็น light เฉพาะในรูปภาพ
+          const clonedRoot =
+            clonedDoc.querySelector('[data-theme]') || clonedDoc.documentElement
+          clonedRoot.setAttribute('data-theme', 'light')
+
+          // 3. บังคับสี SVG Text (แกนกราฟ) ให้เป็นสีดำสนิท
+          // เพราะบางครั้ง SVG จะไม่ยอมเปลี่ยนสีตาม data-theme ในทันทีที่ Clone
+          const svgTexts = clonedDoc.querySelectorAll('text, tspan')
+          svgTexts.forEach(el => {
+            el.setAttribute('fill', '#000000')
+            el.style.fill = '#000000'
+          })
+        }
       })
         .then(canvasImage => {
           // คืนขนาดเดิม
@@ -593,7 +620,7 @@ const FullChart = () => {
       <div
         ref={canvasChartRef}
         className='p-3 rounded-lg mt-2'
-        data-theme='light'
+        // data-theme='light'
       >
         <div ref={tableInfoRef} className='hidden'>
           <div className='grid grid-cols-2 gap-3'>
