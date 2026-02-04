@@ -246,9 +246,12 @@ const FullChart = () => {
     }
   }
 
+  // ... existing imports
+
   const handleDownload = useCallback(
     async (type: string) => {
       if (canvasChartRef.current && tableInfoRef.current) {
+        // เตรียม Style ก่อนเริ่ม
         tableInfoRef.current.style.display = 'flex'
         tableInfoRef.current.style.color = 'black'
         canvasChartRef.current.style.color = 'black'
@@ -257,13 +260,44 @@ const FullChart = () => {
 
         const canvas = canvasChartRef.current
 
-        const promise = html2canvas(canvas, { scale: 2 })
+        // เพิ่ม Options ให้ html2canvas
+        const promise = html2canvas(canvas, {
+          scale: 2,
+          backgroundColor: '#ffffff', // บังคับพื้นหลังขาว
+          onclone: clonedDoc => {
+            // 1. จัดการ SVG Text (ส่วนใหญ่เป็นแกน X, Y และ Label ในกราฟ)
+            const svgTexts = clonedDoc.querySelectorAll('text')
+            svgTexts.forEach(el => {
+              if (el instanceof SVGElement) {
+                // ตรวจสอบ Type เพื่อกัน Error
+                el.style.fill = '#000000'
+                el.setAttribute('fill', '#000000')
+              }
+            })
+
+            // 2. จัดการ HTML Text (Legend, Tooltip หรือคำอธิบายที่เป็น HTML)
+            // เลือก Class ที่มักจะเป็นตัวหนังสือ (ปรับเพิ่มลด selector ได้ตามโครงสร้างจริง)
+            const htmlTexts = clonedDoc.querySelectorAll(
+              '.apexcharts-legend-text, .apexcharts-text, span, div, p'
+            )
+
+            htmlTexts.forEach(el => {
+              if (el instanceof HTMLElement) {
+                // เช็คว่ามีข้อความจริงๆ ไหม (เพื่อไม่ให้ไปเปลี่ยนสี div ที่เป็นแค่กล่องเปล่า)
+                if (el.innerText && el.innerText.trim().length > 0) {
+                  el.style.color = '#000000'
+                }
+              }
+            })
+          }
+        })
           .then(canvasImage => {
             const dataURL = canvasImage.toDataURL(
               type === 'png' ? 'image/png' : 'image/jpg',
               1.0
             )
 
+            // ... (โค้ดส่วนดาวน์โหลดเดิม) ...
             let pagename = ''
             if (pageNumber === 1) {
               pagename = 'Day_Chart'
@@ -286,6 +320,7 @@ const FullChart = () => {
             throw new Error('Failed to download the image')
           })
           .finally(() => {
+            // ... (โค้ด Reset Style เดิม) ...
             if (tableInfoRef.current && canvasChartRef.current) {
               tableInfoRef.current.style.display = 'none'
               tableInfoRef.current.style.color = ''
@@ -303,7 +338,7 @@ const FullChart = () => {
         toast.error(t('nodata'))
       }
     },
-    [t]
+    [t, pageNumber] // อย่าลืมใส่ pageNumber ใน dependency ถ้ามีการใช้
   )
 
   const exportChart = () => {
