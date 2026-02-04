@@ -113,6 +113,9 @@ export default {
     doorNum: 'ประตู',
     doorAlertText: 'ตั้งค่าเสียงประตู',
     doorInacctive: 'ปิดใช้งานประตู',
+    sensor: 'เซ็นเซอร์',
+    sensorFailed: 'มีปัญหา',
+    sensorNormal: 'ปกติ',
 
     // device cards
     deviceOnline: 'ออนไลน์',

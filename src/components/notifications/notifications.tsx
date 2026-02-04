@@ -17,6 +17,8 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 import {
   PiDoorLight,
   PiDoorOpenLight,
+  PiLinkBreakLight,
+  PiLinkSimpleLight,
   PiNoteLight,
   PiPlugsConnectedLight,
   PiPlugsLight,
@@ -84,63 +86,13 @@ const Notifications = () => {
     }
   }
 
-  // const subTextNotiDetails = (text: string) => {
-  //   const [topic, sub, status] = text.split('/')
-
-  //   switch (topic) {
-  //     case 'PROBE1':
-  //       if (sub === 'TEMP') {
-  //         const tempKeys: Record<string, string> = {
-  //           OVER: 'tempHigherLimmit',
-  //           LOWER: 'tempBelowLimmit'
-  //         }
-  //         return t(tempKeys[status] || 'tempBackToNormal')
-  //       }
-  //       // กรณี Door
-  //       const door1Status = status === 'ON' ? t('stateOn') : t('stateOff')
-  //       return `${t('deviceProbeTb')} ${topic.replace('PROBE', '')} ${t(
-  //         'doorNum'
-  //       )} ${sub.replace('DOOR', '')} ${door1Status}`
-  //     case 'PROBE2':
-  //       if (sub === 'TEMP') {
-  //         const tempKeys: Record<string, string> = {
-  //           OVER: 'tempHigherLimmit',
-  //           LOWER: 'tempBelowLimmit'
-  //         }
-  //         return t(tempKeys[status] || 'tempBackToNormal')
-  //       }
-  //       // กรณี Door
-  //       const door2Status = status === 'ON' ? t('stateOn') : t('stateOff')
-  //       return `${t('deviceProbeTb')} ${topic.replace('PROBE', '')} ${t(
-  //         'doorNum'
-  //       )} ${sub.replace('DOOR', '')} ${door2Status}`
-  //     case 'AC':
-  //       return sub === 'ON' ? t('plugBackToNormal') : t('plugProblem')
-
-  //     case 'SD':
-  //       return sub === 'ON' ? t('SdCardProblem') : t('SdCardBackToNormal')
-
-  //     case 'INTERNET':
-  //       return sub === 'ON' ? t('InternetProblem') : t('InternetBackToNormal')
-
-  //     case 'REPORT':
-  //       const { temperature, humidity } = extractValues(text) || {}
-  //       return `${t('reportText')}/ ${t('devicsmtrackTb')}: ${
-  //         temperature ?? '- -'
-  //       }°C, ${t('deviceHumiTb')}: ${humidity ?? '- -'}%`
-
-  //     default:
-  //       return text
-  //   }
-  // }
-
   const subTextNotiDetails = (text: string) => {
     const [topic, sub, status] = text.split('/')
 
     if (topic.startsWith('PROBE')) {
       const probeNum = topic.replace('PROBE', '')
 
-      // กรณีอุณหภูมิ (TEMP)
+      // กรณีอุณหภูมิ
       if (sub === 'TEMP') {
         const tempMap: Record<string, string> = {
           OVER: 'tempHigherLimmit',
@@ -149,14 +101,21 @@ const Notifications = () => {
         return t(tempMap[status] || 'tempBackToNormal')
       }
 
-      // กรณี Door หรือ Sensor (ใช้ Logic ON/OFF เหมือนกัน)
-      if (sub.startsWith('DOOR') || sub === 'SENSOR') {
+      // กรณี DOOR หรือ SENSOR (ใช้ Logic เปิด/ปิด เหมือนกัน)
+      if (sub.startsWith('DOOR')) {
         const state = status === 'ON' ? t('stateOn') : t('stateOff')
 
-        // ถ้าเป็น Door ให้แสดงคำว่า "ประตู x" ถ้าเป็น Sensor ให้แสดงคำว่า "SENSOR" (หรือใส่ t('sensorKey') ตามต้องการ)
+        // ถ้าเป็น Door ให้ตัดคำว่า DOOR ออกเพื่อเอาเลข, ถ้าเป็น SENSOR ให้ใช้ชื่อ SENSOR เลย
         const subName = sub.startsWith('DOOR')
           ? `${t('doorNum')} ${sub.replace('DOOR', '')}`
-          : `${t('doorNum')} 1`
+          : `${t('doorNum')} 1` // หรือใส่ t('sensor')
+
+        return `${t('deviceProbeTb')} ${probeNum} ${subName} ${state}`
+      } else if (sub.startsWith('SENSOR')) {
+        const state = status === 'ON' ? t('sensorNormal') : t('sensorFailed')
+        const subName = sub.startsWith('SENSOR')
+          ? `${t('sensor')} ${sub.replace('SENSOR', '')}`
+          : `${t('sensor')} 1` // หรือใส่ t('sensor')
 
         return `${t('deviceProbeTb')} ${probeNum} ${subName} ${state}`
       }
@@ -179,88 +138,62 @@ const Notifications = () => {
     }
   }
 
-  // const subTextNotiDetailsIcon = (text: string) => {
-  //   if (text.split('/')[0] === 'PROBE1') {
-  //     if (text.split('/')[1] === 'TEMP') {
-  //       if (text.split('/')[2] === 'OVER') {
-  //         return <PiThermometerHotLight size={24} />
-  //       } else if (text.split('/')[2] === 'LOWER') {
-  //         return <PiThermometerColdLight size={24} />
-  //       } else {
-  //         return <PiThermometerSimpleLight size={24} />
-  //       }
-  //     }
-  //     const probe = text.split('/')
-  //     return probe[2] === 'ON' ? (
-  //       <PiDoorOpenLight size={24} />
-  //     ) : (
-  //       <PiDoorLight size={24} />
-  //     )
-  //   } else if (text.split('/')[0] === 'AC') {
-  //     if (text.split('/')[1] === 'ON') {
-  //       return <PiPlugsConnectedLight size={24} />
-  //     } else {
-  //       return <PiPlugsLight size={24} />
-  //     }
-  //   } else if (text.split('/')[0] === 'SD') {
-  //     if (text.split('/')[1] === 'ON') {
-  //       return <PiSimCardLight size={24} />
-  //     } else {
-  //       return <PiSimCardLight size={24} />
-  //     }
-  //   } else if (text.split('/')[0] === 'REPORT') {
-  //     return <PiNoteLight size={24} />
-  //   } else if (text.split('/')[0] === 'INTERNET') {
-  //     if (text.split('/')[1] === 'ON') {
-  //       return <PiWifiSlashLight size={24} />
-  //     } else {
-  //       return <PiWifiHighLight size={24} />
-  //     }
-  //   } else {
-  //     return <PiSirenLight size={24} />
-  //   }
-  // }
-
   const subTextNotiDetailsIcon = (text: string) => {
     const [topic, sub, status] = text.split('/')
-    const iconSize = 24 // กำหนดขนาดที่เดียว แก้ไขง่าย
+    const iconSize = 24
 
-    // 1. จัดการกลุ่ม PROBE (รองรับ PROBE1, PROBE2...)
+    // 1. จัดการกลุ่ม PROBE
     if (topic.startsWith('PROBE')) {
+      // --- กรณีอุณหภูมิ ---
       if (sub === 'TEMP') {
         const tempIcons: Record<string, JSX.Element> = {
-          OVER: <PiThermometerHotLight size={iconSize} />,
-          LOWER: <PiThermometerColdLight size={iconSize} />
+          OVER: (
+            <PiThermometerHotLight size={iconSize} className='text-error' />
+          ),
+          LOWER: (
+            <PiThermometerColdLight size={iconSize} className='text-warning' />
+          )
         }
         return tempIcons[status] || <PiThermometerSimpleLight size={iconSize} />
       }
 
-      // เคส DOOR และ SENSOR (ON = เปิด, OFF = ปิด)
-      return status === 'ON' ? (
-        <PiDoorOpenLight size={iconSize} />
-      ) : (
-        <PiDoorLight size={iconSize} />
-      )
+      // --- กรณี SENSOR (เซ็นเซอร์หลุด/ปกติ) ---
+      if (sub.startsWith('SENSOR')) {
+        // ตาม Logic subTextNotiDetails ของคุณ: ON = ปกติ, OFF = หลุด/พัง
+        return status === 'ON' ? (
+          <PiLinkSimpleLight size={iconSize} className='text-success' /> // ไอคอนเชื่อมต่อปกติ
+        ) : (
+          <PiLinkBreakLight size={iconSize} className='text-error' /> // ไอคอนเซ็นเซอร์หลุด
+        )
+      }
+
+      // --- กรณี DOOR (เปิด/ปิด) ---
+      if (sub.startsWith('DOOR')) {
+        return status === 'ON' ? (
+          <PiDoorOpenLight size={iconSize} className='text-error' />
+        ) : (
+          <PiDoorLight size={iconSize} className='text-success' />
+        )
+      }
     }
 
     // 2. จัดการกลุ่มอื่นๆ ด้วย Switch
     switch (topic) {
       case 'AC':
         return sub === 'ON' ? (
-          <PiPlugsConnectedLight size={iconSize} />
+          <PiPlugsConnectedLight size={iconSize} className='text-success' />
         ) : (
-          <PiPlugsLight size={iconSize} />
+          <PiPlugsLight size={iconSize} className='text-error' />
         )
 
       case 'SD':
-        // ในโค้ดเดิมทั้ง ON/OFF ใช้ไอคอนเดียวกัน จึง return ได้เลย
         return <PiSimCardLight size={iconSize} />
 
       case 'INTERNET':
         return sub === 'ON' ? (
-          <PiWifiSlashLight size={iconSize} />
+          <PiWifiSlashLight size={iconSize} className='text-error' />
         ) : (
-          <PiWifiHighLight size={iconSize} />
+          <PiWifiHighLight size={iconSize} className='text-success' />
         )
 
       case 'REPORT':
@@ -314,12 +247,12 @@ const Notifications = () => {
     () => (
       <ul
         tabIndex={1}
-        className='dropdown-content bg-base-100 text-base-content rounded-box top-px z-10 mt-16 right-0 w-[360px] md:w-[480px] border border-white/5 shadow-2xl outline-1 outline-black/5'
+        className='dropdown-content bg-base-100 text-base-content rounded-box top-px z-10 mt-16 right-0 w-90 md:w-120 border border-white/5 shadow-2xl outline-1 outline-black/5'
       >
-        <div className='flex items-center justify-between rounded-t-box p-2 h-[54px] bg-base-100/70 backdrop-blur-md border-b border-base-content/10 sticky top-0 z-10'>
+        <div className='flex items-center justify-between rounded-t-box p-2 h-13.5 bg-base-100/70 backdrop-blur-md border-b border-base-content/10 sticky top-0 z-10'>
           <span className='text-base ml-2'>{t('titleNotification')}</span>
           <button
-            className='btn btn-ghost border border-base-content/20 flex p-0 duration-300 ease-linear max-h-[34px] min-h-[34px] max-w-[34px] min-w-[34px] tooltip tooltip-left'
+            className='btn btn-ghost border border-base-content/20 flex p-0 duration-300 ease-linear max-h-8.5 min-h-8.5 max-w-8.5 min-w-8.5 tooltip tooltip-left'
             data-tip={t('isExapndText')}
             onClick={() => {
               document.activeElement instanceof HTMLElement &&
@@ -336,7 +269,7 @@ const Notifications = () => {
         {role === 'LEGACY_ADMIN' || role === 'LEGACY_USER' || tmsMode ? (
           <div
             id='scrollableDiv'
-            className='h-[520px] max-h-[calc(100dvh-180px)] md:max-h-[520px] overflow-y-scroll'
+            className='h-130 max-h-[calc(100dvh-180px)] md:max-h-130 overflow-y-scroll'
           >
             {notificationList.length > 0 ? (
               <InfiniteScroll
@@ -346,7 +279,7 @@ const Notifications = () => {
                 scrollableTarget='scrollableDiv'
                 loader={
                   <div>
-                    <div className='divider my-0 before:h-[1px] after:h-[1px]'></div>
+                    <div className='divider my-0 before:h-px after:h-px'></div>
                     <div className='flex items-center justify-center p-4 pt-3'>
                       <span
                         className={`loading ${loadingStyle} loading-md`}
@@ -356,7 +289,7 @@ const Notifications = () => {
                 }
                 endMessage={
                   <div>
-                    <div className='divider my-0 before:h-[1px] after:h-[1px]'></div>
+                    <div className='divider my-0 before:h-px after:h-px'></div>
                     <div className='flex items-center justify-center p-4 pt-3 opacity-70'>
                       <p className='text-sm'>{t('noMoreLoad')}</p>
                     </div>
@@ -417,7 +350,7 @@ const Notifications = () => {
         ) : (
           <div
             id='scrollableDiv'
-            className='h-[520px] max-h-[calc(100dvh-230px)] md:max-h-[520px] overflow-y-scroll'
+            className='h-130 max-h-[calc(100dvh-230px)] md:max-h-130 overflow-y-scroll'
           >
             {notificationList.length > 0 ? (
               <InfiniteScroll
@@ -427,7 +360,7 @@ const Notifications = () => {
                 scrollableTarget='scrollableDiv'
                 loader={
                   <div>
-                    <div className='divider my-0 before:h-[1px] after:h-[1px]'></div>
+                    <div className='divider my-0 before:h-px after:h-px'></div>
                     <div className='flex items-center justify-center p-4 pt-3'>
                       <span
                         className={`loading ${loadingStyle} loading-md`}
@@ -437,7 +370,7 @@ const Notifications = () => {
                 }
                 endMessage={
                   <div>
-                    <div className='divider my-0 before:h-[1px] after:h-[1px]'></div>
+                    <div className='divider my-0 before:h-px after:h-px'></div>
                     <div className='flex items-center justify-center p-4 pt-3 opacity-70'>
                       <p className='text-sm'>{t('noMoreLoad')}</p>
                     </div>
@@ -450,7 +383,7 @@ const Notifications = () => {
                       className='flex items-center gap-3 py-2 px-3 hover:bg-base-200 duration-300 ease-linear'
                       key={index}
                     >
-                      <div className='bg-primary/10 text-primary/70 rounded-field p-1'>
+                      <div className='bg-base-300/80 text-primary/70 rounded-field p-1'>
                         {subTextNotiDetailsIcon(item.message)}
                       </div>
                       <div className='flex flex-col gap-1 w-full'>

@@ -103,6 +103,9 @@ export default {
     messageOff: 'Off',
     notificationButtonSubmit: 'Save',
     doorInacctive: 'Disable the door',
+    sensor: 'Sensor',
+    sensorFailed: 'Error',
+    sensorNormal: 'Normal',
 
     // device cards
     deviceOnline: 'Online',
