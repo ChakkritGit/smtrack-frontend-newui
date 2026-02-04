@@ -2,71 +2,69 @@ name: Build Frontend
 
 on:
   push:
-    branches: [ "dev" ]
+    branches: ["dev"]
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-    - name: Get Original Commit Message
-      id: get_commit_message
-      run: |
-        COMMIT_MESSAGE=$(git log -1 --pretty=%B)
+      - name: Get Original Commit Message
+        id: get_commit_message
+        run: |
+          COMMIT_MESSAGE=$(git log -1 --pretty=%B)
 
-        if [[ $COMMIT_MESSAGE == "Merge branch"* ]]; then
-          COMMIT_MESSAGE=$(git log -1 --pretty=%B HEAD^2)
-        fi
-        echo "message<<EOF" >> $GITHUB_OUTPUT
-        echo "$COMMIT_MESSAGE" >> $GITHUB_OUTPUT
-        echo "EOF" >> $GITHUB_OUTPUT
+          if [[ $COMMIT_MESSAGE == "Merge branch"* ]]; then
+            COMMIT_MESSAGE=$(git log -1 --pretty=%B HEAD^2)
+          fi
+          echo "message<<EOF" >> $GITHUB_OUTPUT
+          echo "$COMMIT_MESSAGE" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
 
-    - name: Set dynamic image tag
-      run: echo "TAG=siamatic/smtrack-frontend:2.0.14c-${GITHUB_SHA::7}" >> $GITHUB_ENV
+      - name: Set dynamic image tag
+        run: echo "TAG=siamatic/smtrack-frontend:2.0.15-${GITHUB_SHA::7}" >> $GITHUB_ENV
 
-    - name: Login to docker hub
-      uses: docker/login-action@v3
-      with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Login to docker hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
 
-    - name: Build and push
-      uses: docker/build-push-action@v6
-      with:
-        context: .
-        push: true
-        tags: ${{ env.TAG }}
-        build-args: |
-          VITE_APP_API=${{secrets.VITE_APP_API}}
-          VITE_APP_IMG=${{secrets.VITE_APP_IMG}}
-          VITE_APP_AUTH=${{secrets.VITE_APP_AUTH}}
-          VITE_APP_SOCKET=${{secrets.VITE_APP_SOCKET}}
-          VITE_APP_DOMAIN=${{secrets.VITE_APP_DOMAIN}}
-          VITE_APP_MQTT=${{secrets.VITE_APP_MQTT}}
-          VITE_APP_MQTT_PORT=${{secrets.VITE_APP_MQTT_PORT}}
-          VITE_APP_MQTT_USERNAME=${{secrets.VITE_APP_MQTT_USERNAME}}
-          VITE_APP_MQTT_PASSWORD=${{secrets.VITE_APP_MQTT_PASSWORD}}
-          VITE_APP_VERSION=${{secrets.VITE_APP_VERSION}}
-          VITE_APP_SECRETKEY=${{secrets.VITE_APP_SECRETKEY}}
-          VITE_APP_MAXAGE=${{secrets.VITE_APP_MAXAGE}}
-          VITE_APP_NODE_ENV=${{secrets.VITE_APP_NODE_ENV}}
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: ${{ env.TAG }}
+          secrets: |
+            "VITE_APP_API=${{secrets.VITE_APP_API}}"
+            "VITE_APP_IMG=${{secrets.VITE_APP_IMG}}"
+            "VITE_APP_AUTH=${{secrets.VITE_APP_AUTH}}"
+            "VITE_APP_SOCKET=${{secrets.VITE_APP_SOCKET}}"
+            "VITE_APP_DOMAIN=${{secrets.VITE_APP_DOMAIN}}"
+            "VITE_APP_MQTT=${{secrets.VITE_APP_MQTT}}"
+            "VITE_APP_MQTT_PORT=${{secrets.VITE_APP_MQTT_PORT}}"
+            "VITE_APP_MQTT_USERNAME=${{secrets.VITE_APP_MQTT_USERNAME}}"
+            "VITE_APP_MQTT_PASSWORD=${{secrets.VITE_APP_MQTT_PASSWORD}}"
+            "VITE_APP_VERSION=${{secrets.VITE_APP_VERSION}}"
+            "VITE_APP_SECRETKEY=${{secrets.VITE_APP_SECRETKEY}}"
+            "VITE_APP_MAXAGE=${{secrets.VITE_APP_MAXAGE}}"
+            "VITE_APP_NODE_ENV=${{secrets.VITE_APP_NODE_ENV}}"
 
-    - name: Update Kubernetes manifests
-      run: |
-        git config --global user.email "nongtonnee@gmail.com"
-        git config --global user.name "ChakkritGit"
+      - name: Update Kubernetes manifests
+        run: |
+          git config --global user.email "nongtonnee@gmail.com"
+          git config --global user.name "ChakkritGit"
 
-        sed -i -E "s|image: siamatic/smtrack-frontend:[^ ]+|image: ${{ env.TAG }}|g" k8s/deploy.yaml
+          sed -i -E "s|image: siamatic/smtrack-frontend:[^ ]+|image: ${{ env.TAG }}|g" k8s/deploy.yaml
 
-        git add k8s/deploy.yaml
-        git commit -m "Update deployment image to ${{ env.TAG }}"
-        git push
+          git add k8s/deploy.yaml
+          git commit -m "Update deployment image to ${{ env.TAG }}"
+          git push
 
     # - name: Send success message to slack
     #   id: slack
