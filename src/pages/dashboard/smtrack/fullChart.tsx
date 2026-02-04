@@ -246,87 +246,38 @@ const FullChart = () => {
     }
   }
 
-  // ... existing imports
-
   const handleDownload = useCallback(
     async (type: string) => {
       if (canvasChartRef.current && tableInfoRef.current) {
-        // เตรียม Style ก่อนเริ่ม
+        // 1. เตรียมหน้าจอ (แสดงหัวตาราง)
         tableInfoRef.current.style.display = 'flex'
         tableInfoRef.current.style.color = 'black'
         canvasChartRef.current.style.color = 'black'
-        canvasChartRef.current.style.position = 'relative'
-        canvasChartRef.current.style.zIndex = '-50'
 
         const canvas = canvasChartRef.current
 
-        // เพิ่ม Options ให้ html2canvas
         const promise = html2canvas(canvas, {
-          scale: 2,
-          backgroundColor: '#ffffff', // บังคับพื้นหลังขาว
-          onclone: clonedDoc => {
-            // 1. จัดการ SVG Text (ส่วนใหญ่เป็นแกน X, Y และ Label ในกราฟ)
-            const svgTexts = clonedDoc.querySelectorAll('text')
-            svgTexts.forEach(el => {
-              if (el instanceof SVGElement) {
-                // ตรวจสอบ Type เพื่อกัน Error
-                el.style.fill = '#000000'
-                el.setAttribute('fill', '#000000')
-              }
-            })
-
-            // 2. จัดการ HTML Text (Legend, Tooltip หรือคำอธิบายที่เป็น HTML)
-            // เลือก Class ที่มักจะเป็นตัวหนังสือ (ปรับเพิ่มลด selector ได้ตามโครงสร้างจริง)
-            const htmlTexts = clonedDoc.querySelectorAll(
-              '.apexcharts-legend-text, .apexcharts-text, span, div, p'
-            )
-
-            htmlTexts.forEach(el => {
-              if (el instanceof HTMLElement) {
-                // เช็คว่ามีข้อความจริงๆ ไหม (เพื่อไม่ให้ไปเปลี่ยนสี div ที่เป็นแค่กล่องเปล่า)
-                if (el.innerText && el.innerText.trim().length > 0) {
-                  el.style.color = '#000000'
-                }
-              }
-            })
-          }
+          scale: 3, // เพิ่มความชัด
+          useCORS: true
         })
           .then(canvasImage => {
             const dataURL = canvasImage.toDataURL(
-              type === 'png' ? 'image/png' : 'image/jpg',
+              type === 'png' ? 'image/png' : 'image/jpeg',
               1.0
             )
-
-            // ... (โค้ดส่วนดาวน์โหลดเดิม) ...
-            let pagename = ''
-            if (pageNumber === 1) {
-              pagename = 'Day_Chart'
-            } else if (pageNumber === 2) {
-              pagename = 'Week_Chart'
-            } else {
-              pagename = 'Custom_Chart'
-            }
-
             const link = document.createElement('a')
             link.href = dataURL
-            link.download = `${pagename}${type === 'png' ? '.png' : '.jpg'}`
-
+            link.download = `${
+              pageNumber === 1 ? 'Day' : 'Chart'
+            }_${Date.now()}.${type}`
             document.body.appendChild(link)
             link.click()
             document.body.removeChild(link)
           })
-          .catch(error => {
-            console.error('Error generating image:', error)
-            throw new Error('Failed to download the image')
-          })
           .finally(() => {
-            // ... (โค้ด Reset Style เดิม) ...
-            if (tableInfoRef.current && canvasChartRef.current) {
+            // คืนค่าหน้าจอจริง
+            if (tableInfoRef.current)
               tableInfoRef.current.style.display = 'none'
-              tableInfoRef.current.style.color = ''
-              canvasChartRef.current.style.color = ''
-              canvasChartRef.current.style.zIndex = '1'
-            }
           })
 
         toast.promise(promise, {
@@ -334,37 +285,31 @@ const FullChart = () => {
           success: <span>{t('downloaded')}</span>,
           error: <span>{t('descriptionErrorWrong')}</span>
         })
-      } else {
-        toast.error(t('nodata'))
       }
     },
-    [t, pageNumber] // อย่าลืมใส่ pageNumber ใน dependency ถ้ามีการใช้
+    [t, pageNumber]
   )
 
   const exportChart = () => {
     return new Promise(async (resolve, reject) => {
-      setTimeout(async () => {
-        try {
+      if (!canvasChartRef.current) return reject('No element')
+
+      // เก็บค่าเดิม
+      const originalWidth = canvasChartRef.current.style.width
+      const originalHeight = canvasChartRef.current.style.height
+
+      html2canvas(canvasChartRef.current!, {
+        scale: 2
+      })
+        .then(canvasImage => {
+          // คืนขนาดเดิม
           if (canvasChartRef.current) {
-            canvasChartRef.current.style.width = '1480px'
-            canvasChartRef.current.style.height = '680px'
-            canvasChartRef.current.style.color = 'black'
-
-            await new Promise(resolve => setTimeout(resolve, 500))
-            const canvas = canvasChartRef.current
-
-            html2canvas(canvas)
-              .then(canvasImage => {
-                resolve(canvasImage.toDataURL('image/png', 1.0))
-              })
-              .catch(error => {
-                reject(error)
-              })
+            canvasChartRef.current.style.width = originalWidth
+            canvasChartRef.current.style.height = originalHeight
           }
-        } catch (error) {
-          reject(error)
-        }
-      }, 600)
+          resolve(canvasImage.toDataURL('image/png', 1.0))
+        })
+        .catch(reject)
     })
   }
 
@@ -645,7 +590,11 @@ const FullChart = () => {
           </button>
         </div>
       )}
-      <div ref={canvasChartRef} className='p-3'>
+      <div
+        ref={canvasChartRef}
+        className='p-3 rounded-lg mt-2'
+        data-theme='light'
+      >
         <div ref={tableInfoRef} className='hidden'>
           <div className='grid grid-cols-2 gap-3'>
             <div className='flex items-center gap-3'>

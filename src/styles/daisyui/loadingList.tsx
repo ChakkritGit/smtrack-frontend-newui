@@ -15,7 +15,7 @@ const LoadingList = () => {
   }
 
   return (
-    <div className='grid grid-cols-1 md:grid-cols-2 gap-0.5 py-3 max-h-[200px] overflow-y-scroll'>
+    <div className='grid grid-cols-1 md:grid-cols-2 gap-0.5 py-3 max-h-50 overflow-y-scroll'>
       <div
         className={`flex items-center gap-3 w-full justify-between cursor-pointer hover:bg-base-200 transition-all duration-300 ease-out px-4 py-3 rounded-selector ${
           loadingStyle === 'loading-spinner' ? 'bg-base-300/50' : ''

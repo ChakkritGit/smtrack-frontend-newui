@@ -1,6 +1,9 @@
 import Chart from 'react-apexcharts'
 import { useTranslation } from 'react-i18next'
-import { DeviceLog, DeviceLogs} from '../../../../types/smtrack/devices/deviceType'
+import {
+  DeviceLog,
+  DeviceLogs
+} from '../../../../types/smtrack/devices/deviceType'
 import Loading from '../../../skeleton/table/loading'
 import { useMemo } from 'react'
 

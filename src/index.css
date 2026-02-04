@@ -5,56 +5,56 @@
 }
 
 @font-face {
-  font-family: 'Anuphan';
-  src: url('./assets/fonts/Anuphan-Thin.ttf') format('truetype');
+  font-family: "Anuphan";
+  src: url("./assets/fonts/Anuphan-Thin.ttf") format("truetype");
   font-weight: 100;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Anuphan';
-  src: url('./assets/fonts/Anuphan-ExtraLight.ttf') format('truetype');
+  font-family: "Anuphan";
+  src: url("./assets/fonts/Anuphan-ExtraLight.ttf") format("truetype");
   font-weight: 200;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Anuphan';
-  src: url('./assets/fonts/Anuphan-Light.ttf') format('truetype');
+  font-family: "Anuphan";
+  src: url("./assets/fonts/Anuphan-Light.ttf") format("truetype");
   font-weight: 300;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Anuphan';
-  src: url('./assets/fonts/Anuphan-Regular.ttf') format('truetype');
+  font-family: "Anuphan";
+  src: url("./assets/fonts/Anuphan-Regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Anuphan';
-  src: url('./assets/fonts/Anuphan-Medium.ttf') format('truetype');
+  font-family: "Anuphan";
+  src: url("./assets/fonts/Anuphan-Medium.ttf") format("truetype");
   font-weight: 500;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Anuphan';
-  src: url('./assets/fonts/Anuphan-SemiBold.ttf') format('truetype');
+  font-family: "Anuphan";
+  src: url("./assets/fonts/Anuphan-SemiBold.ttf") format("truetype");
   font-weight: 600;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Anuphan';
-  src: url('./assets/fonts/Anuphan-Bold.ttf') format('truetype');
+  font-family: "Anuphan";
+  src: url("./assets/fonts/Anuphan-Bold.ttf") format("truetype");
   font-weight: 700;
   font-style: normal;
 }
 
 * {
-  font-family: 'Anuphan', sans-serif;
+  font-family: "Anuphan", sans-serif;
   /* user-select: none;
   -webkit-user-select: none; */
   /* outline: 1px solid red !important; */
@@ -106,7 +106,7 @@ body {
 
 .react-select__indicator,
 .react-select__dropdown-indicator {
-  &>svg {
+  & > svg {
     fill: var(--fallback-bc, oklch(var(--bc) / 0.25)) !important;
   }
 }
@@ -132,40 +132,40 @@ body {
 }
 
 .custom-role-select {
-  &>.react-select__menu>div:nth-child(1) {
+  & > .react-select__menu > div:nth-child(1) {
     justify-content: unset !important;
     max-height: 140px;
   }
 }
 
 .custom-device-select {
-  &>.react-select__menu>div:nth-child(1) {
+  & > .react-select__menu > div:nth-child(1) {
     justify-content: unset !important;
     max-height: 300px;
   }
 }
 
 .custom-menu-select {
-  &>.react-select__menu>div:nth-child(1) {
+  & > .react-select__menu > div:nth-child(1) {
     justify-content: unset !important;
     max-height: 250px;
   }
 }
 
 .custom-ward-menu-select {
-  &>.react-select__menu>div:nth-child(1) {
+  & > .react-select__menu > div:nth-child(1) {
     justify-content: unset !important;
     max-height: 250px;
     max-width: 250px;
   }
 
-  &>.react-select__menu {
+  & > .react-select__menu {
     @apply right-1;
   }
 }
 
 .custom-hospital-menu-select {
-  &>.react-select__menu>div:nth-child(1) {
+  & > .react-select__menu > div:nth-child(1) {
     justify-content: unset !important;
     max-height: 250px;
     max-width: 350px;
@@ -198,7 +198,7 @@ body {
 
 .custom-swiper-pagination .swiper-pagination-bullet-active-next,
 .custom-swiper-pagination .swiper-pagination-bullet-active-prev {
-  transform: scale(0.80) !important;
+  transform: scale(0.8) !important;
 }
 
 .custom-swiper-pagination .swiper-pagination-bullet-active-next-next,
@@ -210,7 +210,7 @@ body {
   @apply !bg-primary;
 }
 
-.apexcharts-xaxis-texts-g>text {
+.apexcharts-xaxis-texts-g > text {
   @apply !fill-base-content;
 }
 
@@ -223,99 +223,103 @@ body {
 }
 
 .dataTableWrapperWithNoData {
-  height: calc(100% - 1.25rem
-      /* 20px */
-    );
+  height: calc(100% - 1.25rem /* 20px */);
 
-  &>div {
+  & > div {
     max-height: unset;
     height: 100%;
 
-    &>div {
+    & > div {
       height: 100%;
     }
   }
 }
 
 .dataTableWrapper {
-  &>div:nth-child(1) {
+  & > div:nth-child(1) {
     @apply rounded-none;
   }
 
-  &>div>div>div>div>div>div>button {
+  & > div > div > div > div > div > div > button {
     @apply text-inherit;
   }
 
-  &>div>div>div>div {
+  & > div > div > div > div {
     @apply bg-base-100 duration-300 ease-linear h-full;
   }
 
-  &>div>div>div>div>div {
-    &>div {
+  & > div > div > div > div > div {
+    & > div {
       @apply duration-300 ease-linear;
     }
 
     @apply bg-transparent !text-base-content !border-b-base-content/10 duration-300 ease-linear;
   }
 
-  &>div>div>div>div:nth-child(2)>div:hover {
+  & > div > div > div > div:nth-child(2) > div:hover {
     @apply duration-300 ease-linear bg-base-300;
   }
 
-  &>div:nth-child(2)>nav {
+  & > div:nth-child(2) > nav {
     @apply bg-transparent text-base-content border-t-base-content/10 duration-300 ease-linear;
 
-    &>div:nth-child(4)>button:disabled {
+    & > div:nth-child(4) > button:disabled {
       @apply !cursor-not-allowed text-base-content/30 fill-base-content/30;
     }
 
-    &>div:nth-child(4)>button {
+    & > div:nth-child(4) > button {
       @apply text-base-content fill-base-content;
     }
   }
 }
 
-#pagination-next-page, #pagination-last-page, #pagination-previous-page, #pagination-first-page {
-  &>svg {
+#pagination-next-page,
+#pagination-last-page,
+#pagination-previous-page,
+#pagination-first-page {
+  & > svg {
     @apply !fill-base-content;
   }
 }
 
-#pagination-next-page:disabled, #pagination-last-page:disabled, #pagination-previous-page:disabled, #pagination-first-page:disabled {
-  &>svg {
+#pagination-next-page:disabled,
+#pagination-last-page:disabled,
+#pagination-previous-page:disabled,
+#pagination-first-page:disabled {
+  & > svg {
     @apply !fill-base-content/35;
   }
 }
 
 .dataTableSubWrapper {
-  &>div:nth-child(1) {
+  & > div:nth-child(1) {
     @apply rounded-none;
   }
 
-  &>div>div>div>div {
+  & > div > div > div > div {
     @apply bg-base-200 duration-300 ease-linear h-full;
   }
 
-  &>div>div>div>div>div {
-    &>div {
+  & > div > div > div > div > div {
+    & > div {
       @apply duration-300 ease-linear;
     }
 
     @apply bg-transparent !text-base-content !border-b-base-content/10 duration-300 ease-linear;
   }
 
-  &>div>div>div>div:nth-child(2)>div:hover {
+  & > div > div > div > div:nth-child(2) > div:hover {
     @apply duration-300 ease-linear bg-base-300;
   }
 
-  &>div:nth-child(2)>nav {
+  & > div:nth-child(2) > nav {
     @apply bg-transparent text-base-content border-t-base-content/10 duration-300 ease-linear;
 
-    &>div:nth-child(4)>button:disabled {
+    & > div:nth-child(4) > button:disabled {
       @apply !cursor-not-allowed text-base-content/30 fill-base-content/30;
     }
 
-    &>div:nth-child(4)>button {
+    & > div:nth-child(4) > button {
       @apply text-base-content fill-base-content;
     }
   }
@@ -392,7 +396,7 @@ div:where(.swal2-icon).swal2-success {
   @apply !text-green-500 !border-green-500;
 }
 
-div:where(.swal2-icon).swal2-success [class^=swal2-success-line] {
+div:where(.swal2-icon).swal2-success [class^="swal2-success-line"] {
   @apply !bg-green-500;
 }
 
@@ -412,22 +416,22 @@ div:where(.swal2-icon).swal2-error {
   @apply !text-red-500 !border-red-500;
 }
 
-div:where(.swal2-icon).swal2-error [class^=swal2-x-mark-line] {
+div:where(.swal2-icon).swal2-error [class^="swal2-x-mark-line"] {
   @apply !bg-red-500;
 }
 
 .swal2-show {
-  --animation-btn: .25s;
+  --animation-btn: 0.25s;
   animation: button-pop var(--animation-btn, 0.25s) ease-out !important;
 }
 
 @keyframes button-pop {
   0% {
-    transform: scale(.96);
+    transform: scale(0.96);
   }
 
   30% {
-    transform: scale(.98);
+    transform: scale(0.98);
   }
 
   100% {
@@ -480,7 +484,7 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
-input[type=number] {
+input[type="number"] {
   appearance: textfield;
   -moz-appearance: textfield;
 }
@@ -494,7 +498,7 @@ input[type=number] {
 @keyframes testkey {
   0% {
     transform: scaleY(0);
-    scale: .9;
+    scale: 0.9;
     opacity: 0;
   }
 
@@ -505,7 +509,7 @@ input[type=number] {
   }
 }
 
-.btm-nav>*:where(.active) {
+.btm-nav > *:where(.active) {
   @apply bg-transparent;
 }
 
@@ -522,7 +526,7 @@ input[type=number] {
 }
 
 .initial-Launched-Main {
-  animation: bounch ease .3s;
+  animation: bounch ease 0.3s;
 }
 
 @keyframes bounch {
