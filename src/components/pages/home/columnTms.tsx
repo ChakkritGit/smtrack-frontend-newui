@@ -132,16 +132,16 @@ const columnTms = (
     {
       name: t('deviceConnectTb'),
       cell: (item: DeviceTmsType) => {
-        if (item.online === undefined) return null
+        if (item.online === null) return null
 
         return (
           <div
             className={`w-max h-6 px-2 text-black flex items-center justify-center rounded-field ${
-              item.online ? 'bg-green-400' : 'bg-red-400'
+              item?.online ? 'bg-green-400' : 'bg-red-400'
             } duration-300 ease-linear`}
             onClick={() => handleRowClicked(item)}
           >
-            {item.online ? t('deviceOnline') : t('deviceOffline')}
+            {item?.online ? t('deviceOnline') : t('deviceOffline')}
           </div>
         )
       },
