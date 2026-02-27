@@ -1,19 +1,19 @@
-import { JSX, useEffect, useMemo, useState } from 'react'
-import { RiArrowRightUpLine, RiNotification4Line } from 'react-icons/ri'
-import axiosInstance from '../../constants/axios/axiosInstance'
+import { JSX, useEffect, useMemo, useState } from "react";
+import { RiArrowRightUpLine, RiNotification4Line } from "react-icons/ri";
+import axiosInstance from "../../constants/axios/axiosInstance";
 import {
   responseType,
-  UserProfileType
-} from '../../types/smtrack/utilsRedux/utilsReduxType'
-import { AxiosError } from 'axios'
-import { useTranslation } from 'react-i18next'
-import { NotificationType } from '../../types/global/notification'
-import { extractValues } from '../../constants/utils/utilsConstants'
-import { RootState } from '../../redux/reducers/rootReducer'
-import { useDispatch, useSelector } from 'react-redux'
-import { Location, useLocation, useNavigate } from 'react-router-dom'
-import { setTokenExpire } from '../../redux/actions/utilsActions'
-import InfiniteScroll from 'react-infinite-scroll-component'
+  UserProfileType,
+} from "../../types/smtrack/utilsRedux/utilsReduxType";
+import { AxiosError } from "axios";
+import { useTranslation } from "react-i18next";
+import { NotificationType } from "../../types/global/notification";
+import { extractValues } from "../../constants/utils/utilsConstants";
+import { RootState } from "../../redux/reducers/rootReducer";
+import { useDispatch, useSelector } from "react-redux";
+import { Location, useLocation, useNavigate } from "react-router-dom";
+import { setTokenExpire } from "../../redux/actions/utilsActions";
+import InfiniteScroll from "react-infinite-scroll-component";
 import {
   PiDoorLight,
   PiDoorOpenLight,
@@ -28,259 +28,270 @@ import {
   PiThermometerHotLight,
   PiThermometerSimpleLight,
   PiWifiHighLight,
-  PiWifiSlashLight
-} from 'react-icons/pi'
+  PiWifiSlashLight,
+} from "react-icons/pi";
 
 const Notifications = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const { tokenDecode, tmsMode, userProfile, loadingStyle, popUpMode } =
-    useSelector((state: RootState) => state.utils)
-  const location = useLocation()
-  const { t } = useTranslation()
-  const navigate = useNavigate()
-  const [page, setPage] = useState(1)
-  const [notificationList, setNotification] = useState<NotificationType[]>([])
-  const [isNotiLoading, setIsNotiLoading] = useState(true)
-  const [fetchMore, setFetchMore] = useState(false)
-  const { role = 'USER' } = tokenDecode || {}
+    useSelector((state: RootState) => state.utils);
+  const location = useLocation();
+  const { t } = useTranslation();
+  const navigate = useNavigate();
+  const [page, setPage] = useState(1);
+  const [notificationList, setNotification] = useState<NotificationType[]>([]);
+  const [isNotiLoading, setIsNotiLoading] = useState(true);
+  const [fetchMore, setFetchMore] = useState(false);
+  const { role = "USER" } = tokenDecode || {};
 
   const fetchNotification = async (pages: number) => {
     try {
-      setIsNotiLoading(true)
+      setIsNotiLoading(true);
       const response = await axiosInstance.get<
         responseType<NotificationType[]>
       >(
-        role === 'LEGACY_ADMIN' || role === 'LEGACY_USER' || tmsMode
+        role === "LEGACY_ADMIN" || role === "LEGACY_USER" || tmsMode
           ? `/legacy/templog/alert/notification?page=${pages}&perpage=${10}`
-          : `/log/notification?page=${pages}&perpage=${10}`
-      )
-      setNotification(prevList =>
-        pages === 1 ? response.data.data : prevList.concat(response.data.data)
-      )
+          : `/log/notification?page=${pages}&perpage=${10}`,
+      );
+      setNotification((prevList) =>
+        pages === 1 ? response.data.data : prevList.concat(response.data.data),
+      );
       if (response.data.data.length < 10) {
-        setFetchMore(false)
+        setFetchMore(false);
       } else {
-        setFetchMore(true)
+        setFetchMore(true);
       }
     } catch (error) {
       if (error instanceof AxiosError) {
         if (error.response?.status === 401) {
-          dispatch(setTokenExpire(true))
+          dispatch(setTokenExpire(true));
         }
-        console.error(error.message)
+        console.error(error.message);
       } else {
-        console.error(error)
+        console.error(error);
       }
     } finally {
-      setIsNotiLoading(false)
+      setIsNotiLoading(false);
     }
-  }
+  };
 
   const handleLoadMoreData = () => {
     if (fetchMore) {
       const timeoutId = setTimeout(() => {
-        setPage(prevPage => prevPage + 1)
-      }, 1000)
+        setPage((prevPage) => prevPage + 1);
+      }, 1000);
 
-      return () => clearTimeout(timeoutId)
+      return () => clearTimeout(timeoutId);
     }
-  }
+  };
 
   const subTextNotiDetails = (text: string) => {
-    const [topic, sub, status] = text.split('/')
+    const [topic, sub, status, value] = text.split("/");
 
-    if (topic.startsWith('PROBE')) {
-      const probeNum = topic.replace('PROBE', '')
+    if (topic.startsWith("PROBE")) {
+      const probeNum = topic.replace("PROBE", "");
 
       // กรณีอุณหภูมิ
-      if (sub === 'TEMP') {
+      if (sub === "TEMP") {
         const tempMap: Record<string, string> = {
-          OVER: 'tempHigherLimmit',
-          LOWER: 'tempBelowLimmit'
-        }
-        return t(tempMap[status] || 'tempBackToNormal')
+          OVER: "tempHigherLimmit",
+          LOWER: "tempBelowLimmit",
+        };
+        return `${t(tempMap[status] || "tempBackToNormal")} ${value ? `(${value}°C)` : ""}`;
       }
 
       // กรณี DOOR หรือ SENSOR (ใช้ Logic เปิด/ปิด เหมือนกัน)
-      if (sub.startsWith('DOOR')) {
-        const state = status === 'ON' ? t('stateOn') : t('stateOff')
+      if (sub.startsWith("DOOR")) {
+        const state = status === "ON" ? t("stateOn") : t("stateOff");
 
         // ถ้าเป็น Door ให้ตัดคำว่า DOOR ออกเพื่อเอาเลข, ถ้าเป็น SENSOR ให้ใช้ชื่อ SENSOR เลย
-        const subName = sub.startsWith('DOOR')
-          ? `${t('doorNum')} ${sub.replace('DOOR', '')}`
-          : `${t('doorNum')} 1` // หรือใส่ t('sensor')
+        const doorNum = sub.replace("DOOR", "");
+        let subName = "";
 
-        return `${t('deviceProbeTb')} ${probeNum} ${subName} ${state}`
-      } else if (sub.startsWith('SENSOR')) {
-        const state = status === 'ON' ? t('sensorNormal') : t('sensorFailed')
-        const subName = sub.startsWith('SENSOR')
-          ? `${t('sensor')} ${sub.replace('SENSOR', '')}`
-          : `${t('sensor')} 1` // หรือใส่ t('sensor')
+        if (Number(doorNum) > 0) {
+          subName = sub.startsWith("DOOR")
+            ? `${t("doorNum")} ${doorNum} ${state}`
+            : `${t("doorNum")} 1 ${state}`; // หรือใส่ t('sensor')
+        } else {
+          if (status === "ON") {
+            subName = `${t("doorLongOpen")} ${value ? `(${value}) ${t('doorTime')}` : ""}`;
+          }
+        }
 
-        return `${t('deviceProbeTb')} ${probeNum} ${subName} ${state}`
+        return `${t("deviceProbeTb")} ${probeNum} ${subName}`;
+      } else if (sub.startsWith("SENSOR")) {
+        const state = status === "ON" ? t("sensorNormal") : t("sensorFailed");
+        const subName = sub.startsWith("SENSOR")
+          ? `${t("sensor")} ${sub.replace("SENSOR", "")}`
+          : `${t("sensor")} 1`; // หรือใส่ t('sensor')
+
+        return `${t("deviceProbeTb")} ${probeNum} ${subName} ${state}`;
       }
     }
 
     switch (topic) {
-      case 'AC':
-        return sub === 'ON' ? t('plugBackToNormal') : t('plugProblem')
-      case 'SD':
-        return sub === 'ON' ? t('SdCardProblem') : t('SdCardBackToNormal')
-      case 'INTERNET':
-        return sub === 'ON' ? t('InternetProblem') : t('InternetBackToNormal')
-      case 'REPORT':
-        const val = extractValues(text)
-        return `${t('reportText')}/ ${t('devicsmtrackTb')}: ${
-          val?.temperature ?? '- -'
-        }°C, ${t('deviceHumiTb')}: ${val?.humidity ?? '- -'}%`
+      case "AC":
+        return sub === "ON" ? t("plugBackToNormal") : t("plugProblem");
+      case "SD":
+        return sub === "ON" ? t("SdCardProblem") : t("SdCardBackToNormal");
+      case "INTERNET":
+        return sub === "ON" ? t("InternetProblem") : t("InternetBackToNormal");
+      case "REPORT":
+        const val = extractValues(text);
+        return `${t("reportText")}/ ${t("devicsmtrackTb")}: ${
+          val?.temperature ?? "- -"
+        }°C, ${t("deviceHumiTb")}: ${val?.humidity ?? "- -"}%`;
       default:
-        return text
+        return text;
     }
-  }
+  };
 
   const subTextNotiDetailsIcon = (text: string) => {
-    const [topic, sub, status] = text.split('/')
-    const iconSize = 24
+    const [topic, sub, status] = text.split("/");
+    const iconSize = 24;
 
     // 1. จัดการกลุ่ม PROBE
-    if (topic.startsWith('PROBE')) {
+    if (topic.startsWith("PROBE")) {
       // --- กรณีอุณหภูมิ ---
-      if (sub === 'TEMP') {
+      if (sub === "TEMP") {
         const tempIcons: Record<string, JSX.Element> = {
           OVER: (
-            <PiThermometerHotLight size={iconSize} className='text-error' />
+            <PiThermometerHotLight size={iconSize} className="text-error" />
           ),
           LOWER: (
-            <PiThermometerColdLight size={iconSize} className='text-warning' />
-          )
-        }
-        return tempIcons[status] || <PiThermometerSimpleLight size={iconSize} />
+            <PiThermometerColdLight size={iconSize} className="text-warning" />
+          ),
+        };
+        return (
+          tempIcons[status] || <PiThermometerSimpleLight size={iconSize} />
+        );
       }
 
       // --- กรณี SENSOR (เซ็นเซอร์หลุด/ปกติ) ---
-      if (sub.startsWith('SENSOR')) {
+      if (sub.startsWith("SENSOR")) {
         // ตาม Logic subTextNotiDetails ของคุณ: ON = ปกติ, OFF = หลุด/พัง
-        return status === 'ON' ? (
-          <PiLinkSimpleLight size={iconSize} className='text-success' /> // ไอคอนเชื่อมต่อปกติ
+        return status === "ON" ? (
+          <PiLinkSimpleLight size={iconSize} className="text-success" /> // ไอคอนเชื่อมต่อปกติ
         ) : (
-          <PiLinkBreakLight size={iconSize} className='text-error' /> // ไอคอนเซ็นเซอร์หลุด
-        )
+          <PiLinkBreakLight size={iconSize} className="text-error" /> // ไอคอนเซ็นเซอร์หลุด
+        );
       }
 
       // --- กรณี DOOR (เปิด/ปิด) ---
-      if (sub.startsWith('DOOR')) {
-        return status === 'ON' ? (
-          <PiDoorOpenLight size={iconSize} className='text-error' />
+      if (sub.startsWith("DOOR")) {
+        return status === "ON" ? (
+          <PiDoorOpenLight size={iconSize} className="text-error" />
         ) : (
-          <PiDoorLight size={iconSize} className='text-success' />
-        )
+          <PiDoorLight size={iconSize} className="text-success" />
+        );
       }
     }
 
     // 2. จัดการกลุ่มอื่นๆ ด้วย Switch
     switch (topic) {
-      case 'AC':
-        return sub === 'ON' ? (
-          <PiPlugsConnectedLight size={iconSize} className='text-success' />
+      case "AC":
+        return sub === "ON" ? (
+          <PiPlugsConnectedLight size={iconSize} className="text-success" />
         ) : (
-          <PiPlugsLight size={iconSize} className='text-error' />
-        )
+          <PiPlugsLight size={iconSize} className="text-error" />
+        );
 
-      case 'SD':
-        return <PiSimCardLight size={iconSize} />
+      case "SD":
+        return <PiSimCardLight size={iconSize} />;
 
-      case 'INTERNET':
-        return sub === 'ON' ? (
-          <PiWifiSlashLight size={iconSize} className='text-error' />
+      case "INTERNET":
+        return sub === "ON" ? (
+          <PiWifiSlashLight size={iconSize} className="text-error" />
         ) : (
-          <PiWifiHighLight size={iconSize} className='text-success' />
-        )
+          <PiWifiHighLight size={iconSize} className="text-success" />
+        );
 
-      case 'REPORT':
-        return <PiNoteLight size={iconSize} />
+      case "REPORT":
+        return <PiNoteLight size={iconSize} />;
 
       default:
-        return <PiSirenLight size={iconSize} />
+        return <PiSirenLight size={iconSize} />;
     }
-  }
+  };
 
   const changeFavicon = (
     href: string,
     notificationarray: NotificationType[],
     path: Location<any>,
-    Profile: UserProfileType | undefined
+    Profile: UserProfileType | undefined,
   ) => {
-    const pathSegment = path.pathname.split('/')[1]
+    const pathSegment = path.pathname.split("/")[1];
     const capitalized =
-      pathSegment.charAt(0).toUpperCase() + pathSegment.slice(1)
+      pathSegment.charAt(0).toUpperCase() + pathSegment.slice(1);
 
     if (notificationarray.length > 0) {
       const link: HTMLLinkElement =
         document.querySelector("link[rel*='icon']") ||
-        document.createElement('link')
-      link.type = 'image/png'
-      link.rel = 'icon'
-      link.href = href
+        document.createElement("link");
+      link.type = "image/png";
+      link.rel = "icon";
+      link.href = href;
 
-      document.getElementsByTagName('head')[0].appendChild(link)
+      document.getElementsByTagName("head")[0].appendChild(link);
       document.title =
         Profile?.ward.hospital.hosName +
-        ' - ' +
-        `${path.pathname.split('/')[1] !== '' ? capitalized : 'Home'}`
+        " - " +
+        `${path.pathname.split("/")[1] !== "" ? capitalized : "Home"}`;
     } else {
       const link: HTMLLinkElement =
         document.querySelector("link[rel*='icon']") ||
-        document.createElement('link')
-      link.type = 'image/png'
-      link.rel = 'icon'
-      link.href = href
+        document.createElement("link");
+      link.type = "image/png";
+      link.rel = "icon";
+      link.href = href;
 
-      document.getElementsByTagName('head')[0].appendChild(link)
+      document.getElementsByTagName("head")[0].appendChild(link);
       document.title =
         Profile?.ward.hospital.hosName +
-        ' - ' +
-        `${path.pathname.split('/')[1] !== '' ? capitalized : 'Home'}`
+        " - " +
+        `${path.pathname.split("/")[1] !== "" ? capitalized : "Home"}`;
     }
-  }
+  };
 
   const NotificationList = useMemo(
     () => (
       <ul
         tabIndex={1}
-        className='dropdown-content bg-base-100 text-base-content rounded-box top-px z-10 mt-16 right-0 w-90 md:w-120 border border-white/5 shadow-2xl outline-1 outline-black/5'
+        className="dropdown-content bg-base-100 text-base-content rounded-box top-px z-10 mt-16 right-0 w-90 md:w-120 border border-white/5 shadow-2xl outline-1 outline-black/5"
       >
-        <div className='flex items-center justify-between rounded-t-box p-2 h-13.5 bg-base-100/70 backdrop-blur-md border-b border-base-content/10 sticky top-0 z-10'>
-          <span className='text-base ml-2'>{t('titleNotification')}</span>
+        <div className="flex items-center justify-between rounded-t-box p-2 h-13.5 bg-base-100/70 backdrop-blur-md border-b border-base-content/10 sticky top-0 z-10">
+          <span className="text-base ml-2">{t("titleNotification")}</span>
           <button
-            className='btn btn-ghost border border-base-content/20 flex p-0 duration-300 ease-linear max-h-8.5 min-h-8.5 max-w-8.5 min-w-8.5 tooltip tooltip-left'
-            data-tip={t('isExapndText')}
+            className="btn btn-ghost border border-base-content/20 flex p-0 duration-300 ease-linear max-h-8.5 min-h-8.5 max-w-8.5 min-w-8.5 tooltip tooltip-left"
+            data-tip={t("isExapndText")}
             onClick={() => {
               document.activeElement instanceof HTMLElement &&
-                document.activeElement.blur()
+                document.activeElement.blur();
 
-              if (location.pathname !== '/notification') {
-                navigate('/notification')
+              if (location.pathname !== "/notification") {
+                navigate("/notification");
               }
             }}
           >
             <RiArrowRightUpLine size={20} />
           </button>
         </div>
-        {role === 'LEGACY_ADMIN' || role === 'LEGACY_USER' || tmsMode ? (
+        {role === "LEGACY_ADMIN" || role === "LEGACY_USER" || tmsMode ? (
           <div
-            id='scrollableDiv'
-            className='h-130 max-h-[calc(100dvh-180px)] md:max-h-130 overflow-y-scroll'
+            id="scrollableDiv"
+            className="h-130 max-h-[calc(100dvh-180px)] md:max-h-130 overflow-y-scroll"
           >
             {notificationList.length > 0 ? (
               <InfiniteScroll
                 dataLength={notificationList.length}
                 next={handleLoadMoreData}
                 hasMore={fetchMore}
-                scrollableTarget='scrollableDiv'
+                scrollableTarget="scrollableDiv"
                 loader={
                   <div>
-                    <div className='divider my-0 before:h-px after:h-px'></div>
-                    <div className='flex items-center justify-center p-4 pt-3'>
+                    <div className="divider my-0 before:h-px after:h-px"></div>
+                    <div className="flex items-center justify-center p-4 pt-3">
                       <span
                         className={`loading ${loadingStyle} loading-md`}
                       ></span>
@@ -289,9 +300,9 @@ const Notifications = () => {
                 }
                 endMessage={
                   <div>
-                    <div className='divider my-0 before:h-px after:h-px'></div>
-                    <div className='flex items-center justify-center p-4 pt-3 opacity-70'>
-                      <p className='text-sm'>{t('noMoreLoad')}</p>
+                    <div className="divider my-0 before:h-px after:h-px"></div>
+                    <div className="flex items-center justify-center p-4 pt-3 opacity-70">
+                      <p className="text-sm">{t("noMoreLoad")}</p>
                     </div>
                   </div>
                 }
@@ -299,41 +310,41 @@ const Notifications = () => {
                 <div>
                   {notificationList.map((item, index) => (
                     <li
-                      className='flex items-center gap-3 py-2 px-3 hover:bg-base-200 duration-300 ease-linear'
+                      className="flex items-center gap-3 py-2 px-3 hover:bg-base-200 duration-300 ease-linear"
                       key={index}
                     >
-                      <div className='bg-primary/10 text-primary/70 rounded-field p-1'>
+                      <div className="bg-primary/10 text-primary/70 rounded-field p-1">
                         <PiSirenLight size={24} />
                       </div>
-                      <div className='flex flex-col gap-1 w-full'>
-                        <div className='flex items-center justify-between gap-3'>
-                          <span className='font-medium'>{item.message}</span>
-                          <div className='flex flex-col items-end opacity-70'>
-                            <span className='text-[14px]'>
+                      <div className="flex flex-col gap-1 w-full">
+                        <div className="flex items-center justify-between gap-3">
+                          <span className="font-medium">{item.message}</span>
+                          <div className="flex flex-col items-end opacity-70">
+                            <span className="text-[14px]">
                               {new Date(item.createdAt).toLocaleString(
-                                'th-TH',
+                                "th-TH",
                                 {
-                                  hour: '2-digit',
-                                  minute: '2-digit',
-                                  second: '2-digit',
-                                  timeZone: 'UTC'
-                                }
+                                  hour: "2-digit",
+                                  minute: "2-digit",
+                                  second: "2-digit",
+                                  timeZone: "UTC",
+                                },
                               )}
                             </span>
-                            <span className='w-max text-[14px]'>
+                            <span className="w-max text-[14px]">
                               {new Date(item.createdAt).toLocaleString(
-                                'th-TH',
+                                "th-TH",
                                 {
-                                  day: '2-digit',
-                                  month: '2-digit',
-                                  year: '2-digit',
-                                  timeZone: 'UTC'
-                                }
+                                  day: "2-digit",
+                                  month: "2-digit",
+                                  year: "2-digit",
+                                  timeZone: "UTC",
+                                },
                               )}
                             </span>
                           </div>
                         </div>
-                        <span className='text-[14px] opacity-70'>
+                        <span className="text-[14px] opacity-70">
                           {item?.device?.serial}
                         </span>
                       </div>
@@ -342,26 +353,26 @@ const Notifications = () => {
                 </div>
               </InfiniteScroll>
             ) : (
-              <div className='flex items-center justify-center loading-hieght-full'>
-                <div>{t('notificationEmpty')}</div>
+              <div className="flex items-center justify-center loading-hieght-full">
+                <div>{t("notificationEmpty")}</div>
               </div>
             )}
           </div>
         ) : (
           <div
-            id='scrollableDiv'
-            className='h-130 max-h-[calc(100dvh-230px)] md:max-h-130 overflow-y-scroll'
+            id="scrollableDiv"
+            className="h-130 max-h-[calc(100dvh-230px)] md:max-h-130 overflow-y-scroll"
           >
             {notificationList.length > 0 ? (
               <InfiniteScroll
                 dataLength={notificationList.length}
                 next={handleLoadMoreData}
                 hasMore={fetchMore}
-                scrollableTarget='scrollableDiv'
+                scrollableTarget="scrollableDiv"
                 loader={
                   <div>
-                    <div className='divider my-0 before:h-px after:h-px'></div>
-                    <div className='flex items-center justify-center p-4 pt-3'>
+                    <div className="divider my-0 before:h-px after:h-px"></div>
+                    <div className="flex items-center justify-center p-4 pt-3">
                       <span
                         className={`loading ${loadingStyle} loading-md`}
                       ></span>
@@ -370,9 +381,9 @@ const Notifications = () => {
                 }
                 endMessage={
                   <div>
-                    <div className='divider my-0 before:h-px after:h-px'></div>
-                    <div className='flex items-center justify-center p-4 pt-3 opacity-70'>
-                      <p className='text-sm'>{t('noMoreLoad')}</p>
+                    <div className="divider my-0 before:h-px after:h-px"></div>
+                    <div className="flex items-center justify-center p-4 pt-3 opacity-70">
+                      <p className="text-sm">{t("noMoreLoad")}</p>
                     </div>
                   </div>
                 }
@@ -380,37 +391,37 @@ const Notifications = () => {
                 <div>
                   {notificationList.map((item, index) => (
                     <li
-                      className='flex items-center gap-3 py-2 px-3 hover:bg-base-200 duration-300 ease-linear'
+                      className="flex items-center gap-3 py-2 px-3 hover:bg-base-200 duration-300 ease-linear"
                       key={index}
                     >
-                      <div className='bg-base-300/80 text-primary/70 rounded-field p-1'>
+                      <div className="bg-base-300/80 text-primary/70 rounded-field p-1">
                         {subTextNotiDetailsIcon(item.message)}
                       </div>
-                      <div className='flex flex-col gap-1 w-full'>
-                        <div className='flex items-center justify-between gap-3'>
-                          <span className='font-medium'>
+                      <div className="flex flex-col gap-1 w-full">
+                        <div className="flex items-center justify-between gap-3">
+                          <span className="font-medium">
                             {subTextNotiDetails(item.message)}
                           </span>
-                          <div className='flex flex-col items-end opacity-70'>
-                            <span className='text-[14px]'>
-                              {new Date(item.createAt).toLocaleString('th-TH', {
-                                hour: '2-digit',
-                                minute: '2-digit',
-                                second: '2-digit',
-                                timeZone: 'UTC'
+                          <div className="flex flex-col items-end opacity-70">
+                            <span className="text-[14px]">
+                              {new Date(item.createAt).toLocaleString("th-TH", {
+                                hour: "2-digit",
+                                minute: "2-digit",
+                                second: "2-digit",
+                                timeZone: "UTC",
                               })}
                             </span>
-                            <span className='w-max text-[14px]'>
-                              {new Date(item.createAt).toLocaleString('th-TH', {
-                                day: '2-digit',
-                                month: '2-digit',
-                                year: '2-digit',
-                                timeZone: 'UTC'
+                            <span className="w-max text-[14px]">
+                              {new Date(item.createAt).toLocaleString("th-TH", {
+                                day: "2-digit",
+                                month: "2-digit",
+                                year: "2-digit",
+                                timeZone: "UTC",
                               })}
                             </span>
                           </div>
                         </div>
-                        <span className='text-[14px] opacity-70'>
+                        <span className="text-[14px] opacity-70">
                           {item.device.name}
                         </span>
                       </div>
@@ -419,104 +430,104 @@ const Notifications = () => {
                 </div>
               </InfiniteScroll>
             ) : (
-              <div className='flex items-center justify-center loading-hieght-full'>
-                <div>{t('notificationEmpty')}</div>
+              <div className="flex items-center justify-center loading-hieght-full">
+                <div>{t("notificationEmpty")}</div>
               </div>
             )}
           </div>
         )}
       </ul>
     ),
-    [notificationList, t, fetchMore, tmsMode, role, location.pathname]
-  )
+    [notificationList, t, fetchMore, tmsMode, role, location.pathname],
+  );
 
   useEffect(() => {
-    let subscribed = true
-    ;(async () => {
+    let subscribed = true;
+    (async () => {
       if (subscribed) {
-        await fetchNotification(1)
+        await fetchNotification(1);
       }
-    })()
+    })();
     return () => {
-      subscribed = false
-    }
-  }, [])
+      subscribed = false;
+    };
+  }, []);
 
   useEffect(() => {
-    if (page === 1) return
-    fetchNotification(page)
-  }, [page])
+    if (page === 1) return;
+    fetchNotification(page);
+  }, [page]);
 
   useEffect(() => {
-    let isMounted = true
+    let isMounted = true;
 
-    if (isNotiLoading) return
+    if (isNotiLoading) return;
 
     if (!popUpMode && notificationList.length > 0) {
-      const img = new Image()
-      img.src = userProfile?.ward.hospital.hosPic || 'app-logo.png'
-      img.crossOrigin = 'anonymous'
+      const img = new Image();
+      img.src = userProfile?.ward.hospital.hosPic || "app-logo.png";
+      img.crossOrigin = "anonymous";
 
       const handleImageLoad = () => {
         if (!isMounted) {
           console.log(
-            '↩️ Image loaded, but the component has unmounted or the effect has been re-invoked. Aborting favicon update.'
-          )
-          return
+            "↩️ Image loaded, but the component has unmounted or the effect has been re-invoked. Aborting favicon update.",
+          );
+          return;
         }
 
-        console.log('✅ Image loaded successfully:', img.src)
+        console.log("✅ Image loaded successfully:", img.src);
 
-        const canvas = document.createElement('canvas')
-        const ctx = canvas.getContext('2d')
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
 
         if (!ctx) {
-          console.error('❌ Canvas context is null')
-          return
+          console.error("❌ Canvas context is null");
+          return;
         }
 
-        const size = 64
-        const borderRadius = 12
-        canvas.width = size
-        canvas.height = size
+        const size = 64;
+        const borderRadius = 12;
+        canvas.width = size;
+        canvas.height = size;
 
-        ctx.beginPath()
-        ctx.moveTo(borderRadius, 0)
-        ctx.lineTo(size - borderRadius, 0)
-        ctx.arcTo(size, 0, size, borderRadius, borderRadius)
-        ctx.lineTo(size, size - borderRadius)
-        ctx.arcTo(size, size, size - borderRadius, size, borderRadius)
-        ctx.lineTo(borderRadius, size)
-        ctx.arcTo(0, size, 0, size - borderRadius, borderRadius)
-        ctx.lineTo(0, borderRadius)
-        ctx.arcTo(0, 0, borderRadius, 0, borderRadius)
-        ctx.closePath()
-        ctx.clip()
+        ctx.beginPath();
+        ctx.moveTo(borderRadius, 0);
+        ctx.lineTo(size - borderRadius, 0);
+        ctx.arcTo(size, 0, size, borderRadius, borderRadius);
+        ctx.lineTo(size, size - borderRadius);
+        ctx.arcTo(size, size, size - borderRadius, size, borderRadius);
+        ctx.lineTo(borderRadius, size);
+        ctx.arcTo(0, size, 0, size - borderRadius, borderRadius);
+        ctx.lineTo(0, borderRadius);
+        ctx.arcTo(0, 0, borderRadius, 0, borderRadius);
+        ctx.closePath();
+        ctx.clip();
 
-        ctx.drawImage(img, 0, 0, size, size)
+        ctx.drawImage(img, 0, 0, size, size);
 
-        const dotSize = 26
-        const x = size - dotSize + 11
-        const y = dotSize / 5 + 9
-        ctx.fillStyle = 'oklch(0.65 0.2639 29.44)'
-        ctx.beginPath()
-        ctx.arc(x, y, dotSize / 2, 0, Math.PI * 2)
-        ctx.fill()
+        const dotSize = 26;
+        const x = size - dotSize + 11;
+        const y = dotSize / 5 + 9;
+        ctx.fillStyle = "oklch(0.65 0.2639 29.44)";
+        ctx.beginPath();
+        ctx.arc(x, y, dotSize / 2, 0, Math.PI * 2);
+        ctx.fill();
 
-        console.log('🎨 Image drawn on canvas')
+        console.log("🎨 Image drawn on canvas");
 
         changeFavicon(
-          canvas.toDataURL('image/png'),
+          canvas.toDataURL("image/png"),
           [...notificationList],
           location,
-          userProfile
-        )
-      }
+          userProfile,
+        );
+      };
 
-      img.onload = handleImageLoad
+      img.onload = handleImageLoad;
 
       if (img.complete) {
-        handleImageLoad()
+        handleImageLoad();
       }
     } else {
       if (userProfile?.ward.hospital.hosPic) {
@@ -524,35 +535,35 @@ const Notifications = () => {
           `${userProfile?.ward.hospital.hosPic}`,
           [...notificationList],
           location,
-          userProfile
-        )
+          userProfile,
+        );
       }
     }
 
     return () => {
       console.log(
-        '🧹 Cleanup function called. The next effect will run or the component will unmount.'
-      )
-      isMounted = false
-    }
-  }, [location, notificationList, popUpMode, userProfile, isNotiLoading])
+        "🧹 Cleanup function called. The next effect will run or the component will unmount.",
+      );
+      isMounted = false;
+    };
+  }, [location, notificationList, popUpMode, userProfile, isNotiLoading]);
 
   return (
-    <div className='dropdown dropdown-end'>
+    <div className="dropdown dropdown-end">
       <div
         tabIndex={0}
-        data-tip={t('titleNotification')}
-        role='button'
-        className='indicator flex btn btn-ghost justify-end tooltip tooltip-left md:tooltip-bottom'
+        data-tip={t("titleNotification")}
+        role="button"
+        className="indicator flex btn btn-ghost justify-end tooltip tooltip-left md:tooltip-bottom"
       >
         {!popUpMode && notificationList.length > 0 && (
-          <span className='absolute bg-primary h-3 w-3 px-1 top-0.5 right-1.5 rounded-full'></span>
+          <span className="absolute bg-primary h-3 w-3 px-1 top-0.5 right-1.5 rounded-full"></span>
         )}
         <RiNotification4Line size={24} />
       </div>
       {NotificationList}
     </div>
-  )
-}
+  );
+};
 
-export default Notifications
+export default Notifications;
