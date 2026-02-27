@@ -325,6 +325,7 @@ export default {
     InternetBackToNormal: "The Internet is back to normal",
     doorNum: "Door",
     doorLongOpen: "The door is open for a long time",
+    doorClosed: "The door is closed",
     doorTime: "minutes",
     doorAlertText: "Door Alert Settings",
     notificationEmpty: "No notification yet",

@@ -116,6 +116,8 @@ const Notifications = () => {
         } else {
           if (status === "ON") {
             subName = `${t("doorLongOpen")} ${value ? `(${value}) ${t('doorTime')}` : ""}`;
+          } else {
+            subName = t("doorClosed");
           }
         }
 
