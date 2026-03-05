@@ -1,6 +1,6 @@
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '../../../../redux/reducers/rootReducer'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../../redux/reducers/rootReducer";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   RiDashboardFill,
   RiDashboardLine,
@@ -15,30 +15,30 @@ import {
   RiShieldCheckFill,
   RiShieldCheckLine,
   RiUser6Fill,
-  RiUser6Line
-} from 'react-icons/ri'
+  RiUser6Line,
+} from "react-icons/ri";
 import {
   setDeviceKey,
   setHosId,
   setSwitchingMode,
   setTmsMode,
-  setWardId
-} from '../../../../redux/actions/utilsActions'
-import DefaultPic from '../../../../assets/images/default-pic.png'
-import { useTranslation } from 'react-i18next'
+  setWardId,
+} from "../../../../redux/actions/utilsActions";
+import DefaultPic from "../../../../assets/images/default-pic.png";
+import { useTranslation } from "react-i18next";
 import {
   cookieOptions,
-  cookies
-} from '../../../../constants/utils/utilsConstants'
-import { GlobalContextType } from '../../../../types/global/globalContext'
-import { GlobalContext } from '../../../../contexts/globalContext'
-import { useContext } from 'react'
+  cookies,
+} from "../../../../constants/utils/utilsConstants";
+import { GlobalContextType } from "../../../../types/global/globalContext";
+import { GlobalContext } from "../../../../contexts/globalContext";
+import { useContext } from "react";
 
 const Sidebar = () => {
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const { t } = useTranslation()
-  const location = useLocation()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { t } = useTranslation();
+  const location = useLocation();
   const {
     isExpand,
     userProfile,
@@ -46,204 +46,204 @@ const Sidebar = () => {
     tokenDecode,
     switchingMode,
     transitionDisabled,
-    loadingStyle
-  } = useSelector((state: RootState) => state.utils)
-  const { ward: wardData } = useContext(GlobalContext) as GlobalContextType
-  const { ward } = userProfile || {}
-  const { role } = tokenDecode || {}
+    loadingStyle,
+  } = useSelector((state: RootState) => state.utils);
+  const { ward: wardData } = useContext(GlobalContext) as GlobalContextType;
+  const { ward } = userProfile || {};
+  const { role } = tokenDecode || {};
 
   return (
     <aside
-      className={`drawer-side z-90 ${isExpand ? 'overflow-visible!' : ''}`}
+      className={`drawer-side z-90 ${isExpand ? "overflow-visible!" : ""}`}
     >
       <label
-        htmlFor='my-drawer-2'
-        aria-label='close sidebar'
-        className='drawer-overlay'
+        htmlFor="my-drawer-2"
+        aria-label="close sidebar"
+        className="drawer-overlay"
       ></label>
       <div
         className={`menu bg-base-100 text-base-content min-h-full flex flex-col items-center! justify-between ${
-          transitionDisabled ? 'transition-all! ease-out! duration-300!' : ''
-        } ${isExpand ? 'w-25' : 'w-58.75'}`}
+          transitionDisabled ? "transition-all! ease-out! duration-300!" : ""
+        } ${isExpand ? "w-25" : "w-58.75"}`}
       >
         <div>
-          <div className='flex items-center justify-center flex-col gap-5 p-3'>
+          <div className="flex items-center justify-center flex-col gap-5 p-3">
             <img
-              onClick={() => navigate('/')}
+              onClick={() => navigate("/")}
               src={ward?.hospital.hosPic ? ward.hospital.hosPic : DefaultPic}
-              alt='Hospital-img'
+              alt="Hospital-img"
               className={`btn btn-ghost rounded-box bg-white transition-all ease-out duration-300 ${
-                isExpand ? 'w-24 h-max' : 'max-w-32 h-28'
+                isExpand ? "w-24 h-max" : "max-w-32 h-28"
               } object-contain p-0 hover:bg-transparent`}
             />
             <h3
-              className='text-[24px] truncate max-w-45 leading-9'
+              className="text-[24px] truncate max-w-45 leading-9"
               title={ward?.hospital.hosName}
             >
               {ward?.hospital.hosName
                 ? isExpand
                   ? ward?.hospital.hosName[0]
                   : ward?.hospital.hosName
-                : '—'}
+                : "—"}
             </h3>
           </div>
-          <div className='divider mt-0 mb-0 hidden sm:flex'></div>
-          <div className='hidden sm:flex items-center justify-center flex-col gap-2 p-3'>
+          <div className="divider mt-0 mb-0 hidden sm:flex"></div>
+          <div className="hidden sm:flex items-center justify-center flex-col gap-2 p-3">
             <Link
-              to={'/'}
+              to={"/"}
               className={`btn font-normal flex-nowrap justify-start w-full ${
-                location.pathname === '/'
-                  ? 'btn-neutral pointer-events-none'
-                  : 'btn-ghost'
-              } flex ${isExpand ? 'tooltip tooltip-right z-50' : ''}`}
-              data-tip={t('sideShowAllBox')}
+                location.pathname === "/"
+                  ? "btn-neutral pointer-events-none"
+                  : "btn-ghost"
+              } flex ${isExpand ? "tooltip tooltip-right z-50" : ""}`}
+              data-tip={t("sideShowAllBox")}
             >
-              {location.pathname === '/' ? (
+              {location.pathname === "/" ? (
                 <RiHome3Fill size={24} />
               ) : (
                 <RiHome3Line size={24} />
               )}
               {!isExpand && (
-                <span className='text-[16px] leading-normal truncate'>
-                  {t('sideShowAllBox')}
+                <span className="text-[16px] leading-normal truncate">
+                  {t("sideShowAllBox")}
                 </span>
               )}
             </Link>
             <Link
-              to={'/dashboard'}
+              to={"/dashboard"}
               className={`btn font-normal flex-nowrap justify-start w-full ${
-                location.pathname === '/dashboard' ? 'pointer-events-none' : ''
+                location.pathname === "/dashboard" ? "pointer-events-none" : ""
               } ${
-                location.pathname === '/dashboard' ||
-                location.pathname.split('/')[2] === 'chart' ||
-                location.pathname.split('/')[2] === 'table' ||
-                location.pathname === '/dashboard/chart/compare'
-                  ? 'btn-neutral'
-                  : 'btn-ghost'
-              } flex ${isExpand ? 'tooltip tooltip-right z-50' : ''}`}
-              data-tip={t('sideDashboard')}
+                location.pathname === "/dashboard" ||
+                location.pathname.split("/")[2] === "chart" ||
+                location.pathname.split("/")[2] === "table" ||
+                location.pathname === "/dashboard/chart/compare"
+                  ? "btn-neutral"
+                  : "btn-ghost"
+              } flex ${isExpand ? "tooltip tooltip-right z-50" : ""}`}
+              data-tip={t("sideDashboard")}
             >
-              {location.pathname === '/dashboard' ||
-              location.pathname.split('/')[2] === 'chart' ||
-              location.pathname.split('/')[2] === 'table' ||
-              location.pathname === '/dashboard/chart/compare' ? (
+              {location.pathname === "/dashboard" ||
+              location.pathname.split("/")[2] === "chart" ||
+              location.pathname.split("/")[2] === "table" ||
+              location.pathname === "/dashboard/chart/compare" ? (
                 <RiDashboardFill size={24} />
               ) : (
                 <RiDashboardLine size={24} />
               )}
               {!isExpand && (
-                <span className='text-[16px] leading-normal truncate'>
-                  {t('sideDashboard')}
+                <span className="text-[16px] leading-normal truncate">
+                  {t("sideDashboard")}
                 </span>
               )}
             </Link>
-            {(role === 'SUPER' ||
-              role === 'SERVICE' ||
-              role === 'ADMIN' ||
-              role === 'LEGACY_ADMIN') && (
+            {(role === "SUPER" ||
+              role === "SERVICE" ||
+              role === "ADMIN" ||
+              role === "LEGACY_ADMIN") && (
               <>
                 <Link
-                  to={'/users'}
+                  to={"/users"}
                   className={`btn font-normal flex-nowrap justify-start w-full ${
-                    location.pathname === '/users'
-                      ? 'btn-neutral pointer-events-none'
-                      : 'btn-ghost'
-                  } flex ${isExpand ? 'tooltip tooltip-right z-50' : ''}`}
-                  data-tip={t('sidePermission')}
+                    location.pathname === "/users"
+                      ? "btn-neutral pointer-events-none"
+                      : "btn-ghost"
+                  } flex ${isExpand ? "tooltip tooltip-right z-50" : ""}`}
+                  data-tip={t("sidePermission")}
                 >
-                  {location.pathname === '/users' ? (
+                  {location.pathname === "/users" ? (
                     <RiUser6Fill size={24} />
                   ) : (
                     <RiUser6Line size={24} />
                   )}
                   {!isExpand && (
-                    <span className='text-[16px] leading-normal truncate'>
-                      {t('sidePermission')}
+                    <span className="text-[16px] leading-normal truncate">
+                      {t("sidePermission")}
                     </span>
                   )}
                 </Link>
                 <Link
-                  to={'/management'}
+                  to={"/management"}
                   className={`btn font-normal flex-nowrap justify-start w-full ${
-                    location.pathname === '/management'
-                      ? 'pointer-events-none'
-                      : ''
+                    location.pathname === "/management"
+                      ? "pointer-events-none"
+                      : ""
                   } ${
-                    location.pathname === '/management' ||
-                    location.pathname.split('/')[2] === 'csv'
-                      ? 'btn-neutral'
-                      : 'btn-ghost'
-                  } flex ${isExpand ? 'tooltip tooltip-right z-50' : ''}`}
-                  data-tip={t('sideManage')}
+                    location.pathname === "/management" ||
+                    location.pathname.split("/")[2] === "csv"
+                      ? "btn-neutral"
+                      : "btn-ghost"
+                  } flex ${isExpand ? "tooltip tooltip-right z-50" : ""}`}
+                  data-tip={t("sideManage")}
                 >
-                  {location.pathname === '/management' ? (
+                  {location.pathname === "/management" ? (
                     <RiListSettingsFill size={24} />
                   ) : (
                     <RiListSettingsLine size={24} />
                   )}
                   {!isExpand && (
-                    <span className='text-[16px] leading-normal truncate'>
-                      {t('sideManage')}
+                    <span className="text-[16px] leading-normal truncate">
+                      {t("sideManage")}
                     </span>
                   )}
                 </Link>
               </>
             )}
           </div>
-          <div className='flex items-center justify-center flex-col gap-2 p-3'>
-            {(role === 'SUPER' ||
-              role === 'SERVICE' ||
-              role === 'ADMIN' ||
-              role === 'LEGACY_ADMIN' ||
-              role === 'USER') && (
+          <div className="flex items-center justify-center flex-col gap-2 p-3">
+            {(role === "SUPER" ||
+              role === "SERVICE" ||
+              role === "ADMIN" ||
+              role === "LEGACY_ADMIN" ||
+              role === "USER") && (
               <>
-                <div className='divider mb-0'></div>
+                <div className="divider mb-0"></div>
                 <Link
-                  to={'/repair'}
+                  to={"/repair"}
                   className={`btn font-normal flex-nowrap justify-start w-full ${
-                    location.pathname === '/repair' ? 'pointer-events-none' : ''
+                    location.pathname === "/repair" ? "pointer-events-none" : ""
                   } ${
-                    location.pathname === '/repair' ||
-                    location.pathname === '/repair/preview'
-                      ? 'btn-neutral'
-                      : 'btn-ghost'
-                  } flex ${isExpand ? 'tooltip tooltip-right z-50' : ''}`}
-                  data-tip={t('sideRepair')}
+                    location.pathname === "/repair" ||
+                    location.pathname === "/repair/preview"
+                      ? "btn-neutral"
+                      : "btn-ghost"
+                  } flex ${isExpand ? "tooltip tooltip-right z-50" : ""}`}
+                  data-tip={t("sideRepair")}
                 >
-                  {location.pathname === '/repair' ||
-                  location.pathname === '/repair/preview' ? (
+                  {location.pathname === "/repair" ||
+                  location.pathname === "/repair/preview" ? (
                     <RiFileSettingsFill size={24} />
                   ) : (
                     <RiFileSettingsLine size={24} />
                   )}
                   {!isExpand && (
-                    <span className='text-[16px] leading-normal truncate'>
-                      {t('sideRepair')}
+                    <span className="text-[16px] leading-normal truncate">
+                      {t("sideRepair")}
                     </span>
                   )}
                 </Link>
                 <Link
-                  to={'/warranty'}
+                  to={"/warranty"}
                   className={`btn font-normal flex-nowrap justify-start w-full ${
-                    location.pathname === '/warranty'
-                      ? 'pointer-events-none'
-                      : ''
+                    location.pathname === "/warranty"
+                      ? "pointer-events-none"
+                      : ""
                   } ${
-                    location.pathname === '/warranty' ||
-                    location.pathname === '/warranty/preview'
-                      ? 'btn-neutral'
-                      : 'btn-ghost'
-                  } flex ${isExpand ? 'tooltip tooltip-right z-50' : ''}`}
-                  data-tip={t('sideWarranty')}
+                    location.pathname === "/warranty" ||
+                    location.pathname === "/warranty/preview"
+                      ? "btn-neutral"
+                      : "btn-ghost"
+                  } flex ${isExpand ? "tooltip tooltip-right z-50" : ""}`}
+                  data-tip={t("sideWarranty")}
                 >
-                  {location.pathname === '/warranty' ? (
+                  {location.pathname === "/warranty" ? (
                     <RiShieldCheckFill size={24} />
                   ) : (
                     <RiShieldCheckLine size={24} />
                   )}
                   {!isExpand && (
-                    <span className='text-[16px] leading-normal truncate'>
-                      {t('sideWarranty')}
+                    <span className="text-[16px] leading-normal truncate">
+                      {t("sideWarranty")}
                     </span>
                   )}
                 </Link>
@@ -251,27 +251,27 @@ const Sidebar = () => {
             )}
           </div>
         </div>
-        <div className='w-full'>
-          <div className='divider mb-0'></div>
-          <div className='flex justify-center flex-col gap-3 p-3'>
-            {(role === 'SUPER' ||
-              role === 'SERVICE' ||
-              role === 'ADMIN' ||
-              role === 'LEGACY_ADMIN') &&
-              wardData.find(f => f.type === 'LEGACY') && (
+        <div className="w-full">
+          <div className="divider mb-0"></div>
+          <div className="flex justify-center flex-col gap-3 p-3">
+            {(role === "SUPER" ||
+              role === "SERVICE" ||
+              role === "ADMIN" ||
+              role === "LEGACY_ADMIN") &&
+              wardData.find((f) => f.type === "LEGACY") && (
                 <label
-                  htmlFor='ModeToggle'
-                  className='flex flex-col items-center justify-center gap-2'
+                  htmlFor="ModeToggle"
+                  className="flex flex-col items-center justify-center gap-2"
                 >
                   {!isExpand ? (
-                    <div className='flex items-center gap-2'>
+                    <div className="flex items-center gap-2">
                       {switchingMode && (
                         <span
                           className={`loading ${loadingStyle} loading-xs`}
                         ></span>
                       )}
-                      <span className='text-[12px] truncate'>
-                        {!switchingMode ? t('currentMode') : t('switchingMode')}
+                      <span className="text-[12px] truncate">
+                        {!switchingMode ? t("currentMode") : t("switchingMode")}
                       </span>
                     </div>
                   ) : (
@@ -282,57 +282,57 @@ const Sidebar = () => {
                     )
                   )}
                   <input
-                    id='ModeToggle'
-                    name='ModeToggle'
-                    type='checkbox'
-                    className='toggle toggle-md'
+                    id="ModeToggle"
+                    name="ModeToggle"
+                    type="checkbox"
+                    className="toggle toggle-md"
                     checked={tmsMode}
                     disabled={switchingMode}
                     onChange={async () => {
-                      dispatch(setSwitchingMode())
-                      dispatch(setDeviceKey(''))
-                      dispatch(setHosId(undefined))
-                      dispatch(setWardId(undefined))
-                      cookies.remove('hosId', cookieOptions)
-                      cookies.remove('wardId', cookieOptions)
-                      cookies.remove('deviceKey', cookieOptions)
-                      cookies.remove('searchHistory', cookieOptions)
-                      cookies.set('tmsMode', !tmsMode, cookieOptions)
-                      cookies.update()
+                      dispatch(setSwitchingMode());
+                      dispatch(setDeviceKey(""));
+                      dispatch(setHosId(undefined));
+                      dispatch(setWardId(undefined));
+                      cookies.remove("hosId", cookieOptions);
+                      cookies.remove("wardId", cookieOptions);
+                      cookies.remove("deviceKey", cookieOptions);
+                      cookies.remove("searchHistory", cookieOptions);
+                      cookies.set("tmsMode", !tmsMode, cookieOptions);
+                      cookies.update();
 
-                      await new Promise(resolve => setTimeout(resolve, 500))
+                      await new Promise((resolve) => setTimeout(resolve, 500));
 
-                      navigate('/')
-                      dispatch(setTmsMode())
-                      dispatch(setSwitchingMode())
+                      navigate("/");
+                      dispatch(setTmsMode());
+                      dispatch(setSwitchingMode());
                     }}
                   />
                 </label>
               )}
             <Link
-              to={'/settings'}
+              to={"/settings"}
               className={`btn hidden sm:flex font-normal flex-nowrap justify-start w-full ${
-                location.pathname === '/settings'
-                  ? 'btn-neutral pointer-events-none'
-                  : 'btn-ghost'
-              } flex ${isExpand ? 'tooltip tooltip-right z-50' : ''}`}
-              data-tip={t('sideSetting')}
+                location.pathname === "/settings"
+                  ? "btn-neutral pointer-events-none"
+                  : "btn-ghost"
+              } flex ${isExpand ? "tooltip tooltip-right z-50" : ""}`}
+              data-tip={t("sideSetting")}
             >
-              {location.pathname === '/settings' ? (
+              {location.pathname === "/settings" ? (
                 <RiSettings3Fill size={24} />
               ) : (
                 <RiSettings3Line size={24} />
               )}
               {!isExpand && (
-                <span className='text-[16px] leading-normal truncate'>
-                  {t('sideSetting')}
+                <span className="text-[16px] leading-normal truncate">
+                  {t("sideSetting")}
                 </span>
               )}
             </Link>
             <Link
-              to={'/changelog'}
+              to={"/changelog"}
               className={`text-[12px] ${
-                isExpand ? 'text-center' : 'text-right'
+                isExpand ? "text-center" : "text-right"
               } hover:underline cursor-pointer`}
             >
               Version 2.0.17
@@ -341,7 +341,7 @@ const Sidebar = () => {
         </div>
       </div>
     </aside>
-  )
-}
+  );
+};
 
-export default Sidebar
+export default Sidebar;

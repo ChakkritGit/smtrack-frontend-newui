@@ -112,7 +112,7 @@ export default {
     InternetBackToNormal: "อินเทอร์เน็ตกลับมาปกติ",
     doorNum: "ประตู",
     doorLongOpen: "ประตูเปิดค้างเกิน",
-    doorClosed: 'ประตูปิดแล้ว',
+    doorClosed: "ประตูปิดแล้ว",
     doorTime: "นาที",
     doorAlertText: "ตั้งค่าเสียงประตู",
     doorInacctive: "ปิดใช้งานประตู",

@@ -115,7 +115,7 @@ const Notifications = () => {
             : `${t("doorNum")} 1 ${state}`; // หรือใส่ t('sensor')
         } else {
           if (status === "ON") {
-            subName = `${t("doorLongOpen")} ${value ? `(${value}) ${t('doorTime')}` : ""}`;
+            subName = `${t("doorLongOpen")} ${value ? `(${value}) ${t("doorTime")}` : ""}`;
           } else {
             subName = t("doorClosed");
           }

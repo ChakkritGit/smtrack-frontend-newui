@@ -4,16 +4,16 @@ import { cookies } from '../constants/utils/utilsConstants'
 import { UserProfileType } from '../types/smtrack/utilsRedux/utilsReduxType'
 
 class MQTTService {
-  private static instance: MQTTService
+  // private static instance: MQTTService
   private client: MqttClient
 
-  private constructor () {
+  private constructor (private host: string) {
     const userProfile: UserProfileType = cookies.get('userProfile')
 
     const options: IClientOptions = {
       path: '/mqtt',
       protocol: 'wss',
-      host: `${import.meta.env.VITE_APP_MQTT}`,
+      host: this.host,
       port: Number(import.meta.env.VITE_APP_MQTT_PORT),
       username: `${import.meta.env.VITE_APP_MQTT_USERNAME}`,
       password: `${import.meta.env.VITE_APP_MQTT_PASSWORD}`,
@@ -43,11 +43,11 @@ class MQTTService {
     })
   }
 
-  public static getInstance (): MQTTService {
-    if (!MQTTService.instance) {
-      MQTTService.instance = new MQTTService()
-    }
-    return MQTTService.instance
+  public static getInstance (host: string): MQTTService {
+    // if (!MQTTService.instance) {
+    //   MQTTService.instance = new MQTTService(host)
+    // }
+    return new MQTTService(host)
   }
 
   public getClient (): MqttClient {
@@ -55,5 +55,7 @@ class MQTTService {
   }
 }
 
-export const mqttService = MQTTService.getInstance()
-export const client = mqttService.getClient()
+export const mqttSMTRackService = MQTTService.getInstance(`${import.meta.env.VITE_APP_MQTT}`)
+export const mqttTMSService = MQTTService.getInstance(`${import.meta.env.VITE_APP_MQTT_TMS}`)
+export const client = mqttSMTRackService.getClient()
+export const clientTms = mqttTMSService.getClient()
