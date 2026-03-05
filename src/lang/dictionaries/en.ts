@@ -106,6 +106,9 @@ export default {
     sensor: "Sensor",
     sensorFailed: "Error",
     sensorNormal: "Normal",
+    statusLow: "Low",
+    statusHigh: "High",
+    viewAll: "View All",
 
     // device cards
     deviceOnline: "Online",

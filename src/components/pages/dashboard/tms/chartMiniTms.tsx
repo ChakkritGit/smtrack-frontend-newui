@@ -25,10 +25,10 @@ const ChartMiniTms = (props: ChartMiniProps) => {
     if (!groupedByProbe[item.probe]) {
       groupedByProbe[item.probe] = []
     }
-    groupedByProbe[item.probe].push({ x: item.time, y: item.tempAvg })
+    groupedByProbe[item.probe].push({ x: item.time, y: Number(item.tempAvg.toFixed(2)) })
   })
 
-  const series: ApexAxisChartSeries = Object.keys(groupedByProbe).map(
+  const series = Object.keys(groupedByProbe).map(
     probe => ({
       type: 'area',
       name: probe,

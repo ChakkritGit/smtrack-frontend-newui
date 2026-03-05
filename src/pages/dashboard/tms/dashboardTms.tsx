@@ -17,6 +17,7 @@ import { useTranslation } from "react-i18next";
 import { RiCloseLargeLine } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 import { clientTms } from "../../../services/mqtt";
+import MqttRealTempType from "../../../types/tms/devices/mqttRealTemp";
 
 const DashboardTms = () => {
   const { t } = useTranslation();
@@ -27,6 +28,7 @@ const DashboardTms = () => {
   );
   const [deviceLogs, setDeviceLogs] = useState<DeviceLogTms>();
   const [loading, setLoading] = useState(false);
+  const [mqttData, setMqttData] = useState<MqttRealTempType[]>([]);
   const modalRef = useRef<HTMLDialogElement>(null);
 
   const fetchDeviceLogs = useCallback(async () => {
@@ -55,54 +57,99 @@ const DashboardTms = () => {
   }, [deviceKey]);
 
   useEffect(() => {
-    clientTms.subscribe(`tms/${deviceKey}/#`, (err) => {
+    if (!deviceKey) return;
+    setMqttData([]); // เคลียร์ข้อมูลเก่าเมื่อเปลี่ยนเครื่องใหม่
+
+    const topicToSubscribe = `tms/${deviceKey}/#`;
+
+    // 1. Subscribe หัวข้อใหม่
+    clientTms.subscribe(topicToSubscribe, (err) => {
       if (err) console.error("MQTT Subscribe Error", err);
     });
 
-    clientTms.on("message", (topic, message) => {
+    // 2. สร้างฟังก์ชันรับข้อความ
+    const handleMqttMessage = (topic: string, message: any) => {
+      // ป้องกันบัค: รับเฉพาะข้อมูลของ deviceKey ที่กำลังเปิดดูอยู่เท่านั้น!
+      if (!topic.includes(`tms/${deviceKey}`)) return;
+
       try {
-        const mqData = JSON.parse(message.toString());
-        if (mqData) {
-          console.log("Received MQTT message:", topic, mqData);
+        const mqData: MqttRealTempType[] = JSON.parse(message.toString());
+
+        if (mqData && mqData.length > 0) {
+          // 3. เซ็ต State แบบอัปเดตค่าเดิม (Merge) ไม่ลบทับ
+          setMqttData((prevData) => {
+            let updatedData = [...prevData];
+
+            mqData.forEach((incomingProbe) => {
+              // หาว่าโพรบที่ส่งมา มีอยู่ใน state หรือยัง
+              const existingIndex = updatedData.findIndex(
+                (p) => p.probe === incomingProbe.probe,
+              );
+
+              if (existingIndex !== -1) {
+                // ถ้ามีแล้ว ให้อัปเดตข้อมูลของโพรบนั้น
+                updatedData[existingIndex] = incomingProbe;
+              } else {
+                // ถ้ายังไม่มี ให้เพิ่มเข้าไปใน Array
+                updatedData.push(incomingProbe);
+              }
+            });
+
+            return updatedData;
+          });
         }
       } catch (error) {
-        console.error(error);
+        console.error("MQTT Parse Error: ", error);
       }
-    });
+    };
+
+    // เปิดรับข้อความ
+    clientTms.on("message", handleMqttMessage);
+
+    // 4. Cleanup Function: ทำงานเมื่อเปลี่ยนเครื่อง (เปลี่ยน deviceKey) หรือออกจากหน้า
+    return () => {
+      clientTms.unsubscribe(topicToSubscribe);
+      clientTms.off("message", handleMqttMessage); // ถอด event ออก ป้องกันการทำงานซ้ำซ้อน
+    };
   }, [deviceKey]);
 
   const CardInfoComponent = useMemo(() => {
     return <CardInfoTms deviceData={deviceLogs} />;
-  }, [deviceKey, deviceLogs]);
+  }, [deviceLogs]);
 
   const CardStatusComponent = useMemo(() => {
-    return <CardStatusTms deviceData={deviceLogs} />;
-  }, [deviceKey, deviceLogs]);
+    return <CardStatusTms deviceData={deviceLogs} mqttData={mqttData} />;
+  }, [deviceLogs, mqttData]);
 
   const DeviceDetailLog = useMemo(() => {
     if (!deviceLogs) return;
 
     return (
       <>
-        <div className="flex items-start gap-4 mt-4 flex-wrap lg:flex-wrap xl:flex-nowrap">
-          <div className="w-full xl:w-[50%] lg:h-73.75 bg-base-100 rounded-field overflow-hidden">
+        {/* เปลี่ยน Layout ตรงนี้เป็น Grid เพื่อแบ่งสัดส่วน ซ้าย-ขวา */}
+        <div className="grid grid-cols-1 xl:grid-cols-12 gap-4 mt-4 items-stretch">
+          {/* ฝั่งซ้าย: ข้อมูลอุปกรณ์ (ให้กว้าง 5 ส่วน) ลบ lg:h-73.75 ออก */}
+          <div className="xl:col-span-5 2xl:col-span-4 bg-base-100 rounded-field shadow-sm overflow-hidden h-full">
             {CardInfoComponent}
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-12 gap-4 w-full xl:w-[50%]">
+
+          {/* ฝั่งขวา: การ์ดสถานะ (ให้กว้าง 7 ส่วน) ใช้ flex-col เพื่อให้เรียงลงมาตามธรรมชาติ */}
+          <div className="xl:col-span-7 2xl:col-span-8 flex flex-col gap-4">
             {CardStatusComponent}
           </div>
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-2 mt-4 gap-3">
-          <div className="w-full min-h-96.25">
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 mt-4 gap-4">
+          <div className="w-full min-h-96.25 bg-base-100 rounded-field p-4 shadow-sm">
             <ChartSwiperWrapperTms deviceLogs={deviceLogs} />
           </div>
-          <div className="w-full min-h-96.25">
+          <div className="w-full min-h-96.25 bg-base-100 rounded-field p-4 shadow-sm">
             <DataTableWrapperTms deviceLogs={deviceLogs} />
           </div>
         </div>
       </>
     );
-  }, [deviceKey, deviceLogs]);
+  }, [deviceLogs, mqttData, CardInfoComponent, CardStatusComponent]);
 
   useEffect(() => {
     if (!deviceKey && !switchingMode) {

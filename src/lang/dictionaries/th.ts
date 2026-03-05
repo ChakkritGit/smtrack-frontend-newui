@@ -119,6 +119,9 @@ export default {
     sensor: "เซ็นเซอร์",
     sensorFailed: "มีปัญหา",
     sensorNormal: "ปกติ",
+    statusLow: "ต่ำเกินไป",
+    statusHigh: "สูงเกินไป",
+    viewAll: "ดูทั้งหมด",
 
     // device cards
     deviceOnline: "ออนไลน์",
