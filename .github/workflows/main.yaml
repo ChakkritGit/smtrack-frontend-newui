@@ -73,13 +73,13 @@ jobs:
         with:
           payload: |
             {
-              "text": "✅ GitHub Action build ${{ env.TAG }} result: ${{ job.status }} 🫩🫩 \n📝 Commit: ${{ steps.get_commit_message.outputs.message }}",
+              "text": "GitHub Action build ${{ env.TAG }} result: ${{ job.status }} 🫩🫩 \n Commit: ${{ steps.get_commit_message.outputs.message }}",
               "blocks": [
                 {
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "✅ GitHub Action build *${{ env.TAG }}* result: *${{ job.status }}* 🫩🫩 \n📝 *Commit:* ${{ steps.get_commit_message.outputs.message }}"
+                    "text": "GitHub Action build *${{ env.TAG }}* result: *${{ job.status }}* 🫩🫩 \n *Commit:* ${{ steps.get_commit_message.outputs.message }}"
                   }
                 }
               ]
