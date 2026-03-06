@@ -130,7 +130,7 @@ const CardStatusTms = (props: PropsType) => {
           )}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-2 h-max min-h-22.5">
+        <div className={`gap-3 pt-2 h-max min-h-22.5 ${displayMqttData.length < 3 ? "flex items-center justify-center" : "grid grid-cols-1 md:grid-cols-3"}`}>
           {displayMqttData.length > 0 ? (
             displayMqttData.map((item, index) => {
               const { text, color, bg, border } = getStatusDisplay(item.status);
@@ -193,7 +193,7 @@ const CardStatusTms = (props: PropsType) => {
           )}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-2 h-max min-h-22.5">
+        <div className={`gap-3 pt-2 h-max min-h-22.5 ${displayApiProbes.length < 3 ? "flex items-center justify-center" : "grid grid-cols-1 md:grid-cols-3"}`}>
           {displayApiProbes.length > 0 ? (
             displayApiProbes.map((probeName, index) => {
               const { min, max } = getProbeMinMax(probeName);

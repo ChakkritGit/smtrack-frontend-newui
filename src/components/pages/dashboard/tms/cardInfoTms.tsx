@@ -1,6 +1,5 @@
 import { useTranslation } from "react-i18next";
 import { DeviceLogTms } from "../../../../types/tms/devices/deviceType";
-import DefaultPic from "../../../../assets/images/default-pic.png";
 import { RiDoorClosedLine, RiDoorOpenLine } from "react-icons/ri";
 
 type PropsType = {
@@ -15,19 +14,19 @@ const CardInfoTms = (props: PropsType) => {
   const isDoorOpen = deviceData?.log ? deviceData.log[0]?.door : false;
 
   return (
-    <div className="p-6 h-full flex flex-col justify-center items-center">
-      <div className="flex justify-center items-start flex-col lg:flex-row gap-8 w-full">
+    <div className="p-6 h-full flex flex-col justify-start items-center">
+      <div className="flex justify-start items-start w-full">
         {/* ส่วนรูปภาพ */}
-        <div className="flex justify-center items-center w-full lg:w-[40%]">
+        {/* <div className="flex justify-center items-center w-full lg:w-[40%]">
           <img
             src={DefaultPic}
             alt="Device-image"
             className="rounded-field w-25 lg:w-full max-w-30 object-contain cursor-pointer hover:scale-105 duration-300 ease-linear drop-shadow-sm"
           />
-        </div>
+        </div> */}
 
         {/* ส่วนรายละเอียด */}
-        <div className="w-full lg:w-[60%] flex flex-col gap-4 text-base-content">
+        <div className="w-full flex flex-col gap-4 text-base-content">
           <div className="flex flex-col gap-3">
             <div className="grid grid-cols-[100px_auto] sm:grid-cols-[120px_auto] gap-2 items-start">
               <span className="font-bold text-gray-500">
