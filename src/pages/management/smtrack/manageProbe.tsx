@@ -280,7 +280,6 @@ const ManageProbe = () => {
       formData.type !== '' &&
       formData.position !== '' &&
       formData.stampTime !== '' &&
-      formData.doorQty !== 0 &&
       formData.channel !== '' &&
       formData.channel !== '' &&
       scheduleDay.firstDay !== '' &&
@@ -303,7 +302,7 @@ const ManageProbe = () => {
         tempMax: formData.tempMax,
         humiMin: formData.humiMin,
         humiMax: formData.humiMax,
-        doorQty: formData.doorQty,
+        doorQty: formData.doorQty ?? 0,
         channel: formData.channel,
         firstDay: scheduleDay.firstDay,
         secondDay: scheduleDay.seccondDay,
