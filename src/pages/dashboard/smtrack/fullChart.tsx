@@ -642,7 +642,7 @@ const FullChart = () => {
             onChange={(e) => setFreq(String(e?.value))}
             menuPlacement="bottom"
             autoFocus={false}
-            className="react-select-container z-150 custom-menu-select"
+            className="react-select-container z-150 custom-menu-select w-full md:w-auto"
             classNamePrefix="react-select"
           />
           <button
