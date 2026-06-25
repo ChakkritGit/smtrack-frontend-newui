@@ -1,82 +1,109 @@
-import { AxiosError } from 'axios'
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { Location, useLocation, useNavigate } from 'react-router-dom'
-import axiosInstance from '../../../constants/axios/axiosInstance'
+import { AxiosError } from "axios";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { Location, useLocation, useNavigate } from "react-router-dom";
+import axiosInstance from "../../../constants/axios/axiosInstance";
 import {
   cookies,
   formatThaiDate,
-  formatThaiDateSend
-} from '../../../constants/utils/utilsConstants'
-import { responseType } from '../../../types/smtrack/utilsRedux/utilsReduxType'
-import { useTranslation } from 'react-i18next'
+  formatThaiDateSend,
+} from "../../../constants/utils/utilsConstants";
+import { responseType } from "../../../types/smtrack/utilsRedux/utilsReduxType";
+import { useTranslation } from "react-i18next";
 import {
   RiBarChart2Fill,
   RiDashboardLine,
   RiFileImageLine,
   RiFilePdf2Line,
-  RiMenuLine
-} from 'react-icons/ri'
-import Swal from 'sweetalert2'
-import { useDispatch, useSelector } from 'react-redux'
+  RiMenuLine,
+} from "react-icons/ri";
+import Swal from "sweetalert2";
+import { useDispatch, useSelector } from "react-redux";
 import {
   setSubmitLoading,
-  setTokenExpire
-} from '../../../redux/actions/utilsActions'
-import toast from 'react-hot-toast'
-import { RootState } from '../../../redux/reducers/rootReducer'
-import html2canvas from 'html2canvas-pro'
-import Loading from '../../../components/skeleton/table/loading'
-import ImagesOne from '../../../assets/images/Thanes.png'
-import { Autoplay, EffectCreative, Pagination } from 'swiper/modules'
-import { Swiper as SwiperType } from 'swiper/types'
-import { Swiper, SwiperSlide } from 'swiper/react'
+  setTokenExpire,
+} from "../../../redux/actions/utilsActions";
+import toast from "react-hot-toast";
+import { RootState } from "../../../redux/reducers/rootReducer";
+import html2canvas from "html2canvas-pro";
+import Loading from "../../../components/skeleton/table/loading";
+import ImagesOne from "../../../assets/images/Thanes.png";
+import { Autoplay, EffectCreative, Pagination } from "swiper/modules";
+import { Swiper as SwiperType } from "swiper/types";
+import { Swiper, SwiperSlide } from "swiper/react";
 import {
   DeviceLog,
-  DeviceLogs
-} from '../../../types/smtrack/devices/deviceType'
-import FullChartComponent from '../../../components/pages/dashboard/smtrack/fullChart'
-import { DayPicker } from 'react-day-picker'
-import { th, enUS } from 'react-day-picker/locale'
+  DeviceLogs,
+} from "../../../types/smtrack/devices/deviceType";
+import FullChartComponent from "../../../components/pages/dashboard/smtrack/fullChart";
+import { DayPicker } from "react-day-picker";
+import { th, enUS } from "react-day-picker/locale";
+import Select from "react-select";
+import { Option } from "../../../types/global/hospitalAndWard";
+
+type selectOption = {
+  value: string;
+  label: string;
+};
+
+const freqList = [
+  {
+    value: "5m",
+    label: "5m",
+  },
+  {
+    value: "30m",
+    label: "30m",
+  },
+  {
+    value: "60m",
+    label: "60m",
+  },
+  {
+    value: "120m",
+    label: "120m",
+  },
+];
 
 const FullChart = () => {
-  const dispatch = useDispatch()
-  const { t } = useTranslation()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const { t } = useTranslation();
+  const navigate = useNavigate();
   const { userProfile, submitLoading, i18nInit } = useSelector(
-    (state: RootState) => state.utils
-  )
-  const location = useLocation() as Location<{ deviceLogs: DeviceLog }>
+    (state: RootState) => state.utils,
+  );
+  const location = useLocation() as Location<{ deviceLogs: DeviceLog }>;
   const { deviceLogs } = location.state ?? {
     deviceLogs: {
-      id: '',
+      id: "",
       minTemp: 0,
       maxTemp: 0,
-      name: '',
-      ward: '',
-      hospital: ''
-    }
-  }
-  const [pageNumber, setPagenumber] = useState(1)
-  const [dataLog, setDataLog] = useState<DeviceLogs[]>([])
-  const [startDate, setStartDate] = useState<Date | undefined>()
-  const [endDate, setEndDate] = useState<Date | undefined>()
-  const [isLoading, setIsLoading] = useState(false)
-  const canvasChartRef = useRef<HTMLDivElement | null>(null)
-  const tableInfoRef = useRef<HTMLDivElement | null>(null)
+      name: "",
+      ward: "",
+      hospital: "",
+    },
+  };
+  const [pageNumber, setPagenumber] = useState(1);
+  const [dataLog, setDataLog] = useState<DeviceLogs[]>([]);
+  const [startDate, setStartDate] = useState<Date | undefined>();
+  const [endDate, setEndDate] = useState<Date | undefined>();
+  const [isLoading, setIsLoading] = useState(false);
+  const canvasChartRef = useRef<HTMLDivElement | null>(null);
+  const tableInfoRef = useRef<HTMLDivElement | null>(null);
   // const [isPause, setIsPaused] = useState(false)
-  const swiperRef = useRef<SwiperType>(null)
-  const abortRef = useRef<AbortController | null>(null)
-  const [currentSlideIndex, setCurrentSlideIndex] = useState(0)
+  const swiperRef = useRef<SwiperType>(null);
+  const abortRef = useRef<AbortController | null>(null);
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+  const [freq, setFreq] = useState("5m");
 
   const handleSlideChange = (swiper: SwiperType) => {
-    setCurrentSlideIndex(swiper.realIndex)
-  }
+    setCurrentSlideIndex(swiper.realIndex);
+  };
 
   const abortPrevRequest = () => {
     if (abortRef.current) {
-      abortRef.current.abort()
+      abortRef.current.abort();
     }
-  }
+  };
 
   // const togglePause = useCallback(() => {
   //   setIsPaused(prev => !prev)
@@ -89,276 +116,300 @@ const FullChart = () => {
   //   }
   // }, [isPause])
 
-  const logDay = async () => {
-    abortPrevRequest()
-    const controller = new AbortController()
-    abortRef.current = controller
+  const mapOptions = <T, K extends keyof T>(
+    data: T[],
+    valueKey: K,
+    labelKey: K,
+  ): Option[] =>
+    data.map((item) => ({
+      value: item[valueKey] as unknown as string,
+      label: item[labelKey] as unknown as string,
+    }));
 
-    setPagenumber(1)
-    setDataLog([])
-    setIsLoading(true)
+  const mapDefaultValue = <T, K extends keyof T>(
+    data: T[],
+    id: string,
+    valueKey: K,
+    labelKey: K,
+  ): Option | undefined =>
+    data
+      .filter((item) => item[valueKey] === id)
+      .map((item) => ({
+        value: item[valueKey] as unknown as string,
+        label: item[labelKey] as unknown as string,
+      }))[0];
+
+  const logDay = async () => {
+    abortPrevRequest();
+    const controller = new AbortController();
+    abortRef.current = controller;
+
+    setPagenumber(1);
+    setDataLog([]);
+    setIsLoading(true);
     try {
       const response = await axiosInstance.get<responseType<DeviceLogs[]>>(
         `/log/graph?sn=${
-          deviceLogs?.id ? deviceLogs?.id : cookies.get('deviceKey')
+          deviceLogs?.id ? deviceLogs?.id : cookies.get("deviceKey")
         }&filter=day`,
         {
-          signal: controller.signal
-        }
-      )
-      setDataLog(response.data.data)
+          signal: controller.signal,
+        },
+      );
+      setDataLog(response.data.data);
     } catch (error) {
       if (error instanceof AxiosError) {
         if (error.response?.status === 401) {
-          dispatch(setTokenExpire(true))
+          dispatch(setTokenExpire(true));
         }
-        console.log(error.response?.data?.message)
+        console.log(error.response?.data?.message);
       } else {
-        console.error(error)
+        console.error(error);
       }
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   const logWeek = async () => {
-    abortPrevRequest()
-    const controller = new AbortController()
-    abortRef.current = controller
+    abortPrevRequest();
+    const controller = new AbortController();
+    abortRef.current = controller;
 
-    setPagenumber(2)
-    setDataLog([])
-    setIsLoading(true)
+    setPagenumber(2);
+    setDataLog([]);
+    setIsLoading(true);
     try {
       const response = await axiosInstance.get<responseType<DeviceLogs[]>>(
         `/log/graph?sn=${
-          deviceLogs?.id ? deviceLogs?.id : cookies.get('deviceKey')
+          deviceLogs?.id ? deviceLogs?.id : cookies.get("deviceKey")
         }&filter=week`,
         {
-          signal: controller.signal
-        }
-      )
-      setDataLog(response.data.data)
+          signal: controller.signal,
+        },
+      );
+      setDataLog(response.data.data);
     } catch (error) {
       if (error instanceof AxiosError) {
         if (error.response?.status === 401) {
-          dispatch(setTokenExpire(true))
+          dispatch(setTokenExpire(true));
         }
-        console.log(error.response?.data?.message)
+        console.log(error.response?.data?.message);
       } else {
-        console.error(error)
+        console.error(error);
       }
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   const logMonth = async () => {
-    abortPrevRequest()
-    const controller = new AbortController()
-    abortRef.current = controller
+    abortPrevRequest();
+    const controller = new AbortController();
+    abortRef.current = controller;
 
-    setPagenumber(3)
-    setDataLog([])
-    setIsLoading(true)
+    setPagenumber(3);
+    setDataLog([]);
+    setIsLoading(true);
     try {
       const response = await axiosInstance.get<responseType<DeviceLogs[]>>(
         `/log/graph?sn=${
-          deviceLogs?.id ? deviceLogs?.id : cookies.get('deviceKey')
+          deviceLogs?.id ? deviceLogs?.id : cookies.get("deviceKey")
         }&filter=month`,
         {
-          signal: controller.signal
-        }
-      )
-      setDataLog(response.data.data)
+          signal: controller.signal,
+        },
+      );
+      setDataLog(response.data.data);
     } catch (error) {
       if (error instanceof AxiosError) {
         if (error.response?.status === 401) {
-          dispatch(setTokenExpire(true))
+          dispatch(setTokenExpire(true));
         }
-        console.log(error.response?.data?.message)
+        console.log(error.response?.data?.message);
       } else {
-        console.error(error)
+        console.error(error);
       }
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   const Logcustom = async () => {
-    abortPrevRequest()
-    const controller = new AbortController()
-    abortRef.current = controller
+    abortPrevRequest();
+    const controller = new AbortController();
+    abortRef.current = controller;
 
-    let startDateNew = startDate
-    let endDateNew = endDate
+    let startDateNew = startDate;
+    let endDateNew = endDate;
 
     if (startDateNew && endDateNew) {
-      let timeDiff = Math.abs(endDateNew.getTime() - startDateNew.getTime())
-      let diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24))
+      let timeDiff = Math.abs(endDateNew.getTime() - startDateNew.getTime());
+      let diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
       if (diffDays <= 31) {
         try {
-          setDataLog([])
-          setIsLoading(true)
+          setDataLog([]);
+          setIsLoading(true);
           const responseData = await axiosInstance.get<
             responseType<DeviceLogs[]>
           >(
             `/log/graph?sn=${
-              deviceLogs?.id ? deviceLogs?.id : cookies.get('deviceKey')
+              deviceLogs?.id ? deviceLogs?.id : cookies.get("deviceKey")
             }&filter=${formatThaiDateSend(startDateNew)},${formatThaiDateSend(
-              endDateNew
-            )}`,
+              endDateNew,
+            )}&freq=${freq}`,
             {
-              signal: controller.signal
-            }
-          )
-          setDataLog(responseData.data.data)
+              signal: controller.signal,
+            },
+          );
+          setDataLog(responseData.data.data);
         } catch (error) {
           if (error instanceof AxiosError) {
             if (error.response?.status === 401) {
-              dispatch(setTokenExpire(true))
+              dispatch(setTokenExpire(true));
             } else {
-              console.error('Something wrong' + error)
+              console.error("Something wrong" + error);
             }
           } else {
-            console.error('Uknown error: ', error)
+            console.error("Uknown error: ", error);
           }
         } finally {
-          setIsLoading(false)
+          setIsLoading(false);
         }
       } else {
         Swal.fire({
-          title: t('alertHeaderWarning'),
-          text: t('customMessageLogData'),
-          icon: 'warning',
+          title: t("alertHeaderWarning"),
+          text: t("customMessageLogData"),
+          icon: "warning",
           timer: 3000,
-          showConfirmButton: false
-        })
+          showConfirmButton: false,
+        });
       }
     } else {
       Swal.fire({
-        title: t('alertHeaderWarning'),
-        text: t('completeField'),
-        icon: 'warning',
+        title: t("alertHeaderWarning"),
+        text: t("completeField"),
+        icon: "warning",
         timer: 2000,
-        showConfirmButton: false
-      })
+        showConfirmButton: false,
+      });
     }
-  }
+  };
 
   const handleDownload = useCallback(
     async (type: string) => {
       if (canvasChartRef.current && tableInfoRef.current) {
         // 1. แสดงส่วนหัวตารางก่อน (แต่ไม่ต้องกลัวเรื่องสีกระพริบบนจอ)
-        tableInfoRef.current.style.display = 'flex'
+        tableInfoRef.current.style.display = "flex";
 
         const promise = html2canvas(canvasChartRef.current, {
           scale: 3,
-          backgroundColor: '#ffffff', // บังคับพื้นหลังรูปเป็นสีขาว
+          backgroundColor: "#ffffff", // บังคับพื้นหลังรูปเป็นสีขาว
           useCORS: true,
-          onclone: clonedDoc => {
+          onclone: (clonedDoc) => {
             // 2. ค้นหา element ในเอกสารที่ถูก Clone ออกมา
             // และสั่งเปลี่ยนธีมเป็น light เฉพาะในรูปภาพ
             const clonedRoot =
-              clonedDoc.querySelector('[data-theme]') ||
-              clonedDoc.documentElement
-            clonedRoot.setAttribute('data-theme', 'light')
+              clonedDoc.querySelector("[data-theme]") ||
+              clonedDoc.documentElement;
+            clonedRoot.setAttribute("data-theme", "light");
 
             // 3. บังคับสี SVG Text (แกนกราฟ) ให้เป็นสีดำสนิท
             // เพราะบางครั้ง SVG จะไม่ยอมเปลี่ยนสีตาม data-theme ในทันทีที่ Clone
-            const svgTexts = clonedDoc.querySelectorAll('text, tspan')
-            svgTexts.forEach(el => {
-              el.setAttribute('fill', '#000000')
-              el.style.fill = '#000000'
-            })
-          }
+            const svgTexts = clonedDoc.querySelectorAll("text, tspan");
+            svgTexts.forEach((el) => {
+              el.setAttribute("fill", "#000000");
+              el.style.fill = "#000000";
+            });
+          },
         })
-          .then(canvasImage => {
+          .then((canvasImage) => {
             const dataURL = canvasImage.toDataURL(
-              type === 'png' ? 'image/png' : 'image/jpeg',
-              1.0
-            )
-            const link = document.createElement('a')
-            link.href = dataURL
-            link.download = `Chart_${Date.now()}.${type}`
-            document.body.appendChild(link)
-            link.click()
-            document.body.removeChild(link)
+              type === "png" ? "image/png" : "image/jpeg",
+              1.0,
+            );
+            const link = document.createElement("a");
+            link.href = dataURL;
+            link.download = `Chart_${Date.now()}.${type}`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
           })
           .finally(() => {
             if (tableInfoRef.current)
-              tableInfoRef.current.style.display = 'none'
-          })
+              tableInfoRef.current.style.display = "none";
+          });
 
         toast.promise(promise, {
-          loading: t('processing'),
-          success: <span>{t('downloaded')}</span>,
-          error: <span>{t('descriptionErrorWrong')}</span>
-        })
+          loading: t("processing"),
+          success: <span>{t("downloaded")}</span>,
+          error: <span>{t("descriptionErrorWrong")}</span>,
+        });
       }
     },
-    [t, pageNumber]
-  )
+    [t, pageNumber],
+  );
 
   const exportChart = () => {
     return new Promise(async (resolve, reject) => {
-      if (!canvasChartRef.current) return reject('No element')
+      if (!canvasChartRef.current) return reject("No element");
 
       // เก็บค่าเดิม
-      const originalWidth = canvasChartRef.current.style.width
-      const originalHeight = canvasChartRef.current.style.height
+      const originalWidth = canvasChartRef.current.style.width;
+      const originalHeight = canvasChartRef.current.style.height;
 
       html2canvas(canvasChartRef.current!, {
         scale: 3,
-        backgroundColor: '#ffffff', // บังคับพื้นหลังรูปเป็นสีขาว
+        backgroundColor: "#ffffff", // บังคับพื้นหลังรูปเป็นสีขาว
         useCORS: true,
-        onclone: clonedDoc => {
+        onclone: (clonedDoc) => {
           // 2. ค้นหา element ในเอกสารที่ถูก Clone ออกมา
           // และสั่งเปลี่ยนธีมเป็น light เฉพาะในรูปภาพ
           const clonedRoot =
-            clonedDoc.querySelector('[data-theme]') || clonedDoc.documentElement
-          clonedRoot.setAttribute('data-theme', 'light')
+            clonedDoc.querySelector("[data-theme]") ||
+            clonedDoc.documentElement;
+          clonedRoot.setAttribute("data-theme", "light");
 
           // 3. บังคับสี SVG Text (แกนกราฟ) ให้เป็นสีดำสนิท
           // เพราะบางครั้ง SVG จะไม่ยอมเปลี่ยนสีตาม data-theme ในทันทีที่ Clone
-          const svgTexts = clonedDoc.querySelectorAll('text, tspan')
-          svgTexts.forEach(el => {
-            el.setAttribute('fill', '#000000')
-            el.style.fill = '#000000'
-          })
-        }
+          const svgTexts = clonedDoc.querySelectorAll("text, tspan");
+          svgTexts.forEach((el) => {
+            el.setAttribute("fill", "#000000");
+            el.style.fill = "#000000";
+          });
+        },
       })
-        .then(canvasImage => {
+        .then((canvasImage) => {
           // คืนขนาดเดิม
           if (canvasChartRef.current) {
-            canvasChartRef.current.style.width = originalWidth
-            canvasChartRef.current.style.height = originalHeight
+            canvasChartRef.current.style.width = originalWidth;
+            canvasChartRef.current.style.height = originalHeight;
           }
-          resolve(canvasImage.toDataURL('image/png', 1.0))
+          resolve(canvasImage.toDataURL("image/png", 1.0));
         })
-        .catch(reject)
-    })
-  }
+        .catch(reject);
+    });
+  };
 
   useEffect(() => {
-    logDay()
-  }, [])
+    logDay();
+  }, []);
 
   useEffect(() => {
-    if (deviceLogs?.id === '') {
-      navigate('/dashboard')
+    if (deviceLogs?.id === "") {
+      navigate("/dashboard");
     }
-  }, [deviceLogs?.id])
+  }, [deviceLogs?.id]);
 
   useEffect(() => {
     if (submitLoading) {
-      ;(async () => {
+      (async () => {
         try {
-          const waitExport = await exportChart()
-          dispatch(setSubmitLoading())
-          navigate('/dashboard/chart/preview', {
+          const waitExport = await exportChart();
+          dispatch(setSubmitLoading());
+          navigate("/dashboard/chart/preview", {
             state: {
-              title: 'Chart-Report',
+              title: "Chart-Report",
               ward: deviceLogs?.ward,
               image: ImagesOne,
               hospital: deviceLogs?.hospital,
@@ -369,28 +420,28 @@ const FullChart = () => {
               hosImg: userProfile?.ward.hospital.hosPic,
               probe: deviceLogs.probe,
               deviceLogs,
-              currentSlideIndex: currentSlideIndex
-            }
-          })
+              currentSlideIndex: currentSlideIndex,
+            },
+          });
         } catch (error) {
-          dispatch(setSubmitLoading())
+          dispatch(setSubmitLoading());
           Swal.fire({
-            title: t('alertHeaderError'),
-            text: t('descriptionErrorWrong'),
-            icon: 'error',
+            title: t("alertHeaderError"),
+            text: t("descriptionErrorWrong"),
+            icon: "error",
             timer: 2000,
-            showConfirmButton: false
-          })
+            showConfirmButton: false,
+          });
         }
-      })()
+      })();
     }
-  }, [submitLoading, currentSlideIndex])
+  }, [submitLoading, currentSlideIndex]);
 
   const chartWrapper = useMemo(() => {
     return (
       <Swiper
-        onSwiper={swiper => (swiperRef.current = swiper)}
-        slidesPerView={'auto'}
+        onSwiper={(swiper) => (swiperRef.current = swiper)}
+        slidesPerView={"auto"}
         spaceBetween={30}
         centeredSlides={true}
         loop={deviceLogs?.probe && deviceLogs?.probe.length > 2}
@@ -404,27 +455,27 @@ const FullChart = () => {
         allowTouchMove={false}
         pagination={{
           dynamicBullets: true,
-          clickable: true
+          clickable: true,
         }}
-        effect={'creative'}
+        effect={"creative"}
         creativeEffect={{
           prev: {
             shadow: false,
-            translate: ['-120%', 0, -500]
+            translate: ["-120%", 0, -500],
           },
           next: {
             shadow: false,
-            translate: ['120%', 0, -500]
-          }
+            translate: ["120%", 0, -500],
+          },
         }}
         modules={[Autoplay, Pagination, EffectCreative]}
-        className='mySwiper h-full custom-swiper-pagination'
+        className="mySwiper h-full custom-swiper-pagination"
       >
         {deviceLogs &&
-          deviceLogs?.probe?.map(item => {
-            const filterItem = dataLog.filter(itemTwo =>
-              itemTwo.probe.includes(item.channel)
-            )
+          deviceLogs?.probe?.map((item) => {
+            const filterItem = dataLog.filter((itemTwo) =>
+              itemTwo.probe.includes(item.channel),
+            );
             return (
               <SwiperSlide>
                 <FullChartComponent
@@ -435,80 +486,80 @@ const FullChart = () => {
                   isLoading={isLoading}
                 />
               </SwiperSlide>
-            )
+            );
           })}
       </Swiper>
-    )
-  }, [deviceLogs, dataLog, t])
+    );
+  }, [deviceLogs, dataLog, t]);
 
   return (
-    <div className='p-3 px-5 overflow-hidden'>
-      <div className='breadcrumbs text-sm mt-3'>
+    <div className="p-3 px-5 overflow-hidden">
+      <div className="breadcrumbs text-sm mt-3">
         <ul>
           <li>
-            <a onClick={() => navigate('/dashboard')}>
-              <RiDashboardLine size={16} className='mr-1' />
-              {t('sideDashboard')}
+            <a onClick={() => navigate("/dashboard")}>
+              <RiDashboardLine size={16} className="mr-1" />
+              {t("sideDashboard")}
             </a>
           </li>
           <li>
-            <div className='flex items-center gap-2'>
-              <RiBarChart2Fill size={16} className='mr-1' />
-              <span>{t('fullChart')}</span>
+            <div className="flex items-center gap-2">
+              <RiBarChart2Fill size={16} className="mr-1" />
+              <span>{t("fullChart")}</span>
               <span>-</span>
               <span>{deviceLogs?.id}</span>
             </div>
           </li>
         </ul>
       </div>
-      <div className='flex items-center justify-between flex-col md:flex-row gap-3 mt-2'>
-        <div role='tablist' className='tabs tabs-border justify-start w-full'>
+      <div className="flex items-center justify-between flex-col md:flex-row gap-3 mt-2">
+        <div role="tablist" className="tabs tabs-border justify-start w-full">
           <a
-            role='tab'
-            className={`tab ${pageNumber === 1 ? 'tab-active' : ''}`}
+            role="tab"
+            className={`tab ${pageNumber === 1 ? "tab-active" : ""}`}
             onClick={() => {
               if (pageNumber !== 1) {
-                logDay()
+                logDay();
               }
             }}
           >
-            {t('chartDay')}
+            {t("chartDay")}
           </a>
           <a
-            role='tab'
-            className={`tab ${pageNumber === 2 ? 'tab-active' : ''}`}
+            role="tab"
+            className={`tab ${pageNumber === 2 ? "tab-active" : ""}`}
             onClick={() => {
               if (pageNumber !== 2) {
-                logWeek()
+                logWeek();
               }
             }}
           >
-            {t('chartWeek')}
+            {t("chartWeek")}
           </a>
           <a
-            role='tab'
-            className={`tab ${pageNumber === 3 ? 'tab-active' : ''}`}
+            role="tab"
+            className={`tab ${pageNumber === 3 ? "tab-active" : ""}`}
             onClick={() => {
               if (pageNumber !== 3) {
-                logMonth()
+                logMonth();
               }
             }}
           >
-            {t('month')}
+            {t("month")}
           </a>
           <a
-            role='tab'
-            className={`tab ${pageNumber === 4 ? 'tab-active' : ''}`}
+            role="tab"
+            className={`tab ${pageNumber === 4 ? "tab-active" : ""}`}
             onClick={() => {
               if (pageNumber !== 4) {
-                setPagenumber(4)
+                setPagenumber(4);
               }
             }}
           >
-            {t('chartCustom')}
+            {t("chartCustom")}
           </a>
         </div>
-        <div className='flex items-center gap-3 justify-end w-full'>
+        <div className="flex items-center gap-3 justify-end w-full">
           {/* {deviceLogs && deviceLogs?.probe?.length > 1 && (
             <label
               htmlFor='button'
@@ -523,48 +574,48 @@ const FullChart = () => {
               </button>
             </label>
           )} */}
-          <div className='dropdown dropdown-end z-50'>
+          <div className="dropdown dropdown-end z-50">
             <button
               tabIndex={0}
-              role='button'
-              data-tip={t('menuButton')}
-              className='btn btn-ghost flex p-0 max-w-7.5 min-w-7.5 max-h-7.5 min-h-7.5 tooltip tooltip-top'
+              role="button"
+              data-tip={t("menuButton")}
+              className="btn btn-ghost flex p-0 max-w-7.5 min-w-7.5 max-h-7.5 min-h-7.5 tooltip tooltip-top"
             >
               <RiMenuLine size={20} />
             </button>
             <ul
               tabIndex={0}
-              className='dropdown-content menu bg-base-100 rounded-box z-1 max-w-45 w-35 p-2 shadow'
+              className="dropdown-content menu bg-base-100 rounded-box z-1 max-w-45 w-35 p-2 shadow"
             >
-              <li onClick={() => handleDownload('png')}>
-                <div className='flex items-center gap-3 text-[16px]'>
+              <li onClick={() => handleDownload("png")}>
+                <div className="flex items-center gap-3 text-[16px]">
                   <RiFileImageLine size={20} />
                   <a>PNG</a>
                 </div>
               </li>
-              <li onClick={() => handleDownload('jpg')}>
-                <div className='flex items-center gap-3 text-[16px]'>
+              <li onClick={() => handleDownload("jpg")}>
+                <div className="flex items-center gap-3 text-[16px]">
                   <RiFileImageLine size={20} />
                   <a>JPG</a>
                 </div>
               </li>
-              <div className='divider my-1 h-2 before:h-px after:h-px'></div>
+              <div className="divider my-1 h-2 before:h-px after:h-px"></div>
               <li
                 onClick={async () => {
-                  dispatch(setSubmitLoading())
+                  dispatch(setSubmitLoading());
                   if (dataLog.length === 0) {
                     Swal.fire({
-                      title: t('alertHeaderWarning'),
-                      text: t('dataNotReady'),
-                      icon: 'warning',
+                      title: t("alertHeaderWarning"),
+                      text: t("dataNotReady"),
+                      icon: "warning",
                       timer: 2000,
-                      showConfirmButton: false
-                    })
-                    dispatch(setSubmitLoading())
+                      showConfirmButton: false,
+                    });
+                    dispatch(setSubmitLoading());
                   }
                 }}
               >
-                <div className='flex items-center gap-3 text-[16px]'>
+                <div className="flex items-center gap-3 text-[16px]">
                   <RiFilePdf2Line size={20} />
                   <a>PDF</a>
                 </div>
@@ -574,71 +625,90 @@ const FullChart = () => {
         </div>
       </div>
       {pageNumber === 4 && (
-        <div className='flex items-end justify-center flex-col md:items-center md:flex-row gap-3 mt-3'>
+        <div className="flex items-end justify-center flex-col md:items-center md:flex-row gap-3 mt-3">
+          <Select
+            id="freq"
+            options={mapOptions<selectOption, keyof selectOption>(
+              freqList,
+              "value",
+              "label",
+            )}
+            value={mapDefaultValue<selectOption, keyof selectOption>(
+              freqList,
+              freq,
+              "value",
+              "label",
+            )}
+            onChange={(e) => setFreq(String(e?.value))}
+            menuPlacement="bottom"
+            autoFocus={false}
+            className="react-select-container z-150 custom-menu-select"
+            classNamePrefix="react-select"
+          />
           <button
-            popoverTarget='startDate-popover'
-            className='input input-border w-full md:w-56'
+            popoverTarget="startDate-popover"
+            className="input input-border w-full md:w-56"
           >
-            {startDate ? formatThaiDate(startDate) : t('selectData')}
+            {startDate ? formatThaiDate(startDate) : t("selectData")}
           </button>
 
-          <div popover='auto' id='startDate-popover' className='dropdown'>
+          <div popover="auto" id="startDate-popover" className="dropdown">
             <DayPicker
-              className='react-day-picker'
-              mode='single'
+              className="react-day-picker"
+              mode="single"
               selected={startDate}
               onSelect={setStartDate}
-              locale={i18nInit === 'th' ? th : enUS}
+              locale={i18nInit === "th" ? th : enUS}
             />
           </div>
 
           <button
-            popoverTarget='endDate-popover'
-            className='input input-border w-full md:w-56'
+            popoverTarget="endDate-popover"
+            className="input input-border w-full md:w-56"
           >
-            {endDate ? formatThaiDate(endDate) : t('selectData')}
+            {endDate ? formatThaiDate(endDate) : t("selectData")}
           </button>
 
-          <div popover='auto' id='endDate-popover' className='dropdown'>
+          <div popover="auto" id="endDate-popover" className="dropdown">
             <DayPicker
-              className='react-day-picker'
-              mode='single'
+              className="react-day-picker"
+              mode="single"
               selected={endDate}
               onSelect={setEndDate}
-              locale={i18nInit === 'th' ? th : enUS}
+              locale={i18nInit === "th" ? th : enUS}
             />
           </div>
 
           <button
-            className='btn btn-neutral shadow-lg shadow-neutral/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 w-full md:w-24'
+            className="btn btn-neutral shadow-lg shadow-neutral/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 w-full md:w-24"
             onClick={() => Logcustom()}
           >
-            {t('searchButton')}
+            {t("searchButton")}
           </button>
         </div>
       )}
       <div
         ref={canvasChartRef}
-        className='p-3 rounded-lg mt-2'
+        className="p-3 rounded-lg mt-2"
         // data-theme='light'
       >
-        <div ref={tableInfoRef} className='hidden'>
-          <div className='grid grid-cols-2 gap-3'>
-            <div className='flex items-center gap-3'>
+        <div ref={tableInfoRef} className="hidden">
+          <div className="grid grid-cols-2 gap-3">
+            <div className="flex items-center gap-3">
               <span>Hospital: </span>
               <h4>{userProfile?.ward.hospital.hosName}</h4>
             </div>
-            <div className='flex items-center gap-3'>
+            <div className="flex items-center gap-3">
               <span>S/N: </span>
               <span> {deviceLogs?.id}</span>
             </div>
-            <div className='flex items-center gap-3'>
+            <div className="flex items-center gap-3">
               <span>Name: </span>
-              <span>{deviceLogs?.name ? deviceLogs?.name : '--'}</span>
+              <span>{deviceLogs?.name ? deviceLogs?.name : "--"}</span>
             </div>
-            <div className='flex items-center gap-3'>
+            <div className="flex items-center gap-3">
               <span>Probe Name: </span>
-              <span>{deviceLogs?.probe[currentSlideIndex]?.name ?? '-'}</span>
+              <span>{deviceLogs?.probe[currentSlideIndex]?.name ?? "-"}</span>
             </div>
           </div>
         </div>
@@ -646,7 +716,7 @@ const FullChart = () => {
       </div>
       {submitLoading && <Loading />}
     </div>
-  )
-}
+  );
+};
 
-export default FullChart
+export default FullChart;

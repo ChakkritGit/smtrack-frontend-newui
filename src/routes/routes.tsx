@@ -101,15 +101,15 @@ const Routes = () => {
     }
   }
 
-  const getSpecialTheme = (): string | null => {
-    const today = new Date()
-    const day = today.getDate()
-    const month = today.getMonth() + 1
+  // const getSpecialTheme = (): string | null => {
+  //   const today = new Date()
+  //   const day = today.getDate()
+  //   const month = today.getMonth() + 1
 
-    if (month === 2 && day === 14) return 'valentine'
-    if (month === 10 && day === 31) return 'halloween'
-    return null
-  }
+  //   if (month === 2 && day === 14) return 'valentine'
+  //   if (month === 10 && day === 31) return 'halloween'
+  //   return null
+  // }
 
   useEffect(() => {
     toasts
@@ -118,12 +118,12 @@ const Routes = () => {
       .forEach(toasts => toast.dismiss(toasts.id))
   }, [toasts])
 
-  useEffect(() => {
-    const specialTheme = getSpecialTheme()
-    if (specialTheme) {
-      dispatch(setTheme(specialTheme))
-    }
-  }, [])
+  // useEffect(() => {
+  //   const specialTheme = getSpecialTheme()
+  //   if (specialTheme) {
+  //     dispatch(setTheme(specialTheme))
+  //   }
+  // }, [])
 
   useEffect(() => {
     if (!token) return
