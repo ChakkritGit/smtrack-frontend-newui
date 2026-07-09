@@ -1307,7 +1307,7 @@ const Adjustments = (props: AdjustmentsProps) => {
                       pearling
                       minDistance={1}
                       step={0.01}
-                      min={0}
+                      min={-100}
                       max={100}
                       disabled={
                         isLoadingMqtt ||
@@ -1396,7 +1396,7 @@ const Adjustments = (props: AdjustmentsProps) => {
                     className='input  text-center w-full'
                     type='number'
                     step={0.01}
-                    min={0}
+                    min={-100}
                     max={100}
                     value={adjustmentsForm.adjustHumi}
                     disabled={
