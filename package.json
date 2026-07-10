@@ -38,7 +38,7 @@
     "baseline-browser-mapping": "^2.10.42",
     "caniuse-lite": "^1.0.30001802",
     "crypto-js": "^4.2.0",
-    "esptool-js": "file:vendor\\esptool-js-0.5.4.tgz",
+    "esptool-js": "file:vendor\\esptool-js-0.6.0.tgz",
     "filesize": "^11.0.19",
     "heic2any": "^0.0.4",
     "html2canvas-pro": "^1.6.7",
