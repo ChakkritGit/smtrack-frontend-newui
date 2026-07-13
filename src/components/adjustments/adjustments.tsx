@@ -1536,7 +1536,7 @@ const Adjustments = (props: AdjustmentsProps) => {
                     className='btn btn-ghost bg-blue-500 text-white text-lg'
                     type='button'
                     onClick={() => {
-                      if (adjustmentsForm.adjustHumi > -40) {
+                      if (adjustmentsForm.adjustHumi > -100) {
                         setAdjustmentsForm({
                           ...adjustmentsForm,
                           adjustHumi: parseFloat(
@@ -1554,7 +1554,7 @@ const Adjustments = (props: AdjustmentsProps) => {
                     className='input  text-center w-full'
                     type='number'
                     step={0.01}
-                    min={0}
+                    min={-100}
                     max={100}
                     value={adjustmentsForm.adjustHumi}
                     disabled={
@@ -1597,7 +1597,7 @@ const Adjustments = (props: AdjustmentsProps) => {
                     className='btn btn-ghost bg-blue-500 text-white text-lg'
                     type='button'
                     onClick={() => {
-                      if (adjustmentsForm.adjustHumi < 120) {
+                      if (adjustmentsForm.adjustHumi < 100) {
                         setAdjustmentsForm({
                           ...adjustmentsForm,
                           adjustHumi: parseFloat(
